@@ -1,22 +1,22 @@
 <h1 class="rx-title"><img src="./manual/asset/Rx_Logo_S.png">RxJS</h1>
 
-**The ReactiveX library for JavaScript.**
+**用于 JavaScript 的 ReactiveX 库。**
 
-RxJS is a library for reactive programming using Observables, to make it easier to compose asynchronous or callback-based code. This project is a rewrite of [Reactive-Extensions/RxJS](https://github.com/Reactive-Extensions/RxJS) with better performance, better modularity, better debuggable call stacks, while staying mostly backwards compatible, with some breaking changes that reduce the API surface.
+RxJS 是使用 Observables 的响应式编程的库，它使编写异步或基于回调的代码更容易。这个项目是 [Reactive-Extensions/RxJS](https://github.com/Reactive-Extensions/RxJS)(RxJS 4) 的重写，具有更好的性能、更好的模块性、更好的可调试调用堆栈，同时保持大部分向后兼容，只有一些破坏性的变更(breaking changes)是为了减少外层的 API 。
 
-### [» Install it](./manual/installation.html)
-*How to install RxJS through npm or CDN*
-### [» Learn it](./manual/overview.html)
-*Read the Manual on Observables, Observer, Subject, etc*
-### [» Full reference](./identifiers.html)
-*Read detailed documentation on each operator*
-### [» View examples](./manual/tutorial.html)
-*Read our tutorials on using RxJS in real applications*
+### [» 安装](./manual/installation.html)
+*如何通过 npm 或 CDN 安装 RxJS*
+### [» 学习](./manual/overview.html)
+*阅读学习手册，手册内容包含 Observalbes、Observer、Subject，等等*
+### [» 完整参考](./identifiers.html)
+*阅读每个操作符的详细文档*
+### [» 查看示例](./manual/tutorial.html)
+*查看几个在实际应用中使用 RxJS 的教程*
 
 - - -
 
-### Find the right Operator
+### 查找适合的操作符
 
 <div class="decision-tree-widget"></div>
 
-**Hint: open your DevTools to experiment with RxJS.**
+**提示: 打开开发者工具来试用 RxJS 。**
