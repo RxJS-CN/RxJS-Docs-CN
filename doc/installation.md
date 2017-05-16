@@ -1,10 +1,10 @@
-## ES6 via npm
+## 通过 npm 安装 ES6 版本
 
 ```none
 npm install rxjs
 ```
 
-To import the entire core set of functionality:
+导入整个核心功能集：
 
 ```js
 import Rx from 'rxjs/Rx';
@@ -12,17 +12,17 @@ import Rx from 'rxjs/Rx';
 Rx.Observable.of(1,2,3)
 ```
 
-To import only what you need by patching (this is useful for size-sensitive bundling):
+通过打补丁的方式只导入所需要的(这对于减少 bundling 的体积是十分有用的)：
 
 ```js 
 import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 
-Observable.of(1,2,3).map(x => x + '!!!'); // etc
+Observable.of(1,2,3).map(x => x + '!!!'); // 等等
 ```
 
-To import what you need and use it with proposed [bind operator](https://github.com/tc39/proposal-bind-operator):
+只导入需要的并且使用被提议的[绑定操作符](https://github.com/tc39/proposal-bind-operator)：
 
 > Note: This additional syntax requires [transpiler support](http://babeljs.io/docs/plugins/transform-function-bind/) and this syntax may be completely withdrawn from TC39 without notice! Use at your own risk.
 
