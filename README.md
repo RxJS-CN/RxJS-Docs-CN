@@ -1,4 +1,4 @@
-<img src="/asset/Rx_Logo_S.png" alt="logo" height="120" align="right" />
+<img src="doc/asset/Rx_Logo_S.png" alt="logo" height="120" align="right" />
 
 # RxJS 5 中文文档(计划六月底前正式上线)
 
