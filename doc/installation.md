@@ -24,35 +24,35 @@ Observable.of(1,2,3).map(x => x + '!!!'); // 等等
 
 只导入需要的并且使用被提议的[绑定操作符](https://github.com/tc39/proposal-bind-operator)：
 
-> Note: This additional syntax requires [transpiler support](http://babeljs.io/docs/plugins/transform-function-bind/) and this syntax may be completely withdrawn from TC39 without notice! Use at your own risk.
+> 注意：这个额外的预发需要[编译器支持](http://babeljs.io/docs/plugins/transform-function-bind/)并且此语法可能会在没有任何通知的情况下完全从 TC39 撤回！要使用的话需要你自己来承担风险。
 
 ```js
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operator/map';
 
-Observable::of(1,2,3)::map(x => x + '!!!'); // etc
+Observable::of(1,2,3)::map(x => x + '!!!'); // 等等
 ```
 
-## CommonJS via npm
+## 通过 npm 安装 CommonJS 版本
 
 ```none
 npm install rxjs
 ```
 
-Import all core functionality:
+导入所有核心功能:
 
 ```js
 var Rx = require('rxjs/Rx');
 
-Rx.Observable.of(1,2,3); // etc
+Rx.Observable.of(1,2,3); // 等等
 ```
 
-Import only what you need and patch Observable (this is useful in size-sensitive bundling scenarios):
+通过打补丁的方式只导入所需要的(这对于减少 bundling 的体积是十分有用的)：
 
 ```js
 var Observable = require('rxjs/Observable').Observable;
-// patch Observable with appropriate methods
+// 使用适合的方法在 Observable 上打补丁
 require('rxjs/add/observable/of');
 require('rxjs/add/operator/map');
 
