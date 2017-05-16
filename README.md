@@ -1,8 +1,6 @@
-<img src="docs/asset/Rx_Logo_S.png" alt="logo" height="120" align="right" />
+<img src="/asset/Rx_Logo_S.png" alt="logo" height="120" align="right" />
 
-# RxJS 5 中文文档
-
-### **计划六月底前正式上线**
+# RxJS 5 中文文档(计划六月底前正式上线)
 
 [![Build Status](https://travis-ci.org/ReactiveX/rxjs.svg?branch=master)](https://travis-ci.org/ReactiveX/rxjs)
 [![Coverage Status](https://coveralls.io/repos/github/ReactiveX/rxjs/badge.svg?branch=master)](https://coveralls.io/github/ReactiveX/rxjs?branch=master)
