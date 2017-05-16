@@ -80,17 +80,17 @@ map.call(of(1,2,3), function (x) { return x + '!!!'; });
 
 2. 如果没有使用 typings 的话，可以从 [/es6-shim/es6-shim.d.ts](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/es6-shim/es6-shim.d.ts) 拷贝定义好的接口。
 
-3. Add type definition file included in `tsconfig.json` or CLI argument.
+3. 在 `tsconfig.json` 或 CLI 参数中添加类型定义文件。
 
-## All Module Types (CJS/ES6/AMD/TypeScript) via npm
+## 通过 npm 所有全模块类型 (CJS/ES6/AMD/TypeScript)
 
-To install this library via [npm](https://www.npmjs.org) **version 3**, use the following command:
+要安装这个库需要 [npm](https://www.npmjs.org) **3**及以上版本，使用下面的命令行：
 
 ```none
 npm install @reactivex/rxjs
 ```
 
-If you are using npm **version 2** before this library has achieved a stable version, you need to specify the library version explicitly:
+如果你使用的还是 npm **2**的话，那么在这个库升级至稳定版之前，需要明确地指定库的版本号：
 
 ```none
 npm install @reactivex/rxjs@5.0.0-beta.1
@@ -99,10 +99,10 @@ npm install @reactivex/rxjs@5.0.0-beta.1
 ## CDN
 
 For CDN, you can use [unpkg](https://unpkg.com). Just replace `version` with the current
-version on the link below:
+对于 CDN，可以使用 [unpkg](https://unpkg.com) 。只需要用当前的版本号来替换下面链接中的 `version`：
 
-For RxJS 5.0.0-beta.1 through beta.11:
+对于 RxJS 5.0.0-beta.1 到 beta.11：
 https://unpkg.com/@reactivex/rxjs@version/dist/global/Rx.umd.js
 
-For RxJS 5.0.0-beta.12 and higher:
+对于 RxJS 5.0.0-beta.12 及以上版本：
 https://unpkg.com/@reactivex/rxjs@version/dist/global/Rx.js
