@@ -21,7 +21,7 @@ var observable = Rx.Observable.create(function (observer) {
 });
 ```
 
-To invoke the Observable and see these values, we need to *subscribe* to it:
+要调用 Observable 并看到这些值，我们需要*订阅* Observable：
 
 ```js
 var observable = Rx.Observable.create(function (observer) {
