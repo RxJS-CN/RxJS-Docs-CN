@@ -59,7 +59,7 @@ Rx.Observable.fromEvent(button, 'click')
 
 RxJS 提供了一整套操作符来帮助你控制事件如何流经 observables 。
 
-下面的示例展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：
+下面的代码展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：
 
 ```js
 var count = 0;
@@ -86,10 +86,12 @@ Rx.Observable.fromEvent(button, 'click')
 
 其他流程控制操作符有 [**filter**](../class/es6/Observable.js~Observable.html#instance-method-filter)、[**delay**](../class/es6/Observable.js~Observable.html#instance-method-delay)、[**debounceTime**](../class/es6/Observable.js~Observable.html#instance-method-debounceTime)、[**take**](../class/es6/Observable.js~Observable.html#instance-method-take)、[**takeUntil**](../class/es6/Observable.js~Observable.html#instance-method-takeUntil)、[**distinct**](../class/es6/Observable.js~Observable.html#instance-method-distinct)、[**distinctUntilChanged**](../class/es6/Observable.js~Observable.html#instance-method-distinctUntilChanged) 等等。
 
-### Values
-You can transform the values passed through your observables.
+### 值 (Values)
 
-Here's how you can add the current mouse x position for every click, in plain JavaScript:
+对于流经 observables 的值，你可以对其进行转换。
+
+下面的代码展示的是如何累加每次点击的鼠标 x 坐标，先来看使用普通的 JavaScript：
+
 ```js
 var count = 0;
 var rate = 1000;
@@ -104,7 +106,8 @@ button.addEventListener('click', (event) => {
 });
 ```
 
-With RxJS:
+使用 RxJS：
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -114,5 +117,5 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(count));
 ```
 
-Other value producing operators are [**pluck**](../class/es6/Observable.js~Observable.html#instance-method-pluck), [**pairwise**](../class/es6/Observable.js~Observable.html#instance-method-pairwise),
-[**sample**](../class/es6/Observable.js~Observable.html#instance-method-sample) etc.
+其他产生值的操作符有 [**pluck**](../class/es6/Observable.js~Observable.html#instance-method-pluck)、[**pairwise**](../class/es6/Observable.js~Observable.html#instance-method-pairwise)、
+[**sample**](../class/es6/Observable.js~Observable.html#instance-method-sample) 等等。
