@@ -74,7 +74,8 @@ button.addEventListener('click', () => {
 });
 ```
 
-With RxJS:
+使用 RxJS：
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -83,7 +84,7 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(`Clicked ${count} times`));
 ```
 
-Other flow control operators are [**filter**](../class/es6/Observable.js~Observable.html#instance-method-filter), [**delay**](../class/es6/Observable.js~Observable.html#instance-method-delay), [**debounceTime**](../class/es6/Observable.js~Observable.html#instance-method-debounceTime), [**take**](../class/es6/Observable.js~Observable.html#instance-method-take), [**takeUntil**](../class/es6/Observable.js~Observable.html#instance-method-takeUntil), [**distinct**](../class/es6/Observable.js~Observable.html#instance-method-distinct), [**distinctUntilChanged**](../class/es6/Observable.js~Observable.html#instance-method-distinctUntilChanged) etc.
+其他流程控制操作符有 [**filter**](../class/es6/Observable.js~Observable.html#instance-method-filter)、[**delay**](../class/es6/Observable.js~Observable.html#instance-method-delay)、[**debounceTime**](../class/es6/Observable.js~Observable.html#instance-method-debounceTime)、[**take**](../class/es6/Observable.js~Observable.html#instance-method-take)、[**takeUntil**](../class/es6/Observable.js~Observable.html#instance-method-takeUntil)、[**distinct**](../class/es6/Observable.js~Observable.html#instance-method-distinct)、[**distinctUntilChanged**](../class/es6/Observable.js~Observable.html#instance-method-distinctUntilChanged) 等等。
 
 ### Values
 You can transform the values passed through your observables.
