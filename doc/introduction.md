@@ -24,7 +24,7 @@ var button = document.querySelector('button');
 button.addEventListener('click', () => console.log('Clicked!'));
 ```
 
-Using RxJS you create an observable instead.
+使用 RxJS 的话，创建一个 observable 来代替。
 
 ```js
 var button = document.querySelector('button');
@@ -32,12 +32,12 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(() => console.log('Clicked!'));
 ```
 
+### 纯净性 (Purity)
 
-### Purity
-What makes RxJS powerful is its ability to produce values using pure functions. That means your code is less prone to errors.
+使得 RxJS 强大的正是它使用纯函数来产生值的能力。这意味着你的代码更不容易出错。
 
-Normally you would create an impure function, where other
-pieces of your code can mess up your state.
+通常你会创建一个非纯函数，这个函数之外也使用了共享变量的代码会把将你的应用状态搞得一团糟。
+
 ```js
 var count = 0;
 var button = document.querySelector('button');
