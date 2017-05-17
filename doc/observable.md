@@ -81,13 +81,13 @@ RxJS 引入了 Observables，一个新的 JavaScript 推送体系。Observable �
 - **Promise** 是最终可能(或可能不)返回单个值的运算。
 - **Observable** 是惰性的评估运算，它可以从它被调用的时刻起同步或异步地返回零到(有可能的)无限多个值。
 
-## Observables 作为一般化的函数
+## Observables 作为函数的泛化
 
-Contrary to popular claims, Observables are not like EventEmitters nor are they like Promises for multiple values. Observables *may act* like EventEmitters in some cases, namely when they are multicasted using RxJS Subjects, but usually they don't act like EventEmitters.
+与流行的说法正好相反，Observables 既不像 EventEmitters，也不像多个值的 Promises 。在某些情况下，即当使用 RxJS 的 Subjects 进行多播时， Observables 的行为可能会比较像 EventEmitters，但通常情况下 Observables 的行为并不像 EventEmitters 。
 
-<span class="informal">Observables are like functions with zero arguments, but generalize those to allow multiple values.</span>
+<span class="informal">Observables 像是没有参数, 但可以泛化为多个值的函数。</span>
 
-Consider the following:
+考虑如下代码：
 
 ```js
 function foo() {
@@ -95,13 +95,13 @@ function foo() {
   return 42;
 }
 
-var x = foo.call(); // same as foo()
+var x = foo.call(); // 等同于 foo()
 console.log(x);
-var y = foo.call(); // same as foo()
+var y = foo.call(); // 等同于 foo()
 console.log(y);
 ```
 
-We expect to see as output:
+我们期待看到的输出：
 
 ```none
 "Hello"
