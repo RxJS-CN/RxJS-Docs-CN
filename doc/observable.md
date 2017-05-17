@@ -135,11 +135,11 @@ foo.subscribe(function (y) {
 42
 ```
 
-This happens because both functions and Observables are lazy computations. If you don't call the function, the `console.log('Hello')` won't happen. Also with Observables, if you don't "call" it (with `subscribe`), the `console.log('Hello')` won't happen. Plus, "calling" or "subscribing" is an isolated operation: two function calls trigger two separate side effects, and two Observable subscribes trigger two separate side effects. As opposed to EventEmitters which share the side effects and have eager execution regardless of the existence of subscribers, Observables have no shared execution and are lazy.
+这是因为函数和 Observables 都是惰性运算。如果你不调用函数，`console.log('Hello')` 就不会执行。Observables 也是如此，如果你不“调用”它(使用 `subscribe`)，`console.log('Hello')` 也不会执行。此外，“调用”或“订阅”是独立的操作：两个函数调用会触发两个单独的副作用，两个 Observable 订阅同样也是触发两个单独的副作用。EventEmitters 共享副作用并且无论是否存在订阅者都会尽早执行，Observables 与之相反，不会共享副作用并且是延迟执行。
 
-<span class="informal">Subscribing to an Observable is analogous to calling a Function.</span>
+<span class="informal">订阅 Observable 类似于调用函数。</span>
 
-Some people claim that Observables are asynchronous. That is not true. If you surround a function call with logs, like this:
+一些人声称 Observables 是异步的。那不是真的。如果你用日志包围一个函数调用，像这样：
 
 <!-- skip-example -->
 ```js
@@ -148,7 +148,7 @@ console.log(foo.call());
 console.log('after');
 ```
 
-You will see the output:
+你会看到这样的输出:
 
 ```none
 "before"
