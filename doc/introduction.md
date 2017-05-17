@@ -1,48 +1,51 @@
-# Introduction
+# 入门
 
-RxJS is a library for composing asynchronous and event-based programs by using observable sequences. It provides one core type, the [Observable](./overview.html#observable), satellite types (Observer, Schedulers, Subjects) and operators inspired by [Array#extras](https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/1.6) (map, filter, reduce, every, etc) to allow handling asynchronous events as collections.
+RxJS 是一个库，它通过使用 observable 序列来编写异步和基于事件的程序。它提供了一个核心类型 [Observable](./overview.html#observable)，附属类型 (Observer、 Schedulers、 Subjects) 和受 [Array#extras] 启发的操作符 (map、filter、reduce、every, 等等)，这些数组操作符可以把异步事件作为集合来处理。
 
-<span class="informal">Think of RxJS as Lodash for events.</span>
+<span class="informal">可以把 RxJS 当做是用来处理事件的 [Lodash](https://lodash.com) 。</span>
 
-ReactiveX combines the [Observer pattern](https://en.wikipedia.org/wiki/Observer_pattern) with the [Iterator pattern](https://en.wikipedia.org/wiki/Iterator_pattern) and [functional programming with collections](http://martinfowler.com/articles/collection-pipeline/#NestedOperatorExpressions) to fill the need for an ideal way of managing sequences of events.
+ReactiveX 结合了 [观察者模式](https://en.wikipedia.org/wiki/Observer_pattern)、[迭代器模式](https://en.wikipedia.org/wiki/Iterator_pattern) 和 [使用集合的函数式编程](http://martinfowler.com/articles/collection-pipeline/#NestedOperatorExpressions)，以满足以一种理想方式来管理事件序列所需要的一切。
 
-The essential concepts in RxJS which solve async event management are:
+在 RxJS 中用来解决异步事件管理的的基本概念是：
 
-- **Observable:** represents the idea of an invokable collection of future values or events.
-- **Observer:** is a collection of callbacks that knows how to listen to values delivered by the Observable.
-- **Subscription:** represents the execution of an Observable, is primarily useful for cancelling the execution.
-- **Operators:** are pure functions that enable a functional programming style of dealing with collections with operations like `map`, `filter`, `concat`, `flatMap`, etc.
-- **Subject:** is the equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers.
-- **Schedulers:** are centralized dispatchers to control concurrency, allowing us to coordinate when computation happens on e.g. `setTimeout` or `requestAnimationFrame` or others.
+- **Observable (可观察对象):** 表示一个概念，这个概念是一个可调用的未来值或事件的集合。
+- **Observer (观察者):** 一个回调函数的集合，它知道如何去监听由 Observable 提供的值。
+- **Subscription (订阅):** 表示 Observable 的执行，主要用于取消 Observable 的执行。
+- **Operators (操作符):** 采用函数式编程风格的纯函数 (pure function)，使用像 `map`、`filter`、`concat`、`flatMap` 等这样的操作符来处理集合。
+- **Subject (主体):** 相当于 EventEmitter，并且是将值或事件多路推送给多个 Observer 的唯一方式。
+- **Schedulers (调度器):** 用来控制并发并且是中央集权的调度员，允许我们在发生计算时进行协调，例如 `setTimeout` 或 `requestAnimationFrame` 或其他。
 
-## First examples
+## 第一个示例
 
-Normally you register event listeners.
+注册事件监听器的常规写法。
+
 ```js
 var button = document.querySelector('button');
 button.addEventListener('click', () => console.log('Clicked!'));
 ```
 
-Using RxJS you create an observable instead.
+使用 RxJS 的话，创建一个 observable 来代替。
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
   .subscribe(() => console.log('Clicked!'));
 ```
 
+### 纯净性 (Purity)
 
-### Purity
-What makes RxJS powerful is its ability to produce values using pure functions. That means your code is less prone to errors.
+使得 RxJS 强大的正是它使用纯函数来产生值的能力。这意味着你的代码更不容易出错。
 
-Normally you would create an impure function, where other
-pieces of your code can mess up your state.
+通常你会创建一个非纯函数，这个函数之外也使用了共享变量的代码会把将你的应用状态搞得一团糟。
+
 ```js
 var count = 0;
 var button = document.querySelector('button');
 button.addEventListener('click', () => console.log(`Clicked ${++count} times`));
 ```
 
-Using RxJS you isolate the state.
+使用 RxJS 的话，你会将应用状态隔离出来。
+
 ```Js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -50,12 +53,14 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(`Clicked ${count} times`));
 ```
 
-The **scan** operator works just like **reduce** for arrays. It takes a value which is exposed to a callback. The returned value of the callback will then become the next value exposed the next time the callback runs.
+**scan** 操作符的工作原理与数组的 **reduce** 类似。它需要一个暴露给回调函数当参数的初始值。每次回调函数运行后的返回值会作为下次回调函数运行时的参数。
 
-### Flow
-RxJS has a whole range of operators that helps you control how the events flow through your observables.
+### 流动性 (Flow)
 
-This is how you would allow at most one click per second, with plain JavaScript:
+RxJS 提供了一整套操作符来帮助你控制事件如何流经 observables 。
+
+下面的代码展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：
+
 ```js
 var count = 0;
 var rate = 1000;
@@ -69,7 +74,8 @@ button.addEventListener('click', () => {
 });
 ```
 
-With RxJS:
+使用 RxJS：
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -78,12 +84,14 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(`Clicked ${count} times`));
 ```
 
-Other flow control operators are [**filter**](../class/es6/Observable.js~Observable.html#instance-method-filter), [**delay**](../class/es6/Observable.js~Observable.html#instance-method-delay), [**debounceTime**](../class/es6/Observable.js~Observable.html#instance-method-debounceTime), [**take**](../class/es6/Observable.js~Observable.html#instance-method-take), [**takeUntil**](../class/es6/Observable.js~Observable.html#instance-method-takeUntil), [**distinct**](../class/es6/Observable.js~Observable.html#instance-method-distinct), [**distinctUntilChanged**](../class/es6/Observable.js~Observable.html#instance-method-distinctUntilChanged) etc.
+其他流程控制操作符有 [**filter**](../class/es6/Observable.js~Observable.html#instance-method-filter)、[**delay**](../class/es6/Observable.js~Observable.html#instance-method-delay)、[**debounceTime**](../class/es6/Observable.js~Observable.html#instance-method-debounceTime)、[**take**](../class/es6/Observable.js~Observable.html#instance-method-take)、[**takeUntil**](../class/es6/Observable.js~Observable.html#instance-method-takeUntil)、[**distinct**](../class/es6/Observable.js~Observable.html#instance-method-distinct)、[**distinctUntilChanged**](../class/es6/Observable.js~Observable.html#instance-method-distinctUntilChanged) 等等。
 
-### Values
-You can transform the values passed through your observables.
+### 值 (Values)
 
-Here's how you can add the current mouse x position for every click, in plain JavaScript:
+对于流经 observables 的值，你可以对其进行转换。
+
+下面的代码展示的是如何累加每次点击的鼠标 x 坐标，先来看使用普通的 JavaScript：
+
 ```js
 var count = 0;
 var rate = 1000;
@@ -98,7 +106,8 @@ button.addEventListener('click', (event) => {
 });
 ```
 
-With RxJS:
+使用 RxJS：
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -108,5 +117,5 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(count));
 ```
 
-Other value producing operators are [**pluck**](../class/es6/Observable.js~Observable.html#instance-method-pluck), [**pairwise**](../class/es6/Observable.js~Observable.html#instance-method-pairwise),
-[**sample**](../class/es6/Observable.js~Observable.html#instance-method-sample) etc.
+其他产生值的操作符有 [**pluck**](../class/es6/Observable.js~Observable.html#instance-method-pluck)、[**pairwise**](../class/es6/Observable.js~Observable.html#instance-method-pairwise)、
+[**sample**](../class/es6/Observable.js~Observable.html#instance-method-sample) 等等。
