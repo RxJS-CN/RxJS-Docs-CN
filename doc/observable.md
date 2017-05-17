@@ -59,29 +59,29 @@ done
 
 **拉取**和**推送**是两种不同的协议，用来描述数据**生产者 (Producer)**如何与数据**消费者 (Consumer)**如何进行通信的。
 
-**什么是拉取？** - 在拉取系统中，由消费者来决定何时从生产者那接收数据。生产者本身不知道数据是何时交付到消费者手中的。
+**什么是拉取？** - 在拉取体系中，由消费者来决定何时从生产者那接收数据。生产者本身不知道数据是何时交付到消费者手中的。
 
-每个 JavaScript 函数都是一个拉取系统。函数是数据的生产者，调用该函数的代码通过从函数调用中“取出”一个**单个**返回值来对该函数进行消费。
+每个 JavaScript 函数都是拉取体系。函数是数据的生产者，调用该函数的代码通过从函数调用中“取出”一个**单个**返回值来对该函数进行消费。
 
-ES2105 引入了 [generator 函数和 iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) (`function*`)，这是另外一种类型的拉取系统。调用 `iterator.next()` 的代码是消费者，它会从 iterator(生产者) 那“取出”**多个**值。
+ES2105 引入了 [generator 函数和 iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) (`function*`)，这是另外一种类型的拉取体系。调用 `iterator.next()` 的代码是消费者，它会从 iterator(生产者) 那“取出”**多个**值。
 
-| | Producer | Consumer |
+| | 生产者 | 消费者 |
 | --- | --- | --- |
-| **Pull** | **Passive:** produces data when requested. | **Active:** decides when data is requested. |
-| **Push** | **Active:** produces data at its own pace. | **Passive:** reacts to received data. |
+| **拉取** | **被动的:** 当被请求时产生数据。 | **主动的:** 决定何时请求数据。 |
+| **推送** | **主动的:** 按自己的节奏产生数据。 | **被动的:** 对收到的数据做出反应。 |
 
-**What is Push?** In Push systems, the Producer determines when to send data to the Consumer. The Consumer is unaware of when it will receive that data.
+**什么是推送？** - 在推送体系中，由生产者来决定何时把数据发送给消费者。消费者本身不知道何时会接收到数据。
 
-Promises are the most common type of Push system in JavaScript today. A Promise (the Producer) delivers a resolved value to registered callbacks (the Consumers), but unlike functions, it is the Promise which is in charge of determining precisely when that value is "pushed" to the callbacks.
+在当今的 JavaScript 世界中，Promises 是最常见的推送体系类型。Promise(生产者) 将一个解析过的值传递给已注册的回调函数(消费者)，但不同于函数的是，由 Promise 来决定何时把值“推送”给回调函数。
 
-RxJS introduces Observables, a new Push system for JavaScript. An Observable is a Producer of multiple values, "pushing" them to Observers (Consumers).
+RxJS 引入了 Observables，一个新的 JavaScript 推送体系。Observable 是多个值的生产者，并将值“推送”给观察者(消费者)。
 
-- A **Function** is a lazily evaluated computation that synchronously returns a single value on invocation.
-- A **generator** is a lazily evaluated computation that synchronously returns zero to (potentially) infinite values on iteration.
-- A **Promise** is a computation that may (or may not) eventually return a single value.
-- An **Observable** is a lazily evaluated computation that can synchronously or asynchronously return zero to (potentially) infinite values from the time it's invoked onwards.
+- **Function** 是惰性的评估运算，调用时会同步地返回一个单一值。
+- **Generator** 是惰性的评估运算，调用时会同步地返回零到(有可能的)无限多个值。
+- **Promise** 是最终可能(或可能不)返回单个值的运算。
+- **Observable** 是惰性的评估运算，它可以从它被调用的时刻起同步或异步地返回零到(有可能的)无限多个值。
 
-## Observables as generalizations of functions
+## Observables 作为一般化的函数
 
 Contrary to popular claims, Observables are not like EventEmitters nor are they like Promises for multiple values. Observables *may act* like EventEmitters in some cases, namely when they are multicasted using RxJS Subjects, but usually they don't act like EventEmitters.
 
