@@ -44,7 +44,8 @@ var button = document.querySelector('button');
 button.addEventListener('click', () => console.log(`Clicked ${++count} times`));
 ```
 
-Using RxJS you isolate the state.
+使用 RxJS 的话，你会将应用状态隔离出来。
+
 ```Js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
@@ -52,12 +53,14 @@ Rx.Observable.fromEvent(button, 'click')
   .subscribe(count => console.log(`Clicked ${count} times`));
 ```
 
-The **scan** operator works just like **reduce** for arrays. It takes a value which is exposed to a callback. The returned value of the callback will then become the next value exposed the next time the callback runs.
+**scan** 操作符的工作原理与数组的 **reduce** 类似。它需要一个暴露给回调函数当参数的初始值。每次回调函数运行后的返回值会作为下次回调函数运行时的参数。
 
-### Flow
-RxJS has a whole range of operators that helps you control how the events flow through your observables.
+### 流动性 (Flow)
 
-This is how you would allow at most one click per second, with plain JavaScript:
+RxJS 提供了一整套操作符来帮助你控制事件如何流经 observables 。
+
+下面的示例展示的是如何控制一秒钟内最多点击一次，先来看使用普通的 JavaScript：
+
 ```js
 var count = 0;
 var rate = 1000;
