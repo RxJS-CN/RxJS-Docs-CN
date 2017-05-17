@@ -110,7 +110,7 @@ console.log(y);
 42
 ```
 
-You can write the same behavior above, but with Observables:
+你可以使用 Observables 重写上面的代码：
 
 ```js
 var foo = Rx.Observable.create(function (observer) {
@@ -126,7 +126,7 @@ foo.subscribe(function (y) {
 });
 ```
 
-And the output is the same:
+输出是一样的:
 
 ```none
 "Hello"
