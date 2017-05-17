@@ -43,7 +43,7 @@ observable.subscribe({
 console.log('just after subscribe');
 ```
 
-Which executes as such on the console:
+控制台执行的结果：
 
 ```none
 just before subscribe
@@ -55,16 +55,15 @@ got value 4
 done
 ```
 
-## Pull versus Push
+## 拉取 (Pull) vs. 推送 (Push)
 
-*Pull* and *Push* are two different protocols that describe how a data *Producer* can communicate with a data *Consumer*.
+**拉取**和**推送**是两种不同的协议，用来描述数据**生产者 (Producer)**如何与数据**消费者 (Consumer)**如何进行通信的。
 
-**What is Pull?** In Pull systems, the Consumer determines when it receives data from the data Producer. The Producer itself is unaware of when the data will be delivered to the Consumer.
+**什么是拉取？** - 在拉取系统中，由消费者来决定何时从生产者那接收数据。生产者本身不知道数据是何时交付到消费者手中的。
 
-Every JavaScript Function is a Pull system. The function is a Producer of data, and the code that calls the function is consuming it by "pulling" out a *single* return value from its call.
+每个 JavaScript 函数都是一个拉取系统。函数是数据的生产者，调用该函数的代码通过从函数调用中“取出”一个**单个**返回值来对该函数进行消费。
 
-ES2015 introduced [generator functions and iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) (`function*`), another type of Pull system. Code that calls `iterator.next()` is the Consumer, "pulling" out *multiple* values from the iterator (the Producer).
-
+ES2105 引入了 [generator 函数和 iterators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*) (`function*`)，这是另外一种类型的拉取系统。调用 `iterator.next()` 的代码是消费者，它会从 iterator(生产者) 那“取出”**多个**值。
 
 | | Producer | Consumer |
 | --- | --- | --- |
