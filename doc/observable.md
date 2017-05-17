@@ -1,13 +1,13 @@
-# Observable
+# Observable (可观察对象)
 
-Observables are lazy Push collections of multiple values. They fill the missing spot in the following table:
+Observables 是多个值的惰性推送集合。它填补了下面表格中的空白：
 
-| | Single | Multiple |
+| | 单个值 | 多个值 |
 | --- | --- | --- |
-| **Pull** | [`Function`](https://developer.mozilla.org/en-US/docs/Glossary/Function) | [`Iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) |
-| **Push** | [`Promise`](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise) | [`Observable`](../class/es6/Observable.js~Observable.html) |
+| **拉取** | [`Function`](https://developer.mozilla.org/en-US/docs/Glossary/Function) | [`Iterator`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols) |
+| **推送** | [`Promise`](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Promise.jsm/Promise) | [`Observable`](../class/es6/Observable.js~Observable.html) |
 
-**Example.** The following is an Observable that pushes the values `1`, `2`, `3` immediately (synchronously) when subscribed, and the value `4` after one second has passed since the subscribe call, then completes:
+**示例** - 当订阅下面代码中的 Observable 的时候会立即(同步地)推送值`1`、`2`、`3`，然后1秒后会推送值`4`，再然后是完成流：
 
 ```js
 var observable = Rx.Observable.create(function (observer) {
