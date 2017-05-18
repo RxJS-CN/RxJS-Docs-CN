@@ -284,24 +284,24 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 
 在上面的示例中，`subscribe` 函数是用来描述 Observable 最重要的一块。我们来看下订阅是什么意思。
 
-### Subscribing to Observables
+### 订阅 Observables
 
-The Observable `observable` in the example can be *subscribed* to, like this:
+示例中的 Observable 对象 `observable` 可以**订阅**，像这样：
 
 <!-- skip-example -->
 ```js
 observable.subscribe(x => console.log(x));
 ```
 
-It is not a coincidence that `observable.subscribe` and `subscribe` in `Observable.create(function subscribe(observer) {...})` have the same name. In the library, they are different, but for practical purposes you can consider them conceptually equal.
+`observable.subscribe` 和 `Observable.create(function subscribe(observer) {...})` 中的 `subscribe` 有着同样的名字，这并不是一个巧合。在库中，它们是不同的，但从实际出发，你可以认为在概念上它们是等同的。
 
-This shows how `subscribe` calls are not shared among multiple Observers of the same Observable. When calling `observable.subscribe` with an Observer, the function `subscribe` in `Observable.create(function subscribe(observer) {...})` is run for that given Observer. Each call to `observable.subscribe` triggers its own independent setup for that given Observer.
+这表明 `subscribe` 调用在同一 Observable 的多个观察者之间是不共享的。当使用一个观察者调用 `observable.subscribe` 时，`Observable.create(function subscribe(observer) {...})` 中的 `subscribe` 函数只服务于给定的观察者。对 `observable.subscribe` 的每次调用都会触发针对给定观察者的独立设置。
 
-<span class="informal">Subscribing to an Observable is like calling a function, providing callbacks where the data will be delivered to.</span>
+<span class="informal">订阅 Observable 像是调用函数, 并提供接收数据的回调函数。</span>
 
-This is drastically different to event handler APIs like `addEventListener` / `removeEventListener`. With `observable.subscribe`, the given Observer is not registered as a listener in the Observable. The Observable does not even maintain a list of attached Observers.
+这与像 `addEventListener` / `removeEventListener` 这样的事件处理方法 API 是完全不同的。使用 `observable.subscribe`，在 Observable 中不会将给定的观察者注册为监听器。Observable 甚至不会去维护一个附加的观察者列表。
 
-A `subscribe` call is simply a way to start an "Observable execution" and deliver values or events to an Observer of that execution.
+`subscribe` 调用是启动 “Observable 执行”的一种简单方式， 并将值或事件传递给本次执行的观察者。
 
 ### Executing Observables
 
