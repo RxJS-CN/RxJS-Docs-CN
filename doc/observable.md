@@ -361,11 +361,11 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 });
 ```
 
-### Disposing Observable Executions
+### 清理 Observable 执行
 
-Because Observable Executions may be infinite, and it's common for an Observer to want to abort execution in finite time, we need an API for canceling an execution. Since each execution is exclusive to one Observer only, once the Observer is done receiving values, it has to have a way to stop the execution, in order to avoid wasting computation power or memory resources.
+因为 Observable 执行可能会是无限的，并且观察者通常希望能在有限的时间内中止执行，所以我们需要一个 API 来取消执行。因为每个执行都是其对应观察者专属的，一旦观察者完成接收值，它必须要一种方法来停止执行，以避免浪费计算能力或内存资源。
 
-When `observable.subscribe` is called, the Observer gets attached to the newly created Observable execution. This call also returns an object, the `Subscription`:
+当调用了 `observable.subscribe` ，观察者会被附加到新创建的 Observable 执行中。这个调用还返回一个对象，即 `Subscription` (订阅)：
 
 <!-- skip-example -->
 ```js
