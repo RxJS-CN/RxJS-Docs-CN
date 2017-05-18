@@ -334,7 +334,7 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 });
 ```
 
-Observables strictly adhere to the Observable Contract, so the following code would not deliver the Next notification `4`:
+Observable 严格遵守自身的规约，所以下面的代码不会发送 "Next" 通知 `4`：
 
 ```js
 var observable = Rx.Observable.create(function subscribe(observer) {
@@ -342,11 +342,11 @@ var observable = Rx.Observable.create(function subscribe(observer) {
   observer.next(2);
   observer.next(3);
   observer.complete();
-  observer.next(4); // Is not delivered because it would violate the contract
+  observer.next(4); // 因为违反规约，所以不会发送
 });
 ```
 
-It is a good idea to wrap any code in `subscribe` with `try`/`catch` block that will deliver an Error notification if it catches an exception:
+在 `subscribe` 中用 `try`/`catch` 代码块来包裹任意代码是个不错的主意，如果捕获到异常的话，会发送 "Error" 通知：
 
 ```js
 var observable = Rx.Observable.create(function subscribe(observer) {
@@ -356,7 +356,7 @@ var observable = Rx.Observable.create(function subscribe(observer) {
     observer.next(3);
     observer.complete();
   } catch (err) {
-    observer.error(err); // delivers an error if it caught one
+    observer.error(err); // 如果捕获到异常会发送一个错误
   }
 });
 ```
