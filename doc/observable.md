@@ -219,7 +219,7 @@ console.log('after');
 "after"
 ```
 
-But you can also "return" values asynchronously:
+但你也可以异步地“返回”值：
 
 ```js
 var foo = Rx.Observable.create(function (observer) {
@@ -228,7 +228,7 @@ var foo = Rx.Observable.create(function (observer) {
   observer.next(100);
   observer.next(200);
   setTimeout(() => {
-    observer.next(300); // happens asynchronously
+    observer.next(300); // 异步执行
   }, 1000);
 });
 
@@ -239,7 +239,7 @@ foo.subscribe(function (x) {
 console.log('after');
 ```
 
-With output:
+输出：
 
 ```none
 "before"
