@@ -383,18 +383,18 @@ subscription.unsubscribe();
 
 <span class="informal">当你订阅了 Observable，你会得到一个订阅，它表示进行中的执行。只要调用 `unsubscribe()` 方法就可以取消执行。</span>
 
-Each Observable must define how to dispose resources of that execution when we create the Observable using `create()`. You can do that by returning a custom `unsubscribe` function from within `function subscribe()`.
+当我们使用 `create()` 方法创建 Observable 时，Observable 必须定义如何清理执行的资源。你可以通过在 `function subscribe()` 中返回一个自定义的 `unsubscribe` 函数。
 
-For instance, this is how we clear an interval execution set with `setInterval`:
+举例来说，这是我们如何清理使用了 `setInterval` 的 interval 执行集合：
 
 ```js
 var observable = Rx.Observable.create(function subscribe(observer) {
-  // Keep track of the interval resource
+  // 追踪 interval 资源
   var intervalID = setInterval(() => {
     observer.next('hi');
   }, 1000);
 
-  // Provide a way of canceling and disposing the interval resource
+  // 提供取消和清理 interval 资源的方法
   return function unsubscribe() {
     clearInterval(intervalID);
   };
