@@ -372,7 +372,7 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 var subscription = observable.subscribe(x => console.log(x));
 ```
 
-订阅表示进行中的执行，它有最小化的 API 以允许你取消执行。想了解更多订阅相关的内容，请参见 [`Subscription` 类型](./overview.html#subscription)。使用 `subscription.unsubscribe()` 你可以取消进行中的执行：
+Subscription 表示进行中的执行，它有最小化的 API 以允许你取消执行。想了解更多订阅相关的内容，请参见 [`Subscription` 类型](./overview.html#subscription)。使用 `subscription.unsubscribe()` 你可以取消进行中的执行：
 
 ```js
 var observable = Rx.Observable.from([10, 20, 30]);
@@ -381,7 +381,7 @@ var subscription = observable.subscribe(x => console.log(x));
 subscription.unsubscribe();
 ```
 
-<span class="informal">当你订阅了 Observable，你会得到一个订阅，它表示进行中的执行。只要调用 `unsubscribe()` 方法就可以取消执行。</span>
+<span class="informal">当你订阅了 Observable，你会得到一个 Subscription ，它表示进行中的执行。只要调用 `unsubscribe()` 方法就可以取消执行。</span>
 
 当我们使用 `create()` 方法创建 Observable 时，Observable 必须定义如何清理执行的资源。你可以通过在 `function subscribe()` 中返回一个自定义的 `unsubscribe` 函数。
 
