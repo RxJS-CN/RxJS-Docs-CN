@@ -177,21 +177,21 @@ console.log('after');
 "after"
 ```
 
-Which proves the subscription of `foo` was entirely synchronous, just like a function.
+这证明了 `foo` 的订阅完全是同步的，就像函数一样。
 
-<span class="informal">Observables are able to deliver values either synchronously or asynchronously.</span>
+<span class="informal">Observables 传递值可以是同步的，也可以是异步的。</span>
 
-What is the difference between an Observable and a function? **Observables can "return" multiple values over time**, something which functions cannot. You can't do this:
+那么 Observable 和 函数的区别是什么呢？**Observable 可以随着时间的推移“返回”多个值**，这是函数所做不到的。你无法这样：
 
 ```js
 function foo() {
   console.log('Hello');
   return 42;
-  return 100; // dead code. will never happen
+  return 100; // 死代码，永远不会执行
 }
 ```
 
-Functions can only return one value. Observables, however, can do this:
+函数只能返回一个值。但 Observables 可以这样：
 
 ```js
 var foo = Rx.Observable.create(function (observer) {
