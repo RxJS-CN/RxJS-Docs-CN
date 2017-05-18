@@ -251,20 +251,20 @@ console.log('after');
 300
 ```
 
-Conclusion:
+结论:
 
-- `func.call()` means "*give me one value synchronously*"
-- `observable.subscribe()` means "*give me any amount of values, either synchronously or asynchronously*"
+- `func.call()` 意思是 "*同步地给我一个值*"
+- `observable.subscribe()` 意思是 "*给我任意数量的值，无论是同步还是异步*"
 
-## Anatomy of an Observable
+## Observable 剖析
 
-Observables are **created** using `Rx.Observable.create` or a creation operator, are **subscribed** to with an Observer, **execute** to deliver `next` / `error` / `complete` notifications to the Observer, and their execution may be **disposed**. These four aspects are all encoded in an Observable instance, but some of these aspects are related to other types, like Observer and Subscription.
+Observables 是使用 `Rx.Observable.create` 或创建操作符**创建的**，并使用观察者来**订阅**它，然后**执行**它并发送 `next` / `error` / `complete` 通知给观察者，而且执行可能会被**清理**。这四个方面全部编码在 Observables 实例中，但某些方面是与其他类型相关的，像 Observer (观察者) 和  Subscription (订阅)。
 
-Core Observable concerns:
-- **Creating** Observables
-- **Subscribing** to Observables
-- **Executing** the Observable
-- **Disposing** Observables
+Observable 的核心关注点：
+- **创建** Observables
+- **订阅** Observables
+- **执行** Observables
+- **清理** Observables
 
 ### Creating Observables
 
