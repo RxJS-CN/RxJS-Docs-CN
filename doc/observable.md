@@ -303,27 +303,27 @@ observable.subscribe(x => console.log(x));
 
 `subscribe` 调用是启动 “Observable 执行”的一种简单方式， 并将值或事件传递给本次执行的观察者。
 
-### Executing Observables
+### 执行 Observables
 
-The code inside `Observable.create(function subscribe(observer) {...})` represents an "Observable execution", a lazy computation that only happens for each Observer that subscribes. The execution produces multiple values over time, either synchronously or asynchronously.
+`Observable.create(function subscribe(observer) {...})` 中`...`的代码表示 “Observable 执行”，它是惰性运算，只有在每个观察者订阅后才会执行。随着时间的推移，执行会以同步或异步的方式产生多个值。
 
-There are three types of values an Observable Execution can deliver:
+Observable 执行可以传递三种类型的值：
 
-- "Next" notification: sends a value such as a Number, a String, an Object, etc.
-- "Error" notification: sends a JavaScript Error or exception.
-- "Complete" notification: does not send a value.
+- "Next" 通知： 发送一个值，比如数字、字符串、对象，等等。
+- "Error" 通知： 发送一个 JavaScript 错误 或 异常。
+- "Complete" 通知： 不再发送任何值。
 
-Next notifications are the most important and most common type: they represent actual data being delivered to an Observer. Error and Complete notifications may happen only once during the Observable Execution, and there can only be either one of them.
+"Next" 通知是最重要，也是最常见的类型：它们表示传递给观察者的实际数据。"Error" 和 "Complete" 通知可能只会在 Observable 执行期间发生一次，并且只会执行其中的一个。
 
-These constraints are expressed best in the so-called *Observable Grammar* or *Contract*, written as a regular expression:
+这些约束用所谓的* Observable 语法*或*合约*表达最好，写为正则表达式是这样的：
 
 ```none
 next*(error|complete)?
 ```
 
-<span class="informal">In an Observable Execution, zero to infinite Next notifications may be delivered. If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.</span>
+<span class="informal">在 Observable 执行中, 可能会发送零个到无穷多个 "Next" 通知。如果发送的是 "Error" 或  "Complete" 通知的话，那么之后不会再发送任何通知了。</span>
 
-The following is an example of an Observable execution that delivers three Next notifications, then completes:
+下面是 Observable 执行的示例，它发送了三个 "Next" 通知，然后是 "Complete" 通知：
 
 ```js
 var observable = Rx.Observable.create(function subscribe(observer) {
