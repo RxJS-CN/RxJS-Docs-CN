@@ -197,8 +197,8 @@ function foo() {
 var foo = Rx.Observable.create(function (observer) {
   console.log('Hello');
   observer.next(42);
-  observer.next(100); // "return" another value
-  observer.next(200); // "return" yet another
+  observer.next(100); // “返回”另外一个值
+  observer.next(200); // 还可以再“返回”值
 });
 
 console.log('before');
@@ -208,7 +208,7 @@ foo.subscribe(function (x) {
 console.log('after');
 ```
 
-With synchronous output:
+同步输出：
 
 ```none
 "before"
