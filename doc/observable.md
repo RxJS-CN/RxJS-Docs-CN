@@ -157,7 +157,7 @@ console.log('after');
 "after"
 ```
 
-And this is the same behavior with Observables:
+使用 Observables 来做同样的事：
 
 <!-- skip-example -->
 ```js
@@ -168,7 +168,7 @@ foo.subscribe(function (x) {
 console.log('after');
 ```
 
-And the output is:
+输出是：
 
 ```none
 "before"
