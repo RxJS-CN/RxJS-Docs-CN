@@ -401,7 +401,7 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 });
 ```
 
-Just like `observable.subscribe` resembles `Observable.create(function subscribe() {...})`, the `unsubscribe` we return from `subscribe` is conceptually equal to `subscription.unsubscribe`. In fact, if we remove the ReactiveX types surrounding these concepts, we're left with rather straightforward JavaScript.
+正如 `observable.subscribe` 类似于 `Observable.create(function subscribe() {...})`，从 `subscribe` 返回的 `unsubscribe` 在概念上也等同于 `subscription.unsubscribe`。事实上，如果我们抛开围绕这些概念的 ReactiveX 类型，保留下来的只是相当简单的 JavaScript 。
 
 ```js
 function subscribe(observer) {
@@ -416,8 +416,8 @@ function subscribe(observer) {
 
 var unsubscribe = subscribe({next: (x) => console.log(x)});
 
-// Later:
-unsubscribe(); // dispose the resources
+// 稍后：
+unsubscribe(); // 清理资源
 ```
 
-The reason why we use Rx types like Observable, Observer, and Subscription is to get safety (such as the Observable Contract) and composability with Operators.
+为什么我们要使用像 Observable、Observer 和 Subscription 这样的 Rx 类型？原因是保证代码的安全性(比如 Observable 规约)和操作符的可组合性。
