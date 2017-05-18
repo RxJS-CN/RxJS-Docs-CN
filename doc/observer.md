@@ -1,6 +1,6 @@
-# Observer
+# Observer (观察者)
 
-**What is an Observer?** An Observer is a consumer of values delivered by an Observable. Observers are simply a set of callbacks, one for each type of notification delivered by the Observable: `next`, `error`, and `complete`. The following is an example of a typical Observer object:
+**什么是观察者？** - 观察者是由 Observable 发送的值的消费者。观察者只是一组回调函数的集合，每个回调函数对应一种 Observable 发送的通知类型：`next`、`error` 和 `complete` 。下面的示例是一个典型的观察者对象：
 
 ```js
 var observer = {
@@ -10,18 +10,18 @@ var observer = {
 };
 ```
 
-To use the Observer, provide it to the `subscribe` of an Observable:
+要使用观察者，需要把它提供给 Observable 的 `subscribe` 方法：
 
 <!-- skip-example -->
 ```js
 observable.subscribe(observer);
 ```
 
-<span class="informal">Observers are just objects with three callbacks, one for each type of notification that an Observable may deliver.</span>
+<span class="informal">观察者只是有三个回调函数的对象，每个回调函数对应一种 Observable 发送的通知类型。</span>
 
-Observers in RxJS may also be *partial*. If you don't provide one of the callbacks, the execution of the Observable will still happen normally, except some types of notifications will be ignored, because they don't have a corresponding callback in the Observer.
+RxJS 中的观察者也可能是*部分的*。如果你没有提供某个回调函数，Observable 的执行也会正常运行，只是某些通知类型会被忽略，因为观察者中没有没有相对应的回调函数。
 
-The example below is an Observer without the `complete` callback:
+下面的示例是没有 `complete` 回调函数的观察者：
 
 ```js
 var observer = {
@@ -30,14 +30,14 @@ var observer = {
 };
 ```
 
-When subscribing to an Observable, you may also just provide the callbacks as arguments, without being attached to an Observer object, for instance like this:
+当订阅 Observable 时，你可能只提供了一个回调函数作为参数，而并没有将其附加到观察者对象上，例如这样：
 
 <!-- skip-example -->
 ```js
 observable.subscribe(x => console.log('Observer got a next value: ' + x));
 ```
 
-Internally in `observable.subscribe`, it will create an Observer object using the first callback argument as the `next` handler. All three types of callbacks may be provided as arguments:
+在 `observable.subscribe` 内部，它回创建一个观察者对象并使用第一个回调函数参数作为 `next` 的处理方法。所有三种类型的回调函数都可以直接作为参数来提供：
 
 <!-- skip-example -->
 ```js
