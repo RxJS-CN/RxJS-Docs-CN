@@ -372,16 +372,16 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 var subscription = observable.subscribe(x => console.log(x));
 ```
 
-The Subscription represents the ongoing execution, and has a minimal API which allows you to cancel that execution. Read more about the [`Subscription` type here](./overview.html#subscription). With `subscription.unsubscribe()` you can cancel the ongoing execution:
+订阅表示进行中的执行，它有最小化的 API 以允许你取消执行。想了解更多订阅相关的内容，请参见 [`Subscription` 类型](./overview.html#subscription)。使用 `subscription.unsubscribe()` 你可以取消进行中的执行：
 
 ```js
 var observable = Rx.Observable.from([10, 20, 30]);
 var subscription = observable.subscribe(x => console.log(x));
-// Later:
+// 稍后：
 subscription.unsubscribe();
 ```
 
-<span class="informal">When you subscribe, you get back a Subscription, which represents the ongoing execution. Just call `unsubscribe()` to cancel the execution.</span>
+<span class="informal">当你订阅了 Observable，你会得到一个订阅，它表示进行中的执行。只要调用 `unsubscribe()` 方法就可以取消执行。</span>
 
 Each Observable must define how to dispose resources of that execution when we create the Observable using `create()`. You can do that by returning a custom `unsubscribe` function from within `function subscribe()`.
 
