@@ -266,11 +266,11 @@ Observable 的核心关注点：
 - **执行** Observables
 - **清理** Observables
 
-### Creating Observables
+### 创建 Observables
 
-`Rx.Observable.create` is an alias for the `Observable` constructor, and it takes one argument: the `subscribe` function.
+`Rx.Observable.create` 是 `Observable` 构造函数的别名，它接收一个参数：`subscribe` 函数。
 
-The following example creates an Observable to emit the string `'hi'` every second to an Observer.
+下面的示例创建了一个 Observable，它每隔一秒会向观察者发送字符串 `'hi'` 。
 
 ```js
 var observable = Rx.Observable.create(function subscribe(observer) {
@@ -280,9 +280,9 @@ var observable = Rx.Observable.create(function subscribe(observer) {
 });
 ```
 
-<span class="informal">Observables can be created with `create`, but usually we use the so-called [creation operators](./overview.html#creation-operators), like `of`, `from`, `interval`, etc.</span>
+<span class="informal">Observables 可以使用 `create` 来创建, 但通常我们使用所谓的[创建操作符](./overview.html#creation-operators), 像 `of`、`from`、`interval`、等等。</span>
 
-In the example above, the `subscribe` function is the most important piece to describe the Observable. Let's look at what subscribing means.
+在上面的示例中，`subscribe` 函数是用来描述 Observable 最重要的一块。我们来看下订阅是什么意思。
 
 ### Subscribing to Observables
 
