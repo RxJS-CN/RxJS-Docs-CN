@@ -146,11 +146,11 @@ setTimeout(() => {
 }, 2000);
 ```
 
-If we wish to avoid explicit calls to `connect()`, we can use ConnectableObservable's `refCount()` method (reference counting), which returns an Observable that keeps track of how many subscribers it has. When the number of subscribers increases from `0` to `1`, it will call `connect()` for us, which starts the shared execution. Only when the number of subscribers decreases from `1` to `0` will it be fully unsubscribed, stopping further execution.
+如果不想显示调用 `connect()`，我们可以使用 ConnectableObservable 的 `refCount()` 方法(引用计数)，这个方法返回 Observable，这个 Observable 会追踪有多少个订阅者。当订阅者的数量从`0`变成`1`，它会调用 `connect()` 以开启共享的执行。当订阅者数量从`1`变成`0`时，它会完全取消订阅，停止进一步的执行。
 
-<span class="informal">`refCount` makes the multicasted Observable automatically start executing when the first subscriber arrives, and stop executing when the last subscriber leaves.</span>
+<span class="informal">`refCount` 的作用是，当有第一个订阅者时，多播 Observable 会自动地启动执行，而当最后一个订阅者离开时，多播 Observable 会自动地停止执行。</span>
 
-Below is an example:
+示例如下：
 
 ```js
 var source = Rx.Observable.interval(500);
@@ -158,8 +158,7 @@ var subject = new Rx.Subject();
 var refCounted = source.multicast(subject).refCount();
 var subscription1, subscription2, subscriptionConnect;
 
-// This calls `connect()`, because
-// it is the first subscriber to `refCounted`
+// 这里其实调用了 `connect()`，因为 `refCounted` 有了第一个订阅者
 console.log('observerA subscribed');
 subscription1 = refCounted.subscribe({
   next: (v) => console.log('observerA: ' + v)
