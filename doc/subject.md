@@ -100,20 +100,20 @@ multicasted.connect();
 
 手动调用 `connect()` 并处理 Subscription 通常太笨重。通常，当第一个观察者到达时我们想要*自动地*连接，而当最后一个观察者取消订阅时我们想要*自动地*取消共享执行。
 
-请考虑以下示例，下面的列表概述了发生 Subscriptions 的经过：
+请考虑以下示例，下面的列表概述了 Subscriptions 发生的经过：
 
-1. First Observer subscribes to the multicasted Observable
-2. **The multicasted Observable is connected**
-3. The `next` value `0` is delivered to the first Observer
-4. Second Observer subscribes to the multicasted Observable
-5. The `next` value `1` is delivered to the first Observer
-5. The `next` value `1` is delivered to the second Observer
-1. First Observer unsubscribes from the multicasted Observable
-5. The `next` value `2` is delivered to the second Observer
-1. Second Observer unsubscribes from the multicasted Observable
-1. **The connection to the multicasted Observable is unsubscribed**
+1. 第一个观察者订阅了多播 Observable
+2. **多播 Observable 已连接**
+3. `next` 值 `0` 发送给第一个观察者
+4. 第二个观察者订阅了多播 Observable
+5. `next` 值 `1` 发送给第一个观察者
+6. `next` 值 `1` 发送给第二个观察者
+7. 第一个观察者取消了多播 Observable 的订阅
+8. `next` 值 `2` 发送给第二个观察者
+9. 第二个观察者取消了多播 Observable 的订阅
+10. **多播 Observable 的连接已中断(底层进行的操作是取消订阅)**
 
-To achieve that with explicit calls to `connect()`, we write the following code:
+要实现这点，需要显示地调用 `connect()`，代码如下：
 
 ```js
 var source = Rx.Observable.interval(500);
@@ -124,8 +124,8 @@ var subscription1, subscription2, subscriptionConnect;
 subscription1 = multicasted.subscribe({
   next: (v) => console.log('observerA: ' + v)
 });
-// We should call `connect()` here, because the first
-// subscriber to `multicasted` is interested in consuming values
+// 这里我们应该调用 `connect()`，因为 `multicasted` 的第一个
+// 订阅者关心消费值
 subscriptionConnect = multicasted.connect();
 
 setTimeout(() => {
@@ -138,11 +138,11 @@ setTimeout(() => {
   subscription1.unsubscribe();
 }, 1200);
 
-// We should unsubscribe the shared Observable execution here,
-// because `multicasted` would have no more subscribers after this
+// 这里我们应该取消共享的 Observable 执行的订阅，
+// 因为此后 `multicasted` 将不再有订阅者
 setTimeout(() => {
   subscription2.unsubscribe();
-  subscriptionConnect.unsubscribe(); // for the shared Observable execution
+  subscriptionConnect.unsubscribe(); // 用于共享的 Observable 执行
 }, 2000);
 ```
 
