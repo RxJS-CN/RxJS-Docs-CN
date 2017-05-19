@@ -35,7 +35,7 @@ observerA: 2
 observerB: 2
 ```
 
-Since a Subject is an Observer, this also means you may provide a Subject as the argument to the `subscribe` of any Observable, like the example below shows:
+因为 Subject 是观察者，这也就在意味着你可以把 Subject 作为参数传给任何 Observable 的 `subscribe` 方法，如下面的示例所展示的：
 
 ```js
 var subject = new Rx.Subject();
@@ -49,10 +49,10 @@ subject.subscribe({
 
 var observable = Rx.Observable.from([1, 2, 3]);
 
-observable.subscribe(subject); // You can subscribe providing a Subject
+observable.subscribe(subject); // 你可以提供一个 Subject 进行订阅
 ```
 
-Which executes as:
+执行结果：
 
 ```none
 observerA: 1
@@ -63,9 +63,9 @@ observerA: 3
 observerB: 3
 ```
 
-With the approach above, we essentially just converted a unicast Observable execution to multicast, through the Subject. This demonstrates how Subjects are the only way of making any Observable execution be shared to multiple Observers.
+使用上面的方法，我们基本上只是通过 Subject 将单播的 Observable 执行转换为多播的。这也说明了 Subjects 是将任意 Observable 执行共享给多个观察者的唯一方式。
 
-There are also a few specializations of the `Subject` type: `BehaviorSubject`, `ReplaySubject`, and `AsyncSubject`.
+还有一些特殊类型的 `Subject`：`BehaviorSubject`、`ReplaySubject` 和 `AsyncSubject`。
 
 ## Multicasted Observables
 
