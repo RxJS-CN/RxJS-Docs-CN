@@ -297,7 +297,7 @@ setTimeout(() => {
 }, 1000);
 ```
 
-With the following output where the second Observer gets events `3`, `4` and `5` that happened in the last `500` milliseconds prior to its subscription:
+从下面的输出可以看出，第二个观察者得到的值是`3`、`4`、`5`，这三个值是订阅发生前的`500`毫秒内发生的：
 
 ```none
 observerA: 1
