@@ -206,10 +206,10 @@ Subject 的其中一个变种就是 `BehaviorSubject`，它有一个“当前值
 
 <span class="informal">BehaviorSubjects 适合用来表示“随时间推移的值”。举例来说，生日的流是一个 Subject，但年龄的流应该是一个 BehaviorSubject 。</span>
 
-在下面的示例中，BehaviorSubject 使用值`0`进行初始化，当第一个观察者订阅它时会得到`0`。第二个观察者会得到值`2`，尽管它是在值`2`发送之后订阅的。
+在下面的示例中，BehaviorSubject 使用值`0`进行初始化，当第一个观察者订阅时会得到`0`。第二个观察者订阅时会得到值`2`，尽管它是在值`2`发送之后订阅的。
 
 ```js
-var subject = new Rx.BehaviorSubject(0); // 0 is the initial value
+var subject = new Rx.BehaviorSubject(0); // 0是初始值
 
 subject.subscribe({
   next: (v) => console.log('observerA: ' + v)
@@ -225,7 +225,7 @@ subject.subscribe({
 subject.next(3);
 ```
 
-With output:
+输出：
 
 ```none
 observerA: 0
@@ -238,11 +238,11 @@ observerB: 3
 
 ## ReplaySubject
 
-A `ReplaySubject` is similar to a `BehaviorSubject` in that it can send old values to new subscribers, but it can also *record* a part of the Observable execution.
+`ReplaySubject` 类似于 `BehaviorSubject`，它可以发送旧值给新的订阅者，但它还可以*记录* Observable 执行的一部分。
 
-<span class="informal">A `ReplaySubject` records multiple values from the Observable execution and replays them to new subscribers.</span>
+<span class="informal">`ReplaySubject` 记录 Observable 执行中的多个值并将其回放给新的订阅者。</span>
 
-When creating a `ReplaySubject`, you can specify how many values to replay:
+当创建 `ReplaySubject` 时，你可以指定回放多少个值：
 
 ```js
 var subject = new Rx.ReplaySubject(3); // buffer 3 values for new subscribers
