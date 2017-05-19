@@ -202,7 +202,7 @@ observerB unsubscribed
 
 ## BehaviorSubject
 
-Subject 的其中一个变种就是 `BehaviorSubject`，它有一个“当前值”的概念。它保存了发送个消费者的最新值。并且当有新的观察者订阅时，会立即从 `BehaviorSubject` 那接收到“当前值”。
+Subject 的其中一个变体就是 `BehaviorSubject`，它有一个“当前值”的概念。它保存了发送个消费者的最新值。并且当有新的观察者订阅时，会立即从 `BehaviorSubject` 那接收到“当前值”。
 
 <span class="informal">BehaviorSubjects 适合用来表示“随时间推移的值”。举例来说，生日的流是一个 Subject，但年龄的流应该是一个 BehaviorSubject 。</span>
 
@@ -315,7 +315,7 @@ observerB: 6
 
 ## AsyncSubject
 
-The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes.
+AsyncSubject 是另一个 Subject 变体，只有当 Observable 执行完成时(执行 `complete()`)，它才会将执行的最后一个值发送给观察者。
 
 ```js
 var subject = new Rx.AsyncSubject();
@@ -337,11 +337,11 @@ subject.next(5);
 subject.complete();
 ```
 
-With output:
+输出：
 
 ```none
 observerA: 5
 observerB: 5
 ```
 
-The AsyncSubject is similar to the [`last()`](../class/es6/Observable.js~Observable.html#instance-method-last) operator, in that it waits for the `complete` notification in order to deliver a single value.
+AsyncSubject 和 [`last()`](../class/es6/Observable.js~Observable.html#instance-method-last) 操作符类似，因为它也是等待 `complete` 通知，以发送一个单个值。
