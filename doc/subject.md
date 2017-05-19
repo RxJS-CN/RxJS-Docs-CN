@@ -245,7 +245,7 @@ observerB: 3
 当创建 `ReplaySubject` 时，你可以指定回放多少个值：
 
 ```js
-var subject = new Rx.ReplaySubject(3); // buffer 3 values for new subscribers
+var subject = new Rx.ReplaySubject(3); // 为新的订阅者缓冲3个值
 
 subject.subscribe({
   next: (v) => console.log('observerA: ' + v)
@@ -277,7 +277,7 @@ observerA: 5
 observerB: 5
 ```
 
-You can also specify a *window time* in milliseconds, besides of the buffer size, to determine how old the recorded values can be. In the following example we use a large buffer size of `100`, but a window time parameter of just `500` milliseconds.
+你还可以指定 *window time* (以毫秒为单位)，除了缓冲数量，还要确定多久之前的值可以记录。在下面的示例中，我们使用了较大的缓存数量`100`，但 window time 参数只设置了`500`毫秒。
 
 <!-- skip-example -->
 ```js
