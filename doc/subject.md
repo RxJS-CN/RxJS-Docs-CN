@@ -158,7 +158,8 @@ var subject = new Rx.Subject();
 var refCounted = source.multicast(subject).refCount();
 var subscription1, subscription2, subscriptionConnect;
 
-// 这里其实调用了 `connect()`，因为 `refCounted` 有了第一个订阅者
+// 这里其实调用了 `connect()`，
+// 因为 `refCounted` 有了第一个订阅者
 console.log('observerA subscribed');
 subscription1 = refCounted.subscribe({
   next: (v) => console.log('observerA: ' + v)
@@ -176,15 +177,15 @@ setTimeout(() => {
   subscription1.unsubscribe();
 }, 1200);
 
-// This is when the shared Observable execution will stop, because
-// `refCounted` would have no more subscribers after this
+// 这里共享的 Observable 执行会停止，
+// 因为此后 `refCounted` 将不再有订阅者
 setTimeout(() => {
   console.log('observerB unsubscribed');
   subscription2.unsubscribe();
 }, 2000);
 ```
 
-Which executes with the output:
+执行结果：
 
 ```none
 observerA subscribed
@@ -197,15 +198,15 @@ observerB: 2
 observerB unsubscribed
 ```
 
-The `refCount()` method only exists on ConnectableObservable, and it returns an `Observable`, not another ConnectableObservable.
+`refCount()` 只存在于 ConnectableObservable，它返回的是 `Observable`，而不是另一个 ConnectableObservable 。
 
 ## BehaviorSubject
 
-One of the variants of Subjects is the `BehaviorSubject`, which has a notion of "the current value". It stores the latest value emitted to its consumers, and whenever a new Observer subscribes, it will immediately receive the "current value" from the `BehaviorSubject`.
+Subject 的其中一个变种就是 `BehaviorSubject`，它有一个“当前值”的概念。它保存了发送个消费者的最新值。并且当有新的观察者订阅时，会立即从 `BehaviorSubject` 那接收到“当前值”。
 
-<span class="informal">BehaviorSubjects are useful for representing "values over time". For instance, an event stream of birthdays is a Subject, but the stream of a person's age would be a BehaviorSubject.</span>
+<span class="informal">BehaviorSubjects 适合用来表示“随时间推移的值”。举例来说，生日的流是一个 Subject，但年龄的流应该是一个 BehaviorSubject 。</span>
 
-In the following example, the BehaviorSubject is initialized with the value `0` which the first Observer receives when it subscribes. The second Observer receives the value `2` even though it subscribed after the value `2` was sent.
+在下面的示例中，BehaviorSubject 使用值`0`进行初始化，当第一个观察者订阅它时会得到`0`。第二个观察者会得到值`2`，尽管它是在值`2`发送之后订阅的。
 
 ```js
 var subject = new Rx.BehaviorSubject(0); // 0 is the initial value
