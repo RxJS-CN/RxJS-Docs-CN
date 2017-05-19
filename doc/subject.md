@@ -67,20 +67,20 @@ observerB: 3
 
 还有一些特殊类型的 `Subject`：`BehaviorSubject`、`ReplaySubject` 和 `AsyncSubject`。
 
-## Multicasted Observables
+## 多播的 Observables
 
-A "multicasted Observable" passes notifications through a Subject which may have many subscribers, whereas a plain "unicast Observable" only sends notifications to a single Observer.
+“多播 Observable” 通过 Subject 来发送通知，这个 Subject 可能有多个订阅者，然而普通的 “单播 Observable” 只发送通知给单个观察者。
 
-<span class="informal">A multicasted Observable uses a Subject under the hood to make multiple Observers see the same Observable execution.</span>
+<span class="informal">多播 Observable 在底层是通过使用 Subject 使得多个观察者可以看见同一个 Observable 执行。</span>
 
-Under the hood, this is how the `multicast` operator works: Observers subscribe to an underlying Subject, and the Subject subscribes to the source Observable. The following example is similar to the previous example which used `observable.subscribe(subject)`:
+在底层，这就是 `multicast` 操作符的工作原理：观察者订阅一个基础的 Subject，然后 Subject 订阅源 Observable 。下面的示例与前面使用 `observable.subscribe(subject)` 的示例类似：
 
 ```js
 var source = Rx.Observable.from([1, 2, 3]);
 var subject = new Rx.Subject();
 var multicasted = source.multicast(subject);
 
-// These are, under the hood, `subject.subscribe({...})`:
+// 在底层使用了 `subject.subscribe({...})`:
 multicasted.subscribe({
   next: (v) => console.log('observerA: ' + v)
 });
@@ -88,19 +88,19 @@ multicasted.subscribe({
   next: (v) => console.log('observerB: ' + v)
 });
 
-// This is, under the hood, `source.subscribe(subject)`:
+// 在底层使用了 `source.subscribe(subject)`:
 multicasted.connect();
 ```
 
-`multicast` returns an Observable that looks like a normal Observable, but works like a Subject when it comes to subscribing. `multicast` returns a `ConnectableObservable`, which is simply an Observable with the `connect()` method.
+`multicast` 操作符返回一个 Observable，它看起来很普通的 Observable 没什么区别，但当订阅时就像是 Subject 。`multicast` 返回的是 `ConnectableObservable`，它只是一个有 `connect()` 方法的 Observable 。
 
-The `connect()` method is important to determine exactly when the shared Observable execution  will start. Because `connect()` does `source.subscribe(subject)` under the hood, `connect()` returns a Subscription, which you can unsubscribe from in order to cancel the shared Observable execution.
+`connect()` 方法十分重要，它决定了何时启动共享的 Observable 执行。因为 `connect()` 方法在底层执行了 `source.subscribe(subject)`，所以它返回的是 Subscription，你可以取消订阅以取消共享的 Observable 执行。
 
-### Reference counting
+### 引用计数
 
-Calling `connect()` manually and handling the Subscription is often cumbersome. Usually, we want to *automatically* connect when the first Observer arrives, and automatically cancel the shared execution when the last Observer unsubscribes.
+手动调用 `connect()` 并处理 Subscription 通常太笨重。通常，当第一个观察者到达时我们想要*自动地*连接，而当最后一个观察者取消订阅时我们想要*自动地*取消共享执行。
 
-Consider the following example where subscriptions occur as outlined by this list:
+请考虑以下示例，下面的列表概述了发生 Subscriptions 的经过：
 
 1. First Observer subscribes to the multicasted Observable
 2. **The multicasted Observable is connected**
