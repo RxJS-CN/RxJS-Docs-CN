@@ -61,15 +61,15 @@ observable.subscribe(finalObserver);
 console.log('just after subscribe');
 ```
 
-The `proxyObserver` is created in `observeOn(Rx.Scheduler.async)`, and its `next(val)` function is approximately the following:
+`proxyObserver` 是在 `observeOn(Rx.Scheduler.async)` 中创建的，它的 `next(val)` 函数大概是下面这样子的：
 
 ```js
 var proxyObserver = {
   next: (val) => {
     Rx.Scheduler.async.schedule(
       (x) => finalObserver.next(x),
-      0 /* delay */,
-      val /* will be the x for the function above */
+      0 /* 延迟时间 */,
+      val /* 会作为上面函数所使用的 x */
     );
   },
 
