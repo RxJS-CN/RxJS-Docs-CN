@@ -71,15 +71,15 @@ observable.subscribe(x => console.log(x));
 
 最常用的静态操作符类型是所谓的**创建操作符**。它们只接收非 Observable 参数，比如数字，然后**创建**一个新的 Observable ，而不是将一个输入 Observable 转换为输出 Observable 。
 
-一个典型的静态操作符示例就是 `interval` 函数。它接收一个数字(非 Observable)作为参数，并生产一个 Observable 作为输出：
+一个典型的静态操作符例子就是 `interval` 函数。它接收一个数字(非 Observable)作为参数，并生产一个 Observable 作为输出：
 
 ```js
-var observable = Rx.Observable.interval(1000 /* number of milliseconds */);
+var observable = Rx.Observable.interval(1000 /* 毫秒数 */);
 ```
 
-Another example of a creation operator is `create`, which we have been using extensively in previous examples. See the list of [all static creation operators here](#creation-operators).
+创建操作符的另一个例子就是 `create`，已经在前面的示例中广泛使用。[点击这里](#creation-operators)查看所有静态操作符列表。
 
-However, static operators may be of different nature than simply creation. Some *Combination Operators* may be static, such as `merge`, `combineLatest`, `concat`, etc. These make sense as static operators because they take *multiple* Observables as input, not just one, for instance:
+然而，有些静态操作符可能不同于简单的创建。一些**组合操作符**可能是静态的，比如 `merge`、`combineLatest`、`concat`，等等。这些作为静态运算符是有道理的，因为它们将**多个** Observables 作为输入，而不仅仅是一个，例如：
 
 ```js
 var observable1 = Rx.Observable.interval(1000);
@@ -88,9 +88,9 @@ var observable2 = Rx.Observable.interval(400);
 var merged = Rx.Observable.merge(observable1, observable2);
 ```
 
-## Marble diagrams
+## Marble diagrams (弹珠图)
 
-To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. *Marble Diagrams* are visual representations of how operators work, and include the input Observable(s), the operator and its parameters, and the output Observable.
+要解释操作符是如何工作的，文字描述通常是不足以描述清楚的。许多操作符都是跟时间相关的，它们可能会以不同的方式延迟(delay)、取样(sample)、节流(throttle)或去抖动值(debonce)。图表通常是更适合的工具。**弹珠图**是操作符运行方式的视觉表示，其中包含输入 Obserable(s) (输入可能是多个 Observable )、操作符及其参数和输出 Observable 。
 
 <span class="informal">In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.</span>
 
