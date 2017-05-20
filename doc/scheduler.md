@@ -96,9 +96,9 @@ var proxyObserver = {
 
 你可能在你的 RxJS 代码中已经使用过调度器了，只是没有明确地指明要使用的调度器的类型。这是因为所有的 Observable 操作符处理并发性都有可选的调度器。如果没有提供调度器的话，RxJS 会通过使用最小并发原则选择一个默认调度器。这意味着引入满足操作符需要的最小并发量的调度器会被选择。例如，对于返回有限和少量消息的 observable 的操作符，RxJS 不使用调度器，即 `null` 或 `undefined` 。对于返回潜在大量的或无限数量的消息的操作符，使用 `queue` 调度器。对于使用定时器的操作符，使用 `aysnc` 调度器。
 
-Because RxJS uses the least concurrency scheduler, you can pick a different scheduler if you want to introduce concurrency for performance purpose.  To specify a particular scheduler, you can use those operator methods that take a scheduler, e.g., `from([10, 20, 30], Rx.Scheduler.async)`.
+因为 RxJS 使用最少的并发调度器，如果出于性能考虑，你想要引入并发，那么可以选择不同的调度器。要指定具体的调度器，可以使用那些采用调度器的操作符方法，例如 `from([10, 20, 30], Rx.Scheduler.async)` 。
 
-**Static creation operators usually take a Scheduler as argument.** For instance, `from(array, scheduler)` lets you specify the Scheduler to use when delivering each notification converted from the `array`. It is usually the last argument to the operator. The following static creation operators take a Scheduler argument:
+**静态创建操作符通常可以接收调度器作为参数。** 举例来说，`from(array, scheduler)` 可以让你指定调度器，当发送从 `array` 转换的每个通知的时候使用。调度器通常作为操作符的最后一个参数。下面的静态创建操作符接收调度器参数：
 
 - `bindCallback`
 - `bindNodeCallback`
@@ -114,14 +114,14 @@ Because RxJS uses the least concurrency scheduler, you can pick a different sche
 - `throw`
 - `timer`
 
-**Use `subscribeOn` to schedule in what context will the `subscribe()` call happen.** By default, a `subscribe()` call on an Observable will happen synchronously and immediately. However, you may delay or schedule the actual subscription to happen on a given Scheduler, using the instance operator `subscribeOn(scheduler)`, where `scheduler` is an argument you provide.
+**使用 `subscribeOn` 来调度 `subscribe()` 调用在什么样的上下文中执行。** 默认情况下，Observable 的 `subscribe()` 调用会立即同步地执行。然而，你可能会延迟或安排在给定的调度器上执行实际的 subscription ，使用实例操作符 `subscribeOn(scheduler)`，其中 `scheduler` 是你提供的参数。
 
-**Use `observeOn` to schedule in what context will notifications be delivered.** As we saw in the examples above, instance operator `observeOn(scheduler)` introduces a mediator Observer between the source Observable and the destination Observer, where the mediator schedules calls to the destination Observer using your given `scheduler`.
+**使用 `observeOn` 来调度发送通知的的上下文。** 正如我们在上面的示例中所看到的，实例操作符 `observeOn(scheduler)` 在源 Observable 和目标观察者之间引入了一个中介观察者，中介负责调度，它使用给定的 `scheduler` 来调用目标观察者。
 
-**Instance operators may take a Scheduler as argument.**
+**实例操作符可能会接收调度器作为参数。**
 
-Time-related operators like `bufferTime`, `debounceTime`, `delay`, `auditTime`, `sampleTime`, `throttleTime`, `timeInterval`, `timeout`, `timeoutWith`, `windowTime` all take a Scheduler as the last argument, and otherwise operate by default on the `Rx.Scheduler.async` Scheduler.
+像 `bufferTime`、`debounceTime`、`delay`、`auditTime`、`sampleTime`、`throttleTime`、`timeInterval`、`timeout`、`timeoutWith`、`windowTime` 这样时间相关的操作符全部接收调度器作为最后的参数，并且默认的操作是在 `Rx.Scheduler.async` 调度器上。
 
-Other instance operators that take a Scheduler as argument: `cache`, `combineLatest`, `concat`, `expand`, `merge`, `publishReplay`, `startWith`.
+其他接收调度器作为参数的实例操作符：`cache`、`combineLatest`、`concat`、`expand`、`merge`、`publishReplay`、`startWith`。
 
-Notice that both `cache` and `publishReplay` accept a Scheduler because they utilize a ReplaySubject. The constructor of a ReplaySubjects takes an optional Scheduler as the last argument because ReplaySubject may deal with time, which only makes sense in the context of a Scheduler. By default, a ReplaySubject uses the `queue` Scheduler to provide a clock.
+注意，`cache` 和 `publishReplay` 都接收调度器是因为它们使用了 ReplaySubject 。ReplaySubjects 的构造函数接收一个可选的调度器作为最后的参数，因为 ReplaySubject 可能会处理时间，这只在调度器的上下文中才有意义。默认情况下，ReplaySubject 使用 `quequ` 调度器来提供时钟。
