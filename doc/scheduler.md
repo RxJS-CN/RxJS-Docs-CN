@@ -77,24 +77,24 @@ var proxyObserver = {
 }
 ```
 
-The `async` Scheduler operates with a `setTimeout` or `setInterval`, even if the given `delay` was zero. As usual, in JavaScript, `setTimeout(fn, 0)` is known to run the function `fn` earliest on the next event loop iteration. This explains why `got value 1` is delivered to the `finalObserver` after `just after subscribe` happened.
+`async` 调度器操作符使用了 `setTimeout` 或 `setInterval`，即使给定的`延迟时间`为0。照例，在 JavaScript 中，我们已知的是 `setTimeout(fn, 0)` 会在下一次事件循环迭代的最开始运行 `fn` 。这也解释了为什么发送给 `finalObserver` 的 `got value 1` 发生在 `just after subscribe` 之后。
 
-The `schedule()` method of a Scheduler takes a `delay` argument, which refers to a quantity of time relative to the Scheduler's own internal clock. A Scheduler's clock need not have any relation to the actual wall-clock time. This is how temporal operators like `delay` operate not on actual time, but on time dictated by the Scheduler's clock. This is specially useful in testing, where a *virtual time Scheduler* may be used to fake wall-clock time while in reality executing scheduled tasks synchronously.
+调度器的 `schedule()` 方法接收一个 `delay` 参数，它指的是相对于调度器内部时钟的一段时间。调度器的时钟不需要与实际的挂钟时间有任何关系。这也就是为什么像 `delay` 这样的时间操作符不是在实际时间上操作的，而是取决于调度器的时钟时间。这在测试中极其有用，可以使用**虚拟时间调度器**来伪造挂钟时间，同时实际上是在同步执行计划任务。
 
-## Scheduler Types
+## 调度器类型
 
-The `async` Scheduler is one of the built-in schedulers provided by RxJS. Each of these can be created and returned by using static properties of the `Scheduler` object.
+`async` 调度器是 RxJS 提供的内置调度器中的一个。可以通过使用 `Scheduler` 对象的静态属性创建并返回其中的每种类型的调度器。
 
-| Scheduler | Purpose |
+| 调度器 | 目的 |
 | --- | --- |
-| `null` | By not passing any scheduler, notifications are delivered synchronously and recursively. Use this for constant-time operations or tail recursive operations. |
-| `Rx.Scheduler.queue` | Schedules on a queue in the current event frame (trampoline scheduler). Use this for iteration operations. |
-| `Rx.Scheduler.asap` | Schedules on the micro task queue, which uses the fastest transport mechanism available, either Node.js' `process.nextTick()` or Web Worker MessageChannel or setTimeout or others. Use this for asynchronous conversions. |
-| `Rx.Scheduler.async` | Schedules work with `setInterval`. Use this for time-based operations. |
+| `null` | 不传递任何调度器的话，会以同步递归的方式发送通知。用于定时操作或尾递归操作。|
+| `Rx.Scheduler.queue` | 当前事件帧中的队列调度(蹦床调度器)。用于迭代操作。|
+| `Rx.Scheduler.asap` | 微任务的队列调度，它使用可用的最快速的传输机制，比如 Node.js 的 `process.nextTick()` 或 Web Worker 的 MessageChannel 或 setTimeout 或其他。用于异步转换。 |
+| `Rx.Scheduler.async` | 使用 `setInterval` 的调度。用于基于时间的操作符。 |
 
-## Using Schedulers
+## 使用调度器
 
-You may have already used schedulers in your RxJS code without explicitly stating the type of schedulers to be used. This is because all Observable operators that deal with concurrency have optional schedulers. If you do not provide the scheduler, RxJS will pick a default scheduler by using the principle of least concurrency. This means that the scheduler which introduces the least amount of concurrency that satisfies the needs of the operator is chosen. For example, for operators returning an observable with a finite and small number of messages, RxJS uses no Scheduler, i.e. `null` or `undefined`.  For operators returning a potentially large or infinite number of messages, `queue` Scheduler is used. For operators which use timers, `async` is used.
+你可能在你的 RxJS 代码中已经使用过调度器了，只是没有明确地指明要使用的调度器的类型。这是因为所有的 Observable 操作符处理并发性都有可选的调度器。如果没有提供调度器的话，RxJS 会通过使用最小并发原则选择一个默认调度器。这意味着引入满足操作符需要的最小并发量的调度器会被选择。例如，对于返回有限和少量消息的 observable 的操作符，RxJS 不使用调度器，即 `null` 或 `undefined` 。对于返回潜在大量的或无限数量的消息的操作符，使用 `queue` 调度器。对于使用定时器的操作符，使用 `aysnc` 调度器。
 
 Because RxJS uses the least concurrency scheduler, you can pick a different scheduler if you want to introduce concurrency for performance purpose.  To specify a particular scheduler, you can use those operator methods that take a scheduler, e.g., `from([10, 20, 30], Rx.Scheduler.async)`.
 
