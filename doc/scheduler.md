@@ -28,7 +28,7 @@ observable.subscribe({
 console.log('just after subscribe');
 ```
 
-Which executes with the output:
+输出结果：
 
 ```none
 just before subscribe
@@ -39,7 +39,7 @@ got value 3
 done
 ```
 
-Notice how the notifications `got value...` were delivered after `just after subscribe`, which is different to the default behavior we have seen so far. This is because `observeOn(Rx.Scheduler.async)` introduces a proxy Observer between `Observable.create` and the final Observer. Let's rename some identifiers to make that distinction obvious in the example code:
+注意通知 `got value...` 在 `just after subscribe` 之后才发送，这与我们到目前为止所见的默认行为是不一样的。这是因为 `observeOn(Rx.Scheduler.async)` 在 `Observable.create` 和最终的观察者之间引入了一个代理观察者。在下面的示例代码中，我们重命名了一些标识符，使得其中的区别变得更明显：
 
 ```js
 var observable = Rx.Observable.create(function (proxyObserver) {
