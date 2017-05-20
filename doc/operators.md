@@ -92,21 +92,21 @@ var merged = Rx.Observable.merge(observable1, observable2);
 
 要解释操作符是如何工作的，文字描述通常是不足以描述清楚的。许多操作符都是跟时间相关的，它们可能会以不同的方式延迟(delay)、取样(sample)、节流(throttle)或去抖动值(debonce)。图表通常是更适合的工具。**弹珠图**是操作符运行方式的视觉表示，其中包含输入 Obserable(s) (输入可能是多个 Observable )、操作符及其参数和输出 Observable 。
 
-<span class="informal">In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.</span>
+<span class="informal">在弹珠图中，时间流向右边，图描述了在 Observable 执行中值(“弹珠”)是如何发出的。</span>
 
-Below you can see the anatomy of a marble diagram.
+在下图中可以看到解剖过的弹珠图。
 
 <img src="./asset/marble-diagram-anatomy.svg">
 
-Throughout this documentation site, we extensively use marble diagrams to explain how operators work. They may be really useful in other contexts too, like on a whiteboard or even in our unit tests (as ASCII diagrams).
+在整个文档站中，我们广泛地使用弹珠图来解释操作符的工作方式。它们在其他环境中也可能非常有用，例如在白板上，甚至在我们的单元测试中(如 ASCII 图)。
 
-## Choose an operator
+## 选择操作符
 
 <div class="decision-tree-widget"></div>
 
-## Categories of operators
+## 操作符分类
 
-There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, combination, multicasting, error handling, utility, etc. In the following list you will find all the operators organized in categories.
+操作符有着不同的用途，它们可作如下分类：创建、转换、过滤、组合、错误处理、工具，等等。在下面的列表中，你可以按分类组织好的所有操作符。
 
 ### Creation Operators
 
