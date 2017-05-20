@@ -108,7 +108,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 
 操作符有着不同的用途，它们可作如下分类：创建、转换、过滤、组合、错误处理、工具，等等。在下面的列表中，你可以按分类组织好的所有操作符。
 
-### Creation Operators
+### 创建操作符
 
 - `ajax`
 - [`bindCallback`](../class/es6/Observable.js~Observable.html#static-method-bindCallback)
@@ -130,7 +130,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`throw`](../class/es6/Observable.js~Observable.html#static-method-throw)
 - [`timer`](../class/es6/Observable.js~Observable.html#static-method-timer)
 
-### Transformation Operators
+### 转换操作符
 
 - [`buffer`](../class/es6/Observable.js~Observable.html#instance-method-buffer)
 - [`bufferCount`](../class/es6/Observable.js~Observable.html#instance-method-bufferCount)
@@ -159,7 +159,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`windowToggle`](../class/es6/Observable.js~Observable.html#instance-method-windowToggle)
 - [`windowWhen`](../class/es6/Observable.js~Observable.html#instance-method-windowWhen)
 
-### Filtering Operators
+### 过滤操作符
 
 - [`debounce`](../class/es6/Observable.js~Observable.html#instance-method-debounce)
 - [`debounceTime`](../class/es6/Observable.js~Observable.html#instance-method-debounceTime)
@@ -188,7 +188,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`throttle`](../class/es6/Observable.js~Observable.html#instance-method-throttle)
 - [`throttleTime`](../class/es6/Observable.js~Observable.html#instance-method-throttleTime)
 
-### Combination Operators
+### 组合操作符
 
 - [`combineAll`](../class/es6/Observable.js~Observable.html#instance-method-combineAll)
 - [`combineLatest`](../class/es6/Observable.js~Observable.html#instance-method-combineLatest)
@@ -205,7 +205,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`zip`](../class/es6/Observable.js~Observable.html#static-method-zip)
 - [`zipAll`](../class/es6/Observable.js~Observable.html#instance-method-zipAll)
 
-### Multicasting Operators
+### 多播操作符
 
 - [`cache`](../class/es6/Observable.js~Observable.html#instance-method-cache)
 - [`multicast`](../class/es6/Observable.js~Observable.html#instance-method-multicast)
@@ -215,13 +215,13 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`publishReplay`](../class/es6/Observable.js~Observable.html#instance-method-publishReplay)
 - [`share`](../class/es6/Observable.js~Observable.html#instance-method-share)
 
-### Error Handling Operators
+### 错误处理操作符
 
 - [`catch`](../class/es6/Observable.js~Observable.html#instance-method-catch)
 - [`retry`](../class/es6/Observable.js~Observable.html#instance-method-retry)
 - [`retryWhen`](../class/es6/Observable.js~Observable.html#instance-method-retryWhen)
 
-### Utility Operators
+### 工具操作符
 
 - [`do`](../class/es6/Observable.js~Observable.html#instance-method-do)
 - [`delay`](../class/es6/Observable.js~Observable.html#instance-method-delay)
@@ -239,7 +239,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`toArray`](../class/es6/Observable.js~Observable.html#instance-method-toArray)
 - [`toPromise`](../class/es6/Observable.js~Observable.html#instance-method-toPromise)
 
-### Conditional and Boolean Operators
+### 条件和布尔操作符
 
 - [`defaultIfEmpty`](../class/es6/Observable.js~Observable.html#instance-method-defaultIfEmpty)
 - [`every`](../class/es6/Observable.js~Observable.html#instance-method-every)
@@ -247,7 +247,7 @@ var merged = Rx.Observable.merge(observable1, observable2);
 - [`findIndex`](../class/es6/Observable.js~Observable.html#instance-method-findIndex)
 - [`isEmpty`](../class/es6/Observable.js~Observable.html#instance-method-isEmpty)
 
-### Mathematical and Aggregate Operators
+### 数学和聚合操作符
 
 - [`count`](../class/es6/Observable.js~Observable.html#instance-method-count)
 - [`max`](../class/es6/Observable.js~Observable.html#instance-method-max)
