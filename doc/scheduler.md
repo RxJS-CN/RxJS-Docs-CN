@@ -1,14 +1,14 @@
-# Scheduler
+# Scheduler (调度器)
 
-**What is a Scheduler?** A scheduler controls when a subscription starts and when notifications are delivered. It consists of three components.
+**什么是调度器？** - 调度器控制着何时启动 subscription 和何时发送通知。它由三部分组成：
 
-- **A Scheduler is a data structure.** It knows how to store and queue tasks based on priority or other criteria.
-- **A Scheduler is an execution context.** It denotes where and when the task is executed (e.g. immediately, or in another callback mechanism such as setTimeout or process.nextTick, or the animation frame).
-- **A Scheduler has a (virtual) clock.** It provides a notion of "time" by a getter method `now()` on the scheduler. Tasks being scheduled on a particular scheduler will adhere only to the time denoted by that clock.
+- **调度器是一种数据结构。** 它知道如何根据优先级或其他标准来存储任务和将任务进行排序。
+- **调度器是执行上下文。**  它表示在何时何地执行任务(举例来说，立即的，或另一种回调函数机制(比如 setTimeout 或 process.nextTick)，或动画帧)。
+- **调度器有一个(虚拟的)时钟。** 调度器功能通过它的 getter 方法 `now()` 提供了“时间”的概念。在具体调度器上安排的任务将严格遵循该时钟所表示的时间。
 
-<span class="informal">A Scheduler lets you define in what execution context will an Observable deliver notifications to its Observer.</span>
+<span class="informal">调度器可以让你规定 Observable 在什么样的执行上下文中发送通知给它的观察者。</span>
 
-In the example below, we take the usual simple Observable that emits values `1`, `2`, `3` synchronously, and use the operator `observeOn` to specify the `async` scheduler to use for delivering those values.
+在下面的示例中，我们采用普通的 Observable ，它同步地发出值`1`、`2`、`3`，并使用操作符 `observeOn` 来指定 `async` 调度器发送这些值。
 
 ```js
 var observable = Rx.Observable.create(function (observer) {
