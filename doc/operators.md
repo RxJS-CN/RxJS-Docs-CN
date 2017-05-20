@@ -1,14 +1,14 @@
-# Operators
+# Operators (操作符)
 
-RxJS is mostly useful for its *operators*, even though the Observable is the foundation. Operators are the essential pieces that allow complex asynchronous code to be easily composed in a declarative manner.
+RxJS 最有用的还是它的**操作符**，尽管它的根基是 Observable 。操作符是允许复杂的异步代码以声明式的方式进行轻松组合的基础代码单元。
 
-## What are operators?
+## 什么是操作符？
 
-Operators are **methods** on the Observable type, such as `.map(...)`, `.filter(...)`, `.merge(...)`, etc. When called, they do not *change* the existing Observable instance. Instead, they return a *new* Observable, whose subscription logic is based on the first Observable.
+操作符是 Observable 类型上的**方法**，比如 `.map(...)`、`.filter(...)`、`.merge(...)`，等等。当操作符被调用时，它们不会**改变**已经存在的 Observable 实例。相反，它们返回一个**新的** Observable ，它的 subscription 逻辑基于第一个 Observable 。
 
-<span class="informal">An Operator is a function which creates a new Observable based on the current Observable. This is a pure operation: the previous Observable stays unmodified.</span>
+<span class="informal"> 操作符是函数，它基于当前的 Observable 创建一个新的 Observable。这是一个无副作用的操作：前面的 Observable 保持不变。</span>
 
-An Operator is essentially a pure function which takes one Observable as input and generates another Observable as output. Subscribing to the output Observable will also subscribe to the input Observable. In the following example, we create a custom operator function that multiplies each value received from the input Observable by 10:
+操作符本质上是一个纯函数 (pure function)，它接收一个 Observable 作为输入，并生成一个新的 Observable 作为输出。订阅输出 Observalbe 同样会订阅输入 Observable 。在下面的示例中，我们创建一个自定义操作符函数，它将从输入 Observable 接收的每个值都乘以10：
 
 ```js
 function multiplyByTen(input) {
@@ -27,7 +27,7 @@ var output = multiplyByTen(input);
 output.subscribe(x => console.log(x));
 ```
 
-Which outputs:
+输出：
 
 ```none
 10
@@ -36,11 +36,11 @@ Which outputs:
 40
 ```
 
-Notice that a subscribe to `output` will cause `input` Observable to be subscribed. We call this an "operator subscription chain".
+注意，订阅 `output` 会导致 `input` Observable 也被订阅。我们称之为“操作符订阅链”。
 
-## Instance operators versus static operators
+## 实例操作符 vs. 静态操作符
 
-**What is an instance operator?** Typically when referring to operators, we assume *instance* operators, which are methods on Observable instances. For instance, if the operator `multiplyByTen` would be an official instance operator, it would look roughly like this:
+**什么是实例操作符？** - 通常提到操作符时，我们指的是**实例**操作符，它是 Observable 实例上的方法。举例来说，如果上面的 `multiplyByTen` 是官方提供的实例操作符，它看起来大致是这个样子的：
 
 ```js
 Rx.Observable.prototype.multiplyByTen = function multiplyByTen() {
@@ -55,9 +55,9 @@ Rx.Observable.prototype.multiplyByTen = function multiplyByTen() {
 }
 ```
 
-<span class="informal">Instance operators are functions that use the `this` keyword to infer what is the input Observable.</span>
+<span class="informal">实例运算符是使用 `this` 关键字来指代输入的 Observable 的函数。</span>
 
-Notice how the `input` Observable is not a function argument anymore, it is assumed to be the `this` object. This is how we would use such instance operator:
+注意，这里的 `input` Observable 不再是一个函数参数，它现在是 `this` 对象。下面是我们如何使用这样的实例运算符：
 
 ```js
 var observable = Rx.Observable.from([1, 2, 3, 4]).multiplyByTen();
@@ -65,21 +65,21 @@ var observable = Rx.Observable.from([1, 2, 3, 4]).multiplyByTen();
 observable.subscribe(x => console.log(x));
 ```
 
-**What is a static operator?** Besides instance operators, static operators are functions attached to the Observable class directly. A static operator uses no `this` keyword internally, but instead relies entirely on its arguments.
+**什么是静态操作符？** - 除了实例操作符，还有静态操作符，它们是直接附加到 Observable 类上的。静态操作符在内部不使用 `this` 关键字，而是完全依赖于它的参数。
 
-<span class="informal">Static operators are pure functions attached to the Observable class, and usually are used to create Observables from scratch.</span>
+<span class="informal">静态操作符是附加到 Observalbe 类上的纯函数，通常用来从头开始创建 Observalbe 。</span>
 
-The most common type of static operators are the so-called *Creation Operators*. Instead of transforming an input Observable to an output Observable, they simply take a non-Observable argument, like a number, and *create* a new Observable.
+最常用的静态操作符类型是所谓的**创建操作符**。它们只接收非 Observable 参数，比如数字，然后**创建**一个新的 Observable ，而不是将一个输入 Observable 转换为输出 Observable 。
 
-A typical example of a static creation operator would be the `interval` function. It takes a number (not an Observable) as input argument, and produces an Observable as output:
+一个典型的静态操作符例子就是 `interval` 函数。它接收一个数字(非 Observable)作为参数，并生产一个 Observable 作为输出：
 
 ```js
-var observable = Rx.Observable.interval(1000 /* number of milliseconds */);
+var observable = Rx.Observable.interval(1000 /* 毫秒数 */);
 ```
 
-Another example of a creation operator is `create`, which we have been using extensively in previous examples. See the list of [all static creation operators here](#creation-operators).
+创建操作符的另一个例子就是 `create`，已经在前面的示例中广泛使用。[点击这里](#creation-operators)查看所有静态操作符列表。
 
-However, static operators may be of different nature than simply creation. Some *Combination Operators* may be static, such as `merge`, `combineLatest`, `concat`, etc. These make sense as static operators because they take *multiple* Observables as input, not just one, for instance:
+然而，有些静态操作符可能不同于简单的创建。一些**组合操作符**可能是静态的，比如 `merge`、`combineLatest`、`concat`，等等。这些作为静态运算符是有道理的，因为它们将**多个** Observables 作为输入，而不仅仅是一个，例如：
 
 ```js
 var observable1 = Rx.Observable.interval(1000);
@@ -88,27 +88,27 @@ var observable2 = Rx.Observable.interval(400);
 var merged = Rx.Observable.merge(observable1, observable2);
 ```
 
-## Marble diagrams
+## Marble diagrams (弹珠图)
 
-To explain how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emissions in different ways. Diagrams are often a better tool for that. *Marble Diagrams* are visual representations of how operators work, and include the input Observable(s), the operator and its parameters, and the output Observable.
+要解释操作符是如何工作的，文字描述通常是不足以描述清楚的。许多操作符都是跟时间相关的，它们可能会以不同的方式延迟(delay)、取样(sample)、节流(throttle)或去抖动值(debonce)。图表通常是更适合的工具。**弹珠图**是操作符运行方式的视觉表示，其中包含输入 Obserable(s) (输入可能是多个 Observable )、操作符及其参数和输出 Observable 。
 
-<span class="informal">In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.</span>
+<span class="informal">在弹珠图中，时间流向右边，图描述了在 Observable 执行中值(“弹珠”)是如何发出的。</span>
 
-Below you can see the anatomy of a marble diagram.
+在下图中可以看到解剖过的弹珠图。
 
 <img src="./asset/marble-diagram-anatomy.svg">
 
-Throughout this documentation site, we extensively use marble diagrams to explain how operators work. They may be really useful in other contexts too, like on a whiteboard or even in our unit tests (as ASCII diagrams).
+在整个文档站中，我们广泛地使用弹珠图来解释操作符的工作方式。它们在其他环境中也可能非常有用，例如在白板上，甚至在我们的单元测试中(如 ASCII 图)。
 
-## Choose an operator
+## 选择操作符
 
 <div class="decision-tree-widget"></div>
 
-## Categories of operators
+## 操作符分类
 
-There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, combination, multicasting, error handling, utility, etc. In the following list you will find all the operators organized in categories.
+操作符有着不同的用途，它们可作如下分类：创建、转换、过滤、组合、错误处理、工具，等等。在下面的列表中，你可以按分类组织好的所有操作符。
 
-### Creation Operators
+### 创建操作符
 
 - `ajax`
 - [`bindCallback`](../class/es6/Observable.js~Observable.html#static-method-bindCallback)
@@ -130,7 +130,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`throw`](../class/es6/Observable.js~Observable.html#static-method-throw)
 - [`timer`](../class/es6/Observable.js~Observable.html#static-method-timer)
 
-### Transformation Operators
+### 转换操作符
 
 - [`buffer`](../class/es6/Observable.js~Observable.html#instance-method-buffer)
 - [`bufferCount`](../class/es6/Observable.js~Observable.html#instance-method-bufferCount)
@@ -159,7 +159,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`windowToggle`](../class/es6/Observable.js~Observable.html#instance-method-windowToggle)
 - [`windowWhen`](../class/es6/Observable.js~Observable.html#instance-method-windowWhen)
 
-### Filtering Operators
+### 过滤操作符
 
 - [`debounce`](../class/es6/Observable.js~Observable.html#instance-method-debounce)
 - [`debounceTime`](../class/es6/Observable.js~Observable.html#instance-method-debounceTime)
@@ -188,7 +188,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`throttle`](../class/es6/Observable.js~Observable.html#instance-method-throttle)
 - [`throttleTime`](../class/es6/Observable.js~Observable.html#instance-method-throttleTime)
 
-### Combination Operators
+### 组合操作符
 
 - [`combineAll`](../class/es6/Observable.js~Observable.html#instance-method-combineAll)
 - [`combineLatest`](../class/es6/Observable.js~Observable.html#instance-method-combineLatest)
@@ -205,7 +205,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`zip`](../class/es6/Observable.js~Observable.html#static-method-zip)
 - [`zipAll`](../class/es6/Observable.js~Observable.html#instance-method-zipAll)
 
-### Multicasting Operators
+### 多播操作符
 
 - [`cache`](../class/es6/Observable.js~Observable.html#instance-method-cache)
 - [`multicast`](../class/es6/Observable.js~Observable.html#instance-method-multicast)
@@ -215,13 +215,13 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`publishReplay`](../class/es6/Observable.js~Observable.html#instance-method-publishReplay)
 - [`share`](../class/es6/Observable.js~Observable.html#instance-method-share)
 
-### Error Handling Operators
+### 错误处理操作符
 
 - [`catch`](../class/es6/Observable.js~Observable.html#instance-method-catch)
 - [`retry`](../class/es6/Observable.js~Observable.html#instance-method-retry)
 - [`retryWhen`](../class/es6/Observable.js~Observable.html#instance-method-retryWhen)
 
-### Utility Operators
+### 工具操作符
 
 - [`do`](../class/es6/Observable.js~Observable.html#instance-method-do)
 - [`delay`](../class/es6/Observable.js~Observable.html#instance-method-delay)
@@ -239,7 +239,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`toArray`](../class/es6/Observable.js~Observable.html#instance-method-toArray)
 - [`toPromise`](../class/es6/Observable.js~Observable.html#instance-method-toPromise)
 
-### Conditional and Boolean Operators
+### 条件和布尔操作符
 
 - [`defaultIfEmpty`](../class/es6/Observable.js~Observable.html#instance-method-defaultIfEmpty)
 - [`every`](../class/es6/Observable.js~Observable.html#instance-method-every)
@@ -247,7 +247,7 @@ There are operators for different purposes, and they may be categorized as: crea
 - [`findIndex`](../class/es6/Observable.js~Observable.html#instance-method-findIndex)
 - [`isEmpty`](../class/es6/Observable.js~Observable.html#instance-method-isEmpty)
 
-### Mathematical and Aggregate Operators
+### 数学和聚合操作符
 
 - [`count`](../class/es6/Observable.js~Observable.html#instance-method-count)
 - [`max`](../class/es6/Observable.js~Observable.html#instance-method-max)
