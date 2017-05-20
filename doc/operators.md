@@ -27,7 +27,7 @@ var output = multiplyByTen(input);
 output.subscribe(x => console.log(x));
 ```
 
-Which outputs:
+输出：
 
 ```none
 10
@@ -36,11 +36,11 @@ Which outputs:
 40
 ```
 
-Notice that a subscribe to `output` will cause `input` Observable to be subscribed. We call this an "operator subscription chain".
+注意，订阅 `output` 会导致 `input` Observable 也被订阅。我们称之为“操作符订阅链”。
 
-## Instance operators versus static operators
+## 实例操作符 vs. 静态操作符
 
-**What is an instance operator?** Typically when referring to operators, we assume *instance* operators, which are methods on Observable instances. For instance, if the operator `multiplyByTen` would be an official instance operator, it would look roughly like this:
+**什么是实例操作符？** - 通常提到操作符时，我们指的是**实例**操作符，它是 Observable 实例上的方法。举例来说，如果上面的 `multiplyByTen` 是官方提供的实例操作符，它看起来大致是这个样子的：
 
 ```js
 Rx.Observable.prototype.multiplyByTen = function multiplyByTen() {
