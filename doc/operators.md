@@ -8,7 +8,7 @@ RxJS 最有用的还是它的**操作符**，尽管它的根基是 Observable �
 
 <span class="informal"> 操作符是函数，它基于当前的 Observable 创建一个新的 Observable。这是一个无副作用的操作：前面的 Observable 保持不变。</span>
 
-操作符本质上是一个纯函数 (pure function)，它接收一个 Observable 作为输入，并生成一个新的 Observable 作为输出。订阅输出的 Observalbe 同样会订阅输入的 Observable 。在下面的示例中，我们创建一个自定义操作符函数，它将从输入的 Observable 接收的每个值都乘以10：
+操作符本质上是一个纯函数 (pure function)，它接收一个 Observable 作为输入，并生成一个新的 Observable 作为输出。订阅输出 Observalbe 同样会订阅输入 Observable 。在下面的示例中，我们创建一个自定义操作符函数，它将从输入 Observable 接收的每个值都乘以10：
 
 ```js
 function multiplyByTen(input) {
@@ -55,9 +55,9 @@ Rx.Observable.prototype.multiplyByTen = function multiplyByTen() {
 }
 ```
 
-<span class="informal">Instance operators are functions that use the `this` keyword to infer what is the input Observable.</span>
+<span class="informal">实例运算符是使用 `this` 关键字来指代输入的 Observable 的函数。</span>
 
-Notice how the `input` Observable is not a function argument anymore, it is assumed to be the `this` object. This is how we would use such instance operator:
+注意，这里的 `input` Observable 不再是一个函数参数，它现在是 `this` 对象。下面是我们如何使用这样的实例运算符：
 
 ```js
 var observable = Rx.Observable.from([1, 2, 3, 4]).multiplyByTen();
@@ -65,13 +65,13 @@ var observable = Rx.Observable.from([1, 2, 3, 4]).multiplyByTen();
 observable.subscribe(x => console.log(x));
 ```
 
-**What is a static operator?** Besides instance operators, static operators are functions attached to the Observable class directly. A static operator uses no `this` keyword internally, but instead relies entirely on its arguments.
+**什么是静态操作符？** - 除了实例操作符，还有静态操作符，它们是直接附加到 Observable 类上的。静态操作符在内部不使用 `this` 关键字，而是完全依赖于它的参数。
 
-<span class="informal">Static operators are pure functions attached to the Observable class, and usually are used to create Observables from scratch.</span>
+<span class="informal">静态操作符是附加到 Observalbe 类上的纯函数，通常用来从头开始创建 Observalbe 。</span>
 
-The most common type of static operators are the so-called *Creation Operators*. Instead of transforming an input Observable to an output Observable, they simply take a non-Observable argument, like a number, and *create* a new Observable.
+最常用的静态操作符类型是所谓的**创建操作符**。它们只接收非 Observable 参数，比如数字，然后**创建**一个新的 Observable ，而不是将一个输入 Observable 转换为输出 Observable 。
 
-A typical example of a static creation operator would be the `interval` function. It takes a number (not an Observable) as input argument, and produces an Observable as output:
+一个典型的静态操作符示例就是 `interval` 函数。它接收一个数字(非 Observable)作为参数，并生产一个 Observable 作为输出：
 
 ```js
 var observable = Rx.Observable.interval(1000 /* number of milliseconds */);
