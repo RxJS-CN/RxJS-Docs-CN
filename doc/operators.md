@@ -1,14 +1,14 @@
-# Operators
+# Operators (操作符)
 
-RxJS is mostly useful for its *operators*, even though the Observable is the foundation. Operators are the essential pieces that allow complex asynchronous code to be easily composed in a declarative manner.
+RxJS 最有用的还是它的**操作符**，尽管它的根基是 Observable 。操作符是允许复杂的异步代码以声明式的方式进行轻松组合的基础代码单元。
 
-## What are operators?
+## 什么是操作符？
 
-Operators are **methods** on the Observable type, such as `.map(...)`, `.filter(...)`, `.merge(...)`, etc. When called, they do not *change* the existing Observable instance. Instead, they return a *new* Observable, whose subscription logic is based on the first Observable.
+操作符是 Observable 类型上的**方法**，比如 `.map(...)`、`.filter(...)`、`.merge(...)`，等等。当操作符被调用时，它们不会**改变**已经存在的 Observable 实例。相反，它们返回一个**新的** Observable ，它的 subscription 逻辑基于第一个 Observable 。
 
-<span class="informal">An Operator is a function which creates a new Observable based on the current Observable. This is a pure operation: the previous Observable stays unmodified.</span>
+<span class="informal"> 操作符是函数，它基于当前的 Observable 创建一个新的 Observable。这是一个无副作用的操作：前面的 Observable 保持不变。</span>
 
-An Operator is essentially a pure function which takes one Observable as input and generates another Observable as output. Subscribing to the output Observable will also subscribe to the input Observable. In the following example, we create a custom operator function that multiplies each value received from the input Observable by 10:
+操作符本质上是一个纯函数 (pure function)，它接收一个 Observable 作为输入，并生成一个新的 Observable 作为输出。订阅输出的 Observalbe 同样会订阅输入的 Observable 。在下面的示例中，我们创建一个自定义操作符函数，它将从输入的 Observable 接收的每个值都乘以10：
 
 ```js
 function multiplyByTen(input) {
