@@ -122,7 +122,7 @@ state.subscribe(state => {
 
 ### React
 
-Lets look at an example where we subscribe to an observable when the component mounts and unsubscribes when it unmounts.
+我们来看一个示例，当组件进入 `componentDidMount` 生命周期事件时订阅 observable，而当进入 `componentWillUnmount` 生命周期事件时取消订阅。
 
 <!-- skip-example -->
 ```js
@@ -135,9 +135,9 @@ class MyComponent extends ObservableComponent {
   }
   componentDidMount() {
     this.messages = messages
-      // Accumulate our messages in an array
+      // 在数组中累积我们的消息
       .scan((messages, message) => [message].concat(messages), [])
-      // And render whenever we get a new message
+      // 当得到一条新消息时进行渲染
       .subscribe(messages => this.setState({messages: messages}));
   }
   componentWillUnmount() {
@@ -157,6 +157,6 @@ class MyComponent extends ObservableComponent {
 export default MyComponent;
 ```
 
-There are many other ways to use observables with React as well. Take a look at these:
+还有许多其他的方式可以使用 React 和 observables。看看这些：
 
-- [rxjs-react-component](https://www.npmjs.com/package/rxjs-react-component). It will allow you to expose observables that maps to state changes. Also use observables for lifecycle hooks
+- [rxjs-react-component](https://www.npmjs.com/package/rxjs-react-component)。它允许你暴露映射到状态更改的 observable 。还可以使用 observable 版的生命周期钩子。
