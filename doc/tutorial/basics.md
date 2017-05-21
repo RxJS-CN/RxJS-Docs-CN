@@ -1,26 +1,26 @@
-# The basics
+# 基础
 
-## Converting to observables
+## 转换成 observables
 <!-- skip-example -->
 ```js
-// From one or multiple values
+// 来自一个或多个值
 Rx.Observable.of('foo', 'bar');
 
-// From array of values
+// 来自数组
 Rx.Observable.from([1,2,3]);
 
-// From an event
+// 来自事件
 Rx.Observable.fromEvent(document.querySelector('button'), 'click');
 
-// From a Promise
+// 来自 Promise
 Rx.Observable.fromPromise(fetch('/users'));
 
-// From a callback (last argument is a callback)
+// 来自回调函数(最后一个参数得是回调函数，比如下面的 cb)
 // fs.exists = (path, cb(exists))
 var exists = Rx.Observable.bindCallback(fs.exists);
 exists('file.txt').subscribe(exists => console.log('Does file exist?', exists));
 
-// From a callback (last argument is a callback)
+// 来自回调函数(最后一个参数得是回调函数，比如下面的 cb)
 // fs.rename = (pathA, pathB, cb(err, result))
 var rename = Rx.Observable.bindNodeCallback(fs.rename);
 rename('file.txt', 'else.txt').subscribe(() => console.log('Renamed!'));
