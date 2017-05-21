@@ -1,26 +1,24 @@
-# External References
+# 外部参考资料
 
-Can't get enough RxJS? Check out these other great resources!
+还没有学到足够的 RxJS 知识？查看其他这些超级棒的资源吧！
 
-## Tutorials
+## 教程
 
-- [RxJS @ Egghead.io](https://egghead.io/technologies/rx)
-- [The introduction to Reactive Programming you've been missing](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
-- [2 minute introduction to Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877)
-- [Learn RxJS - @jhusain](https://github.com/jhusain/learnrx)
-- [Rx Workshop](http://rxworkshop.codeplex.com/) 
-- [Reactive Programming and MVC](http://aaronstacy.com/writings/reactive-programming-and-mvc/)
-- [RxJS Training - @andrestaltz](https://github.com/staltz/rxjs-training)
+- [RxJS 课程 - Egghead.io](https://egghead.io/technologies/rx)
+- [不容错过的响应式编程介绍](https://gist.github.com/staltz/868e7e9bc2a7b8c1f754)
+- [2分钟告诉你什么是 Rx](https://medium.com/@andrestaltz/2-minute-introduction-to-rx-24c8ca793877)
+- [学习 RxJS - @jhusain](https://github.com/jhusain/learnrx)
+- [Rx 工场](http://rxworkshop.codeplex.com/) 
+- [响应式编程和 MVC](http://aaronstacy.com/writings/reactive-programming-and-mvc/)
+- [RxJS 培训 - @andrestaltz](https://github.com/staltz/rxjs-training)
 
+## 书籍
 
-## Books
-
-- [RxJS in Action](https://www.manning.com/books/rxjs-in-action) 
-- [RxJS](http://xgrommx.github.io/rx-book/)
-- [Intro to Rx](http://www.amazon.com/Introduction-to-Rx-ebook/dp/B008GM3YPM/)
-- [Programming Reactive Extensions and LINQ](http://www.amazon.com/Programming-Reactive-Extensions-Jesse-Liberty/dp/1430237473/)
-- [Reactive Programming with RxJS](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs)
-
+- [RxJS 实战](https://www.manning.com/books/rxjs-in-action) 
+- [Rx Book](http://xgrommx.github.io/rx-book/)
+- [Rx 介绍](http://www.amazon.com/Introduction-to-Rx-ebook/dp/B008GM3YPM/)
+- [响应式编程扩展 LINQ](http://www.amazon.com/Programming-Reactive-Extensions-Jesse-Liberty/dp/1430237473/)
+- [使用 RxJS 进行响应式编程](https://pragprog.com/book/smreactjs/reactive-programming-with-rxjs)
 
 ## Videos
 
@@ -38,7 +36,6 @@ Can't get enough RxJS? Check out these other great resources!
 - [Reactive Game Programming for the Discerning Hipster - JSConf 2014 - Bodil Stokke](https://www.youtube.com/watch?v=x8mmAu7ZR9Y)
 
 ## Presentations
-
 
 - Don't Cross the Streams - Cascadia.js 2012 [slides/demos](http://www.slideshare.net/mattpodwysocki/cascadiajs-dont-cross-the-streams) | [video](http://www.youtube.com/watch?v=FqBq4uoiG0M)
 - Curing Your Asynchronous Blues - Strange Loop 2013 [slides/demos](https://github.com/Reactive-Extensions/StrangeLoop2013) | [video](http://www.infoq.com/presentations/rx-event-processing)
