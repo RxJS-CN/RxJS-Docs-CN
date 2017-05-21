@@ -5,6 +5,7 @@
 rm -rf tmp/docs && \
   npm run build_docs && \
   git checkout gh-pages && \
+  git pull origin gh-pages && \
   cp -r ./tmp/docs/ ./ && \
   rm -rf tmp/ && \
   git add . && \
