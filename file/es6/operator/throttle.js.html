@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -79,6 +81,10 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/throttle.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
+export const defaultThrottleConfig = {
+    leading: true,
+    trailing: false
+};
 /**
  * Emits a value from the source Observable, then ignores subsequent source
  * values for a duration determined by another Observable, then repeats this
@@ -112,65 +118,94 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @param {function(value: T): SubscribableOrPromise} durationSelector A function
  * that receives a value from the source Observable, for computing the silencing
  * duration for each source value, returned as an Observable or a Promise.
+ * @param {Object} config a configuration object to define `leading` and `trailing` behavior. Defaults
+ * to `{ leading: true, trailing: false }`.
  * @return {Observable&lt;T&gt;} An Observable that performs the throttle operation to
  * limit the rate of emissions from the source.
  * @method throttle
  * @owner Observable
  */
-export function throttle(durationSelector) {
-    return this.lift(new ThrottleOperator(durationSelector));
+export function throttle(durationSelector, config = defaultThrottleConfig) {
+    return this.lift(new ThrottleOperator(durationSelector, config.leading, config.trailing));
 }
 class ThrottleOperator {
-    constructor(durationSelector) {
+    constructor(durationSelector, leading, trailing) {
         this.durationSelector = durationSelector;
+        this.leading = leading;
+        this.trailing = trailing;
     }
     call(subscriber, source) {
-        return source.subscribe(new ThrottleSubscriber(subscriber, this.durationSelector));
+        return source.subscribe(new ThrottleSubscriber(subscriber, this.durationSelector, this.leading, this.trailing));
     }
 }
 /**
- * We need this JSDoc comment for affecting ESDoc.
+ * We need this JSDoc comment for affecting ESDoc
  * @ignore
  * @extends {Ignored}
  */
 class ThrottleSubscriber extends OuterSubscriber {
-    constructor(destination, durationSelector) {
+    constructor(destination, durationSelector, _leading, _trailing) {
         super(destination);
         this.destination = destination;
         this.durationSelector = durationSelector;
+        this._leading = _leading;
+        this._trailing = _trailing;
+        this._hasTrailingValue = false;
     }
     _next(value) {
-        if (!this.throttled) {
-            this.tryDurationSelector(value);
+        if (this.throttled) {
+            if (this._trailing) {
+                this._hasTrailingValue = true;
+                this._trailingValue = value;
+            }
+        }
+        else {
+            const duration = this.tryDurationSelector(value);
+            if (duration) {
+                this.add(this.throttled = subscribeToResult(this, duration));
+            }
+            if (this._leading) {
+                this.destination.next(value);
+                if (this._trailing) {
+                    this._hasTrailingValue = true;
+                    this._trailingValue = value;
+                }
+            }
         }
     }
     tryDurationSelector(value) {
-        let duration = null;
         try {
-            duration = this.durationSelector(value);
+            return this.durationSelector(value);
         }
         catch (err) {
             this.destination.error(err);
-            return;
+            return null;
         }
-        this.emitAndThrottle(value, duration);
-    }
-    emitAndThrottle(value, duration) {
-        this.add(this.throttled = subscribeToResult(this, duration));
-        this.destination.next(value);
     }
     _unsubscribe() {
-        const throttled = this.throttled;
+        const { throttled, _trailingValue, _hasTrailingValue, _trailing } = this;
+        this._trailingValue = null;
+        this._hasTrailingValue = false;
         if (throttled) {
             this.remove(throttled);
             this.throttled = null;
             throttled.unsubscribe();
         }
     }
+    _sendTrailing() {
+        const { destination, throttled, _trailing, _trailingValue, _hasTrailingValue } = this;
+        if (throttled &amp;&amp; _trailing &amp;&amp; _hasTrailingValue) {
+            destination.next(_trailingValue);
+            this._trailingValue = null;
+            this._hasTrailingValue = false;
+        }
+    }
     notifyNext(outerValue, innerValue, outerIndex, innerIndex, innerSub) {
+        this._sendTrailing();
         this._unsubscribe();
     }
     notifyComplete() {
+        this._sendTrailing();
         this._unsubscribe();
     }
 }

@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -82,7 +84,7 @@ import { isArray } from &apos;../util/isArray&apos;;
 import { Subscriber } from &apos;../Subscriber&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
-import { $$iterator } from &apos;../symbol/iterator&apos;;
+import { iterator as Symbol_iterator } from &apos;../symbol/iterator&apos;;
 /* tslint:enable:max-line-length */
 /**
  * @param observables
@@ -158,8 +160,8 @@ export class ZipSubscriber extends Subscriber {
         if (isArray(value)) {
             iterators.push(new StaticArrayIterator(value));
         }
-        else if (typeof value[$$iterator] === &apos;function&apos;) {
-            iterators.push(new StaticIterator(value[$$iterator]()));
+        else if (typeof value[Symbol_iterator] === &apos;function&apos;) {
+            iterators.push(new StaticIterator(value[Symbol_iterator]()));
         }
         else {
             iterators.push(new ZipBufferIterator(this.destination, this, value));
@@ -168,6 +170,10 @@ export class ZipSubscriber extends Subscriber {
     _complete() {
         const iterators = this.iterators;
         const len = iterators.length;
+        if (len === 0) {
+            this.destination.complete();
+            return;
+        }
         this.active = len;
         for (let i = 0; i &lt; len; i++) {
             let iterator = iterators[i];
@@ -259,7 +265,7 @@ class StaticArrayIterator {
         this.length = 0;
         this.length = array.length;
     }
-    [$$iterator]() {
+    [Symbol_iterator]() {
         return this;
     }
     next(value) {
@@ -288,7 +294,7 @@ class ZipBufferIterator extends OuterSubscriber {
         this.buffer = [];
         this.isComplete = false;
     }
-    [$$iterator]() {
+    [Symbol_iterator]() {
         return this;
     }
     // NOTE: there is actually a name collision here with Subscriber.next and Iterator.next

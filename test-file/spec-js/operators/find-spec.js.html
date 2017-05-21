@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -80,6 +82,7 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&quot;use strict&quot;;
 var chai_1 = require(&apos;chai&apos;);
 var Rx = require(&apos;../../dist/cjs/Rx&apos;);
+var doNotUnsubscribe_1 = require(&apos;../helpers/doNotUnsubscribe&apos;);
 var Observable = Rx.Observable;
 /** @test {find} */
 describe(&apos;Observable.prototype.find&apos;, function () {
@@ -197,6 +200,26 @@ describe(&apos;Observable.prototype.find&apos;, function () {
             throw &apos;error&apos;;
         };
         expectObservable(source.find(predicate)).toBe(expected);
+        expectSubscriptions(source.subscriptions).toBe(subs);
+    });
+    it(&apos;should unsubscribe from source when complete, even if following operator does not unsubscribe&apos;, function () {
+        var values = { a: 3, b: 9, c: 15, d: 20 };
+        var source = hot(&apos;---a--b--c--d---|&apos;, values);
+        var subs = &apos;^        !       &apos;;
+        var expected = &apos;---------(c|)    &apos;;
+        var predicate = function (x) { return x % 5 === 0; };
+        expectObservable(source.find(predicate).let(doNotUnsubscribe_1.doNotUnsubscribe)).toBe(expected, values);
+        expectSubscriptions(source.subscriptions).toBe(subs);
+    });
+    it(&apos;should unsubscribe from source when predicate function errors,&apos; +
+        &apos; even if followring operator does not unsubscribe&apos;, function () {
+        var source = hot(&apos;--a--b--c--|&apos;);
+        var subs = &apos;^ !&apos;;
+        var expected = &apos;--#&apos;;
+        var predicate = function (value) {
+            throw &apos;error&apos;;
+        };
+        expectObservable(source.find(predicate).let(doNotUnsubscribe_1.doNotUnsubscribe)).toBe(expected);
         expectSubscriptions(source.subscriptions).toBe(subs);
     });
     it(&apos;should support type guards without breaking previous behavior&apos;, function () {

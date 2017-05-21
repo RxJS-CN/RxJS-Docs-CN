@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -84,10 +86,10 @@ import { PromiseObservable } from &apos;./PromiseObservable&apos;;
 import { IteratorObservable } from &apos;./IteratorObservable&apos;;
 import { ArrayObservable } from &apos;./ArrayObservable&apos;;
 import { ArrayLikeObservable } from &apos;./ArrayLikeObservable&apos;;
-import { $$iterator } from &apos;../symbol/iterator&apos;;
+import { iterator as Symbol_iterator } from &apos;../symbol/iterator&apos;;
 import { Observable } from &apos;../Observable&apos;;
 import { ObserveOnSubscriber } from &apos;../operator/observeOn&apos;;
-import { $$observable } from &apos;../symbol/observable&apos;;
+import { observable as Symbol_observable } from &apos;../symbol/observable&apos;;
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -157,7 +159,7 @@ export class FromObservable extends Observable {
      */
     static create(ish, scheduler) {
         if (ish != null) {
-            if (typeof ish[$$observable] === &apos;function&apos;) {
+            if (typeof ish[Symbol_observable] === &apos;function&apos;) {
                 if (ish instanceof Observable &amp;&amp; !scheduler) {
                     return ish;
                 }
@@ -169,7 +171,7 @@ export class FromObservable extends Observable {
             else if (isPromise(ish)) {
                 return new PromiseObservable(ish, scheduler);
             }
-            else if (typeof ish[$$iterator] === &apos;function&apos; || typeof ish === &apos;string&apos;) {
+            else if (typeof ish[Symbol_iterator] === &apos;function&apos; || typeof ish === &apos;string&apos;) {
                 return new IteratorObservable(ish, scheduler);
             }
             else if (isArrayLike(ish)) {
@@ -182,10 +184,10 @@ export class FromObservable extends Observable {
         const ish = this.ish;
         const scheduler = this.scheduler;
         if (scheduler == null) {
-            return ish[$$observable]().subscribe(subscriber);
+            return ish[Symbol_observable]().subscribe(subscriber);
         }
         else {
-            return ish[$$observable]().subscribe(new ObserveOnSubscriber(subscriber, scheduler, 0));
+            return ish[Symbol_observable]().subscribe(new ObserveOnSubscriber(subscriber, scheduler, 0));
         }
     }
 }

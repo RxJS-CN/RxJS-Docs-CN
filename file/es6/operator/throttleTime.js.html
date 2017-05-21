@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -79,6 +81,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/throttleTime.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { async } from &apos;../scheduler/async&apos;;
+import { defaultThrottleConfig } from &apos;./throttle&apos;;
 /**
  * Emits a value from the source Observable, then ignores subsequent source
  * values for `duration` milliseconds, then repeats this process.
@@ -118,16 +121,18 @@ import { async } from &apos;../scheduler/async&apos;;
  * @method throttleTime
  * @owner Observable
  */
-export function throttleTime(duration, scheduler = async) {
-    return this.lift(new ThrottleTimeOperator(duration, scheduler));
+export function throttleTime(duration, scheduler = async, config = defaultThrottleConfig) {
+    return this.lift(new ThrottleTimeOperator(duration, scheduler, config.leading, config.trailing));
 }
 class ThrottleTimeOperator {
-    constructor(duration, scheduler) {
+    constructor(duration, scheduler, leading, trailing) {
         this.duration = duration;
         this.scheduler = scheduler;
+        this.leading = leading;
+        this.trailing = trailing;
     }
     call(subscriber, source) {
-        return source.subscribe(new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler));
+        return source.subscribe(new ThrottleTimeSubscriber(subscriber, this.duration, this.scheduler, this.leading, this.trailing));
     }
 }
 /**
@@ -136,20 +141,37 @@ class ThrottleTimeOperator {
  * @extends {Ignored}
  */
 class ThrottleTimeSubscriber extends Subscriber {
-    constructor(destination, duration, scheduler) {
+    constructor(destination, duration, scheduler, leading, trailing) {
         super(destination);
         this.duration = duration;
         this.scheduler = scheduler;
+        this.leading = leading;
+        this.trailing = trailing;
+        this._hasTrailingValue = false;
+        this._trailingValue = null;
     }
     _next(value) {
-        if (!this.throttled) {
+        if (this.throttled) {
+            if (this.trailing) {
+                this._trailingValue = value;
+                this._hasTrailingValue = true;
+            }
+        }
+        else {
             this.add(this.throttled = this.scheduler.schedule(dispatchNext, this.duration, { subscriber: this }));
-            this.destination.next(value);
+            if (this.leading) {
+                this.destination.next(value);
+            }
         }
     }
     clearThrottle() {
         const throttled = this.throttled;
         if (throttled) {
+            if (this.trailing &amp;&amp; this._hasTrailingValue) {
+                this.destination.next(this._trailingValue);
+                this._trailingValue = null;
+                this._hasTrailingValue = false;
+            }
             throttled.unsubscribe();
             this.remove(throttled);
             this.throttled = null;

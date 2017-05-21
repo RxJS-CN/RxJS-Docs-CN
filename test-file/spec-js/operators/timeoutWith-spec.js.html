@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -282,6 +284,30 @@ describe(&apos;Observable.prototype.timeoutWith&apos;, function () {
         var expected = &apos;---a---b---             &apos;;
         var result = e1.timeoutWith(new Date(rxTestScheduler.now() + 100), e2, rxTestScheduler);
         expectObservable(result).toBe(expected);
+        expectSubscriptions(e1.subscriptions).toBe(e1subs);
+        expectSubscriptions(e2.subscriptions).toBe(e2subs);
+    });
+    it(&apos;should unsubscribe from the scheduled timeout action when timeout is unsubscribed early&apos;, function () {
+        var e1 = hot(&apos;---a---b-----c----|&apos;);
+        var e1subs = &apos;^          !       &apos;;
+        var e2 = cold(&apos;-x---y| &apos;);
+        var e2subs = &apos;           ^  !    &apos;;
+        var expected = &apos;---a---b----x--    &apos;;
+        var unsub = &apos;              !    &apos;;
+        var result = e1
+            .lift({
+            call: function (timeoutSubscriber, source) {
+                var action = timeoutSubscriber.action; // get a ref to the action here
+                timeoutSubscriber.add(function () {
+                    if (!action.closed) {
+                        throw new Error(&apos;TimeoutSubscriber scheduled action wasn\&apos;t canceled&apos;);
+                    }
+                });
+                return source.subscribe(timeoutSubscriber);
+            }
+        })
+            .timeoutWith(40, e2, rxTestScheduler);
+        expectObservable(result, unsub).toBe(expected);
         expectSubscriptions(e1.subscriptions).toBe(e1subs);
         expectSubscriptions(e2.subscriptions).toBe(e2subs);
     });

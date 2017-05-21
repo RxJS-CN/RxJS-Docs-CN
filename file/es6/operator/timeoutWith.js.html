@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -113,59 +115,43 @@ class TimeoutWithOperator {
  */
 class TimeoutWithSubscriber extends OuterSubscriber {
     constructor(destination, absoluteTimeout, waitFor, withObservable, scheduler) {
-        super();
-        this.destination = destination;
+        super(destination);
         this.absoluteTimeout = absoluteTimeout;
         this.waitFor = waitFor;
         this.withObservable = withObservable;
         this.scheduler = scheduler;
-        this.timeoutSubscription = undefined;
-        this.index = 0;
-        this._previousIndex = 0;
-        this._hasCompleted = false;
-        destination.add(this);
+        this.action = null;
         this.scheduleTimeout();
     }
-    get previousIndex() {
-        return this._previousIndex;
-    }
-    get hasCompleted() {
-        return this._hasCompleted;
-    }
-    static dispatchTimeout(state) {
-        const source = state.subscriber;
-        const currentIndex = state.index;
-        if (!source.hasCompleted &amp;&amp; source.previousIndex === currentIndex) {
-            source.handleTimeout();
-        }
+    static dispatchTimeout(subscriber) {
+        const { withObservable } = subscriber;
+        subscriber._unsubscribeAndRecycle();
+        subscriber.add(subscribeToResult(subscriber, withObservable));
     }
     scheduleTimeout() {
-        let currentIndex = this.index;
-        const timeoutState = { subscriber: this, index: currentIndex };
-        this.scheduler.schedule(TimeoutWithSubscriber.dispatchTimeout, this.waitFor, timeoutState);
-        this.index++;
-        this._previousIndex = currentIndex;
+        const { action } = this;
+        if (action) {
+            // Recycle the action if we&apos;ve already scheduled one. All the production
+            // Scheduler Actions mutate their state/delay time and return themeselves.
+            // VirtualActions are immutable, so they create and return a clone. In this
+            // case, we need to set the action reference to the most recent VirtualAction,
+            // to ensure that&apos;s the one we clone from next time.
+            this.action = action.schedule(this, this.waitFor);
+        }
+        else {
+            this.add(this.action = this.scheduler.schedule(TimeoutWithSubscriber.dispatchTimeout, this.waitFor, this));
+        }
     }
     _next(value) {
-        this.destination.next(value);
         if (!this.absoluteTimeout) {
             this.scheduleTimeout();
         }
+        super._next(value);
     }
-    _error(err) {
-        this.destination.error(err);
-        this._hasCompleted = true;
-    }
-    _complete() {
-        this.destination.complete();
-        this._hasCompleted = true;
-    }
-    handleTimeout() {
-        if (!this.closed) {
-            const withObservable = this.withObservable;
-            this.unsubscribe();
-            this.destination.add(this.timeoutSubscription = subscribeToResult(this, withObservable));
-        }
+    _unsubscribe() {
+        this.action = null;
+        this.scheduler = null;
+        this.withObservable = null;
     }
 }
 //# sourceMappingURL=timeoutWith.js.map</code></pre>

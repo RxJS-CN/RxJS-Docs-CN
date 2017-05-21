@@ -1727,7 +1727,7 @@
                 },
                 {
                   "type": "Line",
-                  "value": " `pair([obs1, obs2, ...])`",
+                  "value": " `race([obs1, obs2, ...])`",
                   "range": [
                     1092,
                     1120
@@ -6219,7 +6219,7 @@
     },
     {
       "type": "Line",
-      "value": " `pair([obs1, obs2, ...])`",
+      "value": " `race([obs1, obs2, ...])`",
       "range": [
         1092,
         1120

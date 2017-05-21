@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -341,6 +343,36 @@ describe(&apos;Observable.prototype.throttle&apos;, function () {
             done();
         }, function () {
             done(new Error(&apos;should not be called&apos;));
+        });
+    });
+    describe(&apos;throttle(fn, { leading: true, trailing: true })&apos;, function () {
+        asDiagram(&apos;throttle(fn, { leading: true, trailing: true })&apos;)(&apos;should immediately emit the first value in each time window&apos;, function () {
+            var e1 = hot(&apos;-a-xy-----b--x--cxxx--|&apos;);
+            var e1subs = &apos;^                     !&apos;;
+            var e2 = cold(&apos;----|                 &apos;);
+            var e2subs = [&apos; ^   !                 &apos;,
+                &apos;          ^   !        &apos;,
+                &apos;                ^   !  &apos;];
+            var expected = &apos;-a---y----b---x-c---x-|&apos;;
+            var result = e1.throttle(function () { return e2; }, { leading: true, trailing: true });
+            expectObservable(result).toBe(expected);
+            expectSubscriptions(e1.subscriptions).toBe(e1subs);
+            expectSubscriptions(e2.subscriptions).toBe(e2subs);
+        });
+    });
+    describe(&apos;throttle(fn, { leading: false, trailing: true })&apos;, function () {
+        asDiagram(&apos;throttle(fn, { leading: false, trailing: true })&apos;)(&apos;should immediately emit the first value in each time window&apos;, function () {
+            var e1 = hot(&apos;-a-xy-----b--x--cxxx--|&apos;);
+            var e1subs = &apos;^                     !&apos;;
+            var e2 = cold(&apos;----|                 &apos;);
+            var e2subs = [&apos; ^   !                 &apos;,
+                &apos;          ^   !        &apos;,
+                &apos;                ^   !  &apos;];
+            var expected = &apos;-----y--------x-----x-|&apos;;
+            var result = e1.throttle(function () { return e2; }, { leading: false, trailing: true });
+            expectObservable(result).toBe(expected);
+            expectSubscriptions(e1.subscriptions).toBe(e1subs);
+            expectSubscriptions(e2.subscriptions).toBe(e2subs);
         });
     });
 });

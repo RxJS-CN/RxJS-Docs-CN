@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
+          "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
           "range": [
             44,
-            1513
+            1507
           ],
           "loc": {
             "start": {
@@ -120,8 +120,8 @@
           "type": "Identifier",
           "name": "map",
           "range": [
-            1530,
-            1533
+            1524,
+            1527
           ],
           "loc": {
             "start": {
@@ -139,8 +139,8 @@
             "type": "Identifier",
             "name": "project",
             "range": [
-              1534,
-              1541
+              1528,
+              1535
             ],
             "loc": {
               "start": {
@@ -157,8 +157,8 @@
             "type": "Identifier",
             "name": "thisArg",
             "range": [
-              1543,
-              1550
+              1537,
+              1544
             ],
             "loc": {
               "start": {
@@ -187,8 +187,8 @@
                     "type": "Identifier",
                     "name": "project",
                     "range": [
-                      1569,
-                      1576
+                      1563,
+                      1570
                     ],
                     "loc": {
                       "start": {
@@ -203,8 +203,8 @@
                   },
                   "prefix": true,
                   "range": [
-                    1562,
-                    1576
+                    1556,
+                    1570
                   ],
                   "loc": {
                     "start": {
@@ -222,8 +222,8 @@
                   "value": "function",
                   "raw": "'function'",
                   "range": [
-                    1581,
-                    1591
+                    1575,
+                    1585
                   ],
                   "loc": {
                     "start": {
@@ -237,8 +237,8 @@
                   }
                 },
                 "range": [
-                  1562,
-                  1591
+                  1556,
+                  1585
                 ],
                 "loc": {
                   "start": {
@@ -262,8 +262,8 @@
                         "type": "Identifier",
                         "name": "TypeError",
                         "range": [
-                          1613,
-                          1622
+                          1607,
+                          1616
                         ],
                         "loc": {
                           "start": {
@@ -282,8 +282,8 @@
                           "value": "argument is not a function. Are you looking for `mapTo()`?",
                           "raw": "'argument is not a function. Are you looking for `mapTo()`?'",
                           "range": [
-                            1623,
-                            1683
+                            1617,
+                            1677
                           ],
                           "loc": {
                             "start": {
@@ -298,8 +298,8 @@
                         }
                       ],
                       "range": [
-                        1609,
-                        1684
+                        1603,
+                        1678
                       ],
                       "loc": {
                         "start": {
@@ -313,8 +313,8 @@
                       }
                     },
                     "range": [
-                      1603,
-                      1685
+                      1597,
+                      1679
                     ],
                     "loc": {
                       "start": {
@@ -329,8 +329,8 @@
                   }
                 ],
                 "range": [
-                  1593,
-                  1691
+                  1587,
+                  1685
                 ],
                 "loc": {
                   "start": {
@@ -345,8 +345,8 @@
               },
               "alternate": null,
               "range": [
-                1558,
-                1691
+                1552,
+                1685
               ],
               "loc": {
                 "start": {
@@ -369,8 +369,8 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      1703,
-                      1707
+                      1697,
+                      1701
                     ],
                     "loc": {
                       "start": {
@@ -387,8 +387,8 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      1708,
-                      1712
+                      1702,
+                      1706
                     ],
                     "loc": {
                       "start": {
@@ -402,8 +402,8 @@
                     }
                   },
                   "range": [
-                    1703,
-                    1712
+                    1697,
+                    1706
                   ],
                   "loc": {
                     "start": {
@@ -423,8 +423,8 @@
                       "type": "Identifier",
                       "name": "MapOperator",
                       "range": [
-                        1717,
-                        1728
+                        1711,
+                        1722
                       ],
                       "loc": {
                         "start": {
@@ -442,8 +442,8 @@
                         "type": "Identifier",
                         "name": "project",
                         "range": [
-                          1729,
-                          1736
+                          1723,
+                          1730
                         ],
                         "loc": {
                           "start": {
@@ -460,8 +460,8 @@
                         "type": "Identifier",
                         "name": "thisArg",
                         "range": [
-                          1738,
-                          1745
+                          1732,
+                          1739
                         ],
                         "loc": {
                           "start": {
@@ -476,8 +476,8 @@
                       }
                     ],
                     "range": [
-                      1713,
-                      1746
+                      1707,
+                      1740
                     ],
                     "loc": {
                       "start": {
@@ -492,8 +492,8 @@
                   }
                 ],
                 "range": [
-                  1703,
-                  1747
+                  1697,
+                  1741
                 ],
                 "loc": {
                   "start": {
@@ -507,8 +507,8 @@
                 }
               },
               "range": [
-                1696,
-                1748
+                1690,
+                1742
               ],
               "loc": {
                 "start": {
@@ -523,8 +523,8 @@
             }
           ],
           "range": [
-            1552,
-            1750
+            1546,
+            1744
           ],
           "loc": {
             "start": {
@@ -540,8 +540,8 @@
         "generator": false,
         "expression": false,
         "range": [
-          1521,
-          1750
+          1515,
+          1744
         ],
         "loc": {
           "start": {
@@ -556,10 +556,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
+            "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
             "range": [
               44,
-              1513
+              1507
             ],
             "loc": {
               "start": {
@@ -578,8 +578,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1514,
-        1750
+        1508,
+        1744
       ],
       "loc": {
         "start": {
@@ -594,10 +594,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
+          "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
           "range": [
             44,
-            1513
+            1507
           ],
           "loc": {
             "start": {
@@ -620,8 +620,8 @@
           "type": "Identifier",
           "name": "MapOperator",
           "range": [
-            1764,
-            1775
+            1758,
+            1769
           ],
           "loc": {
             "start": {
@@ -644,8 +644,8 @@
                 "type": "Identifier",
                 "name": "constructor",
                 "range": [
-                  1782,
-                  1793
+                  1776,
+                  1787
                 ],
                 "loc": {
                   "start": {
@@ -666,8 +666,8 @@
                     "type": "Identifier",
                     "name": "project",
                     "range": [
-                      1794,
-                      1801
+                      1788,
+                      1795
                     ],
                     "loc": {
                       "start": {
@@ -684,8 +684,8 @@
                     "type": "Identifier",
                     "name": "thisArg",
                     "range": [
-                      1803,
-                      1810
+                      1797,
+                      1804
                     ],
                     "loc": {
                       "start": {
@@ -713,8 +713,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              1822,
-                              1826
+                              1816,
+                              1820
                             ],
                             "loc": {
                               "start": {
@@ -731,8 +731,8 @@
                             "type": "Identifier",
                             "name": "project",
                             "range": [
-                              1827,
-                              1834
+                              1821,
+                              1828
                             ],
                             "loc": {
                               "start": {
@@ -746,8 +746,8 @@
                             }
                           },
                           "range": [
-                            1822,
-                            1834
+                            1816,
+                            1828
                           ],
                           "loc": {
                             "start": {
@@ -764,8 +764,8 @@
                           "type": "Identifier",
                           "name": "project",
                           "range": [
-                            1837,
-                            1844
+                            1831,
+                            1838
                           ],
                           "loc": {
                             "start": {
@@ -779,8 +779,8 @@
                           }
                         },
                         "range": [
-                          1822,
-                          1844
+                          1816,
+                          1838
                         ],
                         "loc": {
                           "start": {
@@ -794,8 +794,8 @@
                         }
                       },
                       "range": [
-                        1822,
-                        1845
+                        1816,
+                        1839
                       ],
                       "loc": {
                         "start": {
@@ -819,8 +819,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              1854,
-                              1858
+                              1848,
+                              1852
                             ],
                             "loc": {
                               "start": {
@@ -837,8 +837,8 @@
                             "type": "Identifier",
                             "name": "thisArg",
                             "range": [
-                              1859,
-                              1866
+                              1853,
+                              1860
                             ],
                             "loc": {
                               "start": {
@@ -852,8 +852,8 @@
                             }
                           },
                           "range": [
-                            1854,
-                            1866
+                            1848,
+                            1860
                           ],
                           "loc": {
                             "start": {
@@ -870,8 +870,8 @@
                           "type": "Identifier",
                           "name": "thisArg",
                           "range": [
-                            1869,
-                            1876
+                            1863,
+                            1870
                           ],
                           "loc": {
                             "start": {
@@ -885,8 +885,8 @@
                           }
                         },
                         "range": [
-                          1854,
-                          1876
+                          1848,
+                          1870
                         ],
                         "loc": {
                           "start": {
@@ -900,8 +900,8 @@
                         }
                       },
                       "range": [
-                        1854,
-                        1877
+                        1848,
+                        1871
                       ],
                       "loc": {
                         "start": {
@@ -916,8 +916,8 @@
                     }
                   ],
                   "range": [
-                    1812,
-                    1883
+                    1806,
+                    1877
                   ],
                   "loc": {
                     "start": {
@@ -933,8 +933,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1793,
-                  1883
+                  1787,
+                  1877
                 ],
                 "loc": {
                   "start": {
@@ -950,8 +950,8 @@
               "kind": "constructor",
               "computed": false,
               "range": [
-                1782,
-                1883
+                1776,
+                1877
               ],
               "loc": {
                 "start": {
@@ -971,8 +971,8 @@
                 "type": "Identifier",
                 "name": "call",
                 "range": [
-                  1888,
-                  1892
+                  1882,
+                  1886
                 ],
                 "loc": {
                   "start": {
@@ -993,8 +993,8 @@
                     "type": "Identifier",
                     "name": "subscriber",
                     "range": [
-                      1893,
-                      1903
+                      1887,
+                      1897
                     ],
                     "loc": {
                       "start": {
@@ -1011,8 +1011,8 @@
                     "type": "Identifier",
                     "name": "source",
                     "range": [
-                      1905,
-                      1911
+                      1899,
+                      1905
                     ],
                     "loc": {
                       "start": {
@@ -1040,8 +1040,8 @@
                             "type": "Identifier",
                             "name": "source",
                             "range": [
-                              1930,
-                              1936
+                              1924,
+                              1930
                             ],
                             "loc": {
                               "start": {
@@ -1058,8 +1058,8 @@
                             "type": "Identifier",
                             "name": "subscribe",
                             "range": [
-                              1937,
-                              1946
+                              1931,
+                              1940
                             ],
                             "loc": {
                               "start": {
@@ -1073,8 +1073,8 @@
                             }
                           },
                           "range": [
-                            1930,
-                            1946
+                            1924,
+                            1940
                           ],
                           "loc": {
                             "start": {
@@ -1094,8 +1094,8 @@
                               "type": "Identifier",
                               "name": "MapSubscriber",
                               "range": [
-                                1951,
-                                1964
+                                1945,
+                                1958
                               ],
                               "loc": {
                                 "start": {
@@ -1113,8 +1113,8 @@
                                 "type": "Identifier",
                                 "name": "subscriber",
                                 "range": [
-                                  1965,
-                                  1975
+                                  1959,
+                                  1969
                                 ],
                                 "loc": {
                                   "start": {
@@ -1133,8 +1133,8 @@
                                 "object": {
                                   "type": "ThisExpression",
                                   "range": [
-                                    1977,
-                                    1981
+                                    1971,
+                                    1975
                                   ],
                                   "loc": {
                                     "start": {
@@ -1151,8 +1151,8 @@
                                   "type": "Identifier",
                                   "name": "project",
                                   "range": [
-                                    1982,
-                                    1989
+                                    1976,
+                                    1983
                                   ],
                                   "loc": {
                                     "start": {
@@ -1166,8 +1166,8 @@
                                   }
                                 },
                                 "range": [
-                                  1977,
-                                  1989
+                                  1971,
+                                  1983
                                 ],
                                 "loc": {
                                   "start": {
@@ -1186,8 +1186,8 @@
                                 "object": {
                                   "type": "ThisExpression",
                                   "range": [
-                                    1991,
-                                    1995
+                                    1985,
+                                    1989
                                   ],
                                   "loc": {
                                     "start": {
@@ -1204,8 +1204,8 @@
                                   "type": "Identifier",
                                   "name": "thisArg",
                                   "range": [
-                                    1996,
-                                    2003
+                                    1990,
+                                    1997
                                   ],
                                   "loc": {
                                     "start": {
@@ -1219,8 +1219,8 @@
                                   }
                                 },
                                 "range": [
-                                  1991,
-                                  2003
+                                  1985,
+                                  1997
                                 ],
                                 "loc": {
                                   "start": {
@@ -1235,8 +1235,8 @@
                               }
                             ],
                             "range": [
-                              1947,
-                              2004
+                              1941,
+                              1998
                             ],
                             "loc": {
                               "start": {
@@ -1251,8 +1251,8 @@
                           }
                         ],
                         "range": [
-                          1930,
-                          2005
+                          1924,
+                          1999
                         ],
                         "loc": {
                           "start": {
@@ -1266,8 +1266,8 @@
                         }
                       },
                       "range": [
-                        1923,
-                        2006
+                        1917,
+                        2000
                       ],
                       "loc": {
                         "start": {
@@ -1282,8 +1282,8 @@
                     }
                   ],
                   "range": [
-                    1913,
-                    2012
+                    1907,
+                    2006
                   ],
                   "loc": {
                     "start": {
@@ -1299,8 +1299,8 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1892,
-                  2012
+                  1886,
+                  2006
                 ],
                 "loc": {
                   "start": {
@@ -1316,8 +1316,8 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1888,
-                2012
+                1882,
+                2006
               ],
               "loc": {
                 "start": {
@@ -1333,8 +1333,8 @@
             }
           ],
           "range": [
-            1776,
-            2014
+            1770,
+            2008
           ],
           "loc": {
             "start": {
@@ -1348,8 +1348,8 @@
           }
         },
         "range": [
-          1758,
-          2014
+          1752,
+          2008
         ],
         "loc": {
           "start": {
@@ -1367,8 +1367,8 @@
             "type": "Block",
             "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
             "range": [
-              2015,
-              2106
+              2009,
+              2100
             ],
             "loc": {
               "start": {
@@ -1386,8 +1386,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1751,
-        2014
+        1745,
+        2008
       ],
       "loc": {
         "start": {
@@ -1404,8 +1404,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            2015,
-            2106
+            2009,
+            2100
           ],
           "loc": {
             "start": {
@@ -1426,8 +1426,8 @@
         "type": "Identifier",
         "name": "MapSubscriber",
         "range": [
-          2113,
-          2126
+          2107,
+          2120
         ],
         "loc": {
           "start": {
@@ -1444,8 +1444,8 @@
         "type": "Identifier",
         "name": "Subscriber",
         "range": [
-          2135,
-          2145
+          2129,
+          2139
         ],
         "loc": {
           "start": {
@@ -1467,8 +1467,8 @@
               "type": "Identifier",
               "name": "constructor",
               "range": [
-                2152,
-                2163
+                2146,
+                2157
               ],
               "loc": {
                 "start": {
@@ -1489,8 +1489,8 @@
                   "type": "Identifier",
                   "name": "destination",
                   "range": [
-                    2164,
-                    2175
+                    2158,
+                    2169
                   ],
                   "loc": {
                     "start": {
@@ -1507,8 +1507,8 @@
                   "type": "Identifier",
                   "name": "project",
                   "range": [
-                    2177,
-                    2184
+                    2171,
+                    2178
                   ],
                   "loc": {
                     "start": {
@@ -1525,8 +1525,8 @@
                   "type": "Identifier",
                   "name": "thisArg",
                   "range": [
-                    2186,
-                    2193
+                    2180,
+                    2187
                   ],
                   "loc": {
                     "start": {
@@ -1550,8 +1550,8 @@
                       "callee": {
                         "type": "Super",
                         "range": [
-                          2205,
-                          2210
+                          2199,
+                          2204
                         ],
                         "loc": {
                           "start": {
@@ -1569,8 +1569,8 @@
                           "type": "Identifier",
                           "name": "destination",
                           "range": [
-                            2211,
-                            2222
+                            2205,
+                            2216
                           ],
                           "loc": {
                             "start": {
@@ -1585,8 +1585,8 @@
                         }
                       ],
                       "range": [
-                        2205,
-                        2223
+                        2199,
+                        2217
                       ],
                       "loc": {
                         "start": {
@@ -1600,8 +1600,8 @@
                       }
                     },
                     "range": [
-                      2205,
-                      2224
+                      2199,
+                      2218
                     ],
                     "loc": {
                       "start": {
@@ -1625,8 +1625,8 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            2233,
-                            2237
+                            2227,
+                            2231
                           ],
                           "loc": {
                             "start": {
@@ -1643,8 +1643,8 @@
                           "type": "Identifier",
                           "name": "project",
                           "range": [
-                            2238,
-                            2245
+                            2232,
+                            2239
                           ],
                           "loc": {
                             "start": {
@@ -1658,8 +1658,8 @@
                           }
                         },
                         "range": [
-                          2233,
-                          2245
+                          2227,
+                          2239
                         ],
                         "loc": {
                           "start": {
@@ -1676,8 +1676,8 @@
                         "type": "Identifier",
                         "name": "project",
                         "range": [
-                          2248,
-                          2255
+                          2242,
+                          2249
                         ],
                         "loc": {
                           "start": {
@@ -1691,8 +1691,8 @@
                         }
                       },
                       "range": [
-                        2233,
-                        2255
+                        2227,
+                        2249
                       ],
                       "loc": {
                         "start": {
@@ -1706,8 +1706,8 @@
                       }
                     },
                     "range": [
-                      2233,
-                      2256
+                      2227,
+                      2250
                     ],
                     "loc": {
                       "start": {
@@ -1731,8 +1731,8 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            2265,
-                            2269
+                            2259,
+                            2263
                           ],
                           "loc": {
                             "start": {
@@ -1749,8 +1749,8 @@
                           "type": "Identifier",
                           "name": "count",
                           "range": [
-                            2270,
-                            2275
+                            2264,
+                            2269
                           ],
                           "loc": {
                             "start": {
@@ -1764,8 +1764,8 @@
                           }
                         },
                         "range": [
-                          2265,
-                          2275
+                          2259,
+                          2269
                         ],
                         "loc": {
                           "start": {
@@ -1783,8 +1783,8 @@
                         "value": 0,
                         "raw": "0",
                         "range": [
-                          2278,
-                          2279
+                          2272,
+                          2273
                         ],
                         "loc": {
                           "start": {
@@ -1798,8 +1798,8 @@
                         }
                       },
                       "range": [
-                        2265,
-                        2279
+                        2259,
+                        2273
                       ],
                       "loc": {
                         "start": {
@@ -1813,8 +1813,8 @@
                       }
                     },
                     "range": [
-                      2265,
-                      2280
+                      2259,
+                      2274
                     ],
                     "loc": {
                       "start": {
@@ -1838,8 +1838,8 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            2289,
-                            2293
+                            2283,
+                            2287
                           ],
                           "loc": {
                             "start": {
@@ -1856,8 +1856,8 @@
                           "type": "Identifier",
                           "name": "thisArg",
                           "range": [
-                            2294,
-                            2301
+                            2288,
+                            2295
                           ],
                           "loc": {
                             "start": {
@@ -1871,8 +1871,8 @@
                           }
                         },
                         "range": [
-                          2289,
-                          2301
+                          2283,
+                          2295
                         ],
                         "loc": {
                           "start": {
@@ -1892,8 +1892,8 @@
                           "type": "Identifier",
                           "name": "thisArg",
                           "range": [
-                            2304,
-                            2311
+                            2298,
+                            2305
                           ],
                           "loc": {
                             "start": {
@@ -1909,8 +1909,8 @@
                         "right": {
                           "type": "ThisExpression",
                           "range": [
-                            2315,
-                            2319
+                            2309,
+                            2313
                           ],
                           "loc": {
                             "start": {
@@ -1924,8 +1924,8 @@
                           }
                         },
                         "range": [
-                          2304,
-                          2319
+                          2298,
+                          2313
                         ],
                         "loc": {
                           "start": {
@@ -1939,8 +1939,8 @@
                         }
                       },
                       "range": [
-                        2289,
-                        2319
+                        2283,
+                        2313
                       ],
                       "loc": {
                         "start": {
@@ -1954,8 +1954,8 @@
                       }
                     },
                     "range": [
-                      2289,
-                      2320
+                      2283,
+                      2314
                     ],
                     "loc": {
                       "start": {
@@ -1970,8 +1970,8 @@
                   }
                 ],
                 "range": [
-                  2195,
-                  2326
+                  2189,
+                  2320
                 ],
                 "loc": {
                   "start": {
@@ -1987,8 +1987,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                2163,
-                2326
+                2157,
+                2320
               ],
               "loc": {
                 "start": {
@@ -2004,8 +2004,8 @@
             "kind": "constructor",
             "computed": false,
             "range": [
-              2152,
-              2326
+              2146,
+              2320
             ],
             "loc": {
               "start": {
@@ -2022,8 +2022,8 @@
                 "type": "Line",
                 "value": " NOTE: This looks unoptimized, but it's actually purposefully NOT",
                 "range": [
-                  2331,
-                  2398
+                  2325,
+                  2392
                 ],
                 "loc": {
                   "start": {
@@ -2040,8 +2040,8 @@
                 "type": "Line",
                 "value": " using try/catch optimizations.",
                 "range": [
-                  2403,
-                  2436
+                  2397,
+                  2430
                 ],
                 "loc": {
                   "start": {
@@ -2063,8 +2063,8 @@
               "type": "Identifier",
               "name": "_next",
               "range": [
-                2441,
-                2446
+                2435,
+                2440
               ],
               "loc": {
                 "start": {
@@ -2085,8 +2085,8 @@
                   "type": "Identifier",
                   "name": "value",
                   "range": [
-                    2447,
-                    2452
+                    2441,
+                    2446
                   ],
                   "loc": {
                     "start": {
@@ -2112,8 +2112,8 @@
                           "type": "Identifier",
                           "name": "result",
                           "range": [
-                            2468,
-                            2474
+                            2462,
+                            2468
                           ],
                           "loc": {
                             "start": {
@@ -2128,8 +2128,8 @@
                         },
                         "init": null,
                         "range": [
-                          2468,
-                          2474
+                          2462,
+                          2468
                         ],
                         "loc": {
                           "start": {
@@ -2145,8 +2145,8 @@
                     ],
                     "kind": "let",
                     "range": [
-                      2464,
-                      2475
+                      2458,
+                      2469
                     ],
                     "loc": {
                       "start": {
@@ -2173,8 +2173,8 @@
                               "type": "Identifier",
                               "name": "result",
                               "range": [
-                                2502,
-                                2508
+                                2496,
+                                2502
                               ],
                               "loc": {
                                 "start": {
@@ -2198,8 +2198,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      2511,
-                                      2515
+                                      2505,
+                                      2509
                                     ],
                                     "loc": {
                                       "start": {
@@ -2216,8 +2216,8 @@
                                     "type": "Identifier",
                                     "name": "project",
                                     "range": [
-                                      2516,
-                                      2523
+                                      2510,
+                                      2517
                                     ],
                                     "loc": {
                                       "start": {
@@ -2231,8 +2231,8 @@
                                     }
                                   },
                                   "range": [
-                                    2511,
-                                    2523
+                                    2505,
+                                    2517
                                   ],
                                   "loc": {
                                     "start": {
@@ -2249,8 +2249,8 @@
                                   "type": "Identifier",
                                   "name": "call",
                                   "range": [
-                                    2524,
-                                    2528
+                                    2518,
+                                    2522
                                   ],
                                   "loc": {
                                     "start": {
@@ -2264,8 +2264,8 @@
                                   }
                                 },
                                 "range": [
-                                  2511,
-                                  2528
+                                  2505,
+                                  2522
                                 ],
                                 "loc": {
                                   "start": {
@@ -2285,8 +2285,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      2529,
-                                      2533
+                                      2523,
+                                      2527
                                     ],
                                     "loc": {
                                       "start": {
@@ -2303,8 +2303,8 @@
                                     "type": "Identifier",
                                     "name": "thisArg",
                                     "range": [
-                                      2534,
-                                      2541
+                                      2528,
+                                      2535
                                     ],
                                     "loc": {
                                       "start": {
@@ -2318,8 +2318,8 @@
                                     }
                                   },
                                   "range": [
-                                    2529,
-                                    2541
+                                    2523,
+                                    2535
                                   ],
                                   "loc": {
                                     "start": {
@@ -2336,8 +2336,8 @@
                                   "type": "Identifier",
                                   "name": "value",
                                   "range": [
-                                    2543,
-                                    2548
+                                    2537,
+                                    2542
                                   ],
                                   "loc": {
                                     "start": {
@@ -2359,8 +2359,8 @@
                                     "object": {
                                       "type": "ThisExpression",
                                       "range": [
-                                        2550,
-                                        2554
+                                        2544,
+                                        2548
                                       ],
                                       "loc": {
                                         "start": {
@@ -2377,8 +2377,8 @@
                                       "type": "Identifier",
                                       "name": "count",
                                       "range": [
-                                        2555,
-                                        2560
+                                        2549,
+                                        2554
                                       ],
                                       "loc": {
                                         "start": {
@@ -2392,8 +2392,8 @@
                                       }
                                     },
                                     "range": [
-                                      2550,
-                                      2560
+                                      2544,
+                                      2554
                                     ],
                                     "loc": {
                                       "start": {
@@ -2408,8 +2408,8 @@
                                   },
                                   "prefix": false,
                                   "range": [
-                                    2550,
-                                    2562
+                                    2544,
+                                    2556
                                   ],
                                   "loc": {
                                     "start": {
@@ -2424,8 +2424,8 @@
                                 }
                               ],
                               "range": [
-                                2511,
-                                2563
+                                2505,
+                                2557
                               ],
                               "loc": {
                                 "start": {
@@ -2439,8 +2439,8 @@
                               }
                             },
                             "range": [
-                              2502,
-                              2563
+                              2496,
+                              2557
                             ],
                             "loc": {
                               "start": {
@@ -2454,8 +2454,8 @@
                             }
                           },
                           "range": [
-                            2502,
-                            2564
+                            2496,
+                            2558
                           ],
                           "loc": {
                             "start": {
@@ -2470,8 +2470,8 @@
                         }
                       ],
                       "range": [
-                        2488,
-                        2574
+                        2482,
+                        2568
                       ],
                       "loc": {
                         "start": {
@@ -2490,8 +2490,8 @@
                         "type": "Identifier",
                         "name": "err",
                         "range": [
-                          2590,
-                          2593
+                          2584,
+                          2587
                         ],
                         "loc": {
                           "start": {
@@ -2520,8 +2520,8 @@
                                   "object": {
                                     "type": "ThisExpression",
                                     "range": [
-                                      2609,
-                                      2613
+                                      2603,
+                                      2607
                                     ],
                                     "loc": {
                                       "start": {
@@ -2538,8 +2538,8 @@
                                     "type": "Identifier",
                                     "name": "destination",
                                     "range": [
-                                      2614,
-                                      2625
+                                      2608,
+                                      2619
                                     ],
                                     "loc": {
                                       "start": {
@@ -2553,8 +2553,8 @@
                                     }
                                   },
                                   "range": [
-                                    2609,
-                                    2625
+                                    2603,
+                                    2619
                                   ],
                                   "loc": {
                                     "start": {
@@ -2571,8 +2571,8 @@
                                   "type": "Identifier",
                                   "name": "error",
                                   "range": [
-                                    2626,
-                                    2631
+                                    2620,
+                                    2625
                                   ],
                                   "loc": {
                                     "start": {
@@ -2586,8 +2586,8 @@
                                   }
                                 },
                                 "range": [
-                                  2609,
-                                  2631
+                                  2603,
+                                  2625
                                 ],
                                 "loc": {
                                   "start": {
@@ -2605,8 +2605,8 @@
                                   "type": "Identifier",
                                   "name": "err",
                                   "range": [
-                                    2632,
-                                    2635
+                                    2626,
+                                    2629
                                   ],
                                   "loc": {
                                     "start": {
@@ -2621,8 +2621,8 @@
                                 }
                               ],
                               "range": [
-                                2609,
-                                2636
+                                2603,
+                                2630
                               ],
                               "loc": {
                                 "start": {
@@ -2636,8 +2636,8 @@
                               }
                             },
                             "range": [
-                              2609,
-                              2637
+                              2603,
+                              2631
                             ],
                             "loc": {
                               "start": {
@@ -2654,8 +2654,8 @@
                             "type": "ReturnStatement",
                             "argument": null,
                             "range": [
-                              2650,
-                              2657
+                              2644,
+                              2651
                             ],
                             "loc": {
                               "start": {
@@ -2670,8 +2670,8 @@
                           }
                         ],
                         "range": [
-                          2595,
-                          2667
+                          2589,
+                          2661
                         ],
                         "loc": {
                           "start": {
@@ -2685,8 +2685,8 @@
                         }
                       },
                       "range": [
-                        2583,
-                        2667
+                        2577,
+                        2661
                       ],
                       "loc": {
                         "start": {
@@ -2701,8 +2701,8 @@
                     },
                     "finalizer": null,
                     "range": [
-                      2484,
-                      2667
+                      2478,
+                      2661
                     ],
                     "loc": {
                       "start": {
@@ -2728,8 +2728,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              2676,
-                              2680
+                              2670,
+                              2674
                             ],
                             "loc": {
                               "start": {
@@ -2746,8 +2746,8 @@
                             "type": "Identifier",
                             "name": "destination",
                             "range": [
-                              2681,
-                              2692
+                              2675,
+                              2686
                             ],
                             "loc": {
                               "start": {
@@ -2761,8 +2761,8 @@
                             }
                           },
                           "range": [
-                            2676,
-                            2692
+                            2670,
+                            2686
                           ],
                           "loc": {
                             "start": {
@@ -2779,8 +2779,8 @@
                           "type": "Identifier",
                           "name": "next",
                           "range": [
-                            2693,
-                            2697
+                            2687,
+                            2691
                           ],
                           "loc": {
                             "start": {
@@ -2794,8 +2794,8 @@
                           }
                         },
                         "range": [
-                          2676,
-                          2697
+                          2670,
+                          2691
                         ],
                         "loc": {
                           "start": {
@@ -2813,8 +2813,8 @@
                           "type": "Identifier",
                           "name": "result",
                           "range": [
-                            2698,
-                            2704
+                            2692,
+                            2698
                           ],
                           "loc": {
                             "start": {
@@ -2829,8 +2829,8 @@
                         }
                       ],
                       "range": [
-                        2676,
-                        2705
+                        2670,
+                        2699
                       ],
                       "loc": {
                         "start": {
@@ -2844,8 +2844,8 @@
                       }
                     },
                     "range": [
-                      2676,
-                      2706
+                      2670,
+                      2700
                     ],
                     "loc": {
                       "start": {
@@ -2860,8 +2860,8 @@
                   }
                 ],
                 "range": [
-                  2454,
-                  2712
+                  2448,
+                  2706
                 ],
                 "loc": {
                   "start": {
@@ -2877,8 +2877,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                2446,
-                2712
+                2440,
+                2706
               ],
               "loc": {
                 "start": {
@@ -2894,8 +2894,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              2441,
-              2712
+              2435,
+              2706
             ],
             "loc": {
               "start": {
@@ -2912,8 +2912,8 @@
                 "type": "Line",
                 "value": " NOTE: This looks unoptimized, but it's actually purposefully NOT",
                 "range": [
-                  2331,
-                  2398
+                  2325,
+                  2392
                 ],
                 "loc": {
                   "start": {
@@ -2930,8 +2930,8 @@
                 "type": "Line",
                 "value": " using try/catch optimizations.",
                 "range": [
-                  2403,
-                  2436
+                  2397,
+                  2430
                 ],
                 "loc": {
                   "start": {
@@ -2949,8 +2949,8 @@
           }
         ],
         "range": [
-          2146,
-          2714
+          2140,
+          2708
         ],
         "loc": {
           "start": {
@@ -2964,8 +2964,8 @@
         }
       },
       "range": [
-        2107,
-        2714
+        2101,
+        2708
       ],
       "loc": {
         "start": {
@@ -2982,8 +2982,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            2015,
-            2106
+            2009,
+            2100
           ],
           "loc": {
             "start": {
@@ -3002,8 +3002,8 @@
           "type": "Line",
           "value": "# sourceMappingURL=map.js.map",
           "range": [
-            2715,
-            2746
+            2709,
+            2740
           ],
           "loc": {
             "start": {
@@ -3022,7 +3022,7 @@
   "sourceType": "module",
   "range": [
     0,
-    2714
+    2708
   ],
   "loc": {
     "start": {
@@ -3037,10 +3037,10 @@
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
+      "value": "*\n * Applies a given `project` function to each value emitted by the source\n * Observable, and emits the resulting values as an Observable.\n *\n * <span class=\"informal\">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),\n * it passes each source value through a transformation function to get\n * corresponding output values.</span>\n *\n * <img src=\"./img/map.png\" width=\"100%\">\n *\n * Similar to the well known `Array.prototype.map` function, this operator\n * applies a projection to each value and emits that projection in the output\n * Observable.\n *\n * @example <caption>Map every click to the clientX position of that click</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var positions = clicks.map(ev => ev.clientX);\n * positions.subscribe(x => console.log(x));\n *\n * @see {@link mapTo}\n * @see {@link pluck}\n *\n * @param {function(value: T, index: number): R} project The function to apply\n * to each `value` emitted by the source Observable. The `index` parameter is\n * the number `i` for the i-th emission that has happened since the\n * subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to define what `this` is in the\n * `project` function.\n * @return {Observable<R>} An Observable that emits the values from the source\n * Observable transformed by the given `project` function.\n * @method map\n * @owner Observable\n ",
       "range": [
         44,
-        1513
+        1507
       ],
       "loc": {
         "start": {
@@ -3057,8 +3057,8 @@
       "type": "Block",
       "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
       "range": [
-        2015,
-        2106
+        2009,
+        2100
       ],
       "loc": {
         "start": {
@@ -3075,8 +3075,8 @@
       "type": "Line",
       "value": " NOTE: This looks unoptimized, but it's actually purposefully NOT",
       "range": [
-        2331,
-        2398
+        2325,
+        2392
       ],
       "loc": {
         "start": {
@@ -3093,8 +3093,8 @@
       "type": "Line",
       "value": " using try/catch optimizations.",
       "range": [
-        2403,
-        2436
+        2397,
+        2430
       ],
       "loc": {
         "start": {
@@ -3111,8 +3111,8 @@
       "type": "Line",
       "value": "# sourceMappingURL=map.js.map",
       "range": [
-        2715,
-        2746
+        2709,
+        2740
       ],
       "loc": {
         "start": {

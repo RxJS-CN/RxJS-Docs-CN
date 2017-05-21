@@ -1,8 +1,23 @@
 {
   "coverage": "100%",
-  "expectCount": 218,
-  "actualCount": 218,
+  "expectCount": 223,
+  "actualCount": 223,
   "files": {
+    "es6/symbol/iterator.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "es6/symbol/observable.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "es6/symbol/rxSubscriber.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "es6/scheduler/Action.js": {
       "expectCount": 2,
       "actualCount": 2,
@@ -283,12 +298,12 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "es6/operator/combineLatest.js": {
+    "es6/observable/combineLatest.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "es6/observable/combineLatest.js": {
+    "es6/operator/combineLatest.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
@@ -493,6 +508,11 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "es6/operator/onErrorResumeNext.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "es6/operator/pairwise.js": {
       "expectCount": 1,
       "actualCount": 1,
@@ -563,11 +583,6 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "es6/util/root.js": {
-      "expectCount": 1,
-      "actualCount": 1,
-      "undocumentLines": []
-    },
     "es6/operator/sample.js": {
       "expectCount": 1,
       "actualCount": 1,
@@ -593,12 +608,22 @@
       "actualCount": 1,
       "undocumentLines": []
     },
+    "es6/operator/shareReplay.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
     "es6/operator/single.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
     "es6/operator/skip.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "es6/operator/skipLast.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []

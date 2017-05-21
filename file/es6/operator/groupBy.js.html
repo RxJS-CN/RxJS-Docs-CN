@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -90,6 +92,52 @@ import { FastMap } from &apos;../util/FastMap&apos;;
  * {@link GroupedObservable} per group.
  *
  * &lt;img src=&quot;./img/groupBy.png&quot; width=&quot;100%&quot;&gt;
+ *
+ * @example &lt;caption&gt;Group objects by id and return as array&lt;/caption&gt;
+ * Observable.of&lt;Obj&gt;({id: 1, name: &apos;aze1&apos;},
+ *                    {id: 2, name: &apos;sf2&apos;},
+ *                    {id: 2, name: &apos;dg2&apos;},
+ *                    {id: 1, name: &apos;erg1&apos;},
+ *                    {id: 1, name: &apos;df1&apos;},
+ *                    {id: 2, name: &apos;sfqfb2&apos;},
+ *                    {id: 3, name: &apos;qfs3&apos;},
+ *                    {id: 2, name: &apos;qsgqsfg2&apos;}
+ *     )
+ *     .groupBy(p =&gt; p.id)
+ *     .flatMap( (group$) =&gt; group$.reduce((acc, cur) =&gt; [...acc, cur], []))
+ *     .subscribe(p =&gt; console.log(p));
+ *
+ * // displays:
+ * // [ { id: 1, name: &apos;aze1&apos; },
+ * //   { id: 1, name: &apos;erg1&apos; },
+ * //   { id: 1, name: &apos;df1&apos; } ]
+ * //
+ * // [ { id: 2, name: &apos;sf2&apos; },
+ * //   { id: 2, name: &apos;dg2&apos; },
+ * //   { id: 2, name: &apos;sfqfb2&apos; },
+ * //   { id: 2, name: &apos;qsgqsfg2&apos; } ]
+ * //
+ * // [ { id: 3, name: &apos;qfs3&apos; } ]
+ *
+ * @example &lt;caption&gt;Pivot data on the id field&lt;/caption&gt;
+ * Observable.of&lt;Obj&gt;({id: 1, name: &apos;aze1&apos;},
+ *                    {id: 2, name: &apos;sf2&apos;},
+ *                    {id: 2, name: &apos;dg2&apos;},
+ *                    {id: 1, name: &apos;erg1&apos;},
+ *                    {id: 1, name: &apos;df1&apos;},
+ *                    {id: 2, name: &apos;sfqfb2&apos;},
+ *                    {id: 3, name: &apos;qfs1&apos;},
+ *                    {id: 2, name: &apos;qsgqsfg2&apos;}
+ *                   )
+ *     .groupBy(p =&gt; p.id, p =&gt; p.anme)
+ *     .flatMap( (group$) =&gt; group$.reduce((acc, cur) =&gt; [...acc, cur], [&quot;&quot; + group$.key]))
+ *     .map(arr =&gt; ({&apos;id&apos;: parseInt(arr[0]), &apos;values&apos;: arr.slice(1)}))
+ *     .subscribe(p =&gt; console.log(p));
+ *
+ * // displays:
+ * // { id: 1, values: [ &apos;aze1&apos;, &apos;erg1&apos;, &apos;df1&apos; ] }
+ * // { id: 2, values: [ &apos;sf2&apos;, &apos;dg2&apos;, &apos;sfqfb2&apos;, &apos;qsgqsfg2&apos; ] }
+ * // { id: 3, values: [ &apos;qfs1&apos; ] }
  *
  * @param {function(value: T): K} keySelector A function that extracts the key
  * for each item.

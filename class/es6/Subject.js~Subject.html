@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -435,7 +437,7 @@ functions.</p>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#static-method-fromPromise">fromPromise</a></span></span><span data-ice="signature">(promise: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span>&lt;<span>T</span>&gt;, scheduler: <span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#static-method-fromPromise">fromPromise</a></span></span><span data-ice="signature">(promise: <span>PromiseLike</span>&lt;<span>T</span>&gt;, scheduler: <span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
         </p>
       </div>
       <div>
@@ -702,7 +704,7 @@ of its input Observables.</p>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-[$$observable]">[$$observable]</a></span></span><span data-ice="signature">(): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span></span>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-[Symbol_observable]">[Symbol_observable]</a></span></span><span data-ice="signature">(): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span></span>
         </p>
       </div>
       <div>
@@ -2124,13 +2126,41 @@ emitted by a ConnectableObservable that shares a single subscription to the unde
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-observeOn">observeOn</a></span></span><span data-ice="signature">(scheduler: <span>*</span>, delay: <span>*</span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>R</span>&gt; | <span><a href="class/es6/observable/dom/WebSocketSubject.js~WebSocketSubject.html">WebSocketSubject</a></span>&lt;<span>T</span>&gt; | <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-observeOn">observeOn</a></span></span><span data-ice="signature">(scheduler: <span>IScheduler</span>, delay: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
         </p>
       </div>
       <div>
         
         
+        <div data-ice="description"><p>Re-emits all notifications from source Observable with specified scheduler.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-onErrorResumeNext">onErrorResumeNext</a></span></span><span data-ice="signature">(observables: ...<span><a href="class/es6/MiscJSDoc.js~ObservableInputDoc.html">ObservableInput</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span></span>
+        </p>
+      </div>
+      <div>
         
+        
+        <div data-ice="description"><p>When any of the provided Observable emits an complete or error notification, it immediately subscribes to the next one
+that was passed.</p>
+</div>
       </div>
     </td>
     <td>
@@ -2627,6 +2657,31 @@ are equal.</p>
     <td>
       <div>
         <p>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-shareReplay">shareReplay</a></span></span><span data-ice="signature">(bufferSize: <span>*</span>, windowTime: <span>*</span>, scheduler: <span>*</span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
            <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-single">single</a></span></span><span data-ice="signature">(predicate: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
         </p>
       </div>
@@ -2661,6 +2716,32 @@ predicate, if that Observable emits one such item.</p>
         
         
         <div data-ice="description"><p>Returns an Observable that skips the first <code>count</code> items emitted by the source Observable.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-skipLast">skipLast</a></span></span><span data-ice="signature">(count: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Skip the last <code>count</code> values emitted by the source Observable.</p>
 </div>
       </div>
     </td>
@@ -2974,7 +3055,7 @@ satisfied.</p>
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-throttle">throttle</a></span></span><span data-ice="signature">(durationSelector: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(value: <span>T</span>)</span>: <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-throttle">throttle</a></span></span><span data-ice="signature">(durationSelector: <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(value: <span>T</span>)</span>: <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span></span>, config: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>&lt;<span>T</span>&gt;</span>
         </p>
       </div>
       <div>

@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -79,21 +81,22 @@
 <div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p></p><h1 class="rx-title"><img src="./manual/asset/Rx_Logo_S.png">RxJS</h1>
 
 <p></p>
-<p><strong>The ReactiveX library for JavaScript.</strong></p>
-<p>RxJS is a library for reactive programming using Observables, to make it easier to compose asynchronous or callback-based code. This project is a rewrite of <a href="https://github.com/Reactive-Extensions/RxJS">Reactive-Extensions/RxJS</a> with better performance, better modularity, better debuggable call stacks, while staying mostly backwards compatible, with some breaking changes that reduce the API surface.</p>
-<h3 id="-install-it-manual-installation-html-"><a href="./manual/installation.html">&#xBB; Install it</a></h3>
-<p><em>How to install RxJS through npm or CDN</em></p>
-<h3 id="-learn-it-manual-overview-html-"><a href="./manual/overview.html">&#xBB; Learn it</a></h3>
-<p><em>Read the Manual on Observables, Observer, Subject, etc</em></p>
-<h3 id="-full-reference-identifiers-html-"><a href="./identifiers.html">&#xBB; Full reference</a></h3>
-<p><em>Read detailed documentation on each operator</em></p>
-<h3 id="-view-examples-manual-tutorial-html-"><a href="./manual/tutorial.html">&#xBB; View examples</a></h3>
-<p><em>Read our tutorials on using RxJS in real applications</em></p>
+<p><strong>&#x7528;&#x4E8E; JavaScript &#x7684; ReactiveX &#x5E93;&#x3002;</strong></p>
+<p>RxJS &#x662F;&#x4F7F;&#x7528; Observables &#x7684;&#x54CD;&#x5E94;&#x5F0F;&#x7F16;&#x7A0B;&#x7684;&#x5E93;&#xFF0C;&#x5B83;&#x4F7F;&#x7F16;&#x5199;&#x5F02;&#x6B65;&#x6216;&#x57FA;&#x4E8E;&#x56DE;&#x8C03;&#x7684;&#x4EE3;&#x7801;&#x66F4;&#x5BB9;&#x6613;&#x3002;&#x8FD9;&#x4E2A;&#x9879;&#x76EE;&#x662F; <a href="https://github.com/Reactive-Extensions/RxJS">Reactive-Extensions/RxJS</a>(RxJS 4) &#x7684;&#x91CD;&#x5199;&#xFF0C;&#x5177;&#x6709;&#x66F4;&#x597D;&#x7684;&#x6027;&#x80FD;&#x3001;&#x66F4;&#x597D;&#x7684;&#x6A21;&#x5757;&#x6027;&#x3001;&#x66F4;&#x597D;&#x7684;&#x53EF;&#x8C03;&#x8BD5;&#x8C03;&#x7528;&#x5806;&#x6808;&#xFF0C;&#x540C;&#x65F6;&#x4FDD;&#x6301;&#x5927;&#x90E8;&#x5206;&#x5411;&#x540E;&#x517C;&#x5BB9;&#xFF0C;&#x53EA;&#x6709;&#x4E00;&#x4E9B;&#x7834;&#x574F;&#x6027;&#x7684;&#x53D8;&#x66F4;(breaking changes)&#x662F;&#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x5916;&#x5C42;&#x7684; API &#x3002;</p>
+<h3 id="-manual-installation-html-"><a href="./manual/installation.html">&#xBB; &#x5B89;&#x88C5;</a></h3>
+<p><em>&#x5982;&#x4F55;&#x901A;&#x8FC7; npm &#x6216; CDN &#x5B89;&#x88C5; RxJS</em></p>
+<h3 id="-manual-overview-html-"><a href="./manual/overview.html">&#xBB; &#x5B66;&#x4E60;</a></h3>
+<p><em>&#x9605;&#x8BFB;&#x5B66;&#x4E60;&#x624B;&#x518C;&#xFF0C;&#x624B;&#x518C;&#x5185;&#x5BB9;&#x5305;&#x542B; Observalbes&#x3001;Observer&#x3001;Subject&#xFF0C;&#x7B49;&#x7B49;</em></p>
+<h3 id="-identifiers-html-"><a href="./identifiers.html">&#xBB; &#x5B8C;&#x6574;&#x53C2;&#x8003;</a></h3>
+<p><em>&#x9605;&#x8BFB;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x8BE6;&#x7EC6;&#x6587;&#x6863;</em></p>
+<h3 id="-manual-tutorial-html-"><a href="./manual/tutorial.html">&#xBB; &#x67E5;&#x770B;&#x793A;&#x4F8B;</a></h3>
+<p><em>&#x67E5;&#x770B;&#x51E0;&#x4E2A;&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x4F7F;&#x7528; RxJS &#x7684;&#x6559;&#x7A0B;</em></p>
 <hr>
+<h3 id="-">&#x67E5;&#x627E;&#x9002;&#x5408;&#x7684;&#x64CD;&#x4F5C;&#x7B26;</h3>
 <p><div class="decision-tree-widget"></div>
 
 </p>
-<p><strong>Hint: open your DevTools to experiment with RxJS.</strong></p>
+<p><strong>&#x63D0;&#x793A;: &#x6253;&#x5F00;&#x5F00;&#x53D1;&#x8005;&#x5DE5;&#x5177;&#x6765;&#x8BD5;&#x7528; RxJS &#x3002;</strong></p>
 </div>
 </div>
 

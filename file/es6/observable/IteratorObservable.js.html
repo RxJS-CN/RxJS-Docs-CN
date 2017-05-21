@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -79,7 +81,7 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/observable/IteratorObservable.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { root } from &apos;../util/root&apos;;
 import { Observable } from &apos;../Observable&apos;;
-import { $$iterator } from &apos;../symbol/iterator&apos;;
+import { iterator as Symbol_iterator } from &apos;../symbol/iterator&apos;;
 /**
  * We need this JSDoc comment for affecting ESDoc.
  * @extends {Ignored}
@@ -152,7 +154,7 @@ class StringIterator {
         this.idx = idx;
         this.len = len;
     }
-    [$$iterator]() { return (this); }
+    [Symbol_iterator]() { return (this); }
     next() {
         return this.idx &lt; this.len ? {
             done: false,
@@ -169,7 +171,7 @@ class ArrayIterator {
         this.idx = idx;
         this.len = len;
     }
-    [$$iterator]() { return this; }
+    [Symbol_iterator]() { return this; }
     next() {
         return this.idx &lt; this.len ? {
             done: false,
@@ -181,7 +183,7 @@ class ArrayIterator {
     }
 }
 function getIterator(obj) {
-    const i = obj[$$iterator];
+    const i = obj[Symbol_iterator];
     if (!i &amp;&amp; typeof obj === &apos;string&apos;) {
         return new StringIterator(obj);
     }
@@ -191,7 +193,7 @@ function getIterator(obj) {
     if (!i) {
         throw new TypeError(&apos;object is not iterable&apos;);
     }
-    return obj[$$iterator]();
+    return obj[Symbol_iterator]();
 }
 const maxSafeInteger = Math.pow(2, 53) - 1;
 function toLength(o) {

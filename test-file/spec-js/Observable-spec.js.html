@@ -66,12 +66,14 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-asap">asap</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-async">async</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-queue">queue</a></span></span></li>
+<li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">symbol</div><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$iterator">$$iterator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$observable">$$observable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-$$rxSubscriber">$$rxSubscriber</a></span></span></li>
 <li data-ice="doc"><div data-ice="dirPath" class="nav-dir-path">util</div><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ArgumentOutOfRangeError.js~ArgumentOutOfRangeError.html">ArgumentOutOfRangeError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/EmptyError.js~EmptyError.html">EmptyError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/ObjectUnsubscribedError.js~ObjectUnsubscribedError.html">ObjectUnsubscribedError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/TimeoutError.js~TimeoutError.html">TimeoutError</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/es6/util/UnsubscriptionError.js~UnsubscriptionError.html">UnsubscriptionError</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-root">root</a></span></span></li>
 </ul>
 </div>
 </nav>
@@ -255,6 +257,33 @@ describe(&apos;Observable&apos;, function () {
             });
             source.subscribe();
         });
+        it(&apos;should not be unsubscribed when other empty subscription completes&apos;, function () {
+            var unsubscribeCalled = false;
+            var source = new Observable(function () {
+                return function () {
+                    unsubscribeCalled = true;
+                };
+            });
+            source.subscribe();
+            chai_1.expect(unsubscribeCalled).to.be.false;
+            Observable.empty().subscribe();
+            chai_1.expect(unsubscribeCalled).to.be.false;
+        });
+        it(&apos;should not be unsubscribed when other subscription with same observer completes&apos;, function () {
+            var unsubscribeCalled = false;
+            var source = new Observable(function () {
+                return function () {
+                    unsubscribeCalled = true;
+                };
+            });
+            var observer = {
+                next: function () { }
+            };
+            source.subscribe(observer);
+            chai_1.expect(unsubscribeCalled).to.be.false;
+            Observable.empty().subscribe(observer);
+            chai_1.expect(unsubscribeCalled).to.be.false;
+        });
         it(&apos;should run unsubscription logic when an error is sent synchronously and subscribe is called with no arguments&apos;, function () {
             var unsubscribeCalled = false;
             var source = new Observable(function (subscriber) {
@@ -431,8 +460,9 @@ describe(&apos;Observable&apos;, function () {
                 &apos; of the anonymous observer&apos;, function (done) {
                 //intentionally not using lambda to avoid typescript&apos;s this context capture
                 var o = {
+                    myValue: &apos;foo&apos;,
                     next: function next(x) {
-                        chai_1.expect(this).to.equal(o);
+                        chai_1.expect(this.myValue).to.equal(&apos;foo&apos;);
                         chai_1.expect(x).to.equal(1);
                         done();
                     }
@@ -443,8 +473,9 @@ describe(&apos;Observable&apos;, function () {
                 &apos; of the anonymous observer&apos;, function (done) {
                 //intentionally not using lambda to avoid typescript&apos;s this context capture
                 var o = {
+                    myValue: &apos;foo&apos;,
                     error: function error(err) {
-                        chai_1.expect(this).to.equal(o);
+                        chai_1.expect(this.myValue).to.equal(&apos;foo&apos;);
                         chai_1.expect(err).to.equal(&apos;bad&apos;);
                         done();
                     }
@@ -455,8 +486,9 @@ describe(&apos;Observable&apos;, function () {
                 &apos; context of the anonymous observer&apos;, function (done) {
                 //intentionally not using lambda to avoid typescript&apos;s this context capture
                 var o = {
+                    myValue: &apos;foo&apos;,
                     complete: function complete() {
-                        chai_1.expect(this).to.equal(o);
+                        chai_1.expect(this.myValue).to.equal(&apos;foo&apos;);
                         done();
                     }
                 };
@@ -474,8 +506,9 @@ describe(&apos;Observable&apos;, function () {
                 var unsubscribeCalled = false;
                 //intentionally not using lambda to avoid typescript&apos;s this context capture
                 var o = {
+                    myValue: &apos;foo&apos;,
                     next: function next(x) {
-                        chai_1.expect(this).to.equal(o);
+                        chai_1.expect(this.myValue).to.equal(&apos;foo&apos;);
                         throw x;
                     }
                 };
