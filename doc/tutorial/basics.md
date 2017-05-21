@@ -48,33 +48,33 @@ myObservable.subscribe(value => console.log(value));
 
 选择哪种方式需要根据场景。当你想要包装随时间推移产生值的功能时，普通的 **Observable** 就已经很好了。使用 **Subject**，你可以从任何地方触发新事件，并且将已存在的 observables 和它进行连接。
 
-## Controlling the flow
+## 控制流动
 
 ```js
-// typing "hello world"
+// 输入 "hello world"
 var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
 
-// Filter out target values less than 3 characters long
+// 过滤掉小于3个字符长度的目标值
 input.filter(event => event.target.value.length > 2)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
 
-// Delay the events
+// 延迟事件
 input.delay(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h" -200ms-> "e" -200ms-> "l" ...
 
-// Only let through an event every 200 ms
+// 每200ms只能通过一个事件
 input.throttleTime(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h" -200ms-> "w"
 
-// Let through latest event after 200 ms
+// 停止输入后200ms方能通过最新的那个事件
 input.debounceTime(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "o" -200ms-> "d"
 
-// Stop the stream of events after 3 events
+// 在3次事件后停止事件流
 input.take(3)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
