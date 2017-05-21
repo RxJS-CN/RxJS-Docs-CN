@@ -85,10 +85,11 @@ state.subscribe((state) => {
 });
 ```
 
-We can take the state store approach and use it with many different frameworks and libraries.
+我们可以采用状态存储的方式，并且结合一些不同的框架和库来进行使用。
 
 ### Immutable JS
-You can also create a global state store for your application using [Immutable JS](https://facebook.github.io/immutable-js/). Immutable JS is a great way to create immutable state stores that allows you to optimize rendering by doing shallow checks on changed values.
+
+你还可以使用 [Immutable JS](https://facebook.github.io/immutable-js/) 来为你的应用创建一个全局的状态存储。Immutable JS 是创建不变的状态存储的好方法，它允许你通过对更改的值进行浅检查来优化渲染。
 
 <!-- skip-example -->
 ```js
@@ -108,7 +109,7 @@ var state = Observable.merge(
 export default state;
 ```
 
-Now you can import your state in whatever UI layer you are using.
+现在，你可以在使用的任何 UI 层中导入状态。
 
 <!-- skip-example -->
 ```js
@@ -120,6 +121,7 @@ state.subscribe(state => {
 ```
 
 ### React
+
 Lets look at an example where we subscribe to an observable when the component mounts and unsubscribes when it unmounts.
 
 <!-- skip-example -->
