@@ -1,40 +1,43 @@
-# The basics
+# 基础
 
-## Converting to observables
+## 转换成 observables
 <!-- skip-example -->
 ```js
-// From one or multiple values
+// 来自一个或多个值
 Rx.Observable.of('foo', 'bar');
 
-// From array of values
+// 来自数组
 Rx.Observable.from([1,2,3]);
 
-// From an event
+// 来自事件
 Rx.Observable.fromEvent(document.querySelector('button'), 'click');
 
-// From a Promise
+// 来自 Promise
 Rx.Observable.fromPromise(fetch('/users'));
 
-// From a callback (last argument is a callback)
+// 来自回调函数(最后一个参数得是回调函数，比如下面的 cb)
 // fs.exists = (path, cb(exists))
 var exists = Rx.Observable.bindCallback(fs.exists);
 exists('file.txt').subscribe(exists => console.log('Does file exist?', exists));
 
-// From a callback (last argument is a callback)
+// 来自回调函数(最后一个参数得是回调函数，比如下面的 cb)
 // fs.rename = (pathA, pathB, cb(err, result))
 var rename = Rx.Observable.bindNodeCallback(fs.rename);
 rename('file.txt', 'else.txt').subscribe(() => console.log('Renamed!'));
 ```
 
-## Creating observables
-Externally produce new events.
+## 创建 observables
+
+在外部产生新事件。
+
 ```js
 var myObservable = new Rx.Subject();
 myObservable.subscribe(value => console.log(value));
 myObservable.next('foo');
 ```
 
-Internally produce new events.
+在内部产生新事件。
+
 ```js
 var myObservable = Rx.Observable.create(observer => {
   observer.next('foo');
@@ -43,67 +46,69 @@ var myObservable = Rx.Observable.create(observer => {
 myObservable.subscribe(value => console.log(value));
 ```
 
-Which one you choose depends on the scenario. The normal **Observable** is great when you want to wrap functionality that produces values over time. An example would be a websocket connection. With **Subject** you can trigger new events from anywhere really and you can connect existing observables to it.
+选择哪种方式需要根据场景。当你想要包装随时间推移产生值的功能时，普通的 **Observable** 就已经很好了。使用 **Subject**，你可以从任何地方触发新事件，并且将已存在的 observables 和它进行连接。
 
-## Controlling the flow
+## 控制流动
+
 ```js
-// typing "hello world"
+// 输入 "hello world"
 var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
 
-// Filter out target values less than 3 characters long
+// 过滤掉小于3个字符长度的目标值
 input.filter(event => event.target.value.length > 2)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
 
-// Delay the events
+// 延迟事件
 input.delay(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h" -200ms-> "e" -200ms-> "l" ...
 
-// Only let through an event every 200 ms
+// 每200ms只能通过一个事件
 input.throttleTime(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h" -200ms-> "w"
 
-// Let through latest event after 200 ms
+// 停止输入后200ms方能通过最新的那个事件
 input.debounceTime(200)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "o" -200ms-> "d"
 
-// Stop the stream of events after 3 events
+// 在3次事件后停止事件流
 input.take(3)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
 
-// Passes through events until other observable triggers an event
+// 直到其他 observable 触发事件才会通过事件
 var stopStream = Rx.Observable.fromEvent(document.querySelector('button'), 'click');
 input.takeUntil(stopStream)
   .map(event => event.target.value)
-  .subscribe(value => console.log(value)); // "hello" (click)
+  .subscribe(value => console.log(value)); // "hello" (点击才能看到)
 ```
 
-## Producing values
+## 产生值
+
 ```js
-// typing "hello world"
+// 输入 "hello world"
 var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
 
-// Pass on a new value
+// 传递一个新的值
 input.map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h"
 
-// Pass on a new value by plucking it
+// 通过提取属性传递一个新的值
 input.pluck('target', 'value')
   .subscribe(value => console.log(value)); // "h"
 
-// Pass the two previous values
+// 传递之前的两个值
 input.pluck('target', 'value').pairwise()
   .subscribe(value => console.log(value)); // ["h", "e"]
 
-// Only pass unique values through
+// 只会通过唯一的值
 input.pluck('target', 'value').distinct()
   .subscribe(value => console.log(value)); // "helo wrd"
 
-// Do not pass repeating values through
+// 不会传递重复的值
 input.pluck('target', 'value').distinctUntilChanged()
   .subscribe(value => console.log(value)); // "helo world"
 ```
