@@ -1,25 +1,28 @@
-# Creating applications
+# 创建应用
 
-RxJS is a great tool to keep your code less error prone. It does that by using pure and stateless functions. But applications are stateful, so how do we bridge the stateless world of RxJS with the stateful world of our applications?
+RxJS 是个很好的工具，可以让你的代码更少出错。它是通过使用无状态的纯函数来做到这点的。但是应用是有状态的，那么我们如何将 RxJS 的无状态世界与我们应用的有状态世界连接起来呢？
 
-Let us create a simple state store of the value `0`. On each click we want to increase that count in our state store.
+我们来创建一个只存储值为`0`的简单状态。每次点击我们想要增加存储在状态中的 count 。
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
-  // scan (reduce) to a stream of counts
+  // 对流进行 scan (reduce) 操作，以获取 count 的值
   .scan(count => count + 1, 0)
-  // Set the count on an element each time it changes
+  // 每次改变时都在元素上设置 count
   .subscribe(count => document.querySelector('#count').innerHTML = count);
 ```
-So producing state is within the world of RxJS, but changing the DOM is a side effect which happens at "the end of the line".
 
-## State stores
-Applications use state stores to hold state. These are called different things in different frameworks, like store, reducer and model, but at the core they are all just a plain object. What we also need to handle is that multiple observables can update a single state store.
+所以产生状态是在 RxJS 的世界中完成的，但最后一行代码中改变 DOM 却是一种副作用。
+
+## 状态和存储 (State Store)
+
+应用使用状态和存储来保持状态。状态存储在不同的框架中有着不同的名称，像 store、reducer 和 model ，但重点是它们都只是普通的对象。我们还需要处理的是多个 observables 可以更新同一个状态存储。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
-  // We map to a function that will change our state
+  // 我们映射到一个函数，它会改变状态
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 ```
 
