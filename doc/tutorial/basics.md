@@ -26,15 +26,18 @@ var rename = Rx.Observable.bindNodeCallback(fs.rename);
 rename('file.txt', 'else.txt').subscribe(() => console.log('Renamed!'));
 ```
 
-## Creating observables
-Externally produce new events.
+## 创建 observables
+
+在外部产生新事件。
+
 ```js
 var myObservable = new Rx.Subject();
 myObservable.subscribe(value => console.log(value));
 myObservable.next('foo');
 ```
 
-Internally produce new events.
+在内部产生新事件。
+
 ```js
 var myObservable = Rx.Observable.create(observer => {
   observer.next('foo');
@@ -43,9 +46,10 @@ var myObservable = Rx.Observable.create(observer => {
 myObservable.subscribe(value => console.log(value));
 ```
 
-Which one you choose depends on the scenario. The normal **Observable** is great when you want to wrap functionality that produces values over time. An example would be a websocket connection. With **Subject** you can trigger new events from anywhere really and you can connect existing observables to it.
+选择哪种方式需要根据场景。当你想要包装随时间推移产生值的功能时，普通的 **Observable** 就已经很好了。使用 **Subject**，你可以从任何地方触发新事件，并且将已存在的 observables 和它进行连接。
 
 ## Controlling the flow
+
 ```js
 // typing "hello world"
 var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
