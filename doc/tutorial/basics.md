@@ -79,35 +79,36 @@ input.take(3)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
 
-// Passes through events until other observable triggers an event
+// 直到其他 observable 触发事件才会通过事件
 var stopStream = Rx.Observable.fromEvent(document.querySelector('button'), 'click');
 input.takeUntil(stopStream)
   .map(event => event.target.value)
-  .subscribe(value => console.log(value)); // "hello" (click)
+  .subscribe(value => console.log(value)); // "hello" (点击才能看到)
 ```
 
-## Producing values
+## 产生值
+
 ```js
-// typing "hello world"
+// 输入 "hello world"
 var input = Rx.Observable.fromEvent(document.querySelector('input'), 'input');
 
-// Pass on a new value
+// 传递一个新的值
 input.map(event => event.target.value)
   .subscribe(value => console.log(value)); // "h"
 
-// Pass on a new value by plucking it
+// 通过提取属性传递一个新的值
 input.pluck('target', 'value')
   .subscribe(value => console.log(value)); // "h"
 
-// Pass the two previous values
+// 传递之前的两个值
 input.pluck('target', 'value').pairwise()
   .subscribe(value => console.log(value)); // ["h", "e"]
 
-// Only pass unique values through
+// 只会通过唯一的值
 input.pluck('target', 'value').distinct()
   .subscribe(value => console.log(value)); // "helo wrd"
 
-// Do not pass repeating values through
+// 不会传递重复的值
 input.pluck('target', 'value').distinctUntilChanged()
   .subscribe(value => console.log(value)); // "helo world"
 ```
