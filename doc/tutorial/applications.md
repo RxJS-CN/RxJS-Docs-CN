@@ -1,60 +1,62 @@
-# Creating applications
+# 创建应用
 
-RxJS is a great tool to keep your code less error prone. It does that by using pure and stateless functions. But applications are stateful, so how do we bridge the stateless world of RxJS with the stateful world of our applications?
+RxJS 是个很好的工具，可以让你的代码更少出错。它是通过使用无状态的纯函数来做到这点的。但是应用是有状态的，那么我们如何将 RxJS 的无状态世界与我们应用的有状态世界连接起来呢？
 
-Let us create a simple state store of the value `0`. On each click we want to increase that count in our state store.
+我们来创建一个只存储值为`0`的简单状态。每次点击我们想要增加存储在状态中的 count 。
+
 ```js
 var button = document.querySelector('button');
 Rx.Observable.fromEvent(button, 'click')
-  // scan (reduce) to a stream of counts
+  // 对流进行 scan (reduce) 操作，以获取 count 的值
   .scan(count => count + 1, 0)
-  // Set the count on an element each time it changes
+  // 每次改变时都在元素上设置 count
   .subscribe(count => document.querySelector('#count').innerHTML = count);
 ```
-So producing state is within the world of RxJS, but changing the DOM is a side effect which happens at "the end of the line".
 
-## State stores
-Applications use state stores to hold state. These are called different things in different frameworks, like store, reducer and model, but at the core they are all just a plain object. What we also need to handle is that multiple observables can update a single state store.
+所以产生状态是在 RxJS 的世界中完成的，但最后一行代码中改变 DOM 却是一种副作用。
+
+## 状态和存储 (State Store)
+
+应用使用状态和存储来保持状态。状态存储在不同的框架中有着不同的名称，像 store、reducer 和 model ，但重点是它们都只是普通的对象。我们还需要处理的是多个 observables 可以更新同一个状态存储。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
-  // We map to a function that will change our state
+  // 我们映射到一个函数，它会改变状态
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 ```
 
-What we do here is mapping a click event to a state changing function. So instead of mapping to a value, we map to a function. A function will change the state of our state store. So now let us see how we actually make the change.
+我们在这所做的是将点击事件映射成改变状态的函数。所以我们映射到一个函数，而不是映射到一个值。函数会改变状态存储中的状态。那么现在我们来看下如何实际地做出改变。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 
-// We create an object with our initial state. Whenever a new state change function
-// is received we call it and pass the state. The new state is returned and
-// ready to be changed again on the next click
+// 我们使用初始状态创建了一个对象。每当状态发生变化时，我们会接收到改变状态的函数，
+// 并把状态传递给它。然后返回新的状态并准备在下次点击后再次更改状态。
 var state = increase.scan((state, changeFn) => changeFn(state), {count: 0});
 ```
 
-We can now add a couple of more observables which will also change the same state store.
+现在我们还可以再添加几个 observables ，它们同样也可以更改同一个状态存储。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
-  // Again we map to a function the will increase the count
+  // 我们再一次映射到一个函数，它会增加 count
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 
 var decreaseButton = document.querySelector('#decrease');
 var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
-  // We also map to a function that will decrease the count
+  // 我们还是映射到一个函数，它会减少 count 
   .map(() => state => Object.assign({}, state, {count: state.count - 1}));
 
 var inputElement = document.querySelector('#input');
 var input = Rx.Observable.fromEvent(inputElement, 'keypress')
-  // Let us also map the keypress events to produce an inputValue state
+  // 我们还将按键事件映射成一个函数，它会产生一个叫做 inputValue 状态
   .map(event => state => Object.assign({}, state, {inputValue: event.target.value}));
 
-// We merge the three state change producing observables
+// 我们将这三个改变状态的 observables 进行合并
 var state = Rx.Observable.merge(
   increase,
   decrease,
@@ -64,14 +66,13 @@ var state = Rx.Observable.merge(
   inputValue: ''
 });
 
-// We subscribe to state changes and update the DOM
+// 我们订阅状态的变化并更新 DOM
 state.subscribe((state) => {
   document.querySelector('#count').innerHTML = state.count;
   document.querySelector('#hello').innerHTML = 'Hello ' + state.inputValue;
 });
 
-// To optimize our rendering we can check what state
-// has actually changed
+// 为了优化渲染，我们可以检查什么状态是实际上已经发生变化了的
 var prevState = {};
 state.subscribe((state) => {
   if (state.count !== prevState.count) {
@@ -84,10 +85,11 @@ state.subscribe((state) => {
 });
 ```
 
-We can take the state store approach and use it with many different frameworks and libraries.
+我们可以采用状态存储的方式，并且结合一些不同的框架和库来进行使用。
 
 ### Immutable JS
-You can also create a global state store for your application using [Immutable JS](https://facebook.github.io/immutable-js/). Immutable JS is a great way to create immutable state stores that allows you to optimize rendering by doing shallow checks on changed values.
+
+你还可以使用 [Immutable JS](https://facebook.github.io/immutable-js/) 来为你的应用创建一个全局的状态存储。Immutable JS 是创建不变的状态存储的好方法，它允许你通过对更改的值进行浅检查来优化渲染。
 
 <!-- skip-example -->
 ```js
@@ -107,7 +109,7 @@ var state = Observable.merge(
 export default state;
 ```
 
-Now you can import your state in whatever UI layer you are using.
+现在，你可以在使用的任何 UI 层中导入状态。
 
 <!-- skip-example -->
 ```js
@@ -119,7 +121,8 @@ state.subscribe(state => {
 ```
 
 ### React
-Lets look at an example where we subscribe to an observable when the component mounts and unsubscribes when it unmounts.
+
+我们来看一个示例，当组件进入 `componentDidMount` 生命周期事件时订阅 observable，而当进入 `componentWillUnmount` 生命周期事件时取消订阅。
 
 <!-- skip-example -->
 ```js
@@ -132,9 +135,9 @@ class MyComponent extends ObservableComponent {
   }
   componentDidMount() {
     this.messages = messages
-      // Accumulate our messages in an array
+      // 在数组中累积我们的消息
       .scan((messages, message) => [message].concat(messages), [])
-      // And render whenever we get a new message
+      // 当得到一条新消息时进行渲染
       .subscribe(messages => this.setState({messages: messages}));
   }
   componentWillUnmount() {
@@ -154,6 +157,6 @@ class MyComponent extends ObservableComponent {
 export default MyComponent;
 ```
 
-There are many other ways to use observables with React as well. Take a look at these:
+还有许多其他的方式可以使用 React 和 observables。看看这些：
 
-- [rxjs-react-component](https://www.npmjs.com/package/rxjs-react-component). It will allow you to expose observables that maps to state changes. Also use observables for lifecycle hooks
+- [rxjs-react-component](https://www.npmjs.com/package/rxjs-react-component)。它允许你暴露映射到状态更改的 observable 。还可以使用 observable 版的生命周期钩子。
