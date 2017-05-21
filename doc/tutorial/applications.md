@@ -26,30 +26,29 @@ var increase = Rx.Observable.fromEvent(increaseButton, 'click')
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 ```
 
-What we do here is mapping a click event to a state changing function. So instead of mapping to a value, we map to a function. A function will change the state of our state store. So now let us see how we actually make the change.
+我们在这所做的是将点击事件映射成改变状态的函数。所以我们映射到一个函数，而不是映射到一个值。函数会改变状态存储中的状态。那么现在我们来看下如何实际地做出改变。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 
-// We create an object with our initial state. Whenever a new state change function
-// is received we call it and pass the state. The new state is returned and
-// ready to be changed again on the next click
+// 我们使用初始状态创建了一个对象。每当状态发生变化时，我们会接收到改变状态的函数，
+// 并把状态传递给它。然后返回新的状态并准备在下次点击后再次更改状态。
 var state = increase.scan((state, changeFn) => changeFn(state), {count: 0});
 ```
 
-We can now add a couple of more observables which will also change the same state store.
+现在我们还可以再添加几个 observables ，它们同样也可以更改同一个状态存储。
 
 ```js
 var increaseButton = document.querySelector('#increase');
 var increase = Rx.Observable.fromEvent(increaseButton, 'click')
-  // Again we map to a function the will increase the count
+  // 我们再一次映射到一个函数，它会增加 count
   .map(() => state => Object.assign({}, state, {count: state.count + 1}));
 
 var decreaseButton = document.querySelector('#decrease');
 var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
-  // We also map to a function that will decrease the count
+  // 我们还是映射到一个函数，它会减少 count 
   .map(() => state => Object.assign({}, state, {count: state.count - 1}));
 
 var inputElement = document.querySelector('#input');
