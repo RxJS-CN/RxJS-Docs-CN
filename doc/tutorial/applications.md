@@ -53,10 +53,10 @@ var decrease = Rx.Observable.fromEvent(decreaseButton, 'click')
 
 var inputElement = document.querySelector('#input');
 var input = Rx.Observable.fromEvent(inputElement, 'keypress')
-  // Let us also map the keypress events to produce an inputValue state
+  // 我们还将按键事件映射成一个函数，它会产生一个叫做 inputValue 状态
   .map(event => state => Object.assign({}, state, {inputValue: event.target.value}));
 
-// We merge the three state change producing observables
+// 我们将这三个改变状态的 observables 进行合并
 var state = Rx.Observable.merge(
   increase,
   decrease,
@@ -66,14 +66,13 @@ var state = Rx.Observable.merge(
   inputValue: ''
 });
 
-// We subscribe to state changes and update the DOM
+// 我们订阅状态的变化并更新 DOM
 state.subscribe((state) => {
   document.querySelector('#count').innerHTML = state.count;
   document.querySelector('#hello').innerHTML = 'Hello ' + state.inputValue;
 });
 
-// To optimize our rendering we can check what state
-// has actually changed
+// 为了优化渲染，我们可以检查什么状态是实际上已经发生变化了的
 var prevState = {};
 state.subscribe((state) => {
   if (state.count !== prevState.count) {
