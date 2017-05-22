@@ -84,13 +84,13 @@ function viewModel(state$) {
 }
 
 function renderCurrentSentence(state) {
-  const WELCOME_SENTENCE = 'Do you need to find an operator for your problem? ' +
-    'Start by choosing an option from the list below:';
+  const WELCOME_SENTENCE = '你需要找到一个操作符来解决你的问题吗？ ' +
+    '从下面的列表中选择一个选项开始：';
   return p('.current-sentence', [
     !state.previous ? WELCOME_SENTENCE : null,
     state.previous ? `"${state.previous}${state.options.length === 1 ? '.' : '...'}"` : null,
-    state.previous ? span('.undo', '\u21A9\u00A0Undo') : null,
-    state.previous ? span('.reset', 'Or\u00A0reset') : null
+    state.previous ? span('.undo', '\u21A9\u00A0撤销') : null,
+    state.previous ? span('.reset', 'Or\u00A0重置') : null
   ].filter(x => x !== null));
 }
 
@@ -107,7 +107,7 @@ const OBSERVABLE_PATH = './class/es6/Observable.js~Observable.html';
 function renderStaticDecision(option) {
   const label = option.label.replace('Observable.', '');
   return h4('.decision', [
-    '\u00BB You want the static operator ',
+    '\u00BB 你想要的静态操作符 ',
     a(
       {attrs: {href: `${OBSERVABLE_PATH}#static-method-${label}`}},
       label
@@ -118,7 +118,7 @@ function renderStaticDecision(option) {
 
 function renderInstanceDecision(option) {
   return h4('.decision', [
-    '\u00BB You want the instance operator ',
+    '\u00BB 你想要的示例操作符 ',
     a(
       {attrs: {href: `${OBSERVABLE_PATH}#instance-method-${option.label}`}},
       option.label
