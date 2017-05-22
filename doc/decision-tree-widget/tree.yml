@@ -2,108 +2,108 @@
 children:
   - label: '我有一个已存在的 Observable， 然后'
     children:
-    - label: I want to change each emitted value
+    - label: 我想改变每一个发出的值，
       children:
-      - label: to be a constant value
+      - label: 这个值是个常量
         children:
         - label: mapTo
-      - label: to be a value calculated through a formula
+      - label: 这个值是通过公式计算得到的
         children:
         - label: map
-    - label: I want to pick a property off each emitted value
+    - label: 我想从每个发出的值中选取一个属性
       children:
       - label: pluck
-    - label: I want to spy the values being emitted without affecting them
+    - label: 我想在不影响发出的值的情况下窥探它们
       children:
       - label: do
-    - label: I want to allow some values to pass
+    - label: 我想只允许某些值通过，做法是
       children:
-      - label: based on custom logic
+      - label: 基于自定义逻辑
         children:
         - label: filter
-      - label: if they are at the start of the Observable
+      - label: 如果通过的值是在 Observable 起始处，并且
         children:
-        - label: and only the first value
+        - label: 只要第一个值
           children:
           - label: first
-        - label: based on a given amount
+        - label: 基于给定的数量
           children:
           - label: take
-        - label: based on custom logic
+        - label: 基于自定义逻辑
           children:
           - label: takeWhile
-      - label: if they are exactly the n-th emission
+      - label: 如果它正好是第n个发出的值
         children:
         - label: elementAt
-      - label: if they are at the end of the Observable
+      - label: 如果通过的值是在 Observable 结尾处，并且
         children:
-        - label: and only the last value
+        - label: 只要最后一个值
           children:
           - label: last
-        - label: based on a given amount
+        - label: 基于给定的数量
           children:
           - label: takeLast
-      - label: until another Observable emits a value or completes
+      - label: 直到另一个 Observable 发出值或完成
         children:
         - label: takeUntil
-    - label: I want to ignore values
+    - label: 我想忽略某些值，做法是
       children:
-      - label: altogether
+      - label: 全部忽略
         children:
         - label: ignoreElements
-      - label: from the start of the Observable
+      - label: 从 Observable 的起始处，并且
         children:
-        - label: based on a given amount
+        - label: 基于给定的数量
           children:
           - label: skip
-        - label: based on custom logic
+        - label: 基于自定义逻辑
           children:
           - label: skipWhile
-      - label: from the end of the Observable
+      - label: 从 Observable 的结尾处
         children:
         - label: skipLast
-      - label: until another Observable emits a value
+      - label: 直到另一个 Observabler 发出值
         children:
         - label: skipUntil
-      - label: that match some previous value
+      - label: 匹配一些前面的值，
         children:
-        - label: according to value equality
+        - label: 根据值是否相等，并且
           children:
-          - label: emitted just before the current value
+          - label: 比较的是上一个值
             children:
             - label: distinctUntilChanged
-          - label: emitted some time in the past
+          - label: 比较的是过去一段时间内
             children:
             - label: distinct
-        - label: according to a key or object property
+        - label: 根据键值或对象属性，并且
           children:
-          - label: emitted just before the current value
+          - label: 比较的是上一个值
             children:
             - label: distinctUntilKeyChanged
-      - label: that occur too frequently
+      - label: 针对那么发生频率过高的，然后
         children:
-        - label: by emitting the first value in each time window
+        - label: 只发出每个时间窗口内的第一个值，并且
           children:
-          - label: "where time windows are determined by another Observable's emissions"
+          - label: 时间窗口取决于由另外一个 Observable 的发送
             children:
             - label: throttle
-          - label: where time windows are determined by a time duration
+          - label: 时间窗口取决于时间区间
             children:
             - label: throttleTime
-        - label: by emitting the last value in each time window
+        - label: 只发出每个时间窗口内的最后一个值，并且
           children:
-          - label: "where time windows are determined by another Observable's emissions"
+          - label: 时间窗口取决于由另外一个 Observable 的发送
             children:
             - label: audit
-          - label: where time windows are determined by a time duration
+          - label: 时间窗口取决于时间区间
             children:
             - label: auditTime
-        - label: by emitting the last value as soon as enough silence has occured
+        - label: 一旦沉默的时间足够长的话，就发出最后一个值，并且
           children:
-          - label: where the silence duration threshold is determined by another Observable"
+          - label: 沉默持续时间阈值取决于另外一个 Observable
             children:
             - label: debounce
-          - label: where the silence duration threshold is determined by a time duration
+          - label: 沉默持续时间阈值取决于时间区间
             children:
             - label: debounceTime
     - label: I want to compute a formula using all values emitted
@@ -336,7 +336,7 @@ children:
     - label: 我想输出任何一个 Observable 的值
       children:
       - label: Observable.merge
-    - label: 我想输出的值是根据源 Observables 计算出来的并且
+    - label: 我想输出的值是根据源 Observables 计算出来的，并且
       children:
       - label: 当任意源发出值时使用每个源的最后一个值
         children:
@@ -391,7 +391,7 @@ children:
         - label: 预先被指定为参数的值
           children:
           - label: Observable.of
-      - label: 在定时器上发出值并且
+      - label: 在定时器上发出值，并且
         children:
         - label: 是有规律的
           children:
