@@ -1,6 +1,6 @@
 ---
 children:
-  - label: 'I have one existing Observable, and'
+  - label: '我有一个已存在的 Observable， 并且'
     children:
     - label: I want to change each emitted value
       children:
@@ -325,7 +325,7 @@ children:
         - label: using each source value only once
           children:
           - label: zip
-  - label: 'I have some Observables to combine together as one Observable, and'
+  - label: '我把一些 Observables 组合成了一个 Observable，并且'
     children:
     - label: I want to receive values only from the Observable that emits a value first
       children:
@@ -347,66 +347,66 @@ children:
     - label: I want to subscribe to each in order
       children:
       - label: Observable.concat
-  - label: 'I have no Observables yet, and'
+  - label: '我还没有 Observable， 并且'
     children:
-    - label: I want to create a new Observable
+    - label: 我想创建一个新的 Observable，它
       children:
-      - label: using custom logic
+      - label: 使用自定义逻辑
         children:
         - label: Observable.create
-      - label: using a state machine similar to a for loop
+      - label: 使用类似于 for 循环的状态机
         children:
         - label: Observable.generate
-      - label: that throws an error
+      - label: 抛出错误
         children:
         - label: Observable.throw
-      - label: that just completes, without emitting values
+      - label: 只是完成流而不发出任何值
         children:
         - label: Observable.empty
-      - label: that never emits anything
+      - label: 从不发出任何东西
         children:
         - label: Observable.never
-      - label: from an existing source of events
+      - label: 来自已存在的事件源
         children:
-        - label: coming from the DOM or Node.js or similar
+        - label: 来自 DOM 或 Node.js 或其他类似的
           children:
           - label: Observable.fromEvent
-        - label: that uses an API to add and remove event handlers
+        - label: 使用 API 来添加或移除事件处理方法
           children:
           - label: Observable.fromEventPattern
-      - label: from an ES6 Promise
+      - label: 来自 ES6 的 Promise
         children:
         - label: Observable.fromPromise
-      - label: from a Promise or an event source or an array
+      - label: 来自 Promise 或事件源或数组
         children:
         - label: Observable.from
-      - label: that iterates
+      - label: 迭代
         children:
-        - label: over the values in an array
+        - label: 数组中的值
           children:
           - label: Observable.fromArray
-        - label: over values in a numeric range
+        - label: 数字区间中的值
           children:
           - label: Observable.range
-        - label: over prefined values given as arguments
+        - label: 预先被指定为参数的值
           children:
           - label: Observable.of
-      - label: that emits values on a timer
+      - label: 在定时器上发出值而且
         children:
-        - label: regularly
+        - label: 是有规律的
           children:
           - label: Observable.interval
-        - label: with an optional initial delay
+        - label: 具有可选的初始延迟时间
           children:
           - label: Observable.timer
-      - label: which is built on demand when subscribed
+      - label: 被订阅时才会按需建立
         children:
         - label: Observable.defer
-    - label: I want to convert a callback to an Observable
+    - label: 我想把回调函数转换成 Observable，它
       children:
-      - label: supporting a conventional callback API
+      - label: 支持传统的回调函数 API
         children:
         - label: Observable.bindCallback
-      - label: supporting Node.js callback style API
+      - label: 支持 Node.js 风格的回调函数 API
         children:
         - label: Observable.bindNodeCallback
