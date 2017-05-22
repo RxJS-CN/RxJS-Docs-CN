@@ -1,6 +1,6 @@
 ---
 children:
-  - label: '我有一个已存在的 Observable， 并且'
+  - label: '我有一个已存在的 Observable， 然后'
     children:
     - label: I want to change each emitted value
       children:
@@ -325,29 +325,29 @@ children:
         - label: using each source value only once
           children:
           - label: zip
-  - label: '我把一些 Observables 组合成了一个 Observable，并且'
+  - label: '我把一些 Observables 组合成了一个 Observable，然后'
     children:
-    - label: I want to receive values only from the Observable that emits a value first
+    - label: 我只想从首先发出值的 Observable 中接收值
       children:
       - label: Observable.race
-    - label: I want to be notified when all of them have completed
+    - label: 我想所有的 Observables 都完成后再通知我
       children:
       - label: Observable.forkJoin
-    - label: I want to output the values from either of them
+    - label: 我想输出任何一个 Observable 的值
       children:
       - label: Observable.merge
-    - label: I want to output a value computed from values of the source Observables
+    - label: 我想输出的值是根据源 Observables 计算出来的并且
       children:
-      - label: using the latest value of each source whenever any source emits
+      - label: 当任意源发出值时使用每个源的最后一个值
         children:
         - label: Observable.combineLatest
-      - label: using each source value only once
+      - label: 每个源的值只使用一次
         children:
         - label: Observable.zip
-    - label: I want to subscribe to each in order
+    - label: 我想按顺序订阅每一个 Observable 
       children:
       - label: Observable.concat
-  - label: '我还没有 Observable， 并且'
+  - label: '我还没有 Observable， 然后'
     children:
     - label: 我想创建一个新的 Observable，它
       children:
@@ -391,7 +391,7 @@ children:
         - label: 预先被指定为参数的值
           children:
           - label: Observable.of
-      - label: 在定时器上发出值而且
+      - label: 在定时器上发出值并且
         children:
         - label: 是有规律的
           children:
