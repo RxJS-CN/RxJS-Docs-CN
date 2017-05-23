@@ -209,120 +209,120 @@ children:
       - label: 基于发出值进行的关键性计算
         children:
         - label: groupBy
-    - label: I want to start a new Observable for each value
+    - label: 我想为每个值开启一个新的 Observable，并且
       children:
-      - label: and emit the values from all nested Observables in parallel
+      - label: 从所有嵌套的 Observables 中发出的值是并行的，其中
         children:
-        - label: where the nested Observable is the same for every value
+        - label: 对于每个值嵌套的 Observable 都相同的
           children:
           - label: mergeMapTo
-        - label: where the nested Observable is calculated for each value
+        - label: 对于每个值嵌套的 Observable 都是经过计算得出的
           children:
           - label: mergeMap
-      - label: and emit the values from each nested Observable in order
+      - label: 从所有嵌套的 Observables 中发出的值是按顺序来的，其中
         children:
-        - label: where the nested Observable is the same for every value
+        - label: 对于每个值嵌套的 Observable 都相同的
           children:
           - label: concatMapTo
-        - label: where the nested Observable is calculated for each value
+        - label: 对于每个值嵌套的 Observable 都是经过计算得出的
           children:
           - label: concatMap
-      - label: and cancel the previous nested Observable when a new value arrives
+      - label: 在新值到达时会取消先前的嵌套的 Observable
         children:
-        - label: where the nested Observable is the same for every value
+        - label: 对于每个值嵌套的 Observable 都相同的
           children:
           - label: switchMapTo
-        - label: where the nested Observable is calculated for each value
+        - label: 对于每个值嵌套的 Observable 都是经过计算得出的
           children:
           - label: switchMap
-      - label: and ignore incoming values while the current nested Observable has not yet completed
+      - label: 在当前嵌套的 Observable 还没有完成时忽略接下来的值
         children:
         - label: exhaustMap
-      - label: and recursively start a new Observable for each new value
+      - label: 递归地为每个新值开启一个新的 Observable
         children:
         - label: expand
-    - label: I want to perform custom operations without breaking the chained calls API
+    - label: 我想执行自定义操作而不会破坏链式调用的 API
       children:
       - label: let
-    - label: I want to share a subscription between multiple subscribers
+    - label: 我想在多个订阅者之间共享同一个 subscription，做法是
       children:
-      - label: using a conventional Subject
+      - label: 使用常规的 Subject，并且
         children:
-        - label: and start it as soon as the first subscriber arrives
+        - label: 在第一个订阅者到达后立即启动
           children:
           - label: share
-        - label: and start it manually or imperatively
+        - label: 手动地或命令式地启动
           children:
           - label: publish
-      - label: using a BehaviorSubject
+      - label: 使用 BehaviorSubject
         children:
         - label: publishBehavior
-      - label: using a ReplaySubject
+      - label: 使用 ReplaySubject
         children:
         - label: publishReplay
-      - label: using an AsyncSubject
+      - label: 使用 AsyncSubject
         children:
         - label: publishLast
-      - label: using a specific subject implementation
+      - label: 使用具体的 Subject 实现
         children:
         - label: multicast
-      - label: and make it behave like a cache
+      - label: 使其行为像是缓存
         children:
         - label: cache
-    - label: when an error occurs
+    - label: 当错误发生时，
       children:
-      - label: I want to start a new Observable
+      - label: 我想开启一个新的 Observable
         children:
         - label: catch
-      - label: I want to re-subscribe
+      - label: 我想重新订阅，并且
         children:
-        - label: immediately
+        - label: 是立即的
           children:
           - label: retry
-        - label: when another Observable emits
+        - label: 当另一个 Observable 发出时
           children:
           - label: retryWhen
-    - label: when it completes
+    - label: 当完成时，
       children:
-      - label: I want to re-subscribe
+      - label: 我想重新订阅，并且
         children:
-          - label: immediately
+          - label: 是立即的
             children:
             - label: repeat
-          - label: when another Observable emits
+          - label: 当另一个 Observable 发出时
             children:
             - label: repeatWhen
-      - label: I want to start a new Observable
+      - label: 我想开启一个新的 Observable
         children:
         - label: concat
-    - label: when it completes, errors or unsubscribes, I want to execute a function
+    - label: 当完成时、发生错误时或取消订阅时，我想执行一个函数
       children:
       - label: finally
-    - label: I want to change the scheduler
+    - label: 我想更改调度器，并且这个调度器
       children:
-      - label: that routes calls to subscribe
+      - label: 按路由调用订阅
         children:
         - label: subscribeOn
-      - label: that routes values to observers
+      - label: 按路由将值发送给观察者
         children:
         - label: observeOn
-    - label: I want to combine this Observable with others, and
+    - label: 我想将这个 Observable 与其他的进行组合，并且
       children:
-      - label: I want to receive values only from the Observable that emits a value first
+      - label: 我只想从首先发出值的 Observable 中接收值
         children:
         - label: race
-      - label: I want to output the values from either of them
+      - label: 我想输出任何一个 Observable 的值
         children:
-        - label: Observable.merge
-      - label: I want to output a value computed from values of the source Observables
+        - label: merge
+      - label: 我想输出的值是根据源 Observables 计算出来的，并且
         children:
-        - label: using the latest value of each source whenever any source emits
+        - label: 当任意源发出值时使用每个源的最后一个值
           children:
           - label: combineLatest
-        - label: using the latest value of each source only when the primary Observable emits
+        - label: 只有当主要这个的 Observabale 发出值时使用每个源的最后一个值
           children:
           - label: withLatestFrom
-        - label: using each source value only once
+        - label: 每个源的值只使用一次
           children:
           - label: zip
   - label: '我把一些 Observables 组合成了一个 Observable，然后'
