@@ -10,45 +10,38 @@ import { isNumeric } from '../util/isNumeric';
 import { isScheduler } from '../util/isScheduler';
 
 /**
- * Branch out the source Observable values as a nested Observable periodically
- * in time.
+ * 周期性地将源 Observable 的值分支成嵌套的 Observable 。
  *
- * <span class="informal">It's like {@link bufferTime}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferTime}，但是发出的是嵌套的
+ * Observable 而不是数组.</span>
  *
  * <img src="./img/windowTime.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable starts a new window periodically, as
- * determined by the `windowCreationInterval` argument. It emits each window
- * after a fixed timespan, specified by the `windowTimeSpan` argument. When the
- * source Observable completes or encounters an error, the output Observable
- * emits the current window and propagates the notification from the source
- * Observable. If `windowCreationInterval` is not provided, the output
- * Observable starts a new window when the previous window of duration
- * `windowTimeSpan` completes. If `maxWindowCount` is provided, each window
- * will emit at most fixed number of values. Window will complete immediately
- * after emitting last value and next one still will open as specified by
- * `windowTimeSpan` and `windowCreationInterval` arguments.
+ * 返回一个发出从源 Observable 收集到数据的窗口 Observable。输出 Observable 周期性的开启新窗口 ，由
+ * `windowCreationInterval` 参数决定。它在一个固定的时间跨度发出每个新窗口， 由`windowTimeSpan` 参数指定。
+ * 当源 Observable 完成或者遇到错误， 输出 Observable 发出当前窗口并且将源 Observable 的通知传播出去。 如果
+ * `windowCreationInterval` 没有被提供, 输出 Observable 开启一个新的窗口当前一个window度过了`windowTimeSpan`。
+ * 如果`maxWindowCount` 被提供了, 每个窗口将最多发射若干个固定值。 窗口将会立刻完成当最后一个值发出并且下个会在
+ * 由`windowTimeSpan` 和 `windowCreationInterval` 参数决定的时间开启。
  *
- * @example <caption>In every window of 1 second each, emit at most 2 click events</caption>
+ * @example <caption>在每一个1秒的窗口, 发出最多两个点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowTime(1000)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Every 5 seconds start a window 1 second long, and emit at most 2 click events per window</caption>
+ * @example <caption>每5秒启动一个窗口1秒长, 每个窗口发出最多两个点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowTime(1000, 5000)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Same as example above but with maxWindowCount instead of take</caption>
+ * @example <caption>和上面的例子一样，但是用 maxWindowCount 代替 take</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var result = clicks.windowTime(1000, 5000, 2) // each window has still at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ * var result = clicks.windowTime(1000, 5000, 2) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
 
  * @see {@link window}
@@ -57,15 +50,11 @@ import { isScheduler } from '../util/isScheduler';
  * @see {@link windowWhen}
  * @see {@link bufferTime}
  *
- * @param {number} windowTimeSpan The amount of time to fill each window.
- * @param {number} [windowCreationInterval] The interval at which to start new
- * windows.
- * @param {number} [maxWindowSize=Number.POSITIVE_INFINITY] Max number of
- * values each window can emit before completion.
- * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
- * intervals that determine window boundaries.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {number} windowTimeSpan 填充每个窗口的时间量。
+ * @param {number} [windowCreationInterval] 启动新窗口的间隔。
+ * @param {number} [maxWindowSize=Number.POSITIVE_INFINITY] 每个窗口在完成前可以发送的最大值。
+ * @param {Scheduler} [scheduler=async] 调度器，以确定确定窗口边界的时间间隔。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowTime
  * @owner Observable
  */

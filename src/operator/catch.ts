@@ -6,11 +6,11 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Catches errors on the observable to be handled by returning a new observable or throwing an error.
+ * 捕获 observable 中的错误，可以通过返回一个新的 observable 或者抛出错误对象来处理。
  *
  * <img src="./img/catch.png" width="100%">
  *
- * @example <caption>Continues with a different Observable when there's an error</caption>
+ * @example <caption>当发生错误的时候通过返回一个新的 Observable 继续运行</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -23,7 +23,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *   .subscribe(x => console.log(x));
  *   // 1, 2, 3, I, II, III, IV, V
  *
- * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
+ * @example <caption>当发生错误的时候重试源 Observable, 和retry()操作符类似</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -37,7 +37,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *   .subscribe(x => console.log(x));
  *   // 1, 2, 3, 1, 2, 3, ...
  *
- * @example <caption>Throws a new error when the source Observable throws an error</caption>
+ * @example <caption>当源 Observable 发生错误的时候，抛出一个新的错误</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -55,11 +55,9 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
- * @param {function} selector a function that takes as arguments `err`, which is the error, and `caught`, which
- *  is the source observable, in case you'd like to "retry" that observable by returning it again. Whatever observable
- *  is returned by the `selector` will be used to continue the observable chain.
- * @return {Observable} An observable that originates from either the source or the observable returned by the
- *  catch `selector` function.
+ * @param {function} selector 该函数接受 err 参数，即错误对象，还接受 catch 参数，即源 Observable，
+ * 当你想“重试”的时候返回它即可。 任何被`selector`返回的 observable 都会被用来代替源 observable。
+ * @return {Observable} 该 Observable 源自源 Observable 或 selector 函数返回的 Observable。
  * @method catch
  * @name catch
  * @owner Observable

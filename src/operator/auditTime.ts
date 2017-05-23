@@ -6,27 +6,19 @@ import { Observable } from '../Observable';
 import { Subscription, TeardownLogic } from '../Subscription';
 
 /**
- * Ignores source values for `duration` milliseconds, then emits the most recent
- * value from the source Observable, then repeats this process.
+ * 在 duration 毫秒内忽略源值并发出源 Observable 的最新值， 然后重复此过程。
  *
- * <span class="informal">When it sees a source values, it ignores that plus
- * the next ones for `duration` milliseconds, and then it emits the most recent
- * value from the source.</span>
+ * <span class="informal">当它看见一个源值，它会在接下来的 duration 毫秒内忽略这个值和接下来的源值，然后发出最新的源值。</span>
  *
  * <img src="./img/auditTime.png" width="100%">
  *
- * `auditTime` is similar to `throttleTime`, but emits the last value from the
- * silenced time window, instead of the first value. `auditTime` emits the most
- * recent value from the source Observable on the output Observable as soon as
- * its internal timer becomes disabled, and ignores source values while the
- * timer is enabled. Initially, the timer is disabled. As soon as the first
- * source value arrives, the timer is enabled. After `duration` milliseconds (or
- * the time unit determined internally by the optional `scheduler`) has passed,
- * the timer is disabled, then the most recent source value is emitted on the
- * output Observable, and this process repeats for the next source value.
- * Optionally takes a {@link IScheduler} for managing timers.
+ * 
+ *  `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在
+ * 输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
+ * 忽略源值。只要源 Observable 发出第一值, 时间间隔被启用。度过持续时间后(或者时间单位由内部可选的参数调度器决定),
+ * 时间间隔被禁用, 输出 Observable 发出最新的值, 不断的重复这个过程。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.auditTime(1000);
  * result.subscribe(x => console.log(x));
@@ -37,13 +29,9 @@ import { Subscription, TeardownLogic } from '../Subscription';
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} duration Time to wait before emitting the most recent source
- * value, measured in milliseconds or the time unit determined internally
- * by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the rate-limiting behavior.
- * @return {Observable<T>} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {number} duration 以毫秒为单位或以可选的 scheduler 内部决定的时间单位来衡量。
+ * @param {Scheduler} [scheduler=async] 调度器( {@link IScheduler} )，用来管理处理限制发送频率的定时器。
+ * @return {Observable<T>} 该 Observable 限制源 Observable 的发送频率。
  * @method auditTime
  * @owner Observable
  */

@@ -6,17 +6,14 @@ import { EmptyError } from '../util/EmptyError';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Returns an Observable that emits the single item emitted by the source Observable that matches a specified
- * predicate, if that Observable emits one such item. If the source Observable emits more than one such item or no
- * such items, notify of an IllegalArgumentException or NoSuchElementException respectively.
+ * 该 Observable 发出源 Observable 所发出的值中匹配指定 predicate 函数的单个项。 
+ * 如果源 Observable 发出多于1个数据项或者没有发出数据项, 分别以 IllegalArgumentException 和 NoSuchElementException 进行通知。
  *
  * <img src="./img/single.png" width="100%">
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {Function} predicate - A predicate function to evaluate items emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits the single item emitted by the source Observable that matches
- * the predicate.
+ * @throws {EmptyError} 如果 Observable 在完成之前发送了 `next` 通知，发送 EmptyError 给观察者的 `error` 回调回调函数。
+ * @param {Function} predicate - 断言函数，用来评估源 Observable 的数据项。
+ * @return {Observable<T>} 该 Observable 发出源 Observable 所发出的值中匹配指定 predicate 函数的单个项。
  .
  * @method single
  * @owner Observable

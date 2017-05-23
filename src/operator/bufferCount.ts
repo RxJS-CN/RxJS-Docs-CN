@@ -4,26 +4,21 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Buffers the source Observable values until the size hits the maximum
- * `bufferSize` given.
+ * 缓冲源 Observable 的值直到缓冲数量到达设定的 `bufferSize`.
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * that array only when its size reaches `bufferSize`.</span>
+ * <span class="informal">将过往的值收集到一个数组中，当数组数量到达设定的 bufferSize 时发出该数组。</span>
  *
  * <img src="./img/bufferCount.png" width="100%">
  *
- * Buffers a number of values from the source Observable by `bufferSize` then
- * emits the buffer and clears it, and starts a new buffer each
- * `startBufferEvery` values. If `startBufferEvery` is not provided or is
- * `null`, then new buffers are started immediately at the start of the source
- * and when each buffer closes and is emitted.
+ * 缓冲源 Observable 的N个值(N = bufferSize)，然后发出该缓冲区并进行清理，再然后开启一个新的缓存区，新缓存区会新缓存M个值(M = startBufferEvery)。
+ * 如果`startBufferEvery`没有提供或者为`null`, 新的缓冲会在源开始的时候开启并且在每次发出的时候关闭。
  *
- * @example <caption>Emit the last two click events as an array</caption>
+ * @example <caption>将最后两次点击事件作为数组发出</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>On every click, emit the last two click events as an array</caption>
+ * @example <caption>在每次点击的时候, 以数组的形势发出最后两次的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x => console.log(x));
@@ -35,12 +30,11 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link pairwise}
  * @see {@link windowCount}
  *
- * @param {number} bufferSize The maximum size of the buffer emitted.
- * @param {number} [startBufferEvery] Interval at which to start a new buffer.
- * For example if `startBufferEvery` is `2`, then a new buffer will be started
- * on every other value from the source. A new buffer is started at the
- * beginning of the source by default.
- * @return {Observable<T[]>} An Observable of arrays of buffered values.
+ * @param {number} bufferSize 缓存区的最大长度。
+ * @param {number} [startBufferEvery] 确定何时启用新的缓冲区。
+ * 例如上面图中所示，如果`startBufferEvery`是`2`, 那么隔一个数据会开一个新
+ * 的缓冲区。 默认情况下，将在源的起始处启用新的缓冲区。
+ * @return {Observable<T[]>} 缓存值数组的 Observable 。
  * @method bufferCount
  * @owner Observable
  */

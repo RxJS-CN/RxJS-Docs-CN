@@ -7,37 +7,30 @@ export function concatMap<T, I, R>(this: Observable<T>, project: (value: T, inde
 /* tslint:enable:max-line-length */
 
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable, in a serialized fashion waiting for each one to complete before
- * merging the next.
- *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link concatAll}.</span>
+ * 将源值投射为一个合并到输出 Observable 的 Observable,以串行的方式等待前一个完成再合并下一个
+ * Observable。
+ * 
+ * <span class="informal">将每个值映射为 Observable, 然后使用{@link concatAll}将所有的
+ * 内部 Observables 打平。</span>
  *
  * <img src="./img/concatMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called "inner") Observable. Each new inner Observable is
- * concatenated with the previous inner Observable.
+ * 返回一个 Observable，该 Observable 发出基于对源 Observable 发出的值调用提供的函数, 
+ * 该函数返回所谓的内部 Observable。 每个新的内部 Observable 和前一个内部 Observable 连接在一起。
  *
- * __Warning:__ if source values arrive endlessly and faster than their
- * corresponding inner Observables can complete, it will result in memory issues
- * as inner Observables amass in an unbounded buffer waiting for their turn to
- * be subscribed to.
+ * 警告: 如果源值不断的到达并且速度快于内部 Observables 完成的速度, 它会导致内存问题，
+ * 因为内部的 Observable 在无限制的缓冲区中聚集，以等待轮流订阅。
  *
- * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
- * to `1`.
+ * Note: ｀concatMap｀ 等价于 ｀concurrency｀ 参数(最大并发数)为1的 ｀mergeMap｀ 。
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果是串行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
@@ -47,24 +40,17 @@ export function concatMap<T, I, R>(this: Observable<T>, project: (value: T, inde
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project 
+ * 用在源Observable发出的每个值上,返回Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An observable of values merged from the projected
- * Observables as they were subscribed to, one at a time. Optionally, these
- * values may have been projected from a passed `projectResult` argument.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and taking values from each projected inner
- * Observable sequentially.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} Observable，发出对源Observable发出的每个值使用投射函数
+ * (和可选的`resultSelector`)的结果并且顺序的取出每个投射过的内部Observable的值.
  * @method concatMap
  * @owner Observable
  */

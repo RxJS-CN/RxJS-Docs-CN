@@ -12,27 +12,23 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Branch out the source Observable values as a nested Observable using a
- * factory function of closing Observables to determine when to start a new
- * window.
+ * 将源 Observable 的值分支成嵌套的 Observable ，通过使用关闭 Observable 的工厂函数来决定何时开启新的窗口。
  *
- * <span class="informal">It's like {@link bufferWhen}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferWhen}, 但是发出的是嵌套的 Observable
+ * 而不是数组。</span>
  *
  * <img src="./img/windowWhen.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping windows.
- * It emits the current window and opens a new one whenever the Observable
- * produced by the specified `closingSelector` function emits an item. The first
- * window is opened immediately when subscribing to the output Observable.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。 输出 Observable 发出连接的，非重叠的窗口。
+ * 每当由指定的 closingSelector 函数产生的 Observable 发出项，它会发出当前窗口并开启一个新窗口。
+ * 当输出 Observable 被订阅的时候立马开启第一个窗口。
  *
- * @example <caption>Emit only the first two clicks events in every window of [1-5] random seconds</caption>
+ * @example <caption>在每个秒速随机(1-5秒)的窗口中，只发出最开始的两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks
  *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两个发送
+ *   .mergeAll(); // 打平高阶Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link window}
@@ -41,11 +37,9 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowToggle}
  * @see {@link bufferWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals (on either `next` or
- * `complete`) when to close the previous window and start a new one.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {function(): Observable} closingSelector 函数，不接受参数并且返回 Observable，
+ * 该 Observable 发出信号(`next` 或者 `complete`)以决定何时关闭前一个窗口，开启新一个窗口。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable(译者注：其实就是高阶 Observable )。
  * @method windowWhen
  * @owner Observable
  */
