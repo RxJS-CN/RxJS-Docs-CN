@@ -8,37 +8,29 @@ export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
 /* tslint:enable:max-line-length */
 
 /**
- * Converts a higher-order Observable into a first-order Observable by
- * concatenating the inner Observables in order.
- *
- * <span class="informal">Flattens an Observable-of-Observables by putting one
- * inner Observable after the other.</span>
+ * 通过顺序地连接内部 Observable，将高阶 Observable 转化为一阶 Observable 。
+ * 
+ * <span class="informal">通过一个接一个的连接内部 Observable ，将高阶 Observable 打平。</span>
  *
  * <img src="./img/concatAll.png" width="100%">
  *
- * Joins every Observable emitted by the source (a higher-order Observable), in
- * a serial fashion. It subscribes to each inner Observable only after the
- * previous inner Observable has completed, and merges all of their values into
- * the returned observable.
+ * 串行连接源(高阶 Observable)所发出的每个 Observable，只有当一个内部 Observable 完成的时候才订阅下
+ * 一个内部 Observable，并将它们的所有值合并到返回的 Observable 中。
  *
- * __Warning:__ If the source Observable emits Observables quickly and
- * endlessly, and the inner Observables it emits generally complete slower than
- * the source emits, you can run into memory issues as the incoming Observables
- * collect in an unbounded buffer.
+ * 警告: 如果源 Observable 很快并且不停的发送 Observables, 内部 Observables 发送的完成
+ * 通知比源 Observable 慢, 你会遇到内存问题，因为传入的 Observables 在无界缓冲区中收集.
  *
- * Note: `concatAll` is equivalent to `mergeAll` with concurrency parameter set
- * to `1`.
+ * 注意: concatAll 等价于 concurrency 参数(最大并发数)为1的 mergeAll 。
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
  * firstOrder.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果是串行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link combineAll}
@@ -50,8 +42,7 @@ export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable emitting values from all the inner
- * Observables concatenated.
+ * @return {Observable} Observable，该 Observable 串联地发出所有内部 Observables 的值。
  * @method concatAll
  * @owner Observable
  */

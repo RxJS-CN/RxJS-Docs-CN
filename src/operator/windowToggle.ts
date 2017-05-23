@@ -12,22 +12,16 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Branch out the source Observable values as a nested Observable starting from
- * an emission from `openings` and ending when the output of `closingSelector`
- * emits.
+ * 将源 Observable 的值分支成嵌套的 Observable，分支策略是以 openings 发出项为起始，以 closingSelector 发出为结束。
  *
- * <span class="informal">It's like {@link bufferToggle}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferToggle}, 但是发出的是嵌套 Observable 而不是数组。</span>
  *
  * <img src="./img/windowToggle.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits windows that contain those items
- * emitted by the source Observable between the time when the `openings`
- * Observable emits an item and when the Observable returned by
- * `closingSelector` emits an item.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。输出 Observable 发出窗口 ，每一个窗口
+ * 包括当 `openings` 发出时开始收集源 Observable 的数据项并且 `closingSelector` 返回的 Observable 发出项时结束收集。
  *
- * @example <caption>Every other second, emit the click events from the next 500ms</caption>
+ * @example <caption>每隔一秒钟, 发出接下来 500ms 的点击事件。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var openings = Rx.Observable.interval(1000);
  * var result = clicks.windowToggle(openings, i =>
@@ -41,14 +35,10 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowWhen}
  * @see {@link bufferToggle}
  *
- * @param {Observable<O>} openings An observable of notifications to start new
- * windows.
- * @param {function(value: O): Observable} closingSelector A function that takes
- * the value emitted by the `openings` observable and returns an Observable,
- * which, when it emits (either `next` or `complete`), signals that the
- * associated window should complete.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {Observable<O>} openings 通知开启新窗口的 observable。
+ * @param {function(value: O): Observable} closingSelector 是一个接受`openings` observable
+ * 发出的值作为参数，并且返回 Observable 的函数, 当该 observable 发出 `next` 或者 `complete`时，会发信号给相关的窗口以通知它们应该完成。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowToggle
  * @owner Observable
  */

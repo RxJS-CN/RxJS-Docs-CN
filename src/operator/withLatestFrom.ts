@@ -23,23 +23,18 @@ export function withLatestFrom<T, R>(this: Observable<T>, array: ObservableInput
 /* tslint:enable:max-line-length */
 
 /**
- * Combines the source Observable with other Observables to create an Observable
- * whose values are calculated from the latest values of each, only when the
- * source emits.
+ * 结合源 Observable 和另外的 Observables 以创建新的 Observable， 该 Observable 的值由每
+ * 个 Observable 最新的值计算得出，当且仅当源发出的时候。
  *
- * <span class="informal">Whenever the source Observable emits a value, it
- * computes a formula using that value plus the latest values from other input
- * Observables, then emits the output of that formula.</span>
+ * <span class="informal">每当源 Observable 发出值，它会计算一个公式，此公式使用该值加上其他输入 Observable 的最新值，然后发出公式的输出结果。</span>
  *
  * <img src="./img/withLatestFrom.png" width="100%">
  *
- * `withLatestFrom` combines each value from the source Observable (the
- * instance) with the latest values from the other input Observables only when
- * the source emits a value, optionally using a `project` function to determine
- * the value to be emitted on the output Observable. All input Observables must
- * emit at least one value before the output Observable will emit a value.
+ * `withLatestFrom` 结合源 Observablecombines（实例）和其他输入 Observables 的最新值，当且仅当 
+ * source 发出数据时, 可选的使用 `project` 函数以决定输出 Observable 将要发出的值。
+ * 在输出 Observable 发出值之前，所有的输入 Observables 都必须发出至少一个值。
  *
- * @example <caption>On every click event, emit an array with the latest timer event plus the click event</caption>
+ * @example <caption>对于每个点击事件，发出一个包含最新时间和点击事件的数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var result = clicks.withLatestFrom(timer);
@@ -47,16 +42,10 @@ export function withLatestFrom<T, R>(this: Observable<T>, array: ObservableInput
  *
  * @see {@link combineLatest}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Function} [project] Projection function for combining values
- * together. Receives all values in order of the Observables passed, where the
- * first parameter is a value from the source Observable. (e.g.
- * `a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`). If this is not
- * passed, arrays will be emitted on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other 输入 Observable ，用来和源 Observable 结合。 可以传入多个输入 Observables。
+ * @param {Function} [project] 将多个值合并的投射函数。顺序地接受所有 Observables 传入的值，第一个参数是源 Observable
+ * 的值。 (`a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`)。 如果没有传入, 输入 Observable 会一直发送数组。
+ * @return {Observable} 该 Observable 为一个拥有将每个输入 Observable 最新的值投射后的值, 或者一个包含所有输入 Observable 的最新值的数组。
  * @method withLatestFrom
  * @owner Observable
  */

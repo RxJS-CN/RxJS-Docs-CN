@@ -8,26 +8,22 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Branch out the source Observable values as a nested Observable whenever
- * `windowBoundaries` emits.
+ * 每当 `windowBoundaries` 发出项时，将源 Observable 的值分支成嵌套的 Observable 。
  *
- * <span class="informal">It's like {@link buffer}, but emits a nested Observable
- * instead of an array.</span>
+ * <span class="informal">就像是 {@link buffer}, 但发出的是嵌套的 Observable ，而不是数组。</span>
  *
  * <img src="./img/window.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping
- * windows. It emits the current window and opens a new one whenever the
- * Observable `windowBoundaries` emits an item. Because each window is an
- * Observable, the output is a higher-order Observable.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。 输出 Observable 发出连接的，不重叠的 
+ * 窗口. 当`windowBoundaries` Observable 开始发出数据，它会发出目前的窗口并且会打开一个新的。 
+ * 因为每个窗口都是 Observable， 所以输出 Observable 是高阶 Observable。
  *
- * @example <caption>In every window of 1 second each, emit at most 2 click events</caption>
+ * @example <caption>在每个窗口(窗口间的时间间隔为1秒)中，最多发出两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var result = clicks.window(interval)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两个发送
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link windowCount}
@@ -36,10 +32,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowWhen}
  * @see {@link buffer}
  *
- * @param {Observable<any>} windowBoundaries An Observable that completes the
- * previous window and starts a new window.
- * @return {Observable<Observable<T>>} An Observable of windows, which are
- * Observables emitting values of the source Observable.
+ * @param {Observable<any>} windowBoundaries 完成上一个窗口并且开启新窗口的 Observable。
+ * @return {Observable<Observable<T>>} 每个窗口都是一个 Observable，它发出源 Observable 所发出的值。
  * @method window
  * @owner Observable
  */

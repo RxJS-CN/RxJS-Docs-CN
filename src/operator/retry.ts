@@ -4,18 +4,15 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will resubscribe to the source Observable for a maximum of `count` resubscriptions (given
- * as a number parameter) rather than propagating the `error` call.
+ * 返回一个 Observable， 该 Observable 是源 Observable 不包含错误异常的镜像。 如果源 Observable 发生错误, 这个方法不会传播错误而是会不
+ * 断的重新订阅源 Observable 直到达到最大重试次数 (由数字参数指定)。 
  *
  * <img src="./img/retry.png" width="100%">
  *
- * Any and all items emitted by the source Observable will be emitted by the resulting Observable, even those emitted
- * during failed subscriptions. For example, if an Observable fails at first but emits [1, 2] then succeeds the second
- * time and emits: [1, 2, 3, 4, 5] then the complete stream of emissions and notifications
- * would be: [1, 2, 1, 2, 3, 4, 5, `complete`].
- * @param {number} count - Number of retry attempts before failing.
- * @return {Observable} The source Observable modified with the retry logic.
+ * 任何所有被源 Observable 发出的数据项都会被做为结果的 Observable 发出, 即使这些发送是在失败的订阅期间。 举个例子, 如果一个 Observable 
+ * 第一次发送[1, 2]后失败了，紧接着第二次成功的发出: [1, 2, 3, 4, 5]后触发完成， 最后发送流和通知为: [1, 2, 1, 2, 3, 4, 5, `complete`]。
+ * @param {number} count - 在失败之前重试的次数。
+ * @return {Observable} 使用重试逻辑修改过的源 Observable。
  * @method retry
  * @owner Observable
  */

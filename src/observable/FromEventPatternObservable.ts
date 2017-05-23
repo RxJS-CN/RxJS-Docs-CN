@@ -11,21 +11,17 @@ import { Subscriber } from '../Subscriber';
 export class FromEventPatternObservable<T> extends Observable<T> {
 
   /**
-   * Creates an Observable from an API based on addHandler/removeHandler
-   * functions.
+   * 从一个基于 addHandler/removeHandler 方法的API创建 Observable。
    *
-   * <span class="informal">Converts any addHandler/removeHandler API to an
-   * Observable.</span>
+   * <span class="informal">将任何 addHandler/removeHandler 的API转化为 Observable。</span>
    *
    * <img src="./img/fromEventPattern.png" width="100%">
+   * 
+   * 创建 Observable ，该 Observable 通过使用`addHandler` 和 `removeHandler`添加和删除事件处理器, 
+   * 使用可选的选择器函数将事件参数转化为结果. `addHandler`当输出 Observable 被订阅的时候调用, `removeHandler`
+   * 方法在取消订阅的时候被调用。
    *
-   * Creates an Observable by using the `addHandler` and `removeHandler`
-   * functions to add and remove the handlers, with an optional selector
-   * function to project the event arguments to a result. The `addHandler` is
-   * called when the output Observable is subscribed, and `removeHandler` is
-   * called when the Subscription is unsubscribed.
-   *
-   * @example <caption>Emits clicks happening on the DOM document</caption>
+   * @example <caption>发出 DOM document 上的点击事件</caption>
    * function addClickHandler(handler) {
    *   document.addEventListener('click', handler);
    * }
@@ -43,16 +39,13 @@ export class FromEventPatternObservable<T> extends Observable<T> {
    * @see {@link from}
    * @see {@link fromEvent}
    *
-   * @param {function(handler: Function): any} addHandler A function that takes
-   * a `handler` function as argument and attaches it somehow to the actual
-   * source of events.
-   * @param {function(handler: Function, signal?: any): void} [removeHandler] An optional function that
-   * takes a `handler` function as argument and removes it in case it was
-   * previously attached using `addHandler`. if addHandler returns signal to teardown when remove,
-   * removeHandler function will forward it.
-   * @param {function(...args: any): T} [selector] An optional function to
-   * post-process results. It takes the arguments from the event handler and
-   * should return a single value.
+   * @param {function(handler: Function): any} addHandler 一个接收处理器的函数，并且将
+   * 该处理器添加到事件源。
+   * @param {function(handler: Function, signal?: any): void} [removeHandler] 可选的
+   * 函数，接受处理器函数做为参数，可以移除处理器当之前使用`addHandler`添加处理器。如果 addHandler
+   * 返回的信号当移除的时候要清理，removeHandler 会去做这件事情。
+   * @param {function(...args: any): T} [selector] 可选的函数处理结果。 接受事件处理的参数返
+   * 回单个的值。
    * @return {Observable<T>}
    * @static true
    * @name fromEventPattern
