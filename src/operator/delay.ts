@@ -10,27 +10,23 @@ import { PartialObserver } from '../Observer';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Delays the emission of items from the source Observable by a given timeout or
- * until a given Date.
+ * 通过给定的超时或者直到一个给定的时间来延迟源 Observable 的发送。
  *
- * <span class="informal">Time shifts each item by some specified amount of
- * milliseconds.</span>
+ * <span class="informal">每个数据项的发出时间都往后推移固定的毫秒数.</span>
  *
  * <img src="./img/delay.png" width="100%">
  *
- * If the delay argument is a Number, this operator time shifts the source
- * Observable by that amount of time expressed in milliseconds. The relative
- * time intervals between the values are preserved.
+ * 如果延时参数是数字, 这个操作符会将源 Observable 的发出时间都往后推移固定的毫秒数。
+ * 保存值之间的相对时间间隔.
  *
- * If the delay argument is a Date, this operator time shifts the start of the
- * Observable execution until the given date occurs.
+ * 如果延迟参数是日期类型, 这个操作符会延时Observable的执行直到到了给定的时间.
  *
- * @example <caption>Delay each click by one second</caption>
+ * @example <caption>每次点击延迟1秒</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
  * delayedClicks.subscribe(x => console.log(x));
  *
- * @example <caption>Delay all clicks until a future date happens</caption>
+ * @example <caption>延时所有的点击直到到达未来的时间点</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var date = new Date('March 15, 2050 12:00:00'); // in the future
  * var delayedClicks = clicks.delay(date); // click emitted only after that date
@@ -39,12 +35,9 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link debounceTime}
  * @see {@link delayWhen}
  *
- * @param {number|Date} delay The delay duration in milliseconds (a `number`) or
- * a `Date` until which the emission of the source items is delayed.
- * @param {Scheduler} [scheduler=async] The IScheduler to use for
- * managing the timers that handle the time-shift for each item.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified timeout or Date.
+ * @param {number|Date} delay 延迟时间(以毫秒为单位的数字)或 Date 对象(发送延迟到这个时间点)。
+ * @param {Scheduler} [scheduler=async] 调度器，用来管理处理每项时延的定时器。
+ * @return {Observable} 该 Observalbe 通过指定的超时时间或日期来延迟源 Observable 的发送。
  * @method delay
  * @owner Observable
  */

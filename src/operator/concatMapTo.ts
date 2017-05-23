@@ -7,37 +7,30 @@ export function concatMapTo<T, I, R>(this: Observable<T>, observable: Observable
 /* tslint:enable:max-line-length */
 
 /**
- * Projects each source value to the same Observable which is merged multiple
- * times in a serialized fashion on the output Observable.
- *
- * <span class="informal">It's like {@link concatMap}, but maps each value
- * always to the same inner Observable.</span>
+ * 将每个源值投射成同一个 Observable ，该 Observable 会以串行的方式多次合并到输出 Observable 中 。
+ * 
+ * <span class="informal">就像是{@link concatMap}, 但是将每个值总是映射为同一个内部 Observable。</span>
  *
  * <img src="./img/concatMapTo.png" width="100%">
  *
- * Maps each source value to the given Observable `innerObservable` regardless
- * of the source value, and then flattens those resulting Observables into one
- * single Observable, which is the output Observable. Each new `innerObservable`
- * instance emitted on the output Observable is concatenated with the previous
- * `innerObservable` instance.
+ * 不管源值是多少都将其映射为给定的`innerObservable`, 然后将其打平为单个 Observable,也就
+ * 是所谓的输出 Observable。 在输出 Observable 上发出的每个新的 innerObservable 实例与
+ * 先前的 innerObservable 实例相连接。
  *
- * __Warning:__ if source values arrive endlessly and faster than their
- * corresponding inner Observables can complete, it will result in memory issues
- * as inner Observables amass in an unbounded buffer waiting for their turn to
- * be subscribed to.
+ * 警告: 如果源值不断的到达并且速度快于内部Observables完成的速度, 它会导致内存问题
+ * 因为内部的 Observable 在无限制的缓冲区中聚集，以等待轮流订阅。
  *
  * Note: `concatMapTo` is equivalent to `mergeMapTo` with concurrency parameter
  * set to `1`.
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果不是并行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
@@ -46,19 +39,15 @@ export function concatMapTo<T, I, R>(this: Observable<T>, observable: Observable
  * @see {@link mergeMapTo}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
- * the source Observable.
+ * @param {ObservableInput} innerObservable Observable，替换源Observable的每个值.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An observable of values merged together by joining the
- * passed observable with itself, one after the other, for each value emitted
- * from the source.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} observable，值由将每个源值投射的observable串行合并而成.
  * @method concatMapTo
  * @owner Observable
  */

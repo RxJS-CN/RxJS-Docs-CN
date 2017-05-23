@@ -16,20 +16,16 @@ export function concat<T, R>(this: Observable<T>, ...observables: Array<Observab
 /* tslint:enable:max-line-length */
 
 /**
- * Creates an output Observable which sequentially emits all values from every
- * given input Observable after the current Observable.
+ * 创建一个输出 Observable，它在当前 Observable 之后顺序地发出每个给定的输入 Observable 中的所有值。
  *
- * <span class="informal">Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.</span>
+ * <span class="informal">通过顺序地发出多个 Observables 的值将它们连接起来，一个接一个的。</span>
  *
  * <img src="./img/concat.png" width="100%">
  *
- * Joins this Observable with multiple other Observables by subscribing to them
- * one at a time, starting with the source, and merging their results into the
- * output Observable. Will wait for each Observable to complete before moving
- * on to the next.
+ * 通过依次订阅输入Observable将输出Observable加入多个输入Observable，从源头开始，
+ * 合并它们的值给输出Observable. 只有前一个Observable结束才会进行下一个Observable。
  *
- * @example <caption>Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10</caption>
+ * @example <caption>将从0数到3的定时器和从1到10的同步序列进行连接</caption>
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = timer.concat(sequence);
@@ -38,7 +34,7 @@ export function concat<T, R>(this: Observable<T>, ...observables: Array<Observab
  * // results in:
  * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
  *
- * @example <caption>Concatenate 3 Observables</caption>
+ * @example <caption>连接3个Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -55,12 +51,9 @@ export function concat<T, R>(this: Observable<T>, ...observables: Array<Observab
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} other An input Observable to concatenate after the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} other 等待被连接的 Observable。 可以接受多个输入 Observable。
+ * @param {Scheduler} [scheduler=null] 可选的调度器，控制每个输入 Observable 的订阅。
+ * @return {Observable} 顺序的、串行的将所有输入 Observable 的值合并给输出 Observable。
  * @method concat
  * @owner Observable
  */
@@ -79,43 +72,36 @@ export function concatStatic<T>(...observables: (ObservableInput<T> | IScheduler
 export function concatStatic<T, R>(...observables: (ObservableInput<any> | IScheduler)[]): Observable<R>;
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from given
- * Observable and then moves on to the next.
- *
- * <span class="informal">Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.</span>
+ * 创建一个输出 Observable，该 Observable 顺序的发出每个输入 Observable 的所有值。
+ * 
+ * <span class="informal">连接多个输入 Observable，顺序的发出它们的值，一个
+ * Observable 接一个 Observable。</span>
  *
  * <img src="./img/concat.png" width="100%">
  *
- * `concat` joins multiple Observables together, by subscribing to them one at a time and
- * merging their results into the output Observable. You can pass either an array of
- * Observables, or put them directly as arguments. Passing an empty array will result
- * in Observable that completes immediately.
+ * `concat`通过一次订阅一个将多个 Observables 连接起来，并将值合并到输出 Observable 中。 
+ * 你可以传递一个输入 Observable 数组，或者直接把它们当做参数传递。 传递一个空数组会
+ * 导致输出 Observable 立马触发完成状态。
  *
- * `concat` will subscribe to first input Observable and emit all its values, without
- * changing or affecting them in any way. When that Observable completes, it will
- * subscribe to then next Observable passed and, again, emit its values. This will be
- * repeated, until the operator runs out of Observables. When last input Observable completes,
- * `concat` will complete as well. At any given moment only one Observable passed to operator
- * emits values. If you would like to emit values from passed Observables concurrently, check out
- * {@link merge} instead, especially with optional `concurrent` parameter. As a matter of fact,
- * `concat` is an equivalent of `merge` operator with `concurrent` parameter set to `1`.
+ * `concat`会订阅第一个输入 Observable 并且发出它的所有值, 不去做任何干预。 当这个
+ * 输入 Observable 完成时， 订阅第二个输入 Observable，同样的发出它的所有值。这个过
+ * 程会不断重复直到输入 Observable 都用过了。当最后一个输入 Observable 完成时，`concat`
+ * 也会完成。 任何时刻都只会有一个输入 Observable 发出值。 如果你想让所有的输入 Observable
+ * 并行发出数据，请查看{@link merge}, 特别的带上`concurrent`参数。 事实上,`concat`和
+ * `concurrent`设置为1的`merge`效果是一样的。
  *
- * Note that if some input Observable never completes, `concat` will also never complete
- * and Observables following the one that did not complete will never be subscribed. On the other
- * hand, if some Observable simply completes immediately after it is subscribed, it will be
- * invisible for `concat`, which will just move on to the next Observable.
+ * 注意，如果输入 Observable 一直都不完成, `concat` 也会一直不能完成并且下一个输入 Observable
+ * 将永远不能被订阅. 另一方面, 如果某个输入 Observable 在它被订阅后立马处于完成状态, 那么它对
+ * `concat`是不可见的, 仅仅会转向下一个输入 Observable.
  *
- * If any Observable in chain errors, instead of passing control to the next Observable,
- * `concat` will error immediately as well. Observables that would be subscribed after
- * the one that emitted error, never will.
+ * 如果输入 Observable 链中的任一成员发生错误, `concat`会立马触发错误状态，而不去控制下一个输入
+ * Observable. 发生错误的输入 Observable 之后的输入 Observable 不会被订阅.
  *
- * If you pass to `concat` the same Observable many times, its stream of values
- * will be "replayed" on every subscription, which means you can repeat given Observable
- * as many times as you like. If passing the same Observable to `concat` 1000 times becomes tedious,
- * you can always use {@link repeat}.
+ * 如果你将同一输入 Observable 传递给`concat`多次，结果流会在每次订阅的时候“重复播放”, 这意味着
+ * 你可以重复 Observable 多次. 如果你乏味的给`concat`传递同一输入 Observable 1000次,你可以试着
+ * 用用{@link repeat}.
  *
- * @example <caption>Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10</caption>
+ * @example <caption>将从0数到3的定时器和从1到10的同步序列进行连接</caption>
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = Rx.Observable.concat(timer, sequence);
@@ -125,7 +111,7 @@ export function concatStatic<T, R>(...observables: (ObservableInput<any> | ISche
  * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
  *
  *
- * @example <caption>Concatenate an array of 3 Observables</caption>
+ * @example <caption>连接3个 Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -139,7 +125,7 @@ export function concatStatic<T, R>(...observables: (ObservableInput<any> | ISche
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
  *
  *
- * @example <caption>Concatenate the same Observable to repeat it</caption>
+ * @example <caption>连接同一个 Observable 多次</caption>
  * const timer = Rx.Observable.interval(1000).take(2);
  *
  * Rx.Observable.concat(timer, timer) // concating the same Observable!
@@ -160,13 +146,11 @@ export function concatStatic<T, R>(...observables: (ObservableInput<any> | ISche
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} input1 An input Observable to concatenate with others.
- * @param {ObservableInput} input2 An input Observable to concatenate with others.
- * More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} input1 等待被连接的输入 Observable。
+ * @param {ObservableInput} input2 等待被连接的输入 Observable。
+ * 可以传递多个输入Observable.
+ * @param {Scheduler} [scheduler=null] 可选的调度器，调度每个 Observable 的订阅。
+ * @return {Observable} 有序的、串行的将所有输入 Observable 的值合并到单一的输出 Observable。
  * @static true
  * @name concat
  * @owner Observable

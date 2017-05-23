@@ -11,31 +11,26 @@ import { Subscriber } from '../Subscriber';
 export class RangeObservable extends Observable<number> {
 
   /**
-   * Creates an Observable that emits a sequence of numbers within a specified
-   * range.
+   * 创建一个 Observable ，它发出指定范围内的数字序列。
    *
-   * <span class="informal">Emits a sequence of numbers in a range.</span>
+   * <span class="informal">发出区间范围内的数字序列。</span>
    *
    * <img src="./img/range.png" width="100%">
    *
-   * `range` operator emits a range of sequential integers, in order, where you
-   * select the `start` of the range and its `length`. By default, uses no
-   * IScheduler and just delivers the notifications synchronously, but may use
-   * an optional IScheduler to regulate those deliveries.
+   * `range` 操作符顺序发出一个区间范围内的连续整数, 你可以决定区间的开始和长度。 默认情况下, 不使用
+   * 调度器仅仅同步的发送通知, 但是也可以可选的使用可选的调度器来控制发送。
    *
-   * @example <caption>Emits the numbers 1 to 10</caption>
+   * @example <caption>发出从1到10的数</caption>
    * var numbers = Rx.Observable.range(1, 10);
    * numbers.subscribe(x => console.log(x));
    *
    * @see {@link timer}
    * @see {@link interval}
    *
-   * @param {number} [start=0] The value of the first integer in the sequence.
-   * @param {number} [count=0] The number of sequential integers to generate.
-   * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-   * the emissions of the notifications.
-   * @return {Observable} An Observable of numbers that emits a finite range of
-   * sequential integers.
+   * @param {number} [start=0] 序列中的第一个整数值。
+   * @param {number} [count=0] 要生成序列的长度。
+   * @param {Scheduler} [scheduler] 调度器 ( {@link IScheduler} )，用来调度通知的发送。
+   * @return {Observable} 该 Observable 发出有限区间范围内的连续整数。
    * @static true
    * @name range
    * @owner Observable
