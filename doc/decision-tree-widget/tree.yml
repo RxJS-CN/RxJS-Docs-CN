@@ -1,6 +1,6 @@
 ---
 children:
-  - label: '我有一个已存在的 Observable， 然后'
+  - label: 我有一个已存在的 Observable， 然后
     children:
     - label: 我想改变每一个发出的值，
       children:
@@ -325,7 +325,7 @@ children:
         - label: 每个源的值只使用一次
           children:
           - label: zip
-  - label: '我把一些 Observables 组合成了一个 Observable，然后'
+  - label: 我把一些 Observables 组合成了一个 Observable，然后
     children:
     - label: 我只想从首先发出值的 Observable 中接收值
       children:
@@ -347,7 +347,7 @@ children:
     - label: 我想按顺序订阅每一个 Observable 
       children:
       - label: Observable.concat
-  - label: '我还没有 Observable， 然后'
+  - label: 我还没有 Observable， 然后
     children:
     - label: 我想创建一个新的 Observable，它
       children:
