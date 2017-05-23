@@ -25,22 +25,18 @@ export class ArrayObservable<T> extends Observable<T> {
   static of<T>(item1: T, item2: T, item3: T, item4: T, item5: T, item6: T, scheduler?: IScheduler): Observable<T>;
   static of<T>(...array: Array<T | IScheduler>): Observable<T>;
   /**
-   * Creates an Observable that emits some values you specify as arguments,
-   * immediately one after the other, and then emits a complete notification.
-   *
-   * <span class="informal">Emits the arguments you provide, then completes.
+   * 创建一个 Observable，它会依次发出由你提供的参数，最后发出完成通知。
+   * <span class="informal">发出你提供的参数，然后完成。
    * </span>
    *
    * <img src="./img/of.png" width="100%">
    *
-   * This static operator is useful for creating a simple Observable that only
-   * emits the arguments given, and the complete notification thereafter. It can
-   * be used for composing with other Observables, such as with {@link concat}.
-   * By default, it uses a `null` IScheduler, which means the `next`
-   * notifications are sent synchronously, although with a different IScheduler
-   * it is possible to determine when those notifications will be delivered.
+   * 这个静态操作符适用于创建简单的 Observable ，该 Observable 只发出给定的参数，
+   * 在发送完这些参数后发出完成通知。它可以用来和其他 Observables 组合比如说{@link concat}。
+   * 默认情况下，它使用`null`调度器，这意味着`next`通知是同步发出的,
+   * 尽管使用不同的调度器可以决定这些通知何时送到。
    *
-   * @example <caption>Emit 10, 20, 30, then 'a', 'b', 'c', then start ticking every second.</caption>
+   * @example <caption>发出 10、20、 30, 然后是 'a'、 'b'、 'c', 紧接着开始每秒发出。</caption>
    * var numbers = Rx.Observable.of(10, 20, 30);
    * var letters = Rx.Observable.of('a', 'b', 'c');
    * var interval = Rx.Observable.interval(1000);
@@ -52,10 +48,9 @@ export class ArrayObservable<T> extends Observable<T> {
    * @see {@link never}
    * @see {@link throw}
    *
-   * @param {...T} values Arguments that represent `next` values to be emitted.
-   * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-   * the emissions of the `next` notifications.
-   * @return {Observable<T>} An Observable that emits each given input value.
+   * @param {...T} values 表示 `next` 发出的值。
+   * @param {Scheduler} [scheduler] 用来调度 next 通知发送的调度器( {@link IScheduler} )。
+   * @return {Observable<T>} 发出每个给定输入值的 Observable。
    * @static true
    * @name of
    * @owner Observable

@@ -28,77 +28,56 @@ export class BoundNodeCallbackObservable<T> extends Observable<T> {
   /* tslint:enable:max-line-length */
 
   /**
-   * Converts a Node.js-style callback API to a function that returns an
-   * Observable.
+   * 把 Node.js 式回调API转换为返回 Observable 的函数。
    *
-   * <span class="informal">It's just like {@link bindCallback}, but the
-   * callback is expected to be of type `callback(error, result)`.</span>
+   * <span class="informal">就像是 {@link bindCallback}, 但是回调函数必须形如
+   * `callback(error, result)`这样</span>
    *
-   * `bindNodeCallback` is not an operator because its input and output are not
-   * Observables. The input is a function `func` with some parameters, but the
-   * last parameter must be a callback function that `func` calls when it is
-   * done. The callback function is expected to follow Node.js conventions,
-   * where the first argument to the callback is an error object, signaling
-   * whether call was successful. If that object is passed to callback, it means
-   * something went wrong.
+   * `bindNodeCallback` 并不是一个操作符，因为它的输入和输出并不是 Observable。输入的是一个
+   * 带有多个参数的函数，并且该函数的最后一个参数必须是个回调函数，当该函数执行完之后会掉
+   * 用回调函数，回调函数被要求遵循 Node.js 公约，其中第一个参数是错误对象，标示调用是否成功。
+   * 如果这个错误对象被传递给了回调函数，这意味着调用出现了错误。
    *
-   * The output of `bindNodeCallback` is a function that takes the same
-   * parameters as `func`, except the last one (the callback). When the output
-   * function is called with arguments, it will return an Observable.
-   * If `func` calls its callback with error parameter present, Observable will
-   * error with that value as well. If error parameter is not passed, Observable will emit
-   * second parameter. If there are more parameters (third and so on),
-   * Observable will emit an array with all arguments, except first error argument.
+   * `bindNodeCallback` 的输出是一个函数，该函数接受的参数和输入函数一样(除了没有最后一个回调函
+   * 数)。当输出函数被调用，会返回一个 Observable 。如果输入函数带着错误对象调用回调函数，Observable
+   * 也会用这个错误对象触发错误状态。如果错误对象没有被传递，Observable 会发出第二个参数。
+   * 如果输入函数给回调函数传递三个或者更多的值，该 Observable 会发出一个包含除了第一个错误参
+   * 数的所有值的数组。
    *
-   * Optionally `bindNodeCallback` accepts selector function, which allows you to
-   * make resulting Observable emit value computed by selector, instead of regular
-   * callback arguments. It works similarly to {@link bindCallback} selector, but
-   * Node.js-style error argument will never be passed to that function.
+   * `bindNodeCallback`接受可选的选择器函数，它允许 Observable 发出由选择器计算的值，而
+   * 不是普通的回调参数。这和{@link bindCallback}的选择器效果类似，但是 node 式的错误参数永远
+   * 不会传递给该函数。
    *
-   * Note that `func` will not be called at the same time output function is,
-   * but rather whenever resulting Observable is subscribed. By default call to
-   * `func` will happen synchronously after subscription, but that can be changed
-   * with proper {@link Scheduler} provided as optional third parameter. Scheduler
-   * can also control when values from callback will be emitted by Observable.
-   * To find out more, check out documentation for {@link bindCallback}, where
-   * Scheduler works exactly the same.
+   * 注意，输入函数永远不会被调用直到输出函数返回的 Observable 被订阅。默认情况下，订阅后会同步调用
+   * 输入方法, 但是这可以被改变，通过使用{@link Scheduler}作为可选的第三个参数。
+   * 调度器可以控制 Observable 何时发出数据。想要获取更多信息，请查看{@link bindCallback}的文档，
+   * 工作原理完全一样。
    *
-   * As in {@link bindCallback}, context (`this` property) of input function will be set to context
-   * of returned function, when it is called.
+   * 和{@link bindCallback}一样，输入函数的上下文(this)将会被设置给输出函数的上下文，当它被调用
+   * 的时候。当 Observable 发出了数据后，它会立马完成。这意味着即使输入函数再次调用回调函数，第二次以
+   * 及后续调用的值永远不会出现在流中。如果你需要处理多次调用，查看{@link fromEvent}或者{@link fromEventPattern}
+   * 来替代。
    *
-   * After Observable emits value, it will complete immediately. This means
-   * even if `func` calls callback again, values from second and consecutive
-   * calls will never appear on the stream. If you need to handle functions
-   * that call callbacks multiple times, check out {@link fromEvent} or
-   * {@link fromEventPattern} instead.
+   * 注意，`bindNodeCallback`同样可以用在非 Node.js 环境中，Node.js 式回调函数仅仅是一种公约，所以
+   * 如果你的目标环境是浏览器或者其他，并且你使用的API遵守了这种回调公约，`bindNodeCallback`就可以
+   * 安全的使用那些API函数。
    *
-   * Note that `bindNodeCallback` can be used in non-Node.js environments as well.
-   * "Node.js-style" callbacks are just a convention, so if you write for
-   * browsers or any other environment and API you use implements that callback style,
-   * `bindNodeCallback` can be safely used on that API functions as well.
+   * 牢记，传递给回调的错误对象并不是 JavaScript 内置的 Error 的实例。事实上，它甚至可以不是对象。
+   * 回调函数的错误参数被解读为“存在”，当该参数有值的时候。它可以是，例如，非0数字，非空字符串，逻辑
+   * 是。在所有这些情况下，都会触发 Observable 的错误状态。这意味着当使用`bindNodeCallback`
+   * 的时候通常形式的回调函数都会触发失败。如果你的 Observable 经常发生你预料之外的错误，请检查下
+   * 回调函数是否是 node.js 式的回调，如果不是，请使用{@link bindCallback}替代。
    *
-   * Remember that Error object passed to callback does not have to be an instance
-   * of JavaScript built-in `Error` object. In fact, it does not even have to an object.
-   * Error parameter of callback function is interpreted as "present", when value
-   * of that parameter is truthy. It could be, for example, non-zero number, non-empty
-   * string or boolean `true`. In all of these cases resulting Observable would error
-   * with that value. This means usually regular style callbacks will fail very often when
-   * `bindNodeCallback` is used. If your Observable errors much more often then you
-   * would expect, check if callback really is called in Node.js-style and, if not,
-   * switch to {@link bindCallback} instead.
+   * 注意，即使错误参数出现在回调函数中，但是它的值是假值，它仍然不会出现在Observable的发出数组或者选择器中。
    *
-   * Note that even if error parameter is technically present in callback, but its value
-   * is falsy, it still won't appear in array emitted by Observable or in selector function.
-   *
-   *
-   * @example <caption>Read a file from the filesystem and get the data as an Observable</caption>
+   * @example <caption>从文件系统中读取文件并且从 Observable 中获取数据。</caption>
    * import * as fs from 'fs';
    * var readFileAsObservable = Rx.Observable.bindNodeCallback(fs.readFile);
    * var result = readFileAsObservable('./roadNames.txt', 'utf8');
    * result.subscribe(x => console.log(x), e => console.error(e));
    *
    *
-   * @example <caption>Use on function calling callback with multiple arguments</caption>
+   * @example <caption>使用具有多个参数的函数调用回调</caption>
    * someFunction((err, a, b) => {
    *   console.log(err); // null
    *   console.log(a); // 5
@@ -111,7 +90,7 @@ export class BoundNodeCallbackObservable<T> extends Observable<T> {
    * });
    *
    *
-   * @example <caption>Use with selector function</caption>
+   * @example <caption>使用选择器函数</caption>
    * someFunction((err, a, b) => {
    *   console.log(err); // undefined
    *   console.log(a); // "abc"
@@ -124,7 +103,7 @@ export class BoundNodeCallbackObservable<T> extends Observable<T> {
    * });
    *
    *
-   * @example <caption>Use on function calling callback in regular style</caption>
+   * @example <caption>非 node.js 式的回调函数</caption>
    * someFunction(a => {
    *   console.log(a); // 5
    * });
@@ -140,14 +119,10 @@ export class BoundNodeCallbackObservable<T> extends Observable<T> {
    * @see {@link from}
    * @see {@link fromPromise}
    *
-   * @param {function} func Function with a Node.js-style callback as the last parameter.
-   * @param {function} [selector] A function which takes the arguments from the
-   * callback and maps those to a value to emit on the output Observable.
-   * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-   * callbacks.
-   * @return {function(...params: *): Observable} A function which returns the
-   * Observable that delivers the same values the Node.js callback would
-   * deliver.
+   * @param {function} func 最后一个参数是 node.js 式回调的函数。
+   * @param {function} [selector] 选择器，从回调函数中获取参数并将这些映射为一个 Observable 发出的值。
+   * @param {Scheduler} [scheduler] 调度器，调度回调函数。
+   * @return {function(...params: *): 一个返回 Observable 的函数，该 Observable 发出 node.js 式回调函数返回的数据。
    * @static true
    * @name bindNodeCallback
    * @owner Observable
@@ -227,7 +202,6 @@ function dispatch<T>(this: Action<DispatchState<T>>, state: DispatchState<T>) {
 
   if (!subject) {
     subject = source.subject = new AsyncSubject<T>();
-
     const handler = function handlerFn(this: any, ...innerArgs: any[]) {
       const source = (<any>handlerFn).source;
       const { selector, subject } = source;

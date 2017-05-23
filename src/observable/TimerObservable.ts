@@ -15,43 +15,31 @@ import { Subscriber } from '../Subscriber';
 export class TimerObservable extends Observable<number> {
 
   /**
-   * Creates an Observable that starts emitting after an `initialDelay` and
-   * emits ever increasing numbers after each `period` of time thereafter.
+   * 创建一个 Observable，该 Observable 在初始延时（`initialDelay`）之后开始发送并且在每个时间周期（ `period`）后发出自增的数字。
    *
-   * <span class="informal">Its like {@link interval}, but you can specify when
-   * should the emissions start.</span>
+   * <span class="informal">就像是{@link interval}, 但是你可以指定什么时候开始发送。</span>
    *
    * <img src="./img/timer.png" width="100%">
    *
-   * `timer` returns an Observable that emits an infinite sequence of ascending
-   * integers, with a constant interval of time, `period` of your choosing
-   * between those emissions. The first emission happens after the specified
-   * `initialDelay`. The initial delay may be a {@link Date}. By default, this
-   * operator uses the `async` IScheduler to provide a notion of time, but you
-   * may pass any IScheduler to it. If `period` is not specified, the output
-   * Observable emits only one value, `0`. Otherwise, it emits an infinite
-   * sequence.
+   * `timer` 返回一个发出有限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
+   * 初始延时之后. 初始延时就像是{@link Date}。 默认情况下, 这个操作符使用 async 调度器来提供时间的概念, 
+   * 但是你也可以传递任何调度器。 如果时间周期没有被指定, 输出 Observable 只发出0。 否则,会发送一个无限数列。
    *
-   * @example <caption>Emits ascending numbers, one every second (1000ms), starting after 3 seconds</caption>
+   * @example <caption>每隔1秒发出自增的数字，3秒后开始发送。</caption>
    * var numbers = Rx.Observable.timer(3000, 1000);
    * numbers.subscribe(x => console.log(x));
    *
-   * @example <caption>Emits one number after five seconds</caption>
+   * @example <caption>5秒后发出一个数字</caption>
    * var numbers = Rx.Observable.timer(5000);
    * numbers.subscribe(x => console.log(x));
    *
    * @see {@link interval}
    * @see {@link delay}
    *
-   * @param {number|Date} initialDelay The initial delay time to wait before
-   * emitting the first value of `0`.
-   * @param {number} [period] The period of time between emissions of the
-   * subsequent numbers.
-   * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-   * the emission of values, and providing a notion of "time".
-   * @return {Observable} An Observable that emits a `0` after the
-   * `initialDelay` and ever increasing numbers after each `period` of time
-   * thereafter.
+   * @param {number|Date} initialDelay 在发出第一个值 0 之i前等待的初始延迟时间。
+   * @param {number} [period] 连续数字发送之间的时间周期。
+   * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送, 提供“时间”的概念。
+   * @return {Observable} 该 Observable 在初始时延(initialDelay)后发出0，并且在之后的每个时间周期(period)后发出按自增的数字。
    * @static true
    * @name timer
    * @owner Observable

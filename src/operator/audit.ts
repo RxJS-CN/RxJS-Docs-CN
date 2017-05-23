@@ -9,27 +9,19 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Ignores source values for a duration determined by another Observable, then
- * emits the most recent value from the source Observable, then repeats this
- * process.
+ * 在由另外一个 Observable 决定的时间段里忽略源数据，然后发出源 Observable 最新发出的值，
+ * 然后重复此过程。
  *
- * <span class="informal">It's like {@link auditTime}, but the silencing
- * duration is determined by a second Observable.</span>
+ * <span class="informal">就像是{@link auditTime}, 但是沉默持续时间由第二个 Observable 决定。</span>
  *
  * <img src="./img/audit.png" width="100%">
  *
- * `audit` is similar to `throttle`, but emits the last value from the silenced
- * time window, instead of the first value. `audit` emits the most recent value
- * from the source Observable on the output Observable as soon as its internal
- * timer becomes disabled, and ignores source values while the timer is enabled.
- * Initially, the timer is disabled. As soon as the first source value arrives,
- * the timer is enabled by calling the `durationSelector` function with the
- * source value, which returns the "duration" Observable. When the duration
- * Observable emits a value or completes, the timer is disabled, then the most
- * recent source value is emitted on the output Observable, and this process
- * repeats for the next source value.
+ * `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
+ * 忽略源值。一旦第一个源值达到，它会被转发到输出 Observable ，然后通过使用源值调用 durationSelector 函数来
+ * 启动定时器，这个函数返回 "duration" Observable 。当 duration Observable 发出值或完成时，定时器会被禁用，
+ * 并且下一个源值也是重复此过程。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.audit(ev => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -40,11 +32,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link sample}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the silencing
- * duration, returned as an Observable or a Promise.
- * @return {Observable<T>} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数从源 Observable 中接收值，用于为每个源值计算沉默持续时间，并返回 Observable 或 Promise 。
+ * @return {Observable<T>} 该 Observable 限制源 Observable 的发送频率。
  * @method audit
  * @owner Observable
  */

@@ -4,14 +4,13 @@ import { Subscriber } from '../Subscriber';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Returns an Observable that skips all items emitted by the source Observable as long as a specified condition holds
- * true, but emits all further source items as soon as the condition becomes false.
+ * 返回一个 Observable， 该 Observable 会跳过由源 Observable 发出的所有满足指定条件的数据项， 
+ * 但是一旦出现了不满足条件的项，则发出在此之后的所有项。
  *
  * <img src="./img/skipWhile.png" width="100%">
  *
- * @param {Function} predicate - A function to test each item emitted from the source Observable.
- * @return {Observable<T>} An Observable that begins emitting items emitted by the source Observable when the
- * specified predicate becomes false.
+ * @param {Function} predicate - 函数，用来测试源 Observable 发出的每个数据项。
+ * @return {Observable<T>} Observable，当指定的 predicate 函数返回 false 时，该 Observable 开始发出由源 Observable 发出的项。
  * @method skipWhile
  * @owner Observable
  */

@@ -10,20 +10,17 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Buffers the source Observable values, using a factory function of closing
- * Observables to determine when to close, emit, and reset the buffer.
+ * 缓冲源 Observable 的值, 使用关闭 Observable 的工厂函数来决定何时关闭、发出和重置缓冲区。
  *
- * <span class="informal">Collects values from the past as an array. When it
- * starts collecting values, it calls a function that returns an Observable that
- * tells when to close the buffer and restart collecting.</span>
+ * <span class="informal">将过往的值收集到数组中， 当开始收集数据的时候, 调用函数返回
+ * Observable, 该 Observable 告知何时关闭缓冲区并重新开始收集。</span>
  *
  * <img src="./img/bufferWhen.png" width="100%">
  *
- * Opens a buffer immediately, then closes the buffer when the observable
- * returned by calling `closingSelector` function emits a value. When it closes
- * the buffer, it immediately opens a new buffer and repeats the process.
+ * 立马开启缓冲区, 然后当`closingSelector`函数返回的observable发出数据的时候关闭缓冲区.
+ * 当关闭缓冲区的时候, 会立马开启新的缓冲区，并不断重复此过程。
  *
- * @example <caption>Emit an array of the last clicks every [1-5] random seconds</caption>
+ * @example <caption>发出每个随机秒(1-5秒)数内的最新点击事件数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferWhen(() =>
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
@@ -36,9 +33,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link bufferToggle}
  * @see {@link windowWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals buffer closure.
- * @return {Observable<T[]>} An observable of arrays of buffered values.
+ * @param {function(): Observable} closingSelector 该函数不接受参数，并返回通知缓冲区关闭的 Observable 。
+ * @return {Observable<T[]>} 缓冲数组的 Observable 。
  * @method bufferWhen
  * @owner Observable
  */

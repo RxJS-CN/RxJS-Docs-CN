@@ -16,23 +16,20 @@ export interface DispatchArg {
 export class ErrorObservable extends Observable<any> {
 
   /**
-   * Creates an Observable that emits no items to the Observer and immediately
-   * emits an error notification.
+   * 创建一个不发送数据给观察者并且立马发出错误通知的 Observable。
    *
-   * <span class="informal">Just emits 'error', and nothing else.
-   * </span>
+   * <span class="informal">仅仅发出 error 通知，其他什么也不做。</span>
    *
    * <img src="./img/throw.png" width="100%">
    *
-   * This static operator is useful for creating a simple Observable that only
-   * emits the error notification. It can be used for composing with other
-   * Observables, such as in a {@link mergeMap}.
+   * 这个静态操作符对于创建简单的只发出错误通知的 Observable 十分有用。 可以被用来和其他
+   * Observables 组合, 比如在 {@link mergeMap} 中使用。
    *
-   * @example <caption>Emit the number 7, then emit an error.</caption>
+   * @example <caption>先发出数字7，然后发出错误通知。</caption>
    * var result = Rx.Observable.throw(new Error('oops!')).startWith(7);
    * result.subscribe(x => console.log(x), e => console.error(e));
    *
-   * @example <caption>Map and flatten numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
+   * @example <caption>映射并打平成字母序列abc，但当数字为13时抛出错误。</caption>
    * var interval = Rx.Observable.interval(1000);
    * var result = interval.mergeMap(x =>
    *   x === 13 ?
@@ -46,11 +43,9 @@ export class ErrorObservable extends Observable<any> {
    * @see {@link never}
    * @see {@link of}
    *
-   * @param {any} error The particular Error to pass to the error notification.
-   * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-   * the emission of the error notification.
-   * @return {Observable} An error Observable: emits only the error notification
-   * using the given error argument.
+   * @param {any} 将具体的 Error 传递给错误通知。
+   * @param {Scheduler} [scheduler] 调度器{@link IScheduler}，用来调度错误通知的发送。
+   * @return {Observable} 错误的 Observable：只使用给定的错误参数发出错误通知。
    * @static true
    * @name throw
    * @owner Observable

@@ -11,34 +11,26 @@ import { async } from '../scheduler/async';
  */
 export class IntervalObservable extends Observable<number> {
   /**
-   * Creates an Observable that emits sequential numbers every specified
-   * interval of time, on a specified IScheduler.
+   * 创建一个 Observable ，该 Observable 使用指定的 IScheduler ，并以指定时间间隔发出连续的数字。
    *
-   * <span class="informal">Emits incremental numbers periodically in time.
-   * </span>
+   * <span class="informal">定期发出自增的数字。</span>
    *
    * <img src="./img/interval.png" width="100%">
    *
-   * `interval` returns an Observable that emits an infinite sequence of
-   * ascending integers, with a constant interval of time of your choosing
-   * between those emissions. The first emission is not sent immediately, but
-   * only after the first period has passed. By default, this operator uses the
-   * `async` IScheduler to provide a notion of time, but you may pass any
-   * IScheduler to it.
+   * `interval` 返回一个发出无限自增的序列整数, 你可以选择固定的时间间隔进行发送。 第一次并
+   * 没有立马去发送, 而是第一个时间段过后才发出。 默认情况下, 这个操作符使用 async 调度器来
+   * 提供时间的概念，但也可以给它传递任意调度器。
    *
-   * @example <caption>Emits ascending numbers, one every second (1000ms)</caption>
+   * @example <caption>每1秒发出一个自增数</caption>
    * var numbers = Rx.Observable.interval(1000);
    * numbers.subscribe(x => console.log(x));
    *
    * @see {@link timer}
    * @see {@link delay}
    *
-   * @param {number} [period=0] The interval size in milliseconds (by default)
-   * or the time unit determined by the scheduler's clock.
-   * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-   * the emission of values, and providing a notion of "time".
-   * @return {Observable} An Observable that emits a sequential number each time
-   * interval.
+   * @param {number} [period=0] 时间间隔，它以毫秒为单位(默认)，或者由调度器的内部时钟决定的时间单位。
+   * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送并提供”时间“的概念。
+   * @return {Observable} 每个时间间隔都发出自增数的 Observable 。
    * @static true
    * @name interval
    * @owner Observable

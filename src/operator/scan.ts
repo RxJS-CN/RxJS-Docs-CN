@@ -9,25 +9,19 @@ export function scan<T, R>(this: Observable<T>, accumulator: (acc: R, value: T, 
 /* tslint:enable:max-line-length */
 
 /**
- * Applies an accumulator function over the source Observable, and returns each
- * intermediate result, with an optional seed value.
+ * 对源 Observable 使用累加器函数， 返回生成的中间值， 可选的初始值。
  *
- * <span class="informal">It's like {@link reduce}, but emits the current
- * accumulation whenever the source emits a value.</span>
+ * <span class="informal">就想是 {@link reduce}, 但是发出目前的累计数当源发出数据的时候。</span>
  *
  * <img src="./img/scan.png" width="100%">
  *
- * Combines together all values emitted on the source, using an accumulator
- * function that knows how to join a new source value into the accumulation from
- * the past. Is similar to {@link reduce}, but emits the intermediate
- * accumulations.
+ * 将所有源发出的数据结合起来， 使用一个累加器函数，该函数知道如何将新的值加入到累加器中。 
+ * 这就像是{@link reduce}， 但是会发出中间的累加值。
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * 返回一个 Observable， 该 Observable 对每个源 Observable 发出的值使用特定的累加器。 
+ * 如果`seed`值提供了， 这个值会被累加器用作初始值。 如果`seed`值没有被提供， 源数据的第一项会被当做初始值。
  *
- * @example <caption>Count the number of click events</caption>
+ * @example <caption>计数点击次数</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var ones = clicks.mapTo(1);
  * var seed = 0;
@@ -39,9 +33,9 @@ export function scan<T, R>(this: Observable<T>, accumulator: (acc: R, value: T, 
  * @see {@link reduce}
  *
  * @param {function(acc: R, value: T, index: number): R} accumulator
- * The accumulator function called on each source value.
- * @param {T|R} [seed] The initial accumulation value.
- * @return {Observable<R>} An observable of the accumulated values.
+ * 对每个源数据调用的累加器函数。
+ * @param {T|R} [seed] 初始值。
+ * @return {Observable<R>} 带有累加功能的observable。
  * @method scan
  * @owner Observable
  */

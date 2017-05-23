@@ -84,33 +84,28 @@ export function mergeStatic<T>(...observables: (ObservableInput<T> | IScheduler 
 export function mergeStatic<T, R>(...observables: (ObservableInput<any> | IScheduler | number)[]): Observable<R>;
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which concurrently emits all values from every
- * given input Observable.
+ * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中值。
  *
- * <span class="informal">Flattens multiple Observables together by blending
- * their values into one Observable.</span>
+ * <span class="informal">通过把多个 Observables 的值混合到一个 Observable 中来将其打平。</span>
  *
  * <img src="./img/merge.png" width="100%">
  *
- * `merge` subscribes to each given input Observable (as arguments), and simply
- * forwards (without doing any transformation) all the values from all the input
- * Observables to the output Observable. The output Observable only completes
- * once all input Observables have completed. Any error delivered by an input
- * Observable will be immediately emitted on the output Observable.
+ * `merge` 订阅每个给定的输入 Observable (作为参数)，然后只是将所有输入 Observables 的所有值发
+ * 送(不进行任何转换)到输出 Observable 。所有的输入 Observable 都完成了，输出 Observable 才
+ * 能完成。任何由输入 Observable 发出的错误都会立即在输出 Observalbe 上发出。
  *
- * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
+ * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
  * clicksOrTimer.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // timer will emit ascending values, one every second(1000ms) to console
- * // clicks logs MouseEvents to console everytime the "document" is clicked
- * // Since the two streams are merged you see these happening
- * // as they occur.
+ * // 结果如下:
+ * // 每隔1s发出一个自增值到控制台
+ * // document被点击的时候MouseEvents会被打印到控制台
+ * // 因为两个流被合并了，所以你当它们发生的时候你就可以看见.
  *
- * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
+ * @example <caption>合并3个Observables, 但是只并行运行2个</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -118,27 +113,22 @@ export function mergeStatic<T, R>(...observables: (ObservableInput<any> | ISched
  * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
  * merged.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // - First timer1 and timer2 will run concurrently
- * // - timer1 will emit a value every 1000ms for 10 iterations
- * // - timer2 will emit a value every 2000ms for 6 iterations
- * // - after timer1 hits it's max iteration, timer2 will
- * //   continue, and timer3 will start to run concurrently with timer2
- * // - when timer2 hits it's max iteration it terminates, and
- * //   timer3 will continue to emit a value every 500ms until it is complete
+ * // 结果如下:
+ * // - timer1和timer2将会并行运算
+ * // - timer1每隔1s发出值，迭代10次
+ * // - timer2每隔1s发出值，迭代6次
+ * // - timer1达到迭代最大次数,timer2会继续，timer3开始和timer2并行运行
+ * // - 当timer2达到最大迭代次数就停止，timer3将会继续每隔500ms发出数据直到结束
  *
  * @see {@link mergeAll}
  * @see {@link mergeMap}
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {...ObservableInput} observables Input Observables to merge together.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
- * concurrency of input Observables.
- * @return {Observable} an Observable that emits items that are the result of
- * every input Observable.
+ * @param {...ObservableInput} observables 合并到一起的输入Observables。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 Observables 的最大数量。
+ * @param {Scheduler} [scheduler=null] 调度器用来管理并行的输入Observables。
+ * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。
  * @static true
  * @name merge
  * @owner Observable
