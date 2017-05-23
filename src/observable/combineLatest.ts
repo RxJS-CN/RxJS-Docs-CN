@@ -29,32 +29,26 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
 /* tslint:enable:max-line-length */
 
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * 结合多个Observables创建一个值由每个输入Observable的最新值计算而来的Observable。
  *
- * <span class="informal">Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.</span>
+ * <span class="informal">每当任一输入Observable发射一个值，它使用所有输入的最新
+ * 值，然后将该值发射。</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` combines the values from all the Observables passed as
- * arguments. This is done by subscribing to each Observable in order and,
- * whenever any Observable emits, collecting an array of the most recent
- * values from each Observable. So if you pass `n` Observables to operator,
- * returned Observable will always emit an array of `n` values, in order
- * corresponding to order of passed Observables (value from the first Observable
- * on the first place and so on).
+ * `combineLatest` 结合所有传入的Observables参数的值. 这是通过顺序订阅每个Observable，
+ * 每当任一Observable发射，收集每个Observable的最新的值组成一个数组。所以，当你给操作符
+ * 传入'n'个Observables，返回的Observable总是会发射一个长度为‘n’的数组，对应传递Observable
+ * 的顺序（第一个Observable的值放到数组的第一个）
  *
- * Static version of `combineLatest` accepts either an array of Observables
- * or each Observable can be put directly as an argument. Note that array of
- * Observables is good choice, if you don't know beforehand how many Observables
- * you will combine. Passing empty array will result in Observable that
- * completes immediately.
+ * 静态版本的`combineLatest`接受一个Observables数组或者单个Observable当做参数。
+ * 请注意，Observables数组是一个好的选择，如果你事先不知道多少个Observables你将要结合。
+ * 传递空的数组将会导致Observable立马被完成。
  *
- * To ensure output array has always the same length, `combineLatest` will
- * actually wait for all input Observables to emit at least once,
- * before it starts emitting results. This means if some Observable emits
+ * 为了保证输出数组的长度相同，`combineLatest`实际上会等待所有的输入Observables至少发射一次，
+ * 在输出Observable发射之前。这意味着如果某些Observable在其余的Observable之前发射，所有的值
+ * 除了最后的值都会被丢弃。
+ * This means if some Observable emits
  * values before other Observables started emitting, all that values but last
  * will be lost. On the other hand, is some Observable does not emit value but
  * completes, resulting Observable will complete at the same moment without

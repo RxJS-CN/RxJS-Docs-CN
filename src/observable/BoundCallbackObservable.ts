@@ -35,80 +35,55 @@ export class BoundCallbackObservable<T> extends Observable<T> {
   /* tslint:enable:max-line-length */
 
   /**
-   * Converts a callback API to a function that returns an Observable.
+   * 把回调API转化为返回Observable的函数
+   * <span class="informal">给它一个签名为`f(x, callback)`的函数f,返回一个函数g,
+   * 调用'g(x)'的时候会返回一个Observable</span>
+   * 
+   * `bindCallback` 并不是一个操作符，因为它的输入和输出并不是Observable。输入的是一个
+   * 带有多个参数的函数，并且该函数的最后一个参数必须是个回调函数，当该函数执行完之后会掉
+   * 用回调函数。
    *
-   * <span class="informal">Give it a function `f` of type `f(x, callback)` and
-   * it will return a function `g` that when called as `g(x)` will output an
-   * Observable.</span>
+   * `bindCallback` 的输出是一个函数，该函数接受的参数和输入函数一样(除了没有最后一个回调函
+   * 数)。当输出函数被掉用，会返回一个Observable。如果输入函数给回调函数传递一个值，则该Observable
+   * 会发射这个值。如果输入函数给回调函数传递多个值，则该Observable会发射一个包含所有值的数组。
+   * 
+   * 很重要的一点是，输入函数在输出函数返回的Observable被订阅之前不会执行。这意味着如果输入
+   * 函数是AJAX请求，该请求在返回的Observable每次被订阅之后才会发出。
    *
-   * `bindCallback` is not an operator because its input and output are not
-   * Observables. The input is a function `func` with some parameters, but the
-   * last parameter must be a callback function that `func` calls when it is
-   * done.
+   * 作为一个可选项，选择器函数可以传给`bindObservable`.该函数接受和回调一样的参数。返回Observable
+   * 发射的值，而不是回调参数本身，即使默认情况下，传递给回调的多个参数将在流中显示为数组。选择器
+   * 函数直接用参数掉用，就像回调一样。这意味着你可以想象默认选择器（当没有显示提供的时候）是这样
+   * 一个函数:将它的所有参数聚集到数组中，或者仅仅返回第一个参数当只有一个参数的时候。
    *
-   * The output of `bindCallback` is a function that takes the same parameters
-   * as `func`, except the last one (the callback). When the output function
-   * is called with arguments, it will return an Observable. If `func` function
-   * calls its callback with one argument, the Observable will emit that value.
-   * If on the other hand callback is called with multiple values, resulting
-   * Observable will emit an array with these arguments.
+   * 最后一个可选参数 - {@link Scheduler} - 可以用来控制当Observable被订阅的时候掉用输入函
+   * 数以及发射结果的时机。默认订阅Observable后掉用输入函数是同步的，但是使用`Scheduler.async`
+   * 作为最后一个参数将会延迟输入函数的掉用，就像是用0毫秒的setTimeout包装过。所以如果你使用了异
+   * 步调度器并且订阅了Observable，当前正在执行的所有函数调用，将在调用“输入函数”之前结束。
    *
-   * It is very important to remember, that input function `func` is not called
-   * when output function is, but rather when Observable returned by output
-   * function is subscribed. This means if `func` makes AJAX request, that request
-   * will be made every time someone subscribes to resulting Observable, but not before.
+   * 当涉及到传递给回调的结果时，默认情况下当输入函数调用回调之后会立马发射，特别的，如果回调是同步
+   * 调用的，那么Observable的订阅也会同步掉用`next`方法。如果你想延迟掉用，使用`Scheduler.async`。
+   * 这意味着通过使用`Scheduler.async`，你可以确保输入函数永远异步掉用回调函数，从而避免了可怕的Zalgo。
    *
-   * Optionally, selector function can be passed to `bindObservable`. That function
-   * takes the same arguments as callback, and returns value
-   * that will be emitted by Observable instead of callback parameters themselves.
-   * Even though by default multiple arguments passed to callback appear in the stream as array,
-   * selector function will be called with arguments directly, just as callback would.
-   * This means you can imagine default selector (when one is not provided explicitly)
-   * as function that aggregates all its arguments into array, or simply returns first argument,
-   * if there is only one.
+   * 需要注意的是，输出函数返回的Observable只能发射一次然后完成。即使输入函数多次掉用回调函数，第二次
+   * 以及之后的掉用都不会出现在流中。如果你需要监听多次的掉用，你大概需要使用{@link fromEvent}或者
+   * {@link fromEventPattern}来代替。
    *
-   * Last optional parameter - {@link Scheduler} - can be used to control when call
-   * to `func` happens after someone subscribes to Observable, as well as when results
-   * passed to callback will be emitted. By default subscription to Observable calls `func`
-   * synchronously, but using `Scheduler.async` as last parameter will defer call to input function,
-   * just like wrapping that call in `setTimeout` with time `0` would. So if you use async Scheduler
-   * and call `subscribe` on output Observable, all function calls that are currently executing,
-   * will end before `func` is invoked.
+   * 如果输入函数依赖上下文(this),该上下文将被设置为输出函数在调用时的同一上下文.特别的，如果输入函数
+   * 被当作是某个对象的方法进行掉用，为了保持同样的行为，建议将输出函数的上下文设置为该对象，输入方法不
+   * 是已经绑定的。
    *
-   * When it comes to emitting results passed to callback, by default they are emitted
-   * immediately after `func` invokes callback. In particular, if callback is called synchronously,
-   * then subscription to resulting Observable will call `next` function synchronously as well.
-   * If you want to defer that call, using `Scheduler.async` will, again, do the job.
-   * This means that by using `Scheduler.async` you can, in a sense, ensure that `func`
-   * always calls its callback asynchronously, thus avoiding terrifying Zalgo.
+   * 如果输入函数以node的方式(第一个参数是可选的错误参数用来标示掉用是否成功)掉用回调函数，{@link bindNodeCallback}
+   * 提供了方便的错误处理，也许是更好的选择。 `bindCallback` 不会区别对待这些方法，错误参数(是否传递)
+   * 被解释成正常的参数。
    *
-   * Note that Observable created by output function will always emit only one value
-   * and then complete right after. Even if `func` calls callback multiple times, values from
-   * second and following calls will never appear in the stream. If you need to
-   * listen for multiple calls, you probably want to use {@link fromEvent} or
-   * {@link fromEventPattern} instead.
-   *
-   * If `func` depends on some context (`this` property), that context will be set
-   * to the same context that output function has at call time. In particular, if `func`
-   * is called as method of some object, in order to preserve proper behaviour,
-   * it is recommended to set context of output function to that object as well,
-   * provided `func` is not already bound.
-   *
-   * If input function calls its callback in "node style" (i.e. first argument to callback is
-   * optional error parameter signaling whether call failed or not), {@link bindNodeCallback}
-   * provides convenient error handling and probably is a better choice.
-   * `bindCallback` will treat such functions without any difference and error parameter
-   * (whether passed or not) will always be interpreted as regular callback argument.
-   *
-   *
-   * @example <caption>Convert jQuery's getJSON to an Observable API</caption>
-   * // Suppose we have jQuery.getJSON('/my/url', callback)
+   * @example <caption>把jQuery的getJSON方法转化为Observable API</caption>
+   * // 假设我们有这个方法:jQuery.getJSON('/my/url', callback)
    * var getJSONAsObservable = Rx.Observable.bindCallback(jQuery.getJSON);
    * var result = getJSONAsObservable('/my/url');
    * result.subscribe(x => console.log(x), e => console.error(e));
    *
    *
-   * @example <caption>Receive array of arguments passed to callback</caption>
+   * @example <caption>接收传递给回调的参数数组</caption>
    * someFunction((a, b, c) => {
    *   console.log(a); // 5
    *   console.log(b); // 'some string'
@@ -121,7 +96,7 @@ export class BoundCallbackObservable<T> extends Observable<T> {
    * });
    *
    *
-   * @example <caption>Use bindCallback with selector function</caption>
+   * @example <caption>使用bindCallback选择器函数</caption>
    * someFunction((a, b, c) => {
    *   console.log(a); // 'a'
    *   console.log(b); // 'b'
@@ -134,7 +109,7 @@ export class BoundCallbackObservable<T> extends Observable<T> {
    * });
    *
    *
-   * @example <caption>Compare behaviour with and without async Scheduler</caption>
+   * @example <caption>比较异步和非异步调度的行为</caption>
    * function iCallMyCallbackSynchronously(cb) {
    *   cb();
    * }
@@ -152,9 +127,9 @@ export class BoundCallbackObservable<T> extends Observable<T> {
    * // I was async!
    *
    *
-   * @example <caption>Use bindCallback on object method</caption>
+   * @example <caption>bindCallback对象方法</caption>
    * const boundMethod = Rx.Observable.bindCallback(someObject.methodWithCallback);
-   * boundMethod.call(someObject) // make sure methodWithCallback has access to someObject
+   * boundMethod.call(someObject) // 确保methodWithCallback可以访问someObject
    * .subscribe(subscriber);
    *
    *
@@ -162,13 +137,10 @@ export class BoundCallbackObservable<T> extends Observable<T> {
    * @see {@link from}
    * @see {@link fromPromise}
    *
-   * @param {function} func Function with a callback as the last parameter.
-   * @param {function} [selector] A function which takes the arguments from the
-   * callback and maps those to a value to emit on the output Observable.
-   * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-   * callbacks.
-   * @return {function(...params: *): Observable} A function which returns the
-   * Observable that delivers the same values the callback would deliver.
+   * @param {function} func 最后一个参数是回调的函数.
+   * @param {function} [selector] 选择器，从回调函数中获取参数并将这些映射为一个Observable发射的值
+   * @param {Scheduler} [scheduler] 调度器，调度回调函数
+   * @return {function(...params: *): Observable} 一个返回Observable的函数，该Observable发射回调函数返回的数据。
    * @static true
    * @name bindCallback
    * @owner Observable
