@@ -29,52 +29,41 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
 /* tslint:enable:max-line-length */
 
 /**
- * 结合多个Observables创建一个值由每个输入Observable的最新值计算而来的Observable。
+ * 结合多个Observable，创建一个值由每个输入Observable的最新值计算而来的Observable。
  *
- * <span class="informal">每当任一输入Observable发射一个值，它使用所有输入的最新
- * 值，然后将该值发射。</span>
+ * <span class="informal">每当任一输入Observable发射值，返回Observable使用所有输入
+ * Observable的最新值，然后将该值发射。</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` 结合所有传入的Observables参数的值. 这是通过顺序订阅每个Observable，
- * 每当任一Observable发射，收集每个Observable的最新的值组成一个数组。所以，当你给操作符
- * 传入'n'个Observables，返回的Observable总是会发射一个长度为‘n’的数组，对应传递Observable
+ * `combineLatest` 结合所有输入Observable参数的值. 顺序订阅每个Observable，
+ * 每当任一输入Observable发射，收集每个输入Observable的最新值组成一个数组。所以，当你给操作符
+ * 传入n个Observable，返回的Observable总是会发射一个长度为n的数组，对应输入Observable
  * 的顺序（第一个Observable的值放到数组的第一个）
  *
  * 静态版本的`combineLatest`接受一个Observables数组或者单个Observable当做参数。
- * 请注意，Observables数组是一个好的选择，如果你事先不知道多少个Observables你将要结合。
- * 传递空的数组将会导致Observable立马被完成。
+ * 请注意，Observables数组是一个好的选择，如果你事先不知道你将要结合多少个Observable。
+ * 传递空的数组将会导致返回Observable立马被完成。
  *
- * 为了保证输出数组的长度相同，`combineLatest`实际上会等待所有的输入Observables至少发射一次，
- * 在输出Observable发射之前。这意味着如果某些Observable在其余的Observable之前发射，所有的值
- * 除了最后的值都会被丢弃。
- * This means if some Observable emits
- * values before other Observables started emitting, all that values but last
- * will be lost. On the other hand, is some Observable does not emit value but
- * completes, resulting Observable will complete at the same moment without
- * emitting anything, since it will be now impossible to include value from
- * completed Observable in resulting array. Also, if some input Observable does
- * not emit any value and never completes, `combineLatest` will also never emit
- * and never complete, since, again, it will wait for all streams to emit some
- * value.
+ * 为了保证输出数组的长度相同，`combineLatest`实际上会等待所有的输入Observable至少发射一次，
+ * 在返回Observable发射之前。这意味着如果某个输入Observable在其余的输入Observable之前发射，它所发射
+ * 的值只保留最新的。另一方面，如果某个输入Observable没有发射值就完成了，返回Observable也不会发
+ * 射值并立马完成，因为不可能从已经完成的Observable中收集到值。同样的，如果某个输入Observable
+ * 不发射值也不完成，`combineLatest`会永远不发射值也不结束。所以，再次强调下，它会等待所有的流
+ * 去发射值。
  *
- * If at least one Observable was passed to `combineLatest` and all passed Observables
- * emitted something, resulting Observable will complete when all combined
- * streams complete. So even if some Observable completes, result of
- * `combineLatest` will still emit values when other Observables do. In case
- * of completed Observable, its value from now on will always be the last
- * emitted value. On the other hand, if any Observable errors, `combineLatest`
- * will error immediately as well, and all other Observables will be unsubscribed.
+ * 如果给`combineLatest`至少传递一个输入Observable并且所有传入的输入Observable都发射了值，返回
+ * Observable将会在所有结合流完成后完成。所以即使某些Observable完成了，`combineLatest`返回
+ * Observable仍然会发射值当其他输入Observable也发射值的时候。对于完成的输入Observable，它
+ * 的值一直是最后发射的值。另一方面，如果任一输入Observable发生错误，`combineLatest`也会
+ * 立马触发错误状态，所有的其他输入Observable都会被解除订阅。
  *
- * `combineLatest` accepts as optional parameter `project` function, which takes
- * as arguments all values that would normally be emitted by resulting Observable.
- * `project` can return any kind of value, which will be then emitted by Observable
- * instead of default array. Note that `project` does not take as argument that array
- * of values, but values themselves. That means default `project` can be imagined
- * as function that takes all its arguments and puts them into an array.
+ * `combineLatest`接受一个可选的参数投射函数，它接受返回Observable发射的值。投射函数
+ * 可以返回任何数据，这些数据代替默认的数组被返回Observable发射。需要注意的是，投射函数并不接
+ * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
+ * 函数。
  *
- *
- * @example <caption>Combine two timer Observables</caption>
+ * @example <caption>结合两个 timer Observables</caption>
  * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
  * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
  * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
@@ -86,7 +75,7 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
  * // [2, 1] after 2s
  *
  *
- * @example <caption>Combine an array of Observables</caption>
+ * @example <caption>结合Observables数组</caption>
  * const observables = [1, 5, 10].map(
  *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
  * );
@@ -99,7 +88,7 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
  * // [1, 5, 10] after 10s
  *
  *
- * @example <caption>Use project function to dynamically calculate the Body-Mass Index</caption>
+ * @example <caption>使用project函数动态计算体质指数</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
@@ -115,17 +104,12 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} observable1 An input Observable to combine with other Observables.
- * @param {ObservableInput} observable2 An input Observable to combine with other Observables.
- * More than one input Observables may be given as arguments
- * or an array of Observables may be given as the first argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
- * each input Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} observable1 输入Observable用来和其他Observables进行结合.
+ * @param {ObservableInput} observable2 输入Observable用来和其他Observables进行结合.
+ * 可以有多个输入Observables传入或者第一个参数是Observables数组
+ * @param {function} [project] 可选的函数将结合的所有最新的值映射成一个新的值.
+ * @param {Scheduler} [scheduler=null] 订阅每个输入的Observable
+ * @return {Observable} 一个投射所有输入Observable最新的值，或者所有输入Observable最新值的数组。
  * @static true
  * @name combineLatest
  * @owner Observable

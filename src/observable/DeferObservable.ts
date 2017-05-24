@@ -12,22 +12,16 @@ import { OuterSubscriber } from '../OuterSubscriber';
 export class DeferObservable<T> extends Observable<T> {
 
   /**
-   * Creates an Observable that, on subscribe, calls an Observable factory to
-   * make an Observable for each new Observer.
+   * 创建一个Observable，当被订阅的时候，调用Observable工厂为每个订阅者创建新的Observable。
    *
-   * <span class="informal">Creates the Observable lazily, that is, only when it
-   * is subscribed.
+   * <span class="informal">懒创建Observable, 也就是说, 当且仅当它被订阅的时候.
    * </span>
    *
    * <img src="./img/defer.png" width="100%">
-   *
-   * `defer` allows you to create the Observable only when the Observer
-   * subscribes, and create a fresh Observable for each Observer. It waits until
-   * an Observer subscribes to it, and then it generates an Observable,
-   * typically with an Observable factory function. It does this afresh for each
-   * subscriber, so although each subscriber may think it is subscribing to the
-   * same Observable, in fact each subscriber gets its own individual
-   * Observable.
+   * `defer` 允许你创建一个Observable当且仅当它被订阅的时候，并且会每个订阅者创建新的Observable.
+   * 它一直在等待直到观察者订阅了它, 然后它创建一个新的Observable,通常会以Observable工厂函数的方式.
+   * 对每个订阅者它都是新的, 所以即使每个订阅者也许会认为它们订阅的是同一个Observable, 事实上每个订阅
+   * 者获得的只属于它们的Observable.
    *
    * @example <caption>Subscribe to either an Observable of clicks or an Observable of interval, at random</caption>
    * var clicksOrInterval = Rx.Observable.defer(function () {
