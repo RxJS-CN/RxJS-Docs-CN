@@ -17,57 +17,41 @@ import { Observer } from './Observer';
  */
 export class ObservableDoc {
   /**
-   * Creates a new Observable, that will execute the specified function when an
-   * {@link Observer} subscribes to it.
+   * 创建一个新的Observable, 该Observable会执行特定的函数当{@link Observer}订阅它的时候.
    *
-   * <span class="informal">Create custom Observable, that does whatever you like.</span>
+   * <span class="informal">创建一个定制化的Observable.</span>
    *
    * <img src="./img/create.png" width="100%">
    *
-   * `create` converts an `onSubscription` function to an actual Observable.
-   * Whenever someone subscribes to that Observable, the function will be called
-   * with an {@link Observer} instance as a first and only parameter. `onSubscription` should
-   * then invoke the Observers `next`, `error` and `complete` methods.
+   * `create` 将 `onSubscription` 函数转化为一个真实的Observable.每当有人订阅该Observable的
+   * 时候，`onSubscription`函数会接收{@link Observer}实例做为唯一参数执行。`onSubscription` 应该
+   * 调用观察者对象的 `next`, `error` and `complete` 方法.
    *
-   * Calling `next` with a value will emit that value to the observer. Calling `complete`
-   * means that Observable finished emitting and will not do anything else.
-   * Calling `error` means that something went wrong - value passed to `error` method should
-   * provide details on what exactly happened.
+   * 带值调用`next`会将该值发出给观察者.调用`complete`意味着Observable结束了发出，不会做任何事情.
+   * 调用`error`意味着出现了错误-传给`error`的参数应该提供详细的错误信息.
    *
-   * A well-formed Observable can emit as many values as it needs via `next` method,
-   * but `complete` and `error` methods can be called only once and nothing else can be called
-   * thereafter. If you try to invoke `next`, `complete` or `error` methods after created
-   * Observable already completed or ended with an error, these calls will be ignored to
-   * preserve so called *Observable Contract*. Note that you are not required to call
-   * `complete` at any point - it is perfectly fine to create an Observable that never ends,
-   * depending on your needs.
+   * 一个格式良好的Observable可以通过`next`方法发出尽可能多的值,但是`complete`和`error`方法只能被调用
+   * 一次并且之后什么都不能被调用. 如果你试图在Observable已经完成或者发生错误之后调用`next`, `complete` 
+   * 或 `error`方法，这些调用将会忽略对所谓的*Observable Contract*保护.注意，你并不需要一定要在某个时刻
+   * 调用`complete`方法－创建一个不会被终止的Observable也是很棒的，一切取决于你的需求.
    *
-   * `onSubscription` can optionally return either a function or an object with
-   * `unsubscribe` method. In both cases function or method will be called when
-   * subscription to Observable is being cancelled and should be used to clean up all
-   * resources. So, for example, if you are using `setTimeout` in your custom
-   * Observable, when someone unsubscribes, you can clear planned timeout, so that
-   * it does not fire needlessly and browser (or other environment) does not waste
-   * computing power on timing event that no one will listen to anyways.
+   * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象. 当要取消对Observable
+   * 的订阅时，函数或者方法将会被调用，清理所有的资源.所以，举个例子, 如果你在你自己的Observable里面使用了
+   * `setTimeout`, 当有人要取消订阅的时候, 你可以清理定时器, 这样就可以减少不需要的触发和浏览器(或者其他宿主环境)
+   * 不会浪费计算资源在这种无谓的事情上.
    *
-   * Most of the times you should not need to use `create`, because existing
-   * operators allow you to create an Observable for most of the use cases.
-   * That being said, `create` is low-level mechanism allowing you to create
-   * any Observable, if you have very specific needs.
+   * 绝大多数情况下你不需要使用`create`,因为现有的操作符在大多数情况下可以帮助你创建Observable。这也就意味着，
+   * `create`是一个底层机制帮助你创建任何Observable，在你有特殊需求的情况下.
    *
-   * **TypeScript signature issue**
+   * **TypeScript 签名问题**
    *
-   * Because Observable extends class which already has defined static `create` function,
-   * but with different type signature, it was impossible to assign proper signature to
-   * `Observable.create`. Because of that, it has very general type `Function` and thus
-   * function passed to `create` will not be type checked, unless you explicitly state
-   * what signature it should have.
+   * 因为Observable继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名.
+   * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名.
    *
-   * When using TypeScript we recommend to declare type signature of function passed to
-   * `create` as `(observer: Observer) => TeardownLogic`, where {@link Observer}
-   * and {@link TeardownLogic} are interfaces provided by the library.
+   * 当使用TypeScript，我们建议声明传递给`create`的函数签名为`(observer: Observer) => TeardownLogic`,
+   * {@link Observer} 和 {@link TeardownLogic} 是库提供的接口.
    *
-   * @example <caption>Emit three numbers, then complete.</caption>
+   * @example <caption>发出三个数字，然后完成.</caption>
    * var observable = Rx.Observable.create(function (observer) {
    *   observer.next(1);
    *   observer.next(2);
