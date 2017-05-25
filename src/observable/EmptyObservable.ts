@@ -29,28 +29,26 @@ export class EmptyObservable<T> extends Observable<T> {
    * var result = Rx.Observable.empty().startWith(7);
    * result.subscribe(x => console.log(x));
    *
-   * @example <caption>Map and flatten only odd numbers to the sequence 'a', 'b', 'c'</caption>
+   * @example <caption>将奇数映射成abc序列</caption>
    * var interval = Rx.Observable.interval(1000);
    * var result = interval.mergeMap(x =>
    *   x % 2 === 1 ? Rx.Observable.of('a', 'b', 'c') : Rx.Observable.empty()
    * );
    * result.subscribe(x => console.log(x));
    *
-   * // Results in the following to the console:
-   * // x is equal to the count on the interval eg(0,1,2,3,...)
-   * // x will occur every 1000ms
-   * // if x % 2 is equal to 1 print abc
-   * // if x % 2 is not equal to 1 nothing will be output
+   * // 结果如下:
+   * // x 是间隔的计数比如：0,1,2,3,...
+   * // x 1000ms 出现一次
+   * // 如果 x % 2 等于 1 打印 abc
+   * // 如果 x % 2 不等于1 什么也不输出
    *
    * @see {@link create}
    * @see {@link never}
    * @see {@link of}
    * @see {@link throw}
    *
-   * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-   * the emission of the complete notification.
-   * @return {Observable} An "empty" Observable: emits only the complete
-   * notification.
+   * @param {Scheduler} [scheduler] A {@link IScheduler} 用来调度完成通知.
+   * @return {Observable} 空的Observable: 仅仅发出完成通知.
    * @static true
    * @name empty
    * @owner Observable

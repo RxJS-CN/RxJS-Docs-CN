@@ -203,7 +203,6 @@ function dispatch<T>(this: Action<DispatchState<T>>, state: DispatchState<T>) {
 
   if (!subject) {
     subject = source.subject = new AsyncSubject<T>();
-
     const handler = function handlerFn(this: any, ...innerArgs: any[]) {
       const source = (<any>handlerFn).source;
       const { selector, subject } = source;
