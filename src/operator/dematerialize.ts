@@ -4,23 +4,21 @@ import { Subscriber } from '../Subscriber';
 import { Notification } from '../Notification';
 
 /**
- * Converts an Observable of {@link Notification} objects into the emissions
- * that they represent.
+ * 将 {@link Notification} 对象的 Observable 转换成它们所代表的发送。
  *
- * <span class="informal">Unwraps {@link Notification} objects as actual `next`,
- * `error` and `complete` emissions. The opposite of {@link materialize}.</span>
+ * <span class="informal">将 {@link Notification} 对象拆开成实际的 `next`、
+ * `error` 和 `complete` 发送。它与 {@link materialize} 是相反的。</span>
  *
  * <img src="./img/dematerialize.png" width="100%">
  *
- * `dematerialize` is assumed to operate an Observable that only emits
- * {@link Notification} objects as `next` emissions, and does not emit any
- * `error`. Such Observable is the output of a `materialize` operation. Those
- * notifications are then unwrapped using the metadata they contain, and emitted
- * as `next`, `error`, and `complete` on the output Observable.
+ * `dematerialize` 被假定为操作的 Observable 只会将 {@link Notification} 对象
+ * 作为 `next` 发出，并且不会发出任何的 `error` 。这样的 Obseravble 其实是 `materialize`
+ * 操作符的输出。然后这些通知会使用它们所包含的元数据进行拆解，并在输出 Observable 上
+ * 发出 `next` 、`error` 和 `complete` 。
  *
- * Use this operator in conjunction with {@link materialize}.
+ * 与 {@link materialize} 结合来使用此操作符。
  *
- * @example <caption>Convert an Observable of Notifications to an actual Observable</caption>
+ * @example <caption>将 Notifications 的 Observable 转换成实际的 Observable</caption>
  * var notifA = new Rx.Notification('N', 'A');
  * var notifB = new Rx.Notification('N', 'B');
  * var notifE = new Rx.Notification('E', void 0,
@@ -30,7 +28,7 @@ import { Notification } from '../Notification';
  * var upperCase = materialized.dematerialize();
  * upperCase.subscribe(x => console.log(x), e => console.error(e));
  *
- * // Results in:
+ * // 结果：
  * // A
  * // B
  * // TypeError: x.toUpperCase is not a function
@@ -38,8 +36,8 @@ import { Notification } from '../Notification';
  * @see {@link Notification}
  * @see {@link materialize}
  *
- * @return {Observable} An Observable that emits items and notifications
- * embedded in Notification objects emitted by the source Observable.
+ * @return {Observable} Observable 会发出数据项和通知，它们是由源 Observable 所发出
+ * 并且包装在 Notification 对象之中的。
  * @method dematerialize
  * @owner Observable
  */
