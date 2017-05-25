@@ -75,7 +75,7 @@ function viewModel(state$) {
       previous.push(currentTree.children[state.current[i]].label);
       currentTree = currentTree.children[state.current[i]];
     }
-    previous = previous.join(' ');
+    previous = previous.join('');
     return {
       previous,
       options: currentTree.children
@@ -90,7 +90,7 @@ function renderCurrentSentence(state) {
     !state.previous ? WELCOME_SENTENCE : null,
     state.previous ? `"${state.previous}${state.options.length === 1 ? '.' : '...'}"` : null,
     state.previous ? span('.undo', '\u21A9\u00A0撤销') : null,
-    state.previous ? span('.reset', 'Or\u00A0重置') : null
+    state.previous ? span('.reset', '或\u00A0重置') : null
   ].filter(x => x !== null));
 }
 
