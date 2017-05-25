@@ -25,17 +25,15 @@ export class ArrayObservable<T> extends Observable<T> {
   static of<T>(item1: T, item2: T, item3: T, item4: T, item5: T, item6: T, scheduler?: IScheduler): Observable<T>;
   static of<T>(...array: Array<T | IScheduler>): Observable<T>;
   /**
-   * Creates an Observable that emits some values you specify as arguments,
-   * immediately one after the other, and then emits a complete notification.
+   * 创建依次发出由你提供的参数，然后触发完成通知的Observable.
    *
    * <span class="informal">Emits the arguments you provide, then completes.
    * </span>
    *
    * <img src="./img/of.png" width="100%">
    *
-   * This static operator is useful for creating a simple Observable that only
-   * emits the arguments given, and the complete notification thereafter. It can
-   * be used for composing with other Observables, such as with {@link concat}.
+   * 这个静态操作符对于创建仅仅发出传入的参数的Observable十分有用. 可以被用来和其他Observables
+   * 组合, such as with {@link concat}.
    * By default, it uses a `null` IScheduler, which means the `next`
    * notifications are sent synchronously, although with a different IScheduler
    * it is possible to determine when those notifications will be delivered.
