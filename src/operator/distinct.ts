@@ -8,25 +8,23 @@ import { subscribeToResult } from '../util/subscribeToResult';
 import { ISet, Set } from '../util/Set';
 
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
+ * 返回 Observable，它发出源 Observable 发出的所有与之前所有项都不相同的项。
+ * 
+ * 如果提供了 keySelector 函数，那么它会将源 Observable 的每个值都投射成一个新的值，这个值会用来检查是否与前一个投射值相等。如果没有提供 
+ * keySelector 函数，它会直接使用源 Observable 的每个值来检查是否与前一个值相等。
  *
- * If a keySelector function is provided, then it will project each value from the source observable into a new value that it will
- * check for equality with previously projected values. If a keySelector function is not provided, it will use each value from the
- * source observable directly with an equality check against previous values.
+ * 在支持 `Set` 的 JavaScript 运行时中，此操作符会使用 `Set` 来提升不同值检查的性能。
  *
- * In JavaScript runtimes that support `Set`, this operator will use a `Set` to improve performance of the distinct value checking.
+ * 在其他运行时中，此操作符会使用 `Set` 的最小化实现，此实现在底层依赖于 `Array` 和 `indexOf`，因为要检查更多的值来进行区分，所以性能会降低。
+ * 即使是在新浏览器中，长时间运行的 `distinct` 操作也可能会导致内存泄露。为了在某种场景下来缓解这个问题，可以提供一个可选的 `flushes` 参数，
+ * 这样内部的 `Set` 可以被“清空”，基本上清除了它的所有值。
  *
- * In other runtimes, this operator will use a minimal implementation of `Set` that relies on an `Array` and `indexOf` under the
- * hood, so performance will degrade as more values are checked for distinction. Even in newer browsers, a long-running `distinct`
- * use might result in memory leaks. To help alleviate this in some scenarios, an optional `flushes` parameter is also provided so
- * that the internal `Set` can be "flushed", basically clearing it of values.
- *
- * @example <caption>A simple example with numbers</caption>
+ * @example <caption>使用数字的简单示例</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
  *   .distinct()
  *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
  *
- * @example <caption>An example using a keySelector function</caption>
+ * @example <caption>使用 keySelector 函数的示例</caption>
  * interface Person {
  *    age: number,
  *    name: string
@@ -39,16 +37,16 @@ import { ISet, Set } from '../util/Set';
  *     .distinct((p: Person) => p.name)
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  *
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [keySelector] Optional function to select which value you want to check as distinct.
- * @param {Observable} [flushes] Optional Observable for flushing the internal HashSet of the operator.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [keySelector] 可选函数，用来选择要检查哪个值是不同的。
+ * @param {Observable} [flushes] 可选 Observable，用来清空操作符内部的 HashSet 。
+ * @return {Observable} Observable 发出从源 Observable 中得到的不同的值。
  * @method distinct
  * @owner Observable
  */
