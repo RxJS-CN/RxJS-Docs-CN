@@ -11,18 +11,18 @@ export function distinctUntilChanged<T, K>(this: Observable<T>, compare: (x: K, 
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
+ * 返回 Observable，它发出源 Observable 发出的所有与前一项不相同的项。
  *
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ * 如果提供了 compare 函数，那么每一项都会调用它来检验是否应该发出这个值。
  *
- * If a comparator function is not provided, an equality check is used by default.
+ * 如果没有提供 compare 函数，默认使用相等检查。
  *
- * @example <caption>A simple example with numbers</caption>
+ * @example <caption>使用数字的简单示例</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
  *   .distinctUntilChanged()
  *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
  *
- * @example <caption>An example using a compare function</caption>
+ * @example <caption>使用 compare 函数的示例</caption>
  * interface Person {
  *    age: number,
  *    name: string
@@ -36,7 +36,7 @@ export function distinctUntilChanged<T, K>(this: Observable<T>, compare: (x: K, 
  *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo' }
@@ -44,8 +44,8 @@ export function distinctUntilChanged<T, K>(this: Observable<T>, compare: (x: K, 
  * @see {@link distinct}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
+ * @return {Observable} Observable 发出从源 Observable 中得到的与前一项不同的值。
  * @method distinctUntilChanged
  * @owner Observable
  */
