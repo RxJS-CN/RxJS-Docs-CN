@@ -15,19 +15,17 @@ export interface DispatchArg<T> {
 export class EmptyObservable<T> extends Observable<T> {
 
   /**
-   * Creates an Observable that emits no items to the Observer and immediately
-   * emits a complete notification.
+   * 创建一个什么数据都不发出并且立马完成的Observable.
    *
-   * <span class="informal">Just emits 'complete', and nothing else.
+   * <span class="informal">仅仅发出完成.
    * </span>
    *
    * <img src="./img/empty.png" width="100%">
    *
-   * This static operator is useful for creating a simple Observable that only
-   * emits the complete notification. It can be used for composing with other
-   * Observables, such as in a {@link mergeMap}.
+   * 这个静态操作符对于创建一个简单的只发出完成状态通知的Observable是非常有用的. 它可以被用来和
+   * 其他Observables进行组合, 就像{@link mergeMap}.
    *
-   * @example <caption>Emit the number 7, then complete.</caption>
+   * @example <caption>发出数字7, 然后完成.</caption>
    * var result = Rx.Observable.empty().startWith(7);
    * result.subscribe(x => console.log(x));
    *
