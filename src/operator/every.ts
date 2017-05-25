@@ -4,16 +4,16 @@ import { Observable } from '../Observable';
 import { Subscriber } from '../Subscriber';
 
 /**
- * Returns an Observable that emits whether or not every item of the source satisfies the condition specified.
+ * 返回的 Observable 发出是否源 Observable 的每项都满足指定的条件。
  *
- * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
+ * @example <caption>一个简单示例：如果所有元素都小于5就发出 `true`，反之 `false`</caption>
  *  Observable.of(1, 2, 3, 4, 5, 6)
  *     .every(x => x < 5)
  *     .subscribe(x => console.log(x)); // -> false
  *
- * @param {function} predicate A function for determining if an item meets a specified condition.
- * @param {any} [thisArg] Optional object to use for `this` in the callback.
- * @return {Observable} An Observable of booleans that determines if all items of the source Observable meet the condition specified.
+ * @param {function} predicate 用来确定每一项是否满足指定条件的函数。
+ * @param {any} [thisArg] 可选对象，作为回调函数中的 `this` 使用。
+ * @return {Observable} 布尔值的 Observable，用来确定是否源 Observable 的所有项都满足指定条件。
  * @method every
  * @owner Observable
  */
