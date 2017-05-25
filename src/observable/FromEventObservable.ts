@@ -60,40 +60,32 @@ export class FromEventObservable<T> extends Observable<T> {
   /* tslint:enable:max-line-length */
 
   /**
-   * Creates an Observable that emits events of a specific type coming from the
-   * given event target.
+   * 创建一个发出来自于传入事件目标的特定类型事件的Observable.
    *
-   * <span class="informal">Creates an Observable from DOM events, or Node
-   * EventEmitter events or others.</span>
+   * <span class="informal">创建一个来自于DOM事件，或者Node EventEmitter事件或者其他的Observable.</span>
    *
    * <img src="./img/fromEvent.png" width="100%">
    *
-   * Creates an Observable by attaching an event listener to an "event target",
-   * which may be an object with `addEventListener` and `removeEventListener`,
-   * a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the
-   * DOM, or an HTMLCollection from the DOM. The event handler is attached when
-   * the output Observable is subscribed, and removed when the Subscription is
-   * unsubscribed.
+   * 通过给“事件目标”添加事件监听器的方式创建Observable，可能会是拥有`addEventListener`和
+   * `removeEventListener`方法的对象，一个Node.js EventEmitter，一个jQuery式的EventEmitter,
+   * 一个DOM的节点集合, 或者DOM的HTMLCollection. 当输出Observable被订阅的时候事件处理函数会被添加, 
+   * 当取消订阅的时候会将事件处理函数移除.
    *
-   * @example <caption>Emits clicks happening on the DOM document</caption>
+   * @example <caption>当触发DOM document的点击后发出</caption>
    * var clicks = Rx.Observable.fromEvent(document, 'click');
    * clicks.subscribe(x => console.log(x));
    *
-   * // Results in:
-   * // MouseEvent object logged to console everytime a click
-   * // occurs on the document.
+   * // 结果:
+   * // MouseEvent对象在控制台输出当每次在document上发生点击后.
    *
    * @see {@link from}
    * @see {@link fromEventPattern}
    *
-   * @param {EventTargetLike} target The DOMElement, event target, Node.js
-   * EventEmitter, NodeList or HTMLCollection to attach the event handler to.
-   * @param {string} eventName The event name of interest, being emitted by the
-   * `target`.
-   * @param {EventListenerOptions} [options] Options to pass through to addEventListener
-   * @param {SelectorMethodSignature<T>} [selector] An optional function to
-   * post-process results. It takes the arguments from the event handler and
-   * should return a single value.
+   * @param {EventTargetLike} target DOMElement, 事件目标, Node.js
+   * EventEmitter, NodeList 或者 HTMLCollection 等添加事件处理.
+   * @param {string} eventName 感兴趣的事件名称, 被目标发出.
+   * @param {EventListenerOptions} [options] 可选的传递给addEventListener的参数.
+   * @param {SelectorMethodSignature<T>} [selector] 可选的函数处理结果. 接收事件处理函数的参数，应该返回单个值.
    * @return {Observable<T>}
    * @static true
    * @name fromEvent

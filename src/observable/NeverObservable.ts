@@ -9,20 +9,17 @@ import { noop } from '../util/noop';
  */
 export class NeverObservable<T> extends Observable<T> {
   /**
-   * Creates an Observable that emits no items to the Observer.
+   * 创建一个不返回任何数据项的Observer.
    *
-   * <span class="informal">An Observable that never emits anything.</span>
+   * <span class="informal">一个不返回任何数据项的Observer.</span>
    *
    * <img src="./img/never.png" width="100%">
    *
-   * This static operator is useful for creating a simple Observable that emits
-   * neither values nor errors nor the completion notification. It can be used
-   * for testing purposes or for composing with other Observables. Please not
-   * that by never emitting a complete notification, this Observable keeps the
-   * subscription from being disposed automatically. Subscriptions need to be
-   * manually disposed.
+   * 这个静态操作符对于创建既不发出数据也不触发错误和完成通知的Observable. 可以用来测试或
+   * 者和其他Observables进行组合. 注意，由于用于不会发送完成通知,这个Observable一致保持
+   * 着订阅. 订阅需要手动的解除.
    *
-   * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>
+   * @example <caption>发出7, 然后不发出任何值(也不发出完成通知).</caption>
    * function info() {
    *   console.log('Will not be called');
    * }
@@ -34,7 +31,7 @@ export class NeverObservable<T> extends Observable<T> {
    * @see {@link of}
    * @see {@link throw}
    *
-   * @return {Observable} A "never" Observable: never emits anything.
+   * @return {Observable} A "never" Observable: 永远不发出数据.
    * @static true
    * @name never
    * @owner Observable

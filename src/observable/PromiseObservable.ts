@@ -14,27 +14,24 @@ export class PromiseObservable<T> extends Observable<T> {
   public value: T;
 
   /**
-   * Converts a Promise to an Observable.
+   * 将Promise转化为Observable.
    *
-   * <span class="informal">Returns an Observable that just emits the Promise's
-   * resolved value, then completes.</span>
+   * <span class="informal">返回一个仅仅发出Promise resolved的值然后完成的Observable.</span>
    *
-   * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
-   * Observable. If the Promise resolves with a value, the output Observable
-   * emits that resolved value as a `next`, and then completes. If the Promise
-   * is rejected, then the output Observable emits the corresponding Error.
+   * 把ES2015的Promise或者兼容Promises/A+规范的Promise转化为Observable. 如果Promise resolves
+   * 一个值, 输出Observable发出这个值然后完成. 如果Promise被rejected, 输出Observable会发出相应的
+   * 错误.
    *
-   * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
+   * @example <caption>将Fetch返回的Promise转化为Observable</caption>
    * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
    * result.subscribe(x => console.log(x), e => console.error(e));
    *
    * @see {@link bindCallback}
    * @see {@link from}
    *
-   * @param {PromiseLike<T>} promise The promise to be converted.
-   * @param {Scheduler} [scheduler] An optional IScheduler to use for scheduling
-   * the delivery of the resolved value (or the rejection).
-   * @return {Observable<T>} An Observable which wraps the Promise.
+   * @param {PromiseLike<T>} promise 被转化的promise.
+   * @param {Scheduler} [scheduler] 可选的调度器，用来调度resolved或者rejection的值.
+   * @return {Observable<T>} 包装了Promise的Observable.
    * @static true
    * @name fromPromise
    * @owner Observable
