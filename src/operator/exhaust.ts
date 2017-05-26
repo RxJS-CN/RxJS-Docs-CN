@@ -6,25 +6,23 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Converts a higher-order Observable into a first-order Observable by dropping
- * inner Observables while the previous inner Observable has not yet completed.
+ * 当前一个内部 Observable 还未完成的情况下，通过丢弃内部 Observable 使得
+ * 高阶 Observable 转换成一阶 Observable。
  *
- * <span class="informal">Flattens an Observable-of-Observables by dropping the
- * next inner Observables while the current inner is still executing.</span>
+ * <span class="informal">在当前内部 Observable 仍在执行的情况下，通过丢弃
+ * 内部 Observable 将高阶 Observable 打平。</span>
  *
  * <img src="./img/exhaust.png" width="100%">
  *
- * `exhaust` subscribes to an Observable that emits Observables, also known as a
- * higher-order Observable. Each time it observes one of these emitted inner
- * Observables, the output Observable begins emitting the items emitted by that
- * inner Observable. So far, it behaves like {@link mergeAll}. However,
- * `exhaust` ignores every new inner Observable if the previous Observable has
- * not yet completed. Once that one completes, it will accept and flatten the
- * next inner Observable and repeat this process.
+ * `exhaust` 订阅发出 Observables 的 Observable，也就是高阶 Observable 。
+ * 每次观察到这些已发出的内部 Observables 中的其中一个时，输出 Observable 开始发出该内部 Observable 
+ * 要发出的项。到目前为止，它的行为就像 {@link mergeAll} 。然而，如果前一个 Observable 
+ * 还未完成的话，`exhaust` 会忽略每个新的内部 Observable 。一旦完成，它将接受并打平下一个
+ * 内部 Observable ，然后重复此过程。
  *
- * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
+ * @example <caption>只要没有当前活动的计时器，那么每次点击就会运行一个有限的计时器。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
+ * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
  * var result = higherOrder.exhaust();
  * result.subscribe(x => console.log(x));
  *
@@ -35,8 +33,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link exhaustMap}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable that takes a source of Observables and propagates the first observable
- * exclusively until it completes before subscribing to the next.
+ * @return {Observable} Observable 接收源 Observable 并只专注于传播第一个 Observable 直到它完成，然后订阅下一个 Observable 。
  * @method exhaust
  * @owner Observable
  */
