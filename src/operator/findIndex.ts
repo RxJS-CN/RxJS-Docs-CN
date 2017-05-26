@@ -2,21 +2,18 @@ import { Observable } from '../Observable';
 import { FindValueOperator } from './find';
 
 /**
- * Emits only the index of the first value emitted by the source Observable that
- * meets some condition.
+ * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。
  *
- * <span class="informal">It's like {@link find}, but emits the index of the
- * found value, not the value itself.</span>
+ * <span class="informal">它很像 {@link find} , 但发出的是找到的值的索引，
+ * 而不是值本身。</span>
  *
  * <img src="./img/findIndex.png" width="100%">
  *
- * `findIndex` searches for the first item in the source Observable that matches
- * the specified condition embodied by the `predicate`, and returns the
- * (zero-based) index of the first occurrence in the source. Unlike
- * {@link first}, the `predicate` is required in `findIndex`, and does not emit
- * an error if a valid value is not found.
+ * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后
+ * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到
+ * 有效的值的话也不会发出错误。
  *
- * @example <caption>Emit the index of first click that happens on a DIV element</caption>
+ * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -27,11 +24,9 @@ import { FindValueOperator } from './find';
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable} An Observable of the index of the first item that
- * matches the condition.
+ * 使用每项来调用的函数，用于测试是否符合条件。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。
  * @method find
  * @owner Observable
  */
