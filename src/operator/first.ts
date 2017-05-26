@@ -25,28 +25,24 @@ export function first<T>(this: Observable<T>,
                          defaultValue?: T): Observable<T>;
 
 /**
- * Emits only the first value (or the first value that meets some condition)
- * emitted by the source Observable.
+ * 只发出由源 Observable 所发出的值中第一个(或第一个满足条件的值)。
  *
- * <span class="informal">Emits only the first value. Or emits only the first
- * value that passes some test.</span>
+ * <span class="informal">只发出第一个值。或者只发出第一个通过测试的值。</span>
  *
  * <img src="./img/first.png" width="100%">
  *
- * If called with no arguments, `first` emits the first value of the source
- * Observable, then completes. If called with a `predicate` function, `first`
- * emits the first value of the source that matches the specified condition. It
- * may also take a `resultSelector` function to produce the output value from
- * the input value, and a `defaultValue` to emit in case the source completes
- * before it is able to emit a valid value. Throws an error if `defaultValue`
- * was not provided and a matching element is not found.
+ * 如果不使用参数调用，`first` 会发出源 Observable 中的第一个值，然后完成。如果使用
+ * `predicate` 函数来调用，`first` 会发出源 Observable 第一个满足条件的值。它还可以
+ * 接收 `resultSelector` 函数根据输入值生成输出值，假如在源 Observable 完成前无法发
+ * 处一个有效值的话，那么会发出 `defaultValue` 。如果没有提供 `defaultValue` 并且也
+ * 找不到匹配的元素，则抛出错误。
  *
- * @example <caption>Emit only the first click that happens on the DOM</caption>
+ * @example <caption>只发出第一次点击 DOM 的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first();
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Emits the first click that happens on a DIV</caption>
+ * @example <caption>只发出第一次点击 DIV 元素的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -55,21 +51,18 @@ export function first<T>(this: Observable<T>,
  * @see {@link find}
  * @see {@link take}
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
+ * @throws {EmptyError} 如果在 Observable 完成之前还没有发出任何 `next` 通知的话，
+ * 就把 EmptyError 发送给观察者的 `error` 回调函数。
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} [predicate]
- * An optional function called with each item to test for condition matching.
- * @param {function(value: T, index: number): R} [resultSelector] A function to
- * produce the value on the output Observable based on the values
- * and the indices of the source Observable. The arguments passed to this
- * function are:
- * - `value`: the value that was emitted on the source.
- * - `index`: the "index" of the value from the source.
- * @param {R} [defaultValue] The default value emitted in case no valid value
- * was found on the source.
- * @return {Observable<T|R>} An Observable of the first item that matches the
- * condition.
+ * 使用每项来调用的可选函数，用于测试是否符合条件。
+ * @param {function(value: T, index: number): R} [resultSelector] 函数，它基于源 
+ * Observable 的值和索引来生成输出 Observable 的值。传给这个函数的参数有：
+ * - `value`: 在源 Observable 上发出的值。
+ * - `index`: 源值的索引。
+ * @param {R} [defaultValue] 假如在源 Observable 上没有找到有效值，就会发出这个
+ * 默认值。
+ * @return {Observable<T|R>} 符合条件的第一项的 Observable 。
  * @method first
  * @owner Observable
  */
