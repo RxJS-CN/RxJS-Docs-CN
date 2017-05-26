@@ -13,20 +13,18 @@ export function filter<T>(this: Observable<T>,
 /* tslint:enable:max-line-length */
 
 /**
- * Filter items emitted by the source Observable by only emitting those that
- * satisfy a specified predicate.
+ * 通过只发送源 Observable 的中满足指定 predicate 函数的项来进行过滤。
  *
- * <span class="informal">Like
- * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
- * it only emits a value from the source if it passes a criterion function.</span>
+ * <span class="informal">类似于
+ * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)，
+ * 它只会发出源 Observable 中符合标准函数的值。</span>
  *
  * <img src="./img/filter.png" width="100%">
  *
- * Similar to the well-known `Array.prototype.filter` method, this operator
- * takes values from the source Observable, passes them through a `predicate`
- * function and only emits those values that yielded `true`.
+ * 类似于大家所熟知的 `Array.prototype.filter` 方法，此操作符从源 Observable 中
+ * 接收值，将值传递给 `predicate` 函数并且只发出返回 `true` 的这些值。
  *
- * @example <caption>Emit only click events whose target was a DIV element</caption>
+ * @example <caption>只发出目标是 DIV 元素的点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
  * clicksOnDivs.subscribe(x => console.log(x));
@@ -37,17 +35,13 @@ export function filter<T>(this: Observable<T>,
  * @see {@link ignoreElements}
  * @see {@link partition}
  * @see {@link skip}
- *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates each value emitted by the source Observable. If it returns `true`,
- * the value is emitted, if `false` the value is not passed to the output
- * Observable. The `index` parameter is the number `i` for the i-th source
- * emission that has happened since the subscription, starting from the number
- * `0`.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable} An Observable of values from the source that were
- * allowed by the `predicate` function.
+
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable 
+ * 所发出的每个值的函数。如果它返回 `true`，就发出值，如果是 `false` 则不会传给输出 
+ * Observable 。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable} 值的 Observable，这些值来自源 Observable 并且
+ * 是 `predicate` 函数所允许的。
  * @method filter
  * @owner Observable
  */
