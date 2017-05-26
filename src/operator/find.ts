@@ -33,12 +33,6 @@ export function find<T>(this: Observable<T>,
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable<T>} An Observable of the first item that matches the
- * condition.
- * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
  * 使用每项来调用的函数，用于测试是否符合条件。
  * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
  * @return {Observable<T>} 符合条件的第一项的 Observable 。
