@@ -2,27 +2,24 @@ import { CombineLatestOperator } from './combineLatest';
 import { Observable } from '../Observable';
 
 /**
- * Converts a higher-order Observable into a first-order Observable by waiting
- * for the outer Observable to complete, then applying {@link combineLatest}.
+ * 将高阶Observable转化为一阶Observable通过等待最外层的Observable完成,然后调用
+ * {@link combineLatest}.
  *
- * <span class="informal">Flattens an Observable-of-Observables by applying
- * {@link combineLatest} when the Observable-of-Observables completes.</span>
+ * <span class="informal">转化Observable-of-Observables通过调用
+ * {@link combineLatest}当Observable-of-Observables完成的时候.</span>
  *
  * <img src="./img/combineAll.png" width="100%">
  *
- * Takes an Observable of Observables, and collects all Observables from it.
- * Once the outer Observable completes, it subscribes to all collected
- * Observables and combines their values using the {@link combineLatest}
- * strategy, such that:
- * - Every time an inner Observable emits, the output Observable emits.
- * - When the returned observable emits, it emits all of the latest values by:
- *   - If a `project` function is provided, it is called with each recent value
- *     from each inner Observable in whatever order they arrived, and the result
- *     of the `project` function is what is emitted by the output Observable.
- *   - If there is no `project` function, an array of all of the most recent
- *     values is emitted by the output Observable.
+ * 接受一个返回Observables的Observable, 收集所有Observables的值. 一旦最外层的
+ * Observable完成, 会订阅所有收集的Observables然后通过{@link combineLatest}合并值,
+ *  这样:
+ * - 每次内部Observable发送的时候, 外层Observable发送.
+ * - 当返回的observable发送的时候, 会发送所有最新的值:
+ *   - 如果提供了投射函数, 会按顺序出入内部Observable的值, 投射函数的结果
+ *     或被输出Observable发出.
+ *   - 如果没有提供投射函数, 包含所有最新数据的数组会被输出Observable发出.
  *
- * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
+ * @example <caption>将两个点击事件转化为有限间隔Observable, 通过调用combineAll</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev =>
  *   Rx.Observable.interval(Math.random()*2000).take(3)
@@ -33,11 +30,9 @@ import { Observable } from '../Observable';
  * @see {@link combineLatest}
  * @see {@link mergeAll}
  *
- * @param {function} [project] An optional function to map the most recent
- * values from each inner Observable into a new result. Takes each of the most
- * recent values from each collected inner Observable as arguments, in order.
- * @return {Observable} An Observable of projected results or arrays of recent
- * values.
+ * @param {function} [project] 可选的函数参数，将内部Observable发出的最新值映射为新的结果.
+ * 函数顺序的接受内部Observable的值.
+ * @return {Observable} 一个见最新的值投射或者组成数组的Observable.
  * @method combineAll
  * @owner Observable
  */

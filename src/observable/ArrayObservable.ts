@@ -32,13 +32,11 @@ export class ArrayObservable<T> extends Observable<T> {
    *
    * <img src="./img/of.png" width="100%">
    *
-   * 这个静态操作符对于创建仅仅发出传入的参数的Observable十分有用. 可以被用来和其他Observables
-   * 组合, such as with {@link concat}.
-   * By default, it uses a `null` IScheduler, which means the `next`
-   * notifications are sent synchronously, although with a different IScheduler
-   * it is possible to determine when those notifications will be delivered.
+   * 这个静态操作符对于创建仅仅发出传入参数的Observable十分有用. 可以被用来和其他Observables
+   * 组合, 比如说{@link concat}.默认情况下，它使用空调度器，这意味着`next`通知是同步发出的,
+   * 虽然使用的是不同的调度器，也可以决定这些通知的发送.
    *
-   * @example <caption>Emit 10, 20, 30, then 'a', 'b', 'c', then start ticking every second.</caption>
+   * @example <caption>发出 10, 20, 30, 然后 'a', 'b', 'c', 紧接着开始每秒发出.</caption>
    * var numbers = Rx.Observable.of(10, 20, 30);
    * var letters = Rx.Observable.of('a', 'b', 'c');
    * var interval = Rx.Observable.interval(1000);
@@ -50,10 +48,9 @@ export class ArrayObservable<T> extends Observable<T> {
    * @see {@link never}
    * @see {@link throw}
    *
-   * @param {...T} values Arguments that represent `next` values to be emitted.
-   * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-   * the emissions of the `next` notifications.
-   * @return {Observable<T>} An Observable that emits each given input value.
+   * @param {...T} values 用来被`next`发出的值.
+   * @param {Scheduler} [scheduler] 调度器 {@link IScheduler}用来调度`next`通知的发送.
+   * @return {Observable<T>} 一个发出输入值的Observable.
    * @static true
    * @name of
    * @owner Observable

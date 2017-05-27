@@ -61,13 +61,11 @@ export function zipStatic<R>(...observables: Array<ObservableInput<any> | ((...v
 /* tslint:enable:max-line-length */
 
 /**
- * Combines multiple Observables to create an Observable whose values are calculated from the values, in order, of each
- * of its input Observables.
+ * 将多个Observables结合成一个值由所有输入Observables的值顺序计算而来的Observable.
  *
- * If the latest parameter is a function, this function is used to compute the created value from the input values.
- * Otherwise, an array of the input values is returned.
+ * 如果最后一个参数是函数, 这个函数被用来计算最终发出的值.否则, 返回一个顺序包含所有输入值的数组.
  *
- * @example <caption>Combine age and name from different sources</caption>
+ * @example <caption>从不同的源头结合年龄和名称</caption>
  *
  * let age$ = Observable.of<number>(27, 25, 29);
  * let name$ = Observable.of<string>('Foo', 'Bar', 'Beer');
