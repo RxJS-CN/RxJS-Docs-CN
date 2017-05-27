@@ -3,11 +3,11 @@ import { Subscriber } from '../Subscriber';
 import { Observable } from '../Observable';
 
 /**
- * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.
+ * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。
  *
  * <img src="./img/isEmpty.png" width="100%">
  *
- * @return {Observable} An Observable that emits a Boolean.
+ * @return {Observable} 发出布尔值的 Observable 。
  * @method isEmpty
  * @owner Observable
  */
