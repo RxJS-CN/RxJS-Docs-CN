@@ -26,19 +26,18 @@ export function last<T>(this: Observable<T>,
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that emits only the last item emitted by the source Observable.
- * It optionally takes a predicate function as a parameter, in which case, rather than emitting
- * the last item from the source Observable, the resulting Observable will emit the last item
- * from the source Observable that satisfies the predicate.
+ * 返回的 Observable 只发出由源 Observable 发出的最后一个值。它可以接收一个可选的 predicate 函数作为
+ * 参数，如果传入 predicate 的话则发送的不是源 Observable 的最后一项，而是发出源 Observable 中
+ * 满足 predicate 函数的最后一项。
  *
  * <img src="./img/last.png" width="100%">
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {function} predicate - The condition any source emitted item has to satisfy.
- * @return {Observable} An Observable that emits only the last item satisfying the given condition
- * from the source, or an NoSuchElementException if no such items are emitted.
- * @throws - Throws if no items that match the predicate are emitted by the source Observable.
+ * @throws {EmptyError} 如果 Observale 完成前还没有发出任何 `next` 通知的话，就会
+ * 发送 EmptyError 给观察者的 `error` 回调函数。
+ * @param {function} predicate - 任何由源 Observable 发出的项都必须满足的条件函数。
+ * @return {Observable} 该 Observable 只发出源 Observable 中满足给定条件的最后一项，
+ * 或者没有任何项满足条件时发出 NoSuchElementException 。
+ * @throws - 如果在源 Observable 中没有匹配 predicate 函数的项，则抛出。
  * @method last
  * @owner Observable
  */
