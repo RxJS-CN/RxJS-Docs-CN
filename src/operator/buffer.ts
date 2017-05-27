@@ -7,19 +7,17 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Buffers the source Observable values until `closingNotifier` emits.
+ * 缓冲源Observable的值直到`closingNotifier`发出.
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * that array only when another Observable emits.</span>
+ * <span class="informal">将值收集到数组里, 直到另一个Observable发送才发出
+ * 该数组.</span>
  *
  * <img src="./img/buffer.png" width="100%">
  *
- * Buffers the incoming Observable values until the given `closingNotifier`
- * Observable emits a value, at which point it emits the buffer on the output
- * Observable and starts a new buffer internally, awaiting the next time
- * `closingNotifier` emits.
+ * 将Observable发出的值缓冲起来直到`closingNotifier`发出数据, 在这个时刻输出
+ * Observable发出该缓冲区的值并且内部开启一个新的缓冲区, 等待下一个`closingNotifier`的发送.
  *
- * @example <caption>On every click, emit array of most recent interval events</caption>
+ * @example <caption>每次点击事件后发出一个从间隔收集的数组</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
@@ -31,10 +29,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link bufferWhen}
  * @see {@link window}
  *
- * @param {Observable<any>} closingNotifier An Observable that signals the
- * buffer to be emitted on the output Observable.
- * @return {Observable<T[]>} An Observable of buffers, which are arrays of
- * values.
+ * @param {Observable<any>} closingNotifier Observable发出输出Observable发出缓冲的信号.
+ * @return {Observable<T[]>} 数组缓冲的Observable.
  * @method buffer
  * @owner Observable
  */

@@ -44,9 +44,9 @@ export class WebSocketSubject<T> extends AnonymousSubject<T> {
   }
 
   /**
-   * Wrapper around the w3c-compatible WebSocket object provided by the browser.
+   * 包装浏览器提供的兼容w3c的WebSocket对象.
    *
-   * @example <caption>Wraps browser WebSocket</caption>
+   * @example <caption>包装浏览器的WebSocket</caption>
    *
    * let socket$ = Observable.webSocket('ws://localhost:8081');
    *
@@ -58,7 +58,7 @@ export class WebSocketSubject<T> extends AnonymousSubject<T> {
    *
    * socket$.next(JSON.stringify({ op: 'hello' }));
    *
-   * @example <caption>Wraps WebSocket from nodejs-websocket (using node.js)</caption>
+   * @example <caption>包装nodejs的WebSocket</caption>
    *
    * import { w3cwebsocket } from 'websocket';
    *

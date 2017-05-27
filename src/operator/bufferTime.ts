@@ -14,28 +14,24 @@ export function bufferTime<T>(this: Observable<T>, bufferTimeSpan: number, buffe
 /* tslint:enable:max-line-length */
 
 /**
- * Buffers the source Observable values for a specific time period.
+ * 缓冲一个特定时间周期Observable的值.
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * those arrays periodically in time.</span>
+ * <span class="informal">将传入的值收集为一个数组, 周期的发出数组.</span>
  *
  * <img src="./img/bufferTime.png" width="100%">
  *
- * Buffers values from the source for a specific time duration `bufferTimeSpan`.
- * Unless the optional argument `bufferCreationInterval` is given, it emits and
- * resets the buffer every `bufferTimeSpan` milliseconds. If
- * `bufferCreationInterval` is given, this operator opens the buffer every
- * `bufferCreationInterval` milliseconds and closes (emits and resets) the
- * buffer every `bufferTimeSpan` milliseconds. When the optional argument
- * `maxBufferSize` is specified, the buffer will be closed either after
- * `bufferTimeSpan` milliseconds or when it contains `maxBufferSize` elements.
+ * 在一个特定的持续时间`bufferTimeSpan`缓存源Observable的值. 除非指定`bufferCreationInterval`
+ * , 它会发出数组并且重置缓冲区每个`bufferTimeSpan`毫秒. 如果设定了`bufferCreationInterval`, 
+ * 这个操作符会在每个`bufferCreationInterval`打开一个新的缓冲区并且关闭上一个缓冲区. 
+ * 如果`maxBufferSize`被指定, 缓冲区会在`bufferTimeSpan`毫秒之后或者缓冲区元素个数达到`maxBufferSize`
+ * 发出.
  *
- * @example <caption>Every second, emit an array of the recent click events</caption>
+ * @example <caption>每秒，发出这一秒内的所有点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(1000);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
+ * @example <caption>每5秒, 发出2秒内的点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(2000, 5000);
  * buffered.subscribe(x => console.log(x));
@@ -46,13 +42,11 @@ export function bufferTime<T>(this: Observable<T>, bufferTimeSpan: number, buffe
  * @see {@link bufferWhen}
  * @see {@link windowTime}
  *
- * @param {number} bufferTimeSpan The amount of time to fill each buffer array.
- * @param {number} [bufferCreationInterval] The interval at which to start new
- * buffers.
- * @param {number} [maxBufferSize] The maximum buffer size.
- * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
- * intervals that determine buffer boundaries.
- * @return {Observable<T[]>} An observable of arrays of buffered values.
+ * @param {number} bufferTimeSpan 填满每个缓冲区的时间.
+ * @param {number} [bufferCreationInterval] 开启新缓冲区的时间间隔.
+ * @param {number} [maxBufferSize] 缓冲区的最大容量.
+ * @param {Scheduler} [scheduler=async] 调度器，调度缓冲区.
+ * @return {Observable<T[]>} 值为缓冲数组的observable.
  * @method bufferTime
  * @owner Observable
  */

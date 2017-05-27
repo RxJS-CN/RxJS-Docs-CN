@@ -26,24 +26,17 @@ export function combineLatest<T, TOther, R>(this: Observable<T>, array: Observab
 /* tslint:enable:max-line-length */
 
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * 将多个Observables结合成值为所有输入Observables最新值的Observable.
  *
- * <span class="informal">Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.</span>
+ * <span class="informal">无论何时任一输入Observable发出一个值, 它会将所有输入的最新值组合发送.</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` combines the values from this Observable with values from
- * Observables passed as arguments. This is done by subscribing to each
- * Observable, in order, and collecting an array of each of the most recent
- * values any time any of the input Observables emits, then either taking that
- * array and passing it as arguments to an optional `project` function and
- * emitting the return value of that, or just emitting the array of recent
- * values directly if there is no `project` function.
+ * `combineLatest` 结合传入的多个Observables. 通过顺序的订阅每个输入Observable, 在每次任一输入Observables发送的时候收集
+ * 每个输入Observables最新的值组成一个数组, 然后要么将这个数组传给可选的投射函数发送投射函数返回的结果,
+ * 或者仅仅发出该数组如果没有提供投射函数.
  *
- * @example <caption>Dynamically calculate the Body-Mass Index from an Observable of weight and one for height</caption>
+ * @example <caption>动态的计算BMI指数从一个身高的Observable和体重的Observable</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
@@ -58,13 +51,9 @@ export function combineLatest<T, TOther, R>(this: Observable<T>, array: Observab
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other 将要和源Observable结合的输入Observable.可以传入多个输入Observables.
+ * @param {function} [project] 可选的投射函数，将输出Observable返回的值投射为要发出的新的值.
+ * @return {Observable} 一个返回将所有输入Observable的最新的值投射或者组成数组的Observable.
  * @method combineLatest
  * @owner Observable
  */
