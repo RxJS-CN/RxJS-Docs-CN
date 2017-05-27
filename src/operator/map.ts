@@ -3,20 +3,18 @@ import { Subscriber } from '../Subscriber';
 import { Observable } from '../Observable';
 
 /**
- * Applies a given `project` function to each value emitted by the source
- * Observable, and emits the resulting values as an Observable.
+ * 将给定的 `project` 函数应用于源 Observable 发出的每个值，并将结果值作为 
+ * Observable 发出。
  *
- * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
- * it passes each source value through a transformation function to get
- * corresponding output values.</span>
+ * <span class="informal">类似于 [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)，
+ * 它把每个源值传递给转化函数以获得相应的输出值。</span>
  *
  * <img src="./img/map.png" width="100%">
  *
- * Similar to the well known `Array.prototype.map` function, this operator
- * applies a projection to each value and emits that projection in the output
- * Observable.
+ * 类似于大家所熟知的 `Array.prototype.map` 方法，此操作符将投射函数应用于每个值
+ * 并且在输出 Observable 中发出投射后的结果。
  *
- * @example <caption>Map every click to the clientX position of that click</caption>
+ * @example <caption>将每次点击映射为这次点击的 clientX </caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks.map(ev => ev.clientX);
  * positions.subscribe(x => console.log(x));
@@ -24,14 +22,11 @@ import { Observable } from '../Observable';
  * @see {@link mapTo}
  * @see {@link pluck}
  *
- * @param {function(value: T, index: number): R} project The function to apply
- * to each `value` emitted by the source Observable. The `index` parameter is
- * the number `i` for the i-th emission that has happened since the
- * subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to define what `this` is in the
- * `project` function.
- * @return {Observable<R>} An Observable that emits the values from the source
- * Observable transformed by the given `project` function.
+ * @param {function(value: T, index: number): R} project 应用于由源 Observable 
+ * 所发出的每个值的函数。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，定义在 `project` 函数中的 `this` 是什么。
+ * @return {Observable<R>} 该 Observable 发出源 Observable 中经过给定的 `project` 
+ * 函数转换的值。
  * @method map
  * @owner Observable
  */
