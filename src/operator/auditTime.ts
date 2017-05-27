@@ -6,27 +6,20 @@ import { Observable } from '../Observable';
 import { Subscription, TeardownLogic } from '../Subscription';
 
 /**
- * Ignores source values for `duration` milliseconds, then emits the most recent
- * value from the source Observable, then repeats this process.
+ * 忽略一段时间的值,然后从源Observable中发送最新的值,不断重复这个过程.
  *
- * <span class="informal">When it sees a source values, it ignores that plus
- * the next ones for `duration` milliseconds, and then it emits the most recent
- * value from the source.</span>
+ * <span class="informal">忽略一段时间内的值, 然后发出最新的值.</span>
  *
  * <img src="./img/auditTime.png" width="100%">
  *
- * `auditTime` is similar to `throttleTime`, but emits the last value from the
- * silenced time window, instead of the first value. `auditTime` emits the most
- * recent value from the source Observable on the output Observable as soon as
- * its internal timer becomes disabled, and ignores source values while the
- * timer is enabled. Initially, the timer is disabled. As soon as the first
- * source value arrives, the timer is enabled. After `duration` milliseconds (or
- * the time unit determined internally by the optional `scheduler`) has passed,
- * the timer is disabled, then the most recent source value is emitted on the
- * output Observable, and this process repeats for the next source value.
- * Optionally takes a {@link IScheduler} for managing timers.
+ * `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个. 
+ * `auditTime` 从源Observable给输出Observable发出最新的值只要时间间隔被禁用, 忽略源
+ * Observable的只要时间间隔是启用的. 刚开始, 时间间隔是被禁用的. 只要源Observable发出
+ * 第一值, 时间间隔被启用. 度过持续时间后(或者时间单位由内部可选的参数调度器决定),
+ * 时间间隔被禁用, 输出Observable发出最新的值, 不断的重复这个过程.
+ * 可选的参数{@link IScheduler}管理时间.
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>每1秒之后的点击被发出</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.auditTime(1000);
  * result.subscribe(x => console.log(x));
@@ -37,13 +30,10 @@ import { Subscription, TeardownLogic } from '../Subscription';
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} duration Time to wait before emitting the most recent source
- * value, measured in milliseconds or the time unit determined internally
- * by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the rate-limiting behavior.
- * @return {Observable<T>} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {number} duration 在发出最新值之前的等待时间, 以毫秒或者可选的调度器为时间单位.
+ * @param {Scheduler} [scheduler=async] 调度器{@link IScheduler}用来管理rate-limiting
+ * 的行为.
+ * @return {Observable<T>} 执行源Observable发送rate-limiting的Observable.
  * @method auditTime
  * @owner Observable
  */
