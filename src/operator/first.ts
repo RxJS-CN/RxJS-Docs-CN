@@ -34,7 +34,7 @@ export function first<T>(this: Observable<T>,
  * 如果不使用参数调用，`first` 会发出源 Observable 中的第一个值，然后完成。如果使用
  * `predicate` 函数来调用，`first` 会发出源 Observable 第一个满足条件的值。它还可以
  * 接收 `resultSelector` 函数根据输入值生成输出值，假如在源 Observable 完成前无法发
- * 处一个有效值的话，那么会发出 `defaultValue` 。如果没有提供 `defaultValue` 并且也
+ * 出一个有效值的话，那么会发出 `defaultValue` 。如果没有提供 `defaultValue` 并且也
  * 找不到匹配的元素，则抛出错误。
  *
  * @example <caption>只发出第一次点击 DOM 的事件</caption>
