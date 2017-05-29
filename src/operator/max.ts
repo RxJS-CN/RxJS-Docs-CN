@@ -2,17 +2,16 @@ import { Observable } from '../Observable';
 import { ReduceOperator } from './reduce';
 
 /**
- * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
- * and when source Observable completes it emits a single item: the item with the largest value.
+ * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。
  *
  * <img src="./img/max.png" width="100%">
  *
- * @example <caption>Get the maximal value of a series of numbers</caption>
+ * @example <caption>获取一连串数字中的最大值</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .max()
  *   .subscribe(x => console.log(x)); // -> 8
  *
- * @example <caption>Use a comparer function to get the maximal item</caption>
+ * @example <caption>使用比较函数来获取最大值的项</caption>
  * interface Person {
  *   age: number,
  *   name: string
@@ -26,9 +25,8 @@ import { ReduceOperator } from './reduce';
  *
  * @see {@link min}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable} An Observable that emits item with the largest value.
+ * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。
+ * @return {Observable} 该 Observable 发出最大值的项。
  * @method max
  * @owner Observable
  */
