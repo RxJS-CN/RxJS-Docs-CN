@@ -4,15 +4,16 @@ import { ReduceOperator } from './reduce';
 /**
  * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
  * and when source Observable completes it emits a single item: the item with the smallest value.
+ * `min` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。
  *
  * <img src="./img/min.png" width="100%">
  *
- * @example <caption>Get the minimal value of a series of numbers</caption>
+ * @example <caption>获取一连串数字中的最小值</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .min()
  *   .subscribe(x => console.log(x)); // -> 2
  *
- * @example <caption>Use a comparer function to get the minimal item</caption>
+ * @example <caption>使用比较函数来获取最小值的项</caption>
  * interface Person {
  *   age: number,
  *   name: string
@@ -26,9 +27,8 @@ import { ReduceOperator } from './reduce';
  *
  * @see {@link max}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable<R>} An Observable that emits item with the smallest value.
+ * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。
+ * @return {Observable<R>} 该 Observable 发出最小值的项。
  * @method min
  * @owner Observable
  */
