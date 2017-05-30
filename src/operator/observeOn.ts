@@ -9,46 +9,38 @@ import { Action } from '../scheduler/Action';
 
 /**
  *
- * Re-emits all notifications from source Observable with specified scheduler.
+ * 使用指定的调度器来重新发出源 Observable 的所有通知。
  *
- * <span class="informal">Ensure a specific scheduler is used, from outside of an Observable.</span>
+ * <span class="informal">确保从 Observable 的外部使用特定的调度器。</span>
  *
- * `observeOn` is an operator that accepts a scheduler as a first parameter, which will be used to reschedule
- * notifications emitted by the source Observable. It might be useful, if you do not have control over
- * internal scheduler of a given Observable, but want to control when its values are emitted nevertheless.
+ * `observeOn` 操作符接收一个 scheduler 作为第一个参数，它将用于重新安排源 Observable 所发送的通知。如果你不能控制
+ * 给定 Observable 的内部调度器，但是想要控制何时发出值，那么这个操作符可能是有用的。
  *
- * Returned Observable emits the same notifications (nexted values, complete and error events) as the source Observable,
- * but rescheduled with provided scheduler. Note that this doesn't mean that source Observables internal
- * scheduler will be replaced in any way. Original scheduler still will be used, but when the source Observable emits
- * notification, it will be immediately scheduled again - this time with scheduler passed to `observeOn`.
- * An anti-pattern would be calling `observeOn` on Observable that emits lots of values synchronously, to split
- * that emissions into asynchronous chunks. For this to happen, scheduler would have to be passed into the source
- * Observable directly (usually into the operator that creates it). `observeOn` simply delays notifications a
- * little bit more, to ensure that they are emitted at expected moments.
+ * 返回的 Observable 发出与源 Observable 相同的通知(`next`、`complete` 和 `error`)，但是使用提供的调度器进行了重新安排。
+ * 注意，这并不意味着源 Observables 的内部调度器会以任何形式被替换。原始的调度器仍然会被使用，但是当源 Observable 发出
+ * 通知时，它会立即重新安排(这时候使用传给 `observeOn` 的调度器)。在同步地发出大量的值的 Observalbe 上调用 `observeOn` 
+ * 是一种反模式，这会将 Observable 的发送分解成异步块。为了实现这一点，调度器必须直接传递给源 Observable (通常是创建它的操作符)。
+ * `observeOn` 只是简单地像通知延迟一些，以确保这些通知在预期的时间点发出。
  *
- * As a matter of fact, `observeOn` accepts second parameter, which specifies in milliseconds with what delay notifications
- * will be emitted. The main difference between {@link delay} operator and `observeOn` is that `observeOn`
- * will delay all notifications - including error notifications - while `delay` will pass through error
- * from source Observable immediately when it is emitted. In general it is highly recommended to use `delay` operator
- * for any kind of delaying of values in the stream, while using `observeOn` to specify which scheduler should be used
- * for notification emissions in general.
+ * 事实上，`observeOn` 接收第二个参数，它以毫秒为单位指定延迟通知的发送时间。`observeOn` 与 {@link delay} 
+ * 操作符最主要的区别是它会延迟所有通知，包括错误通知，而 `delay` 会当源 Observable 发出错误时立即通过错误。
+ * 通常来说，对于想延迟流中的任何值，强烈推荐使用 `delay` 操作符，而使用 `observeOn` 时，用来指定应该使用
+ * 哪个调度器来进行通知发送。
  *
- * @example <caption>Ensure values in subscribe are called just before browser repaint.</caption>
- * const intervals = Rx.Observable.interval(10); // Intervals are scheduled
- *                                               // with async scheduler by default...
+ * @example <caption>确保在浏览器重绘前调用订阅中的值。</caption>
+ * const intervals = Rx.Observable.interval(10); // 默认情况下，interval 使用异步调度器进行调度
  *
  * intervals
- * .observeOn(Rx.Scheduler.animationFrame)       // ...but we will observe on animationFrame
- * .subscribe(val => {                           // scheduler to ensure smooth animation.
+ * .observeOn(Rx.Scheduler.animationFrame)       // 但我们将在 animationFrame 调度器上进行观察，
+ * .subscribe(val => {                           // 以确保动画的流畅性。
  *   someDiv.style.height = val + 'px';
  * });
  *
  * @see {@link delay}
  *
- * @param {IScheduler} scheduler Scheduler that will be used to reschedule notifications from source Observable.
- * @param {number} [delay] Number of milliseconds that states with what delay every notification should be rescheduled.
- * @return {Observable<T>} Observable that emits the same notifications as the source Observable,
- * but with provided scheduler.
+ * @param {IScheduler} scheduler 用于重新安排源 Observable 的通知的调度器。
+ * @param {number} [delay] 应该重新安排的每个通知的延迟时间的毫秒数。
+ * @return {Observable<T>} 该 Observable 发出与源 Observale 同样的通知，但是使用了提供的调度器。
  *
  * @method observeOn
  * @owner Observable

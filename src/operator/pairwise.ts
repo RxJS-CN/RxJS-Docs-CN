@@ -3,21 +3,18 @@ import { Observable } from '../Observable';
 import { Subscriber } from '../Subscriber';
 
 /**
- * Groups pairs of consecutive emissions together and emits them as an array of
- * two values.
+ * 将一系列连续的发送成对的组合在一起，并将这些分组作为两个值的数组发出。
  *
- * <span class="informal">Puts the current value and previous value together as
- * an array, and emits that.</span>
+ * <span class="informal">将当前值和前一个值作为数组放在一起，然后将其发出。</span>
  *
  * <img src="./img/pairwise.png" width="100%">
  *
- * The Nth emission from the source Observable will cause the output Observable
- * to emit an array [(N-1)th, Nth] of the previous and the current value, as a
- * pair. For this reason, `pairwise` emits on the second and subsequent
- * emissions from the source Observable, but not on the first emission, because
- * there is no previous value in that case.
+ * 源 Observable 的第N个发送会使输出 Observable 发出一个数组 [(N-1)th, Nth]，即前一个
+ * 值和当前值的数组，它们作为一对。出于这个原因，`pairwise` 发出源 Observable 的
+ * 第二个和随后的发送，而不发送第一个，因为它没有前一个值。
+ * 
  *
- * @example <caption>On every click (starting from the second), emit the relative distance to the previous click</caption>
+ * @example <caption>每次点击(从第二次开始)，都会发出与前一次点击的相对距离</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var pairs = clicks.pairwise();
  * var distance = pairs.map(pair => {
@@ -32,8 +29,8 @@ import { Subscriber } from '../Subscriber';
  * @see {@link buffer}
  * @see {@link bufferCount}
  *
- * @return {Observable<Array<T>>} An Observable of pairs (as arrays) of
- * consecutive values from the source Observable.
+ * @return {Observable<Array<T>>} 该 Observabale 为源 Observable 的
+ * 成对的连续值(数组)。
  * @method pairwise
  * @owner Observable
  */

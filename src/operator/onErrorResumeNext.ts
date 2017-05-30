@@ -18,36 +18,30 @@ export function onErrorResumeNext<T, R>(this: Observable<T>, array: ObservableIn
 /* tslint:enable:max-line-length */
 
 /**
- * When any of the provided Observable emits an complete or error notification, it immediately subscribes to the next one
- * that was passed.
+ * 当任何提供的 Observable 发出完成或错误通知时，它会立即地订阅已传入下一个 Observable 。
  *
- * <span class="informal">Execute series of Observables no matter what, even if it means swallowing errors.</span>
+ * <span class="informal">无论发生什么，都会执行一系列的 Observables ，即使这意味着要吞咽错误。</span>
  *
  * <img src="./img/onErrorResumeNext.png" width="100%">
  *
- * `onErrorResumeNext` is an operator that accepts a series of Observables, provided either directly as
- * arguments or as an array. If no single Observable is provided, returned Observable will simply behave the same
- * as the source.
+ * `onErrorResumeNext` 操作符接收一系列的 Observables ，可与直接作为参数或数组提供。如果没提供 Observable ，
+ * 返回的 Observable 与源 Observable 的行为是相同的。
  *
- * `onErrorResumeNext` returns an Observable that starts by subscribing and re-emitting values from the source Observable.
- * When its stream of values ends - no matter if Observable completed or emitted an error - `onErrorResumeNext`
- * will subscribe to the first Observable that was passed as an argument to the method. It will start re-emitting
- * its values as well and - again - when that stream ends, `onErrorResumeNext` will proceed to subscribing yet another
- * Observable in provided series, no matter if previous Observable completed or ended with an error. This will
- * be happening until there is no more Observables left in the series, at which point returned Observable will
- * complete - even if the last subscribed stream ended with an error.
+ * `onErrorResumeNext` 返回的 Observable 通过订阅和重新发出源 Observable 的值开始。当流的值完成时，无论 Observable 
+ * 是完成还是发出错误，`onErrorResumeNext` 都会订阅作为参数传给该方法的第一个 Observable 。它也会开始重新发出它的值，
+ * 再一次，当流完成时，`onErrorResumeNext` 又会继续订阅已提供的系列 Observable 中另一个，无论前一个 Observable 
+ * 是否完成或发生错误。这样的行为会持续到系列中没有更多的 Observable ，返回的 Observale 将在此时完成，即使最后订阅的
+ * 流是以错误结束的。
  *
- * `onErrorResumeNext` can be therefore though of as version of {@link concat} operator, which is more permissive
- * when it comes to the errors emitted by its input Observables. While `concat` subscribes to the next Observable
- * in series only if previous one successfully completed, `onErrorResumeNext` subscribes even if it ended with
- * an error.
+ * 因此， `onErrorResumeNext` 可以认为是某个版本的 {@link concat} 操作符，只是当它的输入 Observables 发生
+ * 错误时，它更为宽容。然而，`concat` 只有当前一个 Observable 成功完成了，它才会订阅系列中的下个 Observable ，
+ * 而 `onErrorResumeNext` 即使是以错误完成某个 Observalbe 时，它也会订阅下一个。
  *
- * Note that you do not get any access to errors emitted by the Observables. In particular do not
- * expect these errors to appear in error callback passed to {@link subscribe}. If you want to take
- * specific actions based on what error was emitted by an Observable, you should try out {@link catch} instead.
+ * 注意，对于由 Observables 发出的错误，你无法获得访问权限。特别是不要指望可以将这些出现在错误回调函数中的
+ * 错误传递给  {@link subscribe} 。如果要根据 Observable 发出的错误采取特定的操作，应该尝试使用 {@link catch} 。
  *
  *
- * @example <caption>Subscribe to the next Observable after map fails</caption>
+ * @example <caption>在 map 操作失败后订阅下一个 Observable </caption>
  * Rx.Observable.of(1, 2, 3, 0)
  *   .map(x => {
  *       if (x === 0) { throw Error(); }
@@ -56,11 +50,11 @@ export function onErrorResumeNext<T, R>(this: Observable<T>, array: ObservableIn
  *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
  *   .subscribe(
  *     val => console.log(val),
- *     err => console.log(err),          // Will never be called.
+ *     err => console.log(err),          // 永远不会调用
  *     () => console.log('that\'s it!')
  *   );
  *
- * // Logs:
+ * // 输出：
  * // 10
  * // 5
  * // 3.3333333333333335
@@ -72,9 +66,9 @@ export function onErrorResumeNext<T, R>(this: Observable<T>, array: ObservableIn
  * @see {@link concat}
  * @see {@link catch}
  *
- * @param {...ObservableInput} observables Observables passed either directly or as an array.
- * @return {Observable} An Observable that emits values from source Observable, but - if it errors - subscribes
- * to the next passed Observable and so on, until it completes or runs out of Observables.
+ * @param {...ObservableInput} observables 传入的 Observables，可以直接传入，也可以作为数组传入。
+ * @return {Observable} 该 Observable 发出源 Observable 的值，但如果发出错误，它会订阅下一个传入的 
+ * Observable ，并以此类推，直到它完成或用完所有的 Observable 。
  * @method onErrorResumeNext
  * @owner Observable
  */
