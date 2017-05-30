@@ -13,19 +13,17 @@ export function mergeMapTo<T, I, R>(this: Observable<T>, observable: ObservableI
 /* tslint:enable:max-line-length */
 
 /**
- * Projects each source value to the same Observable which is merged multiple
- * times in the output Observable.
+ * 将每个源值投射成同一个 Observable ，该 Observable 会多次合并到输出 Observable 中。
  *
- * <span class="informal">It's like {@link mergeMap}, but maps each value always
- * to the same inner Observable.</span>
+ * <span class="informal">它很像 {@link mergeMap}，但永远将每个值映射到同一个内部 
+ * Observable 。</span>
  *
  * <img src="./img/mergeMapTo.png" width="100%">
  *
- * Maps each source value to the given Observable `innerObservable` regardless
- * of the source value, and then merges those resulting Observables into one
- * single Observable, which is the output Observable.
+ * 将每个源值映射成给定的 Observable ：`innerObservable` ，而无论源值是什么，然后
+ * 将这些结果 Observables 合并到单个的 Observable ，也就是输出 Observable 。
  *
- * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
+ * @example <caption>对于每次点击事件，都开启一个时间间隔为1秒的 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -37,21 +35,19 @@ export function mergeMapTo<T, I, R>(this: Observable<T>, observable: ObservableI
  * @see {@link mergeScan}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
- * the source Observable.
+ * @param {ObservableInput} innerObservable 用来替换源 Observable 中的每个值
+ * 的 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits items from the given
- * `innerObservable` (and optionally transformed through `resultSelector`) every
- * time a value is emitted on the source Observable.
+ * * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ + * 传递给这个函数参数有：
+ + * - `outerValue`: 来自源的值
+ + * - `innerValue`: 来自投射的 Observable 的值
+ + * - `outerIndex`: 来自源的值的 "index"
+ + * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
+ * Observables 的最大数量。
+ * @return {Observable} 每次源 Observable 发出值时，该 Observable 发出来自
+ * 给定 `innerObservable` (和通过 `resultSelector` 的可选的转换)的项。
  * @method mergeMapTo
  * @owner Observable
  */
