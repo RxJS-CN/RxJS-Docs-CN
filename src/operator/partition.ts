@@ -3,23 +3,20 @@ import { filter } from './filter';
 import { Observable } from '../Observable';
 
 /**
- * Splits the source Observable into two, one with values that satisfy a
- * predicate, and another with values that don't satisfy the predicate.
+ * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有
+ * 不满足 predicate 的值。
  *
- * <span class="informal">It's like {@link filter}, but returns two Observables:
- * one like the output of {@link filter}, and the other with values that did not
- * pass the condition.</span>
+ * <span class="informal">它很像 {@link filter}，但是返回两个 Observables ：
+ * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>
  *
  * <img src="./img/partition.png" width="100%">
+ * 
+ * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate` 
+ * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数
+ * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是 
+ * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。
  *
- * `partition` outputs an array with two Observables that partition the values
- * from the source Observable through the given `predicate` function. The first
- * Observable in that array emits source values for which the predicate argument
- * returns true. The second Observable emits source values for which the
- * predicate returns false. The first behaves like {@link filter} and the second
- * behaves like {@link filter} with the predicate negated.
- *
- * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>
+ * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
  * var clicksOnDivs = parts[0];
@@ -29,17 +26,13 @@ import { Observable } from '../Observable';
  *
  * @see {@link filter}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates each value emitted by the source Observable. If it returns `true`,
- * the value is emitted on the first Observable in the returned array, if
- * `false` the value is emitted on the second Observable in the array. The
- * `index` parameter is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {[Observable<T>, Observable<T>]} An array with two Observables: one
- * with values that passed the predicate, and another with values that did not
- * pass the predicate.
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable 
+ * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个 
+ * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个 
+ * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：
+ * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。
  * @method partition
  * @owner Observable
  */
