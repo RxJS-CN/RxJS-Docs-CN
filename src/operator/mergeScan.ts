@@ -9,33 +9,32 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { InnerSubscriber } from '../InnerSubscriber';
 
 /**
- * Applies an accumulator function over the source Observable where the
- * accumulator function itself returns an Observable, then each intermediate
- * Observable returned is merged into the output Observable.
+ * 在源 Observable 上应用 accumulator 函数，其中 accumulator 函数本身返回 
+ * Observable ，然后每个返回的中间 Observable 会被合并到输出 Observable 中。
  *
- * <span class="informal">It's like {@link scan}, but the Observables returned
- * by the accumulator are merged into the outer Observable.</span>
+ * <span class="informal">它很像 {@link scan}，但 accumulator 函数返回的 
+ * Observables 会被合并到外部 Observalbe 中。</span>
  *
- * @example <caption>Count the number of click events</caption>
+ * @example <caption>点击计数</caption>
  * const click$ = Rx.Observable.fromEvent(document, 'click');
  * const one$ = click$.mapTo(1);
  * const seed = 0;
  * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
  * count$.subscribe(x => console.log(x));
  *
- * // Results:
+ * // 结果：
  * 1
  * 2
  * 3
  * 4
- * // ...and so on for each click
+ * // ...以此类推，每次点击计数增加1
  *
  * @param {function(acc: R, value: T): Observable<R>} accumulator
- * The accumulator function called on each source value.
- * @param seed The initial accumulation value.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of
- * input Observables being subscribed to concurrently.
- * @return {Observable<R>} An observable of the accumulated values.
+ * 在每个源值上调用的累加器函数。
+ * @param seed 初始的累加值。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
+ * Observables 的最大数量。
+ * @return {Observable<R>} 累加值的 Observable 。
  * @method mergeScan
  * @owner Observable
  */
