@@ -11,16 +11,15 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of a `complete`. If the source
- * Observable calls `complete`, this method will emit to the Observable returned from `notifier`. If that Observable
- * calls `complete` or `error`, then this method will call `complete` or `error` on the child subscription. Otherwise
- * this method will resubscribe to the source Observable.
+ * 返回的 Observalb 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier` 
+ * 返回的 Observable 。如果这个 Observale 调用了 `complete` 或 `error`，那么这个方法会在子 subscription 上调用 
+ * `complete` 或 `error` 。否则，此方法将重新订阅源 Observable。
  *
  * <img src="./img/repeatWhen.png" width="100%">
  *
- * @param {function(notifications: Observable): Observable} notifier - Receives an Observable of notifications with
- * which a user can `complete` or `error`, aborting the repetition.
- * @return {Observable} The source Observable modified with repeat logic.
+ * @param {function(notifications: Observable): Observable} notifier - 接收 Observable 的通知，用户可以该通知
+ * 的 `complete` 或`error` 来中止重复。
+ * @return {Observable} 使用重复逻辑修改过的源 Observable 。
  * @method repeatWhen
  * @owner Observable
  */
