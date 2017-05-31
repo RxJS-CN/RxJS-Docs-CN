@@ -6,12 +6,12 @@ import { TeardownLogic } from '../Subscription';
 import { SubscribeOnObservable } from '../observable/SubscribeOnObservable';
 
 /**
- * Asynchronously subscribes Observers to this Observable on the specified IScheduler.
+ * 使用指定的 IScheduler 异步地订阅此 Observable 的观察者。
  *
  * <img src="./img/subscribeOn.png" width="100%">
  *
- * @param {Scheduler} scheduler - The IScheduler to perform subscription actions on.
- * @return {Observable<T>} The source Observable modified so that its subscriptions happen on the specified IScheduler.
+ * @param {Scheduler} scheduler - 执行 subscription 操作的 IScheduler 。
+ * @return {Observable<T>} 修改过的源 Observable 以便它的 subscriptions 发生在指定的 IScheduler 上。
  .
  * @method subscribeOn
  * @owner Observable
