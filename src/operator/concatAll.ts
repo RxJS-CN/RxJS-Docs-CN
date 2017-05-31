@@ -10,7 +10,7 @@ export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
 /**
  * 将一个高阶Observable转化为一阶Observable通过顺序的连接内部的Observables.
  *
- * <span class="informal">将Observable-of-Observables转化成一个Observable接
+ * <span class="informal">将高阶Observable转化成一个Observable接
  * 一个Observable.</span>
  *
  * <img src="./img/concatAll.png" width="100%">
@@ -23,16 +23,15 @@ export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
  *
  * 注意: `concatAll`和并行数位1的`mergeAll`效果一样.
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>对于每个点击事件, 每秒出发，从0到3的值, 串行地</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
  * firstOrder.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果是串行的)
+ * // 对于"document"对象上的点击事件，都会出发从0到3的值以1秒的间隔
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link combineAll}
@@ -44,8 +43,7 @@ export function concatAll<T, R>(this: Observable<T>): Subscribable<R>;
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable emitting values from all the inner
- * Observables concatenated.
+ * @return {Observable} Observable，发出所有连接的内部Observables的所有值.
  * @method concatAll
  * @owner Observable
  */
