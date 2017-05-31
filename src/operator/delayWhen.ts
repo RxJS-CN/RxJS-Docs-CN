@@ -8,29 +8,22 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Delays the emission of items from the source Observable by a given time span
- * determined by the emissions of another Observable.
+ * 延时源Observable的所有的数据项的发送一个固定的时间段，该时间段由另一个Observable的发送决定.
  *
- * <span class="informal">It's like {@link delay}, but the time span of the
- * delay duration is determined by a second Observable.</span>
+ * <span class="informal">就像是{@link delay}, 但是延时的时间间隔由第二个Observable决定.</span>
  *
  * <img src="./img/delayWhen.png" width="100%">
  *
- * `delayWhen` time shifts each emitted value from the source Observable by a
- * time span determined by another Observable. When the source emits a value,
- * the `delayDurationSelector` function is called with the source value as
- * argument, and should return an Observable, called the "duration" Observable.
- * The source value is emitted on the output Observable only when the duration
- * Observable emits a value or completes.
+ * `delayWhen` 延时发出源Observable的每个值一个由另一个Observable决定的时间段.
+ * 当源发出一个数据,`delayDurationSelector`函数将源值当做参数, 返回一个被称为"持续"Observable.
+ * 源值被输出Observable发出当且仅当持续发出或者完成.
  *
- * Optionally, `delayWhen` takes a second argument, `subscriptionDelay`, which
- * is an Observable. When `subscriptionDelay` emits its first value or
- * completes, the source Observable is subscribed to and starts behaving like
- * described in the previous paragraph. If `subscriptionDelay` is not provided,
- * `delayWhen` will subscribe to the source Observable as soon as the output
- * Observable is subscribed.
+ * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`, 它是一个Observable. 
+ * 当`subscriptionDelay`发出第一个值或者完成, 源Observable被订阅并且开始像前一段描
+ * 述的一样. 如果`subscriptionDelay`没有提供,`delayWhen` 将会订阅源Observable只
+ * 要输出Observable被订阅.
  *
- * @example <caption>Delay each click by a random amount of time, between 0 and 5 seconds</caption>
+ * @example <caption>延时每个点击事件0到5秒的随机时间</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delayWhen(event =>
  *   Rx.Observable.interval(Math.random() * 5000)
@@ -40,15 +33,11 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link debounce}
  * @see {@link delay}
  *
- * @param {function(value: T): Observable} delayDurationSelector A function that
- * returns an Observable for each value emitted by the source Observable, which
- * is then used to delay the emission of that item on the output Observable
- * until the Observable returned from this function emits a value.
- * @param {Observable} subscriptionDelay An Observable that triggers the
- * subscription to the source Observable once it emits any value.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by an amount of time specified by the Observable returned by
- * `delayDurationSelector`.
+ * @param {function(value: T): Observable} delayDurationSelector一个函数接受源Observable
+ * 发出的每个值返回一个Observable, 用来延时输出Observable每个数据项的发出直到该函数返回的Observable发出数据.
+ * @param {Observable} subscriptionDelay Observable，触发源Observable的订阅一旦它发出数据.
+ * @return {Observable} Observable，延时源Observable的发出时间，该时间由`delayDurationSelector`
+ * 返回的Observable决定.
  * @method delayWhen
  * @owner Observable
  */
