@@ -5,14 +5,12 @@ import { EmptyObservable } from '../observable/EmptyObservable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Returns an Observable that repeats the stream of items emitted by the source Observable at most count times.
+ * 返回的 Observable 重复由源 Observable 所发出的项的流，最多可以重复 count 次。
  *
  * <img src="./img/repeat.png" width="100%">
  *
- * @param {number} [count] The number of times the source Observable items are repeated, a count of 0 will yield
- * an empty Observable.
- * @return {Observable} An Observable that repeats the stream of items emitted by the source Observable at most
- * count times.
+ * @param {number} [count] 源 Observable 项重复的次数，如果 count 为0则产生一个空的 Observable 。
+ * @return {Observable} 该 Observable 重复由源 Observable 所发出的项的流，最多可以重复 count 次。
  * @method repeat
  * @owner Observable
  */
