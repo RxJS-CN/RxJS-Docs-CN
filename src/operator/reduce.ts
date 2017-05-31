@@ -9,29 +9,25 @@ export function reduce<T, R>(this: Observable<T>, accumulator: (acc: R, value: T
 /* tslint:enable:max-line-length */
 
 /**
- * Applies an accumulator function over the source Observable, and returns the
- * accumulated result when the source completes, given an optional seed value.
+ * 在源 Observalbe 上应用 accumulator (累加器) 函数，然后当源 Observable 完成时，返回
+ * 累加的结果，可以提供一个可选的 seed 值。
  *
- * <span class="informal">Combines together all values emitted on the source,
- * using an accumulator function that knows how to join a new source value into
- * the accumulation from the past.</span>
+ * <span class="informal">使用 accumulator 函数将源 Observable 所发出的所有值归并在一起，
+ * 该函数知道如何将新的源值加入到过去的积累之中。</span>
  *
  * <img src="./img/reduce.png" width="100%">
  *
- * Like
- * [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce),
- * `reduce` applies an `accumulator` function against an accumulation and each
- * value of the source Observable (from the past) to reduce it to a single
- * value, emitted on the output Observable. Note that `reduce` will only emit
- * one value, only when the source Observable completes. It is equivalent to
- * applying operator {@link scan} followed by operator {@link last}.
+ * 类似于 [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)，
+ * `reduce` 可以对累加值和源 Observable (过去的)的每个值应用 `accumulator` 函数，
+ * 然后将其归并成一个值并且在输出 Observable 上发出。注意，`reduce` 只会发出一个值，
+ * 并且是当源 Observable 完成时才发出。它等价于使用 {@link scan} 操作符后面再跟
+ * {@link last} 操作符。
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * 返回的 Observable 为由源 Observable 发出的每项应用指定的 `accumulator` 函数。
+ * 如果指定了 `seed` 值，那么这个值会作为 `accumulator` 函数的初始值。如果没有指定
+ * `seed` 值，那么源中的第一项会作为 `seed` 来使用。
  *
- * @example <caption>Count the number of click events that happened in 5 seconds</caption>
+ * @example <caption>计算5秒内发生的点击次数</caption>
  * var clicksInFiveSeconds = Rx.Observable.fromEvent(document, 'click')
  *   .takeUntil(Rx.Observable.interval(5000));
  * var ones = clicksInFiveSeconds.mapTo(1);
@@ -44,11 +40,11 @@ export function reduce<T, R>(this: Observable<T>, accumulator: (acc: R, value: T
  * @see {@link mergeScan}
  * @see {@link scan}
  *
- * @param {function(acc: R, value: T, index: number): R} accumulator The accumulator function
- * called on each source value.
- * @param {R} [seed] The initial accumulation value.
- * @return {Observable<R>} An Observable that emits a single value that is the
- * result of accumulating the values emitted by the source Observable.
+ * @param {function(acc: R, value: T, index: number): R} accumulator 调用每个
+ * 源值的累加器函数。
+ * @param {R} [seed] 初始累加值。
+ * @return {Observable<R>} 该 Observable 发出单个值，这个值是由源 Observable 
+ * 发出值累加的结果。
  * @method reduce
  * @owner Observable
  */
