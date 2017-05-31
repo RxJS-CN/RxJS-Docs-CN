@@ -16,10 +16,10 @@ export function race<T, R>(this: Observable<T>, ...observables: Array<Observable
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that mirrors the first source Observable to emit an item
- * from the combination of this Observable and supplied Observables.
- * @param {...Observables} ...observables Sources used to race for which Observable emits first.
- * @return {Observable} An Observable that mirrors the output of the first Observable to emit an item.
+ * 返回 Observable，该 Observable 是源 Observable 和提供的 Observables 的组合中
+ * 第一个发出项的 Observable 的镜像。
+ * @param {...Observables} ...observables 用于竞争的 Observables 源，以比试哪个 Observable 会首先发出项。
+ * @return {Observable} 该 Observable 是第一个发出项的 Observable 输出镜像。
  * @method race
  * @owner Observable
  */
