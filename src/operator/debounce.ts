@@ -8,29 +8,23 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Emits a value from the source Observable only after a particular time span
- * determined by another Observable has passed without another source emission.
+ * 发出源Observable中由传入的另一个Observable决定的时间段后发出的值.
  *
- * <span class="informal">It's like {@link debounceTime}, but the time span of
- * emission silence is determined by a second Observable.</span>
+ * <span class="informal">就像是 {@link debounceTime}, 但是静默时间段由第二个Observable
+ * 决定.</span>
  *
  * <img src="./img/debounce.png" width="100%">
  *
- * `debounce` delays values emitted by the source Observable, but drops previous
- * pending delayed emissions if a new value arrives on the source Observable.
- * This operator keeps track of the most recent value from the source
- * Observable, and spawns a duration Observable by calling the
- * `durationSelector` function. The value is emitted only when the duration
- * Observable emits a value or completes, and if no other value was emitted on
- * the source Observable since the duration Observable was spawned. If a new
- * value appears before the duration Observable emits, the previous value will
- * be dropped and will not be emitted on the output Observable.
+ * `debounce` 延时发送源Observable发出的值,但是会丢弃前一个等待的发送如果源
+ * Observable发出新的值.这个操作符会追踪源Observable的最新值, 时间段通过调用
+ * `durationSelector`确定. 值被发出当持续Observable发出值或者完成, 如果没有
+ * 其他数据发送当持续Observable产生. 如果一个新的值出现当持续Observable发出的
+ * 时候,前一个数据会被丢弃并且不会被输出Observable发出.
  *
- * Like {@link debounceTime}, this is a rate-limiting operator, and also a
- * delay-like operator since output emissions do not necessarily occur at the
- * same time as they did on the source Observable.
+ * 就像{@link debounceTime}, 这是一个控制速率的操作符, 同样也是一个延时类操作符因为输出
+ * 并不一定发生在同一时间因为是源Observable上发生的.
  *
- * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * @example <caption>发出点击后的最近点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounce(() => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -40,12 +34,10 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link delayWhen}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the timeout
- * duration for each source value, returned as an Observable or a Promise.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified duration Observable returned by
- * `durationSelector`, and may drop some values if they occur too frequently.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数接受
+ * 源Observable的值, 对每个值计算持续的时间, 返回一个Observable或者Promise.
+ * @return {Observable} Observable，延时源Observable的发送通过`durationSelector`返回
+ * 的特定的持续Observable, 同时会丢弃一个值如果发送过于频繁.
  * @method debounce
  * @owner Observable
  */

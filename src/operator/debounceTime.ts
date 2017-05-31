@@ -6,29 +6,21 @@ import { Subscription, TeardownLogic } from '../Subscription';
 import { async } from '../scheduler/async';
 
 /**
- * Emits a value from the source Observable only after a particular time span
- * has passed without another source emission.
+ * 发送源Observable中一个特定时间段之后还没有发送的值.
  *
- * <span class="informal">It's like {@link delay}, but passes only the most
- * recent value from each burst of emissions.</span>
+ * <span class="informal">就像是{@link delay}, 但是只发送最新的值.</span>
  *
  * <img src="./img/debounceTime.png" width="100%">
  *
- * `debounceTime` delays values emitted by the source Observable, but drops
- * previous pending delayed emissions if a new value arrives on the source
- * Observable. This operator keeps track of the most recent value from the
- * source Observable, and emits that only when `dueTime` enough time has passed
- * without any other value appearing on the source Observable. If a new value
- * appears before `dueTime` silence occurs, the previous value will be dropped
- * and will not be emitted on the output Observable.
+ * `debounceTime`延时发送源Observable发送的值,但是会丢弃正在排队的发送如果源Observable
+ * 又发出新值. 该操作符追逐了源Observable中最新的值, 并且发出它当且仅当在`dueTime`时间段内
+ * 没有发送行为. 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出Observable
+ * 中发出.
  *
- * This is a rate-limiting operator, because it is impossible for more than one
- * value to be emitted in any time window of duration `dueTime`, but it is also
- * a delay-like operator since output emissions do not occur at the same time as
- * they did on the source Observable. Optionally takes a {@link IScheduler} for
- * managing timers.
+ * 这是一个控制速率的操作符, 因为不可能在窗口的`dueTime`时间段内发送任何值, 同样也是一个延时类操作符因为输出
+ * 并不一定发生在同一时间因为是源Observable上发生的. 可选参数{@link IScheduler}管理时间.
  *
- * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * @example <caption>发出点击后的最近点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounceTime(1000);
  * result.subscribe(x => console.log(x));
@@ -39,15 +31,12 @@ import { async } from '../scheduler/async';
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} dueTime The timeout duration in milliseconds (or the time
- * unit determined internally by the optional `scheduler`) for the window of
- * time required to wait for emission silence before emitting the most recent
- * source value.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the timeout for each value.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified `dueTime`, and may drop some values if they occur
- * too frequently.
+ * @param {number} dueTime 在发送最新的源值之前需要等待的以毫秒为单位(或者由可选的`scheduler`
+ * 提供的时间单位)的时间间隔.
+ * @param {Scheduler} [scheduler=async] {@link IScheduler} 用来管理时间，处理每个值
+ * 的超时时间段.
+ * @return {Observable} Observable，延时发送源Observable的发送在特定的`dueTime`, 并且
+ * 也会去丢弃一些值如果发送太频繁.
  * @method debounceTime
  * @owner Observable
  */
