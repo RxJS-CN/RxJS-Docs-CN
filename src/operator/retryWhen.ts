@@ -11,16 +11,14 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will emit the Throwable that caused the error to the Observable returned from `notifier`.
- * If that Observable calls `complete` or `error` then this method will call `complete` or `error` on the child
- * subscription. Otherwise this method will resubscribe to the source Observable.
+ * 返回一个 Observable， 该 Observable 是源 Observable 不包含错误异常的镜像. 如果源头 Observable 触发 
+ * `error`, 这个方法会发出引起错误的 Throwable 给 `notifier` 返回的 Observable.如果该 Observable 触发 `complete` 或者 `error` 
+ * 则该方法会使子订阅触发 `complete` 和 `error`. 否则该方法会重新订阅源 Observable.
  *
  * <img src="./img/retryWhen.png" width="100%">
  *
- * @param {function(errors: Observable): Observable} notifier - Receives an Observable of notifications with which a
- * user can `complete` or `error`, aborting the retry.
- * @return {Observable} The source Observable modified with retry logic.
+ * @param {function(errors: Observable): Observable} notifier - 接受一个用户可以`complete` 或者 `error`的通知型 Observable , 终止重试.
+ * @return {Observable} 源 Observable 被重试逻辑修改过.
  * @method retryWhen
  * @owner Observable
  */
