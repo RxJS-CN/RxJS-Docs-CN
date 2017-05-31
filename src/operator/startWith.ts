@@ -17,16 +17,13 @@ export function startWith<T>(this: Observable<T>, ...array: Array<T | IScheduler
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that emits the items you specify as arguments before it begins to emit
- * items emitted by the source Observable.
+ * 返回的 Observable 在会先发出作为参数指定的项，然后再发出由源 Observable 所发出的项。
  *
  * <img src="./img/startWith.png" width="100%">
  *
- * @param {...T} values - Items you want the modified Observable to emit first.
- * @param {Scheduler} [scheduler] - A {@link IScheduler} to use for scheduling
- * the emissions of the `next` notifications.
- * @return {Observable} An Observable that emits the items in the specified Iterable and then emits the items
- * emitted by the source Observable.
+ * @param {...T} values - 你希望修改过的 Observable 可以先发出的项。
+ * @param {Scheduler} [scheduler] - 用于调度 `next` 通知发送的 {@link IScheduler} 。
+ * @return {Observable} 该 Observable 发出指定的 Iterable 中的项，然后发出由源 Observable 所发出的项。
  * @method startWith
  * @owner Observable
  */

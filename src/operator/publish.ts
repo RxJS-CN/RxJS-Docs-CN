@@ -9,15 +9,13 @@ export function publish<T>(this: Observable<T>, selector: selector<T>): Observab
 /* tslint:enable:max-line-length */
 
 /**
- * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
- * before it begins emitting items to those Observers that have subscribed to it.
+ * 返回 ConnectableObservable，它是 Observable 的变种，它会一直等待 connnect 方法被调用才会开始把值发送给那些订阅它的观察者。
  *
  * <img src="./img/publish.png" width="100%">
  *
- * @param {Function} [selector] - Optional selector function which can use the multicasted source sequence as many times
- * as needed, without causing multiple subscriptions to the source sequence.
- * Subscribers to the given source will receive all notifications of the source from the time of the subscription on.
- * @return A ConnectableObservable that upon connection causes the source Observable to emit items to its Observers.
+ * @param {Function} [selector] - 可选的选择器函数，可以根据需要多次使用以多播源序列，而不会导致源序列
+ * 生成多个 subscriptions 。给定源的订阅者会从订阅开始的一刻起，接收源的所有通知。
+ * @return ConnectableObservable，一旦连接，源 Observable 便会向它的观察者发出项。
  * @method publish
  * @owner Observable
  */

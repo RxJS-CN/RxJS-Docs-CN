@@ -7,31 +7,27 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Converts a higher-order Observable into a first-order Observable by
- * subscribing to only the most recently emitted of those inner Observables.
+ * 通过只订阅最新发出的内部 Observable ，将高阶 Observable 转换成一阶 Observable 。
  *
- * <span class="informal">Flattens an Observable-of-Observables by dropping the
- * previous inner Observable once a new one appears.</span>
+ * <span class="informal">一旦有新的内部 Observable 出现，通过丢弃前一个，将
+ * 高级 Observable 打平。</span>
  *
  * <img src="./img/switch.png" width="100%">
  *
- * `switch` subscribes to an Observable that emits Observables, also known as a
- * higher-order Observable. Each time it observes one of these emitted inner
- * Observables, the output Observable subscribes to the inner Observable and
- * begins emitting the items emitted by that. So far, it behaves
- * like {@link mergeAll}. However, when a new inner Observable is emitted,
- * `switch` unsubscribes from the earlier-emitted inner Observable and
- * subscribes to the new inner Observable and begins emitting items from it. It
- * continues to behave like this for subsequent inner Observables.
+ *  `switch` 订阅发出 Observables 的 Observable，也就是高阶 Observable 。
+ * 每次观察到这些已发出的内部 Observables 中的其中一个时，输出 Observable 订阅
+ * 这个内部 Observable 并开始发出该 Observable 所发出的项。到目前为止，
+ * 它的行为就像 {@link mergeAll} 。然而，当发出一个新的内部 Observable 时，
+ * `switch` 会从先前发送的内部 Observable 那取消订阅，然后订阅新的内部 Observable 
+ * 并开始发出它的值。后续的内部 Observables 也是如此。
  *
- * @example <caption>Rerun an interval Observable on every click event</caption>
+ * @example <caption>每次点击返回一个 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * // Each click event is mapped to an Observable that ticks every second
+ * // 每次点击事件都会映射成间隔1秒的 interval Observable
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var switched = higherOrder.switch();
- * // The outcome is that `switched` is essentially a timer that restarts
- * // on every click. The interval Observables from older clicks do not merge
- * // with the current interval Observable.
+ * // 结果是 `switched` 本质上是一个每次点击时会重新启动的计时器。
+ * // 之前点击产生的 interval Observables 不会与当前的合并。
  * switched.subscribe(x => console.log(x));
  *
  * @see {@link combineAll}
@@ -42,8 +38,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link switchMapTo}
  * @see {@link zipAll}
  *
- * @return {Observable<T>} An Observable that emits the items emitted by the
- * Observable most recently emitted by the source Observable.
+ * @return {Observable<T>} 该 Observable 发出由源 Observable 最新发出的 
+ * Observable 所发出的项。
  * @method switch
  * @name switch
  * @owner Observable
