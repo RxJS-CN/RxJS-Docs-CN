@@ -6,22 +6,18 @@ import { tryCatch } from '../util/tryCatch';
 import { errorObject } from '../util/errorObject';
 
 /**
- * Compares all values of two observables in sequence using an optional comparor function
- * and returns an observable of a single boolean value representing whether or not the two sequences
- * are equal.
+ * 顺序的比较两个 observables 的所有值通过可选的比较函数然后只有代表两个序列是否相等的单个 boolean 值的 observable.
  *
- * <span class="informal">Checks to see of all values emitted by both observables are equal, in order.</span>
+ * <span class="informal">顺序的比较所有 observables 发出的所有值是否相等.</span>
  *
  * <img src="./img/sequenceEqual.png" width="100%">
  *
- * `sequenceEqual` subscribes to two observables and buffers incoming values from each observable. Whenever either
- * observable emits a value, the value is buffered and the buffers are shifted and compared from the bottom
- * up; If any value pair doesn't match, the returned observable will emit `false` and complete. If one of the
- * observables completes, the operator will wait for the other observable to complete; If the other
- * observable emits before completing, the returned observable will emit `false` and complete. If one observable never
- * completes or emits after the other complets, the returned observable will never complete.
+ * `sequenceEqual` 订阅两个 observables 并且缓冲每个 observable 发出的值. 当任何一个 observable 发出数据, 该值会被缓冲
+ * 并且缓冲区从底部向上移动和比较; 如果任何一对值不匹配, 返回的 observable 会发出 `false` 和完成. 如果其中一个observables完
+ * 成了, 操作符会等待另一个observable完成; 如果另一个observable在完成之前又发出了数据, 返回 observable 会发出 `false` 和完
+ * 成. 如果其中一个 observable 永远不会完成或者在另一个完成后还发出数据, 返回的 observable 永远不会结束.
  *
- * @example <caption>figure out if the Konami code matches</caption>
+ * @example <caption>指出 Konami 码是否匹配</caption>
  * var code = Rx.Observable.from([
  *  "ArrowUp",
  *  "ArrowUp",
@@ -50,10 +46,9 @@ import { errorObject } from '../util/errorObject';
  * @see {@link zip}
  * @see {@link withLatestFrom}
  *
- * @param {Observable} compareTo The observable sequence to compare the source sequence to.
- * @param {function} [comparor] An optional function to compare each value pair
- * @return {Observable} An Observable of a single boolean value representing whether or not
- * the values emitted by both observables were equal in sequence.
+ * @param {Observable} compareTo 用来和源 observable 比较的 observable 序列.
+ * @param {function} [comparor] 用来比较每对的比较函数
+ * @return {Observable} 拥有单个表示所有 observables 数列是否相等的 boolean 值的 Observable.
  * @method sequenceEqual
  * @owner Observable
  */

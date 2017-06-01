@@ -5,16 +5,14 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Skip the last `count` values emitted by the source Observable.
+ * 跳过最后 `count` 个由源 Observable 发出的值.
  *
  * <img src="./img/skipLast.png" width="100%">
  *
- * `skipLast` returns an Observable that accumulates a queue with a length
- * enough to store the first `count` values. As more values are received,
- * values are taken from the front of the queue and produced on the result
- * sequence. This causes values to be delayed.
+ * `skipLast` 返回一个 Observable，该 Observable 累积足够长的队列以存储第一个“计数”值. 
+ * 当接收到更多值时，将从队列的前面取值并在结果序列上产生. 这种情况下值会被延时.
  *
- * @example <caption>Skip the last 2 values of an Observable with many values</caption>
+ * @example <caption>跳过最后两个值</caption>
  * var many = Rx.Observable.range(1, 5);
  * var skipLastTwo = many.skipLast(2);
  * skipLastTwo.subscribe(x => console.log(x));
@@ -30,9 +28,9 @@ import { TeardownLogic } from '../Subscription';
  * @throws {ArgumentOutOfRangeError} When using `skipLast(i)`, it throws
  * ArgumentOutOrRangeError if `i < 0`.
  *
- * @param {number} count Number of elements to skip from the end of the source Observable.
- * @returns {Observable<T>} An Observable that skips the last count values
- * emitted by the source Observable.
+ * @param {number} count 源 Observable 中从后往前要跳过的值.
+ * @returns {Observable<T>} Observable，该 Observable 跳过源 Observable最后发出
+ * 的最后几个值.
  * @method skipLast
  * @owner Observable
  */

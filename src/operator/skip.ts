@@ -4,12 +4,12 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Returns an Observable that skips the first `count` items emitted by the source Observable.
+ * 返回一个 Observable, 该 Observable跳过源 Observable 发出的前几个值.
  *
  * <img src="./img/skip.png" width="100%">
  *
- * @param {Number} count - The number of times, items emitted by source Observable should be skipped.
- * @return {Observable} An Observable that skips values emitted by the source Observable.
+ * @param {Number} count - 次数, 源 Observable 发出应该被跳过的.
+ * @return {Observable} 跳过源 Observable 发出值的 Observable.
  *
  * @method skip
  * @owner Observable
