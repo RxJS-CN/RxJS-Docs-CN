@@ -6,22 +6,20 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Emits only the last `count` values emitted by the source Observable.
+ * 只发出源 Observable 最后发出的的N个值 (N = `count`)。
  *
- * <span class="informal">Remembers the latest `count` values, then emits those
- * only when the source completes.</span>
+ * <span class="informal">记住源 Observable 的最后N个值 (N = `count`)，然后只有当
+ * 它完成时发出这些值。</span>
  *
  * <img src="./img/takeLast.png" width="100%">
  *
- * `takeLast` returns an Observable that emits at most the last `count` values
- * emitted by the source Observable. If the source emits fewer than `count`
- * values then all of its values are emitted. This operator must wait until the
- * `complete` notification emission from the source in order to emit the `next`
- * values on the output Observable, because otherwise it is impossible to know
- * whether or not more values will be emitted on the source. For this reason,
- * all values are emitted synchronously, followed by the complete notification.
- *
- * @example <caption>Take the last 3 values of an Observable with many values</caption>
+ * `takeLast` 返回的 Observable 只发出源 Observable 最后发出的的N个值 (N = `count`)。
+ * 如果源发出值的数量小于 `count` 的话，那么它的所有值都将发出。此操作符必须等待
+ * 源 Observable 的 `complete` 通知发送才能在输出 Observable 上发出 `next` 值，
+ * 因为不这样的话它无法知道源 Observable 上是否还有更多值要发出。出于这个原因，
+ * 所有值都将同步发出，然后是 `complete` 通知。
+ * 
+ * @example <caption>获取有多个值的 Observable 的最后3个值</caption>
  * var many = Rx.Observable.range(1, 100);
  * var lastThree = many.takeLast(3);
  * lastThree.subscribe(x => console.log(x));
@@ -31,13 +29,12 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @throws {ArgumentOutOfRangeError} When using `takeLast(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0`.
+ * @throws {ArgumentOutOfRangeError} 当使用 `takeLast(i)` 时，如果 `i < 0`，
+ * 它会发送 ArgumentOutOrRangeError 给观察者的 `error` 回调函数。
  *
- * @param {number} count The maximum number of values to emit from the end of
- * the sequence of values emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits at most the last count
- * values emitted by the source Observable.
+ * @param {number} count 从源 Observable 的值序列的末尾处，要发出的值的最大数量。
+ * @return {Observable<T>} 该 Observable 只发出源 Observable 最后发出的的N个值 (N = `count`)，
+ * 或者发出源 Observable 的所有值，如果源发出值的数量小于 `count` 的话。
  * @method takeLast
  * @owner Observable
  */
