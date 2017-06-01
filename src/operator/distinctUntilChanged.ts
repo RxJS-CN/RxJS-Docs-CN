@@ -45,7 +45,7 @@ export function distinctUntilChanged<T, K>(this: Observable<T>, compare: (x: K, 
  * @see {@link distinctUntilKeyChanged}
  *
  * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
- * @return {Observable} Observable 发出从源 Observable 中得到的与前一项不同的值。
+ * @return {Observable} 该 Observable 发出从源 Observable 中得到的与前一项不同的值。
  * @method distinctUntilChanged
  * @owner Observable
  */
