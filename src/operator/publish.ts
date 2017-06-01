@@ -9,7 +9,7 @@ export function publish<T>(this: Observable<T>, selector: selector<T>): Observab
 /* tslint:enable:max-line-length */
 
 /**
- * 返回 ConnectableObservable，它是 Observable 的变种，它会一直等待 connnect 方法被调用才会开始把值发送给那些订阅它的观察者。
+ * 返回 ConnectableObservable，它是 Observable 的变种，它会一直等待，直到 connnect 方法被调用才会开始把值发送给那些订阅它的观察者。
  *
  * <img src="./img/publish.png" width="100%">
  *
