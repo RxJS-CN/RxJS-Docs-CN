@@ -58,7 +58,7 @@ export function distinctUntilKeyChanged<T, K>(this: Observable<T>, key: string, 
  *
  * @param {string} key 每项中用于查找对象属性的字符串键。
  * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
- * @return {Observable} Observable 发出从源 Observable 中基于指定的 key 得到的与前一项不同的值。
+ * @return {Observable} 该 Observable 发出从源 Observable 中基于指定的 key 得到与前一项不同的值。
  * @method distinctUntilKeyChanged
  * @owner Observable
  */
