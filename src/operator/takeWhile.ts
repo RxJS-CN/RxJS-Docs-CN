@@ -4,23 +4,20 @@ import { Subscriber } from '../Subscriber';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Emits values emitted by the source Observable so long as each value satisfies
- * the given `predicate`, and then completes as soon as this `predicate` is not
- * satisfied.
+ * 发出在源 Observable 中满足 `predicate` 函数的每个值，并且一旦出现不满足 `predicate` 
+ * 的值就立即完成。
  *
- * <span class="informal">Takes values from the source only while they pass the
- * condition given. When the first value does not satisfy, it completes.</span>
+ * <span class="informal">只要当通过给定的条件时才接收源 Observable 的值。
+ * 当第一个不满足条件的值出现时，它便完成。</span>
  *
  * <img src="./img/takeWhile.png" width="100%">
  *
- * `takeWhile` subscribes and begins mirroring the source Observable. Each value
- * emitted on the source is given to the `predicate` function which returns a
- * boolean, representing a condition to be satisfied by the source values. The
- * output Observable emits the source values until such time as the `predicate`
- * returns false, at which point `takeWhile` stops mirroring the source
- * Observable and completes the output Observable.
+ * `takeWhile` 订阅并开始镜像源 Observable 。每个源 Observable 发出的值都会传给 
+ * `predicate` 函数，它会返回源值是否满足条件的布尔值。输出 Observable 会发出源值，
+ * 直到某个时间点 `predicate` 返回了 false，此时 `takeWhile` 会停止镜像源 Observable 
+ * 并且完成输出 Observable 。
  *
- * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
+ * @example <caption>只有当 clientX 属性大于200时才发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.takeWhile(ev => ev.clientX > 200);
  * result.subscribe(x => console.log(x));
@@ -30,12 +27,10 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link takeUntil}
  * @see {@link skip}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates a value emitted by the source Observable and returns a boolean.
- * Also takes the (zero-based) index as the second argument.
- * @return {Observable<T>} An Observable that emits the values from the source
- * Observable so long as each value satisfies the condition defined by the
- * `predicate`, then completes.
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable 
+ * 所发出值的函数并返回布尔值。还接收 `index`(从0开始) 作为第二个参数。
+ * @return {Observable<T>} 只要每个值满足 `predicate` 函数所定义的条件，那么该 
+ * Observable 就会从源 Observable 中发出值，然后完成。
  * @method takeWhile
  * @owner Observable
  */
