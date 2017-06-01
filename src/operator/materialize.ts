@@ -22,7 +22,7 @@ import { Notification } from '../Notification';
  * 该操作符对于生成源 Observable 的元数据很有用，并作为 `next` 发送使用掉。
  * 与 {@link dematerialize} 结合使用。
  *
- * @example <caption>将一个错误的 Observable 转换成 Notifications 的 Observable</caption>
+ * @example <caption>将一个错误的 Observable 转换成 Notification 类型的 Observable</caption>
  * var letters = Rx.Observable.of('a', 'b', 13, 'd');
  * var upperCase = letters.map(x => x.toUpperCase());
  * var materialized = upperCase.materialize();
@@ -38,7 +38,7 @@ import { Notification } from '../Notification';
  * @see {@link Notification}
  * @see {@link dematerialize}
  *
- * @return {Observable<Notification<T>>} Observable 会发出 {@link Notification} 对象，
+ * @return {Observable<Notification<T>>} 该 Observable 会发出 {@link Notification} 对象，
  * 该对象包装了来自源 Observable 的带有元数据的原始通知。
  * @method materialize
  * @owner Observable
