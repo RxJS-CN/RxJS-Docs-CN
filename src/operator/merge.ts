@@ -29,12 +29,12 @@ export function merge<T, R>(this: Observable<T>, ...observables: Array<Observabl
  *
  * <img src="./img/merge.png" width="100%">
  *
- * `merge` 订阅每个给定的输入 Observable (给定的源或 Observable 作为参数)，然后只是
+ * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是
  * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入 
  * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都
  * 会立即在输出 Observalbe 上发出。
  *
- * @example <caption>合并两个 Observables: 1s 的定时器和 clicks</caption>
+ * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = clicks.merge(timer);
@@ -57,8 +57,8 @@ export function merge<T, R>(this: Observable<T>, ...observables: Array<Observabl
  * 可以给定多个输入 Observables 作为参数。
  * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
  * Observables 的最大数量。
- * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的 
- * IScheduler 。
+ * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的
+ * 调度器。
  * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。
  * @method merge
  * @owner Observable
