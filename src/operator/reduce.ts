@@ -13,7 +13,7 @@ export function reduce<T, R>(this: Observable<T>, accumulator: (acc: R, value: T
  * 累加的结果，可以提供一个可选的 seed 值。
  *
  * <span class="informal">使用 accumulator 函数将源 Observable 所发出的所有值归并在一起，
- * 该函数知道如何将新的源值加入到过去的积累之中。</span>
+ * 该函数知道如何将新的源值纳入到过往的累加结果中。</span>
  *
  * <img src="./img/reduce.png" width="100%">
  *
