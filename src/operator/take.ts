@@ -6,19 +6,17 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Emits only the first `count` values emitted by the source Observable.
+ * 只发出源 Observable 最初发出的的N个值 (N = `count`)。
  *
- * <span class="informal">Takes the first `count` values from the source, then
- * completes.</span>
+ * <span class="informal">接收源 Observable 最初的N个值 (N = `count`)，然后完成。</span>
  *
  * <img src="./img/take.png" width="100%">
  *
- * `take` returns an Observable that emits only the first `count` values emitted
- * by the source Observable. If the source emits fewer than `count` values then
- * all of its values are emitted. After that, it completes, regardless if the
- * source completes.
+ * `take` 返回的 Observable 只发出源 Observable 最初发出的的N个值 (N = `count`)。
+ * 如果源发出值的数量小于 `count` 的话，那么它的所有值都将发出。然后它便完成，无论源 
+ * Observable 是否完成。
  *
- * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
+ * @example <caption>获取时间间隔为1秒的 interval Observable 的最初的5秒</caption>
  * var interval = Rx.Observable.interval(1000);
  * var five = interval.take(5);
  * five.subscribe(x => console.log(x));
@@ -28,13 +26,12 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @throws {ArgumentOutOfRangeError} When using `take(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0`.
+ * @throws {ArgumentOutOfRangeError} 当使用 `take(i)` 时，如果 `i < 0`，
+ * 它会发送 ArgumentOutOrRangeError 给观察者的 `error` 回调函数。
  *
- * @param {number} count The maximum number of `next` values to emit.
- * @return {Observable<T>} An Observable that emits only the first `count`
- * values emitted by the source Observable, or all of the values from the source
- * if the source emits fewer than `count` values.
+ * @param {number} count 发出 `next` 通知的最大次数。
+ * @return {Observable<T>} 该 Observable 只发出源 Observable 最初发出的的N个值 (N = `count`)，
+ * 或者发出源 Observable 的所有值，如果源发出值的数量小于 `count` 的话。
  * @method take
  * @owner Observable
  */
