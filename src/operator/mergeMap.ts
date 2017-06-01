@@ -36,7 +36,7 @@ export function mergeMap<T, I, R>(this: Observable<T>, project: (value: T, index
  * // a1
  * // b1
  * // c1
- * // 继续列出a、b、c加上各自的上升整数
+ * // 继续列出a、b、c加上各自的自增数列
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
