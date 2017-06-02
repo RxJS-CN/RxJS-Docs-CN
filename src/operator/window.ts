@@ -8,21 +8,17 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Branch out the source Observable values as a nested Observable whenever
- * `windowBoundaries` emits.
+ * 当 `windowBoundaries` 开始发送时，分支源 Observable 的值作为嵌套 Observable。
  *
- * <span class="informal">It's like {@link buffer}, but emits a nested Observable
- * instead of an array.</span>
+ * <span class="informal">就像是 {@link buffer}, 但是发出嵌套 Observable 而不是数组。</span>
  *
  * <img src="./img/window.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping
- * windows. It emits the current window and opens a new one whenever the
- * Observable `windowBoundaries` emits an item. Because each window is an
- * Observable, the output is a higher-order Observable.
+ * 返回一个发出从源 Observable 收集到数据的 window Observable。 输出 Observable 发出连接的，不重叠的 
+ * windows. 它会发出目前的 window 并且会打开一个新的当`windowBoundaries` Observable开始发出数据。 
+ * 因为每个 window 都是 Observable， 所以输出 Observable 是高阶 Observable。
  *
- * @example <caption>In every window of 1 second each, emit at most 2 click events</caption>
+ * @example <caption>在每个1秒的 window , 发出最近的两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var result = clicks.window(interval)
@@ -36,10 +32,9 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowWhen}
  * @see {@link buffer}
  *
- * @param {Observable<any>} windowBoundaries An Observable that completes the
- * previous window and starts a new window.
- * @return {Observable<Observable<T>>} An Observable of windows, which are
- * Observables emitting values of the source Observable.
+ * @param {Observable<any>} windowBoundaries 完成上一个 window 并且开启新 window 的 Observable。
+ * @return {Observable<Observable<T>>} 有很多 windows 的 Observable, 它们是 Observables 发出源
+ * Observables 的值。
  * @method window
  * @owner Observable
  */
