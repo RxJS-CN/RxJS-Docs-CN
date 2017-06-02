@@ -9,17 +9,17 @@ export function scan<T, R>(this: Observable<T>, accumulator: (acc: R, value: T, 
 /* tslint:enable:max-line-length */
 
 /**
- * 对源 Observable 使用累加器函数, 返回生成的中间值, 可选的初始值.
+ * 对源 Observable 使用累加器函数， 返回生成的中间值， 可选的初始值。
  *
- * <span class="informal">就想是 {@link reduce}, 但是发出目前的累计数当源发出数据的时候.</span>
+ * <span class="informal">就想是 {@link reduce}, 但是发出目前的累计数当源发出数据的时候。</span>
  *
  * <img src="./img/scan.png" width="100%">
  *
- * 将所有源发出的数据结合起来, 使用一个累加器函数，该函数知道如何将新的值加入到累加器中. 
- * 这就像是{@link reduce}, 但是会发出中间的累加值.
+ * 将所有源发出的数据结合起来， 使用一个累加器函数，该函数知道如何将新的值加入到累加器中。 
+ * 这就像是{@link reduce}， 但是会发出中间的累加值。
  *
- * 返回一个 Observable， 该 Observable 对每个源 Observable 发出的值使用特定的累加器. 
- * 如果`seed`值提供了, 这个值会被累加器用作初始值. 如果`seed`值没有被提供, 源数据的第一项会被当做初始值.
+ * 返回一个 Observable， 该 Observable 对每个源 Observable 发出的值使用特定的累加器。 
+ * 如果`seed`值提供了， 这个值会被累加器用作初始值。 如果`seed`值没有被提供， 源数据的第一项会被当做初始值。
  *
  * @example <caption>计数点击次数</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
@@ -33,9 +33,9 @@ export function scan<T, R>(this: Observable<T>, accumulator: (acc: R, value: T, 
  * @see {@link reduce}
  *
  * @param {function(acc: R, value: T, index: number): R} 累加器
- * 对每个源数据调用的累加器函数.
- * @param {T|R} [seed] 初始值.
- * @return {Observable<R>} 带有累加功能的observable.
+ * 对每个源数据调用的累加器函数。
+ * @param {T|R} [seed] 初始值。
+ * @return {Observable<R>} 带有累加功能的observable。
  * @method scan
  * @owner Observable
  */

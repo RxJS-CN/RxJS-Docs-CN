@@ -6,14 +6,14 @@ import { EmptyError } from '../util/EmptyError';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * 返回一个 Observable ，该 Observable 发出单个数据代表源 Observable 是否复合特定预期, 该 Observable 是否只发出一个数据项. 
- * 如果源 Observable 发出多于1个数据项或者没有发出数据项, 分别以 IllegalArgumentException 和 NoSuchElementException 通知.
+ * 返回一个 Observable ，该 Observable 发出单个数据代表源 Observable 是否复合特定预期, 该 Observable 是否只发出一个数据项。 
+ * 如果源 Observable 发出多于1个数据项或者没有发出数据项, 分别以 IllegalArgumentException 和 NoSuchElementException 通知。
  *
  * <img src="./img/single.png" width="100%">
  *
- * @throws {EmptyError} 发送一个 EmptyError 给 Observer's `error` 回调，如果 Observable 在完成之前发送了 `next` 通知.
- * @param {Function} predicate - 一个断言函数来评估源 Observable 的数据项.
- * @return {Observable<T>} 一个 Observable ，该 Observable 发出单个数据项由源 Observable 发出符合断言.
+ * @throws {EmptyError} 发送一个 EmptyError 给 Observer's `error` 回调，如果 Observable 在完成之前发送了 `next` 通知。
+ * @param {Function} predicate - 一个断言函数来评估源 Observable 的数据项。
+ * @return {Observable<T>} 一个 Observable ，该 Observable 发出单个数据项由源 Observable 发出符合断言。
  .
  * @method single
  * @owner Observable

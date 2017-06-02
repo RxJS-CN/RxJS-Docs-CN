@@ -7,17 +7,17 @@ import { async } from '../scheduler/async';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * 在周期时间间隔内发出源 Observable 发出的最新值.
+ * 在周期时间间隔内发出源 Observable 发出的最新值。
  *
- * <span class="informal">在周期时间间隔内取样源 Observable , 发出取样的.</span>
+ * <span class="informal">在周期时间间隔内取样源 Observable ， 发出取样的。</span>
  *
  * <img src="./img/sampleTime.png" width="100%">
  *
- * `sampleTime` 周期性的查看源 Observable 并且发出上次取样后发出的最新的值, 除非上次取样后
- * 就没有再发出数据了. 取样在每个周期毫秒(或者时间单位由可选的调度器参数决定)内定期发生. 只要
- * 输出 Observable 被订阅取样就开始.
+ * `sampleTime` 周期性的查看源 Observable 并且发出上次取样后发出的最新的值， 除非上次取样后
+ * 就没有再发出数据了。 取样在每个周期毫秒(或者时间单位由可选的调度器参数决定)内定期发生。 只要
+ * 输出 Observable 被订阅取样就开始。
  *
- * @example <caption>每秒, 发出最近的一个点击</caption>
+ * @example <caption>每秒， 发出最近的一个点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.sampleTime(1000);
  * result.subscribe(x => console.log(x));
@@ -28,10 +28,10 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link sample}
  * @see {@link throttleTime}
  *
- * @param {number} period 用毫秒或者由可选的调度器参数决定的时间单位表示的取样周期.
- * @param {Scheduler} [scheduler=async] {@link IScheduler}用来管理取样的时间.
+ * @param {number} period 用毫秒或者由可选的调度器参数决定的时间单位表示的取样周期。
+ * @param {Scheduler} [scheduler=async] {@link IScheduler}用来管理取样的时间。
  * @return {Observable<T>} Observable，该 Observable 发出特定的时间周期从源 Observable 
- * 取样的最新值.
+ * 取样的最新值。
  * @method sampleTime
  * @owner Observable
  */

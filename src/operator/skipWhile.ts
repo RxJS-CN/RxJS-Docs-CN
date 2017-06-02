@@ -5,13 +5,13 @@ import { TeardownLogic } from '../Subscription';
 
 /**
  * 返回一个 Observable， 该 Observable 忽略所有源 Observable 发出并且使得指定条件为 true 的数据项, 
- * 但是会发出所有源 Observable 发出并且使得指定条件为 false 的数据项.
+ * 但是会发出所有源 Observable 发出并且使得指定条件为 false 的数据项。
  *
  * <img src="./img/skipWhile.png" width="100%">
  *
- * @param {Function} predicate - 用来测试源 Observable 发出的每个数据项.
+ * @param {Function} predicate - 用来测试源 Observable 发出的每个数据项。
  * @return {Observable<T>} Observable， 该 Observable 开始发出源 Observable 发出的数据，当该数据使得
- * 制定条件为 false.
+ * 制定条件为 false。
  * @method skipWhile
  * @owner Observable
  */
