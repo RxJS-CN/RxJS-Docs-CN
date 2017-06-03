@@ -7,10 +7,10 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
 /* tslint:enable:max-line-length */
 
 /**
- * Converts an Observable sequence to a ES2015 compliant promise.
+ * 将 Observable 序列转换为符合 ES2015 标准的 Promise 。
  *
  * @example
- * // Using normal ES2015
+ * // 使用普通的 ES2015
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise();
@@ -18,8 +18,8 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * // Rejected Promise
- * // Using normal ES2015
+ * // 被拒的 Promise
+ * // 使用普通的 ES2015
  * let source = Rx.Observable
  *   .throw(new Error('woops'))
  *   .toPromise();
@@ -29,7 +29,7 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
  *   .catch((err) => console.log('Error: %s', err));
  * // => Error: Error: woops
  *
- * // Setting via the config
+ * // 通过 config 进行设置
  * Rx.config.Promise = RSVP.Promise;
  *
  * let source = Rx.Observable
@@ -39,7 +39,7 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * // Setting via the method
+ * // 通过方法进行设置
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise(RSVP.Promise);
@@ -47,11 +47,10 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * @param {PromiseConstructor} [PromiseCtor] The constructor of the promise. If not provided,
- * it will look for a constructor first in Rx.config.Promise then fall back to
- * the native Promise constructor if available.
- * @return {Promise<T>} An ES2015 compatible promise with the last value from
- * the observable sequence.
+ * @param {PromiseConstructor} [PromiseCtor] Promise 的构造函数。如果没有提供的话，
+ * 它首先会在 `Rx.config.Promise` 中寻找构造函数，然后会回退成原生的 Promise 构造函数
+ * (如果有的话)。
+ * @return {Promise<T>} 符合 ES2015 标准的 Promise，它使用 Observable 序列的最后一个值。
  * @method toPromise
  * @owner Observable
  */
