@@ -7,24 +7,20 @@ import { Observable } from '../Observable';
 import { ThrottleConfig, defaultThrottleConfig } from './throttle';
 
 /**
- * Emits a value from the source Observable, then ignores subsequent source
- * values for `duration` milliseconds, then repeats this process.
+ * 从源 Observable 中发出一个值，然后在 `duration` 毫秒内忽略随后发出的源值，
+ * 然后重复此过程。
  *
- * <span class="informal">Lets a value pass, then ignores source values for the
- * next `duration` milliseconds.</span>
+ * <span class="informal">让一个值通过，然后在接下来的 `duration` 毫秒内忽略源值。</span>
  *
  * <img src="./img/throttleTime.png" width="100%">
  *
- * `throttleTime` emits the source Observable values on the output Observable
- * when its internal timer is disabled, and ignores source values when the timer
- * is enabled. Initially, the timer is disabled. As soon as the first source
- * value arrives, it is forwarded to the output Observable, and then the timer
- * is enabled. After `duration` milliseconds (or the time unit determined
- * internally by the optional `scheduler`) has passed, the timer is disabled,
- * and this process repeats for the next source value. Optionally takes a
- * {@link IScheduler} for managing timers.
+ * 当 `throttle` 的内部定时器禁用时，它会在输出 Observable 上发出源 Observable 的值，
+ * 并当定时器启用时忽略源值。最开始时，定时器是禁用的。一旦第一个源值达到，它会被转发
+ * 到输出 Observable ，然后启动定时器。在 `duration` 毫秒(或由可选的 `scheduler` 
+ * 内部确定的时间单位)后，定时器会被禁用，并且下一个源值也是重复此过程。可选择性地
+ * 接收一个 {@link IScheduler} 用来管理定时器。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttleTime(1000);
  * result.subscribe(x => console.log(x));
@@ -35,13 +31,12 @@ import { ThrottleConfig, defaultThrottleConfig } from './throttle';
  * @see {@link sampleTime}
  * @see {@link throttle}
  *
- * @param {number} duration Time to wait before emitting another value after
- * emitting the last value, measured in milliseconds or the time unit determined
- * internally by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the sampling.
- * @return {Observable<T>} An Observable that performs the throttle operation to
- * limit the rate of emissions from the source.
+ * @param {number} duration 在发出一个最新的值后，到再发出另外一个值之间的等待时间，
+ * 以毫秒为单位或以可选的 `scheduler` 内部决定的时间单位来衡量。
+ * @param {Scheduler} [scheduler=async] 调度器( {@link IScheduler} )，用来
+ * 管理处理节流的定时器。
+ * @return {Observable<T>} 该 Observable 执行节流操作，以限制源 Observable 的
+ * 发送频率。
  * @method throttleTime
  * @owner Observable
  */
