@@ -12,22 +12,18 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * Branch out the source Observable values as a nested Observable using a
- * factory function of closing Observables to determine when to start a new
- * window.
+ * 分支源 Observable 的值作为嵌套 Observable，使用工厂函数返回的关闭 Observables 来决定何时开启新的 window。
  *
- * <span class="informal">It's like {@link bufferWhen}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferWhen}, 但是发出的是嵌套的 Observable
+ * 而不是数组。</span>
  *
  * <img src="./img/windowWhen.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping windows.
- * It emits the current window and opens a new one whenever the Observable
- * produced by the specified `closingSelector` function emits an item. The first
- * window is opened immediately when subscribing to the output Observable.
+ * 返回一个发出从源 Observable 收集到数据的 window Observable。 输出 Observable 发出连接的，非重叠的 windows。
+ * 它释放当前 window 并且打开新的 window 当由指定 `closingSelector` 函数返回的 Observable
+ * 发出数据时。当输出 Observable 被订阅的时候立马开启第一个 window。
  *
- * @example <caption>Emit only the first two clicks events in every window of [1-5] random seconds</caption>
+ * @example <caption>仅仅发出前两个点击事件在每个 window 的[1-5]随机秒数</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks
  *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
@@ -41,11 +37,9 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowToggle}
  * @see {@link bufferWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals (on either `next` or
- * `complete`) when to close the previous window and start a new one.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {function(): Observable} closingSelector 函数，不接受参数并且返回 Observable，
+ * 该 Observable 发出信号(`next` 或者 `complete`)决定何时关闭前一个 window ，开启新一个 window。
+ * @return {Observable<Observable<T>>} 返回 windows 的 observable, 它反过来又是 Observables。
  * @method windowWhen
  * @owner Observable
  */

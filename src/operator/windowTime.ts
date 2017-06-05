@@ -38,7 +38,7 @@ import { isScheduler } from '../util/isScheduler';
  *   .mergeAll(); // flatten the Observable-of-Observables
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Same as example above but with maxWindowCount instead of take</caption>
+ * @example <caption>和上面的例子一样，但是用 maxWindowCount 代替 take</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowTime(1000, 5000, 2) // each window has still at most 2 emissions
  *   .mergeAll(); // flatten the Observable-of-Observables
@@ -50,15 +50,11 @@ import { isScheduler } from '../util/isScheduler';
  * @see {@link windowWhen}
  * @see {@link bufferTime}
  *
- * @param {number} windowTimeSpan The amount of time to fill each window.
- * @param {number} [windowCreationInterval] The interval at which to start new
- * windows.
- * @param {number} [maxWindowSize=Number.POSITIVE_INFINITY] Max number of
- * values each window can emit before completion.
- * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
- * intervals that determine window boundaries.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {number} windowTimeSpan 填充每个 window 的时间量。
+ * @param {number} [windowCreationInterval] 启动新 windows 的间隔。
+ * @param {number} [maxWindowSize=Number.POSITIVE_INFINITY] 每个 window 在完成前可以发送的最大值。
+ * @param {Scheduler} [scheduler=async] 调度器，以确定确定 window 边界的时间间隔。
+ * @return {Observable<Observable<T>>} 返回 windows 的 observable, 它反过来又是 Observables。
  * @method windowTime
  * @owner Observable
  */
