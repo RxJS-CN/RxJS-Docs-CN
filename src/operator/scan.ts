@@ -32,7 +32,7 @@ export function scan<T, R>(this: Observable<T>, accumulator: (acc: R, value: T, 
  * @see {@link mergeScan}
  * @see {@link reduce}
  *
- * @param {function(acc: R, value: T, index: number): R} 累加器
+ * @param {function(acc: R, value: T, index: number): R} accumulator
  * 对每个源数据调用的累加器函数。
  * @param {T|R} [seed] 初始值。
  * @return {Observable<R>} 带有累加功能的observable。

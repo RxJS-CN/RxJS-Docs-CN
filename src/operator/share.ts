@@ -7,9 +7,9 @@ function shareSubjectFactory() {
 }
 
 /**
- * 返回一个新的 Observable，该 Observable 多播(分享)源 Observable。 只要至少有一个订阅者并且发出数据。 
- * 当所有的订阅者都取消订阅了它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。
- * 它还有别名 .publish().refCount()。
+ * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。 
+ * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。
+ * 它是 ｀.publish().refCount()｀ 的别名。
  *
  * <img src="./img/share.png" width="100%">
  * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。

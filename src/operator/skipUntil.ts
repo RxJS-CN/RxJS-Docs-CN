@@ -7,12 +7,12 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 返回一个 Observable，该 Observable 会忽略源 Observable 发出的值直到第二个 Observable 开始发送.
+ * 返回一个 Observable，该 Observable 会跳过源 Observable 发出的值直到第二个 Observable 开始发送。
  *
  * <img src="./img/skipUntil.png" width="100%">
  *
- * @param {Observable} notifier - 第二个 Observable 发出后，结果 Observable 开始镜像源 Observable 的元素.
- * @return {Observable<T>} Observable，该 Observable 忽略源 Observable 发出的值直到第二个 Observable 开始发送, 然后发出剩下的数据项.
+ * @param {Observable} notifier - 第二个 Observable ，它发出后，结果 Observable 开始镜像源 Observable 的元素。
+ * @return {Observable<T>} Observable 跳过源 Observable 发出的值直到第二个 Observable 开始发送, 然后发出剩下的数据项。
  * @method skipUntil
  * @owner Observable
  */

@@ -6,15 +6,14 @@ import { tryCatch } from '../util/tryCatch';
 import { errorObject } from '../util/errorObject';
 
 /**
- * 顺序的比较两个 observables 的所有值通过可选的比较函数然后只有代表两个序列是否相等的单个 boolean 值的 observable。
- *
- * <span class="informal">顺序的比较所有 observables 发出的所有值是否相等。</span>
+ * 使用可选的比较函数，按顺序比较两个 Observables 的所有值，然后返回单个布尔值的 Observable， 以表示两个序列是否相等。
+ * <span class="informal">按顺序检查两个 Observables 所发出的所有值是否相等。</span>
  *
  * <img src="./img/sequenceEqual.png" width="100%">
  *
  * `sequenceEqual` 订阅两个 observables 并且缓冲每个 observable 发出的值。 当任何一个 observable 发出数据， 该值会被缓冲
- * 并且缓冲区从底部向上移动和比较； 如果任何一对值不匹配， 返回的 observable 会发出 `false` 和完成。 如果其中一个observables完
- * 成了， 操作符会等待另一个observable完成； 如果另一个observable在完成之前又发出了数据， 返回 observable 会发出 `false` 和完
+ * 并且缓冲区从底部向上移动和比较； 如果任何一对值不匹配， 返回的 observable 会发出 `false` 和完成。 如果其中一个 observables 完
+ * 成了， 操作符会等待另一个 observable 完成； 如果另一个 observable 在完成之前又发出了数据， 返回 observable 会发出 `false` 和完
  * 成。 如果其中一个 observable 永远不会完成或者在另一个完成后还发出数据， 返回的 observable 永远不会结束。
  *
  * @example <caption>指出 Konami 码是否匹配</caption>
@@ -46,9 +45,9 @@ import { errorObject } from '../util/errorObject';
  * @see {@link zip}
  * @see {@link withLatestFrom}
  *
- * @param {Observable} compareTo 用来和源 observable 比较的 observable 序列。
- * @param {function} [comparor] 用来比较每对的比较函数
- * @return {Observable} 拥有单个表示所有 observables 数列是否相等的 boolean 值的 Observable。
+ * @param {Observable} compareTo 用来与源 Observable 进行比较的 Observable 序列。
+ * @param {function} [comparor] 用来比较每一对值的比较函数。
+ * @return {Observable} 该 Observable 发出单个布尔值，该布尔值表示两个 Observables 所发出的值是否依次相等。
  * @method sequenceEqual
  * @owner Observable
  */
