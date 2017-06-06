@@ -15,26 +15,20 @@ export function expand<T, R>(this: Observable<T>, project: (value: T, index: num
 /* tslint:enable:max-line-length */
 
 /**
- * Recursively projects each source value to an Observable which is merged in
- * the output Observable.
+ * 递归地将每个源值投射成 Observable，这个 Observable 会被合并到输出 Observable 中。
  *
- * <span class="informal">It's similar to {@link mergeMap}, but applies the
- * projection function to every source value as well as every output value.
- * It's recursive.</span>
+ * <span class="informal">它与 {@link mergeMap} 类似，但将投射函数应用于每个源值
+ * 以及每个输出值。它是递归的。</span>
  *
  * <img src="./img/expand.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an Observable, and then merging those resulting Observables and
- * emitting the results of this merger. *Expand* will re-emit on the output
- * Observable every source value. Then, each output value is given to the
- * `project` function which returns an inner Observable to be merged on the
- * output Observable. Those output values resulting from the projection are also
- * given to the `project` function to produce new output values. This is how
- * *expand* behaves recursively.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个 Observable，然后合并这些作为结果的 Observable，并发出本次合并的结果。
+ * `expand` 会重新发出在输出 Observable 上的每个源值。然后，将每个输出值传给投射函数，
+ * 该函数返回要合并到输出 Observable 上的内部 Observable 。由投影产生的那些输出值也会
+ * 被传给投射函数以产生新的输出值。这就是 `expand` 如何进行递归的。
  *
- * @example <caption>Start emitting the powers of two on every click, at most 10 of them</caption>
+ * @example <caption>每次点击开始发出的值都是乘以2的，最多连乘10次</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var powersOfTwo = clicks
  *   .mapTo(1)
@@ -45,17 +39,12 @@ export function expand<T, R>(this: Observable<T>, project: (value: T, index: num
  * @see {@link mergeMap}
  * @see {@link mergeScan}
  *
- * @param {function(value: T, index: number) => Observable} project A function
- * that, when applied to an item emitted by the source or the output Observable,
- * returns an Observable.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
- * each projected inner Observable.
- * @return {Observable} An Observable that emits the source values and also
- * result of applying the projection function to each value emitted on the
- * output Observable and and merging the results of the Observables obtained
- * from this transformation.
+ * @param {function(value: T, index: number) => Observable} project 函数，
+ * 当应用于源 Observable 或输出 Observable 发出的项时，返回一个 Observable 。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 同时订阅输入 
+ * Observables 的最大数量。
+ * @return {Observable} Observable 发出源值，同时也将投影函数应用于在输出 Observable 上
+ * 发出的每个值以得到结果，然后合并这些从转换后得到的 Observables 的结果。
  * @method expand
  * @owner Observable
  */

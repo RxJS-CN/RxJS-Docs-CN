@@ -12,20 +12,17 @@ export function find<T>(this: Observable<T>,
 /* tslint:enable:max-line-length */
 
 /**
- * Emits only the first value emitted by the source Observable that meets some
- * condition.
+ * 只发出源 Observable 所发出的值中第一个满足条件的值。
  *
- * <span class="informal">Finds the first value that passes some test and emits
- * that.</span>
+ * <span class="informal">找到第一个通过测试的值并将其发出。</span>
  *
  * <img src="./img/find.png" width="100%">
  *
- * `find` searches for the first item in the source Observable that matches the
- * specified condition embodied by the `predicate`, and returns the first
- * occurrence in the source. Unlike {@link first}, the `predicate` is required
- * in `find`, and does not emit an error if a valid value is not found.
+ * `find` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后
+ * 将其返回。不同于 {@link first}，在 `find` 中 `predicate` 是必须的，而且如果没找到
+ * 有效的值的话也不会发出错误。
  *
- * @example <caption>Find and emit the first click that happens on a DIV element</caption>
+ * @example <caption>找到并发出第一个点击 DIV 元素的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.find(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -36,11 +33,9 @@ export function find<T>(this: Observable<T>,
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable<T>} An Observable of the first item that matches the
- * condition.
+ * 使用每项来调用的函数，用于测试是否符合条件。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable<T>} 符合条件的第一项的 Observable 。
  * @method find
  * @owner Observable
  */

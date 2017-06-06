@@ -14,13 +14,12 @@ export function groupBy<T, K, R>(this: Observable<T>, keySelector: (value: T) =>
 /* tslint:enable:max-line-length */
 
 /**
- * Groups the items emitted by an Observable according to a specified criterion,
- * and emits these grouped items as `GroupedObservables`, one
- * {@link GroupedObservable} per group.
+ * 根据指定条件将源 Observable 发出的值进行分组，并将这些分组作为 `GroupedObservables` 
+ * 发出，每一个分组都是一个 {@link GroupedObservable} 。
  *
  * <img src="./img/groupBy.png" width="100%">
  *
- * @example <caption>Group objects by id and return as array</caption>
+ * @example <caption>通过 id 分组并返回数组</caption>
  * Observable.of<Obj>({id: 1, name: 'aze1'},
  *                    {id: 2, name: 'sf2'},
  *                    {id: 2, name: 'dg2'},
@@ -34,7 +33,7 @@ export function groupBy<T, K, R>(this: Observable<T>, keySelector: (value: T) =>
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
  *     .subscribe(p => console.log(p));
  *
- * // displays:
+ * // 显示：
  * // [ { id: 1, name: 'aze1' },
  * //   { id: 1, name: 'erg1' },
  * //   { id: 1, name: 'df1' } ]
@@ -46,7 +45,7 @@ export function groupBy<T, K, R>(this: Observable<T>, keySelector: (value: T) =>
  * //
  * // [ { id: 3, name: 'qfs3' } ]
  *
- * @example <caption>Pivot data on the id field</caption>
+ * @example <caption>以 id 字段为主组装数据</caption>
  * Observable.of<Obj>({id: 1, name: 'aze1'},
  *                    {id: 2, name: 'sf2'},
  *                    {id: 2, name: 'dg2'},
@@ -56,27 +55,26 @@ export function groupBy<T, K, R>(this: Observable<T>, keySelector: (value: T) =>
  *                    {id: 3, name: 'qfs1'},
  *                    {id: 2, name: 'qsgqsfg2'}
  *                   )
- *     .groupBy(p => p.id, p => p.anme)
+ *     .groupBy(p => p.id, p => p.name)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
  *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
  *     .subscribe(p => console.log(p));
  *
- * // displays:
+ * // 显示：
  * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
  * // { id: 2, values: [ 'sf2', 'dg2', 'sfqfb2', 'qsgqsfg2' ] }
  * // { id: 3, values: [ 'qfs1' ] }
  *
- * @param {function(value: T): K} keySelector A function that extracts the key
- * for each item.
- * @param {function(value: T): R} [elementSelector] A function that extracts the
- * return element for each item.
+ * @param {function(value: T): K} keySelector 提取每项的键的函数。
+ * @param {function(value: T): R} [elementSelector] 提取每项返回元素的函数。
  * @param {function(grouped: GroupedObservable<K,R>): Observable<any>} [durationSelector]
- * A function that returns an Observable to determine how long each group should
- * exist.
+ * 返回一个 Observable 来确定每个组应该存在多长时间的函数。
  * @return {Observable<GroupedObservable<K,R>>} An Observable that emits
  * GroupedObservables, each of which corresponds to a unique key value and each
  * of which emits those items from the source Observable that share that key
  * value.
+ * @return {Observable<GroupedObservable<K,R>>} 发出 GroupedObservables 的 Observable，
+ * 每个 GroupedObservable 对应唯一的键值，并且会发出源 Observable 中共享该键值的项。
  * @method groupBy
  * @owner Observable
  */
@@ -252,10 +250,8 @@ class GroupDurationSubscriber<K, T> extends Subscriber<T> {
 }
 
 /**
- * An Observable representing values belonging to the same group represented by
- * a common key. The values emitted by a GroupedObservable come from the source
- * Observable. The common key is available as the field `key` on a
- * GroupedObservable instance.
+ * 该 Observable 表示因具有共同的键而属于同一个组的值 。由 GroupedObservable 发出的值
+ * 来自于源 Observable 。共同的键可作为 GroupedObservable 实例上的 `key` 字段。
  *
  * @class GroupedObservable<K, T>
  */
