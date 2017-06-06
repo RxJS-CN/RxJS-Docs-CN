@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the smallest value.\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
+          "value": "*\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
           "range": [
             43,
-            1119
+            898
           ],
           "loc": {
             "start": {
@@ -105,7 +105,7 @@
               "column": 0
             },
             "end": {
-              "line": 32,
+              "line": 30,
               "column": 3
             }
           }
@@ -120,16 +120,16 @@
           "type": "Identifier",
           "name": "min",
           "range": [
-            1136,
-            1139
+            915,
+            918
           ],
           "loc": {
             "start": {
-              "line": 33,
+              "line": 31,
               "column": 16
             },
             "end": {
-              "line": 33,
+              "line": 31,
               "column": 19
             }
           }
@@ -139,16 +139,16 @@
             "type": "Identifier",
             "name": "comparer",
             "range": [
-              1140,
-              1148
+              919,
+              927
             ],
             "loc": {
               "start": {
-                "line": 33,
+                "line": 31,
                 "column": 20
               },
               "end": {
-                "line": 33,
+                "line": 31,
                 "column": 28
               }
             }
@@ -166,16 +166,16 @@
                     "type": "Identifier",
                     "name": "min",
                     "range": [
-                      1162,
-                      1165
+                      941,
+                      944
                     ],
                     "loc": {
                       "start": {
-                        "line": 34,
+                        "line": 32,
                         "column": 10
                       },
                       "end": {
-                        "line": 34,
+                        "line": 32,
                         "column": 13
                       }
                     }
@@ -192,32 +192,32 @@
                           "type": "Identifier",
                           "name": "comparer",
                           "range": [
-                            1176,
-                            1184
+                            955,
+                            963
                           ],
                           "loc": {
                             "start": {
-                              "line": 34,
+                              "line": 32,
                               "column": 24
                             },
                             "end": {
-                              "line": 34,
+                              "line": 32,
                               "column": 32
                             }
                           }
                         },
                         "prefix": true,
                         "range": [
-                          1169,
-                          1184
+                          948,
+                          963
                         ],
                         "loc": {
                           "start": {
-                            "line": 34,
+                            "line": 32,
                             "column": 17
                           },
                           "end": {
-                            "line": 34,
+                            "line": 32,
                             "column": 32
                           }
                         }
@@ -227,31 +227,31 @@
                         "value": "function",
                         "raw": "'function'",
                         "range": [
-                          1189,
-                          1199
+                          968,
+                          978
                         ],
                         "loc": {
                           "start": {
-                            "line": 34,
+                            "line": 32,
                             "column": 37
                           },
                           "end": {
-                            "line": 34,
+                            "line": 32,
                             "column": 47
                           }
                         }
                       },
                       "range": [
-                        1169,
-                        1199
+                        948,
+                        978
                       ],
                       "loc": {
                         "start": {
-                          "line": 34,
+                          "line": 32,
                           "column": 17
                         },
                         "end": {
-                          "line": 34,
+                          "line": 32,
                           "column": 47
                         }
                       }
@@ -264,16 +264,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1212,
-                            1213
+                            991,
+                            992
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 11
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 12
                             }
                           }
@@ -282,16 +282,16 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1215,
-                            1216
+                            994,
+                            995
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 14
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 15
                             }
                           }
@@ -308,16 +308,16 @@
                               "type": "Identifier",
                               "name": "comparer",
                               "range": [
-                                1221,
-                                1229
+                                1000,
+                                1008
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 35,
+                                  "line": 33,
                                   "column": 20
                                 },
                                 "end": {
-                                  "line": 35,
+                                  "line": 33,
                                   "column": 28
                                 }
                               }
@@ -327,16 +327,16 @@
                                 "type": "Identifier",
                                 "name": "x",
                                 "range": [
-                                  1230,
-                                  1231
+                                  1009,
+                                  1010
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 29
                                   },
                                   "end": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 30
                                   }
                                 }
@@ -345,32 +345,32 @@
                                 "type": "Identifier",
                                 "name": "y",
                                 "range": [
-                                  1233,
-                                  1234
+                                  1012,
+                                  1013
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 32
                                   },
                                   "end": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 33
                                   }
                                 }
                               }
                             ],
                             "range": [
-                              1221,
-                              1235
+                              1000,
+                              1014
                             ],
                             "loc": {
                               "start": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 20
                               },
                               "end": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 34
                               }
                             }
@@ -380,31 +380,31 @@
                             "value": 0,
                             "raw": "0",
                             "range": [
-                              1238,
-                              1239
+                              1017,
+                              1018
                             ],
                             "loc": {
                               "start": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 37
                               },
                               "end": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 38
                               }
                             }
                           },
                           "range": [
-                            1221,
-                            1239
+                            1000,
+                            1018
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 20
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 38
                             }
                           }
@@ -413,16 +413,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1242,
-                            1243
+                            1021,
+                            1022
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 41
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 42
                             }
                           }
@@ -431,31 +431,31 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1246,
-                            1247
+                            1025,
+                            1026
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 45
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 46
                             }
                           }
                         },
                         "range": [
-                          1221,
-                          1247
+                          1000,
+                          1026
                         ],
                         "loc": {
                           "start": {
-                            "line": 35,
+                            "line": 33,
                             "column": 20
                           },
                           "end": {
-                            "line": 35,
+                            "line": 33,
                             "column": 46
                           }
                         }
@@ -463,16 +463,16 @@
                       "generator": false,
                       "expression": true,
                       "range": [
-                        1211,
-                        1247
+                        990,
+                        1026
                       ],
                       "loc": {
                         "start": {
-                          "line": 35,
+                          "line": 33,
                           "column": 10
                         },
                         "end": {
-                          "line": 35,
+                          "line": 33,
                           "column": 46
                         }
                       }
@@ -485,16 +485,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1259,
-                            1260
+                            1038,
+                            1039
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 11
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 12
                             }
                           }
@@ -503,16 +503,16 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1262,
-                            1263
+                            1041,
+                            1042
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 14
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 15
                             }
                           }
@@ -527,16 +527,16 @@
                             "type": "Identifier",
                             "name": "x",
                             "range": [
-                              1268,
-                              1269
+                              1047,
+                              1048
                             ],
                             "loc": {
                               "start": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 20
                               },
                               "end": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 21
                               }
                             }
@@ -545,31 +545,31 @@
                             "type": "Identifier",
                             "name": "y",
                             "range": [
-                              1272,
-                              1273
+                              1051,
+                              1052
                             ],
                             "loc": {
                               "start": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 24
                               },
                               "end": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 25
                               }
                             }
                           },
                           "range": [
-                            1268,
-                            1273
+                            1047,
+                            1052
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 20
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 25
                             }
                           }
@@ -578,16 +578,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1276,
-                            1277
+                            1055,
+                            1056
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 28
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 29
                             }
                           }
@@ -596,31 +596,31 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1280,
-                            1281
+                            1059,
+                            1060
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 32
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 33
                             }
                           }
                         },
                         "range": [
-                          1268,
-                          1281
+                          1047,
+                          1060
                         ],
                         "loc": {
                           "start": {
-                            "line": 36,
+                            "line": 34,
                             "column": 20
                           },
                           "end": {
-                            "line": 36,
+                            "line": 34,
                             "column": 33
                           }
                         }
@@ -628,46 +628,46 @@
                       "generator": false,
                       "expression": true,
                       "range": [
-                        1258,
-                        1281
+                        1037,
+                        1060
                       ],
                       "loc": {
                         "start": {
-                          "line": 36,
+                          "line": 34,
                           "column": 10
                         },
                         "end": {
-                          "line": 36,
+                          "line": 34,
                           "column": 33
                         }
                       }
                     },
                     "range": [
-                      1168,
-                      1281
+                      947,
+                      1060
                     ],
                     "loc": {
                       "start": {
-                        "line": 34,
+                        "line": 32,
                         "column": 16
                       },
                       "end": {
-                        "line": 36,
+                        "line": 34,
                         "column": 33
                       }
                     }
                   },
                   "range": [
-                    1162,
-                    1281
+                    941,
+                    1060
                   ],
                   "loc": {
                     "start": {
-                      "line": 34,
+                      "line": 32,
                       "column": 10
                     },
                     "end": {
-                      "line": 36,
+                      "line": 34,
                       "column": 33
                     }
                   }
@@ -675,16 +675,16 @@
               ],
               "kind": "const",
               "range": [
-                1156,
-                1282
+                935,
+                1061
               ],
               "loc": {
                 "start": {
-                  "line": 34,
+                  "line": 32,
                   "column": 4
                 },
                 "end": {
-                  "line": 36,
+                  "line": 34,
                   "column": 34
                 }
               }
@@ -699,16 +699,16 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      1294,
-                      1298
+                      1073,
+                      1077
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 11
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 15
                       }
                     }
@@ -717,31 +717,31 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      1299,
-                      1303
+                      1078,
+                      1082
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 16
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 20
                       }
                     }
                   },
                   "range": [
-                    1294,
-                    1303
+                    1073,
+                    1082
                   ],
                   "loc": {
                     "start": {
-                      "line": 37,
+                      "line": 35,
                       "column": 11
                     },
                     "end": {
-                      "line": 37,
+                      "line": 35,
                       "column": 20
                     }
                   }
@@ -753,16 +753,16 @@
                       "type": "Identifier",
                       "name": "ReduceOperator",
                       "range": [
-                        1308,
-                        1322
+                        1087,
+                        1101
                       ],
                       "loc": {
                         "start": {
-                          "line": 37,
+                          "line": 35,
                           "column": 25
                         },
                         "end": {
-                          "line": 37,
+                          "line": 35,
                           "column": 39
                         }
                       }
@@ -772,79 +772,79 @@
                         "type": "Identifier",
                         "name": "min",
                         "range": [
-                          1323,
-                          1326
+                          1102,
+                          1105
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 35,
                             "column": 40
                           },
                           "end": {
-                            "line": 37,
+                            "line": 35,
                             "column": 43
                           }
                         }
                       }
                     ],
                     "range": [
-                      1304,
-                      1327
+                      1083,
+                      1106
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 21
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 44
                       }
                     }
                   }
                 ],
                 "range": [
-                  1294,
-                  1328
+                  1073,
+                  1107
                 ],
                 "loc": {
                   "start": {
-                    "line": 37,
+                    "line": 35,
                     "column": 11
                   },
                   "end": {
-                    "line": 37,
+                    "line": 35,
                     "column": 45
                   }
                 }
               },
               "range": [
-                1287,
-                1329
+                1066,
+                1108
               ],
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 35,
                   "column": 4
                 },
                 "end": {
-                  "line": 37,
+                  "line": 35,
                   "column": 46
                 }
               }
             }
           ],
           "range": [
-            1150,
-            1331
+            929,
+            1110
           ],
           "loc": {
             "start": {
-              "line": 33,
+              "line": 31,
               "column": 30
             },
             "end": {
-              "line": 38,
+              "line": 36,
               "column": 1
             }
           }
@@ -852,26 +852,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          1127,
-          1331
+          906,
+          1110
         ],
         "loc": {
           "start": {
-            "line": 33,
+            "line": 31,
             "column": 7
           },
           "end": {
-            "line": 38,
+            "line": 36,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the smallest value.\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
+            "value": "*\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
             "range": [
               43,
-              1119
+              898
             ],
             "loc": {
               "start": {
@@ -879,7 +879,7 @@
                 "column": 0
               },
               "end": {
-                "line": 32,
+                "line": 30,
                 "column": 3
               }
             }
@@ -890,16 +890,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=min.js.map",
             "range": [
-              1332,
-              1363
+              1111,
+              1142
             ],
             "loc": {
               "start": {
-                "line": 39,
+                "line": 37,
                 "column": 0
               },
               "end": {
-                "line": 39,
+                "line": 37,
                 "column": 31
               }
             }
@@ -909,26 +909,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1120,
-        1331
+        899,
+        1110
       ],
       "loc": {
         "start": {
-          "line": 33,
+          "line": 31,
           "column": 0
         },
         "end": {
-          "line": 38,
+          "line": 36,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the smallest value.\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
+          "value": "*\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
           "range": [
             43,
-            1119
+            898
           ],
           "loc": {
             "start": {
@@ -936,7 +936,7 @@
               "column": 0
             },
             "end": {
-              "line": 32,
+              "line": 30,
               "column": 3
             }
           }
@@ -947,16 +947,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=min.js.map",
           "range": [
-            1332,
-            1363
+            1111,
+            1142
           ],
           "loc": {
             "start": {
-              "line": 39,
+              "line": 37,
               "column": 0
             },
             "end": {
-              "line": 39,
+              "line": 37,
               "column": 31
             }
           }
@@ -967,7 +967,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1331
+    1110
   ],
   "loc": {
     "start": {
@@ -975,17 +975,17 @@
       "column": 0
     },
     "end": {
-      "line": 38,
+      "line": 36,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the smallest value.\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
+      "value": "*\n * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。\n *\n * <img src=\"./img/min.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最小值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .min()\n *   .subscribe(x => console.log(x)); // -> 2\n *\n * @example <caption>使用比较函数来获取最小值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .min<Person>( (a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Bar'\n * }\n *\n * @see {@link max}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable<R>} 该 Observable 发出最小值的项。\n * @method min\n * @owner Observable\n ",
       "range": [
         43,
-        1119
+        898
       ],
       "loc": {
         "start": {
@@ -993,7 +993,7 @@
           "column": 0
         },
         "end": {
-          "line": 32,
+          "line": 30,
           "column": 3
         }
       }
@@ -1002,16 +1002,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=min.js.map",
       "range": [
-        1332,
-        1363
+        1111,
+        1142
       ],
       "loc": {
         "start": {
-          "line": 39,
+          "line": 37,
           "column": 0
         },
         "end": {
-          "line": 39,
+          "line": 37,
           "column": 31
         }
       }
