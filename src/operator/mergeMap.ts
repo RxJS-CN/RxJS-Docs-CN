@@ -12,34 +12,31 @@ export function mergeMap<T, I, R>(this: Observable<T>, project: (value: T, index
 /* tslint:enable:max-line-length */
 
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable.
+ * 将每个源值投射成 Observable ，该 Observable 会合并到输出 Observable 中。
  *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link mergeAll}.</span>
+ * <span class="informal">将每个值映射成 Observable ，然后使用 {@link mergeAll} 
+ * 打平所有的内部 Observables 。</span>
  *
  * <img src="./img/mergeMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an Observable, and then merging those resulting Observables and
- * emitting the results of this merger.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个 Observable，然后合并这些作为结果的 Observable，并发出本次合并的结果。
  *
- * @example <caption>Map and flatten each letter to an Observable ticking every 1 second</caption>
+ * @example <caption>将每个字母映射并打平成一个 Observable ，每1秒钟一次</caption>
  * var letters = Rx.Observable.of('a', 'b', 'c');
  * var result = letters.mergeMap(x =>
  *   Rx.Observable.interval(1000).map(i => x+i)
  * );
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
+ * // 结果如下：
  * // a0
  * // b0
  * // c0
  * // a1
  * // b1
  * // c1
- * // continues to list a,b,c with respective ascending integers
+ * // 继续列出a、b、c加上各自的自增数列
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -49,23 +46,19 @@ export function mergeMap<T, I, R>(this: Observable<T>, project: (value: T, index
  * @see {@link mergeScan}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project 函数，
+ + * 当应用于源 Observable 发出的项时，返回一个 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and merging the results of the Observables obtained
- * from this transformation.
+ * * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ + * 传递给这个函数参数有：
+ + * - `outerValue`: 来自源的值
+ + * - `innerValue`: 来自投射的 Observable 的值
+ + * - `outerIndex`: 来自源的值的 "index"
+ + * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
+ * Observables 的最大数量。
+ * @return {Observable} 该 Observable 发出由源 Observable 发出的每项应用投射函数
+ * (和可选的 `resultSelector`)后的结果，并合并从该转化获得的 Observables 的结果。
  * @method mergeMap
  * @owner Observable
  */

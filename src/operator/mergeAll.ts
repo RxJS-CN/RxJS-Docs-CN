@@ -10,27 +10,25 @@ export function mergeAll<T>(this: Observable<T>, concurrent?: number): T;
 export function mergeAll<T, R>(this: Observable<T>, concurrent?: number): Subscribable<R>;
 
 /**
- * Converts a higher-order Observable into a first-order Observable which
- * concurrently delivers all values that are emitted on the inner Observables.
+ * 将高阶 Observable 转换成一阶 Observable ，一阶 Observable 会同时发出在内部 
+ * Observables 上发出的所有值。
  *
- * <span class="informal">Flattens an Observable-of-Observables.</span>
+ * <span class="informal">打平高阶 Observable 。</span>
  *
  * <img src="./img/mergeAll.png" width="100%">
  *
- * `mergeAll` subscribes to an Observable that emits Observables, also known as
- * a higher-order Observable. Each time it observes one of these emitted inner
- * Observables, it subscribes to that and delivers all the values from the
- * inner Observable on the output Observable. The output Observable only
- * completes once all inner Observables have completed. Any error delivered by
- * a inner Observable will be immediately emitted on the output Observable.
+ * `mergeAll` 订阅发出 Observables 的 Observalbe ，也称为高阶 Observable 。
+ * 每当观察到发出的内部 Observable 时，它会订阅并发出输出 Observable 上的这个
+ * 内部 Observable 的所有值。所有的内部 Observable 都完成了，输出 Observable 
+ * 才能完成。任何由内部 Observable 发出的错误都会立即在输出 Observalbe 上发出。
  *
- * @example <caption>Spawn a new interval Observable for each click event, and blend their outputs as one Observable</caption>
+ * @example <caption>为每个点击事件创建一个新的 interval Observable ，并将其输出混合为一个 Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var firstOrder = higherOrder.mergeAll();
  * firstOrder.subscribe(x => console.log(x));
  *
- * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
+ * @example <caption>每次点击都会从0到9计数(每秒计数一次)，但只允许最多同时只能有两个计时器</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
  * var firstOrder = higherOrder.mergeAll(2);
@@ -46,10 +44,10 @@ export function mergeAll<T, R>(this: Observable<T>, concurrent?: number): Subscr
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of inner
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits values coming from all the
- * inner Observables emitted by the source Observable.
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
+ * Observables 的最大数量。
+ * @return {Observable} 该 Observable 发出的值来自所有由源 Observable 发出的
+ * 内部 Observables 。
  * @method mergeAll
  * @owner Observable
  */
