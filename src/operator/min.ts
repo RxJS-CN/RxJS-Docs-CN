@@ -2,8 +2,6 @@ import { Observable } from '../Observable';
 import { ReduceOperator } from './reduce';
 
 /**
- * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
- * and when source Observable completes it emits a single item: the item with the smallest value.
  * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。
  *
  * <img src="./img/min.png" width="100%">
