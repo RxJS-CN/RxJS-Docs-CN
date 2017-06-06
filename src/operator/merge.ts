@@ -22,7 +22,7 @@ export function merge<T, R>(this: Observable<T>, ...observables: Array<Observabl
 /* tslint:enable:max-line-length */
 
 /**
- * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中所有值。
+ * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。
  *
  * <span class="informal">通过把多个 Observables 的值混合到一个 Observable 中
  * 来将其打平。</span>

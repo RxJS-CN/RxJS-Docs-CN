@@ -8,7 +8,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
 import { ISet, Set } from '../util/Set';
 
 /**
- * 返回 Observable，它发出由源 Observable 所发出的所有与之前所有项都不相同的项。
+ * 返回 Observable，它发出由源 Observable 所发出的所有与之前的项都不相同的项。
  * 
  * 如果提供了 keySelector 函数，那么它会将源 Observable 的每个值都投射成一个新的值，这个值会用来检查是否与先前投射的值相等。如果没有提供 
  * keySelector 函数，它会直接使用源 Observable 的每个值来检查是否与先前的值相等。
@@ -44,7 +44,7 @@ import { ISet, Set } from '../util/Set';
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [keySelector] 可选函数，用来选择要检查哪个值是不同的。
+ * @param {function} [keySelector] 可选函数，用来选择某个键的值以检查是否是不同的。
  * @param {Observable} [flushes] 可选 Observable，用来清空操作符内部的 HashSet 。
  * @return {Observable} 该 Observable 发出从源 Observable 中得到的不同的值。
  * @method distinct

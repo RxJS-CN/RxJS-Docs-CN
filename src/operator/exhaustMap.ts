@@ -12,7 +12,7 @@ export function exhaustMap<T, I, R>(this: Observable<T>, project: (value: T, ind
 /* tslint:enable:max-line-length */
 
 /**
- * 将每个源值投射成 Observable，只有当前一个投射的 Observable 已经完成的话，
+ * 将每个源值投射成 Observable，只有当前一个投射的 Observable 已经完成，
  * 这个 Observable 才会被合并到输出 Observable 中。
  *
  * <span class="informal">把每个值映射成 Observable，然后使用 {@link exhaust} 

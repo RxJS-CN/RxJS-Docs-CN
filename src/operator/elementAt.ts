@@ -38,8 +38,8 @@ import { TeardownLogic } from '../Subscription';
  *
  * @param {number} index 是 Subscription 开始后的第i个通知的索引数值，该值是从 `0` 开始。
  * @param {T} [defaultValue] 缺失索引时返回的默认值。
- * @return {Observable} Observable 发出单个项，如果能找到这项的话。找不到时，如果有给定
- * 的默认值，则发出默认值，没有则发出错误。
+ * @return {Observable} 如果能找到这个项的话，那么该 Observable 发出此单个项。找不到时，如果有给定
+ * 的默认值，则发出默认值，否则发出错误。
  * @method elementAt
  * @owner Observable
  */
