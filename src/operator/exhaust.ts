@@ -10,7 +10,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * 高阶 Observable 转换成一阶 Observable。
  *
  * <span class="informal">在当前内部 Observable 仍在执行的情况下，通过丢弃
- * 内部 Observable 将高阶 Observable 打平。</span>
+ * 接下来的内部 Observable 将高阶 Observable 打平。</span>
  *
  * <img src="./img/exhaust.png" width="100%">
  *
