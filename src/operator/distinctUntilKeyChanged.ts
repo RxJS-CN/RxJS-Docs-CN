@@ -7,14 +7,13 @@ export function distinctUntilKeyChanged<T, K>(this: Observable<T>, key: string, 
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
- * using a property accessed by using the key provided to check if the two items are distinct.
+ * 返回 Observable，它发出源 Observable 发出的所有与前一项不相同的项，使用通过提供的 key 访问到的属性来检查两个项是否不同。
  *
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ * 如果提供了 compare 函数，那么每一项都会调用它来检验是否应该发出这个值。
  *
- * If a comparator function is not provided, an equality check is used by default.
+ * 如果没有提供 compare 函数，默认使用相等检查。
  *
- * @example <caption>An example comparing the name of persons</caption>
+ * @example <caption>比较人名的示例</caption>
  *
  *  interface Person {
  *     age: number,
@@ -29,12 +28,12 @@ export function distinctUntilKeyChanged<T, K>(this: Observable<T>, key: string, 
  *     .distinctUntilKeyChanged('name')
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo' }
  *
- * @example <caption>An example comparing the first letters of the name</caption>
+ * @example <caption>比较名字前三个字母的示例</caption>
  *
  * interface Person {
  *     age: number,
@@ -49,7 +48,7 @@ export function distinctUntilKeyChanged<T, K>(this: Observable<T>, key: string, 
  *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo1' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo2' }
@@ -57,9 +56,9 @@ export function distinctUntilKeyChanged<T, K>(this: Observable<T>, key: string, 
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
  *
- * @param {string} key String key for object property lookup on each item.
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values based on the key specified.
+ * @param {string} key 每项中用于查找对象属性的字符串键。
+ * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
+ * @return {Observable} 该 Observable 发出从源 Observable 中基于指定的 key 得到与前一项不同的值。
  * @method distinctUntilKeyChanged
  * @owner Observable
  */
