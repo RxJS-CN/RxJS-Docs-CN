@@ -185,10 +185,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} An empty Observable that only calls `complete`\n * or `error`, based on which one is called by the source Observable.\n * @method ignoreElements\n * @owner Observable\n ",
+          "value": "*\n * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} 该 Observable 是空的，只调用 `complete` 或\n * `error`，调用是基于源 Observable 的调用。\n * @method ignoreElements\n * @owner Observable\n ",
           "range": [
             81,
-            437
+            342
           ],
           "loc": {
             "start": {
@@ -211,8 +211,8 @@
           "type": "Identifier",
           "name": "ignoreElements",
           "range": [
-            454,
-            468
+            359,
+            373
           ],
           "loc": {
             "start": {
@@ -239,8 +239,8 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      484,
-                      488
+                      389,
+                      393
                     ],
                     "loc": {
                       "start": {
@@ -257,8 +257,8 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      489,
-                      493
+                      394,
+                      398
                     ],
                     "loc": {
                       "start": {
@@ -272,8 +272,8 @@
                     }
                   },
                   "range": [
-                    484,
-                    493
+                    389,
+                    398
                   ],
                   "loc": {
                     "start": {
@@ -293,8 +293,8 @@
                       "type": "Identifier",
                       "name": "IgnoreElementsOperator",
                       "range": [
-                        498,
-                        520
+                        403,
+                        425
                       ],
                       "loc": {
                         "start": {
@@ -309,8 +309,8 @@
                     },
                     "arguments": [],
                     "range": [
-                      494,
-                      522
+                      399,
+                      427
                     ],
                     "loc": {
                       "start": {
@@ -325,8 +325,8 @@
                   }
                 ],
                 "range": [
-                  484,
-                  523
+                  389,
+                  428
                 ],
                 "loc": {
                   "start": {
@@ -340,8 +340,8 @@
                 }
               },
               "range": [
-                477,
-                524
+                382,
+                429
               ],
               "loc": {
                 "start": {
@@ -356,8 +356,8 @@
             }
           ],
           "range": [
-            471,
-            526
+            376,
+            431
           ],
           "loc": {
             "start": {
@@ -373,8 +373,8 @@
         "generator": false,
         "expression": false,
         "range": [
-          445,
-          526
+          350,
+          431
         ],
         "loc": {
           "start": {
@@ -389,10 +389,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} An empty Observable that only calls `complete`\n * or `error`, based on which one is called by the source Observable.\n * @method ignoreElements\n * @owner Observable\n ",
+            "value": "*\n * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} 该 Observable 是空的，只调用 `complete` 或\n * `error`，调用是基于源 Observable 的调用。\n * @method ignoreElements\n * @owner Observable\n ",
             "range": [
               81,
-              437
+              342
             ],
             "loc": {
               "start": {
@@ -411,8 +411,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        438,
-        526
+        343,
+        431
       ],
       "loc": {
         "start": {
@@ -427,10 +427,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} An empty Observable that only calls `complete`\n * or `error`, based on which one is called by the source Observable.\n * @method ignoreElements\n * @owner Observable\n ",
+          "value": "*\n * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} 该 Observable 是空的，只调用 `complete` 或\n * `error`，调用是基于源 Observable 的调用。\n * @method ignoreElements\n * @owner Observable\n ",
           "range": [
             81,
-            437
+            342
           ],
           "loc": {
             "start": {
@@ -448,8 +448,8 @@
     {
       "type": "EmptyStatement",
       "range": [
-        527,
-        528
+        432,
+        433
       ],
       "loc": {
         "start": {
@@ -468,8 +468,8 @@
         "type": "Identifier",
         "name": "IgnoreElementsOperator",
         "range": [
-          535,
-          557
+          440,
+          462
         ],
         "loc": {
           "start": {
@@ -492,8 +492,8 @@
               "type": "Identifier",
               "name": "call",
               "range": [
-                564,
-                568
+                469,
+                473
               ],
               "loc": {
                 "start": {
@@ -514,8 +514,8 @@
                   "type": "Identifier",
                   "name": "subscriber",
                   "range": [
-                    569,
-                    579
+                    474,
+                    484
                   ],
                   "loc": {
                     "start": {
@@ -532,8 +532,8 @@
                   "type": "Identifier",
                   "name": "source",
                   "range": [
-                    581,
-                    587
+                    486,
+                    492
                   ],
                   "loc": {
                     "start": {
@@ -561,8 +561,8 @@
                           "type": "Identifier",
                           "name": "source",
                           "range": [
-                            606,
-                            612
+                            511,
+                            517
                           ],
                           "loc": {
                             "start": {
@@ -579,8 +579,8 @@
                           "type": "Identifier",
                           "name": "subscribe",
                           "range": [
-                            613,
-                            622
+                            518,
+                            527
                           ],
                           "loc": {
                             "start": {
@@ -594,8 +594,8 @@
                           }
                         },
                         "range": [
-                          606,
-                          622
+                          511,
+                          527
                         ],
                         "loc": {
                           "start": {
@@ -615,8 +615,8 @@
                             "type": "Identifier",
                             "name": "IgnoreElementsSubscriber",
                             "range": [
-                              627,
-                              651
+                              532,
+                              556
                             ],
                             "loc": {
                               "start": {
@@ -634,8 +634,8 @@
                               "type": "Identifier",
                               "name": "subscriber",
                               "range": [
-                                652,
-                                662
+                                557,
+                                567
                               ],
                               "loc": {
                                 "start": {
@@ -650,8 +650,8 @@
                             }
                           ],
                           "range": [
-                            623,
-                            663
+                            528,
+                            568
                           ],
                           "loc": {
                             "start": {
@@ -666,8 +666,8 @@
                         }
                       ],
                       "range": [
-                        606,
-                        664
+                        511,
+                        569
                       ],
                       "loc": {
                         "start": {
@@ -681,8 +681,8 @@
                       }
                     },
                     "range": [
-                      599,
-                      665
+                      504,
+                      570
                     ],
                     "loc": {
                       "start": {
@@ -697,8 +697,8 @@
                   }
                 ],
                 "range": [
-                  589,
-                  671
+                  494,
+                  576
                 ],
                 "loc": {
                   "start": {
@@ -714,8 +714,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                568,
-                671
+                473,
+                576
               ],
               "loc": {
                 "start": {
@@ -731,8 +731,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              564,
-              671
+              469,
+              576
             ],
             "loc": {
               "start": {
@@ -748,8 +748,8 @@
           }
         ],
         "range": [
-          558,
-          673
+          463,
+          578
         ],
         "loc": {
           "start": {
@@ -763,8 +763,8 @@
         }
       },
       "range": [
-        529,
-        673
+        434,
+        578
       ],
       "loc": {
         "start": {
@@ -781,8 +781,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            674,
-            765
+            579,
+            670
           ],
           "loc": {
             "start": {
@@ -803,8 +803,8 @@
         "type": "Identifier",
         "name": "IgnoreElementsSubscriber",
         "range": [
-          772,
-          796
+          677,
+          701
         ],
         "loc": {
           "start": {
@@ -821,8 +821,8 @@
         "type": "Identifier",
         "name": "Subscriber",
         "range": [
-          805,
-          815
+          710,
+          720
         ],
         "loc": {
           "start": {
@@ -844,8 +844,8 @@
               "type": "Identifier",
               "name": "_next",
               "range": [
-                822,
-                827
+                727,
+                732
               ],
               "loc": {
                 "start": {
@@ -866,8 +866,8 @@
                   "type": "Identifier",
                   "name": "unused",
                   "range": [
-                    828,
-                    834
+                    733,
+                    739
                   ],
                   "loc": {
                     "start": {
@@ -892,8 +892,8 @@
                         "type": "Identifier",
                         "name": "noop",
                         "range": [
-                          846,
-                          850
+                          751,
+                          755
                         ],
                         "loc": {
                           "start": {
@@ -908,8 +908,8 @@
                       },
                       "arguments": [],
                       "range": [
-                        846,
-                        852
+                        751,
+                        757
                       ],
                       "loc": {
                         "start": {
@@ -923,8 +923,8 @@
                       }
                     },
                     "range": [
-                      846,
-                      853
+                      751,
+                      758
                     ],
                     "loc": {
                       "start": {
@@ -939,8 +939,8 @@
                   }
                 ],
                 "range": [
-                  836,
-                  859
+                  741,
+                  764
                 ],
                 "loc": {
                   "start": {
@@ -956,8 +956,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                827,
-                859
+                732,
+                764
               ],
               "loc": {
                 "start": {
@@ -973,8 +973,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              822,
-              859
+              727,
+              764
             ],
             "loc": {
               "start": {
@@ -990,8 +990,8 @@
           }
         ],
         "range": [
-          816,
-          861
+          721,
+          766
         ],
         "loc": {
           "start": {
@@ -1005,8 +1005,8 @@
         }
       },
       "range": [
-        766,
-        861
+        671,
+        766
       ],
       "loc": {
         "start": {
@@ -1023,8 +1023,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            674,
-            765
+            579,
+            670
           ],
           "loc": {
             "start": {
@@ -1043,8 +1043,8 @@
           "type": "Line",
           "value": "# sourceMappingURL=ignoreElements.js.map",
           "range": [
-            862,
-            904
+            767,
+            809
           ],
           "loc": {
             "start": {
@@ -1063,7 +1063,7 @@
   "sourceType": "module",
   "range": [
     0,
-    861
+    766
   ],
   "loc": {
     "start": {
@@ -1078,10 +1078,10 @@
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} An empty Observable that only calls `complete`\n * or `error`, based on which one is called by the source Observable.\n * @method ignoreElements\n * @owner Observable\n ",
+      "value": "*\n * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。\n *\n * <img src=\"./img/ignoreElements.png\" width=\"100%\">\n *\n * @return {Observable} 该 Observable 是空的，只调用 `complete` 或\n * `error`，调用是基于源 Observable 的调用。\n * @method ignoreElements\n * @owner Observable\n ",
       "range": [
         81,
-        437
+        342
       ],
       "loc": {
         "start": {
@@ -1098,8 +1098,8 @@
       "type": "Block",
       "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
       "range": [
-        674,
-        765
+        579,
+        670
       ],
       "loc": {
         "start": {
@@ -1116,8 +1116,8 @@
       "type": "Line",
       "value": "# sourceMappingURL=ignoreElements.js.map",
       "range": [
-        862,
-        904
+        767,
+        809
       ],
       "loc": {
         "start": {

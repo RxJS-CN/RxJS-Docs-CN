@@ -84,33 +84,32 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 /**
- * Applies an accumulator function over the source Observable where the
- * accumulator function itself returns an Observable, then each intermediate
- * Observable returned is merged into the output Observable.
+ * &#x5728;&#x6E90; Observable &#x4E0A;&#x5E94;&#x7528; accumulator &#x51FD;&#x6570;&#xFF0C;&#x5176;&#x4E2D; accumulator &#x51FD;&#x6570;&#x672C;&#x8EAB;&#x8FD4;&#x56DE;
+ * Observable &#xFF0C;&#x7136;&#x540E;&#x6BCF;&#x4E2A;&#x8FD4;&#x56DE;&#x7684;&#x4E2D;&#x95F4; Observable &#x4F1A;&#x88AB;&#x5408;&#x5E76;&#x5230;&#x8F93;&#x51FA; Observable &#x4E2D;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link scan}, but the Observables returned
- * by the accumulator are merged into the outer Observable.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x5F88;&#x50CF; {@link scan}&#xFF0C;&#x4F46; accumulator &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;
+ * Observables &#x4F1A;&#x88AB;&#x5408;&#x5E76;&#x5230;&#x5916;&#x90E8; Observalbe &#x4E2D;&#x3002;&lt;/span&gt;
  *
- * @example &lt;caption&gt;Count the number of click events&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x70B9;&#x51FB;&#x8BA1;&#x6570;&lt;/caption&gt;
  * const click$ = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * const one$ = click$.mapTo(1);
  * const seed = 0;
  * const count$ = one$.mergeScan((acc, one) =&gt; Rx.Observable.of(acc + one), seed);
  * count$.subscribe(x =&gt; console.log(x));
  *
- * // Results:
+ * // &#x7ED3;&#x679C;&#xFF1A;
  * 1
  * 2
  * 3
  * 4
- * // ...and so on for each click
+ * // ...&#x4EE5;&#x6B64;&#x7C7B;&#x63A8;&#xFF0C;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x8BA1;&#x6570;&#x589E;&#x52A0;1
  *
  * @param {function(acc: R, value: T): Observable&lt;R&gt;} accumulator
- * The accumulator function called on each source value.
- * @param seed The initial accumulation value.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of
- * input Observables being subscribed to concurrently.
- * @return {Observable&lt;R&gt;} An observable of the accumulated values.
+ * &#x5728;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x4E0A;&#x8C03;&#x7528;&#x7684;&#x7D2F;&#x52A0;&#x5668;&#x51FD;&#x6570;&#x3002;
+ * @param seed &#x521D;&#x59CB;&#x7684;&#x7D2F;&#x52A0;&#x503C;&#x3002;
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] &#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8BA2;&#x9605;&#x7684;&#x8F93;&#x5165;
+ * Observables &#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#x3002;
+ * @return {Observable&lt;R&gt;} &#x7D2F;&#x52A0;&#x503C;&#x7684; Observable &#x3002;
  * @method mergeScan
  * @owner Observable
  */

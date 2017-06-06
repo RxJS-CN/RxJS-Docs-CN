@@ -83,15 +83,16 @@
 /**
  * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
  * and when source Observable completes it emits a single item: the item with the smallest value.
+ * `min` &#x64CD;&#x4F5C;&#x7B26;&#x64CD;&#x4F5C;&#x7684; Observable &#x53D1;&#x51FA;&#x6570;&#x5B57;(&#x6216;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x63D0;&#x4F9B;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x7684;&#x9879;)&#x5E76;&#x4E14;&#x5F53;&#x6E90; Observable &#x5B8C;&#x6210;&#x65F6;&#x5B83;&#x53D1;&#x51FA;&#x5355;&#x4E00;&#x9879;&#xFF1A;&#x6700;&#x5C0F;&#x503C;&#x7684;&#x9879;&#x3002;
  *
  * &lt;img src=&quot;./img/min.png&quot; width=&quot;100%&quot;&gt;
  *
- * @example &lt;caption&gt;Get the minimal value of a series of numbers&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x83B7;&#x53D6;&#x4E00;&#x8FDE;&#x4E32;&#x6570;&#x5B57;&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x503C;&lt;/caption&gt;
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .min()
  *   .subscribe(x =&gt; console.log(x)); // -&gt; 2
  *
- * @example &lt;caption&gt;Use a comparer function to get the minimal item&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x6765;&#x83B7;&#x53D6;&#x6700;&#x5C0F;&#x503C;&#x7684;&#x9879;&lt;/caption&gt;
  * interface Person {
  *   age: number,
  *   name: string
@@ -105,9 +106,8 @@
  *
  * @see {@link max}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable&lt;R&gt;} An Observable that emits item with the smallest value.
+ * @param {Function} [comparer] - &#x53EF;&#x9009;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x5B83;&#x6765;&#x66FF;&#x4EE3;&#x9ED8;&#x8BA4;&#x503C;&#x6765;&#x6BD4;&#x8F83;&#x4E24;&#x9879;&#x7684;&#x503C;&#x3002;
+ * @return {Observable&lt;R&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6700;&#x5C0F;&#x503C;&#x7684;&#x9879;&#x3002;
  * @method min
  * @owner Observable
  */

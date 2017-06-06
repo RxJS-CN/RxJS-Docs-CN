@@ -87,13 +87,12 @@ import { Map } from &apos;../util/Map&apos;;
 import { FastMap } from &apos;../util/FastMap&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Groups the items emitted by an Observable according to a specified criterion,
- * and emits these grouped items as `GroupedObservables`, one
- * {@link GroupedObservable} per group.
+ * &#x6839;&#x636E;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x5C06;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x5E76;&#x5C06;&#x8FD9;&#x4E9B;&#x5206;&#x7EC4;&#x4F5C;&#x4E3A; `GroupedObservables`
+ * &#x53D1;&#x51FA;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x5206;&#x7EC4;&#x90FD;&#x662F;&#x4E00;&#x4E2A; {@link GroupedObservable} &#x3002;
  *
  * &lt;img src=&quot;./img/groupBy.png&quot; width=&quot;100%&quot;&gt;
  *
- * @example &lt;caption&gt;Group objects by id and return as array&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x901A;&#x8FC7; id &#x5206;&#x7EC4;&#x5E76;&#x8FD4;&#x56DE;&#x6570;&#x7EC4;&lt;/caption&gt;
  * Observable.of&lt;Obj&gt;({id: 1, name: &apos;aze1&apos;},
  *                    {id: 2, name: &apos;sf2&apos;},
  *                    {id: 2, name: &apos;dg2&apos;},
@@ -107,7 +106,7 @@ import { FastMap } from &apos;../util/FastMap&apos;;
  *     .flatMap( (group$) =&gt; group$.reduce((acc, cur) =&gt; [...acc, cur], []))
  *     .subscribe(p =&gt; console.log(p));
  *
- * // displays:
+ * // &#x663E;&#x793A;&#xFF1A;
  * // [ { id: 1, name: &apos;aze1&apos; },
  * //   { id: 1, name: &apos;erg1&apos; },
  * //   { id: 1, name: &apos;df1&apos; } ]
@@ -119,7 +118,7 @@ import { FastMap } from &apos;../util/FastMap&apos;;
  * //
  * // [ { id: 3, name: &apos;qfs3&apos; } ]
  *
- * @example &lt;caption&gt;Pivot data on the id field&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4EE5; id &#x5B57;&#x6BB5;&#x4E3A;&#x4E3B;&#x7EC4;&#x88C5;&#x6570;&#x636E;&lt;/caption&gt;
  * Observable.of&lt;Obj&gt;({id: 1, name: &apos;aze1&apos;},
  *                    {id: 2, name: &apos;sf2&apos;},
  *                    {id: 2, name: &apos;dg2&apos;},
@@ -129,27 +128,26 @@ import { FastMap } from &apos;../util/FastMap&apos;;
  *                    {id: 3, name: &apos;qfs1&apos;},
  *                    {id: 2, name: &apos;qsgqsfg2&apos;}
  *                   )
- *     .groupBy(p =&gt; p.id, p =&gt; p.anme)
+ *     .groupBy(p =&gt; p.id, p =&gt; p.name)
  *     .flatMap( (group$) =&gt; group$.reduce((acc, cur) =&gt; [...acc, cur], [&quot;&quot; + group$.key]))
  *     .map(arr =&gt; ({&apos;id&apos;: parseInt(arr[0]), &apos;values&apos;: arr.slice(1)}))
  *     .subscribe(p =&gt; console.log(p));
  *
- * // displays:
+ * // &#x663E;&#x793A;&#xFF1A;
  * // { id: 1, values: [ &apos;aze1&apos;, &apos;erg1&apos;, &apos;df1&apos; ] }
  * // { id: 2, values: [ &apos;sf2&apos;, &apos;dg2&apos;, &apos;sfqfb2&apos;, &apos;qsgqsfg2&apos; ] }
  * // { id: 3, values: [ &apos;qfs1&apos; ] }
  *
- * @param {function(value: T): K} keySelector A function that extracts the key
- * for each item.
- * @param {function(value: T): R} [elementSelector] A function that extracts the
- * return element for each item.
+ * @param {function(value: T): K} keySelector &#x63D0;&#x53D6;&#x6BCF;&#x9879;&#x7684;&#x952E;&#x7684;&#x51FD;&#x6570;&#x3002;
+ * @param {function(value: T): R} [elementSelector] &#x63D0;&#x53D6;&#x6BCF;&#x9879;&#x8FD4;&#x56DE;&#x5143;&#x7D20;&#x7684;&#x51FD;&#x6570;&#x3002;
  * @param {function(grouped: GroupedObservable&lt;K,R&gt;): Observable&lt;any&gt;} [durationSelector]
- * A function that returns an Observable to determine how long each group should
- * exist.
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable &#x6765;&#x786E;&#x5B9A;&#x6BCF;&#x4E2A;&#x7EC4;&#x5E94;&#x8BE5;&#x5B58;&#x5728;&#x591A;&#x957F;&#x65F6;&#x95F4;&#x7684;&#x51FD;&#x6570;&#x3002;
  * @return {Observable&lt;GroupedObservable&lt;K,R&gt;&gt;} An Observable that emits
  * GroupedObservables, each of which corresponds to a unique key value and each
  * of which emits those items from the source Observable that share that key
  * value.
+ * @return {Observable&lt;GroupedObservable&lt;K,R&gt;&gt;} &#x53D1;&#x51FA; GroupedObservables &#x7684; Observable&#xFF0C;
+ * &#x6BCF;&#x4E2A; GroupedObservable &#x5BF9;&#x5E94;&#x552F;&#x4E00;&#x7684;&#x952E;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x53D1;&#x51FA;&#x6E90; Observable &#x4E2D;&#x5171;&#x4EAB;&#x8BE5;&#x952E;&#x503C;&#x7684;&#x9879;&#x3002;
  * @method groupBy
  * @owner Observable
  */
@@ -296,10 +294,8 @@ class GroupDurationSubscriber extends Subscriber {
     }
 }
 /**
- * An Observable representing values belonging to the same group represented by
- * a common key. The values emitted by a GroupedObservable come from the source
- * Observable. The common key is available as the field `key` on a
- * GroupedObservable instance.
+ * &#x8BE5; Observable &#x8868;&#x793A;&#x56E0;&#x5177;&#x6709;&#x5171;&#x540C;&#x7684;&#x952E;&#x800C;&#x5C5E;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;&#x7EC4;&#x7684;&#x503C; &#x3002;&#x7531; GroupedObservable &#x53D1;&#x51FA;&#x7684;&#x503C;
+ * &#x6765;&#x81EA;&#x4E8E;&#x6E90; Observable &#x3002;&#x5171;&#x540C;&#x7684;&#x952E;&#x53EF;&#x4F5C;&#x4E3A; GroupedObservable &#x5B9E;&#x4F8B;&#x4E0A;&#x7684; `key` &#x5B57;&#x6BB5;&#x3002;
  *
  * @class GroupedObservable&lt;K, T&gt;
  */

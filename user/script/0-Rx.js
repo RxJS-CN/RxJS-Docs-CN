@@ -2203,27 +2203,25 @@ function combineLatest$$1() {
 Observable.combineLatest = combineLatest$$1;
 
 /**
- * Converts a higher-order Observable into a first-order Observable which
- * concurrently delivers all values that are emitted on the inner Observables.
+ * 将高阶 Observable 转换成一阶 Observable ，一阶 Observable 会同时发出在内部
+ * Observables 上发出的所有值。
  *
- * <span class="informal">Flattens an Observable-of-Observables.</span>
+ * <span class="informal">打平高阶 Observable 。</span>
  *
  * <img src="./img/mergeAll.png" width="100%">
  *
- * `mergeAll` subscribes to an Observable that emits Observables, also known as
- * a higher-order Observable. Each time it observes one of these emitted inner
- * Observables, it subscribes to that and delivers all the values from the
- * inner Observable on the output Observable. The output Observable only
- * completes once all inner Observables have completed. Any error delivered by
- * a inner Observable will be immediately emitted on the output Observable.
+ * `mergeAll` 订阅发出 Observables 的 Observalbe ，也称为高阶 Observable 。
+ * 每当观察到发出的内部 Observable 时，它会订阅并发出输出 Observable 上的这个
+ * 内部 Observable 的所有值。所有的内部 Observable 都完成了，输出 Observable
+ * 才能完成。任何由内部 Observable 发出的错误都会立即在输出 Observalbe 上发出。
  *
- * @example <caption>Spawn a new interval Observable for each click event, and blend their outputs as one Observable</caption>
+ * @example <caption>为每个点击事件创建一个新的 interval Observable ，并将其输出混合为一个 Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var firstOrder = higherOrder.mergeAll();
  * firstOrder.subscribe(x => console.log(x));
  *
- * @example <caption>Count from 0 to 9 every second for each click, but only allow 2 concurrent timers</caption>
+ * @example <caption>每次点击都会从0到9计数(每秒计数一次)，但只允许最多同时只能有两个计时器</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(10));
  * var firstOrder = higherOrder.mergeAll(2);
@@ -2239,10 +2237,10 @@ Observable.combineLatest = combineLatest$$1;
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of inner
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits values coming from all the
- * inner Observables emitted by the source Observable.
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入
+ * Observables 的最大数量。
+ * @return {Observable} 该 Observable 发出的值来自所有由源 Observable 发出的
+ * 内部 Observables 。
  * @method mergeAll
  * @owner Observable
  */
@@ -4153,32 +4151,29 @@ Observable.interval = interval;
 
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which concurrently emits all values from every
- * given input Observable.
+ * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。
  *
- * <span class="informal">Flattens multiple Observables together by blending
- * their values into one Observable.</span>
+ * <span class="informal">通过把多个 Observables 的值混合到一个 Observable 中
+ * 来将其打平。</span>
  *
  * <img src="./img/merge.png" width="100%">
  *
- * `merge` subscribes to each given input Observable (either the source or an
- * Observable given as argument), and simply forwards (without doing any
- * transformation) all the values from all the input Observables to the output
- * Observable. The output Observable only completes once all input Observables
- * have completed. Any error delivered by an input Observable will be immediately
- * emitted on the output Observable.
+ * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是
+ * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入
+ * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都
+ * 会立即在输出 Observalbe 上发出。
  *
- * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
+ * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = clicks.merge(timer);
  * clicksOrTimer.subscribe(x => console.log(x));
  *
- * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
+ * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
- * var concurrent = 2; // the argument
+ * var concurrent = 2; // 参数
  * var merged = timer1.merge(timer2, timer3, concurrent);
  * merged.subscribe(x => console.log(x));
  *
@@ -4187,14 +4182,13 @@ Observable.interval = interval;
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {ObservableInput} other An input Observable to merge with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
- * concurrency of input Observables.
- * @return {Observable} An Observable that emits items that are the result of
- * every input Observable.
+ * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。
+ * 可以给定多个输入 Observables 作为参数。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入
+ * Observables 的最大数量。
+ * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的
+ * 调度器。
+ * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。
  * @method merge
  * @owner Observable
  */
@@ -5258,20 +5252,18 @@ var zip = zipStatic;
 Observable.zip = zip;
 
 /**
- * Applies a given `project` function to each value emitted by the source
- * Observable, and emits the resulting values as an Observable.
+ * 将给定的 `project` 函数应用于源 Observable 发出的每个值，并将结果值作为
+ * Observable 发出。
  *
- * <span class="informal">Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
- * it passes each source value through a transformation function to get
- * corresponding output values.</span>
+ * <span class="informal">类似于 [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)，
+ * 它把每个源值传递给转化函数以获得相应的输出值。</span>
  *
  * <img src="./img/map.png" width="100%">
  *
- * Similar to the well known `Array.prototype.map` function, this operator
- * applies a projection to each value and emits that projection in the output
- * Observable.
+ * 类似于大家所熟知的 `Array.prototype.map` 方法，此操作符将投射函数应用于每个值
+ * 并且在输出 Observable 中发出投射后的结果。
  *
- * @example <caption>Map every click to the clientX position of that click</caption>
+ * @example <caption>将每次点击映射为这次点击的 clientX </caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks.map(ev => ev.clientX);
  * positions.subscribe(x => console.log(x));
@@ -5279,14 +5271,11 @@ Observable.zip = zip;
  * @see {@link mapTo}
  * @see {@link pluck}
  *
- * @param {function(value: T, index: number): R} project The function to apply
- * to each `value` emitted by the source Observable. The `index` parameter is
- * the number `i` for the i-th emission that has happened since the
- * subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to define what `this` is in the
- * `project` function.
- * @return {Observable<R>} An Observable that emits the values from the source
- * Observable transformed by the given `project` function.
+ * @param {function(value: T, index: number): R} project 应用于由源 Observable
+ * 所发出的每个值的函数。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，定义在 `project` 函数中的 `this` 是什么。
+ * @return {Observable<R>} 该 Observable 发出源 Observable 中经过给定的 `project`
+ * 函数转换的值。
  * @method map
  * @owner Observable
  */
@@ -7057,34 +7046,31 @@ Observable.prototype.concatAll = concatAll;
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable.
+ * 将每个源值投射成 Observable ，该 Observable 会合并到输出 Observable 中。
  *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link mergeAll}.</span>
+ * <span class="informal">将每个值映射成 Observable ，然后使用 {@link mergeAll}
+ * 打平所有的内部 Observables 。</span>
  *
  * <img src="./img/mergeMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an Observable, and then merging those resulting Observables and
- * emitting the results of this merger.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个 Observable，然后合并这些作为结果的 Observable，并发出本次合并的结果。
  *
- * @example <caption>Map and flatten each letter to an Observable ticking every 1 second</caption>
+ * @example <caption>将每个字母映射并打平成一个 Observable ，每1秒钟一次</caption>
  * var letters = Rx.Observable.of('a', 'b', 'c');
  * var result = letters.mergeMap(x =>
  *   Rx.Observable.interval(1000).map(i => x+i)
  * );
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
+ * // 结果如下：
  * // a0
  * // b0
  * // c0
  * // a1
  * // b1
  * // c1
- * // continues to list a,b,c with respective ascending integers
+ * // 继续列出a、b、c加上各自的自增数列
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -7094,23 +7080,19 @@ Observable.prototype.concatAll = concatAll;
  * @see {@link mergeScan}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project 函数，
+ + * 当应用于源 Observable 发出的项时，返回一个 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and merging the results of the Observables obtained
- * from this transformation.
+ * * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ + * 传递给这个函数参数有：
+ + * - `outerValue`: 来自源的值
+ + * - `innerValue`: 来自投射的 Observable 的值
+ + * - `outerIndex`: 来自源的值的 "index"
+ + * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入
+ * Observables 的最大数量。
+ * @return {Observable} 该 Observable 发出由源 Observable 发出的每项应用投射函数
+ * (和可选的 `resultSelector`)后的结果，并合并从该转化获得的 Observables 的结果。
  * @method mergeMap
  * @owner Observable
  */
@@ -7286,19 +7268,17 @@ Observable.prototype.concatMap = concatMap;
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to the same Observable which is merged multiple
- * times in the output Observable.
+ * 将每个源值投射成同一个 Observable ，该 Observable 会多次合并到输出 Observable 中。
  *
- * <span class="informal">It's like {@link mergeMap}, but maps each value always
- * to the same inner Observable.</span>
+ * <span class="informal">它很像 {@link mergeMap}，但永远将每个值映射到同一个内部
+ * Observable 。</span>
  *
  * <img src="./img/mergeMapTo.png" width="100%">
  *
- * Maps each source value to the given Observable `innerObservable` regardless
- * of the source value, and then merges those resulting Observables into one
- * single Observable, which is the output Observable.
+ * 将每个源值映射成给定的 Observable ：`innerObservable` ，而无论源值是什么，然后
+ * 将这些结果 Observables 合并到单个的 Observable ，也就是输出 Observable 。
  *
- * @example <caption>For each click event, start an interval Observable ticking every 1 second</caption>
+ * @example <caption>对于每次点击事件，都开启一个时间间隔为1秒的 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.mergeMapTo(Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -7310,21 +7290,19 @@ Observable.prototype.concatMap = concatMap;
  * @see {@link mergeScan}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
- * the source Observable.
+ * @param {ObservableInput} innerObservable 用来替换源 Observable 中的每个值
+ * 的 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits items from the given
- * `innerObservable` (and optionally transformed through `resultSelector`) every
- * time a value is emitted on the source Observable.
+ * * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ + * 传递给这个函数参数有：
+ + * - `outerValue`: 来自源的值
+ + * - `innerValue`: 来自投射的 Observable 的值
+ + * - `outerIndex`: 来自源的值的 "index"
+ + * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入
+ * Observables 的最大数量。
+ * @return {Observable} 每次源 Observable 发出值时，该 Observable 发出来自
+ * 给定 `innerObservable` (和通过 `resultSelector` 的可选的转换)的项。
  * @method mergeMapTo
  * @owner Observable
  */
@@ -7597,23 +7575,21 @@ var CountSubscriber = (function (_super) {
 Observable.prototype.count = count;
 
 /**
- * Converts an Observable of {@link Notification} objects into the emissions
- * that they represent.
+ * 将 {@link Notification} 对象的 Observable 转换成它们所代表的发送。
  *
- * <span class="informal">Unwraps {@link Notification} objects as actual `next`,
- * `error` and `complete` emissions. The opposite of {@link materialize}.</span>
+ * <span class="informal">将 {@link Notification} 对象拆开成实际的 `next`、
+ * `error` 和 `complete` 发送。它与 {@link materialize} 是相反的。</span>
  *
  * <img src="./img/dematerialize.png" width="100%">
  *
- * `dematerialize` is assumed to operate an Observable that only emits
- * {@link Notification} objects as `next` emissions, and does not emit any
- * `error`. Such Observable is the output of a `materialize` operation. Those
- * notifications are then unwrapped using the metadata they contain, and emitted
- * as `next`, `error`, and `complete` on the output Observable.
+ * `dematerialize` 被假定用来操作只发送值为 {@link Notification} 对象的 `next`，
+ * 不发送 `error` 的 Observable 。这样的 Obseravble 其实是 `materialize`
+ * 操作符的输出。然后这些通知会使用它们所包含的元数据进行拆解，并在输出 Observable 上
+ * 发出 `next` 、`error` 和 `complete` 。
  *
- * Use this operator in conjunction with {@link materialize}.
+ * 与 {@link materialize} 结合来使用此操作符。
  *
- * @example <caption>Convert an Observable of Notifications to an actual Observable</caption>
+ * @example <caption>将 Notification 类型的 Observable 转换成实际的 Observable</caption>
  * var notifA = new Rx.Notification('N', 'A');
  * var notifB = new Rx.Notification('N', 'B');
  * var notifE = new Rx.Notification('E', void 0,
@@ -7623,7 +7599,7 @@ Observable.prototype.count = count;
  * var upperCase = materialized.dematerialize();
  * upperCase.subscribe(x => console.log(x), e => console.error(e));
  *
- * // Results in:
+ * // 结果：
  * // A
  * // B
  * // TypeError: x.toUpperCase is not a function
@@ -7631,8 +7607,8 @@ Observable.prototype.count = count;
  * @see {@link Notification}
  * @see {@link materialize}
  *
- * @return {Observable} An Observable that emits items and notifications
- * embedded in Notification objects emitted by the source Observable.
+ * @return {Observable} 该 Observable 会发出数据项和通知，它们是由源 Observable 所发出
+ * 并且包装在 Notification 对象之中的。
  * @method dematerialize
  * @owner Observable
  */
@@ -8305,25 +8281,23 @@ function minimalSetImpl() {
 var Set = _root.Set || minimalSetImpl();
 
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
+ * 返回 Observable，它发出由源 Observable 所发出的所有与之前的项都不相同的项。
  *
- * If a keySelector function is provided, then it will project each value from the source observable into a new value that it will
- * check for equality with previously projected values. If a keySelector function is not provided, it will use each value from the
- * source observable directly with an equality check against previous values.
+ * 如果提供了 keySelector 函数，那么它会将源 Observable 的每个值都投射成一个新的值，这个值会用来检查是否与先前投射的值相等。如果没有提供
+ * keySelector 函数，它会直接使用源 Observable 的每个值来检查是否与先前的值相等。
  *
- * In JavaScript runtimes that support `Set`, this operator will use a `Set` to improve performance of the distinct value checking.
+ * 在支持 `Set` 的 JavaScript 运行时中，此操作符会使用 `Set` 来提升不同值检查的性能。
  *
- * In other runtimes, this operator will use a minimal implementation of `Set` that relies on an `Array` and `indexOf` under the
- * hood, so performance will degrade as more values are checked for distinction. Even in newer browsers, a long-running `distinct`
- * use might result in memory leaks. To help alleviate this in some scenarios, an optional `flushes` parameter is also provided so
- * that the internal `Set` can be "flushed", basically clearing it of values.
+ * 在其他运行时中，此操作符会使用 `Set` 的最小化实现，此实现在底层依赖于 `Array` 和 `indexOf`，因为要检查更多的值来进行区分，所以性能会降低。
+ * 即使是在新浏览器中，长时间运行的 `distinct` 操作也可能会导致内存泄露。为了在某种场景下来缓解这个问题，可以提供一个可选的 `flushes` 参数，
+ * 这样内部的 `Set` 可以被“清空”，基本上清除了它的所有值。
  *
- * @example <caption>A simple example with numbers</caption>
+ * @example <caption>使用数字的简单示例</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
  *   .distinct()
  *   .subscribe(x => console.log(x)); // 1, 2, 3, 4
  *
- * @example <caption>An example using a keySelector function</caption>
+ * @example <caption>使用 keySelector 函数的示例</caption>
  * interface Person {
  *    age: number,
  *    name: string
@@ -8336,16 +8310,16 @@ var Set = _root.Set || minimalSetImpl();
  *     .distinct((p: Person) => p.name)
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  *
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [keySelector] Optional function to select which value you want to check as distinct.
- * @param {Observable} [flushes] Optional Observable for flushing the internal HashSet of the operator.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [keySelector] 可选函数，用来选择某个键的值以检查是否是不同的。
+ * @param {Observable} [flushes] 可选 Observable，用来清空操作符内部的 HashSet 。
+ * @return {Observable} 该 Observable 发出从源 Observable 中得到的不同的值。
  * @method distinct
  * @owner Observable
  */
@@ -8417,18 +8391,18 @@ Observable.prototype.distinct = distinct;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item.
+ * 返回 Observable，它发出源 Observable 发出的所有与前一项不相同的项。
  *
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ * 如果提供了 compare 函数，那么每一项都会调用它来检验是否应该发出这个值。
  *
- * If a comparator function is not provided, an equality check is used by default.
+ * 如果没有提供 compare 函数，默认使用相等检查。
  *
- * @example <caption>A simple example with numbers</caption>
+ * @example <caption>使用数字的简单示例</caption>
  * Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
  *   .distinctUntilChanged()
  *   .subscribe(x => console.log(x)); // 1, 2, 1, 2, 3, 4
  *
- * @example <caption>An example using a compare function</caption>
+ * @example <caption>使用 compare 函数的示例</caption>
  * interface Person {
  *    age: number,
  *    name: string
@@ -8442,7 +8416,7 @@ Observable.prototype.distinct = distinct;
  *     .distinctUntilChanged((p: Person, q: Person) => p.name === q.name)
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo' }
@@ -8450,8 +8424,8 @@ Observable.prototype.distinct = distinct;
  * @see {@link distinct}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
+ * @return {Observable} 该 Observable 发出从源 Observable 中得到的与前一项不同的值。
  * @method distinctUntilChanged
  * @owner Observable
  */
@@ -8517,14 +8491,13 @@ Observable.prototype.distinctUntilChanged = distinctUntilChanged;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
- * using a property accessed by using the key provided to check if the two items are distinct.
+ * 返回 Observable，它发出源 Observable 发出的所有与前一项不相同的项，使用通过提供的 key 访问到的属性来检查两个项是否不同。
  *
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ * 如果提供了 compare 函数，那么每一项都会调用它来检验是否应该发出这个值。
  *
- * If a comparator function is not provided, an equality check is used by default.
+ * 如果没有提供 compare 函数，默认使用相等检查。
  *
- * @example <caption>An example comparing the name of persons</caption>
+ * @example <caption>比较人名的示例</caption>
  *
  *  interface Person {
  *     age: number,
@@ -8539,12 +8512,12 @@ Observable.prototype.distinctUntilChanged = distinctUntilChanged;
  *     .distinctUntilKeyChanged('name')
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo' }
  *
- * @example <caption>An example comparing the first letters of the name</caption>
+ * @example <caption>比较名字前三个字母的示例</caption>
  *
  * interface Person {
  *     age: number,
@@ -8559,7 +8532,7 @@ Observable.prototype.distinctUntilChanged = distinctUntilChanged;
  *     .distinctUntilKeyChanged('name', (x: string, y: string) => x.substring(0, 3) === y.substring(0, 3))
  *     .subscribe(x => console.log(x));
  *
- * // displays:
+ * // 显示：
  * // { age: 4, name: 'Foo1' }
  * // { age: 7, name: 'Bar' }
  * // { age: 5, name: 'Foo2' }
@@ -8567,9 +8540,9 @@ Observable.prototype.distinctUntilChanged = distinctUntilChanged;
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
  *
- * @param {string} key String key for object property lookup on each item.
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values based on the key specified.
+ * @param {string} key 每项中用于查找对象属性的字符串键。
+ * @param {function} [compare] 可选比较函数，用来检验当前项与源中的前一项是否相同。
+ * @return {Observable} 该 Observable 发出从源 Observable 中基于指定的 key 得到与前一项不同的值。
  * @method distinctUntilKeyChanged
  * @owner Observable
  */
@@ -8586,29 +8559,24 @@ Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged;
 
 /* tslint:enable:max-line-length */
 /**
- * Perform a side effect for every emission on the source Observable, but return
- * an Observable that is identical to the source.
+ * 为源 Observable 上的每次发送执行副作用，但返回的 Observable 与源 Observable 是相同的。
  *
- * <span class="informal">Intercepts each emission on the source and runs a
- * function, but returns an output which is identical to the source as long as errors don't occur.</span>
+ * <span class="informal">拦截源 Observable 上的每次发送并且运行一个函数，但返回的输出 Observable 与
+ * 源 Observable 是相同的，只要不发生错误即可。</span>
  *
  * <img src="./img/do.png" width="100%">
  *
- * Returns a mirrored Observable of the source Observable, but modified so that
- * the provided Observer is called to perform a side effect for every value,
- * error, and completion emitted by the source. Any errors that are thrown in
- * the aforementioned Observer or handlers are safely sent down the error path
- * of the output Observable.
+ * 返回源 Observable 的镜像，但镜像是修改过的，以便调用提供的 Observer 来为源 Observable
+ * 发出的每个值，错误和完成执行副作用。在上述的 Observer 或处理方法中抛出的任何错误都可以
+ * 安全地发送到输出 Observable 的错误路径中。
  *
- * This operator is useful for debugging your Observables for the correct values
- * or performing other side effects.
+ * 此操作符适用于调试 Observables 以查看值是否正确，或者执行一些其他的副作用操作。
  *
- * Note: this is different to a `subscribe` on the Observable. If the Observable
- * returned by `do` is not subscribed, the side effects specified by the
- * Observer will never happen. `do` therefore simply spies on existing
- * execution, it does not trigger an execution to happen like `subscribe` does.
+ * 注意：此操作符不同于 Observable 的 `subscribe`。如果 `do` 返回的 Observable 没有被订阅，
+ * 那么观察者指定的副作用永远不会执行。因此 `do` 只是侦查已存在的执行，它不会像 `subscribe`
+ * 那样触发执行的发生。
  *
- * @example <caption>Map every every click to the clientX position of that click, while also logging the click event</caption>
+ * @example <caption>把每次点击映射成该点击的 clientX ，同时还输出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks
  *   .do(ev => console.log(ev))
@@ -8618,12 +8586,10 @@ Observable.prototype.distinctUntilKeyChanged = distinctUntilKeyChanged;
  * @see {@link map}
  * @see {@link subscribe}
  *
- * @param {Observer|function} [nextOrObserver] A normal Observer object or a
- * callback for `next`.
- * @param {function} [error] Callback for errors in the source.
- * @param {function} [complete] Callback for the completion of the source.
- * @return {Observable} An Observable identical to the source, but runs the
- * specified Observer or callback(s) for each item.
+ * @param {Observer|function} [nextOrObserver] 普通的观察者对象或者 `next` 回调函数。
+ * @param {function} [error] 源 Observable 的 `error` 回调函数。
+ * @param {function} [complete] 源 Observable 的 `complete` 回调函数。
+ * @return {Observable} 与源相同的 Observable，但会为每一项的运行指定观察者或回调函数。
  * @method do
  * @name do
  * @owner Observable
@@ -8693,25 +8659,23 @@ Observable.prototype.do = _do;
 Observable.prototype._do = _do;
 
 /**
- * Converts a higher-order Observable into a first-order Observable by dropping
- * inner Observables while the previous inner Observable has not yet completed.
+ * 当前一个内部 Observable 还未完成的情况下，通过丢弃内部 Observable 使得
+ * 高阶 Observable 转换成一阶 Observable。
  *
- * <span class="informal">Flattens an Observable-of-Observables by dropping the
- * next inner Observables while the current inner is still executing.</span>
+ * <span class="informal">在当前内部 Observable 仍在执行的情况下，通过丢弃
+ * 接下来的内部 Observable 将高阶 Observable 打平。</span>
  *
  * <img src="./img/exhaust.png" width="100%">
  *
- * `exhaust` subscribes to an Observable that emits Observables, also known as a
- * higher-order Observable. Each time it observes one of these emitted inner
- * Observables, the output Observable begins emitting the items emitted by that
- * inner Observable. So far, it behaves like {@link mergeAll}. However,
- * `exhaust` ignores every new inner Observable if the previous Observable has
- * not yet completed. Once that one completes, it will accept and flatten the
- * next inner Observable and repeat this process.
+ * `exhaust` 订阅发出 Observables 的 Observable，也就是高阶 Observable 。
+ * 每次观察到这些已发出的内部 Observables 中的其中一个时，输出 Observable 开始发出该内部 Observable
+ * 要发出的项。到目前为止，它的行为就像 {@link mergeAll} 。然而，如果前一个 Observable
+ * 还未完成的话，`exhaust` 会忽略每个新的内部 Observable 。一旦完成，它将接受并打平下一个
+ * 内部 Observable ，然后重复此过程。
  *
- * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
+ * @example <caption>只要没有当前活动的计时器，那么每次点击就会运行一个有限的计时器。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
+ * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000).take(5));
  * var result = higherOrder.exhaust();
  * result.subscribe(x => console.log(x));
  *
@@ -8722,8 +8686,7 @@ Observable.prototype._do = _do;
  * @see {@link exhaustMap}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable that takes a source of Observables and propagates the first observable
- * exclusively until it completes before subscribing to the next.
+ * @return {Observable} Observable 接收源 Observable 并只专注于传播第一个 Observable 直到它完成，然后订阅下一个 Observable 。
  * @method exhaust
  * @owner Observable
  */
@@ -8776,26 +8739,23 @@ Observable.prototype.exhaust = exhaust;
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable only if the previous projected Observable has completed.
+ * 将每个源值投射成 Observable，只有当前一个投射的 Observable 已经完成，
+ * 这个 Observable 才会被合并到输出 Observable 中。
  *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link exhaust}.</span>
+ * <span class="informal">把每个值映射成 Observable，然后使用 {@link exhaust}
+ * 操作符打平所有的内部 Observables 。</span>
  *
  * <img src="./img/exhaustMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called "inner") Observable. When it projects a source value to
- * an Observable, the output Observable begins emitting the items emitted by
- * that projected Observable. However, `exhaustMap` ignores every new projected
- * Observable if the previous projected Observable has not yet completed. Once
- * that one completes, it will accept and flatten the next projected Observable
- * and repeat this process.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个(所谓的“内部”) Observable 。当它将源值投射成 Observable 时，输出 Observable
+ * 开始发出由投射的 Observable 发出的项。然而，如果前一个投射的 Observable 还未完成的话，
+ * 那么 `exhaustMap` 会忽略每个新投射的 Observable 。一旦完成，它将接受并打平下一个
+ * 内部 Observable ，然后重复此过程。
  *
- * @example <caption>Run a finite timer for each click, only if there is no currently active timer</caption>
+ * @example <caption>只要没有当前活动的计时器，那么每次点击就会运行一个有限的计时器。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000));
+ * var result = clicks.exhaustMap((ev) => Rx.Observable.interval(1000).take(5));
  * result.subscribe(x => console.log(x));
  *
  * @see {@link concatMap}
@@ -8803,20 +8763,17 @@ Observable.prototype.exhaust = exhaust;
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project 函数，
+ * 当应用于源 Observable 发出的项时，返回一个 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An Observable containing projected Observables
- * of each item of the source, ignoring projected Observables that start before
- * their preceding Observable has completed.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} 这个 Observable 包含源中每项的投射 Observable，
+ * 忽略在前一个 Observable 完成之前就已经开始的 Observable。
  * @method exhaustMap
  * @owner Observable
  */
@@ -8907,26 +8864,20 @@ Observable.prototype.exhaustMap = exhaustMap;
 
 /* tslint:enable:max-line-length */
 /**
- * Recursively projects each source value to an Observable which is merged in
- * the output Observable.
+ * 递归地将每个源值投射成 Observable，这个 Observable 会被合并到输出 Observable 中。
  *
- * <span class="informal">It's similar to {@link mergeMap}, but applies the
- * projection function to every source value as well as every output value.
- * It's recursive.</span>
+ * <span class="informal">它与 {@link mergeMap} 类似，但将投射函数应用于每个源值
+ * 以及每个输出值。它是递归的。</span>
  *
  * <img src="./img/expand.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an Observable, and then merging those resulting Observables and
- * emitting the results of this merger. *Expand* will re-emit on the output
- * Observable every source value. Then, each output value is given to the
- * `project` function which returns an inner Observable to be merged on the
- * output Observable. Those output values resulting from the projection are also
- * given to the `project` function to produce new output values. This is how
- * *expand* behaves recursively.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个 Observable，然后合并这些作为结果的 Observable，并发出本次合并的结果。
+ * `expand` 会重新发出在输出 Observable 上的每个源值。然后，将每个输出值传给投射函数，
+ * 该函数返回要合并到输出 Observable 上的内部 Observable 。由投影产生的那些输出值也会
+ * 被传给投射函数以产生新的输出值。这就是 `expand` 如何进行递归的。
  *
- * @example <caption>Start emitting the powers of two on every click, at most 10 of them</caption>
+ * @example <caption>每次点击开始发出的值都是乘以2的，最多连乘10次</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var powersOfTwo = clicks
  *   .mapTo(1)
@@ -8937,17 +8888,12 @@ Observable.prototype.exhaustMap = exhaustMap;
  * @see {@link mergeMap}
  * @see {@link mergeScan}
  *
- * @param {function(value: T, index: number) => Observable} project A function
- * that, when applied to an item emitted by the source or the output Observable,
- * returns an Observable.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
- * each projected inner Observable.
- * @return {Observable} An Observable that emits the source values and also
- * result of applying the projection function to each value emitted on the
- * output Observable and and merging the results of the Observables obtained
- * from this transformation.
+ * @param {function(value: T, index: number) => Observable} project 函数，
+ * 当应用于源 Observable 或输出 Observable 发出的项时，返回一个 Observable 。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 同时订阅输入
+ * Observables 的最大数量。
+ * @return {Observable} Observable 发出源值，同时也将投影函数应用于在输出 Observable 上
+ * 发出的每个值以得到结果，然后合并这些从转换后得到的 Observables 的结果。
  * @method expand
  * @owner Observable
  */
@@ -9067,28 +9013,26 @@ var ArgumentOutOfRangeError = (function (_super) {
 }(Error));
 
 /**
- * Emits the single value at the specified `index` in a sequence of emissions
- * from the source Observable.
+ * 只发出单个值，这个值位于源 Observable 的发送序列中的指定 `index` 处。
  *
- * <span class="informal">Emits only the i-th value, then completes.</span>
+ * <span class="informal">只发出第i个值, 然后完成。</span>
  *
  * <img src="./img/elementAt.png" width="100%">
  *
- * `elementAt` returns an Observable that emits the item at the specified
- * `index` in the source Observable, or a default value if that `index` is out
- * of range and the `default` argument is provided. If the `default` argument is
- * not given and the `index` is out of range, the output Observable will emit an
- * `ArgumentOutOfRangeError` error.
+ * `elementAt` 返回的 Observable 会发出源 Observable 指定 `index` 处的项，如果
+ * `index` 超出范围并且提供了 `default` 参数的话，会发出一个默认值。如果没有提供
+ * `default` 参数并且 `index` 超出范围，那么输出 Observable 会发出一个
+ * `ArgumentOutOfRangeError` 错误。
  *
- * @example <caption>Emit only the third click event</caption>
+ * @example <caption>只发出第三次的点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.elementAt(2);
  * result.subscribe(x => console.log(x));
  *
- * // Results in:
+ * // 结果：
  * // click 1 = nothing
  * // click 2 = nothing
- * // click 3 = MouseEvent object logged to console
+ * // click 3 = 打印到控制台的 MouseEvent 对象
  *
  * @see {@link first}
  * @see {@link last}
@@ -9096,15 +9040,14 @@ var ArgumentOutOfRangeError = (function (_super) {
  * @see {@link single}
  * @see {@link take}
  *
- * @throws {ArgumentOutOfRangeError} When using `elementAt(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0` or the
- * Observable has completed before emitting the i-th `next` notification.
+ * @throws {ArgumentOutOfRangeError} 当使用 `elementAt(i)` 时，如果 `i < 0` 或
+ * 在发送第i个 `next` 通知前 Observable 已经完成了，它会发送 ArgumentOutOrRangeError
+ * 给观察者的 `error` 回调函数。
  *
- * @param {number} index Is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {T} [defaultValue] The default value returned for missing indices.
- * @return {Observable} An Observable that emits a single item, if it is found.
- * Otherwise, will emit the default value if given. If not, then emits an error.
+ * @param {number} index 是 Subscription 开始后的第i个通知的索引数值，该值是从 `0` 开始。
+ * @param {T} [defaultValue] 缺失索引时返回的默认值。
+ * @return {Observable} 如果能找到这个项的话，那么该 Observable 发出此单个项。找不到时，如果有给定
+ * 的默认值，则发出默认值，否则发出错误。
  * @method elementAt
  * @owner Observable
  */
@@ -9161,20 +9104,18 @@ Observable.prototype.elementAt = elementAt;
 
 /* tslint:enable:max-line-length */
 /**
- * Filter items emitted by the source Observable by only emitting those that
- * satisfy a specified predicate.
+ * 通过只发送源 Observable 的中满足指定 predicate 函数的项来进行过滤。
  *
- * <span class="informal">Like
- * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter),
- * it only emits a value from the source if it passes a criterion function.</span>
+ * <span class="informal">类似于
+ * [Array.prototype.filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)，
+ * 它只会发出源 Observable 中符合标准函数的值。</span>
  *
  * <img src="./img/filter.png" width="100%">
  *
- * Similar to the well-known `Array.prototype.filter` method, this operator
- * takes values from the source Observable, passes them through a `predicate`
- * function and only emits those values that yielded `true`.
+ * 类似于大家所熟知的 `Array.prototype.filter` 方法，此操作符从源 Observable 中
+ * 接收值，将值传递给 `predicate` 函数并且只发出返回 `true` 的这些值。
  *
- * @example <caption>Emit only click events whose target was a DIV element</caption>
+ * @example <caption>只发出目标是 DIV 元素的点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksOnDivs = clicks.filter(ev => ev.target.tagName === 'DIV');
  * clicksOnDivs.subscribe(x => console.log(x));
@@ -9185,17 +9126,13 @@ Observable.prototype.elementAt = elementAt;
  * @see {@link ignoreElements}
  * @see {@link partition}
  * @see {@link skip}
- *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates each value emitted by the source Observable. If it returns `true`,
- * the value is emitted, if `false` the value is not passed to the output
- * Observable. The `index` parameter is the number `i` for the i-th source
- * emission that has happened since the subscription, starting from the number
- * `0`.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable} An Observable of values from the source that were
- * allowed by the `predicate` function.
+
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable
+ * 所发出的每个值的函数。如果它返回 `true`，就发出值，如果是 `false` 则不会传给输出
+ * Observable 。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable} 值的 Observable，这些值来自源 Observable 并且
+ * 是 `predicate` 函数所允许的。
  * @method filter
  * @owner Observable
  */
@@ -9285,20 +9222,17 @@ Observable.prototype._finally = _finally;
 
 /* tslint:enable:max-line-length */
 /**
- * Emits only the first value emitted by the source Observable that meets some
- * condition.
+ * 只发出源 Observable 所发出的值中第一个满足条件的值。
  *
- * <span class="informal">Finds the first value that passes some test and emits
- * that.</span>
+ * <span class="informal">找到第一个通过测试的值并将其发出。</span>
  *
  * <img src="./img/find.png" width="100%">
  *
- * `find` searches for the first item in the source Observable that matches the
- * specified condition embodied by the `predicate`, and returns the first
- * occurrence in the source. Unlike {@link first}, the `predicate` is required
- * in `find`, and does not emit an error if a valid value is not found.
+ * `find` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后
+ * 将其返回。不同于 {@link first}，在 `find` 中 `predicate` 是必须的，而且如果没找到
+ * 有效的值的话也不会发出错误。
  *
- * @example <caption>Find and emit the first click that happens on a DIV element</caption>
+ * @example <caption>找到并发出第一个点击 DIV 元素的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.find(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -9309,11 +9243,9 @@ Observable.prototype._finally = _finally;
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable<T>} An Observable of the first item that matches the
- * condition.
+ * 使用每项来调用的函数，用于测试是否符合条件。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable<T>} 符合条件的第一项的 Observable 。
  * @method find
  * @owner Observable
  */
@@ -9379,21 +9311,18 @@ var FindValueSubscriber = (function (_super) {
 Observable.prototype.find = find;
 
 /**
- * Emits only the index of the first value emitted by the source Observable that
- * meets some condition.
+ * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。
  *
- * <span class="informal">It's like {@link find}, but emits the index of the
- * found value, not the value itself.</span>
+ * <span class="informal">它很像 {@link find} , 但发出的是找到的值的索引，
+ * 而不是值本身。</span>
  *
  * <img src="./img/findIndex.png" width="100%">
  *
- * `findIndex` searches for the first item in the source Observable that matches
- * the specified condition embodied by the `predicate`, and returns the
- * (zero-based) index of the first occurrence in the source. Unlike
- * {@link first}, the `predicate` is required in `findIndex`, and does not emit
- * an error if a valid value is not found.
+ * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后
+ * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到
+ * 有效的值的话也不会发出错误。
  *
- * @example <caption>Emit the index of first click that happens on a DIV element</caption>
+ * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -9404,11 +9333,9 @@ Observable.prototype.find = find;
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable} An Observable of the index of the first item that
- * matches the condition.
+ * 使用每项来调用的函数，用于测试是否符合条件。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。
  * @method find
  * @owner Observable
  */
@@ -9440,28 +9367,24 @@ var EmptyError = (function (_super) {
 }(Error));
 
 /**
- * Emits only the first value (or the first value that meets some condition)
- * emitted by the source Observable.
+ * 只发出由源 Observable 所发出的值中第一个(或第一个满足条件的值)。
  *
- * <span class="informal">Emits only the first value. Or emits only the first
- * value that passes some test.</span>
+ * <span class="informal">只发出第一个值。或者只发出第一个通过测试的值。</span>
  *
  * <img src="./img/first.png" width="100%">
  *
- * If called with no arguments, `first` emits the first value of the source
- * Observable, then completes. If called with a `predicate` function, `first`
- * emits the first value of the source that matches the specified condition. It
- * may also take a `resultSelector` function to produce the output value from
- * the input value, and a `defaultValue` to emit in case the source completes
- * before it is able to emit a valid value. Throws an error if `defaultValue`
- * was not provided and a matching element is not found.
+ * 如果不使用参数调用，`first` 会发出源 Observable 中的第一个值，然后完成。如果使用
+ * `predicate` 函数来调用，`first` 会发出源 Observable 第一个满足条件的值。它还可以
+ * 接收 `resultSelector` 函数根据输入值生成输出值，假如在源 Observable 完成前无法发
+ * 出一个有效值的话，那么会发出 `defaultValue` 。如果没有提供 `defaultValue` 并且也
+ * 找不到匹配的元素，则抛出错误。
  *
- * @example <caption>Emit only the first click that happens on the DOM</caption>
+ * @example <caption>只发出第一次点击 DOM 的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first();
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Emits the first click that happens on a DIV</caption>
+ * @example <caption>只发出第一次点击 DIV 元素的事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.first(ev => ev.target.tagName === 'DIV');
  * result.subscribe(x => console.log(x));
@@ -9470,21 +9393,18 @@ var EmptyError = (function (_super) {
  * @see {@link find}
  * @see {@link take}
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
+ * @throws {EmptyError} 如果在 Observable 完成之前还没有发出任何 `next` 通知的话，
+ * 就把 EmptyError 发送给观察者的 `error` 回调函数。
  *
  * @param {function(value: T, index: number, source: Observable<T>): boolean} [predicate]
- * An optional function called with each item to test for condition matching.
- * @param {function(value: T, index: number): R} [resultSelector] A function to
- * produce the value on the output Observable based on the values
- * and the indices of the source Observable. The arguments passed to this
- * function are:
- * - `value`: the value that was emitted on the source.
- * - `index`: the "index" of the value from the source.
- * @param {R} [defaultValue] The default value emitted in case no valid value
- * was found on the source.
- * @return {Observable<T|R>} An Observable of the first item that matches the
- * condition.
+ * 使用每项来调用的可选函数，用于测试是否符合条件。
+ * @param {function(value: T, index: number): R} [resultSelector] 函数，它基于源
+ * Observable 的值和索引来生成输出 Observable 的值。传给这个函数的参数有：
+ * - `value`: 在源 Observable 上发出的值。
+ * - `index`: 源值的索引。
+ * @param {R} [defaultValue] 假如在源 Observable 上没有找到有效值，就会发出这个
+ * 默认值。
+ * @return {Observable<T|R>} 符合条件的第一项的 Observable 。
  * @method first
  * @owner Observable
  */
@@ -9662,13 +9582,12 @@ var FastMap = (function () {
 
 /* tslint:enable:max-line-length */
 /**
- * Groups the items emitted by an Observable according to a specified criterion,
- * and emits these grouped items as `GroupedObservables`, one
- * {@link GroupedObservable} per group.
+ * 根据指定条件将源 Observable 发出的值进行分组，并将这些分组作为 `GroupedObservables`
+ * 发出，每一个分组都是一个 {@link GroupedObservable} 。
  *
  * <img src="./img/groupBy.png" width="100%">
  *
- * @example <caption>Group objects by id and return as array</caption>
+ * @example <caption>通过 id 分组并返回数组</caption>
  * Observable.of<Obj>({id: 1, name: 'aze1'},
  *                    {id: 2, name: 'sf2'},
  *                    {id: 2, name: 'dg2'},
@@ -9682,7 +9601,7 @@ var FastMap = (function () {
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], []))
  *     .subscribe(p => console.log(p));
  *
- * // displays:
+ * // 显示：
  * // [ { id: 1, name: 'aze1' },
  * //   { id: 1, name: 'erg1' },
  * //   { id: 1, name: 'df1' } ]
@@ -9694,7 +9613,7 @@ var FastMap = (function () {
  * //
  * // [ { id: 3, name: 'qfs3' } ]
  *
- * @example <caption>Pivot data on the id field</caption>
+ * @example <caption>以 id 字段为主组装数据</caption>
  * Observable.of<Obj>({id: 1, name: 'aze1'},
  *                    {id: 2, name: 'sf2'},
  *                    {id: 2, name: 'dg2'},
@@ -9704,27 +9623,26 @@ var FastMap = (function () {
  *                    {id: 3, name: 'qfs1'},
  *                    {id: 2, name: 'qsgqsfg2'}
  *                   )
- *     .groupBy(p => p.id, p => p.anme)
+ *     .groupBy(p => p.id, p => p.name)
  *     .flatMap( (group$) => group$.reduce((acc, cur) => [...acc, cur], ["" + group$.key]))
  *     .map(arr => ({'id': parseInt(arr[0]), 'values': arr.slice(1)}))
  *     .subscribe(p => console.log(p));
  *
- * // displays:
+ * // 显示：
  * // { id: 1, values: [ 'aze1', 'erg1', 'df1' ] }
  * // { id: 2, values: [ 'sf2', 'dg2', 'sfqfb2', 'qsgqsfg2' ] }
  * // { id: 3, values: [ 'qfs1' ] }
  *
- * @param {function(value: T): K} keySelector A function that extracts the key
- * for each item.
- * @param {function(value: T): R} [elementSelector] A function that extracts the
- * return element for each item.
+ * @param {function(value: T): K} keySelector 提取每项的键的函数。
+ * @param {function(value: T): R} [elementSelector] 提取每项返回元素的函数。
  * @param {function(grouped: GroupedObservable<K,R>): Observable<any>} [durationSelector]
- * A function that returns an Observable to determine how long each group should
- * exist.
+ * 返回一个 Observable 来确定每个组应该存在多长时间的函数。
  * @return {Observable<GroupedObservable<K,R>>} An Observable that emits
  * GroupedObservables, each of which corresponds to a unique key value and each
  * of which emits those items from the source Observable that share that key
  * value.
+ * @return {Observable<GroupedObservable<K,R>>} 发出 GroupedObservables 的 Observable，
+ * 每个 GroupedObservable 对应唯一的键值，并且会发出源 Observable 中共享该键值的项。
  * @method groupBy
  * @owner Observable
  */
@@ -9876,10 +9794,8 @@ var GroupDurationSubscriber = (function (_super) {
     return GroupDurationSubscriber;
 }(Subscriber));
 /**
- * An Observable representing values belonging to the same group represented by
- * a common key. The values emitted by a GroupedObservable come from the source
- * Observable. The common key is available as the field `key` on a
- * GroupedObservable instance.
+ * 该 Observable 表示因具有共同的键而属于同一个组的值 。由 GroupedObservable 发出的值
+ * 来自于源 Observable 。共同的键可作为 GroupedObservable 实例上的 `key` 字段。
  *
  * @class GroupedObservable<K, T>
  */
@@ -9930,12 +9846,12 @@ var InnerRefCountSubscription = (function (_super) {
 Observable.prototype.groupBy = groupBy;
 
 /**
- * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.
+ * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。
  *
  * <img src="./img/ignoreElements.png" width="100%">
  *
- * @return {Observable} An empty Observable that only calls `complete`
- * or `error`, based on which one is called by the source Observable.
+ * @return {Observable} 该 Observable 是空的，只调用 `complete` 或
+ * `error`，调用是基于源 Observable 的调用。
  * @method ignoreElements
  * @owner Observable
  */
@@ -9970,11 +9886,11 @@ var IgnoreElementsSubscriber = (function (_super) {
 Observable.prototype.ignoreElements = ignoreElements;
 
 /**
- * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.
+ * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。
  *
  * <img src="./img/isEmpty.png" width="100%">
  *
- * @return {Observable} An Observable that emits a Boolean.
+ * @return {Observable} 发出布尔值的 Observable 。
  * @method isEmpty
  * @owner Observable
  */
@@ -10215,19 +10131,18 @@ Observable.prototype.auditTime = auditTime;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits only the last item emitted by the source Observable.
- * It optionally takes a predicate function as a parameter, in which case, rather than emitting
- * the last item from the source Observable, the resulting Observable will emit the last item
- * from the source Observable that satisfies the predicate.
+ * 返回的 Observable 只发出由源 Observable 发出的最后一个值。它可以接收一个可选的 predicate 函数作为
+ * 参数，如果传入 predicate 的话则发送的不是源 Observable 的最后一项，而是发出源 Observable 中
+ * 满足 predicate 函数的最后一项。
  *
  * <img src="./img/last.png" width="100%">
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {function} predicate - The condition any source emitted item has to satisfy.
- * @return {Observable} An Observable that emits only the last item satisfying the given condition
- * from the source, or an NoSuchElementException if no such items are emitted.
- * @throws - Throws if no items that match the predicate are emitted by the source Observable.
+ * @throws {EmptyError} 如果 Observale 完成前还没有发出任何 `next` 通知的话，就会
+ * 发送 EmptyError 给观察者的 `error` 回调函数。
+ * @param {function} predicate - 任何由源 Observable 发出的项都必须满足的条件函数。
+ * @return {Observable} 该 Observable 只发出源 Observable 中满足给定条件的最后一项，
+ * 或者没有任何项满足条件时发出 NoSuchElementException 。
+ * @throws - 如果在源 Observable 中没有匹配 predicate 函数的项，则抛出。
  * @method last
  * @owner Observable
  */
@@ -10339,16 +10254,16 @@ Observable.prototype.let = letProto;
 Observable.prototype.letBind = letProto;
 
 /**
- * Returns an Observable that emits whether or not every item of the source satisfies the condition specified.
+ * 返回的 Observable 发出是否源 Observable 的每项都满足指定的条件。
  *
- * @example <caption>A simple example emitting true if all elements are less than 5, false otherwise</caption>
+ * @example <caption>一个简单示例：如果所有元素都小于5就发出 `true`，反之 `false`</caption>
  *  Observable.of(1, 2, 3, 4, 5, 6)
  *     .every(x => x < 5)
  *     .subscribe(x => console.log(x)); // -> false
  *
- * @param {function} predicate A function for determining if an item meets a specified condition.
- * @param {any} [thisArg] Optional object to use for `this` in the callback.
- * @return {Observable} An Observable of booleans that determines if all items of the source Observable meet the condition specified.
+ * @param {function} predicate 用来确定每一项是否满足指定条件的函数。
+ * @param {any} [thisArg] 可选对象，作为回调函数中的 `this` 使用。
+ * @return {Observable} 布尔值的 Observable，用来确定是否源 Observable 的所有项都满足指定条件。
  * @method every
  * @owner Observable
  */
@@ -10409,28 +10324,25 @@ Observable.prototype.every = every;
 Observable.prototype.map = map;
 
 /**
- * Emits the given constant value on the output Observable every time the source
- * Observable emits a value.
+ * 每次源 Observble 发出值时，都在输出 Observable 上发出给定的常量值。
  *
- * <span class="informal">Like {@link map}, but it maps every source value to
- * the same output value every time.</span>
+ * <span class="informal">类似于 {@link map}，但它每一次都把源值映射成同一个输出值。</span>
  *
  * <img src="./img/mapTo.png" width="100%">
  *
- * Takes a constant `value` as argument, and emits that whenever the source
- * Observable emits a value. In other words, ignores the actual source value,
- * and simply uses the emission moment to know when to emit the given `value`.
+ * 接收常量 `value` 作为参数，并每当源 Observable 发出值时都发出这个值。换句话说，
+ * 就是忽略实际的源值，然后简单地使用这个发送时间点以知道何时发出给定的 `value` 。
  *
- * @example <caption>Map every every click to the string 'Hi'</caption>
+ * @example <caption>把每次点击映射成字符串 'Hi'</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var greetings = clicks.mapTo('Hi');
  * greetings.subscribe(x => console.log(x));
  *
  * @see {@link map}
  *
- * @param {any} value The value to map each source value to.
- * @return {Observable} An Observable that emits the given `value` every time
- * the source Observable emits something.
+ * @param {any} value 将每个源值映射成的值。
+ * @return {Observable} 该 Observable 在每次源 Observable 发出值的时候发出给定
+ * 的 `value` 。
  * @method mapTo
  * @owner Observable
  */
@@ -10466,34 +10378,31 @@ var MapToSubscriber = (function (_super) {
 Observable.prototype.mapTo = mapTo;
 
 /**
- * Represents all of the notifications from the source Observable as `next`
- * emissions marked with their original types within {@link Notification}
- * objects.
+ * 表示源 Observable 中的所有通知，每个通知都会在 {@link Notification} 对象中标记为
+ * 它们原始的通知类型，并会作为输出 Observable 的 `next` 通知。
  *
- * <span class="informal">Wraps `next`, `error` and `complete` emissions in
- * {@link Notification} objects, emitted as `next` on the output Observable.
+ * <span class="informal">在 {@link Notification} 对象中包装 `next`、`error`
+ * 和 `complete` 发送, 并在输出 Observable 上作为 `next` 发送出去。
  * </span>
  *
  * <img src="./img/materialize.png" width="100%">
  *
- * `materialize` returns an Observable that emits a `next` notification for each
- * `next`, `error`, or `complete` emission of the source Observable. When the
- * source Observable emits `complete`, the output Observable will emit `next` as
- * a Notification of type "complete", and then it will emit `complete` as well.
- * When the source Observable emits `error`, the output will emit `next` as a
- * Notification of type "error", and then `complete`.
+ * `materialize` 返回一个 Observable，这个 Observable 会为每个源 Observable 的
+ * `next`、`error` 或 `complete` 通知发出 `next` 通知。当源 Observable 发出 `complete` 时，
+ * 输出 Observable 会发出 `next` 并且 Notification 类型为 "complete"，然后它也发出
+ * `complete` 。当源 Observable 发出 `error` 时，输出 Observable 会发出 `next` 并且
+ * Notification 类型为 "error"，然后发出 `complete` 。
  *
- * This operator is useful for producing metadata of the source Observable, to
- * be consumed as `next` emissions. Use it in conjunction with
- * {@link dematerialize}.
+ * 该操作符对于生成源 Observable 的元数据很有用，并作为 `next` 发送使用掉。
+ * 与 {@link dematerialize} 结合使用。
  *
- * @example <caption>Convert a faulty Observable to an Observable of Notifications</caption>
+ * @example <caption>将一个错误的 Observable 转换成 Notification 类型的 Observable</caption>
  * var letters = Rx.Observable.of('a', 'b', 13, 'd');
  * var upperCase = letters.map(x => x.toUpperCase());
  * var materialized = upperCase.materialize();
  * materialized.subscribe(x => console.log(x));
  *
- * // Results in the following:
+ * // 结果如下：
  * // - Notification {kind: "N", value: "A", error: undefined, hasValue: true}
  * // - Notification {kind: "N", value: "B", error: undefined, hasValue: true}
  * // - Notification {kind: "E", value: undefined, error: TypeError:
@@ -10503,9 +10412,8 @@ Observable.prototype.mapTo = mapTo;
  * @see {@link Notification}
  * @see {@link dematerialize}
  *
- * @return {Observable<Notification<T>>} An Observable that emits
- * {@link Notification} objects that wrap the original emissions from the source
- * Observable with metadata.
+ * @return {Observable<Notification<T>>} 该 Observable 会发出 {@link Notification} 对象，
+ * 该对象包装了来自源 Observable 的带有元数据的原始通知。
  * @method materialize
  * @owner Observable
  */
@@ -10665,17 +10573,16 @@ var ReduceSubscriber = (function (_super) {
 }(Subscriber));
 
 /**
- * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
- * and when source Observable completes it emits a single item: the item with the largest value.
+ * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。
  *
  * <img src="./img/max.png" width="100%">
  *
- * @example <caption>Get the maximal value of a series of numbers</caption>
+ * @example <caption>获取一连串数字中的最大值</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .max()
  *   .subscribe(x => console.log(x)); // -> 8
  *
- * @example <caption>Use a comparer function to get the maximal item</caption>
+ * @example <caption>使用比较函数来获取最大值的项</caption>
  * interface Person {
  *   age: number,
  *   name: string
@@ -10689,9 +10596,8 @@ var ReduceSubscriber = (function (_super) {
  *
  * @see {@link min}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable} An Observable that emits item with the largest value.
+ * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。
+ * @return {Observable} 该 Observable 发出最大值的项。
  * @method max
  * @owner Observable
  */
@@ -10715,33 +10621,32 @@ Observable.prototype.flatMapTo = mergeMapTo;
 Observable.prototype.mergeMapTo = mergeMapTo;
 
 /**
- * Applies an accumulator function over the source Observable where the
- * accumulator function itself returns an Observable, then each intermediate
- * Observable returned is merged into the output Observable.
+ * 在源 Observable 上应用 accumulator 函数，其中 accumulator 函数本身返回
+ * Observable ，然后每个返回的中间 Observable 会被合并到输出 Observable 中。
  *
- * <span class="informal">It's like {@link scan}, but the Observables returned
- * by the accumulator are merged into the outer Observable.</span>
+ * <span class="informal">它很像 {@link scan}，但 accumulator 函数返回的
+ * Observables 会被合并到外部 Observalbe 中。</span>
  *
- * @example <caption>Count the number of click events</caption>
+ * @example <caption>点击计数</caption>
  * const click$ = Rx.Observable.fromEvent(document, 'click');
  * const one$ = click$.mapTo(1);
  * const seed = 0;
  * const count$ = one$.mergeScan((acc, one) => Rx.Observable.of(acc + one), seed);
  * count$.subscribe(x => console.log(x));
  *
- * // Results:
+ * // 结果：
  * 1
  * 2
  * 3
  * 4
- * // ...and so on for each click
+ * // ...以此类推，每次点击计数增加1
  *
  * @param {function(acc: R, value: T): Observable<R>} accumulator
- * The accumulator function called on each source value.
- * @param seed The initial accumulation value.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of
- * input Observables being subscribed to concurrently.
- * @return {Observable<R>} An observable of the accumulated values.
+ * 在每个源值上调用的累加器函数。
+ * @param seed 初始的累加值。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入
+ * Observables 的最大数量。
+ * @return {Observable<R>} 累加值的 Observable 。
  * @method mergeScan
  * @owner Observable
  */
@@ -10835,15 +10740,16 @@ Observable.prototype.mergeScan = mergeScan;
 /**
  * The Min operator operates on an Observable that emits numbers (or items that can be compared with a provided function),
  * and when source Observable completes it emits a single item: the item with the smallest value.
+ * `min` 操作符操作的 Observable 发出数字(或可以使用提供函数进行比较的项)并且当源 Observable 完成时它发出单一项：最小值的项。
  *
  * <img src="./img/min.png" width="100%">
  *
- * @example <caption>Get the minimal value of a series of numbers</caption>
+ * @example <caption>获取一连串数字中的最小值</caption>
  * Rx.Observable.of(5, 4, 7, 2, 8)
  *   .min()
  *   .subscribe(x => console.log(x)); // -> 2
  *
- * @example <caption>Use a comparer function to get the minimal item</caption>
+ * @example <caption>使用比较函数来获取最小值的项</caption>
  * interface Person {
  *   age: number,
  *   name: string
@@ -10857,9 +10763,8 @@ Observable.prototype.mergeScan = mergeScan;
  *
  * @see {@link max}
  *
- * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the
- * value of two items.
- * @return {Observable<R>} An Observable that emits item with the smallest value.
+ * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。
+ * @return {Observable<R>} 该 Observable 发出最小值的项。
  * @method min
  * @owner Observable
  */
@@ -11032,21 +10937,17 @@ var RefCountSubscriber = (function (_super) {
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits the results of invoking a specified selector on items
- * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
+ * 返回的 Observable 发出对 ConnectableObservable 发出的项调用一个指定的 selector 函数的结果，
+ * ConnectableObservable 可以在潜在的多个流之间共享单个 subscription 。
  *
  * <img src="./img/multicast.png" width="100%">
  *
- * @param {Function|Subject} subjectOrSubjectFactory - Factory function to create an intermediate subject through
- * which the source sequence's elements will be multicast to the selector function
- * or Subject to push source elements into.
- * @param {Function} [selector] - Optional selector function that can use the multicasted source stream
- * as many times as needed, without causing multiple subscriptions to the source stream.
- * Subscribers to the given source will receive all notifications of the source from the
- * time of the subscription forward.
- * @return {Observable} An Observable that emits the results of invoking the selector
- * on the items emitted by a `ConnectableObservable` that shares a single subscription to
- * the underlying stream.
+ * @param {Function|Subject} subjectOrSubjectFactory - 用来创建中间 Subject 的工厂函数，源序列的元素将通过
+ * 该 Subject 多播到 selector函数，或者将元素推入该 Subject 。
+ * @param {Function} [selector] - 可选的选择器函数，可以根据需要多次使用以多播源流，而不会导致源流
+ * 生成多个 subscriptions 。给定源的订阅者会从订阅开始的一刻起，接收源的所有通知。
+ * @return {Observable} 该 Observable 发出对 ConnectableObservable 发出的项调用 selector 函数的结果，
+ * ConnectableObservable 可以在潜在的多个流之间共享单个 subscription 。
  * @method multicast
  * @owner Observable
  */

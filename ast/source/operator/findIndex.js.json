@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Emits only the index of the first value emitted by the source Observable that\n * meets some condition.\n *\n * <span class=\"informal\">It's like {@link find}, but emits the index of the\n * found value, not the value itself.</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` searches for the first item in the source Observable that matches\n * the specified condition embodied by the `predicate`, and returns the\n * (zero-based) index of the first occurrence in the source. Unlike\n * {@link first}, the `predicate` is required in `findIndex`, and does not emit\n * an error if a valid value is not found.\n *\n * @example <caption>Emit the index of first click that happens on a DIV element</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * A function called with each item to test for condition matching.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {Observable} An Observable of the index of the first item that\n * matches the condition.\n * @method find\n * @owner Observable\n ",
+          "value": "*\n * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。\n *\n * <span class=\"informal\">它很像 {@link find} , 但发出的是找到的值的索引，\n * 而不是值本身。</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后\n * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到\n * 有效的值的话也不会发出错误。\n *\n * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * 使用每项来调用的函数，用于测试是否符合条件。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。\n * @method find\n * @owner Observable\n ",
           "range": [
             44,
-            1443
+            971
           ],
           "loc": {
             "start": {
@@ -105,7 +105,7 @@
               "column": 0
             },
             "end": {
-              "line": 35,
+              "line": 30,
               "column": 3
             }
           }
@@ -120,16 +120,16 @@
           "type": "Identifier",
           "name": "findIndex",
           "range": [
-            1460,
-            1469
+            988,
+            997
           ],
           "loc": {
             "start": {
-              "line": 36,
+              "line": 31,
               "column": 16
             },
             "end": {
-              "line": 36,
+              "line": 31,
               "column": 25
             }
           }
@@ -139,16 +139,16 @@
             "type": "Identifier",
             "name": "predicate",
             "range": [
-              1470,
-              1479
+              998,
+              1007
             ],
             "loc": {
               "start": {
-                "line": 36,
+                "line": 31,
                 "column": 26
               },
               "end": {
-                "line": 36,
+                "line": 31,
                 "column": 35
               }
             }
@@ -157,16 +157,16 @@
             "type": "Identifier",
             "name": "thisArg",
             "range": [
-              1481,
-              1488
+              1009,
+              1016
             ],
             "loc": {
               "start": {
-                "line": 36,
+                "line": 31,
                 "column": 37
               },
               "end": {
-                "line": 36,
+                "line": 31,
                 "column": 44
               }
             }
@@ -185,16 +185,16 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      1503,
-                      1507
+                      1031,
+                      1035
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 32,
                         "column": 11
                       },
                       "end": {
-                        "line": 37,
+                        "line": 32,
                         "column": 15
                       }
                     }
@@ -203,31 +203,31 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      1508,
-                      1512
+                      1036,
+                      1040
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 32,
                         "column": 16
                       },
                       "end": {
-                        "line": 37,
+                        "line": 32,
                         "column": 20
                       }
                     }
                   },
                   "range": [
-                    1503,
-                    1512
+                    1031,
+                    1040
                   ],
                   "loc": {
                     "start": {
-                      "line": 37,
+                      "line": 32,
                       "column": 11
                     },
                     "end": {
-                      "line": 37,
+                      "line": 32,
                       "column": 20
                     }
                   }
@@ -239,16 +239,16 @@
                       "type": "Identifier",
                       "name": "FindValueOperator",
                       "range": [
-                        1517,
-                        1534
+                        1045,
+                        1062
                       ],
                       "loc": {
                         "start": {
-                          "line": 37,
+                          "line": 32,
                           "column": 25
                         },
                         "end": {
-                          "line": 37,
+                          "line": 32,
                           "column": 42
                         }
                       }
@@ -258,16 +258,16 @@
                         "type": "Identifier",
                         "name": "predicate",
                         "range": [
-                          1535,
-                          1544
+                          1063,
+                          1072
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 32,
                             "column": 43
                           },
                           "end": {
-                            "line": 37,
+                            "line": 32,
                             "column": 52
                           }
                         }
@@ -275,16 +275,16 @@
                       {
                         "type": "ThisExpression",
                         "range": [
-                          1546,
-                          1550
+                          1074,
+                          1078
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 32,
                             "column": 54
                           },
                           "end": {
-                            "line": 37,
+                            "line": 32,
                             "column": 58
                           }
                         }
@@ -294,16 +294,16 @@
                         "value": true,
                         "raw": "true",
                         "range": [
-                          1552,
-                          1556
+                          1080,
+                          1084
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 32,
                             "column": 60
                           },
                           "end": {
-                            "line": 37,
+                            "line": 32,
                             "column": 64
                           }
                         }
@@ -312,79 +312,79 @@
                         "type": "Identifier",
                         "name": "thisArg",
                         "range": [
-                          1558,
-                          1565
+                          1086,
+                          1093
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 32,
                             "column": 66
                           },
                           "end": {
-                            "line": 37,
+                            "line": 32,
                             "column": 73
                           }
                         }
                       }
                     ],
                     "range": [
-                      1513,
-                      1566
+                      1041,
+                      1094
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 32,
                         "column": 21
                       },
                       "end": {
-                        "line": 37,
+                        "line": 32,
                         "column": 74
                       }
                     }
                   }
                 ],
                 "range": [
-                  1503,
-                  1567
+                  1031,
+                  1095
                 ],
                 "loc": {
                   "start": {
-                    "line": 37,
+                    "line": 32,
                     "column": 11
                   },
                   "end": {
-                    "line": 37,
+                    "line": 32,
                     "column": 75
                   }
                 }
               },
               "range": [
-                1496,
-                1568
+                1024,
+                1096
               ],
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 32,
                   "column": 4
                 },
                 "end": {
-                  "line": 37,
+                  "line": 32,
                   "column": 76
                 }
               }
             }
           ],
           "range": [
-            1490,
-            1570
+            1018,
+            1098
           ],
           "loc": {
             "start": {
-              "line": 36,
+              "line": 31,
               "column": 46
             },
             "end": {
-              "line": 38,
+              "line": 33,
               "column": 1
             }
           }
@@ -392,26 +392,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          1451,
-          1570
+          979,
+          1098
         ],
         "loc": {
           "start": {
-            "line": 36,
+            "line": 31,
             "column": 7
           },
           "end": {
-            "line": 38,
+            "line": 33,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Emits only the index of the first value emitted by the source Observable that\n * meets some condition.\n *\n * <span class=\"informal\">It's like {@link find}, but emits the index of the\n * found value, not the value itself.</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` searches for the first item in the source Observable that matches\n * the specified condition embodied by the `predicate`, and returns the\n * (zero-based) index of the first occurrence in the source. Unlike\n * {@link first}, the `predicate` is required in `findIndex`, and does not emit\n * an error if a valid value is not found.\n *\n * @example <caption>Emit the index of first click that happens on a DIV element</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * A function called with each item to test for condition matching.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {Observable} An Observable of the index of the first item that\n * matches the condition.\n * @method find\n * @owner Observable\n ",
+            "value": "*\n * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。\n *\n * <span class=\"informal\">它很像 {@link find} , 但发出的是找到的值的索引，\n * 而不是值本身。</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后\n * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到\n * 有效的值的话也不会发出错误。\n *\n * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * 使用每项来调用的函数，用于测试是否符合条件。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。\n * @method find\n * @owner Observable\n ",
             "range": [
               44,
-              1443
+              971
             ],
             "loc": {
               "start": {
@@ -419,7 +419,7 @@
                 "column": 0
               },
               "end": {
-                "line": 35,
+                "line": 30,
                 "column": 3
               }
             }
@@ -430,16 +430,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=findIndex.js.map",
             "range": [
-              1571,
-              1608
+              1099,
+              1136
             ],
             "loc": {
               "start": {
-                "line": 39,
+                "line": 34,
                 "column": 0
               },
               "end": {
-                "line": 39,
+                "line": 34,
                 "column": 37
               }
             }
@@ -449,26 +449,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1444,
-        1570
+        972,
+        1098
       ],
       "loc": {
         "start": {
-          "line": 36,
+          "line": 31,
           "column": 0
         },
         "end": {
-          "line": 38,
+          "line": 33,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Emits only the index of the first value emitted by the source Observable that\n * meets some condition.\n *\n * <span class=\"informal\">It's like {@link find}, but emits the index of the\n * found value, not the value itself.</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` searches for the first item in the source Observable that matches\n * the specified condition embodied by the `predicate`, and returns the\n * (zero-based) index of the first occurrence in the source. Unlike\n * {@link first}, the `predicate` is required in `findIndex`, and does not emit\n * an error if a valid value is not found.\n *\n * @example <caption>Emit the index of first click that happens on a DIV element</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * A function called with each item to test for condition matching.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {Observable} An Observable of the index of the first item that\n * matches the condition.\n * @method find\n * @owner Observable\n ",
+          "value": "*\n * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。\n *\n * <span class=\"informal\">它很像 {@link find} , 但发出的是找到的值的索引，\n * 而不是值本身。</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后\n * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到\n * 有效的值的话也不会发出错误。\n *\n * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * 使用每项来调用的函数，用于测试是否符合条件。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。\n * @method find\n * @owner Observable\n ",
           "range": [
             44,
-            1443
+            971
           ],
           "loc": {
             "start": {
@@ -476,7 +476,7 @@
               "column": 0
             },
             "end": {
-              "line": 35,
+              "line": 30,
               "column": 3
             }
           }
@@ -487,16 +487,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=findIndex.js.map",
           "range": [
-            1571,
-            1608
+            1099,
+            1136
           ],
           "loc": {
             "start": {
-              "line": 39,
+              "line": 34,
               "column": 0
             },
             "end": {
-              "line": 39,
+              "line": 34,
               "column": 37
             }
           }
@@ -507,7 +507,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1570
+    1098
   ],
   "loc": {
     "start": {
@@ -515,17 +515,17 @@
       "column": 0
     },
     "end": {
-      "line": 38,
+      "line": 33,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Emits only the index of the first value emitted by the source Observable that\n * meets some condition.\n *\n * <span class=\"informal\">It's like {@link find}, but emits the index of the\n * found value, not the value itself.</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` searches for the first item in the source Observable that matches\n * the specified condition embodied by the `predicate`, and returns the\n * (zero-based) index of the first occurrence in the source. Unlike\n * {@link first}, the `predicate` is required in `findIndex`, and does not emit\n * an error if a valid value is not found.\n *\n * @example <caption>Emit the index of first click that happens on a DIV element</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * A function called with each item to test for condition matching.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {Observable} An Observable of the index of the first item that\n * matches the condition.\n * @method find\n * @owner Observable\n ",
+      "value": "*\n * 只发出源 Observable 所发出的值中第一个满足条件的值的索引。\n *\n * <span class=\"informal\">它很像 {@link find} , 但发出的是找到的值的索引，\n * 而不是值本身。</span>\n *\n * <img src=\"./img/findIndex.png\" width=\"100%\">\n *\n * `findIndex` 会查找源 Observable 中与 `predicate` 函数体现的指定条件匹配的第一项，然后\n * 返回其索引(从0开始)。不同于 {@link first}，在 `findIndex` 中 `predicate` 是必须的，而且如果没找到\n * 有效的值的话也不会发出错误。\n *\n * @example <caption>找到并发出第一个点击 DIV 元素的事件的索引</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var result = clicks.findIndex(ev => ev.target.tagName === 'DIV');\n * result.subscribe(x => console.log(x));\n *\n * @see {@link filter}\n * @see {@link find}\n * @see {@link first}\n * @see {@link take}\n *\n * @param {function(value: T, index: number, source: Observable<T>): boolean} predicate\n * 使用每项来调用的函数，用于测试是否符合条件。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {Observable<T>} 符合条件的第一项的索引的 Observable 。\n * @method find\n * @owner Observable\n ",
       "range": [
         44,
-        1443
+        971
       ],
       "loc": {
         "start": {
@@ -533,7 +533,7 @@
           "column": 0
         },
         "end": {
-          "line": 35,
+          "line": 30,
           "column": 3
         }
       }
@@ -542,16 +542,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=findIndex.js.map",
       "range": [
-        1571,
-        1608
+        1099,
+        1136
       ],
       "loc": {
         "start": {
-          "line": 39,
+          "line": 34,
           "column": 0
         },
         "end": {
-          "line": 39,
+          "line": 34,
           "column": 37
         }
       }

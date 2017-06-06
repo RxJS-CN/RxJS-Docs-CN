@@ -82,27 +82,25 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Converts a higher-order Observable into a first-order Observable which
- * concurrently delivers all values that are emitted on the inner Observables.
+ * &#x5C06;&#x9AD8;&#x9636; Observable &#x8F6C;&#x6362;&#x6210;&#x4E00;&#x9636; Observable &#xFF0C;&#x4E00;&#x9636; Observable &#x4F1A;&#x540C;&#x65F6;&#x53D1;&#x51FA;&#x5728;&#x5185;&#x90E8;
+ * Observables &#x4E0A;&#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Flattens an Observable-of-Observables.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x6253;&#x5E73;&#x9AD8;&#x9636; Observable &#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/mergeAll.png&quot; width=&quot;100%&quot;&gt;
  *
- * `mergeAll` subscribes to an Observable that emits Observables, also known as
- * a higher-order Observable. Each time it observes one of these emitted inner
- * Observables, it subscribes to that and delivers all the values from the
- * inner Observable on the output Observable. The output Observable only
- * completes once all inner Observables have completed. Any error delivered by
- * a inner Observable will be immediately emitted on the output Observable.
+ * `mergeAll` &#x8BA2;&#x9605;&#x53D1;&#x51FA; Observables &#x7684; Observalbe &#xFF0C;&#x4E5F;&#x79F0;&#x4E3A;&#x9AD8;&#x9636; Observable &#x3002;
+ * &#x6BCF;&#x5F53;&#x89C2;&#x5BDF;&#x5230;&#x53D1;&#x51FA;&#x7684;&#x5185;&#x90E8; Observable &#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x8BA2;&#x9605;&#x5E76;&#x53D1;&#x51FA;&#x8F93;&#x51FA; Observable &#x4E0A;&#x7684;&#x8FD9;&#x4E2A;
+ * &#x5185;&#x90E8; Observable &#x7684;&#x6240;&#x6709;&#x503C;&#x3002;&#x6240;&#x6709;&#x7684;&#x5185;&#x90E8; Observable &#x90FD;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x8F93;&#x51FA; Observable
+ * &#x624D;&#x80FD;&#x5B8C;&#x6210;&#x3002;&#x4EFB;&#x4F55;&#x7531;&#x5185;&#x90E8; Observable &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#x90FD;&#x4F1A;&#x7ACB;&#x5373;&#x5728;&#x8F93;&#x51FA; Observalbe &#x4E0A;&#x53D1;&#x51FA;&#x3002;
  *
- * @example &lt;caption&gt;Spawn a new interval Observable for each click event, and blend their outputs as one Observable&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4E3A;&#x6BCF;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; interval Observable &#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x8F93;&#x51FA;&#x6DF7;&#x5408;&#x4E3A;&#x4E00;&#x4E2A; Observable&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var higherOrder = clicks.map((ev) =&gt; Rx.Observable.interval(1000));
  * var firstOrder = higherOrder.mergeAll();
  * firstOrder.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Count from 0 to 9 every second for each click, but only allow 2 concurrent timers&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x90FD;&#x4F1A;&#x4ECE;0&#x5230;9&#x8BA1;&#x6570;(&#x6BCF;&#x79D2;&#x8BA1;&#x6570;&#x4E00;&#x6B21;)&#xFF0C;&#x4F46;&#x53EA;&#x5141;&#x8BB8;&#x6700;&#x591A;&#x540C;&#x65F6;&#x53EA;&#x80FD;&#x6709;&#x4E24;&#x4E2A;&#x8BA1;&#x65F6;&#x5668;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var higherOrder = clicks.map((ev) =&gt; Rx.Observable.interval(1000).take(10));
  * var firstOrder = higherOrder.mergeAll(2);
@@ -118,10 +116,10 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of inner
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits values coming from all the
- * inner Observables emitted by the source Observable.
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] &#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8BA2;&#x9605;&#x7684;&#x8F93;&#x5165;
+ * Observables &#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x6765;&#x81EA;&#x6240;&#x6709;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;
+ * &#x5185;&#x90E8; Observables &#x3002;
  * @method mergeAll
  * @owner Observable
  */

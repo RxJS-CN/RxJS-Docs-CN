@@ -83,19 +83,18 @@
 import { EmptyError } from &apos;../util/EmptyError&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits only the last item emitted by the source Observable.
- * It optionally takes a predicate function as a parameter, in which case, rather than emitting
- * the last item from the source Observable, the resulting Observable will emit the last item
- * from the source Observable that satisfies the predicate.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53EA;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684; predicate &#x51FD;&#x6570;&#x4F5C;&#x4E3A;
+ * &#x53C2;&#x6570;&#xFF0C;&#x5982;&#x679C;&#x4F20;&#x5165; predicate &#x7684;&#x8BDD;&#x5219;&#x53D1;&#x9001;&#x7684;&#x4E0D;&#x662F;&#x6E90; Observable &#x7684;&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF0C;&#x800C;&#x662F;&#x53D1;&#x51FA;&#x6E90; Observable &#x4E2D;
+ * &#x6EE1;&#x8DB3; predicate &#x51FD;&#x6570;&#x7684;&#x6700;&#x540E;&#x4E00;&#x9879;&#x3002;
  *
  * &lt;img src=&quot;./img/last.png&quot; width=&quot;100%&quot;&gt;
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer&apos;s `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {function} predicate - The condition any source emitted item has to satisfy.
- * @return {Observable} An Observable that emits only the last item satisfying the given condition
- * from the source, or an NoSuchElementException if no such items are emitted.
- * @throws - Throws if no items that match the predicate are emitted by the source Observable.
+ * @throws {EmptyError} &#x5982;&#x679C; Observale &#x5B8C;&#x6210;&#x524D;&#x8FD8;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x4EFB;&#x4F55; `next` &#x901A;&#x77E5;&#x7684;&#x8BDD;&#xFF0C;&#x5C31;&#x4F1A;
+ * &#x53D1;&#x9001; EmptyError &#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+ * @param {function} predicate - &#x4EFB;&#x4F55;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x9879;&#x90FD;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x7684;&#x6761;&#x4EF6;&#x51FD;&#x6570;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53EA;&#x53D1;&#x51FA;&#x6E90; Observable &#x4E2D;&#x6EE1;&#x8DB3;&#x7ED9;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6700;&#x540E;&#x4E00;&#x9879;&#xFF0C;
+ * &#x6216;&#x8005;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x9879;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x65F6;&#x53D1;&#x51FA; NoSuchElementException &#x3002;
+ * @throws - &#x5982;&#x679C;&#x5728;&#x6E90; Observable &#x4E2D;&#x6CA1;&#x6709;&#x5339;&#x914D; predicate &#x51FD;&#x6570;&#x7684;&#x9879;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x3002;
  * @method last
  * @owner Observable
  */

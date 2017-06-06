@@ -82,12 +82,12 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { noop } from &apos;../util/noop&apos;;
 /**
- * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.
+ * &#x5FFD;&#x7565;&#x6E90; Observable &#x6240;&#x53D1;&#x9001;&#x7684;&#x6240;&#x6709;&#x9879;&#xFF0C;&#x53EA;&#x4F20;&#x9012; `complete` &#x6216; `error` &#x7684;&#x8C03;&#x7528;&#x3002;
  *
  * &lt;img src=&quot;./img/ignoreElements.png&quot; width=&quot;100%&quot;&gt;
  *
- * @return {Observable} An empty Observable that only calls `complete`
- * or `error`, based on which one is called by the source Observable.
+ * @return {Observable} &#x8BE5; Observable &#x662F;&#x7A7A;&#x7684;&#xFF0C;&#x53EA;&#x8C03;&#x7528; `complete` &#x6216;
+ * `error`&#xFF0C;&#x8C03;&#x7528;&#x662F;&#x57FA;&#x4E8E;&#x6E90; Observable &#x7684;&#x8C03;&#x7528;&#x3002;
  * @method ignoreElements
  * @owner Observable
  */

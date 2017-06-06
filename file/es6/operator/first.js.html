@@ -82,28 +82,24 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { EmptyError } from &apos;../util/EmptyError&apos;;
 /**
- * Emits only the first value (or the first value that meets some condition)
- * emitted by the source Observable.
+ * &#x53EA;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;(&#x6216;&#x7B2C;&#x4E00;&#x4E2A;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x503C;)&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Emits only the first value. Or emits only the first
- * value that passes some test.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#x3002;&#x6216;&#x8005;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x901A;&#x8FC7;&#x6D4B;&#x8BD5;&#x7684;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/first.png&quot; width=&quot;100%&quot;&gt;
  *
- * If called with no arguments, `first` emits the first value of the source
- * Observable, then completes. If called with a `predicate` function, `first`
- * emits the first value of the source that matches the specified condition. It
- * may also take a `resultSelector` function to produce the output value from
- * the input value, and a `defaultValue` to emit in case the source completes
- * before it is able to emit a valid value. Throws an error if `defaultValue`
- * was not provided and a matching element is not found.
+ * &#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x53C2;&#x6570;&#x8C03;&#x7528;&#xFF0C;`first` &#x4F1A;&#x53D1;&#x51FA;&#x6E90; Observable &#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;&#x5982;&#x679C;&#x4F7F;&#x7528;
+ * `predicate` &#x51FD;&#x6570;&#x6765;&#x8C03;&#x7528;&#xFF0C;`first` &#x4F1A;&#x53D1;&#x51FA;&#x6E90; Observable &#x7B2C;&#x4E00;&#x4E2A;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x503C;&#x3002;&#x5B83;&#x8FD8;&#x53EF;&#x4EE5;
+ * &#x63A5;&#x6536; `resultSelector` &#x51FD;&#x6570;&#x6839;&#x636E;&#x8F93;&#x5165;&#x503C;&#x751F;&#x6210;&#x8F93;&#x51FA;&#x503C;&#xFF0C;&#x5047;&#x5982;&#x5728;&#x6E90; Observable &#x5B8C;&#x6210;&#x524D;&#x65E0;&#x6CD5;&#x53D1;
+ * &#x51FA;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x503C;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x4F1A;&#x53D1;&#x51FA; `defaultValue` &#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B; `defaultValue` &#x5E76;&#x4E14;&#x4E5F;
+ * &#x627E;&#x4E0D;&#x5230;&#x5339;&#x914D;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x9519;&#x8BEF;&#x3002;
  *
- * @example &lt;caption&gt;Emit only the first click that happens on the DOM&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x6B21;&#x70B9;&#x51FB; DOM &#x7684;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.first();
  * result.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Emits the first click that happens on a DIV&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x6B21;&#x70B9;&#x51FB; DIV &#x5143;&#x7D20;&#x7684;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.first(ev =&gt; ev.target.tagName === &apos;DIV&apos;);
  * result.subscribe(x =&gt; console.log(x));
@@ -112,21 +108,18 @@ import { EmptyError } from &apos;../util/EmptyError&apos;;
  * @see {@link find}
  * @see {@link take}
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer&apos;s `error`
- * callback if the Observable completes before any `next` notification was sent.
+ * @throws {EmptyError} &#x5982;&#x679C;&#x5728; Observable &#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x8FD8;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x4EFB;&#x4F55; `next` &#x901A;&#x77E5;&#x7684;&#x8BDD;&#xFF0C;
+ * &#x5C31;&#x628A; EmptyError &#x53D1;&#x9001;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
  *
  * @param {function(value: T, index: number, source: Observable&lt;T&gt;): boolean} [predicate]
- * An optional function called with each item to test for condition matching.
- * @param {function(value: T, index: number): R} [resultSelector] A function to
- * produce the value on the output Observable based on the values
- * and the indices of the source Observable. The arguments passed to this
- * function are:
- * - `value`: the value that was emitted on the source.
- * - `index`: the &quot;index&quot; of the value from the source.
- * @param {R} [defaultValue] The default value emitted in case no valid value
- * was found on the source.
- * @return {Observable&lt;T|R&gt;} An Observable of the first item that matches the
- * condition.
+ * &#x4F7F;&#x7528;&#x6BCF;&#x9879;&#x6765;&#x8C03;&#x7528;&#x7684;&#x53EF;&#x9009;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x3002;
+ * @param {function(value: T, index: number): R} [resultSelector] &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x57FA;&#x4E8E;&#x6E90;
+ * Observable &#x7684;&#x503C;&#x548C;&#x7D22;&#x5F15;&#x6765;&#x751F;&#x6210;&#x8F93;&#x51FA; Observable &#x7684;&#x503C;&#x3002;&#x4F20;&#x7ED9;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x6709;&#xFF1A;
+ * - `value`: &#x5728;&#x6E90; Observable &#x4E0A;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+ * - `index`: &#x6E90;&#x503C;&#x7684;&#x7D22;&#x5F15;&#x3002;
+ * @param {R} [defaultValue] &#x5047;&#x5982;&#x5728;&#x6E90; Observable &#x4E0A;&#x6CA1;&#x6709;&#x627E;&#x5230;&#x6709;&#x6548;&#x503C;&#xFF0C;&#x5C31;&#x4F1A;&#x53D1;&#x51FA;&#x8FD9;&#x4E2A;
+ * &#x9ED8;&#x8BA4;&#x503C;&#x3002;
+ * @return {Observable&lt;T|R&gt;} &#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x7B2C;&#x4E00;&#x9879;&#x7684; Observable &#x3002;
  * @method first
  * @owner Observable
  */

@@ -385,10 +385,10 @@
         },
         {
           "type": "Block",
-          "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (either the source or an\n * Observable given as argument), and simply forwards (without doing any\n * transformation) all the values from all the input Observables to the output\n * Observable. The output Observable only completes once all input Observables\n * have completed. Any error delivered by an input Observable will be immediately\n * emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other An input Observable to merge with the source\n * Observable. More than one input Observables may be given as argument.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} An Observable that emits items that are the result of\n * every input Observable.\n * @method merge\n * @owner Observable\n ",
+          "value": "*\n * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。\n *\n * <span class=\"informal\">通过把多个 Observables 的值混合到一个 Observable 中\n * 来将其打平。</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是\n * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入\n * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都\n * 会立即在输出 Observalbe 上发出。\n *\n * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // 参数\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。\n * 可以给定多个输入 Observables 作为参数。\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入\n * Observables 的最大数量。\n * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的\n * 调度器。\n * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。\n * @method merge\n * @owner Observable\n ",
           "range": [
             243,
-            2284
+            1746
           ],
           "loc": {
             "start": {
@@ -396,7 +396,7 @@
               "column": 0
             },
             "end": {
-              "line": 51,
+              "line": 47,
               "column": 3
             }
           }
@@ -411,16 +411,16 @@
           "type": "Identifier",
           "name": "merge",
           "range": [
-            2301,
-            2306
+            1763,
+            1768
           ],
           "loc": {
             "start": {
-              "line": 52,
+              "line": 48,
               "column": 16
             },
             "end": {
-              "line": 52,
+              "line": 48,
               "column": 21
             }
           }
@@ -432,31 +432,31 @@
               "type": "Identifier",
               "name": "observables",
               "range": [
-                2310,
-                2321
+                1772,
+                1783
               ],
               "loc": {
                 "start": {
-                  "line": 52,
+                  "line": 48,
                   "column": 25
                 },
                 "end": {
-                  "line": 52,
+                  "line": 48,
                   "column": 36
                 }
               }
             },
             "range": [
-              2307,
-              2321
+              1769,
+              1783
             ],
             "loc": {
               "start": {
-                "line": 52,
+                "line": 48,
                 "column": 22
               },
               "end": {
-                "line": 52,
+                "line": 48,
                 "column": 36
               }
             }
@@ -478,16 +478,16 @@
                     "object": {
                       "type": "ThisExpression",
                       "range": [
-                        2336,
-                        2340
+                        1798,
+                        1802
                       ],
                       "loc": {
                         "start": {
-                          "line": 53,
+                          "line": 49,
                           "column": 11
                         },
                         "end": {
-                          "line": 53,
+                          "line": 49,
                           "column": 15
                         }
                       }
@@ -496,31 +496,31 @@
                       "type": "Identifier",
                       "name": "lift",
                       "range": [
-                        2341,
-                        2345
+                        1803,
+                        1807
                       ],
                       "loc": {
                         "start": {
-                          "line": 53,
+                          "line": 49,
                           "column": 16
                         },
                         "end": {
-                          "line": 53,
+                          "line": 49,
                           "column": 20
                         }
                       }
                     },
                     "range": [
-                      2336,
-                      2345
+                      1798,
+                      1807
                     ],
                     "loc": {
                       "start": {
-                        "line": 53,
+                        "line": 49,
                         "column": 11
                       },
                       "end": {
-                        "line": 53,
+                        "line": 49,
                         "column": 20
                       }
                     }
@@ -529,31 +529,31 @@
                     "type": "Identifier",
                     "name": "call",
                     "range": [
-                      2346,
-                      2350
+                      1808,
+                      1812
                     ],
                     "loc": {
                       "start": {
-                        "line": 53,
+                        "line": 49,
                         "column": 21
                       },
                       "end": {
-                        "line": 53,
+                        "line": 49,
                         "column": 25
                       }
                     }
                   },
                   "range": [
-                    2336,
-                    2350
+                    1798,
+                    1812
                   ],
                   "loc": {
                     "start": {
-                      "line": 53,
+                      "line": 49,
                       "column": 11
                     },
                     "end": {
-                      "line": 53,
+                      "line": 49,
                       "column": 25
                     }
                   }
@@ -565,16 +565,16 @@
                       "type": "Identifier",
                       "name": "mergeStatic",
                       "range": [
-                        2351,
-                        2362
+                        1813,
+                        1824
                       ],
                       "loc": {
                         "start": {
-                          "line": 53,
+                          "line": 49,
                           "column": 26
                         },
                         "end": {
-                          "line": 53,
+                          "line": 49,
                           "column": 37
                         }
                       }
@@ -583,16 +583,16 @@
                       {
                         "type": "ThisExpression",
                         "range": [
-                          2363,
-                          2367
+                          1825,
+                          1829
                         ],
                         "loc": {
                           "start": {
-                            "line": 53,
+                            "line": 49,
                             "column": 38
                           },
                           "end": {
-                            "line": 53,
+                            "line": 49,
                             "column": 42
                           }
                         }
@@ -603,94 +603,94 @@
                           "type": "Identifier",
                           "name": "observables",
                           "range": [
-                            2372,
-                            2383
+                            1834,
+                            1845
                           ],
                           "loc": {
                             "start": {
-                              "line": 53,
+                              "line": 49,
                               "column": 47
                             },
                             "end": {
-                              "line": 53,
+                              "line": 49,
                               "column": 58
                             }
                           }
                         },
                         "range": [
-                          2369,
-                          2383
+                          1831,
+                          1845
                         ],
                         "loc": {
                           "start": {
-                            "line": 53,
+                            "line": 49,
                             "column": 44
                           },
                           "end": {
-                            "line": 53,
+                            "line": 49,
                             "column": 58
                           }
                         }
                       }
                     ],
                     "range": [
-                      2351,
-                      2384
+                      1813,
+                      1846
                     ],
                     "loc": {
                       "start": {
-                        "line": 53,
+                        "line": 49,
                         "column": 26
                       },
                       "end": {
-                        "line": 53,
+                        "line": 49,
                         "column": 59
                       }
                     }
                   }
                 ],
                 "range": [
-                  2336,
-                  2385
+                  1798,
+                  1847
                 ],
                 "loc": {
                   "start": {
-                    "line": 53,
+                    "line": 49,
                     "column": 11
                   },
                   "end": {
-                    "line": 53,
+                    "line": 49,
                     "column": 60
                   }
                 }
               },
               "range": [
-                2329,
-                2386
+                1791,
+                1848
               ],
               "loc": {
                 "start": {
-                  "line": 53,
+                  "line": 49,
                   "column": 4
                 },
                 "end": {
-                  "line": 53,
+                  "line": 49,
                   "column": 61
                 }
               }
             }
           ],
           "range": [
-            2323,
-            2388
+            1785,
+            1850
           ],
           "loc": {
             "start": {
-              "line": 52,
+              "line": 48,
               "column": 38
             },
             "end": {
-              "line": 54,
+              "line": 50,
               "column": 1
             }
           }
@@ -698,16 +698,16 @@
         "generator": false,
         "expression": false,
         "range": [
-          2292,
-          2388
+          1754,
+          1850
         ],
         "loc": {
           "start": {
-            "line": 52,
+            "line": 48,
             "column": 7
           },
           "end": {
-            "line": 54,
+            "line": 50,
             "column": 1
           }
         },
@@ -732,10 +732,10 @@
           },
           {
             "type": "Block",
-            "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (either the source or an\n * Observable given as argument), and simply forwards (without doing any\n * transformation) all the values from all the input Observables to the output\n * Observable. The output Observable only completes once all input Observables\n * have completed. Any error delivered by an input Observable will be immediately\n * emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other An input Observable to merge with the source\n * Observable. More than one input Observables may be given as argument.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} An Observable that emits items that are the result of\n * every input Observable.\n * @method merge\n * @owner Observable\n ",
+            "value": "*\n * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。\n *\n * <span class=\"informal\">通过把多个 Observables 的值混合到一个 Observable 中\n * 来将其打平。</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是\n * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入\n * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都\n * 会立即在输出 Observalbe 上发出。\n *\n * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // 参数\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。\n * 可以给定多个输入 Observables 作为参数。\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入\n * Observables 的最大数量。\n * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的\n * 调度器。\n * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。\n * @method merge\n * @owner Observable\n ",
             "range": [
               243,
-              2284
+              1746
             ],
             "loc": {
               "start": {
@@ -743,7 +743,7 @@
                 "column": 0
               },
               "end": {
-                "line": 51,
+                "line": 47,
                 "column": 3
               }
             }
@@ -754,16 +754,16 @@
             "type": "Block",
             "value": " tslint:enable:max-line-length ",
             "range": [
-              2389,
-              2424
+              1851,
+              1886
             ],
             "loc": {
               "start": {
-                "line": 55,
+                "line": 51,
                 "column": 0
               },
               "end": {
-                "line": 55,
+                "line": 51,
                 "column": 35
               }
             }
@@ -772,16 +772,16 @@
             "type": "Block",
             "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (as arguments), and simply\n * forwards (without doing any transformation) all the values from all the input\n * Observables to the output Observable. The output Observable only completes\n * once all input Observables have completed. Any error delivered by an input\n * Observable will be immediately emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = Rx.Observable.merge(clicks, timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // timer will emit ascending values, one every second(1000ms) to console\n * // clicks logs MouseEvents to console everytime the \"document\" is clicked\n * // Since the two streams are merged you see these happening\n * // as they occur.\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // - First timer1 and timer2 will run concurrently\n * // - timer1 will emit a value every 1000ms for 10 iterations\n * // - timer2 will emit a value every 2000ms for 6 iterations\n * // - after timer1 hits it's max iteration, timer2 will\n * //   continue, and timer3 will start to run concurrently with timer2\n * // - when timer2 hits it's max iteration it terminates, and\n * //   timer3 will continue to emit a value every 500ms until it is complete\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {...ObservableInput} observables Input Observables to merge together.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} an Observable that emits items that are the result of\n * every input Observable.\n * @static true\n * @name merge\n * @owner Observable\n ",
             "range": [
-              2425,
-              5154
+              1887,
+              4616
             ],
             "loc": {
               "start": {
-                "line": 56,
+                "line": 52,
                 "column": 0
               },
               "end": {
-                "line": 115,
+                "line": 111,
                 "column": 3
               }
             }
@@ -791,16 +791,16 @@
       "specifiers": [],
       "source": null,
       "range": [
-        2285,
-        2388
+        1747,
+        1850
       ],
       "loc": {
         "start": {
-          "line": 52,
+          "line": 48,
           "column": 0
         },
         "end": {
-          "line": 54,
+          "line": 50,
           "column": 1
         }
       },
@@ -825,10 +825,10 @@
         },
         {
           "type": "Block",
-          "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (either the source or an\n * Observable given as argument), and simply forwards (without doing any\n * transformation) all the values from all the input Observables to the output\n * Observable. The output Observable only completes once all input Observables\n * have completed. Any error delivered by an input Observable will be immediately\n * emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other An input Observable to merge with the source\n * Observable. More than one input Observables may be given as argument.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} An Observable that emits items that are the result of\n * every input Observable.\n * @method merge\n * @owner Observable\n ",
+          "value": "*\n * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。\n *\n * <span class=\"informal\">通过把多个 Observables 的值混合到一个 Observable 中\n * 来将其打平。</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是\n * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入\n * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都\n * 会立即在输出 Observalbe 上发出。\n *\n * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // 参数\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。\n * 可以给定多个输入 Observables 作为参数。\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入\n * Observables 的最大数量。\n * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的\n * 调度器。\n * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。\n * @method merge\n * @owner Observable\n ",
           "range": [
             243,
-            2284
+            1746
           ],
           "loc": {
             "start": {
@@ -836,7 +836,7 @@
               "column": 0
             },
             "end": {
-              "line": 51,
+              "line": 47,
               "column": 3
             }
           }
@@ -847,16 +847,16 @@
           "type": "Block",
           "value": " tslint:enable:max-line-length ",
           "range": [
-            2389,
-            2424
+            1851,
+            1886
           ],
           "loc": {
             "start": {
-              "line": 55,
+              "line": 51,
               "column": 0
             },
             "end": {
-              "line": 55,
+              "line": 51,
               "column": 35
             }
           }
@@ -865,16 +865,16 @@
           "type": "Block",
           "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (as arguments), and simply\n * forwards (without doing any transformation) all the values from all the input\n * Observables to the output Observable. The output Observable only completes\n * once all input Observables have completed. Any error delivered by an input\n * Observable will be immediately emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = Rx.Observable.merge(clicks, timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // timer will emit ascending values, one every second(1000ms) to console\n * // clicks logs MouseEvents to console everytime the \"document\" is clicked\n * // Since the two streams are merged you see these happening\n * // as they occur.\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // - First timer1 and timer2 will run concurrently\n * // - timer1 will emit a value every 1000ms for 10 iterations\n * // - timer2 will emit a value every 2000ms for 6 iterations\n * // - after timer1 hits it's max iteration, timer2 will\n * //   continue, and timer3 will start to run concurrently with timer2\n * // - when timer2 hits it's max iteration it terminates, and\n * //   timer3 will continue to emit a value every 500ms until it is complete\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {...ObservableInput} observables Input Observables to merge together.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} an Observable that emits items that are the result of\n * every input Observable.\n * @static true\n * @name merge\n * @owner Observable\n ",
           "range": [
-            2425,
-            5154
+            1887,
+            4616
           ],
           "loc": {
             "start": {
-              "line": 56,
+              "line": 52,
               "column": 0
             },
             "end": {
-              "line": 115,
+              "line": 111,
               "column": 3
             }
           }
@@ -889,16 +889,16 @@
           "type": "Identifier",
           "name": "mergeStatic",
           "range": [
-            5171,
-            5182
+            4633,
+            4644
           ],
           "loc": {
             "start": {
-              "line": 116,
+              "line": 112,
               "column": 16
             },
             "end": {
-              "line": 116,
+              "line": 112,
               "column": 27
             }
           }
@@ -910,31 +910,31 @@
               "type": "Identifier",
               "name": "observables",
               "range": [
-                5186,
-                5197
+                4648,
+                4659
               ],
               "loc": {
                 "start": {
-                  "line": 116,
+                  "line": 112,
                   "column": 31
                 },
                 "end": {
-                  "line": 116,
+                  "line": 112,
                   "column": 42
                 }
               }
             },
             "range": [
-              5183,
-              5197
+              4645,
+              4659
             ],
             "loc": {
               "start": {
-                "line": 116,
+                "line": 112,
                 "column": 28
               },
               "end": {
-                "line": 116,
+                "line": 112,
                 "column": 42
               }
             }
@@ -952,16 +952,16 @@
                     "type": "Identifier",
                     "name": "concurrent",
                     "range": [
-                      5209,
-                      5219
+                      4671,
+                      4681
                     ],
                     "loc": {
                       "start": {
-                        "line": 117,
+                        "line": 113,
                         "column": 8
                       },
                       "end": {
-                        "line": 117,
+                        "line": 113,
                         "column": 18
                       }
                     }
@@ -973,16 +973,16 @@
                       "type": "Identifier",
                       "name": "Number",
                       "range": [
-                        5222,
-                        5228
+                        4684,
+                        4690
                       ],
                       "loc": {
                         "start": {
-                          "line": 117,
+                          "line": 113,
                           "column": 21
                         },
                         "end": {
-                          "line": 117,
+                          "line": 113,
                           "column": 27
                         }
                       }
@@ -991,46 +991,46 @@
                       "type": "Identifier",
                       "name": "POSITIVE_INFINITY",
                       "range": [
-                        5229,
-                        5246
+                        4691,
+                        4708
                       ],
                       "loc": {
                         "start": {
-                          "line": 117,
+                          "line": 113,
                           "column": 28
                         },
                         "end": {
-                          "line": 117,
+                          "line": 113,
                           "column": 45
                         }
                       }
                     },
                     "range": [
-                      5222,
-                      5246
+                      4684,
+                      4708
                     ],
                     "loc": {
                       "start": {
-                        "line": 117,
+                        "line": 113,
                         "column": 21
                       },
                       "end": {
-                        "line": 117,
+                        "line": 113,
                         "column": 45
                       }
                     }
                   },
                   "range": [
-                    5209,
-                    5246
+                    4671,
+                    4708
                   ],
                   "loc": {
                     "start": {
-                      "line": 117,
+                      "line": 113,
                       "column": 8
                     },
                     "end": {
-                      "line": 117,
+                      "line": 113,
                       "column": 45
                     }
                   }
@@ -1038,16 +1038,16 @@
               ],
               "kind": "let",
               "range": [
-                5205,
-                5247
+                4667,
+                4709
               ],
               "loc": {
                 "start": {
-                  "line": 117,
+                  "line": 113,
                   "column": 4
                 },
                 "end": {
-                  "line": 117,
+                  "line": 113,
                   "column": 46
                 }
               }
@@ -1061,16 +1061,16 @@
                     "type": "Identifier",
                     "name": "scheduler",
                     "range": [
-                      5256,
-                      5265
+                      4718,
+                      4727
                     ],
                     "loc": {
                       "start": {
-                        "line": 118,
+                        "line": 114,
                         "column": 8
                       },
                       "end": {
-                        "line": 118,
+                        "line": 114,
                         "column": 17
                       }
                     }
@@ -1080,31 +1080,31 @@
                     "value": null,
                     "raw": "null",
                     "range": [
-                      5268,
-                      5272
+                      4730,
+                      4734
                     ],
                     "loc": {
                       "start": {
-                        "line": 118,
+                        "line": 114,
                         "column": 20
                       },
                       "end": {
-                        "line": 118,
+                        "line": 114,
                         "column": 24
                       }
                     }
                   },
                   "range": [
-                    5256,
-                    5272
+                    4718,
+                    4734
                   ],
                   "loc": {
                     "start": {
-                      "line": 118,
+                      "line": 114,
                       "column": 8
                     },
                     "end": {
-                      "line": 118,
+                      "line": 114,
                       "column": 24
                     }
                   }
@@ -1112,16 +1112,16 @@
               ],
               "kind": "let",
               "range": [
-                5252,
-                5273
+                4714,
+                4735
               ],
               "loc": {
                 "start": {
-                  "line": 118,
+                  "line": 114,
                   "column": 4
                 },
                 "end": {
-                  "line": 118,
+                  "line": 114,
                   "column": 25
                 }
               }
@@ -1135,16 +1135,16 @@
                     "type": "Identifier",
                     "name": "last",
                     "range": [
-                      5282,
-                      5286
+                      4744,
+                      4748
                     ],
                     "loc": {
                       "start": {
-                        "line": 119,
+                        "line": 115,
                         "column": 8
                       },
                       "end": {
-                        "line": 119,
+                        "line": 115,
                         "column": 12
                       }
                     }
@@ -1156,16 +1156,16 @@
                       "type": "Identifier",
                       "name": "observables",
                       "range": [
-                        5289,
-                        5300
+                        4751,
+                        4762
                       ],
                       "loc": {
                         "start": {
-                          "line": 119,
+                          "line": 115,
                           "column": 15
                         },
                         "end": {
-                          "line": 119,
+                          "line": 115,
                           "column": 26
                         }
                       }
@@ -1180,16 +1180,16 @@
                           "type": "Identifier",
                           "name": "observables",
                           "range": [
-                            5301,
-                            5312
+                            4763,
+                            4774
                           ],
                           "loc": {
                             "start": {
-                              "line": 119,
+                              "line": 115,
                               "column": 27
                             },
                             "end": {
-                              "line": 119,
+                              "line": 115,
                               "column": 38
                             }
                           }
@@ -1198,31 +1198,31 @@
                           "type": "Identifier",
                           "name": "length",
                           "range": [
-                            5313,
-                            5319
+                            4775,
+                            4781
                           ],
                           "loc": {
                             "start": {
-                              "line": 119,
+                              "line": 115,
                               "column": 39
                             },
                             "end": {
-                              "line": 119,
+                              "line": 115,
                               "column": 45
                             }
                           }
                         },
                         "range": [
-                          5301,
-                          5319
+                          4763,
+                          4781
                         ],
                         "loc": {
                           "start": {
-                            "line": 119,
+                            "line": 115,
                             "column": 27
                           },
                           "end": {
-                            "line": 119,
+                            "line": 115,
                             "column": 45
                           }
                         }
@@ -1232,61 +1232,61 @@
                         "value": 1,
                         "raw": "1",
                         "range": [
-                          5322,
-                          5323
+                          4784,
+                          4785
                         ],
                         "loc": {
                           "start": {
-                            "line": 119,
+                            "line": 115,
                             "column": 48
                           },
                           "end": {
-                            "line": 119,
+                            "line": 115,
                             "column": 49
                           }
                         }
                       },
                       "range": [
-                        5301,
-                        5323
+                        4763,
+                        4785
                       ],
                       "loc": {
                         "start": {
-                          "line": 119,
+                          "line": 115,
                           "column": 27
                         },
                         "end": {
-                          "line": 119,
+                          "line": 115,
                           "column": 49
                         }
                       }
                     },
                     "range": [
-                      5289,
-                      5324
+                      4751,
+                      4786
                     ],
                     "loc": {
                       "start": {
-                        "line": 119,
+                        "line": 115,
                         "column": 15
                       },
                       "end": {
-                        "line": 119,
+                        "line": 115,
                         "column": 50
                       }
                     }
                   },
                   "range": [
-                    5282,
-                    5324
+                    4744,
+                    4786
                   ],
                   "loc": {
                     "start": {
-                      "line": 119,
+                      "line": 115,
                       "column": 8
                     },
                     "end": {
-                      "line": 119,
+                      "line": 115,
                       "column": 50
                     }
                   }
@@ -1294,16 +1294,16 @@
               ],
               "kind": "let",
               "range": [
-                5278,
-                5325
+                4740,
+                4787
               ],
               "loc": {
                 "start": {
-                  "line": 119,
+                  "line": 115,
                   "column": 4
                 },
                 "end": {
-                  "line": 119,
+                  "line": 115,
                   "column": 51
                 }
               }
@@ -1316,16 +1316,16 @@
                   "type": "Identifier",
                   "name": "isScheduler",
                   "range": [
-                    5334,
-                    5345
+                    4796,
+                    4807
                   ],
                   "loc": {
                     "start": {
-                      "line": 120,
+                      "line": 116,
                       "column": 8
                     },
                     "end": {
-                      "line": 120,
+                      "line": 116,
                       "column": 19
                     }
                   }
@@ -1335,32 +1335,32 @@
                     "type": "Identifier",
                     "name": "last",
                     "range": [
-                      5346,
-                      5350
+                      4808,
+                      4812
                     ],
                     "loc": {
                       "start": {
-                        "line": 120,
+                        "line": 116,
                         "column": 20
                       },
                       "end": {
-                        "line": 120,
+                        "line": 116,
                         "column": 24
                       }
                     }
                   }
                 ],
                 "range": [
-                  5334,
-                  5351
+                  4796,
+                  4813
                 ],
                 "loc": {
                   "start": {
-                    "line": 120,
+                    "line": 116,
                     "column": 8
                   },
                   "end": {
-                    "line": 120,
+                    "line": 116,
                     "column": 25
                   }
                 }
@@ -1377,16 +1377,16 @@
                         "type": "Identifier",
                         "name": "scheduler",
                         "range": [
-                          5363,
-                          5372
+                          4825,
+                          4834
                         ],
                         "loc": {
                           "start": {
-                            "line": 121,
+                            "line": 117,
                             "column": 8
                           },
                           "end": {
-                            "line": 121,
+                            "line": 117,
                             "column": 17
                           }
                         }
@@ -1400,16 +1400,16 @@
                             "type": "Identifier",
                             "name": "observables",
                             "range": [
-                              5375,
-                              5386
+                              4837,
+                              4848
                             ],
                             "loc": {
                               "start": {
-                                "line": 121,
+                                "line": 117,
                                 "column": 20
                               },
                               "end": {
-                                "line": 121,
+                                "line": 117,
                                 "column": 31
                               }
                             }
@@ -1418,77 +1418,77 @@
                             "type": "Identifier",
                             "name": "pop",
                             "range": [
-                              5387,
-                              5390
+                              4849,
+                              4852
                             ],
                             "loc": {
                               "start": {
-                                "line": 121,
+                                "line": 117,
                                 "column": 32
                               },
                               "end": {
-                                "line": 121,
+                                "line": 117,
                                 "column": 35
                               }
                             }
                           },
                           "range": [
-                            5375,
-                            5390
+                            4837,
+                            4852
                           ],
                           "loc": {
                             "start": {
-                              "line": 121,
+                              "line": 117,
                               "column": 20
                             },
                             "end": {
-                              "line": 121,
+                              "line": 117,
                               "column": 35
                             }
                           }
                         },
                         "arguments": [],
                         "range": [
-                          5375,
-                          5392
+                          4837,
+                          4854
                         ],
                         "loc": {
                           "start": {
-                            "line": 121,
+                            "line": 117,
                             "column": 20
                           },
                           "end": {
-                            "line": 121,
+                            "line": 117,
                             "column": 37
                           }
                         }
                       },
                       "range": [
-                        5363,
-                        5392
+                        4825,
+                        4854
                       ],
                       "loc": {
                         "start": {
-                          "line": 121,
+                          "line": 117,
                           "column": 8
                         },
                         "end": {
-                          "line": 121,
+                          "line": 117,
                           "column": 37
                         }
                       }
                     },
                     "range": [
-                      5363,
-                      5393
+                      4825,
+                      4855
                     ],
                     "loc": {
                       "start": {
-                        "line": 121,
+                        "line": 117,
                         "column": 8
                       },
                       "end": {
-                        "line": 121,
+                        "line": 117,
                         "column": 38
                       }
                     }
@@ -1508,16 +1508,16 @@
                             "type": "Identifier",
                             "name": "observables",
                             "range": [
-                              5406,
-                              5417
+                              4868,
+                              4879
                             ],
                             "loc": {
                               "start": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 12
                               },
                               "end": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 23
                               }
                             }
@@ -1526,31 +1526,31 @@
                             "type": "Identifier",
                             "name": "length",
                             "range": [
-                              5418,
-                              5424
+                              4880,
+                              4886
                             ],
                             "loc": {
                               "start": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 24
                               },
                               "end": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 30
                               }
                             }
                           },
                           "range": [
-                            5406,
-                            5424
+                            4868,
+                            4886
                           ],
                           "loc": {
                             "start": {
-                              "line": 122,
+                              "line": 118,
                               "column": 12
                             },
                             "end": {
-                              "line": 122,
+                              "line": 118,
                               "column": 30
                             }
                           }
@@ -1560,31 +1560,31 @@
                           "value": 1,
                           "raw": "1",
                           "range": [
-                            5427,
-                            5428
+                            4889,
+                            4890
                           ],
                           "loc": {
                             "start": {
-                              "line": 122,
+                              "line": 118,
                               "column": 33
                             },
                             "end": {
-                              "line": 122,
+                              "line": 118,
                               "column": 34
                             }
                           }
                         },
                         "range": [
-                          5406,
-                          5428
+                          4868,
+                          4890
                         ],
                         "loc": {
                           "start": {
-                            "line": 122,
+                            "line": 118,
                             "column": 12
                           },
                           "end": {
-                            "line": 122,
+                            "line": 118,
                             "column": 34
                           }
                         }
@@ -1602,16 +1602,16 @@
                               "type": "Identifier",
                               "name": "observables",
                               "range": [
-                                5439,
-                                5450
+                                4901,
+                                4912
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 122,
+                                  "line": 118,
                                   "column": 45
                                 },
                                 "end": {
-                                  "line": 122,
+                                  "line": 118,
                                   "column": 56
                                 }
                               }
@@ -1626,16 +1626,16 @@
                                   "type": "Identifier",
                                   "name": "observables",
                                   "range": [
-                                    5451,
-                                    5462
+                                    4913,
+                                    4924
                                   ],
                                   "loc": {
                                     "start": {
-                                      "line": 122,
+                                      "line": 118,
                                       "column": 57
                                     },
                                     "end": {
-                                      "line": 122,
+                                      "line": 118,
                                       "column": 68
                                     }
                                   }
@@ -1644,31 +1644,31 @@
                                   "type": "Identifier",
                                   "name": "length",
                                   "range": [
-                                    5463,
-                                    5469
+                                    4925,
+                                    4931
                                   ],
                                   "loc": {
                                     "start": {
-                                      "line": 122,
+                                      "line": 118,
                                       "column": 69
                                     },
                                     "end": {
-                                      "line": 122,
+                                      "line": 118,
                                       "column": 75
                                     }
                                   }
                                 },
                                 "range": [
-                                  5451,
-                                  5469
+                                  4913,
+                                  4931
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 122,
+                                    "line": 118,
                                     "column": 57
                                   },
                                   "end": {
-                                    "line": 122,
+                                    "line": 118,
                                     "column": 75
                                   }
                                 }
@@ -1678,62 +1678,62 @@
                                 "value": 1,
                                 "raw": "1",
                                 "range": [
-                                  5472,
-                                  5473
+                                  4934,
+                                  4935
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 122,
+                                    "line": 118,
                                     "column": 78
                                   },
                                   "end": {
-                                    "line": 122,
+                                    "line": 118,
                                     "column": 79
                                   }
                                 }
                               },
                               "range": [
-                                5451,
-                                5473
+                                4913,
+                                4935
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 122,
+                                  "line": 118,
                                   "column": 57
                                 },
                                 "end": {
-                                  "line": 122,
+                                  "line": 118,
                                   "column": 79
                                 }
                               }
                             },
                             "range": [
-                              5439,
-                              5474
+                              4901,
+                              4936
                             ],
                             "loc": {
                               "start": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 45
                               },
                               "end": {
-                                "line": 122,
+                                "line": 118,
                                 "column": 80
                               }
                             }
                           },
                           "prefix": true,
                           "range": [
-                            5432,
-                            5474
+                            4894,
+                            4936
                           ],
                           "loc": {
                             "start": {
-                              "line": 122,
+                              "line": 118,
                               "column": 38
                             },
                             "end": {
-                              "line": 122,
+                              "line": 118,
                               "column": 80
                             }
                           }
@@ -1743,46 +1743,46 @@
                           "value": "number",
                           "raw": "'number'",
                           "range": [
-                            5479,
-                            5487
+                            4941,
+                            4949
                           ],
                           "loc": {
                             "start": {
-                              "line": 122,
+                              "line": 118,
                               "column": 85
                             },
                             "end": {
-                              "line": 122,
+                              "line": 118,
                               "column": 93
                             }
                           }
                         },
                         "range": [
-                          5432,
-                          5487
+                          4894,
+                          4949
                         ],
                         "loc": {
                           "start": {
-                            "line": 122,
+                            "line": 118,
                             "column": 38
                           },
                           "end": {
-                            "line": 122,
+                            "line": 118,
                             "column": 93
                           }
                         }
                       },
                       "range": [
-                        5406,
-                        5487
+                        4868,
+                        4949
                       ],
                       "loc": {
                         "start": {
-                          "line": 122,
+                          "line": 118,
                           "column": 12
                         },
                         "end": {
-                          "line": 122,
+                          "line": 118,
                           "column": 93
                         }
                       }
@@ -1799,16 +1799,16 @@
                               "type": "Identifier",
                               "name": "concurrent",
                               "range": [
-                                5503,
-                                5513
+                                4965,
+                                4975
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 123,
+                                  "line": 119,
                                   "column": 12
                                 },
                                 "end": {
-                                  "line": 123,
+                                  "line": 119,
                                   "column": 22
                                 }
                               }
@@ -1822,16 +1822,16 @@
                                   "type": "Identifier",
                                   "name": "observables",
                                   "range": [
-                                    5516,
-                                    5527
+                                    4978,
+                                    4989
                                   ],
                                   "loc": {
                                     "start": {
-                                      "line": 123,
+                                      "line": 119,
                                       "column": 25
                                     },
                                     "end": {
-                                      "line": 123,
+                                      "line": 119,
                                       "column": 36
                                     }
                                   }
@@ -1840,125 +1840,125 @@
                                   "type": "Identifier",
                                   "name": "pop",
                                   "range": [
-                                    5528,
-                                    5531
+                                    4990,
+                                    4993
                                   ],
                                   "loc": {
                                     "start": {
-                                      "line": 123,
+                                      "line": 119,
                                       "column": 37
                                     },
                                     "end": {
-                                      "line": 123,
+                                      "line": 119,
                                       "column": 40
                                     }
                                   }
                                 },
                                 "range": [
-                                  5516,
-                                  5531
+                                  4978,
+                                  4993
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 123,
+                                    "line": 119,
                                     "column": 25
                                   },
                                   "end": {
-                                    "line": 123,
+                                    "line": 119,
                                     "column": 40
                                   }
                                 }
                               },
                               "arguments": [],
                               "range": [
-                                5516,
-                                5533
+                                4978,
+                                4995
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 123,
+                                  "line": 119,
                                   "column": 25
                                 },
                                 "end": {
-                                  "line": 123,
+                                  "line": 119,
                                   "column": 42
                                 }
                               }
                             },
                             "range": [
-                              5503,
-                              5533
+                              4965,
+                              4995
                             ],
                             "loc": {
                               "start": {
-                                "line": 123,
+                                "line": 119,
                                 "column": 12
                               },
                               "end": {
-                                "line": 123,
+                                "line": 119,
                                 "column": 42
                               }
                             }
                           },
                           "range": [
-                            5503,
-                            5534
+                            4965,
+                            4996
                           ],
                           "loc": {
                             "start": {
-                              "line": 123,
+                              "line": 119,
                               "column": 12
                             },
                             "end": {
-                              "line": 123,
+                              "line": 119,
                               "column": 43
                             }
                           }
                         }
                       ],
                       "range": [
-                        5489,
-                        5544
+                        4951,
+                        5006
                       ],
                       "loc": {
                         "start": {
-                          "line": 122,
+                          "line": 118,
                           "column": 95
                         },
                         "end": {
-                          "line": 124,
+                          "line": 120,
                           "column": 9
                         }
                       }
                     },
                     "alternate": null,
                     "range": [
-                      5402,
-                      5544
+                      4864,
+                      5006
                     ],
                     "loc": {
                       "start": {
-                        "line": 122,
+                        "line": 118,
                         "column": 8
                       },
                       "end": {
-                        "line": 124,
+                        "line": 120,
                         "column": 9
                       }
                     }
                   }
                 ],
                 "range": [
-                  5353,
-                  5550
+                  4815,
+                  5012
                 ],
                 "loc": {
                   "start": {
-                    "line": 120,
+                    "line": 116,
                     "column": 27
                   },
                   "end": {
-                    "line": 125,
+                    "line": 121,
                     "column": 5
                   }
                 }
@@ -1975,32 +1975,32 @@
                       "type": "Identifier",
                       "name": "last",
                       "range": [
-                        5571,
-                        5575
+                        5033,
+                        5037
                       ],
                       "loc": {
                         "start": {
-                          "line": 126,
+                          "line": 122,
                           "column": 20
                         },
                         "end": {
-                          "line": 126,
+                          "line": 122,
                           "column": 24
                         }
                       }
                     },
                     "prefix": true,
                     "range": [
-                      5564,
-                      5575
+                      5026,
+                      5037
                     ],
                     "loc": {
                       "start": {
-                        "line": 126,
+                        "line": 122,
                         "column": 13
                       },
                       "end": {
-                        "line": 126,
+                        "line": 122,
                         "column": 24
                       }
                     }
@@ -2010,31 +2010,31 @@
                     "value": "number",
                     "raw": "'number'",
                     "range": [
-                      5580,
-                      5588
+                      5042,
+                      5050
                     ],
                     "loc": {
                       "start": {
-                        "line": 126,
+                        "line": 122,
                         "column": 29
                       },
                       "end": {
-                        "line": 126,
+                        "line": 122,
                         "column": 37
                       }
                     }
                   },
                   "range": [
-                    5564,
-                    5588
+                    5026,
+                    5050
                   ],
                   "loc": {
                     "start": {
-                      "line": 126,
+                      "line": 122,
                       "column": 13
                     },
                     "end": {
-                      "line": 126,
+                      "line": 122,
                       "column": 37
                     }
                   }
@@ -2051,16 +2051,16 @@
                           "type": "Identifier",
                           "name": "concurrent",
                           "range": [
-                            5600,
-                            5610
+                            5062,
+                            5072
                           ],
                           "loc": {
                             "start": {
-                              "line": 127,
+                              "line": 123,
                               "column": 8
                             },
                             "end": {
-                              "line": 127,
+                              "line": 123,
                               "column": 18
                             }
                           }
@@ -2074,16 +2074,16 @@
                               "type": "Identifier",
                               "name": "observables",
                               "range": [
-                                5613,
-                                5624
+                                5075,
+                                5086
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 127,
+                                  "line": 123,
                                   "column": 21
                                 },
                                 "end": {
-                                  "line": 127,
+                                  "line": 123,
                                   "column": 32
                                 }
                               }
@@ -2092,124 +2092,124 @@
                               "type": "Identifier",
                               "name": "pop",
                               "range": [
-                                5625,
-                                5628
+                                5087,
+                                5090
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 127,
+                                  "line": 123,
                                   "column": 33
                                 },
                                 "end": {
-                                  "line": 127,
+                                  "line": 123,
                                   "column": 36
                                 }
                               }
                             },
                             "range": [
-                              5613,
-                              5628
+                              5075,
+                              5090
                             ],
                             "loc": {
                               "start": {
-                                "line": 127,
+                                "line": 123,
                                 "column": 21
                               },
                               "end": {
-                                "line": 127,
+                                "line": 123,
                                 "column": 36
                               }
                             }
                           },
                           "arguments": [],
                           "range": [
-                            5613,
-                            5630
+                            5075,
+                            5092
                           ],
                           "loc": {
                             "start": {
-                              "line": 127,
+                              "line": 123,
                               "column": 21
                             },
                             "end": {
-                              "line": 127,
+                              "line": 123,
                               "column": 38
                             }
                           }
                         },
                         "range": [
-                          5600,
-                          5630
+                          5062,
+                          5092
                         ],
                         "loc": {
                           "start": {
-                            "line": 127,
+                            "line": 123,
                             "column": 8
                           },
                           "end": {
-                            "line": 127,
+                            "line": 123,
                             "column": 38
                           }
                         }
                       },
                       "range": [
-                        5600,
-                        5631
+                        5062,
+                        5093
                       ],
                       "loc": {
                         "start": {
-                          "line": 127,
+                          "line": 123,
                           "column": 8
                         },
                         "end": {
-                          "line": 127,
+                          "line": 123,
                           "column": 39
                         }
                       }
                     }
                   ],
                   "range": [
-                    5590,
-                    5637
+                    5052,
+                    5099
                   ],
                   "loc": {
                     "start": {
-                      "line": 126,
+                      "line": 122,
                       "column": 39
                     },
                     "end": {
-                      "line": 128,
+                      "line": 124,
                       "column": 5
                     }
                   }
                 },
                 "alternate": null,
                 "range": [
-                  5560,
-                  5637
+                  5022,
+                  5099
                 ],
                 "loc": {
                   "start": {
-                    "line": 126,
+                    "line": 122,
                     "column": 9
                   },
                   "end": {
-                    "line": 128,
+                    "line": 124,
                     "column": 5
                   }
                 }
               },
               "range": [
-                5330,
-                5637
+                4792,
+                5099
               ],
               "loc": {
                 "start": {
-                  "line": 120,
+                  "line": 116,
                   "column": 4
                 },
                 "end": {
-                  "line": 128,
+                  "line": 124,
                   "column": 5
                 }
               }
@@ -2229,16 +2229,16 @@
                       "type": "Identifier",
                       "name": "scheduler",
                       "range": [
-                        5646,
-                        5655
+                        5108,
+                        5117
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 8
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 17
                         }
                       }
@@ -2248,31 +2248,31 @@
                       "value": null,
                       "raw": "null",
                       "range": [
-                        5660,
-                        5664
+                        5122,
+                        5126
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 22
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 26
                         }
                       }
                     },
                     "range": [
-                      5646,
-                      5664
+                      5108,
+                      5126
                     ],
                     "loc": {
                       "start": {
-                        "line": 129,
+                        "line": 125,
                         "column": 8
                       },
                       "end": {
-                        "line": 129,
+                        "line": 125,
                         "column": 26
                       }
                     }
@@ -2287,16 +2287,16 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          5668,
-                          5679
+                          5130,
+                          5141
                         ],
                         "loc": {
                           "start": {
-                            "line": 129,
+                            "line": 125,
                             "column": 30
                           },
                           "end": {
-                            "line": 129,
+                            "line": 125,
                             "column": 41
                           }
                         }
@@ -2305,31 +2305,31 @@
                         "type": "Identifier",
                         "name": "length",
                         "range": [
-                          5680,
-                          5686
+                          5142,
+                          5148
                         ],
                         "loc": {
                           "start": {
-                            "line": 129,
+                            "line": 125,
                             "column": 42
                           },
                           "end": {
-                            "line": 129,
+                            "line": 125,
                             "column": 48
                           }
                         }
                       },
                       "range": [
-                        5668,
-                        5686
+                        5130,
+                        5148
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 30
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 48
                         }
                       }
@@ -2339,46 +2339,46 @@
                       "value": 1,
                       "raw": "1",
                       "range": [
-                        5691,
-                        5692
+                        5153,
+                        5154
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 53
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 54
                         }
                       }
                     },
                     "range": [
-                      5668,
-                      5692
+                      5130,
+                      5154
                     ],
                     "loc": {
                       "start": {
-                        "line": 129,
+                        "line": 125,
                         "column": 30
                       },
                       "end": {
-                        "line": 129,
+                        "line": 125,
                         "column": 54
                       }
                     }
                   },
                   "range": [
-                    5646,
-                    5692
+                    5108,
+                    5154
                   ],
                   "loc": {
                     "start": {
-                      "line": 129,
+                      "line": 125,
                       "column": 8
                     },
                     "end": {
-                      "line": 129,
+                      "line": 125,
                       "column": 54
                     }
                   }
@@ -2393,16 +2393,16 @@
                       "type": "Identifier",
                       "name": "observables",
                       "range": [
-                        5696,
-                        5707
+                        5158,
+                        5169
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 58
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 69
                         }
                       }
@@ -2412,31 +2412,31 @@
                       "value": 0,
                       "raw": "0",
                       "range": [
-                        5708,
-                        5709
+                        5170,
+                        5171
                       ],
                       "loc": {
                         "start": {
-                          "line": 129,
+                          "line": 125,
                           "column": 70
                         },
                         "end": {
-                          "line": 129,
+                          "line": 125,
                           "column": 71
                         }
                       }
                     },
                     "range": [
-                      5696,
-                      5710
+                      5158,
+                      5172
                     ],
                     "loc": {
                       "start": {
-                        "line": 129,
+                        "line": 125,
                         "column": 58
                       },
                       "end": {
-                        "line": 129,
+                        "line": 125,
                         "column": 72
                       }
                     }
@@ -2445,46 +2445,46 @@
                     "type": "Identifier",
                     "name": "Observable",
                     "range": [
-                      5722,
-                      5732
+                      5184,
+                      5194
                     ],
                     "loc": {
                       "start": {
-                        "line": 129,
+                        "line": 125,
                         "column": 84
                       },
                       "end": {
-                        "line": 129,
+                        "line": 125,
                         "column": 94
                       }
                     }
                   },
                   "range": [
-                    5696,
-                    5732
+                    5158,
+                    5194
                   ],
                   "loc": {
                     "start": {
-                      "line": 129,
+                      "line": 125,
                       "column": 58
                     },
                     "end": {
-                      "line": 129,
+                      "line": 125,
                       "column": 94
                     }
                   }
                 },
                 "range": [
-                  5646,
-                  5732
+                  5108,
+                  5194
                 ],
                 "loc": {
                   "start": {
-                    "line": 129,
+                    "line": 125,
                     "column": 8
                   },
                   "end": {
-                    "line": 129,
+                    "line": 125,
                     "column": 94
                   }
                 }
@@ -2501,16 +2501,16 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          5751,
-                          5762
+                          5213,
+                          5224
                         ],
                         "loc": {
                           "start": {
-                            "line": 130,
+                            "line": 126,
                             "column": 15
                           },
                           "end": {
-                            "line": 130,
+                            "line": 126,
                             "column": 26
                           }
                         }
@@ -2520,78 +2520,78 @@
                         "value": 0,
                         "raw": "0",
                         "range": [
-                          5763,
-                          5764
+                          5225,
+                          5226
                         ],
                         "loc": {
                           "start": {
-                            "line": 130,
+                            "line": 126,
                             "column": 27
                           },
                           "end": {
-                            "line": 130,
+                            "line": 126,
                             "column": 28
                           }
                         }
                       },
                       "range": [
-                        5751,
-                        5765
+                        5213,
+                        5227
                       ],
                       "loc": {
                         "start": {
-                          "line": 130,
+                          "line": 126,
                           "column": 15
                         },
                         "end": {
-                          "line": 130,
+                          "line": 126,
                           "column": 29
                         }
                       }
                     },
                     "range": [
-                      5744,
-                      5766
+                      5206,
+                      5228
                     ],
                     "loc": {
                       "start": {
-                        "line": 130,
+                        "line": 126,
                         "column": 8
                       },
                       "end": {
-                        "line": 130,
+                        "line": 126,
                         "column": 30
                       }
                     }
                   }
                 ],
                 "range": [
-                  5734,
-                  5772
+                  5196,
+                  5234
                 ],
                 "loc": {
                   "start": {
-                    "line": 129,
+                    "line": 125,
                     "column": 96
                   },
                   "end": {
-                    "line": 131,
+                    "line": 127,
                     "column": 5
                   }
                 }
               },
               "alternate": null,
               "range": [
-                5642,
-                5772
+                5104,
+                5234
               ],
               "loc": {
                 "start": {
-                  "line": 129,
+                  "line": 125,
                   "column": 4
                 },
                 "end": {
-                  "line": 131,
+                  "line": 127,
                   "column": 5
                 }
               }
@@ -2609,16 +2609,16 @@
                       "type": "Identifier",
                       "name": "ArrayObservable",
                       "range": [
-                        5788,
-                        5803
+                        5250,
+                        5265
                       ],
                       "loc": {
                         "start": {
-                          "line": 132,
+                          "line": 128,
                           "column": 15
                         },
                         "end": {
-                          "line": 132,
+                          "line": 128,
                           "column": 30
                         }
                       }
@@ -2628,16 +2628,16 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          5804,
-                          5815
+                          5266,
+                          5277
                         ],
                         "loc": {
                           "start": {
-                            "line": 132,
+                            "line": 128,
                             "column": 31
                           },
                           "end": {
-                            "line": 132,
+                            "line": 128,
                             "column": 42
                           }
                         }
@@ -2646,32 +2646,32 @@
                         "type": "Identifier",
                         "name": "scheduler",
                         "range": [
-                          5817,
-                          5826
+                          5279,
+                          5288
                         ],
                         "loc": {
                           "start": {
-                            "line": 132,
+                            "line": 128,
                             "column": 44
                           },
                           "end": {
-                            "line": 132,
+                            "line": 128,
                             "column": 53
                           }
                         }
                       }
                     ],
                     "range": [
-                      5784,
-                      5827
+                      5246,
+                      5289
                     ],
                     "loc": {
                       "start": {
-                        "line": 132,
+                        "line": 128,
                         "column": 11
                       },
                       "end": {
-                        "line": 132,
+                        "line": 128,
                         "column": 54
                       }
                     }
@@ -2680,31 +2680,31 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      5828,
-                      5832
+                      5290,
+                      5294
                     ],
                     "loc": {
                       "start": {
-                        "line": 132,
+                        "line": 128,
                         "column": 55
                       },
                       "end": {
-                        "line": 132,
+                        "line": 128,
                         "column": 59
                       }
                     }
                   },
                   "range": [
-                    5784,
-                    5832
+                    5246,
+                    5294
                   ],
                   "loc": {
                     "start": {
-                      "line": 132,
+                      "line": 128,
                       "column": 11
                     },
                     "end": {
-                      "line": 132,
+                      "line": 128,
                       "column": 59
                     }
                   }
@@ -2716,16 +2716,16 @@
                       "type": "Identifier",
                       "name": "MergeAllOperator",
                       "range": [
-                        5837,
-                        5853
+                        5299,
+                        5315
                       ],
                       "loc": {
                         "start": {
-                          "line": 132,
+                          "line": 128,
                           "column": 64
                         },
                         "end": {
-                          "line": 132,
+                          "line": 128,
                           "column": 80
                         }
                       }
@@ -2735,79 +2735,79 @@
                         "type": "Identifier",
                         "name": "concurrent",
                         "range": [
-                          5854,
-                          5864
+                          5316,
+                          5326
                         ],
                         "loc": {
                           "start": {
-                            "line": 132,
+                            "line": 128,
                             "column": 81
                           },
                           "end": {
-                            "line": 132,
+                            "line": 128,
                             "column": 91
                           }
                         }
                       }
                     ],
                     "range": [
-                      5833,
-                      5865
+                      5295,
+                      5327
                     ],
                     "loc": {
                       "start": {
-                        "line": 132,
+                        "line": 128,
                         "column": 60
                       },
                       "end": {
-                        "line": 132,
+                        "line": 128,
                         "column": 92
                       }
                     }
                   }
                 ],
                 "range": [
-                  5784,
-                  5866
+                  5246,
+                  5328
                 ],
                 "loc": {
                   "start": {
-                    "line": 132,
+                    "line": 128,
                     "column": 11
                   },
                   "end": {
-                    "line": 132,
+                    "line": 128,
                     "column": 93
                   }
                 }
               },
               "range": [
-                5777,
-                5867
+                5239,
+                5329
               ],
               "loc": {
                 "start": {
-                  "line": 132,
+                  "line": 128,
                   "column": 4
                 },
                 "end": {
-                  "line": 132,
+                  "line": 128,
                   "column": 94
                 }
               }
             }
           ],
           "range": [
-            5199,
-            5869
+            4661,
+            5331
           ],
           "loc": {
             "start": {
-              "line": 116,
+              "line": 112,
               "column": 44
             },
             "end": {
-              "line": 133,
+              "line": 129,
               "column": 1
             }
           }
@@ -2815,16 +2815,16 @@
         "generator": false,
         "expression": false,
         "range": [
-          5162,
-          5869
+          4624,
+          5331
         ],
         "loc": {
           "start": {
-            "line": 116,
+            "line": 112,
             "column": 7
           },
           "end": {
-            "line": 133,
+            "line": 129,
             "column": 1
           }
         },
@@ -2833,16 +2833,16 @@
             "type": "Block",
             "value": " tslint:enable:max-line-length ",
             "range": [
-              2389,
-              2424
+              1851,
+              1886
             ],
             "loc": {
               "start": {
-                "line": 55,
+                "line": 51,
                 "column": 0
               },
               "end": {
-                "line": 55,
+                "line": 51,
                 "column": 35
               }
             }
@@ -2851,16 +2851,16 @@
             "type": "Block",
             "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (as arguments), and simply\n * forwards (without doing any transformation) all the values from all the input\n * Observables to the output Observable. The output Observable only completes\n * once all input Observables have completed. Any error delivered by an input\n * Observable will be immediately emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = Rx.Observable.merge(clicks, timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // timer will emit ascending values, one every second(1000ms) to console\n * // clicks logs MouseEvents to console everytime the \"document\" is clicked\n * // Since the two streams are merged you see these happening\n * // as they occur.\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // - First timer1 and timer2 will run concurrently\n * // - timer1 will emit a value every 1000ms for 10 iterations\n * // - timer2 will emit a value every 2000ms for 6 iterations\n * // - after timer1 hits it's max iteration, timer2 will\n * //   continue, and timer3 will start to run concurrently with timer2\n * // - when timer2 hits it's max iteration it terminates, and\n * //   timer3 will continue to emit a value every 500ms until it is complete\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {...ObservableInput} observables Input Observables to merge together.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} an Observable that emits items that are the result of\n * every input Observable.\n * @static true\n * @name merge\n * @owner Observable\n ",
             "range": [
-              2425,
-              5154
+              1887,
+              4616
             ],
             "loc": {
               "start": {
-                "line": 56,
+                "line": 52,
                 "column": 0
               },
               "end": {
-                "line": 115,
+                "line": 111,
                 "column": 3
               }
             }
@@ -2871,16 +2871,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=merge.js.map",
             "range": [
-              5870,
-              5903
+              5332,
+              5365
             ],
             "loc": {
               "start": {
-                "line": 134,
+                "line": 130,
                 "column": 0
               },
               "end": {
-                "line": 134,
+                "line": 130,
                 "column": 33
               }
             }
@@ -2890,16 +2890,16 @@
       "specifiers": [],
       "source": null,
       "range": [
-        5155,
-        5869
+        4617,
+        5331
       ],
       "loc": {
         "start": {
-          "line": 116,
+          "line": 112,
           "column": 0
         },
         "end": {
-          "line": 133,
+          "line": 129,
           "column": 1
         }
       },
@@ -2908,16 +2908,16 @@
           "type": "Block",
           "value": " tslint:enable:max-line-length ",
           "range": [
-            2389,
-            2424
+            1851,
+            1886
           ],
           "loc": {
             "start": {
-              "line": 55,
+              "line": 51,
               "column": 0
             },
             "end": {
-              "line": 55,
+              "line": 51,
               "column": 35
             }
           }
@@ -2926,16 +2926,16 @@
           "type": "Block",
           "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (as arguments), and simply\n * forwards (without doing any transformation) all the values from all the input\n * Observables to the output Observable. The output Observable only completes\n * once all input Observables have completed. Any error delivered by an input\n * Observable will be immediately emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = Rx.Observable.merge(clicks, timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // timer will emit ascending values, one every second(1000ms) to console\n * // clicks logs MouseEvents to console everytime the \"document\" is clicked\n * // Since the two streams are merged you see these happening\n * // as they occur.\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // - First timer1 and timer2 will run concurrently\n * // - timer1 will emit a value every 1000ms for 10 iterations\n * // - timer2 will emit a value every 2000ms for 6 iterations\n * // - after timer1 hits it's max iteration, timer2 will\n * //   continue, and timer3 will start to run concurrently with timer2\n * // - when timer2 hits it's max iteration it terminates, and\n * //   timer3 will continue to emit a value every 500ms until it is complete\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {...ObservableInput} observables Input Observables to merge together.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} an Observable that emits items that are the result of\n * every input Observable.\n * @static true\n * @name merge\n * @owner Observable\n ",
           "range": [
-            2425,
-            5154
+            1887,
+            4616
           ],
           "loc": {
             "start": {
-              "line": 56,
+              "line": 52,
               "column": 0
             },
             "end": {
-              "line": 115,
+              "line": 111,
               "column": 3
             }
           }
@@ -2946,16 +2946,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=merge.js.map",
           "range": [
-            5870,
-            5903
+            5332,
+            5365
           ],
           "loc": {
             "start": {
-              "line": 134,
+              "line": 130,
               "column": 0
             },
             "end": {
-              "line": 134,
+              "line": 130,
               "column": 33
             }
           }
@@ -2966,7 +2966,7 @@
   "sourceType": "module",
   "range": [
     0,
-    5869
+    5331
   ],
   "loc": {
     "start": {
@@ -2974,7 +2974,7 @@
       "column": 0
     },
     "end": {
-      "line": 133,
+      "line": 129,
       "column": 1
     }
   },
@@ -2999,10 +2999,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (either the source or an\n * Observable given as argument), and simply forwards (without doing any\n * transformation) all the values from all the input Observables to the output\n * Observable. The output Observable only completes once all input Observables\n * have completed. Any error delivered by an input Observable will be immediately\n * emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other An input Observable to merge with the source\n * Observable. More than one input Observables may be given as argument.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} An Observable that emits items that are the result of\n * every input Observable.\n * @method merge\n * @owner Observable\n ",
+      "value": "*\n * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。\n *\n * <span class=\"informal\">通过把多个 Observables 的值混合到一个 Observable 中\n * 来将其打平。</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是\n * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入\n * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都\n * 会立即在输出 Observalbe 上发出。\n *\n * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = clicks.merge(timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // 参数\n * var merged = timer1.merge(timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。\n * 可以给定多个输入 Observables 作为参数。\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入\n * Observables 的最大数量。\n * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的\n * 调度器。\n * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。\n * @method merge\n * @owner Observable\n ",
       "range": [
         243,
-        2284
+        1746
       ],
       "loc": {
         "start": {
@@ -3010,7 +3010,7 @@
           "column": 0
         },
         "end": {
-          "line": 51,
+          "line": 47,
           "column": 3
         }
       }
@@ -3019,16 +3019,16 @@
       "type": "Block",
       "value": " tslint:enable:max-line-length ",
       "range": [
-        2389,
-        2424
+        1851,
+        1886
       ],
       "loc": {
         "start": {
-          "line": 55,
+          "line": 51,
           "column": 0
         },
         "end": {
-          "line": 55,
+          "line": 51,
           "column": 35
         }
       }
@@ -3037,16 +3037,16 @@
       "type": "Block",
       "value": "*\n * Creates an output Observable which concurrently emits all values from every\n * given input Observable.\n *\n * <span class=\"informal\">Flattens multiple Observables together by blending\n * their values into one Observable.</span>\n *\n * <img src=\"./img/merge.png\" width=\"100%\">\n *\n * `merge` subscribes to each given input Observable (as arguments), and simply\n * forwards (without doing any transformation) all the values from all the input\n * Observables to the output Observable. The output Observable only completes\n * once all input Observables have completed. Any error delivered by an input\n * Observable will be immediately emitted on the output Observable.\n *\n * @example <caption>Merge together two Observables: 1s interval and clicks</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var timer = Rx.Observable.interval(1000);\n * var clicksOrTimer = Rx.Observable.merge(clicks, timer);\n * clicksOrTimer.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // timer will emit ascending values, one every second(1000ms) to console\n * // clicks logs MouseEvents to console everytime the \"document\" is clicked\n * // Since the two streams are merged you see these happening\n * // as they occur.\n *\n * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>\n * var timer1 = Rx.Observable.interval(1000).take(10);\n * var timer2 = Rx.Observable.interval(2000).take(6);\n * var timer3 = Rx.Observable.interval(500).take(10);\n * var concurrent = 2; // the argument\n * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);\n * merged.subscribe(x => console.log(x));\n *\n * // Results in the following:\n * // - First timer1 and timer2 will run concurrently\n * // - timer1 will emit a value every 1000ms for 10 iterations\n * // - timer2 will emit a value every 2000ms for 6 iterations\n * // - after timer1 hits it's max iteration, timer2 will\n * //   continue, and timer3 will start to run concurrently with timer2\n * // - when timer2 hits it's max iteration it terminates, and\n * //   timer3 will continue to emit a value every 500ms until it is complete\n *\n * @see {@link mergeAll}\n * @see {@link mergeMap}\n * @see {@link mergeMapTo}\n * @see {@link mergeScan}\n *\n * @param {...ObservableInput} observables Input Observables to merge together.\n * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input\n * Observables being subscribed to concurrently.\n * @param {Scheduler} [scheduler=null] The IScheduler to use for managing\n * concurrency of input Observables.\n * @return {Observable} an Observable that emits items that are the result of\n * every input Observable.\n * @static true\n * @name merge\n * @owner Observable\n ",
       "range": [
-        2425,
-        5154
+        1887,
+        4616
       ],
       "loc": {
         "start": {
-          "line": 56,
+          "line": 52,
           "column": 0
         },
         "end": {
-          "line": 115,
+          "line": 111,
           "column": 3
         }
       }
@@ -3055,16 +3055,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=merge.js.map",
       "range": [
-        5870,
-        5903
+        5332,
+        5365
       ],
       "loc": {
         "start": {
-          "line": 134,
+          "line": 130,
           "column": 0
         },
         "end": {
-          "line": 134,
+          "line": 130,
           "column": 33
         }
       }

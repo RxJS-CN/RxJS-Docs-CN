@@ -83,25 +83,23 @@
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 import { Set } from &apos;../util/Set&apos;;
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from previous items.
+ * &#x8FD4;&#x56DE; Observable&#xFF0C;&#x5B83;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x4E0E;&#x4E4B;&#x524D;&#x7684;&#x9879;&#x90FD;&#x4E0D;&#x76F8;&#x540C;&#x7684;&#x9879;&#x3002;
  *
- * If a keySelector function is provided, then it will project each value from the source observable into a new value that it will
- * check for equality with previously projected values. If a keySelector function is not provided, it will use each value from the
- * source observable directly with an equality check against previous values.
+ * &#x5982;&#x679C;&#x63D0;&#x4F9B;&#x4E86; keySelector &#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x4F1A;&#x5C06;&#x6E90; Observable &#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x90FD;&#x6295;&#x5C04;&#x6210;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x4F1A;&#x7528;&#x6765;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x4E0E;&#x5148;&#x524D;&#x6295;&#x5C04;&#x7684;&#x503C;&#x76F8;&#x7B49;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;
+ * keySelector &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6E90; Observable &#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x6765;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x4E0E;&#x5148;&#x524D;&#x7684;&#x503C;&#x76F8;&#x7B49;&#x3002;
  *
- * In JavaScript runtimes that support `Set`, this operator will use a `Set` to improve performance of the distinct value checking.
+ * &#x5728;&#x652F;&#x6301; `Set` &#x7684; JavaScript &#x8FD0;&#x884C;&#x65F6;&#x4E2D;&#xFF0C;&#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x4F7F;&#x7528; `Set` &#x6765;&#x63D0;&#x5347;&#x4E0D;&#x540C;&#x503C;&#x68C0;&#x67E5;&#x7684;&#x6027;&#x80FD;&#x3002;
  *
- * In other runtimes, this operator will use a minimal implementation of `Set` that relies on an `Array` and `indexOf` under the
- * hood, so performance will degrade as more values are checked for distinction. Even in newer browsers, a long-running `distinct`
- * use might result in memory leaks. To help alleviate this in some scenarios, an optional `flushes` parameter is also provided so
- * that the internal `Set` can be &quot;flushed&quot;, basically clearing it of values.
+ * &#x5728;&#x5176;&#x4ED6;&#x8FD0;&#x884C;&#x65F6;&#x4E2D;&#xFF0C;&#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x4F7F;&#x7528; `Set` &#x7684;&#x6700;&#x5C0F;&#x5316;&#x5B9E;&#x73B0;&#xFF0C;&#x6B64;&#x5B9E;&#x73B0;&#x5728;&#x5E95;&#x5C42;&#x4F9D;&#x8D56;&#x4E8E; `Array` &#x548C; `indexOf`&#xFF0C;&#x56E0;&#x4E3A;&#x8981;&#x68C0;&#x67E5;&#x66F4;&#x591A;&#x7684;&#x503C;&#x6765;&#x8FDB;&#x884C;&#x533A;&#x5206;&#xFF0C;&#x6240;&#x4EE5;&#x6027;&#x80FD;&#x4F1A;&#x964D;&#x4F4E;&#x3002;
+ * &#x5373;&#x4F7F;&#x662F;&#x5728;&#x65B0;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#xFF0C;&#x957F;&#x65F6;&#x95F4;&#x8FD0;&#x884C;&#x7684; `distinct` &#x64CD;&#x4F5C;&#x4E5F;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x6CC4;&#x9732;&#x3002;&#x4E3A;&#x4E86;&#x5728;&#x67D0;&#x79CD;&#x573A;&#x666F;&#x4E0B;&#x6765;&#x7F13;&#x89E3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684; `flushes` &#x53C2;&#x6570;&#xFF0C;
+ * &#x8FD9;&#x6837;&#x5185;&#x90E8;&#x7684; `Set` &#x53EF;&#x4EE5;&#x88AB;&#x201C;&#x6E05;&#x7A7A;&#x201D;&#xFF0C;&#x57FA;&#x672C;&#x4E0A;&#x6E05;&#x9664;&#x4E86;&#x5B83;&#x7684;&#x6240;&#x6709;&#x503C;&#x3002;
  *
- * @example &lt;caption&gt;A simple example with numbers&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528;&#x6570;&#x5B57;&#x7684;&#x7B80;&#x5355;&#x793A;&#x4F8B;&lt;/caption&gt;
  * Observable.of(1, 1, 2, 2, 2, 1, 2, 3, 4, 3, 2, 1)
  *   .distinct()
  *   .subscribe(x =&gt; console.log(x)); // 1, 2, 3, 4
  *
- * @example &lt;caption&gt;An example using a keySelector function&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528; keySelector &#x51FD;&#x6570;&#x7684;&#x793A;&#x4F8B;&lt;/caption&gt;
  * interface Person {
  *    age: number,
  *    name: string
@@ -114,16 +112,16 @@ import { Set } from &apos;../util/Set&apos;;
  *     .distinct((p: Person) =&gt; p.name)
  *     .subscribe(x =&gt; console.log(x));
  *
- * // displays:
+ * // &#x663E;&#x793A;&#xFF1A;
  * // { age: 4, name: &apos;Foo&apos; }
  * // { age: 7, name: &apos;Bar&apos; }
  *
  * @see {@link distinctUntilChanged}
  * @see {@link distinctUntilKeyChanged}
  *
- * @param {function} [keySelector] Optional function to select which value you want to check as distinct.
- * @param {Observable} [flushes] Optional Observable for flushing the internal HashSet of the operator.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values.
+ * @param {function} [keySelector] &#x53EF;&#x9009;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x9009;&#x62E9;&#x67D0;&#x4E2A;&#x952E;&#x7684;&#x503C;&#x4EE5;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x662F;&#x4E0D;&#x540C;&#x7684;&#x3002;
+ * @param {Observable} [flushes] &#x53EF;&#x9009; Observable&#xFF0C;&#x7528;&#x6765;&#x6E05;&#x7A7A;&#x64CD;&#x4F5C;&#x7B26;&#x5185;&#x90E8;&#x7684; HashSet &#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x5F97;&#x5230;&#x7684;&#x4E0D;&#x540C;&#x7684;&#x503C;&#x3002;
  * @method distinct
  * @owner Observable
  */

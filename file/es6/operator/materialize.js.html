@@ -82,34 +82,31 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { Notification } from &apos;../Notification&apos;;
 /**
- * Represents all of the notifications from the source Observable as `next`
- * emissions marked with their original types within {@link Notification}
- * objects.
+ * &#x8868;&#x793A;&#x6E90; Observable &#x4E2D;&#x7684;&#x6240;&#x6709;&#x901A;&#x77E5;&#xFF0C;&#x6BCF;&#x4E2A;&#x901A;&#x77E5;&#x90FD;&#x4F1A;&#x5728; {@link Notification} &#x5BF9;&#x8C61;&#x4E2D;&#x6807;&#x8BB0;&#x4E3A;
+ * &#x5B83;&#x4EEC;&#x539F;&#x59CB;&#x7684;&#x901A;&#x77E5;&#x7C7B;&#x578B;&#xFF0C;&#x5E76;&#x4F1A;&#x4F5C;&#x4E3A;&#x8F93;&#x51FA; Observable &#x7684; `next` &#x901A;&#x77E5;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Wraps `next`, `error` and `complete` emissions in
- * {@link Notification} objects, emitted as `next` on the output Observable.
+ * &lt;span class=&quot;informal&quot;&gt;&#x5728; {@link Notification} &#x5BF9;&#x8C61;&#x4E2D;&#x5305;&#x88C5; `next`&#x3001;`error`
+ * &#x548C; `complete` &#x53D1;&#x9001;, &#x5E76;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x4F5C;&#x4E3A; `next` &#x53D1;&#x9001;&#x51FA;&#x53BB;&#x3002;
  * &lt;/span&gt;
  *
  * &lt;img src=&quot;./img/materialize.png&quot; width=&quot;100%&quot;&gt;
  *
- * `materialize` returns an Observable that emits a `next` notification for each
- * `next`, `error`, or `complete` emission of the source Observable. When the
- * source Observable emits `complete`, the output Observable will emit `next` as
- * a Notification of type &quot;complete&quot;, and then it will emit `complete` as well.
- * When the source Observable emits `error`, the output will emit `next` as a
- * Notification of type &quot;error&quot;, and then `complete`.
+ * `materialize` &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8FD9;&#x4E2A; Observable &#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x6E90; Observable &#x7684;
+ * `next`&#x3001;`error` &#x6216; `complete` &#x901A;&#x77E5;&#x53D1;&#x51FA; `next` &#x901A;&#x77E5;&#x3002;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA; `complete` &#x65F6;&#xFF0C;
+ * &#x8F93;&#x51FA; Observable &#x4F1A;&#x53D1;&#x51FA; `next` &#x5E76;&#x4E14; Notification &#x7C7B;&#x578B;&#x4E3A; &quot;complete&quot;&#xFF0C;&#x7136;&#x540E;&#x5B83;&#x4E5F;&#x53D1;&#x51FA;
+ * `complete` &#x3002;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA; `error` &#x65F6;&#xFF0C;&#x8F93;&#x51FA; Observable &#x4F1A;&#x53D1;&#x51FA; `next` &#x5E76;&#x4E14;
+ * Notification &#x7C7B;&#x578B;&#x4E3A; &quot;error&quot;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA; `complete` &#x3002;
  *
- * This operator is useful for producing metadata of the source Observable, to
- * be consumed as `next` emissions. Use it in conjunction with
- * {@link dematerialize}.
+ * &#x8BE5;&#x64CD;&#x4F5C;&#x7B26;&#x5BF9;&#x4E8E;&#x751F;&#x6210;&#x6E90; Observable &#x7684;&#x5143;&#x6570;&#x636E;&#x5F88;&#x6709;&#x7528;&#xFF0C;&#x5E76;&#x4F5C;&#x4E3A; `next` &#x53D1;&#x9001;&#x4F7F;&#x7528;&#x6389;&#x3002;
+ * &#x4E0E; {@link dematerialize} &#x7ED3;&#x5408;&#x4F7F;&#x7528;&#x3002;
  *
- * @example &lt;caption&gt;Convert a faulty Observable to an Observable of Notifications&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&#x7684; Observable &#x8F6C;&#x6362;&#x6210; Notification &#x7C7B;&#x578B;&#x7684; Observable&lt;/caption&gt;
  * var letters = Rx.Observable.of(&apos;a&apos;, &apos;b&apos;, 13, &apos;d&apos;);
  * var upperCase = letters.map(x =&gt; x.toUpperCase());
  * var materialized = upperCase.materialize();
  * materialized.subscribe(x =&gt; console.log(x));
  *
- * // Results in the following:
+ * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;
  * // - Notification {kind: &quot;N&quot;, value: &quot;A&quot;, error: undefined, hasValue: true}
  * // - Notification {kind: &quot;N&quot;, value: &quot;B&quot;, error: undefined, hasValue: true}
  * // - Notification {kind: &quot;E&quot;, value: undefined, error: TypeError:
@@ -119,9 +116,8 @@ import { Notification } from &apos;../Notification&apos;;
  * @see {@link Notification}
  * @see {@link dematerialize}
  *
- * @return {Observable&lt;Notification&lt;T&gt;&gt;} An Observable that emits
- * {@link Notification} objects that wrap the original emissions from the source
- * Observable with metadata.
+ * @return {Observable&lt;Notification&lt;T&gt;&gt;} &#x8BE5; Observable &#x4F1A;&#x53D1;&#x51FA; {@link Notification} &#x5BF9;&#x8C61;&#xFF0C;
+ * &#x8BE5;&#x5BF9;&#x8C61;&#x5305;&#x88C5;&#x4E86;&#x6765;&#x81EA;&#x6E90; Observable &#x7684;&#x5E26;&#x6709;&#x5143;&#x6570;&#x636E;&#x7684;&#x539F;&#x59CB;&#x901A;&#x77E5;&#x3002;
  * @method materialize
  * @owner Observable
  */

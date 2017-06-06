@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the largest value.\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>Get the maximal value of a series of numbers</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>Use a comparer function to get the maximal item</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the\n * value of two items.\n * @return {Observable} An Observable that emits item with the largest value.\n * @method max\n * @owner Observable\n ",
+          "value": "*\n * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最大值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>使用比较函数来获取最大值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable} 该 Observable 发出最大值的项。\n * @method max\n * @owner Observable\n ",
           "range": [
             43,
-            1211
+            895
           ],
           "loc": {
             "start": {
@@ -105,7 +105,7 @@
               "column": 0
             },
             "end": {
-              "line": 32,
+              "line": 30,
               "column": 3
             }
           }
@@ -120,16 +120,16 @@
           "type": "Identifier",
           "name": "max",
           "range": [
-            1228,
-            1231
+            912,
+            915
           ],
           "loc": {
             "start": {
-              "line": 33,
+              "line": 31,
               "column": 16
             },
             "end": {
-              "line": 33,
+              "line": 31,
               "column": 19
             }
           }
@@ -139,16 +139,16 @@
             "type": "Identifier",
             "name": "comparer",
             "range": [
-              1232,
-              1240
+              916,
+              924
             ],
             "loc": {
               "start": {
-                "line": 33,
+                "line": 31,
                 "column": 20
               },
               "end": {
-                "line": 33,
+                "line": 31,
                 "column": 28
               }
             }
@@ -166,16 +166,16 @@
                     "type": "Identifier",
                     "name": "max",
                     "range": [
-                      1254,
-                      1257
+                      938,
+                      941
                     ],
                     "loc": {
                       "start": {
-                        "line": 34,
+                        "line": 32,
                         "column": 10
                       },
                       "end": {
-                        "line": 34,
+                        "line": 32,
                         "column": 13
                       }
                     }
@@ -192,32 +192,32 @@
                           "type": "Identifier",
                           "name": "comparer",
                           "range": [
-                            1268,
-                            1276
+                            952,
+                            960
                           ],
                           "loc": {
                             "start": {
-                              "line": 34,
+                              "line": 32,
                               "column": 24
                             },
                             "end": {
-                              "line": 34,
+                              "line": 32,
                               "column": 32
                             }
                           }
                         },
                         "prefix": true,
                         "range": [
-                          1261,
-                          1276
+                          945,
+                          960
                         ],
                         "loc": {
                           "start": {
-                            "line": 34,
+                            "line": 32,
                             "column": 17
                           },
                           "end": {
-                            "line": 34,
+                            "line": 32,
                             "column": 32
                           }
                         }
@@ -227,31 +227,31 @@
                         "value": "function",
                         "raw": "'function'",
                         "range": [
-                          1281,
-                          1291
+                          965,
+                          975
                         ],
                         "loc": {
                           "start": {
-                            "line": 34,
+                            "line": 32,
                             "column": 37
                           },
                           "end": {
-                            "line": 34,
+                            "line": 32,
                             "column": 47
                           }
                         }
                       },
                       "range": [
-                        1261,
-                        1291
+                        945,
+                        975
                       ],
                       "loc": {
                         "start": {
-                          "line": 34,
+                          "line": 32,
                           "column": 17
                         },
                         "end": {
-                          "line": 34,
+                          "line": 32,
                           "column": 47
                         }
                       }
@@ -264,16 +264,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1304,
-                            1305
+                            988,
+                            989
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 11
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 12
                             }
                           }
@@ -282,16 +282,16 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1307,
-                            1308
+                            991,
+                            992
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 14
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 15
                             }
                           }
@@ -308,16 +308,16 @@
                               "type": "Identifier",
                               "name": "comparer",
                               "range": [
-                                1313,
-                                1321
+                                997,
+                                1005
                               ],
                               "loc": {
                                 "start": {
-                                  "line": 35,
+                                  "line": 33,
                                   "column": 20
                                 },
                                 "end": {
-                                  "line": 35,
+                                  "line": 33,
                                   "column": 28
                                 }
                               }
@@ -327,16 +327,16 @@
                                 "type": "Identifier",
                                 "name": "x",
                                 "range": [
-                                  1322,
-                                  1323
+                                  1006,
+                                  1007
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 29
                                   },
                                   "end": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 30
                                   }
                                 }
@@ -345,32 +345,32 @@
                                 "type": "Identifier",
                                 "name": "y",
                                 "range": [
-                                  1325,
-                                  1326
+                                  1009,
+                                  1010
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 32
                                   },
                                   "end": {
-                                    "line": 35,
+                                    "line": 33,
                                     "column": 33
                                   }
                                 }
                               }
                             ],
                             "range": [
-                              1313,
-                              1327
+                              997,
+                              1011
                             ],
                             "loc": {
                               "start": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 20
                               },
                               "end": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 34
                               }
                             }
@@ -380,31 +380,31 @@
                             "value": 0,
                             "raw": "0",
                             "range": [
-                              1330,
-                              1331
+                              1014,
+                              1015
                             ],
                             "loc": {
                               "start": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 37
                               },
                               "end": {
-                                "line": 35,
+                                "line": 33,
                                 "column": 38
                               }
                             }
                           },
                           "range": [
-                            1313,
-                            1331
+                            997,
+                            1015
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 20
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 38
                             }
                           }
@@ -413,16 +413,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1334,
-                            1335
+                            1018,
+                            1019
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 41
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 42
                             }
                           }
@@ -431,31 +431,31 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1338,
-                            1339
+                            1022,
+                            1023
                           ],
                           "loc": {
                             "start": {
-                              "line": 35,
+                              "line": 33,
                               "column": 45
                             },
                             "end": {
-                              "line": 35,
+                              "line": 33,
                               "column": 46
                             }
                           }
                         },
                         "range": [
-                          1313,
-                          1339
+                          997,
+                          1023
                         ],
                         "loc": {
                           "start": {
-                            "line": 35,
+                            "line": 33,
                             "column": 20
                           },
                           "end": {
-                            "line": 35,
+                            "line": 33,
                             "column": 46
                           }
                         }
@@ -463,16 +463,16 @@
                       "generator": false,
                       "expression": true,
                       "range": [
-                        1303,
-                        1339
+                        987,
+                        1023
                       ],
                       "loc": {
                         "start": {
-                          "line": 35,
+                          "line": 33,
                           "column": 10
                         },
                         "end": {
-                          "line": 35,
+                          "line": 33,
                           "column": 46
                         }
                       }
@@ -485,16 +485,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1351,
-                            1352
+                            1035,
+                            1036
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 11
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 12
                             }
                           }
@@ -503,16 +503,16 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1354,
-                            1355
+                            1038,
+                            1039
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 14
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 15
                             }
                           }
@@ -527,16 +527,16 @@
                             "type": "Identifier",
                             "name": "x",
                             "range": [
-                              1360,
-                              1361
+                              1044,
+                              1045
                             ],
                             "loc": {
                               "start": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 20
                               },
                               "end": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 21
                               }
                             }
@@ -545,31 +545,31 @@
                             "type": "Identifier",
                             "name": "y",
                             "range": [
-                              1364,
-                              1365
+                              1048,
+                              1049
                             ],
                             "loc": {
                               "start": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 24
                               },
                               "end": {
-                                "line": 36,
+                                "line": 34,
                                 "column": 25
                               }
                             }
                           },
                           "range": [
-                            1360,
-                            1365
+                            1044,
+                            1049
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 20
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 25
                             }
                           }
@@ -578,16 +578,16 @@
                           "type": "Identifier",
                           "name": "x",
                           "range": [
-                            1368,
-                            1369
+                            1052,
+                            1053
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 28
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 29
                             }
                           }
@@ -596,31 +596,31 @@
                           "type": "Identifier",
                           "name": "y",
                           "range": [
-                            1372,
-                            1373
+                            1056,
+                            1057
                           ],
                           "loc": {
                             "start": {
-                              "line": 36,
+                              "line": 34,
                               "column": 32
                             },
                             "end": {
-                              "line": 36,
+                              "line": 34,
                               "column": 33
                             }
                           }
                         },
                         "range": [
-                          1360,
-                          1373
+                          1044,
+                          1057
                         ],
                         "loc": {
                           "start": {
-                            "line": 36,
+                            "line": 34,
                             "column": 20
                           },
                           "end": {
-                            "line": 36,
+                            "line": 34,
                             "column": 33
                           }
                         }
@@ -628,46 +628,46 @@
                       "generator": false,
                       "expression": true,
                       "range": [
-                        1350,
-                        1373
+                        1034,
+                        1057
                       ],
                       "loc": {
                         "start": {
-                          "line": 36,
+                          "line": 34,
                           "column": 10
                         },
                         "end": {
-                          "line": 36,
+                          "line": 34,
                           "column": 33
                         }
                       }
                     },
                     "range": [
-                      1260,
-                      1373
+                      944,
+                      1057
                     ],
                     "loc": {
                       "start": {
-                        "line": 34,
+                        "line": 32,
                         "column": 16
                       },
                       "end": {
-                        "line": 36,
+                        "line": 34,
                         "column": 33
                       }
                     }
                   },
                   "range": [
-                    1254,
-                    1373
+                    938,
+                    1057
                   ],
                   "loc": {
                     "start": {
-                      "line": 34,
+                      "line": 32,
                       "column": 10
                     },
                     "end": {
-                      "line": 36,
+                      "line": 34,
                       "column": 33
                     }
                   }
@@ -675,16 +675,16 @@
               ],
               "kind": "const",
               "range": [
-                1248,
-                1374
+                932,
+                1058
               ],
               "loc": {
                 "start": {
-                  "line": 34,
+                  "line": 32,
                   "column": 4
                 },
                 "end": {
-                  "line": 36,
+                  "line": 34,
                   "column": 34
                 }
               }
@@ -699,16 +699,16 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      1386,
-                      1390
+                      1070,
+                      1074
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 11
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 15
                       }
                     }
@@ -717,31 +717,31 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      1391,
-                      1395
+                      1075,
+                      1079
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 16
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 20
                       }
                     }
                   },
                   "range": [
-                    1386,
-                    1395
+                    1070,
+                    1079
                   ],
                   "loc": {
                     "start": {
-                      "line": 37,
+                      "line": 35,
                       "column": 11
                     },
                     "end": {
-                      "line": 37,
+                      "line": 35,
                       "column": 20
                     }
                   }
@@ -753,16 +753,16 @@
                       "type": "Identifier",
                       "name": "ReduceOperator",
                       "range": [
-                        1400,
-                        1414
+                        1084,
+                        1098
                       ],
                       "loc": {
                         "start": {
-                          "line": 37,
+                          "line": 35,
                           "column": 25
                         },
                         "end": {
-                          "line": 37,
+                          "line": 35,
                           "column": 39
                         }
                       }
@@ -772,79 +772,79 @@
                         "type": "Identifier",
                         "name": "max",
                         "range": [
-                          1415,
-                          1418
+                          1099,
+                          1102
                         ],
                         "loc": {
                           "start": {
-                            "line": 37,
+                            "line": 35,
                             "column": 40
                           },
                           "end": {
-                            "line": 37,
+                            "line": 35,
                             "column": 43
                           }
                         }
                       }
                     ],
                     "range": [
-                      1396,
-                      1419
+                      1080,
+                      1103
                     ],
                     "loc": {
                       "start": {
-                        "line": 37,
+                        "line": 35,
                         "column": 21
                       },
                       "end": {
-                        "line": 37,
+                        "line": 35,
                         "column": 44
                       }
                     }
                   }
                 ],
                 "range": [
-                  1386,
-                  1420
+                  1070,
+                  1104
                 ],
                 "loc": {
                   "start": {
-                    "line": 37,
+                    "line": 35,
                     "column": 11
                   },
                   "end": {
-                    "line": 37,
+                    "line": 35,
                     "column": 45
                   }
                 }
               },
               "range": [
-                1379,
-                1421
+                1063,
+                1105
               ],
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 35,
                   "column": 4
                 },
                 "end": {
-                  "line": 37,
+                  "line": 35,
                   "column": 46
                 }
               }
             }
           ],
           "range": [
-            1242,
-            1423
+            926,
+            1107
           ],
           "loc": {
             "start": {
-              "line": 33,
+              "line": 31,
               "column": 30
             },
             "end": {
-              "line": 38,
+              "line": 36,
               "column": 1
             }
           }
@@ -852,26 +852,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          1219,
-          1423
+          903,
+          1107
         ],
         "loc": {
           "start": {
-            "line": 33,
+            "line": 31,
             "column": 7
           },
           "end": {
-            "line": 38,
+            "line": 36,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the largest value.\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>Get the maximal value of a series of numbers</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>Use a comparer function to get the maximal item</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the\n * value of two items.\n * @return {Observable} An Observable that emits item with the largest value.\n * @method max\n * @owner Observable\n ",
+            "value": "*\n * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最大值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>使用比较函数来获取最大值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable} 该 Observable 发出最大值的项。\n * @method max\n * @owner Observable\n ",
             "range": [
               43,
-              1211
+              895
             ],
             "loc": {
               "start": {
@@ -879,7 +879,7 @@
                 "column": 0
               },
               "end": {
-                "line": 32,
+                "line": 30,
                 "column": 3
               }
             }
@@ -890,16 +890,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=max.js.map",
             "range": [
-              1424,
-              1455
+              1108,
+              1139
             ],
             "loc": {
               "start": {
-                "line": 39,
+                "line": 37,
                 "column": 0
               },
               "end": {
-                "line": 39,
+                "line": 37,
                 "column": 31
               }
             }
@@ -909,26 +909,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1212,
-        1423
+        896,
+        1107
       ],
       "loc": {
         "start": {
-          "line": 33,
+          "line": 31,
           "column": 0
         },
         "end": {
-          "line": 38,
+          "line": 36,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the largest value.\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>Get the maximal value of a series of numbers</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>Use a comparer function to get the maximal item</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the\n * value of two items.\n * @return {Observable} An Observable that emits item with the largest value.\n * @method max\n * @owner Observable\n ",
+          "value": "*\n * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最大值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>使用比较函数来获取最大值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable} 该 Observable 发出最大值的项。\n * @method max\n * @owner Observable\n ",
           "range": [
             43,
-            1211
+            895
           ],
           "loc": {
             "start": {
@@ -936,7 +936,7 @@
               "column": 0
             },
             "end": {
-              "line": 32,
+              "line": 30,
               "column": 3
             }
           }
@@ -947,16 +947,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=max.js.map",
           "range": [
-            1424,
-            1455
+            1108,
+            1139
           ],
           "loc": {
             "start": {
-              "line": 39,
+              "line": 37,
               "column": 0
             },
             "end": {
-              "line": 39,
+              "line": 37,
               "column": 31
             }
           }
@@ -967,7 +967,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1423
+    1107
   ],
   "loc": {
     "start": {
@@ -975,17 +975,17 @@
       "column": 0
     },
     "end": {
-      "line": 38,
+      "line": 36,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * The Max operator operates on an Observable that emits numbers (or items that can be compared with a provided function),\n * and when source Observable completes it emits a single item: the item with the largest value.\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>Get the maximal value of a series of numbers</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>Use a comparer function to get the maximal item</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - Optional comparer function that it will use instead of its default to compare the\n * value of two items.\n * @return {Observable} An Observable that emits item with the largest value.\n * @method max\n * @owner Observable\n ",
+      "value": "*\n * `max` 操作符操作的 Observable 发出数字(或可以与提供的函数进行比较的项)并且当源 Observable 完成时它发出单一项：最大值的项。\n *\n * <img src=\"./img/max.png\" width=\"100%\">\n *\n * @example <caption>获取一连串数字中的最大值</caption>\n * Rx.Observable.of(5, 4, 7, 2, 8)\n *   .max()\n *   .subscribe(x => console.log(x)); // -> 8\n *\n * @example <caption>使用比较函数来获取最大值的项</caption>\n * interface Person {\n *   age: number,\n *   name: string\n * }\n * Observable.of<Person>({age: 7, name: 'Foo'},\n *                       {age: 5, name: 'Bar'},\n *                       {age: 9, name: 'Beer'})\n *           .max<Person>((a: Person, b: Person) => a.age < b.age ? -1 : 1)\n *           .subscribe((x: Person) => console.log(x.name)); // -> 'Beer'\n * }\n *\n * @see {@link min}\n *\n * @param {Function} [comparer] - 可选的比较函数，用它来替代默认值来比较两项的值。\n * @return {Observable} 该 Observable 发出最大值的项。\n * @method max\n * @owner Observable\n ",
       "range": [
         43,
-        1211
+        895
       ],
       "loc": {
         "start": {
@@ -993,7 +993,7 @@
           "column": 0
         },
         "end": {
-          "line": 32,
+          "line": 30,
           "column": 3
         }
       }
@@ -1002,16 +1002,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=max.js.map",
       "range": [
-        1424,
-        1455
+        1108,
+        1139
       ],
       "loc": {
         "start": {
-          "line": 39,
+          "line": 37,
           "column": 0
         },
         "end": {
-          "line": 39,
+          "line": 37,
           "column": 31
         }
       }

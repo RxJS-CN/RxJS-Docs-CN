@@ -82,29 +82,24 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Perform a side effect for every emission on the source Observable, but return
- * an Observable that is identical to the source.
+ * &#x4E3A;&#x6E90; Observable &#x4E0A;&#x7684;&#x6BCF;&#x6B21;&#x53D1;&#x9001;&#x6267;&#x884C;&#x526F;&#x4F5C;&#x7528;&#xFF0C;&#x4F46;&#x8FD4;&#x56DE;&#x7684; Observable &#x4E0E;&#x6E90; Observable &#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Intercepts each emission on the source and runs a
- * function, but returns an output which is identical to the source as long as errors don&apos;t occur.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x62E6;&#x622A;&#x6E90; Observable &#x4E0A;&#x7684;&#x6BCF;&#x6B21;&#x53D1;&#x9001;&#x5E76;&#x4E14;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x8FD4;&#x56DE;&#x7684;&#x8F93;&#x51FA; Observable &#x4E0E;
+ * &#x6E90; Observable &#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x53EA;&#x8981;&#x4E0D;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x5373;&#x53EF;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/do.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns a mirrored Observable of the source Observable, but modified so that
- * the provided Observer is called to perform a side effect for every value,
- * error, and completion emitted by the source. Any errors that are thrown in
- * the aforementioned Observer or handlers are safely sent down the error path
- * of the output Observable.
+ * &#x8FD4;&#x56DE;&#x6E90; Observable &#x7684;&#x955C;&#x50CF;&#xFF0C;&#x4F46;&#x955C;&#x50CF;&#x662F;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#xFF0C;&#x4EE5;&#x4FBF;&#x8C03;&#x7528;&#x63D0;&#x4F9B;&#x7684; Observer &#x6765;&#x4E3A;&#x6E90; Observable
+ * &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#xFF0C;&#x9519;&#x8BEF;&#x548C;&#x5B8C;&#x6210;&#x6267;&#x884C;&#x526F;&#x4F5C;&#x7528;&#x3002;&#x5728;&#x4E0A;&#x8FF0;&#x7684; Observer &#x6216;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#x4E2D;&#x629B;&#x51FA;&#x7684;&#x4EFB;&#x4F55;&#x9519;&#x8BEF;&#x90FD;&#x53EF;&#x4EE5;
+ * &#x5B89;&#x5168;&#x5730;&#x53D1;&#x9001;&#x5230;&#x8F93;&#x51FA; Observable &#x7684;&#x9519;&#x8BEF;&#x8DEF;&#x5F84;&#x4E2D;&#x3002;
  *
- * This operator is useful for debugging your Observables for the correct values
- * or performing other side effects.
+ * &#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x9002;&#x7528;&#x4E8E;&#x8C03;&#x8BD5; Observables &#x4EE5;&#x67E5;&#x770B;&#x503C;&#x662F;&#x5426;&#x6B63;&#x786E;&#xFF0C;&#x6216;&#x8005;&#x6267;&#x884C;&#x4E00;&#x4E9B;&#x5176;&#x4ED6;&#x7684;&#x526F;&#x4F5C;&#x7528;&#x64CD;&#x4F5C;&#x3002;
  *
- * Note: this is different to a `subscribe` on the Observable. If the Observable
- * returned by `do` is not subscribed, the side effects specified by the
- * Observer will never happen. `do` therefore simply spies on existing
- * execution, it does not trigger an execution to happen like `subscribe` does.
+ * &#x6CE8;&#x610F;&#xFF1A;&#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x4E0D;&#x540C;&#x4E8E; Observable &#x7684; `subscribe`&#x3002;&#x5982;&#x679C; `do` &#x8FD4;&#x56DE;&#x7684; Observable &#x6CA1;&#x6709;&#x88AB;&#x8BA2;&#x9605;&#xFF0C;
+ * &#x90A3;&#x4E48;&#x89C2;&#x5BDF;&#x8005;&#x6307;&#x5B9A;&#x7684;&#x526F;&#x4F5C;&#x7528;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x3002;&#x56E0;&#x6B64; `do` &#x53EA;&#x662F;&#x4FA6;&#x67E5;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x6267;&#x884C;&#xFF0C;&#x5B83;&#x4E0D;&#x4F1A;&#x50CF; `subscribe`
+ * &#x90A3;&#x6837;&#x89E6;&#x53D1;&#x6267;&#x884C;&#x7684;&#x53D1;&#x751F;&#x3002;
  *
- * @example &lt;caption&gt;Map every every click to the clientX position of that click, while also logging the click event&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x628A;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x6620;&#x5C04;&#x6210;&#x8BE5;&#x70B9;&#x51FB;&#x7684; clientX &#xFF0C;&#x540C;&#x65F6;&#x8FD8;&#x8F93;&#x51FA;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var positions = clicks
  *   .do(ev =&gt; console.log(ev))
@@ -114,12 +109,10 @@
  * @see {@link map}
  * @see {@link subscribe}
  *
- * @param {Observer|function} [nextOrObserver] A normal Observer object or a
- * callback for `next`.
- * @param {function} [error] Callback for errors in the source.
- * @param {function} [complete] Callback for the completion of the source.
- * @return {Observable} An Observable identical to the source, but runs the
- * specified Observer or callback(s) for each item.
+ * @param {Observer|function} [nextOrObserver] &#x666E;&#x901A;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x8C61;&#x6216;&#x8005; `next` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+ * @param {function} [error] &#x6E90; Observable &#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+ * @param {function} [complete] &#x6E90; Observable &#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+ * @return {Observable} &#x4E0E;&#x6E90;&#x76F8;&#x540C;&#x7684; Observable&#xFF0C;&#x4F46;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E00;&#x9879;&#x7684;&#x8FD0;&#x884C;&#x6307;&#x5B9A;&#x89C2;&#x5BDF;&#x8005;&#x6216;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
  * @method do
  * @name do
  * @owner Observable

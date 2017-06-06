@@ -81,16 +81,16 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/every.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Returns an Observable that emits whether or not every item of the source satisfies the condition specified.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x662F;&#x5426;&#x6E90; Observable &#x7684;&#x6BCF;&#x9879;&#x90FD;&#x6EE1;&#x8DB3;&#x6307;&#x5B9A;&#x7684;&#x6761;&#x4EF6;&#x3002;
  *
- * @example &lt;caption&gt;A simple example emitting true if all elements are less than 5, false otherwise&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x793A;&#x4F8B;&#xFF1A;&#x5982;&#x679C;&#x6240;&#x6709;&#x5143;&#x7D20;&#x90FD;&#x5C0F;&#x4E8E;5&#x5C31;&#x53D1;&#x51FA; `true`&#xFF0C;&#x53CD;&#x4E4B; `false`&lt;/caption&gt;
  *  Observable.of(1, 2, 3, 4, 5, 6)
  *     .every(x =&gt; x &lt; 5)
  *     .subscribe(x =&gt; console.log(x)); // -&gt; false
  *
- * @param {function} predicate A function for determining if an item meets a specified condition.
- * @param {any} [thisArg] Optional object to use for `this` in the callback.
- * @return {Observable} An Observable of booleans that determines if all items of the source Observable meet the condition specified.
+ * @param {function} predicate &#x7528;&#x6765;&#x786E;&#x5B9A;&#x6BCF;&#x4E00;&#x9879;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x51FD;&#x6570;&#x3002;
+ * @param {any} [thisArg] &#x53EF;&#x9009;&#x5BF9;&#x8C61;&#xFF0C;&#x4F5C;&#x4E3A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4E2D;&#x7684; `this` &#x4F7F;&#x7528;&#x3002;
+ * @return {Observable} &#x5E03;&#x5C14;&#x503C;&#x7684; Observable&#xFF0C;&#x7528;&#x6765;&#x786E;&#x5B9A;&#x662F;&#x5426;&#x6E90; Observable &#x7684;&#x6240;&#x6709;&#x9879;&#x90FD;&#x6EE1;&#x8DB3;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x3002;
  * @method every
  * @owner Observable
  */

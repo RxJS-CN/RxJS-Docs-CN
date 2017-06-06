@@ -83,34 +83,31 @@
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable.
+ * &#x5C06;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x6295;&#x5C04;&#x6210; Observable &#xFF0C;&#x8BE5; Observable &#x4F1A;&#x5408;&#x5E76;&#x5230;&#x8F93;&#x51FA; Observable &#x4E2D;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link mergeAll}.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x6BCF;&#x4E2A;&#x503C;&#x6620;&#x5C04;&#x6210; Observable &#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528; {@link mergeAll}
+ * &#x6253;&#x5E73;&#x6240;&#x6709;&#x7684;&#x5185;&#x90E8; Observables &#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/mergeMap.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an Observable, and then merging those resulting Observables and
- * emitting the results of this merger.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x57FA;&#x4E8E;&#x5E94;&#x7528;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6765;&#x53D1;&#x9001;&#x9879;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x63D0;&#x4F9B;&#x7ED9;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#xFF0C;
+ * &#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x7136;&#x540E;&#x5408;&#x5E76;&#x8FD9;&#x4E9B;&#x4F5C;&#x4E3A;&#x7ED3;&#x679C;&#x7684; Observable&#xFF0C;&#x5E76;&#x53D1;&#x51FA;&#x672C;&#x6B21;&#x5408;&#x5E76;&#x7684;&#x7ED3;&#x679C;&#x3002;
  *
- * @example &lt;caption&gt;Map and flatten each letter to an Observable ticking every 1 second&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x6BCF;&#x4E2A;&#x5B57;&#x6BCD;&#x6620;&#x5C04;&#x5E76;&#x6253;&#x5E73;&#x6210;&#x4E00;&#x4E2A; Observable &#xFF0C;&#x6BCF;1&#x79D2;&#x949F;&#x4E00;&#x6B21;&lt;/caption&gt;
  * var letters = Rx.Observable.of(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;);
  * var result = letters.mergeMap(x =&gt;
  *   Rx.Observable.interval(1000).map(i =&gt; x+i)
  * );
  * result.subscribe(x =&gt; console.log(x));
  *
- * // Results in the following:
+ * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;&#xFF1A;
  * // a0
  * // b0
  * // c0
  * // a1
  * // b1
  * // c1
- * // continues to list a,b,c with respective ascending integers
+ * // &#x7EE7;&#x7EED;&#x5217;&#x51FA;a&#x3001;b&#x3001;c&#x52A0;&#x4E0A;&#x5404;&#x81EA;&#x7684;&#x81EA;&#x589E;&#x6570;&#x5217;
  *
  * @see {@link concatMap}
  * @see {@link exhaustMap}
@@ -120,23 +117,19 @@ import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
  * @see {@link mergeScan}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project &#x51FD;&#x6570;&#xFF0C;
+ + * &#x5F53;&#x5E94;&#x7528;&#x4E8E;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x9879;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable &#x3002;
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the &quot;index&quot; of the value that came from the source
- * - `innerIndex`: the &quot;index&quot; of the value from the projected Observable
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and merging the results of the Observables obtained
- * from this transformation.
+ * * &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x4EA7;&#x751F;&#x57FA;&#x4E8E;&#x503C;&#x7684;&#x8F93;&#x51FA; Observable &#x548C;&#x6E90;(&#x5916;&#x90E8;)&#x53D1;&#x9001;&#x548C;&#x5185;&#x90E8; Observable &#x53D1;&#x9001;&#x7684;&#x7D22;&#x5F15;&#x3002;
+ + * &#x4F20;&#x9012;&#x7ED9;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x6709;&#xFF1A;
+ + * - `outerValue`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;
+ + * - `innerValue`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;
+ + * - `outerIndex`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;&#x7684; &quot;index&quot;
+ + * - `innerIndex`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;&#x7684; &quot;index&quot;
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] &#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x8BA2;&#x9605;&#x7684;&#x8F93;&#x5165;
+ * Observables &#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x9879;&#x5E94;&#x7528;&#x6295;&#x5C04;&#x51FD;&#x6570;
+ * (&#x548C;&#x53EF;&#x9009;&#x7684; `resultSelector`)&#x540E;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x5E76;&#x5408;&#x5E76;&#x4ECE;&#x8BE5;&#x8F6C;&#x5316;&#x83B7;&#x5F97;&#x7684; Observables &#x7684;&#x7ED3;&#x679C;&#x3002;
  * @method mergeMap
  * @owner Observable
  */

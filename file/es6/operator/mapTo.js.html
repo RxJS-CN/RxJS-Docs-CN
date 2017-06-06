@@ -81,28 +81,25 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/mapTo.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Emits the given constant value on the output Observable every time the source
- * Observable emits a value.
+ * &#x6BCF;&#x6B21;&#x6E90; Observble &#x53D1;&#x51FA;&#x503C;&#x65F6;&#xFF0C;&#x90FD;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x7ED9;&#x5B9A;&#x7684;&#x5E38;&#x91CF;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Like {@link map}, but it maps every source value to
- * the same output value every time.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x7C7B;&#x4F3C;&#x4E8E; {@link map}&#xFF0C;&#x4F46;&#x5B83;&#x6BCF;&#x4E00;&#x6B21;&#x90FD;&#x628A;&#x6E90;&#x503C;&#x6620;&#x5C04;&#x6210;&#x540C;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/mapTo.png&quot; width=&quot;100%&quot;&gt;
  *
- * Takes a constant `value` as argument, and emits that whenever the source
- * Observable emits a value. In other words, ignores the actual source value,
- * and simply uses the emission moment to know when to emit the given `value`.
+ * &#x63A5;&#x6536;&#x5E38;&#x91CF; `value` &#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x6BCF;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA;&#x503C;&#x65F6;&#x90FD;&#x53D1;&#x51FA;&#x8FD9;&#x4E2A;&#x503C;&#x3002;&#x6362;&#x53E5;&#x8BDD;&#x8BF4;&#xFF0C;
+ * &#x5C31;&#x662F;&#x5FFD;&#x7565;&#x5B9E;&#x9645;&#x7684;&#x6E90;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x7B80;&#x5355;&#x5730;&#x4F7F;&#x7528;&#x8FD9;&#x4E2A;&#x53D1;&#x9001;&#x65F6;&#x95F4;&#x70B9;&#x4EE5;&#x77E5;&#x9053;&#x4F55;&#x65F6;&#x53D1;&#x51FA;&#x7ED9;&#x5B9A;&#x7684; `value` &#x3002;
  *
- * @example &lt;caption&gt;Map every every click to the string &apos;Hi&apos;&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x628A;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x6620;&#x5C04;&#x6210;&#x5B57;&#x7B26;&#x4E32; &apos;Hi&apos;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var greetings = clicks.mapTo(&apos;Hi&apos;);
  * greetings.subscribe(x =&gt; console.log(x));
  *
  * @see {@link map}
  *
- * @param {any} value The value to map each source value to.
- * @return {Observable} An Observable that emits the given `value` every time
- * the source Observable emits something.
+ * @param {any} value &#x5C06;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x6620;&#x5C04;&#x6210;&#x7684;&#x503C;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x5728;&#x6BCF;&#x6B21;&#x6E90; Observable &#x53D1;&#x51FA;&#x503C;&#x7684;&#x65F6;&#x5019;&#x53D1;&#x51FA;&#x7ED9;&#x5B9A;
+ * &#x7684; `value` &#x3002;
  * @method mapTo
  * @owner Observable
  */

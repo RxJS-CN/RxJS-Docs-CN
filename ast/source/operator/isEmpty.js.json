@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} An Observable that emits a Boolean.\n * @method isEmpty\n * @owner Observable\n ",
+          "value": "*\n * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} 发出布尔值的 Observable 。\n * @method isEmpty\n * @owner Observable\n ",
           "range": [
             44,
-            308
+            249
           ],
           "loc": {
             "start": {
@@ -120,8 +120,8 @@
           "type": "Identifier",
           "name": "isEmpty",
           "range": [
-            325,
-            332
+            266,
+            273
           ],
           "loc": {
             "start": {
@@ -148,8 +148,8 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      348,
-                      352
+                      289,
+                      293
                     ],
                     "loc": {
                       "start": {
@@ -166,8 +166,8 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      353,
-                      357
+                      294,
+                      298
                     ],
                     "loc": {
                       "start": {
@@ -181,8 +181,8 @@
                     }
                   },
                   "range": [
-                    348,
-                    357
+                    289,
+                    298
                   ],
                   "loc": {
                     "start": {
@@ -202,8 +202,8 @@
                       "type": "Identifier",
                       "name": "IsEmptyOperator",
                       "range": [
-                        362,
-                        377
+                        303,
+                        318
                       ],
                       "loc": {
                         "start": {
@@ -218,8 +218,8 @@
                     },
                     "arguments": [],
                     "range": [
-                      358,
-                      379
+                      299,
+                      320
                     ],
                     "loc": {
                       "start": {
@@ -234,8 +234,8 @@
                   }
                 ],
                 "range": [
-                  348,
-                  380
+                  289,
+                  321
                 ],
                 "loc": {
                   "start": {
@@ -249,8 +249,8 @@
                 }
               },
               "range": [
-                341,
-                381
+                282,
+                322
               ],
               "loc": {
                 "start": {
@@ -265,8 +265,8 @@
             }
           ],
           "range": [
-            335,
-            383
+            276,
+            324
           ],
           "loc": {
             "start": {
@@ -282,8 +282,8 @@
         "generator": false,
         "expression": false,
         "range": [
-          316,
-          383
+          257,
+          324
         ],
         "loc": {
           "start": {
@@ -298,10 +298,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} An Observable that emits a Boolean.\n * @method isEmpty\n * @owner Observable\n ",
+            "value": "*\n * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} 发出布尔值的 Observable 。\n * @method isEmpty\n * @owner Observable\n ",
             "range": [
               44,
-              308
+              249
             ],
             "loc": {
               "start": {
@@ -320,8 +320,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        309,
-        383
+        250,
+        324
       ],
       "loc": {
         "start": {
@@ -336,10 +336,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} An Observable that emits a Boolean.\n * @method isEmpty\n * @owner Observable\n ",
+          "value": "*\n * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} 发出布尔值的 Observable 。\n * @method isEmpty\n * @owner Observable\n ",
           "range": [
             44,
-            308
+            249
           ],
           "loc": {
             "start": {
@@ -360,8 +360,8 @@
         "type": "Identifier",
         "name": "IsEmptyOperator",
         "range": [
-          390,
-          405
+          331,
+          346
         ],
         "loc": {
           "start": {
@@ -384,8 +384,8 @@
               "type": "Identifier",
               "name": "call",
               "range": [
-                412,
-                416
+                353,
+                357
               ],
               "loc": {
                 "start": {
@@ -406,8 +406,8 @@
                   "type": "Identifier",
                   "name": "observer",
                   "range": [
-                    417,
-                    425
+                    358,
+                    366
                   ],
                   "loc": {
                     "start": {
@@ -424,8 +424,8 @@
                   "type": "Identifier",
                   "name": "source",
                   "range": [
-                    427,
-                    433
+                    368,
+                    374
                   ],
                   "loc": {
                     "start": {
@@ -453,8 +453,8 @@
                           "type": "Identifier",
                           "name": "source",
                           "range": [
-                            452,
-                            458
+                            393,
+                            399
                           ],
                           "loc": {
                             "start": {
@@ -471,8 +471,8 @@
                           "type": "Identifier",
                           "name": "subscribe",
                           "range": [
-                            459,
-                            468
+                            400,
+                            409
                           ],
                           "loc": {
                             "start": {
@@ -486,8 +486,8 @@
                           }
                         },
                         "range": [
-                          452,
-                          468
+                          393,
+                          409
                         ],
                         "loc": {
                           "start": {
@@ -507,8 +507,8 @@
                             "type": "Identifier",
                             "name": "IsEmptySubscriber",
                             "range": [
-                              473,
-                              490
+                              414,
+                              431
                             ],
                             "loc": {
                               "start": {
@@ -526,8 +526,8 @@
                               "type": "Identifier",
                               "name": "observer",
                               "range": [
-                                491,
-                                499
+                                432,
+                                440
                               ],
                               "loc": {
                                 "start": {
@@ -542,8 +542,8 @@
                             }
                           ],
                           "range": [
-                            469,
-                            500
+                            410,
+                            441
                           ],
                           "loc": {
                             "start": {
@@ -558,8 +558,8 @@
                         }
                       ],
                       "range": [
-                        452,
-                        501
+                        393,
+                        442
                       ],
                       "loc": {
                         "start": {
@@ -573,8 +573,8 @@
                       }
                     },
                     "range": [
-                      445,
-                      502
+                      386,
+                      443
                     ],
                     "loc": {
                       "start": {
@@ -589,8 +589,8 @@
                   }
                 ],
                 "range": [
-                  435,
-                  508
+                  376,
+                  449
                 ],
                 "loc": {
                   "start": {
@@ -606,8 +606,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                416,
-                508
+                357,
+                449
               ],
               "loc": {
                 "start": {
@@ -623,8 +623,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              412,
-              508
+              353,
+              449
             ],
             "loc": {
               "start": {
@@ -640,8 +640,8 @@
           }
         ],
         "range": [
-          406,
-          510
+          347,
+          451
         ],
         "loc": {
           "start": {
@@ -655,8 +655,8 @@
         }
       },
       "range": [
-        384,
-        510
+        325,
+        451
       ],
       "loc": {
         "start": {
@@ -673,8 +673,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            511,
-            602
+            452,
+            543
           ],
           "loc": {
             "start": {
@@ -695,8 +695,8 @@
         "type": "Identifier",
         "name": "IsEmptySubscriber",
         "range": [
-          609,
-          626
+          550,
+          567
         ],
         "loc": {
           "start": {
@@ -713,8 +713,8 @@
         "type": "Identifier",
         "name": "Subscriber",
         "range": [
-          635,
-          645
+          576,
+          586
         ],
         "loc": {
           "start": {
@@ -736,8 +736,8 @@
               "type": "Identifier",
               "name": "constructor",
               "range": [
-                652,
-                663
+                593,
+                604
               ],
               "loc": {
                 "start": {
@@ -758,8 +758,8 @@
                   "type": "Identifier",
                   "name": "destination",
                   "range": [
-                    664,
-                    675
+                    605,
+                    616
                   ],
                   "loc": {
                     "start": {
@@ -783,8 +783,8 @@
                       "callee": {
                         "type": "Super",
                         "range": [
-                          687,
-                          692
+                          628,
+                          633
                         ],
                         "loc": {
                           "start": {
@@ -802,8 +802,8 @@
                           "type": "Identifier",
                           "name": "destination",
                           "range": [
-                            693,
-                            704
+                            634,
+                            645
                           ],
                           "loc": {
                             "start": {
@@ -818,8 +818,8 @@
                         }
                       ],
                       "range": [
-                        687,
-                        705
+                        628,
+                        646
                       ],
                       "loc": {
                         "start": {
@@ -833,8 +833,8 @@
                       }
                     },
                     "range": [
-                      687,
-                      706
+                      628,
+                      647
                     ],
                     "loc": {
                       "start": {
@@ -849,8 +849,8 @@
                   }
                 ],
                 "range": [
-                  677,
-                  712
+                  618,
+                  653
                 ],
                 "loc": {
                   "start": {
@@ -866,8 +866,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                663,
-                712
+                604,
+                653
               ],
               "loc": {
                 "start": {
@@ -883,8 +883,8 @@
             "kind": "constructor",
             "computed": false,
             "range": [
-              652,
-              712
+              593,
+              653
             ],
             "loc": {
               "start": {
@@ -904,8 +904,8 @@
               "type": "Identifier",
               "name": "notifyComplete",
               "range": [
-                717,
-                731
+                658,
+                672
               ],
               "loc": {
                 "start": {
@@ -926,8 +926,8 @@
                   "type": "Identifier",
                   "name": "isEmpty",
                   "range": [
-                    732,
-                    739
+                    673,
+                    680
                   ],
                   "loc": {
                     "start": {
@@ -953,8 +953,8 @@
                           "type": "Identifier",
                           "name": "destination",
                           "range": [
-                            757,
-                            768
+                            698,
+                            709
                           ],
                           "loc": {
                             "start": {
@@ -973,8 +973,8 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              771,
-                              775
+                              712,
+                              716
                             ],
                             "loc": {
                               "start": {
@@ -991,8 +991,8 @@
                             "type": "Identifier",
                             "name": "destination",
                             "range": [
-                              776,
-                              787
+                              717,
+                              728
                             ],
                             "loc": {
                               "start": {
@@ -1006,8 +1006,8 @@
                             }
                           },
                           "range": [
-                            771,
-                            787
+                            712,
+                            728
                           ],
                           "loc": {
                             "start": {
@@ -1021,8 +1021,8 @@
                           }
                         },
                         "range": [
-                          757,
-                          787
+                          698,
+                          728
                         ],
                         "loc": {
                           "start": {
@@ -1038,8 +1038,8 @@
                     ],
                     "kind": "const",
                     "range": [
-                      751,
-                      788
+                      692,
+                      729
                     ],
                     "loc": {
                       "start": {
@@ -1063,8 +1063,8 @@
                           "type": "Identifier",
                           "name": "destination",
                           "range": [
-                            797,
-                            808
+                            738,
+                            749
                           ],
                           "loc": {
                             "start": {
@@ -1081,8 +1081,8 @@
                           "type": "Identifier",
                           "name": "next",
                           "range": [
-                            809,
-                            813
+                            750,
+                            754
                           ],
                           "loc": {
                             "start": {
@@ -1096,8 +1096,8 @@
                           }
                         },
                         "range": [
-                          797,
-                          813
+                          738,
+                          754
                         ],
                         "loc": {
                           "start": {
@@ -1115,8 +1115,8 @@
                           "type": "Identifier",
                           "name": "isEmpty",
                           "range": [
-                            814,
-                            821
+                            755,
+                            762
                           ],
                           "loc": {
                             "start": {
@@ -1131,8 +1131,8 @@
                         }
                       ],
                       "range": [
-                        797,
-                        822
+                        738,
+                        763
                       ],
                       "loc": {
                         "start": {
@@ -1146,8 +1146,8 @@
                       }
                     },
                     "range": [
-                      797,
-                      823
+                      738,
+                      764
                     ],
                     "loc": {
                       "start": {
@@ -1171,8 +1171,8 @@
                           "type": "Identifier",
                           "name": "destination",
                           "range": [
-                            832,
-                            843
+                            773,
+                            784
                           ],
                           "loc": {
                             "start": {
@@ -1189,8 +1189,8 @@
                           "type": "Identifier",
                           "name": "complete",
                           "range": [
-                            844,
-                            852
+                            785,
+                            793
                           ],
                           "loc": {
                             "start": {
@@ -1204,8 +1204,8 @@
                           }
                         },
                         "range": [
-                          832,
-                          852
+                          773,
+                          793
                         ],
                         "loc": {
                           "start": {
@@ -1220,8 +1220,8 @@
                       },
                       "arguments": [],
                       "range": [
-                        832,
-                        854
+                        773,
+                        795
                       ],
                       "loc": {
                         "start": {
@@ -1235,8 +1235,8 @@
                       }
                     },
                     "range": [
-                      832,
-                      855
+                      773,
+                      796
                     ],
                     "loc": {
                       "start": {
@@ -1251,8 +1251,8 @@
                   }
                 ],
                 "range": [
-                  741,
-                  861
+                  682,
+                  802
                 ],
                 "loc": {
                   "start": {
@@ -1268,8 +1268,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                731,
-                861
+                672,
+                802
               ],
               "loc": {
                 "start": {
@@ -1285,8 +1285,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              717,
-              861
+              658,
+              802
             ],
             "loc": {
               "start": {
@@ -1306,8 +1306,8 @@
               "type": "Identifier",
               "name": "_next",
               "range": [
-                866,
-                871
+                807,
+                812
               ],
               "loc": {
                 "start": {
@@ -1328,8 +1328,8 @@
                   "type": "Identifier",
                   "name": "value",
                   "range": [
-                    872,
-                    877
+                    813,
+                    818
                   ],
                   "loc": {
                     "start": {
@@ -1356,8 +1356,8 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            889,
-                            893
+                            830,
+                            834
                           ],
                           "loc": {
                             "start": {
@@ -1374,8 +1374,8 @@
                           "type": "Identifier",
                           "name": "notifyComplete",
                           "range": [
-                            894,
-                            908
+                            835,
+                            849
                           ],
                           "loc": {
                             "start": {
@@ -1389,8 +1389,8 @@
                           }
                         },
                         "range": [
-                          889,
-                          908
+                          830,
+                          849
                         ],
                         "loc": {
                           "start": {
@@ -1409,8 +1409,8 @@
                           "value": false,
                           "raw": "false",
                           "range": [
-                            909,
-                            914
+                            850,
+                            855
                           ],
                           "loc": {
                             "start": {
@@ -1425,8 +1425,8 @@
                         }
                       ],
                       "range": [
-                        889,
-                        915
+                        830,
+                        856
                       ],
                       "loc": {
                         "start": {
@@ -1440,8 +1440,8 @@
                       }
                     },
                     "range": [
-                      889,
-                      916
+                      830,
+                      857
                     ],
                     "loc": {
                       "start": {
@@ -1456,8 +1456,8 @@
                   }
                 ],
                 "range": [
-                  879,
-                  922
+                  820,
+                  863
                 ],
                 "loc": {
                   "start": {
@@ -1473,8 +1473,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                871,
-                922
+                812,
+                863
               ],
               "loc": {
                 "start": {
@@ -1490,8 +1490,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              866,
-              922
+              807,
+              863
             ],
             "loc": {
               "start": {
@@ -1511,8 +1511,8 @@
               "type": "Identifier",
               "name": "_complete",
               "range": [
-                927,
-                936
+                868,
+                877
               ],
               "loc": {
                 "start": {
@@ -1542,8 +1542,8 @@
                         "object": {
                           "type": "ThisExpression",
                           "range": [
-                            949,
-                            953
+                            890,
+                            894
                           ],
                           "loc": {
                             "start": {
@@ -1560,8 +1560,8 @@
                           "type": "Identifier",
                           "name": "notifyComplete",
                           "range": [
-                            954,
-                            968
+                            895,
+                            909
                           ],
                           "loc": {
                             "start": {
@@ -1575,8 +1575,8 @@
                           }
                         },
                         "range": [
-                          949,
-                          968
+                          890,
+                          909
                         ],
                         "loc": {
                           "start": {
@@ -1595,8 +1595,8 @@
                           "value": true,
                           "raw": "true",
                           "range": [
-                            969,
-                            973
+                            910,
+                            914
                           ],
                           "loc": {
                             "start": {
@@ -1611,8 +1611,8 @@
                         }
                       ],
                       "range": [
-                        949,
-                        974
+                        890,
+                        915
                       ],
                       "loc": {
                         "start": {
@@ -1626,8 +1626,8 @@
                       }
                     },
                     "range": [
-                      949,
-                      975
+                      890,
+                      916
                     ],
                     "loc": {
                       "start": {
@@ -1642,8 +1642,8 @@
                   }
                 ],
                 "range": [
-                  939,
-                  981
+                  880,
+                  922
                 ],
                 "loc": {
                   "start": {
@@ -1659,8 +1659,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                936,
-                981
+                877,
+                922
               ],
               "loc": {
                 "start": {
@@ -1676,8 +1676,8 @@
             "kind": "method",
             "computed": false,
             "range": [
-              927,
-              981
+              868,
+              922
             ],
             "loc": {
               "start": {
@@ -1693,8 +1693,8 @@
           }
         ],
         "range": [
-          646,
-          983
+          587,
+          924
         ],
         "loc": {
           "start": {
@@ -1708,8 +1708,8 @@
         }
       },
       "range": [
-        603,
-        983
+        544,
+        924
       ],
       "loc": {
         "start": {
@@ -1726,8 +1726,8 @@
           "type": "Block",
           "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
           "range": [
-            511,
-            602
+            452,
+            543
           ],
           "loc": {
             "start": {
@@ -1746,8 +1746,8 @@
           "type": "Line",
           "value": "# sourceMappingURL=isEmpty.js.map",
           "range": [
-            984,
-            1019
+            925,
+            960
           ],
           "loc": {
             "start": {
@@ -1766,7 +1766,7 @@
   "sourceType": "module",
   "range": [
     0,
-    983
+    924
   ],
   "loc": {
     "start": {
@@ -1781,10 +1781,10 @@
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * If the source Observable is empty it returns an Observable that emits true, otherwise it emits false.\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} An Observable that emits a Boolean.\n * @method isEmpty\n * @owner Observable\n ",
+      "value": "*\n * 如果源 Observable 是空的话，它返回一个发出 true 的 Observable，否则发出 false 。\n *\n * <img src=\"./img/isEmpty.png\" width=\"100%\">\n *\n * @return {Observable} 发出布尔值的 Observable 。\n * @method isEmpty\n * @owner Observable\n ",
       "range": [
         44,
-        308
+        249
       ],
       "loc": {
         "start": {
@@ -1801,8 +1801,8 @@
       "type": "Block",
       "value": "*\n * We need this JSDoc comment for affecting ESDoc.\n * @ignore\n * @extends {Ignored}\n ",
       "range": [
-        511,
-        602
+        452,
+        543
       ],
       "loc": {
         "start": {
@@ -1819,8 +1819,8 @@
       "type": "Line",
       "value": "# sourceMappingURL=isEmpty.js.map",
       "range": [
-        984,
-        1019
+        925,
+        960
       ],
       "loc": {
         "start": {

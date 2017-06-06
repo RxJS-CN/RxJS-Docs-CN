@@ -83,26 +83,23 @@
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable only if the previous projected Observable has completed.
+ * &#x5C06;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x6295;&#x5C04;&#x6210; Observable&#xFF0C;&#x53EA;&#x6709;&#x5F53;&#x524D;&#x4E00;&#x4E2A;&#x6295;&#x5C04;&#x7684; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#xFF0C;
+ * &#x8FD9;&#x4E2A; Observable &#x624D;&#x4F1A;&#x88AB;&#x5408;&#x5E76;&#x5230;&#x8F93;&#x51FA; Observable &#x4E2D;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link exhaust}.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x628A;&#x6BCF;&#x4E2A;&#x503C;&#x6620;&#x5C04;&#x6210; Observable&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528; {@link exhaust}
+ * &#x64CD;&#x4F5C;&#x7B26;&#x6253;&#x5E73;&#x6240;&#x6709;&#x7684;&#x5185;&#x90E8; Observables &#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/exhaustMap.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called &quot;inner&quot;) Observable. When it projects a source value to
- * an Observable, the output Observable begins emitting the items emitted by
- * that projected Observable. However, `exhaustMap` ignores every new projected
- * Observable if the previous projected Observable has not yet completed. Once
- * that one completes, it will accept and flatten the next projected Observable
- * and repeat this process.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x57FA;&#x4E8E;&#x5E94;&#x7528;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6765;&#x53D1;&#x9001;&#x9879;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x63D0;&#x4F9B;&#x7ED9;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#xFF0C;
+ * &#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;(&#x6240;&#x8C13;&#x7684;&#x201C;&#x5185;&#x90E8;&#x201D;) Observable &#x3002;&#x5F53;&#x5B83;&#x5C06;&#x6E90;&#x503C;&#x6295;&#x5C04;&#x6210; Observable &#x65F6;&#xFF0C;&#x8F93;&#x51FA; Observable
+ * &#x5F00;&#x59CB;&#x53D1;&#x51FA;&#x7531;&#x6295;&#x5C04;&#x7684; Observable &#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5982;&#x679C;&#x524D;&#x4E00;&#x4E2A;&#x6295;&#x5C04;&#x7684; Observable &#x8FD8;&#x672A;&#x5B8C;&#x6210;&#x7684;&#x8BDD;&#xFF0C;
+ * &#x90A3;&#x4E48; `exhaustMap` &#x4F1A;&#x5FFD;&#x7565;&#x6BCF;&#x4E2A;&#x65B0;&#x6295;&#x5C04;&#x7684; Observable &#x3002;&#x4E00;&#x65E6;&#x5B8C;&#x6210;&#xFF0C;&#x5B83;&#x5C06;&#x63A5;&#x53D7;&#x5E76;&#x6253;&#x5E73;&#x4E0B;&#x4E00;&#x4E2A;
+ * &#x5185;&#x90E8; Observable &#xFF0C;&#x7136;&#x540E;&#x91CD;&#x590D;&#x6B64;&#x8FC7;&#x7A0B;&#x3002;
  *
- * @example &lt;caption&gt;Run a finite timer for each click, only if there is no currently active timer&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53EA;&#x8981;&#x6CA1;&#x6709;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x7684;&#x8BA1;&#x65F6;&#x5668;&#xFF0C;&#x90A3;&#x4E48;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x5C31;&#x4F1A;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x6709;&#x9650;&#x7684;&#x8BA1;&#x65F6;&#x5668;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
- * var result = clicks.exhaustMap((ev) =&gt; Rx.Observable.interval(1000));
+ * var result = clicks.exhaustMap((ev) =&gt; Rx.Observable.interval(1000).take(5));
  * result.subscribe(x =&gt; console.log(x));
  *
  * @see {@link concatMap}
@@ -110,20 +107,17 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project &#x51FD;&#x6570;&#xFF0C;
+ * &#x5F53;&#x5E94;&#x7528;&#x4E8E;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x9879;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable &#x3002;
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the &quot;index&quot; of the value that came from the source
- * - `innerIndex`: the &quot;index&quot; of the value from the projected Observable
- * @return {Observable} An Observable containing projected Observables
- * of each item of the source, ignoring projected Observables that start before
- * their preceding Observable has completed.
+ * &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x4EA7;&#x751F;&#x57FA;&#x4E8E;&#x503C;&#x7684;&#x8F93;&#x51FA; Observable &#x548C;&#x6E90;(&#x5916;&#x90E8;)&#x53D1;&#x9001;&#x548C;&#x5185;&#x90E8; Observable &#x53D1;&#x9001;&#x7684;&#x7D22;&#x5F15;&#x3002;
+ * &#x4F20;&#x9012;&#x7ED9;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x6709;&#xFF1A;
+ * - `outerValue`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;
+ * - `innerValue`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;
+ * - `outerIndex`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;&#x7684; &quot;index&quot;
+ * - `innerIndex`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;&#x7684; &quot;index&quot;
+ * @return {Observable} &#x8FD9;&#x4E2A; Observable &#x5305;&#x542B;&#x6E90;&#x4E2D;&#x6BCF;&#x9879;&#x7684;&#x6295;&#x5C04; Observable&#xFF0C;
+ * &#x5FFD;&#x7565;&#x5728;&#x524D;&#x4E00;&#x4E2A; Observable &#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x5C31;&#x5DF2;&#x7ECF;&#x5F00;&#x59CB;&#x7684; Observable&#x3002;
  * @method exhaustMap
  * @owner Observable
  */

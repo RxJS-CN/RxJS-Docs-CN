@@ -81,20 +81,18 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/map.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Applies a given `project` function to each value emitted by the source
- * Observable, and emits the resulting values as an Observable.
+ * &#x5C06;&#x7ED9;&#x5B9A;&#x7684; `project` &#x51FD;&#x6570;&#x5E94;&#x7528;&#x4E8E;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x5C06;&#x7ED3;&#x679C;&#x503C;&#x4F5C;&#x4E3A;
+ * Observable &#x53D1;&#x51FA;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Like [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map),
- * it passes each source value through a transformation function to get
- * corresponding output values.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x7C7B;&#x4F3C;&#x4E8E; [Array.prototype.map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)&#xFF0C;
+ * &#x5B83;&#x628A;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x4F20;&#x9012;&#x7ED9;&#x8F6C;&#x5316;&#x51FD;&#x6570;&#x4EE5;&#x83B7;&#x5F97;&#x76F8;&#x5E94;&#x7684;&#x8F93;&#x51FA;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/map.png&quot; width=&quot;100%&quot;&gt;
  *
- * Similar to the well known `Array.prototype.map` function, this operator
- * applies a projection to each value and emits that projection in the output
- * Observable.
+ * &#x7C7B;&#x4F3C;&#x4E8E;&#x5927;&#x5BB6;&#x6240;&#x719F;&#x77E5;&#x7684; `Array.prototype.map` &#x65B9;&#x6CD5;&#xFF0C;&#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x5C06;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5E94;&#x7528;&#x4E8E;&#x6BCF;&#x4E2A;&#x503C;
+ * &#x5E76;&#x4E14;&#x5728;&#x8F93;&#x51FA; Observable &#x4E2D;&#x53D1;&#x51FA;&#x6295;&#x5C04;&#x540E;&#x7684;&#x7ED3;&#x679C;&#x3002;
  *
- * @example &lt;caption&gt;Map every click to the clientX position of that click&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x6620;&#x5C04;&#x4E3A;&#x8FD9;&#x6B21;&#x70B9;&#x51FB;&#x7684; clientX &lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var positions = clicks.map(ev =&gt; ev.clientX);
  * positions.subscribe(x =&gt; console.log(x));
@@ -102,14 +100,11 @@
  * @see {@link mapTo}
  * @see {@link pluck}
  *
- * @param {function(value: T, index: number): R} project The function to apply
- * to each `value` emitted by the source Observable. The `index` parameter is
- * the number `i` for the i-th emission that has happened since the
- * subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to define what `this` is in the
- * `project` function.
- * @return {Observable&lt;R&gt;} An Observable that emits the values from the source
- * Observable transformed by the given `project` function.
+ * @param {function(value: T, index: number): R} project &#x5E94;&#x7528;&#x4E8E;&#x7531;&#x6E90; Observable
+ * &#x6240;&#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x7684;&#x51FD;&#x6570;&#x3002;`index` &#x53C2;&#x6570;&#x662F;&#x81EA;&#x8BA2;&#x9605;&#x5F00;&#x59CB;&#x540E;&#x53D1;&#x9001;&#x5E8F;&#x5217;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x662F;&#x4ECE; `0` &#x5F00;&#x59CB;&#x7684;&#x3002;
+ * @param {any} [thisArg] &#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF0C;&#x5B9A;&#x4E49;&#x5728; `project` &#x51FD;&#x6570;&#x4E2D;&#x7684; `this` &#x662F;&#x4EC0;&#x4E48;&#x3002;
+ * @return {Observable&lt;R&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6E90; Observable &#x4E2D;&#x7ECF;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684; `project`
+ * &#x51FD;&#x6570;&#x8F6C;&#x6362;&#x7684;&#x503C;&#x3002;
  * @method map
  * @owner Observable
  */

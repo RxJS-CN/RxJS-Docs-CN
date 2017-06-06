@@ -81,21 +81,18 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/findIndex.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { FindValueOperator } from &apos;./find&apos;;
 /**
- * Emits only the index of the first value emitted by the source Observable that
- * meets some condition.
+ * &#x53EA;&#x53D1;&#x51FA;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x503C;&#x7684;&#x7D22;&#x5F15;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link find}, but emits the index of the
- * found value, not the value itself.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x5F88;&#x50CF; {@link find} , &#x4F46;&#x53D1;&#x51FA;&#x7684;&#x662F;&#x627E;&#x5230;&#x7684;&#x503C;&#x7684;&#x7D22;&#x5F15;&#xFF0C;
+ * &#x800C;&#x4E0D;&#x662F;&#x503C;&#x672C;&#x8EAB;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/findIndex.png&quot; width=&quot;100%&quot;&gt;
  *
- * `findIndex` searches for the first item in the source Observable that matches
- * the specified condition embodied by the `predicate`, and returns the
- * (zero-based) index of the first occurrence in the source. Unlike
- * {@link first}, the `predicate` is required in `findIndex`, and does not emit
- * an error if a valid value is not found.
+ * `findIndex` &#x4F1A;&#x67E5;&#x627E;&#x6E90; Observable &#x4E2D;&#x4E0E; `predicate` &#x51FD;&#x6570;&#x4F53;&#x73B0;&#x7684;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x5339;&#x914D;&#x7684;&#x7B2C;&#x4E00;&#x9879;&#xFF0C;&#x7136;&#x540E;
+ * &#x8FD4;&#x56DE;&#x5176;&#x7D22;&#x5F15;(&#x4ECE;0&#x5F00;&#x59CB;)&#x3002;&#x4E0D;&#x540C;&#x4E8E; {@link first}&#xFF0C;&#x5728; `findIndex` &#x4E2D; `predicate` &#x662F;&#x5FC5;&#x987B;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;
+ * &#x6709;&#x6548;&#x7684;&#x503C;&#x7684;&#x8BDD;&#x4E5F;&#x4E0D;&#x4F1A;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x3002;
  *
- * @example &lt;caption&gt;Emit the index of first click that happens on a DIV element&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x627E;&#x5230;&#x5E76;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x70B9;&#x51FB; DIV &#x5143;&#x7D20;&#x7684;&#x4E8B;&#x4EF6;&#x7684;&#x7D22;&#x5F15;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.findIndex(ev =&gt; ev.target.tagName === &apos;DIV&apos;);
  * result.subscribe(x =&gt; console.log(x));
@@ -106,11 +103,9 @@
  * @see {@link take}
  *
  * @param {function(value: T, index: number, source: Observable&lt;T&gt;): boolean} predicate
- * A function called with each item to test for condition matching.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {Observable} An Observable of the index of the first item that
- * matches the condition.
+ * &#x4F7F;&#x7528;&#x6BCF;&#x9879;&#x6765;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x4E8E;&#x6D4B;&#x8BD5;&#x662F;&#x5426;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x3002;
+ * @param {any} [thisArg] &#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x51B3;&#x5B9A; `predicate` &#x51FD;&#x6570;&#x4E2D;&#x7684; `this` &#x7684;&#x503C;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x7B2C;&#x4E00;&#x9879;&#x7684;&#x7D22;&#x5F15;&#x7684; Observable &#x3002;
  * @method find
  * @owner Observable
  */

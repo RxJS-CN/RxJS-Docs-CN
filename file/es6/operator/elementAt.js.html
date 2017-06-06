@@ -82,28 +82,26 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { ArgumentOutOfRangeError } from &apos;../util/ArgumentOutOfRangeError&apos;;
 /**
- * Emits the single value at the specified `index` in a sequence of emissions
- * from the source Observable.
+ * &#x53EA;&#x53D1;&#x51FA;&#x5355;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x4F4D;&#x4E8E;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#x5E8F;&#x5217;&#x4E2D;&#x7684;&#x6307;&#x5B9A; `index` &#x5904;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Emits only the i-th value, then completes.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;i&#x4E2A;&#x503C;, &#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/elementAt.png&quot; width=&quot;100%&quot;&gt;
  *
- * `elementAt` returns an Observable that emits the item at the specified
- * `index` in the source Observable, or a default value if that `index` is out
- * of range and the `default` argument is provided. If the `default` argument is
- * not given and the `index` is out of range, the output Observable will emit an
- * `ArgumentOutOfRangeError` error.
+ * `elementAt` &#x8FD4;&#x56DE;&#x7684; Observable &#x4F1A;&#x53D1;&#x51FA;&#x6E90; Observable &#x6307;&#x5B9A; `index` &#x5904;&#x7684;&#x9879;&#xFF0C;&#x5982;&#x679C;
+ * `index` &#x8D85;&#x51FA;&#x8303;&#x56F4;&#x5E76;&#x4E14;&#x63D0;&#x4F9B;&#x4E86; `default` &#x53C2;&#x6570;&#x7684;&#x8BDD;&#xFF0C;&#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x503C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;
+ * `default` &#x53C2;&#x6570;&#x5E76;&#x4E14; `index` &#x8D85;&#x51FA;&#x8303;&#x56F4;&#xFF0C;&#x90A3;&#x4E48;&#x8F93;&#x51FA; Observable &#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;
+ * `ArgumentOutOfRangeError` &#x9519;&#x8BEF;&#x3002;
  *
- * @example &lt;caption&gt;Emit only the third click event&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53EA;&#x53D1;&#x51FA;&#x7B2C;&#x4E09;&#x6B21;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.elementAt(2);
  * result.subscribe(x =&gt; console.log(x));
  *
- * // Results in:
+ * // &#x7ED3;&#x679C;&#xFF1A;
  * // click 1 = nothing
  * // click 2 = nothing
- * // click 3 = MouseEvent object logged to console
+ * // click 3 = &#x6253;&#x5370;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x7684; MouseEvent &#x5BF9;&#x8C61;
  *
  * @see {@link first}
  * @see {@link last}
@@ -111,15 +109,14 @@ import { ArgumentOutOfRangeError } from &apos;../util/ArgumentOutOfRangeError&ap
  * @see {@link single}
  * @see {@link take}
  *
- * @throws {ArgumentOutOfRangeError} When using `elementAt(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer&apos;s `error` callback if `i &lt; 0` or the
- * Observable has completed before emitting the i-th `next` notification.
+ * @throws {ArgumentOutOfRangeError} &#x5F53;&#x4F7F;&#x7528; `elementAt(i)` &#x65F6;&#xFF0C;&#x5982;&#x679C; `i &lt; 0` &#x6216;
+ * &#x5728;&#x53D1;&#x9001;&#x7B2C;i&#x4E2A; `next` &#x901A;&#x77E5;&#x524D; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x5B83;&#x4F1A;&#x53D1;&#x9001; ArgumentOutOrRangeError
+ * &#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
  *
- * @param {number} index Is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {T} [defaultValue] The default value returned for missing indices.
- * @return {Observable} An Observable that emits a single item, if it is found.
- * Otherwise, will emit the default value if given. If not, then emits an error.
+ * @param {number} index &#x662F; Subscription &#x5F00;&#x59CB;&#x540E;&#x7684;&#x7B2C;i&#x4E2A;&#x901A;&#x77E5;&#x7684;&#x7D22;&#x5F15;&#x6570;&#x503C;&#xFF0C;&#x8BE5;&#x503C;&#x662F;&#x4ECE; `0` &#x5F00;&#x59CB;&#x3002;
+ * @param {T} [defaultValue] &#x7F3A;&#x5931;&#x7D22;&#x5F15;&#x65F6;&#x8FD4;&#x56DE;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x3002;
+ * @return {Observable} &#x5982;&#x679C;&#x80FD;&#x627E;&#x5230;&#x8FD9;&#x4E2A;&#x9879;&#x7684;&#x8BDD;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5; Observable &#x53D1;&#x51FA;&#x6B64;&#x5355;&#x4E2A;&#x9879;&#x3002;&#x627E;&#x4E0D;&#x5230;&#x65F6;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x7ED9;&#x5B9A;
+ * &#x7684;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x5219;&#x53D1;&#x51FA;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x3002;
  * @method elementAt
  * @owner Observable
  */

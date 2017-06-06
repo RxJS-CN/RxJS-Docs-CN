@@ -82,14 +82,13 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { distinctUntilChanged } from &apos;./distinctUntilChanged&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits all items emitted by the source Observable that are distinct by comparison from the previous item,
- * using a property accessed by using the key provided to check if the two items are distinct.
+ * &#x8FD4;&#x56DE; Observable&#xFF0C;&#x5B83;&#x53D1;&#x51FA;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x4E0E;&#x524D;&#x4E00;&#x9879;&#x4E0D;&#x76F8;&#x540C;&#x7684;&#x9879;&#xFF0C;&#x4F7F;&#x7528;&#x901A;&#x8FC7;&#x63D0;&#x4F9B;&#x7684; key &#x8BBF;&#x95EE;&#x5230;&#x7684;&#x5C5E;&#x6027;&#x6765;&#x68C0;&#x67E5;&#x4E24;&#x4E2A;&#x9879;&#x662F;&#x5426;&#x4E0D;&#x540C;&#x3002;
  *
- * If a comparator function is provided, then it will be called for each item to test for whether or not that value should be emitted.
+ * &#x5982;&#x679C;&#x63D0;&#x4F9B;&#x4E86; compare &#x51FD;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6BCF;&#x4E00;&#x9879;&#x90FD;&#x4F1A;&#x8C03;&#x7528;&#x5B83;&#x6765;&#x68C0;&#x9A8C;&#x662F;&#x5426;&#x5E94;&#x8BE5;&#x53D1;&#x51FA;&#x8FD9;&#x4E2A;&#x503C;&#x3002;
  *
- * If a comparator function is not provided, an equality check is used by default.
+ * &#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B; compare &#x51FD;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x4F7F;&#x7528;&#x76F8;&#x7B49;&#x68C0;&#x67E5;&#x3002;
  *
- * @example &lt;caption&gt;An example comparing the name of persons&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BD4;&#x8F83;&#x4EBA;&#x540D;&#x7684;&#x793A;&#x4F8B;&lt;/caption&gt;
  *
  *  interface Person {
  *     age: number,
@@ -104,12 +103,12 @@
  *     .distinctUntilKeyChanged(&apos;name&apos;)
  *     .subscribe(x =&gt; console.log(x));
  *
- * // displays:
+ * // &#x663E;&#x793A;&#xFF1A;
  * // { age: 4, name: &apos;Foo&apos; }
  * // { age: 7, name: &apos;Bar&apos; }
  * // { age: 5, name: &apos;Foo&apos; }
  *
- * @example &lt;caption&gt;An example comparing the first letters of the name&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BD4;&#x8F83;&#x540D;&#x5B57;&#x524D;&#x4E09;&#x4E2A;&#x5B57;&#x6BCD;&#x7684;&#x793A;&#x4F8B;&lt;/caption&gt;
  *
  * interface Person {
  *     age: number,
@@ -124,7 +123,7 @@
  *     .distinctUntilKeyChanged(&apos;name&apos;, (x: string, y: string) =&gt; x.substring(0, 3) === y.substring(0, 3))
  *     .subscribe(x =&gt; console.log(x));
  *
- * // displays:
+ * // &#x663E;&#x793A;&#xFF1A;
  * // { age: 4, name: &apos;Foo1&apos; }
  * // { age: 7, name: &apos;Bar&apos; }
  * // { age: 5, name: &apos;Foo2&apos; }
@@ -132,9 +131,9 @@
  * @see {@link distinct}
  * @see {@link distinctUntilChanged}
  *
- * @param {string} key String key for object property lookup on each item.
- * @param {function} [compare] Optional comparison function called to test if an item is distinct from the previous item in the source.
- * @return {Observable} An Observable that emits items from the source Observable with distinct values based on the key specified.
+ * @param {string} key &#x6BCF;&#x9879;&#x4E2D;&#x7528;&#x4E8E;&#x67E5;&#x627E;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x952E;&#x3002;
+ * @param {function} [compare] &#x53EF;&#x9009;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x68C0;&#x9A8C;&#x5F53;&#x524D;&#x9879;&#x4E0E;&#x6E90;&#x4E2D;&#x7684;&#x524D;&#x4E00;&#x9879;&#x662F;&#x5426;&#x76F8;&#x540C;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x57FA;&#x4E8E;&#x6307;&#x5B9A;&#x7684; key &#x5F97;&#x5230;&#x4E0E;&#x524D;&#x4E00;&#x9879;&#x4E0D;&#x540C;&#x7684;&#x503C;&#x3002;
  * @method distinctUntilKeyChanged
  * @owner Observable
  */
