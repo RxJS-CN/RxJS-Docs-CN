@@ -5,43 +5,40 @@ import { QueueScheduler } from './QueueScheduler';
  *
  * Queue Scheduler
  *
- * <span class="informal">Put every next task on a queue, instead of executing it immediately</span>
+ * <span class="informal">将每个任务都放到队列里，而不是立刻执行</span>
  *
- * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.
+ * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。
  *
- * When used without delay, it schedules given task synchronously - executes it right when
- * it is scheduled. However when called recursively, that is when inside the scheduled task,
- * another task is scheduled with queue scheduler, instead of executing immediately as well,
- * that task will be put on a queue and wait for current one to finish.
+ * 当和延时一起使用， 它同步调用当前任务，即调度的时候里面执行。然而当递归调用的时候，这是在调度的任务内，
+ * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。
+ * 
+ * 这意味着当你用“queue”调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。
  *
- * This means that when you execute task with `queue` scheduler, you are sure it will end
- * before any other task scheduled with that scheduler will start.
- *
- * @examples <caption>Schedule recursively first, then do something</caption>
+ * @examples <caption>首先递归调度, 然后做一些事情</caption>
  *
  * Rx.Scheduler.queue.schedule(() => {
- *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue
+ *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里
  *
  *   console.log('first');
  * });
  *
- * // Logs:
+ * // 日志:
  * // "first"
  * // "second"
  *
  *
- * @example <caption>Reschedule itself recursively</caption>
+ * @example <caption>递归的重新调度自身</caption>
  *
  * Rx.Scheduler.queue.schedule(function(state) {
  *   if (state !== 0) {
  *     console.log('before', state);
- *     this.schedule(state - 1); // `this` references currently executing Action,
- *                               // which we reschedule with new state
+ *     this.schedule(state - 1); // `this` 指向当前执行的 Action,
+ *                               // 我们使用新的状态重新调度
  *     console.log('after', state);
  *   }
  * }, 0, 3);
  *
- * // In scheduler that runs recursively, you would expect:
+ * // 递归运行的调度器， 你的期望:
  * // "before", 3
  * // "before", 2
  * // "before", 1
@@ -49,7 +46,7 @@ import { QueueScheduler } from './QueueScheduler';
  * // "after", 2
  * // "after", 3
  *
- * // But with queue it logs:
+ * // 使用队列，输出:
  * // "before", 3
  * // "after", 3
  * // "before", 2
