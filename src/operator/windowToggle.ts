@@ -18,7 +18,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *
  * <img src="./img/windowToggle.png" width="100%">
  *
- * 返回一个发出从源 Observable 收集到数据的 window Observable。输出 Observable 发出 windows ，每一个 window
+ * 返回一个发出从源 Observable 收集到数据的窗口 Observable。输出 Observable 发出窗口 ，每一个窗口
  * 包括当 `openings` 发出时开始收集源 Observable 的数据项和 `closingSelector` 返回的 Observable 发出时结束收集
  * 的数据项。
  *
@@ -36,11 +36,11 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowWhen}
  * @see {@link bufferToggle}
  *
- * @param {Observable<O>} openings 通知开启新 windows 的 observable。
+ * @param {Observable<O>} openings 通知开启新窗口的 observable。
  * @param {function(value: O): Observable} closingSelector 是一个接受`openings` observable
  * 发出的值为参数并且返回 Observable 的函数, 当该 observable 发出 `next` 或者 `complete`时，与其相
- * 关联的 window 应该完成。
- * @return {Observable<Observable<T>>} 返回 windows 的 observable, 它反过来又是 Observables。
+ * 关联的窗口应该完成。
+ * @return {Observable<Observable<T>>} 返回窗口的 observable, 它反过来又是 Observables。
  * @method windowToggle
  * @owner Observable
  */
