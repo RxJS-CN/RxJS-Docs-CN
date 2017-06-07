@@ -7,17 +7,16 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 缓冲源Observable的值直到`closingNotifier`发出.
+ * 缓冲源 Observable 的值直到 `closingNotifier` 发出。
  *
- * <span class="informal">将值收集到数组里, 直到另一个Observable发送才发出
- * 该数组.</span>
+ * <span class="informal">将过往的值收集到一个数组中，并且仅当另一个 Observable 发出通知时才发出此数组。</span>
  *
  * <img src="./img/buffer.png" width="100%">
  *
- * 将Observable发出的值缓冲起来直到`closingNotifier`发出数据, 在这个时刻输出
- * Observable发出该缓冲区的值并且内部开启一个新的缓冲区, 等待下一个`closingNotifier`的发送.
+ * 将 Observable 发出的值缓冲起来直到 `closingNotifier` 发出数据, 在这个时候在输出
+ * Observable 上发出该缓冲区的值并且内部开启一个新的缓冲区, 等待下一个`closingNotifier`的发送。
  *
- * @example <caption>每次点击事件后发出一个从间隔收集的数组</caption>
+ * @example <caption>每次点击发出 interval Observable 最新缓冲的数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
@@ -29,8 +28,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link bufferWhen}
  * @see {@link window}
  *
- * @param {Observable<any>} closingNotifier Observable发出输出Observable发出缓冲的信号.
- * @return {Observable<T[]>} 数组缓冲的Observable.
+ * @param {Observable<any>} closingNotifier 该 Observable 向输出 Observale 发出信号以通知发出缓冲区。
+ * @return {Observable<T[]>} 数组缓冲的 Observable。
  * @method buffer
  * @owner Observable
  */

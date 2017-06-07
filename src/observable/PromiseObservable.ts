@@ -14,24 +14,24 @@ export class PromiseObservable<T> extends Observable<T> {
   public value: T;
 
   /**
-   * 将Promise转化为Observable.
+   * 将 Promise 转化为 Observable。
    *
-   * <span class="informal">返回一个仅仅发出Promise resolved的值然后完成的Observable.</span>
+   * <span class="informal">返回一个仅仅发出 Promise resolve 过的值然后完成的 Observable。</span>
    *
-   * 把ES2015的Promise或者兼容Promises/A+规范的Promise转化为Observable. 如果Promise resolves
-   * 一个值, 输出Observable发出这个值然后完成. 如果Promise被rejected, 输出Observable会发出相应的
-   * 错误.
+   * 把 ES2015 的 Promise 或者兼容 Promises/A+ 规范的 Promise 转化为 Observable。 如果 Promise resolves
+   * 一个值, 输出 Observable 发出这个值然后完成。 如果 Promise 被 rejected, 输出 Observable 会发出相应的
+   * 错误。
    *
-   * @example <caption>将Fetch返回的Promise转化为Observable</caption>
+   * @example <caption>将 Fetch 返回的 Promise 转化为 Observable。</caption>
    * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
    * result.subscribe(x => console.log(x), e => console.error(e));
    *
    * @see {@link bindCallback}
    * @see {@link from}
    *
-   * @param {PromiseLike<T>} promise 被转化的promise.
-   * @param {Scheduler} [scheduler] 可选的调度器，用来调度resolved或者rejection的值.
-   * @return {Observable<T>} 包装了Promise的Observable.
+   * @param {PromiseLike<T>} promise 被转化的 promise。
+   * @param {Scheduler} [scheduler] 可选的调度器，用来调度 resolved 或者 rejection 的值。
+   * @return {Observable<T>} 包装了 Promise 的 Observable。
    * @static true
    * @name fromPromise
    * @owner Observable

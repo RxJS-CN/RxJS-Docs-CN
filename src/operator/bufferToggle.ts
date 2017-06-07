@@ -8,17 +8,17 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { InnerSubscriber } from '../InnerSubscriber';
 
 /**
- *  缓冲源Observable的值，`openings`发送的时候开始缓冲，`closingSelector`发送的时候结束缓冲.
+ *  缓冲源 Observable 的值，`openings` 发送的时候开始缓冲，`closingSelector` 发送的时候结束缓冲。
  *
- * <span class="informal">将历史数据收集到数组中. 当`opening`发送的时候开始收集, 然后调用`closingSelector`
- * 函数获取Observable，该Observable告知什么时候关闭缓冲.</span>
+ * <span class="informal">将过往数据收集到数组中. 当`opening`发送的时候开始收集, 然后调用`closingSelector`
+ * 函数获取 Observable ，该Observable 告知什么时候关闭缓冲。</span>
  *
  * <img src="./img/bufferToggle.png" width="100%">
  *
  * 缓冲源Observable的值，当`openings`Observable发出信号的时候开始缓冲数据, 当`closingSelector`返回的Subscribable
  * 或者Promise发送的时候结束并且发送缓冲区.
  *
- * @example <caption>在每一秒, 在接下来的500ms发送点击事件</caption>
+ * @example <caption>每隔一秒钟，发出接下来500毫秒内的点击事件。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var openings = Rx.Observable.interval(1000);
  * var buffered = clicks.bufferToggle(openings, i =>
@@ -32,10 +32,10 @@ import { InnerSubscriber } from '../InnerSubscriber';
  * @see {@link bufferWhen}
  * @see {@link windowToggle}
  *
- * @param {SubscribableOrPromise<O>} openings 一个可以别订阅的或者Promise负责通知何时开启缓冲区.
- * @param {function(value: O): SubscribableOrPromise} 关闭选择器，接受`openings`observable
- * 发出的数据返回一个可以被订阅的对象或者Promise的函数,不管何时发出相关联的缓冲区被发送.
- * @return {Observable<T[]>} 缓冲数组的observable.
+ * @param {SubscribableOrPromise<O>} openings 开启新缓冲区的通知，可以是 Subscribable 或 Promise 。
+ * @param {function(value: O): SubscribableOrPromise} closingSelector 接受`openings`observable
+ * 发出的数据返回一个可以被订阅的对象或者Promise的函数,当它发出时，会发信号给相关的缓冲区以通知它们应该发出并清理。
+ * @return {Observable<T[]>} 缓冲数组的 observable。
  * @method bufferToggle
  * @owner Observable
  */

@@ -11,17 +11,17 @@ import { Subscriber } from '../Subscriber';
 export class FromEventPatternObservable<T> extends Observable<T> {
 
   /**
-   * 从一个基于addHandler/removeHandler方法的API创建Observable.
+   * 从一个基于 addHandler/removeHandler 方法的API创建 Observable。
    *
-   * <span class="informal">将任何addHandler/removeHandler的API转化为Observable.</span>
+   * <span class="informal">将任何 addHandler/removeHandler 的API转化为 Observable。</span>
    *
    * <img src="./img/fromEventPattern.png" width="100%">
    * 
-   * 创建Observable，该Observable通过使用`addHandler` 和 `removeHandler`添加和删除事件处理器, 
-   * 使用可选的选择器函数将事件参数转化为结果. `addHandler`当输出Observable被订阅的时候调用, `removeHandler`
-   * 方法在取消订阅的时候被调用.
+   * 创建 Observable ，该 Observable 通过使用`addHandler` 和 `removeHandler`添加和删除事件处理器, 
+   * 使用可选的选择器函数将事件参数转化为结果. `addHandler`当输出 Observable 被订阅的时候调用, `removeHandler`
+   * 方法在取消订阅的时候被调用。
    *
-   * @example <caption>当document发生点击事件的时候发出</caption>
+   * @example <caption>发出 DOM document 上的点击事件</caption>
    * function addClickHandler(handler) {
    *   document.addEventListener('click', handler);
    * }
@@ -40,12 +40,12 @@ export class FromEventPatternObservable<T> extends Observable<T> {
    * @see {@link fromEvent}
    *
    * @param {function(handler: Function): any} addHandler 一个接收处理器的函数，并且将
-   * 该处理器添加到事件源.
+   * 该处理器添加到事件源。
    * @param {function(handler: Function, signal?: any): void} [removeHandler] 可选的
-   * 函数，接受处理器函数做为参数，可以移除处理器当之前使用`addHandler`添加处理器.如果addHandler
-   * 返回的信号当移除的时候要清理，removeHandler会去做这件事情.
-   * @param {function(...args: any): T} [selector] 可选的函数处理结果. 接受事件处理的参数返
-   * 回单个的值.
+   * 函数，接受处理器函数做为参数，可以移除处理器当之前使用`addHandler`添加处理器。如果 addHandler
+   * 返回的信号当移除的时候要清理，removeHandler 会去做这件事情。
+   * @param {function(...args: any): T} [selector] 可选的函数处理结果。 接受事件处理的参数返
+   * 回单个的值。
    * @return {Observable<T>}
    * @static true
    * @name fromEventPattern

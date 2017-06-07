@@ -10,18 +10,18 @@ import { PartialObserver } from '../Observer';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * 延时发出源Observable的每一个数据项一个固定的时间间隔或者直到一个给定的时间.
+ * 通过给定的超时或者直到一个给定的时间来延迟源 Observable 的发送。
  *
  * <span class="informal">每个数据项的发出时间都往后推移固定的毫秒数.</span>
  *
  * <img src="./img/delay.png" width="100%">
  *
- * 如果延时参数是数字, 这个操作符将会延时在这个数据代表的毫秒数后发出每个Observable发出的数据.
+ * 如果延时参数是数字, 这个操作符会将源 Observable 的发出时间都往后推移固定的毫秒数。
  * 保存值之间的相对时间间隔.
  *
- * 如果演示参数是日期类型, 这个操作符会延时Observable的执行直到到了给定的时间.
+ * 如果延迟参数是日期类型, 这个操作符会延时Observable的执行直到到了给定的时间.
  *
- * @example <caption>延时点击1秒</caption>
+ * @example <caption>每次点击延迟1秒</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
  * delayedClicks.subscribe(x => console.log(x));
@@ -35,9 +35,9 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link debounceTime}
  * @see {@link delayWhen}
  *
- * @param {number|Date} delay 延迟时间以毫秒为单位（a）或“日期”，直到源项的发射延迟.
- * @param {Scheduler} [scheduler=async] 调度器用来管理时间处理每个数据项的延时.
- * @return {Observable} Observable，延时发送源Observable一个固定的时间间隔或者日期.
+ * @param {number|Date} delay 延迟时间(以毫秒为单位的数字)或 Date 对象(发送延迟到这个时间点)。
+ * @param {Scheduler} [scheduler=async] 调度器，用来管理处理每项时延的定时器。
+ * @return {Observable} 该 Observalbe 通过指定的超时时间或日期来延迟源 Observable 的发送。
  * @method delay
  * @owner Observable
  */

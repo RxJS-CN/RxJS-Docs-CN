@@ -4,23 +4,21 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * 缓冲源Observable的值直到缓冲数量到达设定的`bufferSize`.
+ * 缓冲源 Observable 的值直到缓冲数量到达设定的 `bufferSize`.
  *
- * <span class="informal">收集成数组, 当数组数量到达设定的`bufferSize`
- * 发出数组.</span>
+ * <span class="informal">将过往的值收集到一个数组中，当数组数量到达设定的 bufferSize 时发出该数组。</span>
  *
  * <img src="./img/bufferCount.png" width="100%">
  *
- * 缓冲一组来自源Observable并且长度为设定的的`bufferSize`的数据，缓冲满了就发出, 
- * 在每次缓冲数量到达`startBufferEvery`的时候开启新的缓冲.如果`startBufferEvery`
- * 没有提供或者为`null`, 新的缓冲会在源开始的时候开启并且在每次发出的时候关闭.
+ * 缓冲源 Observable 的N个值(N = bufferSize)，然后发出该缓冲区并进行清理，再然后开启一个新的缓存区，新缓存区会新缓存M个值(M = startBufferEvery)。
+ * 如果`startBufferEvery`没有提供或者为`null`, 新的缓冲会在源开始的时候开启并且在每次发出的时候关闭。
  *
- * @example <caption>发出两次点击</caption>
+ * @example <caption>将最后两次点击事件作为数组发出</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>在每次点击的时候, 以数组的形势发出最近两次的点击</caption>
+ * @example <caption>在每次点击的时候, 以数组的形势发出最后两次的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x => console.log(x));
@@ -32,11 +30,11 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link pairwise}
  * @see {@link windowCount}
  *
- * @param {number} bufferSize 缓存区的最大长度.
- * @param {number} [startBufferEvery] 确定合适启用新的缓冲区.
- * 比如说：如果`startBufferEvery`是`2`, 那么隔一个数据会开一个新
- * 的缓冲区. 默认会开启一个缓冲区.
- * @return {Observable<T[]>} 发送缓冲数据的Observable.
+ * @param {number} bufferSize 缓存区的最大长度。
+ * @param {number} [startBufferEvery] 确定何时启用新的缓冲区。
+ * 例如上面图中所示，如果`startBufferEvery`是`2`, 那么隔一个数据会开一个新
+ * 的缓冲区。 默认情况下，将在源的起始处启用新的缓冲区。
+ * @return {Observable<T[]>} 缓存值数组的 Observable 。
  * @method bufferCount
  * @owner Observable
  */

@@ -9,19 +9,19 @@ import { OuterSubscriber } from '../OuterSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 在由另外一个Observable决定的时间段里忽略源数据，然后发出源Observable最新发出的值，
- * 重复这个过程.
+ * 在由另外一个 Observable 决定的时间段里忽略源数据，然后发出源 Observable 最新发出的值，
+ * 然后重复此过程。
  *
- * <span class="informal">就像是{@link auditTime}, 但是沉默周期由第二个Observable决定.</span>
+ * <span class="informal">就像是{@link auditTime}, 但是沉默持续时间由第二个 Observable 决定。</span>
  *
  * <img src="./img/audit.png" width="100%">
  *
- * `audit`很像`throttle`, 但是发出的是沉默时间窗口的最后一个值, 而不是第一个. `audit`发出源Observable
- * 最新值只要时间间隔结束, 在时间间隔没结束的时候忽略源值.刚开始, 时间间隔是没有启用的. 只要第一个值到达,
- * 通过调用`durationSelector`启用时间间隔, 返回持续Observable. 当持续Observable发出值或者完成状态,
- * 时间间隔被禁用, 然后输出Observable发出数据, 不断持续这个过程.
+ * `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
+ * 忽略源值。一旦第一个源值达到，它会被转发到输出 Observable ，然后通过使用源值调用 durationSelector 函数来
+ * 启动定时器，这个函数返回 "duration" Observable 。当 duration Observable 发出值或完成时，定时器会被禁用，
+ * 并且下一个源值也是重复此过程。
  *
- * @example <caption>1秒发出一次click</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.audit(ev => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -32,9 +32,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link sample}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} 持续时间选择器，一个函数接受源Observable
- * 发出的值返回Observable或者Promise计算沉默时间.
- * @return {Observable<T>} 执行源Observable发送rate-limiting的Observable.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数从源 Observable 中接收值，用于为每个源值计算沉默持续时间，并返回 Observable 或 Promise 。
+ * @return {Observable<T>} 该 Observable 限制源 Observable 的发送频率。
  * @method audit
  * @owner Observable
  */

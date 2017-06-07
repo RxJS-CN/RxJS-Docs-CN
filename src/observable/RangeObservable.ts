@@ -11,14 +11,14 @@ import { Subscriber } from '../Subscriber';
 export class RangeObservable extends Observable<number> {
 
   /**
-   * 创建一个发出特定区间序列数的 Observable.
+   * 创建一个 Observable ，它发出指定范围内的数字序列。
    *
-   * <span class="informal">发出一个区间的序列数.</span>
+   * <span class="informal">发出区间范围内的数字序列。</span>
    *
    * <img src="./img/range.png" width="100%">
    *
-   * `range` 操作符顺序发出一个区间的序列数, 你可以决定区间的开始和长度. 默认情况下, 不使用
-   * 调度器仅仅同步的发送通知, 但是也可以可选的使用调度器控制发送.
+   * `range` 操作符顺序发出一个区间范围内的连续整数, 你可以决定区间的开始和长度。 默认情况下, 不使用
+   * 调度器仅仅同步的发送通知, 但是也可以可选的使用可选的调度器来控制发送。
    *
    * @example <caption>发出从1到10的数</caption>
    * var numbers = Rx.Observable.range(1, 10);
@@ -27,10 +27,10 @@ export class RangeObservable extends Observable<number> {
    * @see {@link timer}
    * @see {@link interval}
    *
-   * @param {number} [start=0] 在序列中的第一个值.
-   * @param {number} [count=0] 要生成序列的长度.
-   * @param {Scheduler} [scheduler] 调度器{@link IScheduler}用来调度通知的发送.
-   * @return {Observable} 一个发出有限区间数的Observable.
+   * @param {number} [start=0] 序列中的第一个整数值。
+   * @param {number} [count=0] 要生成序列的长度。
+   * @param {Scheduler} [scheduler] 调度器 ( {@link IScheduler} )，用来调度通知的发送。
+   * @return {Observable} 该 Observable 发出有限区间范围内的连续整数。
    * @static true
    * @name range
    * @owner Observable

@@ -2,24 +2,21 @@ import { CombineLatestOperator } from './combineLatest';
 import { Observable } from '../Observable';
 
 /**
- * 将高阶Observable转化为一阶Observable通过等待最外层的Observable完成,然后调用
- * {@link combineLatest}.
+ * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。
  *
- * <span class="informal">转化Observable-of-Observables通过调用
- * {@link combineLatest}当Observable-of-Observables完成的时候.</span>
+ * <span class="informal">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>
  *
  * <img src="./img/combineAll.png" width="100%">
  *
- * 接受一个返回Observables的Observable, 收集所有Observables的值. 一旦最外层的
- * Observable完成, 会订阅所有收集的Observables然后通过{@link combineLatest}合并值,
+ * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的
+ * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,
  *  这样:
- * - 每次内部Observable发送的时候, 外层Observable发送.
- * - 当返回的observable发送的时候, 会发送所有最新的值:
- *   - 如果提供了投射函数, 会按顺序出入内部Observable的值, 投射函数的结果
- *     或被输出Observable发出.
- *   - 如果没有提供投射函数, 包含所有最新数据的数组会被输出Observable发出.
+ * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。
+ * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：
+ *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。
+ *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。
  *
- * @example <caption>将两个点击事件转化为有限间隔Observable, 通过调用combineAll</caption>
+ * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev =>
  *   Rx.Observable.interval(Math.random()*2000).take(3)
@@ -30,9 +27,8 @@ import { Observable } from '../Observable';
  * @see {@link combineLatest}
  * @see {@link mergeAll}
  *
- * @param {function} [project] 可选的函数参数，将内部Observable发出的最新值映射为新的结果.
- * 函数顺序的接受内部Observable的值.
- * @return {Observable} 一个见最新的值投射或者组成数组的Observable.
+ * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。
+ * @return {Observable} 该 Observable 为最新值的投射结果或数组。
  * @method combineAll
  * @owner Observable
  */

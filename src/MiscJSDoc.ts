@@ -17,41 +17,41 @@ import { Observer } from './Observer';
  */
 export class ObservableDoc {
   /**
-   * 创建一个新的Observable, 该Observable会执行特定的函数当{@link Observer}订阅它的时候.
+   * 创建一个新的 Observable ，当观察者( {@link Observer} )订阅该 Observable 时，它会执行指定的函数。
    *
-   * <span class="informal">创建一个定制化的Observable.</span>
+   * <span class="informal">创建自定义的 Observable ，它可以做任何你想做的事情</span>
    *
    * <img src="./img/create.png" width="100%">
    *
-   * `create` 将 `onSubscription` 函数转化为一个真实的Observable.每当有人订阅该Observable的
-   * 时候，`onSubscription`函数会接收{@link Observer}实例做为唯一参数执行。`onSubscription` 应该
-   * 调用观察者对象的 `next`, `error` and `complete` 方法.
+   * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的
+   * 时候，`onSubscription`函数会接收{@link Observer}实例作为唯一参数执行。`onSubscription` 应该
+   * 调用观察者对象的 `next`, `error` 和 `complete` 方法。
    *
-   * 带值调用`next`会将该值发出给观察者.调用`complete`意味着Observable结束了发出，不会做任何事情.
-   * 调用`error`意味着出现了错误-传给`error`的参数应该提供详细的错误信息.
+   * 带值调用`next`会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。
+   * 调用`error`意味着出现了错误，传给`error`的参数应该提供详细的错误信息。
    *
-   * 一个格式良好的Observable可以通过`next`方法发出尽可能多的值,但是`complete`和`error`方法只能被调用
-   * 一次并且之后什么都不能被调用. 如果你试图在Observable已经完成或者发生错误之后调用`next`, `complete` 
-   * 或 `error`方法，这些调用将会忽略对所谓的*Observable Contract*保护.注意，你并不需要一定要在某个时刻
-   * 调用`complete`方法－创建一个不会被终止的Observable也是很棒的，一切取决于你的需求.
+   * 一个格式良好的 Observable 可以通过`next`方法发出任意多个值，但是`complete`和`error`方法只能被调用
+   * 一次并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete` 
+   * 或 `error`方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻
+   * 调用`complete`方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。
    *
-   * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象. 当要取消对Observable
-   * 的订阅时，函数或者方法将会被调用，清理所有的资源.所以，举个例子, 如果你在你自己的Observable里面使用了
-   * `setTimeout`, 当有人要取消订阅的时候, 你可以清理定时器, 这样就可以减少不需要的触发和浏览器(或者其他宿主环境)
-   * 不会浪费计算资源在这种无谓的事情上.
+   * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象。 当要取消对 Observable
+   * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说， 如果你在自己的 Observable 里面使用了
+   * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览
+   * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。
    *
-   * 绝大多数情况下你不需要使用`create`,因为现有的操作符在大多数情况下可以帮助你创建Observable。这也就意味着，
-   * `create`是一个底层机制帮助你创建任何Observable，在你有特殊需求的情况下.
+   * 绝大多数情况下你不需要使用`create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，
+   * `create`是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。
    *
    * **TypeScript 签名问题**
    *
-   * 因为Observable继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名.
-   * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名.
+   * 因为 Observable 继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名。
+   * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名。
    *
-   * 当使用TypeScript，我们建议声明传递给`create`的函数签名为`(observer: Observer) => TeardownLogic`,
-   * {@link Observer} 和 {@link TeardownLogic} 是库提供的接口.
+   * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,
+   * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。
    *
-   * @example <caption>发出三个数字，然后完成.</caption>
+   * @example <caption>发出三个数字，然后完成。</caption>
    * var observable = Rx.Observable.create(function (observer) {
    *   observer.next(1);
    *   observer.next(2);

@@ -61,7 +61,7 @@ export function zipStatic<R>(...observables: Array<ObservableInput<any> | ((...v
 /* tslint:enable:max-line-length */
 
 /**
- * 将多个Observables结合成一个值由所有输入Observables的值顺序计算而来的Observable.
+ * 将多个 Observable 组合以创建一个 Observable，该 Observable 的值是由所有输入 Observables 的值按顺序计算而来的。
  *
  * 如果最后一个参数是函数, 这个函数被用来计算最终发出的值.否则, 返回一个顺序包含所有输入值的数组.
  *
@@ -78,7 +78,7 @@ export function zipStatic<R>(...observables: Array<ObservableInput<any> | ((...v
  *          (age: number, name: string, isDev: boolean) => ({ age, name, isDev }))
  *     .subscribe(x => console.log(x));
  *
- * // outputs
+ * // 输出：
  * // { age: 27, name: 'Foo', isDev: true }
  * // { age: 25, name: 'Bar', isDev: true }
  * // { age: 29, name: 'Beer', isDev: false }

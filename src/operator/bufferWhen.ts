@@ -10,18 +10,17 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 缓冲源Observable的值, 使用关闭Observables的工厂函数决定何时关闭、发出、重置
- * 缓冲区.
+ * 缓冲源 Observable 的值, 使用关闭 Observable 的工厂函数来决定何时关闭、发出和重置缓冲区。
  *
- * <span class="informal">收集历史数据到一个数组. 当开始收集数据的时候, 调用函数返回
- * Observable, 该Observable告知何时关闭缓冲区并重新开始收集.</span>
+ * <span class="informal">将过往的值收集到数组中， 当开始收集数据的时候, 调用函数返回
+ * Observable, 该 Observable 告知何时关闭缓冲区并重新开始收集。</span>
  *
  * <img src="./img/bufferWhen.png" width="100%">
  *
  * 立马开启缓冲区, 然后当`closingSelector`函数返回的observable发出数据的时候关闭缓冲区.
- * 当关闭缓冲区的时候, 会立马打开新的缓冲区不断重复这个过程.
+ * 当关闭缓冲区的时候, 会立马开启新的缓冲区，并不断重复此过程。
  *
- * @example <caption>发送每个[1-5]随机秒的点击事件数组</caption>
+ * @example <caption>发出每个随机秒(1-5秒)数内的最新点击事件数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferWhen(() =>
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
@@ -34,8 +33,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link bufferToggle}
  * @see {@link windowWhen}
  *
- * @param {function(): Observable} closingSelector 一个不接受参数返回决定缓冲区关闭的Observable的函数.
- * @return {Observable<T[]>} 缓冲数组数据的observable.
+ * @param {function(): Observable} closingSelector 该函数不接受参数，并返回通知缓冲区关闭的 Observable 。
+ * @return {Observable<T[]>} 缓冲数组的 Observable 。
  * @method bufferWhen
  * @owner Observable
  */

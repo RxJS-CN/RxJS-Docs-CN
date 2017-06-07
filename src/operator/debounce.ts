@@ -8,23 +8,24 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 发出源Observable中由传入的另一个Observable决定的时间段后发出的值.
+ * 只有在另一个 Observable 决定的一段特定时间经过后并且没有发出另一个源值之后，才从源 Observable 中发出一个值。
  *
- * <span class="informal">就像是 {@link debounceTime}, 但是静默时间段由第二个Observable
- * 决定.</span>
+ * <span class="informal">就像是 {@link debounceTime}, 但是静默时间段由第二个 Observable
+ * 决定。</span>
  *
  * <img src="./img/debounce.png" width="100%">
  *
- * `debounce` 延时发送源Observable发出的值,但是会丢弃前一个等待的发送如果源
- * Observable发出新的值.这个操作符会追踪源Observable的最新值, 时间段通过调用
- * `durationSelector`确定. 值被发出当持续Observable发出值或者完成, 如果没有
- * 其他数据发送当持续Observable产生. 如果一个新的值出现当持续Observable发出的
- * 时候,前一个数据会被丢弃并且不会被输出Observable发出.
+ * `debounce` 延时发送源 Observable 发出的值,但如果源 Observable 发出了新值
+ * 的话，它会丢弃掉前一个等待中的延迟发送。这个操作符会追踪源 Observable 的最新值,
+ * 并通过调用 durationSelector 函数来生产 duration Observable。只有当 
+ * duration Observable 发出值或完成时，才会发出值，如果源 Observable 上没有发
+ * 出其他值，那么 duration Observable 就会产生。如果在 duration Observable 发
+ * 出前出现了新值，那么前一个值会被丢弃并且不会在输出 Observable 上发出。
  *
- * 就像{@link debounceTime}, 这是一个控制速率的操作符, 同样也是一个延时类操作符因为输出
- * 并不一定发生在同一时间因为是源Observable上发生的.
+ * 就像{@link debounceTime}, 这是一个限制发出频率的操作符, 因为输出发送并不一定是
+ * 在同一时间发生的，就像它们在源 Observable 上所做的那样。
  *
- * @example <caption>发出点击后的最近点击</caption>
+ * @example <caption>在一顿狂点后只发出最新的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounce(() => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -35,9 +36,9 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link throttle}
  *
  * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数接受
- * 源Observable的值, 对每个值计算持续的时间, 返回一个Observable或者Promise.
- * @return {Observable} Observable，延时源Observable的发送通过`durationSelector`返回
- * 的特定的持续Observable, 同时会丢弃一个值如果发送过于频繁.
+ * 源Observable的值, 用于计算每个值的延迟持续时间, 返回一个Observable或者Promise.
+ * @return {Observable} Observable，通过 durationSelector 返回的特定 duration Observable 
+ * 来延迟源 Observable 的发送，如果发送过于频繁可能会丢弃一些值。
  * @method debounce
  * @owner Observable
  */

@@ -15,17 +15,17 @@ import { Subscriber } from '../Subscriber';
 export class TimerObservable extends Observable<number> {
 
   /**
-   * 创建一个Observable，该Observable在初始延时之后开始发送并且在每个时间周期后发出自增的数字.
+   * 创建一个 Observable，该 Observable 在初始延时（`initialDelay`）之后开始发送并且在每个时间周期（ `period`）后发出自增的数字。
    *
-   * <span class="informal">就像是{@link interval}, 但是你可以指定什么时候开始发送.</span>
+   * <span class="informal">就像是{@link interval}, 但是你可以指定什么时候开始发送。</span>
    *
    * <img src="./img/timer.png" width="100%">
    *
-   * `timer` 返回一个发出有限自增数列的Observable, 在一个有你选择的固定时间间隔. 第一个发送发生在
-   * 初始延时之后. 初始延时就像是{@link Date}. 默认情况下, 这个操作符使用异步调度器提供时钟概念, 
-   * 但是你也可以传递任何调度器. 如果时间周期没有被指定, 输出Observable只发出0. 否则,会发送一个有限数列.
+   * `timer` 返回一个发出有限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
+   * 初始延时之后. 初始延时就像是{@link Date}。 默认情况下, 这个操作符使用 async 调度器来提供时间的概念, 
+   * 但是你也可以传递任何调度器。 如果时间周期没有被指定, 输出 Observable 只发出0。 否则,会发送一个无限数列。
    *
-   * @example <caption>发出自增的数字, 每隔1秒, 3秒后开始发送</caption>
+   * @example <caption>每隔1秒发出自增的数字，3秒后开始发送。</caption>
    * var numbers = Rx.Observable.timer(3000, 1000);
    * numbers.subscribe(x => console.log(x));
    *
@@ -36,10 +36,10 @@ export class TimerObservable extends Observable<number> {
    * @see {@link interval}
    * @see {@link delay}
    *
-   * @param {number|Date} initialDelay 初始时延.
-   * @param {number} [period] 发送数列的时间周期.
-   * @param {Scheduler} [scheduler=async] 调度器，调度值的发送, 提供时钟概念.
-   * @return {Observable} 初始时延后开始发出0并且每个时间周期发出自增数列的Observable.
+   * @param {number|Date} initialDelay 在发出第一个值 0 之i前等待的初始延迟时间。
+   * @param {number} [period] 连续数字发送之间的时间周期。
+   * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送, 提供“时间”的概念。
+   * @return {Observable} 该 Observable 在初始时延(initialDelay)后发出0，并且在之后的每个时间周期(period)后发出按自增的数字。
    * @static true
    * @name timer
    * @owner Observable

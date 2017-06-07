@@ -26,17 +26,17 @@ export function combineLatest<T, TOther, R>(this: Observable<T>, array: Observab
 /* tslint:enable:max-line-length */
 
 /**
- * 将多个Observables结合成值为所有输入Observables最新值的Observable.
- *
- * <span class="informal">无论何时任一输入Observable发出一个值, 它会将所有输入的最新值组合发送.</span>
+ * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。
+ * 
+ * <span class="informal">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` 结合传入的多个Observables. 通过顺序的订阅每个输入Observable, 在每次任一输入Observables发送的时候收集
- * 每个输入Observables最新的值组成一个数组, 然后要么将这个数组传给可选的投射函数发送投射函数返回的结果,
- * 或者仅仅发出该数组如果没有提供投射函数.
+ * `combineLatest` 结合传入的多个 Observables。 通过顺序的订阅每个输入Observable, 在每次任一输入Observables发送的时候收集
+ * 每个输入Observables最新的值组成一个数组, 然后要么将这个数组传给可选的投射函数并发送投射函数返回的结果,
+ * 或者在没有提供投射函数时仅仅发出该数组。
  *
- * @example <caption>动态的计算BMI指数从一个身高的Observable和体重的Observable</caption>
+ * @example <caption>根据一个身高的 Observable 和一个体重的 Observable 动态的计算BMI指数</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
@@ -51,9 +51,9 @@ export function combineLatest<T, TOther, R>(this: Observable<T>, array: Observab
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} other 将要和源Observable结合的输入Observable.可以传入多个输入Observables.
- * @param {function} [project] 可选的投射函数，将输出Observable返回的值投射为要发出的新的值.
- * @return {Observable} 一个返回将所有输入Observable的最新的值投射或者组成数组的Observable.
+ * @param {ObservableInput} other 将要和源 Observable 结合的输入 Observable。 可以传入多个输入 Observables。
+ * @param {function} [project] 可选的投射函数，将输出 Observable 返回的值投射为要发出的新的值。
+ * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射结果或数组。
  * @method combineLatest
  * @owner Observable
  */
