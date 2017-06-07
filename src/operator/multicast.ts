@@ -10,21 +10,17 @@ export function multicast<T>(SubjectFactory: (this: Observable<T>) => Subject<T>
 /* tslint:enable:max-line-length */
 
 /**
- * Returns an Observable that emits the results of invoking a specified selector on items
- * emitted by a ConnectableObservable that shares a single subscription to the underlying stream.
+ * 返回的 Observable 发出对 ConnectableObservable 发出的项调用一个指定的 selector 函数的结果，
+ * ConnectableObservable 可以在潜在的多个流之间共享单个 subscription 。
  *
  * <img src="./img/multicast.png" width="100%">
  *
- * @param {Function|Subject} subjectOrSubjectFactory - Factory function to create an intermediate subject through
- * which the source sequence's elements will be multicast to the selector function
- * or Subject to push source elements into.
- * @param {Function} [selector] - Optional selector function that can use the multicasted source stream
- * as many times as needed, without causing multiple subscriptions to the source stream.
- * Subscribers to the given source will receive all notifications of the source from the
- * time of the subscription forward.
- * @return {Observable} An Observable that emits the results of invoking the selector
- * on the items emitted by a `ConnectableObservable` that shares a single subscription to
- * the underlying stream.
+ * @param {Function|Subject} subjectOrSubjectFactory - 用来创建中间 Subject 的工厂函数，源序列的元素将通过
+ * 该 Subject 多播到 selector函数，或者将元素推入该 Subject 。
+ * @param {Function} [selector] - 可选的选择器函数，可以根据需要多次使用以多播源流，而不会导致源流
+ * 生成多个 subscriptions 。给定源的订阅者会从订阅开始的一刻起，接收源的所有通知。
+ * @return {Observable} 该 Observable 发出对 ConnectableObservable 发出的项调用 selector 函数的结果，
+ * ConnectableObservable 可以在潜在的多个流之间共享单个 subscription 。
  * @method multicast
  * @owner Observable
  */

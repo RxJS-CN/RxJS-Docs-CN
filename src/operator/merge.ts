@@ -22,28 +22,29 @@ export function merge<T, R>(this: Observable<T>, ...observables: Array<Observabl
 /* tslint:enable:max-line-length */
 
 /**
- * 创建一个并行发出所有输入Observable值的输出Observable.
+ * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中的所有值。
  *
- * <span class="informal">将多个Observables合并通过混合它们的值到一个Observable.</span>
+ * <span class="informal">通过把多个 Observables 的值混合到一个 Observable 中
+ * 来将其打平。</span>
  *
  * <img src="./img/merge.png" width="100%">
  *
- * `merge` 订阅每个输入Observable (either the source or an
- * Observable given as argument), 然后将所有输入Observables的值简单(不做任何的转变)的传递
- * 给输出Observable. 输出Observable只有所有的输入都完成了才会触发完成状态. 任一输入Observable
- * 发生错误，都会立马触发输出Observable的错误状态.
+ * `merge` 订阅每个给定的输入 Observable (给定的源或作为参数的 Observable )，然后只是
+ * 将所有输入 Observables 的所有值发送(不进行任何转换)到输出 Observable 。所有的输入 
+ * Observable 都完成了，输出 Observable 才能完成。任何由输入 Observable 发出的错误都
+ * 会立即在输出 Observalbe 上发出。
  *
- * @example <caption>合并两个Observables: 1s间隔和点击</caption>
+ * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = clicks.merge(timer);
  * clicksOrTimer.subscribe(x => console.log(x));
  *
- * @example <caption>合并3个Observables, 但是只并行运行2个</caption>
+ * @example <caption>合并三个 Observables ，但只能同时运行两个</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
- * var concurrent = 2; // the argument
+ * var concurrent = 2; // 参数
  * var merged = timer1.merge(timer2, timer3, concurrent);
  * merged.subscribe(x => console.log(x));
  *
@@ -52,10 +53,13 @@ export function merge<T, R>(this: Observable<T>, ...observables: Array<Observabl
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {ObservableInput} other 输入Observable和源Observable进行合并. 可以传递多个Observables做为参数.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] 输入Observables的最大并行数.
- * @param {Scheduler} [scheduler=null] 调度器用来管理输入Observables的并行数.
- * @return {Observable} 一个发出值为所有输入Observable的值的Observable.
+ * @param {ObservableInput} other 可以与源 Observable 合并的输入 Observable 。
+ * 可以给定多个输入 Observables 作为参数。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 
+ * Observables 的最大数量。
+ * @param {Scheduler} [scheduler=null] 用来管理输入 Observables 的并发性的
+ * 调度器。
+ * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。
  * @method merge
  * @owner Observable
  */

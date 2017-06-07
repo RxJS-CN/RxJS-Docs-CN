@@ -10,29 +10,24 @@ export function _do<T>(this: Observable<T>, observer: PartialObserver<T>): Obser
 /* tslint:enable:max-line-length */
 
 /**
- * Perform a side effect for every emission on the source Observable, but return
- * an Observable that is identical to the source.
+ * 为源 Observable 上的每次发送执行副作用，但返回的 Observable 与源 Observable 是相同的。
  *
- * <span class="informal">Intercepts each emission on the source and runs a
- * function, but returns an output which is identical to the source as long as errors don't occur.</span>
+ * <span class="informal">拦截源 Observable 上的每次发送并且运行一个函数，但返回的输出 Observable 与
+ * 源 Observable 是相同的，只要不发生错误即可。</span>
  *
  * <img src="./img/do.png" width="100%">
  *
- * Returns a mirrored Observable of the source Observable, but modified so that
- * the provided Observer is called to perform a side effect for every value,
- * error, and completion emitted by the source. Any errors that are thrown in
- * the aforementioned Observer or handlers are safely sent down the error path
- * of the output Observable.
+ * 返回源 Observable 的镜像，但镜像是修改过的，以便调用提供的 Observer 来为源 Observable 
+ * 发出的每个值，错误和完成执行副作用。在上述的 Observer 或处理方法中抛出的任何错误都可以
+ * 安全地发送到输出 Observable 的错误路径中。
  *
- * This operator is useful for debugging your Observables for the correct values
- * or performing other side effects.
+ * 此操作符适用于调试 Observables 以查看值是否正确，或者执行一些其他的副作用操作。
  *
- * Note: this is different to a `subscribe` on the Observable. If the Observable
- * returned by `do` is not subscribed, the side effects specified by the
- * Observer will never happen. `do` therefore simply spies on existing
- * execution, it does not trigger an execution to happen like `subscribe` does.
+ * 注意：此操作符不同于 Observable 的 `subscribe`。如果 `do` 返回的 Observable 没有被订阅，
+ * 那么观察者指定的副作用永远不会执行。因此 `do` 只是侦查已存在的执行，它不会像 `subscribe` 
+ * 那样触发执行的发生。
  *
- * @example <caption>Map every every click to the clientX position of that click, while also logging the click event</caption>
+ * @example <caption>把每次点击映射成该点击的 clientX ，同时还输出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var positions = clicks
  *   .do(ev => console.log(ev))
@@ -42,12 +37,10 @@ export function _do<T>(this: Observable<T>, observer: PartialObserver<T>): Obser
  * @see {@link map}
  * @see {@link subscribe}
  *
- * @param {Observer|function} [nextOrObserver] A normal Observer object or a
- * callback for `next`.
- * @param {function} [error] Callback for errors in the source.
- * @param {function} [complete] Callback for the completion of the source.
- * @return {Observable} An Observable identical to the source, but runs the
- * specified Observer or callback(s) for each item.
+ * @param {Observer|function} [nextOrObserver] 普通的观察者对象或者 `next` 回调函数。
+ * @param {function} [error] 源 Observable 的 `error` 回调函数。
+ * @param {function} [complete] 源 Observable 的 `complete` 回调函数。
+ * @return {Observable} 与源相同的 Observable，但会为每一项的运行指定观察者或回调函数。
  * @method do
  * @name do
  * @owner Observable

@@ -4,12 +4,12 @@ import { Subscriber } from '../Subscriber';
 import { noop } from '../util/noop';
 
 /**
- * Ignores all items emitted by the source Observable and only passes calls of `complete` or `error`.
+ * 忽略源 Observable 所发送的所有项，只传递 `complete` 或 `error` 的调用。
  *
  * <img src="./img/ignoreElements.png" width="100%">
  *
- * @return {Observable} An empty Observable that only calls `complete`
- * or `error`, based on which one is called by the source Observable.
+ * @return {Observable} 该 Observable 是空的，只调用 `complete` 或 
+ * `error`，调用是基于源 Observable 的调用。
  * @method ignoreElements
  * @owner Observable
  */

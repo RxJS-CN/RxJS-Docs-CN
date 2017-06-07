@@ -5,28 +5,26 @@ import { Observable } from '../Observable';
 import { TeardownLogic } from '../Subscription';
 
 /**
- * Emits the single value at the specified `index` in a sequence of emissions
- * from the source Observable.
+ * 只发出单个值，这个值位于源 Observable 的发送序列中的指定 `index` 处。
  *
- * <span class="informal">Emits only the i-th value, then completes.</span>
+ * <span class="informal">只发出第i个值, 然后完成。</span>
  *
  * <img src="./img/elementAt.png" width="100%">
+ * 
+ * `elementAt` 返回的 Observable 会发出源 Observable 指定 `index` 处的项，如果
+ * `index` 超出范围并且提供了 `default` 参数的话，会发出一个默认值。如果没有提供
+ * `default` 参数并且 `index` 超出范围，那么输出 Observable 会发出一个 
+ * `ArgumentOutOfRangeError` 错误。
  *
- * `elementAt` returns an Observable that emits the item at the specified
- * `index` in the source Observable, or a default value if that `index` is out
- * of range and the `default` argument is provided. If the `default` argument is
- * not given and the `index` is out of range, the output Observable will emit an
- * `ArgumentOutOfRangeError` error.
- *
- * @example <caption>Emit only the third click event</caption>
+ * @example <caption>只发出第三次的点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.elementAt(2);
  * result.subscribe(x => console.log(x));
  *
- * // Results in:
+ * // 结果：
  * // click 1 = nothing
  * // click 2 = nothing
- * // click 3 = MouseEvent object logged to console
+ * // click 3 = 打印到控制台的 MouseEvent 对象
  *
  * @see {@link first}
  * @see {@link last}
@@ -34,15 +32,14 @@ import { TeardownLogic } from '../Subscription';
  * @see {@link single}
  * @see {@link take}
  *
- * @throws {ArgumentOutOfRangeError} When using `elementAt(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0` or the
- * Observable has completed before emitting the i-th `next` notification.
+ * @throws {ArgumentOutOfRangeError} 当使用 `elementAt(i)` 时，如果 `i < 0` 或
+ * 在发送第i个 `next` 通知前 Observable 已经完成了，它会发送 ArgumentOutOrRangeError 
+ * 给观察者的 `error` 回调函数。
  *
- * @param {number} index Is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {T} [defaultValue] The default value returned for missing indices.
- * @return {Observable} An Observable that emits a single item, if it is found.
- * Otherwise, will emit the default value if given. If not, then emits an error.
+ * @param {number} index 是 Subscription 开始后的第i个通知的索引数值，该值是从 `0` 开始。
+ * @param {T} [defaultValue] 缺失索引时返回的默认值。
+ * @return {Observable} 如果能找到这个项的话，那么该 Observable 发出此单个项。找不到时，如果有给定
+ * 的默认值，则发出默认值，否则发出错误。
  * @method elementAt
  * @owner Observable
  */
