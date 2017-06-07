@@ -19,7 +19,7 @@ export function toPromise<T>(this: Observable<T>, PromiseCtor: typeof Promise): 
  * // => Value: 42
  *
  * // 被拒的 Promise
- * // 使用普通的 ES2015
+ * // 使用标准的 ES2015
  * let source = Rx.Observable
  *   .throw(new Error('woops'))
  *   .toPromise();
