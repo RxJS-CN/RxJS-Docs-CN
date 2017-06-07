@@ -82,22 +82,17 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { async } from &apos;../scheduler/async&apos;;
 /**
- * Emits the most recently emitted value from the source Observable within
- * periodic time intervals.
+ * &#x5728;&#x5468;&#x671F;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#x53D1;&#x51FA;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6700;&#x65B0;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Samples the source Observable at periodic time
- * intervals, emitting what it samples.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5728;&#x5468;&#x671F;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x5185;&#x53D6;&#x6837;&#x6E90; Observable &#xFF0C; &#x53D1;&#x51FA;&#x53D6;&#x6837;&#x7684;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/sampleTime.png&quot; width=&quot;100%&quot;&gt;
  *
- * `sampleTime` periodically looks at the source Observable and emits whichever
- * value it has most recently emitted since the previous sampling, unless the
- * source has not emitted anything since the previous sampling. The sampling
- * happens periodically in time every `period` milliseconds (or the time unit
- * defined by the optional `scheduler` argument). The sampling starts as soon as
- * the output Observable is subscribed.
+ * `sampleTime` &#x5468;&#x671F;&#x6027;&#x7684;&#x67E5;&#x770B;&#x6E90; Observable &#x5E76;&#x4E14;&#x53D1;&#x51FA;&#x4E0A;&#x6B21;&#x53D6;&#x6837;&#x540E;&#x53D1;&#x51FA;&#x7684;&#x6700;&#x65B0;&#x7684;&#x503C;&#xFF0C; &#x9664;&#x975E;&#x4E0A;&#x6B21;&#x53D6;&#x6837;&#x540E;
+ * &#x5C31;&#x6CA1;&#x6709;&#x518D;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x4E86;&#x3002; &#x53D6;&#x6837;&#x5728;&#x6BCF;&#x4E2A;&#x5468;&#x671F;&#x6BEB;&#x79D2;(&#x6216;&#x8005;&#x65F6;&#x95F4;&#x5355;&#x4F4D;&#x7531;&#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x53C2;&#x6570;&#x51B3;&#x5B9A;)&#x5185;&#x5B9A;&#x671F;&#x53D1;&#x751F;&#x3002; &#x53EA;&#x8981;
+ * &#x8F93;&#x51FA; Observable &#x88AB;&#x8BA2;&#x9605;&#x53D6;&#x6837;&#x5C31;&#x5F00;&#x59CB;&#x3002;
  *
- * @example &lt;caption&gt;Every second, emit the most recent click at most once&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x79D2;&#xFF0C; &#x53D1;&#x51FA;&#x6700;&#x8FD1;&#x7684;&#x4E00;&#x4E2A;&#x70B9;&#x51FB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.sampleTime(1000);
  * result.subscribe(x =&gt; console.log(x));
@@ -108,12 +103,10 @@ import { async } from &apos;../scheduler/async&apos;;
  * @see {@link sample}
  * @see {@link throttleTime}
  *
- * @param {number} period The sampling period expressed in milliseconds or the
- * time unit determined internally by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the sampling.
- * @return {Observable&lt;T&gt;} An Observable that emits the results of sampling the
- * values emitted by the source Observable at the specified time interval.
+ * @param {number} period &#x7528;&#x6BEB;&#x79D2;&#x6216;&#x8005;&#x7531;&#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x53C2;&#x6570;&#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5355;&#x4F4D;&#x8868;&#x793A;&#x7684;&#x53D6;&#x6837;&#x5468;&#x671F;&#x3002;
+ * @param {Scheduler} [scheduler=async] {@link IScheduler}&#x7528;&#x6765;&#x7BA1;&#x7406;&#x53D6;&#x6837;&#x7684;&#x65F6;&#x95F4;&#x3002;
+ * @return {Observable&lt;T&gt;} Observable&#xFF0C;&#x8BE5; Observable &#x53D1;&#x51FA;&#x7279;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5468;&#x671F;&#x4ECE;&#x6E90; Observable
+ * &#x53D6;&#x6837;&#x7684;&#x6700;&#x65B0;&#x503C;&#x3002;
  * @method sampleTime
  * @owner Observable
  */

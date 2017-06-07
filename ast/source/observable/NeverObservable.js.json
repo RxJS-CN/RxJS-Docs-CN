@@ -377,10 +377,10 @@
               "trailingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * Creates an Observable that emits no items to the Observer.\n     *\n     * <span class=\"informal\">An Observable that never emits anything.</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * This static operator is useful for creating a simple Observable that emits\n     * neither values nor errors nor the completion notification. It can be used\n     * for testing purposes or for composing with other Observables. Please not\n     * that by never emitting a complete notification, this Observable keeps the\n     * subscription from being disposed automatically. Subscriptions need to be\n     * manually disposed.\n     *\n     * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable: never emits anything.\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
+                  "value": "*\n     * 创建一个不向观察者发出任何项的 Observable 。\n     *\n     * <span class=\"informal\">从不发出任何项的 Observable 。</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * 这个静态操作符对于创建既不发出数据也不触发错误和完成通知的 Observable。 可以用来测试或\n     * 者和其他 Observables进行组合。 注意，由于不会发送完成通知，这个 Observable 的 subscription\n     * 不会被自动地清理。Subscriptions 需要手动清理。\n     *\n     * @example <caption>发出7, 然后不发出任何值(也不发出完成通知)。</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable:从不发出任何东西的 Observable 。\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
                   "range": [
                     273,
-                    1483
+                    1126
                   ],
                   "loc": {
                     "start": {
@@ -388,7 +388,7 @@
                       "column": 4
                     },
                     "end": {
-                      "line": 42,
+                      "line": 39,
                       "column": 7
                     }
                   }
@@ -402,16 +402,16 @@
                 "type": "Identifier",
                 "name": "create",
                 "range": [
-                  1495,
-                  1501
+                  1138,
+                  1144
                 ],
                 "loc": {
                   "start": {
-                    "line": 43,
+                    "line": 40,
                     "column": 11
                   },
                   "end": {
-                    "line": 43,
+                    "line": 40,
                     "column": 17
                   }
                 }
@@ -431,63 +431,63 @@
                           "type": "Identifier",
                           "name": "NeverObservable",
                           "range": [
-                            1525,
-                            1540
+                            1168,
+                            1183
                           ],
                           "loc": {
                             "start": {
-                              "line": 44,
+                              "line": 41,
                               "column": 19
                             },
                             "end": {
-                              "line": 44,
+                              "line": 41,
                               "column": 34
                             }
                           }
                         },
                         "arguments": [],
                         "range": [
-                          1521,
-                          1542
+                          1164,
+                          1185
                         ],
                         "loc": {
                           "start": {
-                            "line": 44,
+                            "line": 41,
                             "column": 15
                           },
                           "end": {
-                            "line": 44,
+                            "line": 41,
                             "column": 36
                           }
                         }
                       },
                       "range": [
-                        1514,
-                        1543
+                        1157,
+                        1186
                       ],
                       "loc": {
                         "start": {
-                          "line": 44,
+                          "line": 41,
                           "column": 8
                         },
                         "end": {
-                          "line": 44,
+                          "line": 41,
                           "column": 37
                         }
                       }
                     }
                   ],
                   "range": [
-                    1504,
-                    1549
+                    1147,
+                    1192
                   ],
                   "loc": {
                     "start": {
-                      "line": 43,
+                      "line": 40,
                       "column": 20
                     },
                     "end": {
-                      "line": 45,
+                      "line": 42,
                       "column": 5
                     }
                   }
@@ -495,16 +495,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1501,
-                  1549
+                  1144,
+                  1192
                 ],
                 "loc": {
                   "start": {
-                    "line": 43,
+                    "line": 40,
                     "column": 17
                   },
                   "end": {
-                    "line": 45,
+                    "line": 42,
                     "column": 5
                   }
                 }
@@ -512,26 +512,26 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1488,
-                1549
+                1131,
+                1192
               ],
               "loc": {
                 "start": {
-                  "line": 43,
+                  "line": 40,
                   "column": 4
                 },
                 "end": {
-                  "line": 45,
+                  "line": 42,
                   "column": 5
                 }
               },
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * Creates an Observable that emits no items to the Observer.\n     *\n     * <span class=\"informal\">An Observable that never emits anything.</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * This static operator is useful for creating a simple Observable that emits\n     * neither values nor errors nor the completion notification. It can be used\n     * for testing purposes or for composing with other Observables. Please not\n     * that by never emitting a complete notification, this Observable keeps the\n     * subscription from being disposed automatically. Subscriptions need to be\n     * manually disposed.\n     *\n     * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable: never emits anything.\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
+                  "value": "*\n     * 创建一个不向观察者发出任何项的 Observable 。\n     *\n     * <span class=\"informal\">从不发出任何项的 Observable 。</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * 这个静态操作符对于创建既不发出数据也不触发错误和完成通知的 Observable。 可以用来测试或\n     * 者和其他 Observables进行组合。 注意，由于不会发送完成通知，这个 Observable 的 subscription\n     * 不会被自动地清理。Subscriptions 需要手动清理。\n     *\n     * @example <caption>发出7, 然后不发出任何值(也不发出完成通知)。</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable:从不发出任何东西的 Observable 。\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
                   "range": [
                     273,
-                    1483
+                    1126
                   ],
                   "loc": {
                     "start": {
@@ -539,7 +539,7 @@
                       "column": 4
                     },
                     "end": {
-                      "line": 42,
+                      "line": 39,
                       "column": 7
                     }
                   }
@@ -553,16 +553,16 @@
                 "type": "Identifier",
                 "name": "_subscribe",
                 "range": [
-                  1554,
-                  1564
+                  1197,
+                  1207
                 ],
                 "loc": {
                   "start": {
-                    "line": 46,
+                    "line": 43,
                     "column": 4
                   },
                   "end": {
-                    "line": 46,
+                    "line": 43,
                     "column": 14
                   }
                 }
@@ -575,16 +575,16 @@
                     "type": "Identifier",
                     "name": "subscriber",
                     "range": [
-                      1565,
-                      1575
+                      1208,
+                      1218
                     ],
                     "loc": {
                       "start": {
-                        "line": 46,
+                        "line": 43,
                         "column": 15
                       },
                       "end": {
-                        "line": 46,
+                        "line": 43,
                         "column": 25
                       }
                     }
@@ -601,63 +601,63 @@
                           "type": "Identifier",
                           "name": "noop",
                           "range": [
-                            1587,
-                            1591
+                            1230,
+                            1234
                           ],
                           "loc": {
                             "start": {
-                              "line": 47,
+                              "line": 44,
                               "column": 8
                             },
                             "end": {
-                              "line": 47,
+                              "line": 44,
                               "column": 12
                             }
                           }
                         },
                         "arguments": [],
                         "range": [
-                          1587,
-                          1593
+                          1230,
+                          1236
                         ],
                         "loc": {
                           "start": {
-                            "line": 47,
+                            "line": 44,
                             "column": 8
                           },
                           "end": {
-                            "line": 47,
+                            "line": 44,
                             "column": 14
                           }
                         }
                       },
                       "range": [
-                        1587,
-                        1594
+                        1230,
+                        1237
                       ],
                       "loc": {
                         "start": {
-                          "line": 47,
+                          "line": 44,
                           "column": 8
                         },
                         "end": {
-                          "line": 47,
+                          "line": 44,
                           "column": 15
                         }
                       }
                     }
                   ],
                   "range": [
-                    1577,
-                    1600
+                    1220,
+                    1243
                   ],
                   "loc": {
                     "start": {
-                      "line": 46,
+                      "line": 43,
                       "column": 27
                     },
                     "end": {
-                      "line": 48,
+                      "line": 45,
                       "column": 5
                     }
                   }
@@ -665,16 +665,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  1564,
-                  1600
+                  1207,
+                  1243
                 ],
                 "loc": {
                   "start": {
-                    "line": 46,
+                    "line": 43,
                     "column": 14
                   },
                   "end": {
-                    "line": 48,
+                    "line": 45,
                     "column": 5
                   }
                 }
@@ -682,16 +682,16 @@
               "kind": "method",
               "computed": false,
               "range": [
-                1554,
-                1600
+                1197,
+                1243
               ],
               "loc": {
                 "start": {
-                  "line": 46,
+                  "line": 43,
                   "column": 4
                 },
                 "end": {
-                  "line": 48,
+                  "line": 45,
                   "column": 5
                 }
               },
@@ -700,7 +700,7 @@
           ],
           "range": [
             224,
-            1602
+            1245
           ],
           "loc": {
             "start": {
@@ -708,14 +708,14 @@
               "column": 48
             },
             "end": {
-              "line": 49,
+              "line": 46,
               "column": 1
             }
           }
         },
         "range": [
           183,
-          1602
+          1245
         ],
         "loc": {
           "start": {
@@ -723,7 +723,7 @@
             "column": 7
           },
           "end": {
-            "line": 49,
+            "line": 46,
             "column": 1
           }
         },
@@ -752,16 +752,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=NeverObservable.js.map",
             "range": [
-              1603,
-              1646
+              1246,
+              1289
             ],
             "loc": {
               "start": {
-                "line": 50,
+                "line": 47,
                 "column": 0
               },
               "end": {
-                "line": 50,
+                "line": 47,
                 "column": 43
               }
             }
@@ -772,7 +772,7 @@
       "source": null,
       "range": [
         176,
-        1602
+        1245
       ],
       "loc": {
         "start": {
@@ -780,7 +780,7 @@
           "column": 0
         },
         "end": {
-          "line": 49,
+          "line": 46,
           "column": 1
         }
       },
@@ -809,16 +809,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=NeverObservable.js.map",
           "range": [
-            1603,
-            1646
+            1246,
+            1289
           ],
           "loc": {
             "start": {
-              "line": 50,
+              "line": 47,
               "column": 0
             },
             "end": {
-              "line": 50,
+              "line": 47,
               "column": 43
             }
           }
@@ -829,7 +829,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1602
+    1245
   ],
   "loc": {
     "start": {
@@ -837,7 +837,7 @@
       "column": 0
     },
     "end": {
-      "line": 49,
+      "line": 46,
       "column": 1
     }
   },
@@ -862,10 +862,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n     * Creates an Observable that emits no items to the Observer.\n     *\n     * <span class=\"informal\">An Observable that never emits anything.</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * This static operator is useful for creating a simple Observable that emits\n     * neither values nor errors nor the completion notification. It can be used\n     * for testing purposes or for composing with other Observables. Please not\n     * that by never emitting a complete notification, this Observable keeps the\n     * subscription from being disposed automatically. Subscriptions need to be\n     * manually disposed.\n     *\n     * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable: never emits anything.\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
+      "value": "*\n     * 创建一个不向观察者发出任何项的 Observable 。\n     *\n     * <span class=\"informal\">从不发出任何项的 Observable 。</span>\n     *\n     * <img src=\"./img/never.png\" width=\"100%\">\n     *\n     * 这个静态操作符对于创建既不发出数据也不触发错误和完成通知的 Observable。 可以用来测试或\n     * 者和其他 Observables进行组合。 注意，由于不会发送完成通知，这个 Observable 的 subscription\n     * 不会被自动地清理。Subscriptions 需要手动清理。\n     *\n     * @example <caption>发出7, 然后不发出任何值(也不发出完成通知)。</caption>\n     * function info() {\n     *   console.log('Will not be called');\n     * }\n     * var result = Rx.Observable.never().startWith(7);\n     * result.subscribe(x => console.log(x), info, info);\n     *\n     * @see {@link create}\n     * @see {@link empty}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @return {Observable} A \"never\" Observable:从不发出任何东西的 Observable 。\n     * @static true\n     * @name never\n     * @owner Observable\n     ",
       "range": [
         273,
-        1483
+        1126
       ],
       "loc": {
         "start": {
@@ -873,7 +873,7 @@
           "column": 4
         },
         "end": {
-          "line": 42,
+          "line": 39,
           "column": 7
         }
       }
@@ -882,16 +882,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=NeverObservable.js.map",
       "range": [
-        1603,
-        1646
+        1246,
+        1289
       ],
       "loc": {
         "start": {
-          "line": 50,
+          "line": 47,
           "column": 0
         },
         "end": {
-          "line": 50,
+          "line": 47,
           "column": 43
         }
       }

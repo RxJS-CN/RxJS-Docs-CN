@@ -82,25 +82,19 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Applies an accumulator function over the source Observable, and returns each
- * intermediate result, with an optional seed value.
+ * &#x5BF9;&#x6E90; Observable &#x4F7F;&#x7528;&#x7D2F;&#x52A0;&#x5668;&#x51FD;&#x6570;&#xFF0C; &#x8FD4;&#x56DE;&#x751F;&#x6210;&#x7684;&#x4E2D;&#x95F4;&#x503C;&#xFF0C; &#x53EF;&#x9009;&#x7684;&#x521D;&#x59CB;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link reduce}, but emits the current
- * accumulation whenever the source emits a value.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x60F3;&#x662F; {@link reduce}, &#x4F46;&#x662F;&#x53D1;&#x51FA;&#x76EE;&#x524D;&#x7684;&#x7D2F;&#x8BA1;&#x6570;&#x5F53;&#x6E90;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/scan.png&quot; width=&quot;100%&quot;&gt;
  *
- * Combines together all values emitted on the source, using an accumulator
- * function that knows how to join a new source value into the accumulation from
- * the past. Is similar to {@link reduce}, but emits the intermediate
- * accumulations.
+ * &#x5C06;&#x6240;&#x6709;&#x6E90;&#x53D1;&#x51FA;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#xFF0C; &#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x7D2F;&#x52A0;&#x5668;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x5C06;&#x65B0;&#x7684;&#x503C;&#x52A0;&#x5165;&#x5230;&#x7D2F;&#x52A0;&#x5668;&#x4E2D;&#x3002;
+ * &#x8FD9;&#x5C31;&#x50CF;&#x662F;{@link reduce}&#xFF0C; &#x4F46;&#x662F;&#x4F1A;&#x53D1;&#x51FA;&#x4E2D;&#x95F4;&#x7684;&#x7D2F;&#x52A0;&#x503C;&#x3002;
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C; &#x8BE5; Observable &#x5BF9;&#x6BCF;&#x4E2A;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x4F7F;&#x7528;&#x7279;&#x5B9A;&#x7684;&#x7D2F;&#x52A0;&#x5668;&#x3002;
+ * &#x5982;&#x679C;`seed`&#x503C;&#x63D0;&#x4F9B;&#x4E86;&#xFF0C; &#x8FD9;&#x4E2A;&#x503C;&#x4F1A;&#x88AB;&#x7D2F;&#x52A0;&#x5668;&#x7528;&#x4F5C;&#x521D;&#x59CB;&#x503C;&#x3002; &#x5982;&#x679C;`seed`&#x503C;&#x6CA1;&#x6709;&#x88AB;&#x63D0;&#x4F9B;&#xFF0C; &#x6E90;&#x6570;&#x636E;&#x7684;&#x7B2C;&#x4E00;&#x9879;&#x4F1A;&#x88AB;&#x5F53;&#x505A;&#x521D;&#x59CB;&#x503C;&#x3002;
  *
- * @example &lt;caption&gt;Count the number of click events&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8BA1;&#x6570;&#x70B9;&#x51FB;&#x6B21;&#x6570;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var ones = clicks.mapTo(1);
  * var seed = 0;
@@ -112,9 +106,9 @@
  * @see {@link reduce}
  *
  * @param {function(acc: R, value: T, index: number): R} accumulator
- * The accumulator function called on each source value.
- * @param {T|R} [seed] The initial accumulation value.
- * @return {Observable&lt;R&gt;} An observable of the accumulated values.
+ * &#x5BF9;&#x6BCF;&#x4E2A;&#x6E90;&#x6570;&#x636E;&#x8C03;&#x7528;&#x7684;&#x7D2F;&#x52A0;&#x5668;&#x51FD;&#x6570;&#x3002;
+ * @param {T|R} [seed] &#x521D;&#x59CB;&#x503C;&#x3002;
+ * @return {Observable&lt;R&gt;} &#x5E26;&#x6709;&#x7D2F;&#x52A0;&#x529F;&#x80FD;&#x7684;observable&#x3002;
  * @method scan
  * @owner Observable
  */

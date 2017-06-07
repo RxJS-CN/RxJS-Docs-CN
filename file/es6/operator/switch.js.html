@@ -82,31 +82,27 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Converts a higher-order Observable into a first-order Observable by
- * subscribing to only the most recently emitted of those inner Observables.
+ * &#x901A;&#x8FC7;&#x53EA;&#x8BA2;&#x9605;&#x6700;&#x65B0;&#x53D1;&#x51FA;&#x7684;&#x5185;&#x90E8; Observable &#xFF0C;&#x5C06;&#x9AD8;&#x9636; Observable &#x8F6C;&#x6362;&#x6210;&#x4E00;&#x9636; Observable &#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Flattens an Observable-of-Observables by dropping the
- * previous inner Observable once a new one appears.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x4E00;&#x65E6;&#x6709;&#x65B0;&#x7684;&#x5185;&#x90E8; Observable &#x51FA;&#x73B0;&#xFF0C;&#x901A;&#x8FC7;&#x4E22;&#x5F03;&#x524D;&#x4E00;&#x4E2A;&#xFF0C;&#x5C06;
+ * &#x9AD8;&#x7EA7; Observable &#x6253;&#x5E73;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/switch.png&quot; width=&quot;100%&quot;&gt;
  *
- * `switch` subscribes to an Observable that emits Observables, also known as a
- * higher-order Observable. Each time it observes one of these emitted inner
- * Observables, the output Observable subscribes to the inner Observable and
- * begins emitting the items emitted by that. So far, it behaves
- * like {@link mergeAll}. However, when a new inner Observable is emitted,
- * `switch` unsubscribes from the earlier-emitted inner Observable and
- * subscribes to the new inner Observable and begins emitting items from it. It
- * continues to behave like this for subsequent inner Observables.
+ *  `switch` &#x8BA2;&#x9605;&#x53D1;&#x51FA; Observables &#x7684; Observable&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x9AD8;&#x9636; Observable &#x3002;
+ * &#x6BCF;&#x6B21;&#x89C2;&#x5BDF;&#x5230;&#x8FD9;&#x4E9B;&#x5DF2;&#x53D1;&#x51FA;&#x7684;&#x5185;&#x90E8; Observables &#x4E2D;&#x7684;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x65F6;&#xFF0C;&#x8F93;&#x51FA; Observable &#x8BA2;&#x9605;
+ * &#x8FD9;&#x4E2A;&#x5185;&#x90E8; Observable &#x5E76;&#x5F00;&#x59CB;&#x53D1;&#x51FA;&#x8BE5; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;&#x5230;&#x76EE;&#x524D;&#x4E3A;&#x6B62;&#xFF0C;
+ * &#x5B83;&#x7684;&#x884C;&#x4E3A;&#x5C31;&#x50CF; {@link mergeAll} &#x3002;&#x7136;&#x800C;&#xFF0C;&#x5F53;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x5185;&#x90E8; Observable &#x65F6;&#xFF0C;
+ * `switch` &#x4F1A;&#x4ECE;&#x5148;&#x524D;&#x53D1;&#x9001;&#x7684;&#x5185;&#x90E8; Observable &#x90A3;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#xFF0C;&#x7136;&#x540E;&#x8BA2;&#x9605;&#x65B0;&#x7684;&#x5185;&#x90E8; Observable
+ * &#x5E76;&#x5F00;&#x59CB;&#x53D1;&#x51FA;&#x5B83;&#x7684;&#x503C;&#x3002;&#x540E;&#x7EED;&#x7684;&#x5185;&#x90E8; Observables &#x4E5F;&#x662F;&#x5982;&#x6B64;&#x3002;
  *
- * @example &lt;caption&gt;Rerun an interval Observable on every click event&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; interval Observable&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
- * // Each click event is mapped to an Observable that ticks every second
+ * // &#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x90FD;&#x4F1A;&#x6620;&#x5C04;&#x6210;&#x95F4;&#x9694;1&#x79D2;&#x7684; interval Observable
  * var higherOrder = clicks.map((ev) =&gt; Rx.Observable.interval(1000));
  * var switched = higherOrder.switch();
- * // The outcome is that `switched` is essentially a timer that restarts
- * // on every click. The interval Observables from older clicks do not merge
- * // with the current interval Observable.
+ * // &#x7ED3;&#x679C;&#x662F; `switched` &#x672C;&#x8D28;&#x4E0A;&#x662F;&#x4E00;&#x4E2A;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x65F6;&#x4F1A;&#x91CD;&#x65B0;&#x542F;&#x52A8;&#x7684;&#x8BA1;&#x65F6;&#x5668;&#x3002;
+ * // &#x4E4B;&#x524D;&#x70B9;&#x51FB;&#x4EA7;&#x751F;&#x7684; interval Observables &#x4E0D;&#x4F1A;&#x4E0E;&#x5F53;&#x524D;&#x7684;&#x5408;&#x5E76;&#x3002;
  * switched.subscribe(x =&gt; console.log(x));
  *
  * @see {@link combineAll}
@@ -117,8 +113,8 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link switchMapTo}
  * @see {@link zipAll}
  *
- * @return {Observable&lt;T&gt;} An Observable that emits the items emitted by the
- * Observable most recently emitted by the source Observable.
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6700;&#x65B0;&#x53D1;&#x51FA;&#x7684;
+ * Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;
  * @method switch
  * @name switch
  * @owner Observable

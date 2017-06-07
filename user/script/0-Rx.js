@@ -1035,80 +1035,55 @@ var BoundCallbackObservable = (function (_super) {
     }
     /* tslint:enable:max-line-length */
     /**
-     * Converts a callback API to a function that returns an Observable.
+     * 把回调API转化为返回Observable的函数。
      *
-     * <span class="informal">Give it a function `f` of type `f(x, callback)` and
-     * it will return a function `g` that when called as `g(x)` will output an
-     * Observable.</span>
+     * <span class="informal">给它一个签名为`f(x, callback)`的函数f,返回一个函数g,
+     * 调用'g(x)'的时候会返回一个 Observable。</span>
      *
-     * `bindCallback` is not an operator because its input and output are not
-     * Observables. The input is a function `func` with some parameters, but the
-     * last parameter must be a callback function that `func` calls when it is
-     * done.
+     * `bindCallback` 并不是一个操作符，因为它的输入和输出并不是 Observable 。输入的是一个
+     * 带有多个参数的函数，并且该函数的最后一个参数必须是个回调函数，当该函数执行完之后会调用回调函数。
      *
-     * The output of `bindCallback` is a function that takes the same parameters
-     * as `func`, except the last one (the callback). When the output function
-     * is called with arguments, it will return an Observable. If `func` function
-     * calls its callback with one argument, the Observable will emit that value.
-     * If on the other hand callback is called with multiple values, resulting
-     * Observable will emit an array with these arguments.
+     * `bindCallback` 的输出是一个函数，该函数接受的参数和输入函数一样(除了没有最后一个回调函
+     * 数)。当输出函数被调用，会返回一个 Observable 。如果输入函数给回调函数传递一个值，则该 Observable
+     * 会发出这个值。如果输入函数给回调函数传递多个值，则该 Observable 会发出一个包含所有值的数组。
      *
-     * It is very important to remember, that input function `func` is not called
-     * when output function is, but rather when Observable returned by output
-     * function is subscribed. This means if `func` makes AJAX request, that request
-     * will be made every time someone subscribes to resulting Observable, but not before.
+     * 很重要的一点是，输出函数返回的 Observable 被订阅之前，输入函数是不会执行的。这意味着如果输入
+     * 函数发起 AJAX 请求，那么该请求在每次订阅返回的 Observable 之后才会发出，而不是之前。
      *
-     * Optionally, selector function can be passed to `bindObservable`. That function
-     * takes the same arguments as callback, and returns value
-     * that will be emitted by Observable instead of callback parameters themselves.
-     * Even though by default multiple arguments passed to callback appear in the stream as array,
-     * selector function will be called with arguments directly, just as callback would.
-     * This means you can imagine default selector (when one is not provided explicitly)
-     * as function that aggregates all its arguments into array, or simply returns first argument,
-     * if there is only one.
+     * 作为一个可选项，selector 函数可以传给`bindObservable`。该函数接受和回调一样的参数。返回 Observable
+     * 发出的值，而不是回调参数本身，即使在默认情况下，传递给回调的多个参数将在流中显示为数组。选择器
+     * 函数直接用参数调用，就像回调一样。这意味着你可以想象默认选择器（当没有显示提供的时候）是这样
+     * 一个函数:将它的所有参数聚集到数组中，或者仅仅返回第一个参数(当只有一个参数的时候)。
      *
-     * Last optional parameter - {@link Scheduler} - can be used to control when call
-     * to `func` happens after someone subscribes to Observable, as well as when results
-     * passed to callback will be emitted. By default subscription to Observable calls `func`
-     * synchronously, but using `Scheduler.async` as last parameter will defer call to input function,
-     * just like wrapping that call in `setTimeout` with time `0` would. So if you use async Scheduler
-     * and call `subscribe` on output Observable, all function calls that are currently executing,
-     * will end before `func` is invoked.
+     * 最后一个可选参数 - {@link Scheduler} - 当 Observable 被订阅的时候，可以用来控制调用输入函
+     * 数以及发出结果的时机。默认订阅 Observable 后调用输入函数是同步的，但是使用`Scheduler.async`
+     * 作为最后一个参数将会延迟输入函数的调用，就像是用0毫秒的setTimeout包装过。所以如果你使用了异
+     * 步调度器并且订阅了 Observable ，当前正在执行的所有函数调用，将在调用“输入函数”之前结束。
      *
-     * When it comes to emitting results passed to callback, by default they are emitted
-     * immediately after `func` invokes callback. In particular, if callback is called synchronously,
-     * then subscription to resulting Observable will call `next` function synchronously as well.
-     * If you want to defer that call, using `Scheduler.async` will, again, do the job.
-     * This means that by using `Scheduler.async` you can, in a sense, ensure that `func`
-     * always calls its callback asynchronously, thus avoiding terrifying Zalgo.
+     * 当涉及到传递给回调的结果时，默认情况下当输入函数调用回调之后会立马发出，特别是如果回调也是同步调动的话，
+     * 那么 Observable 的订阅也会同步调用`next`方法。如果你想延迟调用，使用`Scheduler.async`。
+     * 这意味着通过使用`Scheduler.async`，你可以确保输入函数永远异步调用回调函数，从而避免了可怕的Zalgo。
      *
-     * Note that Observable created by output function will always emit only one value
-     * and then complete right after. Even if `func` calls callback multiple times, values from
-     * second and following calls will never appear in the stream. If you need to
-     * listen for multiple calls, you probably want to use {@link fromEvent} or
-     * {@link fromEventPattern} instead.
+     * 需要注意的是，输出函数返回的Observable只能发出一次然后完成。即使输入函数多次调用回调函数，第二次
+     * 以及之后的调用都不会出现在流中。如果你需要监听多次的调用，你大概需要使用{@link fromEvent}或者
+     * {@link fromEventPattern}来代替。
      *
-     * If `func` depends on some context (`this` property), that context will be set
-     * to the same context that output function has at call time. In particular, if `func`
-     * is called as method of some object, in order to preserve proper behaviour,
-     * it is recommended to set context of output function to that object as well,
-     * provided `func` is not already bound.
+     * 如果输入函数依赖上下文(this)，该上下文将被设置为输出函数在调用时的同一上下文。特别是如果输入函数
+     * 被当作是某个对象的方法进行调用，为了保持同样的行为，建议将输出函数的上下文设置为该对象，输入方法不
+     * 是已经绑定好的。
      *
-     * If input function calls its callback in "node style" (i.e. first argument to callback is
-     * optional error parameter signaling whether call failed or not), {@link bindNodeCallback}
-     * provides convenient error handling and probably is a better choice.
-     * `bindCallback` will treat such functions without any difference and error parameter
-     * (whether passed or not) will always be interpreted as regular callback argument.
+     * 如果输入函数以 node 的方式(第一个参数是可选的错误参数用来标示调用是否成功)调用回调函数，{@link bindNodeCallback}
+     * 提供了方便的错误处理，也许是更好的选择。 `bindCallback` 不会区别对待这些方法，错误参数(是否传递)
+     * 被解释成正常的参数。
      *
-     *
-     * @example <caption>Convert jQuery's getJSON to an Observable API</caption>
-     * // Suppose we have jQuery.getJSON('/my/url', callback)
+     * @example <caption>把jQuery的getJSON方法转化为Observable API</caption>
+     * // 假设我们有这个方法:jQuery.getJSON('/my/url', callback)
      * var getJSONAsObservable = Rx.Observable.bindCallback(jQuery.getJSON);
      * var result = getJSONAsObservable('/my/url');
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
      *
-     * @example <caption>Receive array of arguments passed to callback</caption>
+     * @example <caption>接收传递给回调的数组参数。</caption>
      * someFunction((a, b, c) => {
      *   console.log(a); // 5
      *   console.log(b); // 'some string'
@@ -1121,7 +1096,7 @@ var BoundCallbackObservable = (function (_super) {
      * });
      *
      *
-     * @example <caption>Use bindCallback with selector function</caption>
+     * @example <caption>使用带 selector 函数的 bindCallback。</caption>
      * someFunction((a, b, c) => {
      *   console.log(a); // 'a'
      *   console.log(b); // 'b'
@@ -1134,7 +1109,7 @@ var BoundCallbackObservable = (function (_super) {
      * });
      *
      *
-     * @example <caption>Compare behaviour with and without async Scheduler</caption>
+     * @example <caption>对使用和不使用 async 调度器的行为进行比较。</caption>
      * function iCallMyCallbackSynchronously(cb) {
      *   cb();
      * }
@@ -1152,9 +1127,9 @@ var BoundCallbackObservable = (function (_super) {
      * // I was async!
      *
      *
-     * @example <caption>Use bindCallback on object method</caption>
+     * @example <caption>在对象方法上使用 bindCallback</caption>
      * const boundMethod = Rx.Observable.bindCallback(someObject.methodWithCallback);
-     * boundMethod.call(someObject) // make sure methodWithCallback has access to someObject
+     * boundMethod.call(someObject) // 确保methodWithCallback可以访问someObject
      * .subscribe(subscriber);
      *
      *
@@ -1162,13 +1137,10 @@ var BoundCallbackObservable = (function (_super) {
      * @see {@link from}
      * @see {@link fromPromise}
      *
-     * @param {function} func Function with a callback as the last parameter.
-     * @param {function} [selector] A function which takes the arguments from the
-     * callback and maps those to a value to emit on the output Observable.
-     * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-     * callbacks.
-     * @return {function(...params: *): Observable} A function which returns the
-     * Observable that delivers the same values the callback would deliver.
+     * @param {function} func 最后一个参数是回调的函数。
+     * @param {function} [selector] 选择器，从回调函数中获取参数并将这些映射为一个 Observable 发出的值。
+     * @param {Scheduler} [scheduler] 调度器，调度回调函数。
+     * @return {function(...params: *): Observable} 一个返回Observable的函数，该Observable发出回调函数返回的数据。
      * @static true
      * @name bindCallback
      * @owner Observable
@@ -1296,77 +1268,56 @@ var BoundNodeCallbackObservable = (function (_super) {
     }
     /* tslint:enable:max-line-length */
     /**
-     * Converts a Node.js-style callback API to a function that returns an
-     * Observable.
+     * 把 Node.js 式回调API转换为返回 Observable 的函数。
      *
-     * <span class="informal">It's just like {@link bindCallback}, but the
-     * callback is expected to be of type `callback(error, result)`.</span>
+     * <span class="informal">就像是 {@link bindCallback}, 但是回调函数必须形如
+     * `callback(error, result)`这样</span>
      *
-     * `bindNodeCallback` is not an operator because its input and output are not
-     * Observables. The input is a function `func` with some parameters, but the
-     * last parameter must be a callback function that `func` calls when it is
-     * done. The callback function is expected to follow Node.js conventions,
-     * where the first argument to the callback is an error object, signaling
-     * whether call was successful. If that object is passed to callback, it means
-     * something went wrong.
+     * `bindNodeCallback` 并不是一个操作符，因为它的输入和输出并不是 Observable。输入的是一个
+     * 带有多个参数的函数，并且该函数的最后一个参数必须是个回调函数，当该函数执行完之后会掉
+     * 用回调函数，回调函数被要求遵循 Node.js 公约，其中第一个参数是错误对象，标示调用是否成功。
+     * 如果这个错误对象被传递给了回调函数，这意味着调用出现了错误。
      *
-     * The output of `bindNodeCallback` is a function that takes the same
-     * parameters as `func`, except the last one (the callback). When the output
-     * function is called with arguments, it will return an Observable.
-     * If `func` calls its callback with error parameter present, Observable will
-     * error with that value as well. If error parameter is not passed, Observable will emit
-     * second parameter. If there are more parameters (third and so on),
-     * Observable will emit an array with all arguments, except first error argument.
+     * `bindNodeCallback` 的输出是一个函数，该函数接受的参数和输入函数一样(除了没有最后一个回调函
+     * 数)。当输出函数被调用，会返回一个 Observable 。如果输入函数带着错误对象调用回调函数，Observable
+     * 也会用这个错误对象触发错误状态。如果错误对象没有被传递，Observable 会发出第二个参数。
+     * 如果输入函数给回调函数传递三个或者更多的值，该 Observable 会发出一个包含除了第一个错误参
+     * 数的所有值的数组。
      *
-     * Optionally `bindNodeCallback` accepts selector function, which allows you to
-     * make resulting Observable emit value computed by selector, instead of regular
-     * callback arguments. It works similarly to {@link bindCallback} selector, but
-     * Node.js-style error argument will never be passed to that function.
+     * `bindNodeCallback`接受可选的选择器函数，它允许 Observable 发出由选择器计算的值，而
+     * 不是普通的回调参数。这和{@link bindCallback}的选择器效果类似，但是 node 式的错误参数永远
+     * 不会传递给该函数。
      *
-     * Note that `func` will not be called at the same time output function is,
-     * but rather whenever resulting Observable is subscribed. By default call to
-     * `func` will happen synchronously after subscription, but that can be changed
-     * with proper {@link Scheduler} provided as optional third parameter. Scheduler
-     * can also control when values from callback will be emitted by Observable.
-     * To find out more, check out documentation for {@link bindCallback}, where
-     * Scheduler works exactly the same.
+     * 注意，输入函数永远不会被调用直到输出函数返回的 Observable 被订阅。默认情况下，订阅后会同步调用
+     * 输入方法, 但是这可以被改变，通过使用{@link Scheduler}作为可选的第三个参数。
+     * 调度器可以控制 Observable 何时发出数据。想要获取更多信息，请查看{@link bindCallback}的文档，
+     * 工作原理完全一样。
      *
-     * As in {@link bindCallback}, context (`this` property) of input function will be set to context
-     * of returned function, when it is called.
+     * 和{@link bindCallback}一样，输入函数的上下文(this)将会被设置给输出函数的上下文，当它被调用
+     * 的时候。当 Observable 发出了数据后，它会立马完成。这意味着即使输入函数再次调用回调函数，第二次以
+     * 及后续调用的值永远不会出现在流中。如果你需要处理多次调用，查看{@link fromEvent}或者{@link fromEventPattern}
+     * 来替代。
      *
-     * After Observable emits value, it will complete immediately. This means
-     * even if `func` calls callback again, values from second and consecutive
-     * calls will never appear on the stream. If you need to handle functions
-     * that call callbacks multiple times, check out {@link fromEvent} or
-     * {@link fromEventPattern} instead.
+     * 注意，`bindNodeCallback`同样可以用在非 Node.js 环境中，Node.js 式回调函数仅仅是一种公约，所以
+     * 如果你的目标环境是浏览器或者其他，并且你使用的API遵守了这种回调公约，`bindNodeCallback`就可以
+     * 安全的使用那些API函数。
      *
-     * Note that `bindNodeCallback` can be used in non-Node.js environments as well.
-     * "Node.js-style" callbacks are just a convention, so if you write for
-     * browsers or any other environment and API you use implements that callback style,
-     * `bindNodeCallback` can be safely used on that API functions as well.
+     * 牢记，传递给回调的错误对象并不是 JavaScript 内置的 Error 的实例。事实上，它甚至可以不是对象。
+     * 回调函数的错误参数被解读为“存在”，当该参数有值的时候。它可以是，例如，非0数字，非空字符串，逻辑
+     * 是。在所有这些情况下，都会触发 Observable 的错误状态。这意味着当使用`bindNodeCallback`
+     * 的时候通常形式的回调函数都会触发失败。如果你的 Observable 经常发生你预料之外的错误，请检查下
+     * 回调函数是否是 node.js 式的回调，如果不是，请使用{@link bindCallback}替代。
      *
-     * Remember that Error object passed to callback does not have to be an instance
-     * of JavaScript built-in `Error` object. In fact, it does not even have to an object.
-     * Error parameter of callback function is interpreted as "present", when value
-     * of that parameter is truthy. It could be, for example, non-zero number, non-empty
-     * string or boolean `true`. In all of these cases resulting Observable would error
-     * with that value. This means usually regular style callbacks will fail very often when
-     * `bindNodeCallback` is used. If your Observable errors much more often then you
-     * would expect, check if callback really is called in Node.js-style and, if not,
-     * switch to {@link bindCallback} instead.
+     * 注意，即使错误参数出现在回调函数中，但是它的值是假值，它仍然不会出现在Observable的发出数组或者选择器中。
      *
-     * Note that even if error parameter is technically present in callback, but its value
-     * is falsy, it still won't appear in array emitted by Observable or in selector function.
-     *
-     *
-     * @example <caption>Read a file from the filesystem and get the data as an Observable</caption>
+     * @example <caption>从文件系统中读取文件并且从 Observable 中获取数据。</caption>
      * import * as fs from 'fs';
      * var readFileAsObservable = Rx.Observable.bindNodeCallback(fs.readFile);
      * var result = readFileAsObservable('./roadNames.txt', 'utf8');
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
      *
-     * @example <caption>Use on function calling callback with multiple arguments</caption>
+     * @example <caption>使用具有多个参数的函数调用回调</caption>
      * someFunction((err, a, b) => {
      *   console.log(err); // null
      *   console.log(a); // 5
@@ -1379,7 +1330,7 @@ var BoundNodeCallbackObservable = (function (_super) {
      * });
      *
      *
-     * @example <caption>Use with selector function</caption>
+     * @example <caption>使用选择器函数</caption>
      * someFunction((err, a, b) => {
      *   console.log(err); // undefined
      *   console.log(a); // "abc"
@@ -1392,7 +1343,7 @@ var BoundNodeCallbackObservable = (function (_super) {
      * });
      *
      *
-     * @example <caption>Use on function calling callback in regular style</caption>
+     * @example <caption>非 node.js 式的回调函数</caption>
      * someFunction(a => {
      *   console.log(a); // 5
      * });
@@ -1408,14 +1359,10 @@ var BoundNodeCallbackObservable = (function (_super) {
      * @see {@link from}
      * @see {@link fromPromise}
      *
-     * @param {function} func Function with a Node.js-style callback as the last parameter.
-     * @param {function} [selector] A function which takes the arguments from the
-     * callback and maps those to a value to emit on the output Observable.
-     * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-     * callbacks.
-     * @return {function(...params: *): Observable} A function which returns the
-     * Observable that delivers the same values the Node.js callback would
-     * deliver.
+     * @param {function} func 最后一个参数是 node.js 式回调的函数。
+     * @param {function} [selector] 选择器，从回调函数中获取参数并将这些映射为一个 Observable 发出的值。
+     * @param {Scheduler} [scheduler] 调度器，调度回调函数。
+     * @return {function(...params: *): 一个返回 Observable 的函数，该 Observable 发出 node.js 式回调函数返回的数据。
      * @static true
      * @name bindNodeCallback
      * @owner Observable
@@ -1601,44 +1548,40 @@ var EmptyObservable = (function (_super) {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits no items to the Observer and immediately
-     * emits a complete notification.
+     * 创建一个什么数据都不发出并且立马完成的 Observable。
      *
-     * <span class="informal">Just emits 'complete', and nothing else.
+     * <span class="informal"> 仅仅发出 complete 通知，其他什么也不做。
      * </span>
      *
      * <img src="./img/empty.png" width="100%">
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the complete notification. It can be used for composing with other
-     * Observables, such as in a {@link mergeMap}.
+     * 这个静态操作符对于创建一个简单的只发出完成状态通知的 Observable 是非常有用的。 它可以被用来和
+     * 其他 Observables 进行组合, 比如在 {@link mergeMap} 中使用。
      *
-     * @example <caption>Emit the number 7, then complete.</caption>
+     * @example <caption>发出数字7, 然后完成。</caption>
      * var result = Rx.Observable.empty().startWith(7);
      * result.subscribe(x => console.log(x));
      *
-     * @example <caption>Map and flatten only odd numbers to the sequence 'a', 'b', 'c'</caption>
+     * @example <caption>仅将奇数映射并打平成字母序列abc。</caption>
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =>
      *   x % 2 === 1 ? Rx.Observable.of('a', 'b', 'c') : Rx.Observable.empty()
      * );
      * result.subscribe(x => console.log(x));
      *
-     * // Results in the following to the console:
-     * // x is equal to the count on the interval eg(0,1,2,3,...)
-     * // x will occur every 1000ms
-     * // if x % 2 is equal to 1 print abc
-     * // if x % 2 is not equal to 1 nothing will be output
+     * // 结果如下:
+     * // x 是间隔的计数比如：0,1,2,3,...
+     * // x 1000ms 出现一次
+     * // 如果 x % 2 等于 1 打印 abc
+     * // 如果 x % 2 不等于1 什么也不输出
      *
      * @see {@link create}
      * @see {@link never}
      * @see {@link of}
      * @see {@link throw}
      *
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emission of the complete notification.
-     * @return {Observable} An "empty" Observable: emits only the complete
-     * notification.
+     * @param {Scheduler} [scheduler] 调度器 ( {@link IScheduler} )， 用来调度完成通知。
+     * @return {Observable} 空的Observable: 仅仅发出完成通知。
      * @static true
      * @name empty
      * @owner Observable
@@ -1682,22 +1625,18 @@ var ArrayObservable = (function (_super) {
         return new ArrayObservable(array, scheduler);
     };
     /**
-     * Creates an Observable that emits some values you specify as arguments,
-     * immediately one after the other, and then emits a complete notification.
-     *
-     * <span class="informal">Emits the arguments you provide, then completes.
+     * 创建一个 Observable，它会依次发出由你提供的参数，最后发出完成通知。
+     * <span class="informal">发出你提供的参数，然后完成。
      * </span>
      *
      * <img src="./img/of.png" width="100%">
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the arguments given, and the complete notification thereafter. It can
-     * be used for composing with other Observables, such as with {@link concat}.
-     * By default, it uses a `null` IScheduler, which means the `next`
-     * notifications are sent synchronously, although with a different IScheduler
-     * it is possible to determine when those notifications will be delivered.
+     * 这个静态操作符适用于创建简单的 Observable ，该 Observable 只发出给定的参数，
+     * 在发送完这些参数后发出完成通知。它可以用来和其他 Observables 组合比如说{@link concat}。
+     * 默认情况下，它使用`null`调度器，这意味着`next`通知是同步发出的,
+     * 尽管使用不同的调度器可以决定这些通知何时送到。
      *
-     * @example <caption>Emit 10, 20, 30, then 'a', 'b', 'c', then start ticking every second.</caption>
+     * @example <caption>发出 10、20、 30, 然后是 'a'、 'b'、 'c', 紧接着开始每秒发出。</caption>
      * var numbers = Rx.Observable.of(10, 20, 30);
      * var letters = Rx.Observable.of('a', 'b', 'c');
      * var interval = Rx.Observable.interval(1000);
@@ -1709,10 +1648,9 @@ var ArrayObservable = (function (_super) {
      * @see {@link never}
      * @see {@link throw}
      *
-     * @param {...T} values Arguments that represent `next` values to be emitted.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emissions of the `next` notifications.
-     * @return {Observable<T>} An Observable that emits each given input value.
+     * @param {...T} values 表示 `next` 发出的值。
+     * @param {Scheduler} [scheduler] 用来调度 next 通知发送的调度器( {@link IScheduler} )。
+     * @return {Observable<T>} 发出每个给定输入值的 Observable。
      * @static true
      * @name of
      * @owner Observable
@@ -1934,24 +1872,17 @@ function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
 var none = {};
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。
  *
- * <span class="informal">Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.</span>
+ * <span class="informal">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` combines the values from this Observable with values from
- * Observables passed as arguments. This is done by subscribing to each
- * Observable, in order, and collecting an array of each of the most recent
- * values any time any of the input Observables emits, then either taking that
- * array and passing it as arguments to an optional `project` function and
- * emitting the return value of that, or just emitting the array of recent
- * values directly if there is no `project` function.
+ * `combineLatest` 结合传入的多个 Observables。 通过顺序的订阅每个输入Observable, 在每次任一输入Observables发送的时候收集
+ * 每个输入Observables最新的值组成一个数组, 然后要么将这个数组传给可选的投射函数并发送投射函数返回的结果,
+ * 或者在没有提供投射函数时仅仅发出该数组。
  *
- * @example <caption>Dynamically calculate the Body-Mass Index from an Observable of weight and one for height</caption>
+ * @example <caption>根据一个身高的 Observable 和一个体重的 Observable 动态的计算BMI指数</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) => w / (h * h));
@@ -1966,13 +1897,9 @@ var none = {};
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other 将要和源 Observable 结合的输入 Observable。 可以传入多个输入 Observables。
+ * @param {function} [project] 可选的投射函数，将输出 Observable 返回的值投射为要发出的新的值。
+ * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射结果或数组。
  * @method combineLatest
  * @owner Observable
  */
@@ -2072,60 +1999,42 @@ var CombineLatestSubscriber = (function (_super) {
 
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。
  *
- * <span class="informal">Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.</span>
+ * <span class="informal">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>
  *
  * <img src="./img/combineLatest.png" width="100%">
  *
- * `combineLatest` combines the values from all the Observables passed as
- * arguments. This is done by subscribing to each Observable in order and,
- * whenever any Observable emits, collecting an array of the most recent
- * values from each Observable. So if you pass `n` Observables to operator,
- * returned Observable will always emit an array of `n` values, in order
- * corresponding to order of passed Observables (value from the first Observable
- * on the first place and so on).
+ * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，
+ * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符
+ * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable
+ * 的顺序（第一个 Observable 的值放到数组的第一个）。
  *
- * Static version of `combineLatest` accepts either an array of Observables
- * or each Observable can be put directly as an argument. Note that array of
- * Observables is good choice, if you don't know beforehand how many Observables
- * you will combine. Passing empty array will result in Observable that
- * completes immediately.
+ * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。
+ * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。
+ * 传递空的数组将会导致返回 Observable 立马完成。
  *
- * To ensure output array has always the same length, `combineLatest` will
- * actually wait for all input Observables to emit at least once,
- * before it starts emitting results. This means if some Observable emits
- * values before other Observables started emitting, all that values but last
- * will be lost. On the other hand, is some Observable does not emit value but
- * completes, resulting Observable will complete at the same moment without
- * emitting anything, since it will be now impossible to include value from
- * completed Observable in resulting array. Also, if some input Observable does
- * not emit any value and never completes, `combineLatest` will also never emit
- * and never complete, since, again, it will wait for all streams to emit some
- * value.
+ * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，
+ * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出
+ * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发
+ * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable
+ * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流
+ * 去发出值。
  *
- * If at least one Observable was passed to `combineLatest` and all passed Observables
- * emitted something, resulting Observable will complete when all combined
- * streams complete. So even if some Observable completes, result of
- * `combineLatest` will still emit values when other Observables do. In case
- * of completed Observable, its value from now on will always be the last
- * emitted value. On the other hand, if any Observable errors, `combineLatest`
- * will error immediately as well, and all other Observables will be unsubscribed.
+ * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回
+ * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回
+ * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它
+ * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会
+ * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。
  *
- * `combineLatest` accepts as optional parameter `project` function, which takes
- * as arguments all values that would normally be emitted by resulting Observable.
- * `project` can return any kind of value, which will be then emitted by Observable
- * instead of default array. Note that `project` does not take as argument that array
- * of values, but values themselves. That means default `project` can be imagined
- * as function that takes all its arguments and puts them into an array.
+ * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数
+ * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接
+ * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
+ * 函数。
  *
- *
- * @example <caption>Combine two timer Observables</caption>
- * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
- * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
+ * @example <caption>结合两个 timer Observables</caption>
+ * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...
+ * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...
  * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
  * combinedTimers.subscribe(value => console.log(value));
  * // Logs
@@ -2135,26 +2044,26 @@ var CombineLatestSubscriber = (function (_super) {
  * // [2, 1] after 2s
  *
  *
- * @example <caption>Combine an array of Observables</caption>
+ * @example <caption>结合 Observables 数组</caption>
  * const observables = [1, 5, 10].map(
- *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
+ *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。
  * );
  * const combined = Rx.Observable.combineLatest(observables);
  * combined.subscribe(value => console.log(value));
- * // Logs
- * // [0, 0, 0] immediately
- * // [1, 0, 0] after 1s
- * // [1, 5, 0] after 5s
- * // [1, 5, 10] after 10s
+ * // 日志
+ * // [0, 0, 0] 立刻
+ * // [1, 0, 0] 1s 后
+ * // [1, 5, 0] 5s 后
+ * // [1, 5, 10] 10s 后
  *
  *
- * @example <caption>Use project function to dynamically calculate the Body-Mass Index</caption>
+ * @example <caption>使用 project 函数动态计算体重指数</caption>
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));
  * bmi.subscribe(x => console.log('BMI is ' + x));
  *
- * // With output to console:
+ * // 控制台输出:
  * // BMI is 24.212293388429753
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
@@ -2164,17 +2073,12 @@ var CombineLatestSubscriber = (function (_super) {
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} observable1 An input Observable to combine with other Observables.
- * @param {ObservableInput} observable2 An input Observable to combine with other Observables.
- * More than one input Observables may be given as arguments
- * or an array of Observables may be given as the first argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
- * each input Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。
+ * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。
+ * 可以有多个输入Observables传入或者第一个参数是Observables数组
+ * @param {function} [project] 投射成输出 Observable 上的一个新的值。
+ * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。
+ * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。
  * @static true
  * @name combineLatest
  * @owner Observable
@@ -2302,20 +2206,16 @@ var MergeAllSubscriber = (function (_super) {
 
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from every
- * given input Observable after the current Observable.
+ * 创建一个输出 Observable，它在当前 Observable 之后顺序地发出每个给定的输入 Observable 中的所有值。
  *
- * <span class="informal">Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.</span>
+ * <span class="informal">通过顺序地发出多个 Observables 的值将它们连接起来，一个接一个的。</span>
  *
  * <img src="./img/concat.png" width="100%">
  *
- * Joins this Observable with multiple other Observables by subscribing to them
- * one at a time, starting with the source, and merging their results into the
- * output Observable. Will wait for each Observable to complete before moving
- * on to the next.
+ * 通过依次订阅输入Observable将输出Observable加入多个输入Observable，从源头开始，
+ * 合并它们的值给输出Observable. 只有前一个Observable结束才会进行下一个Observable。
  *
- * @example <caption>Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10</caption>
+ * @example <caption>将从0数到3的定时器和从1到10的同步序列进行连接</caption>
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = timer.concat(sequence);
@@ -2324,7 +2224,7 @@ var MergeAllSubscriber = (function (_super) {
  * // results in:
  * // 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
  *
- * @example <caption>Concatenate 3 Observables</caption>
+ * @example <caption>连接3个Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -2341,12 +2241,9 @@ var MergeAllSubscriber = (function (_super) {
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} other An input Observable to concatenate after the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} other 等待被连接的 Observable。 可以接受多个输入 Observable。
+ * @param {Scheduler} [scheduler=null] 可选的调度器，控制每个输入 Observable 的订阅。
+ * @return {Observable} 顺序的、串行的将所有输入 Observable 的值合并给输出 Observable。
  * @method concat
  * @owner Observable
  */
@@ -2359,43 +2256,36 @@ function concat$1() {
 }
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from given
- * Observable and then moves on to the next.
+ * 创建一个输出 Observable，该 Observable 顺序的发出每个输入 Observable 的所有值。
  *
- * <span class="informal">Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.</span>
+ * <span class="informal">连接多个输入 Observable，顺序的发出它们的值，一个
+ * Observable 接一个 Observable。</span>
  *
  * <img src="./img/concat.png" width="100%">
  *
- * `concat` joins multiple Observables together, by subscribing to them one at a time and
- * merging their results into the output Observable. You can pass either an array of
- * Observables, or put them directly as arguments. Passing an empty array will result
- * in Observable that completes immediately.
+ * `concat`通过一次订阅一个将多个 Observables 连接起来，并将值合并到输出 Observable 中。
+ * 你可以传递一个输入 Observable 数组，或者直接把它们当做参数传递。 传递一个空数组会
+ * 导致输出 Observable 立马触发完成状态。
  *
- * `concat` will subscribe to first input Observable and emit all its values, without
- * changing or affecting them in any way. When that Observable completes, it will
- * subscribe to then next Observable passed and, again, emit its values. This will be
- * repeated, until the operator runs out of Observables. When last input Observable completes,
- * `concat` will complete as well. At any given moment only one Observable passed to operator
- * emits values. If you would like to emit values from passed Observables concurrently, check out
- * {@link merge} instead, especially with optional `concurrent` parameter. As a matter of fact,
- * `concat` is an equivalent of `merge` operator with `concurrent` parameter set to `1`.
+ * `concat`会订阅第一个输入 Observable 并且发出它的所有值, 不去做任何干预。 当这个
+ * 输入 Observable 完成时， 订阅第二个输入 Observable，同样的发出它的所有值。这个过
+ * 程会不断重复直到输入 Observable 都用过了。当最后一个输入 Observable 完成时，`concat`
+ * 也会完成。 任何时刻都只会有一个输入 Observable 发出值。 如果你想让所有的输入 Observable
+ * 并行发出数据，请查看{@link merge}, 特别的带上`concurrent`参数。 事实上,`concat`和
+ * `concurrent`设置为1的`merge`效果是一样的。
  *
- * Note that if some input Observable never completes, `concat` will also never complete
- * and Observables following the one that did not complete will never be subscribed. On the other
- * hand, if some Observable simply completes immediately after it is subscribed, it will be
- * invisible for `concat`, which will just move on to the next Observable.
+ * 注意，如果输入 Observable 一直都不完成, `concat` 也会一直不能完成并且下一个输入 Observable
+ * 将永远不能被订阅. 另一方面, 如果某个输入 Observable 在它被订阅后立马处于完成状态, 那么它对
+ * `concat`是不可见的, 仅仅会转向下一个输入 Observable.
  *
- * If any Observable in chain errors, instead of passing control to the next Observable,
- * `concat` will error immediately as well. Observables that would be subscribed after
- * the one that emitted error, never will.
+ * 如果输入 Observable 链中的任一成员发生错误, `concat`会立马触发错误状态，而不去控制下一个输入
+ * Observable. 发生错误的输入 Observable 之后的输入 Observable 不会被订阅.
  *
- * If you pass to `concat` the same Observable many times, its stream of values
- * will be "replayed" on every subscription, which means you can repeat given Observable
- * as many times as you like. If passing the same Observable to `concat` 1000 times becomes tedious,
- * you can always use {@link repeat}.
+ * 如果你将同一输入 Observable 传递给`concat`多次，结果流会在每次订阅的时候“重复播放”, 这意味着
+ * 你可以重复 Observable 多次. 如果你乏味的给`concat`传递同一输入 Observable 1000次,你可以试着
+ * 用用{@link repeat}.
  *
- * @example <caption>Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10</caption>
+ * @example <caption>将从0数到3的定时器和从1到10的同步序列进行连接</caption>
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = Rx.Observable.concat(timer, sequence);
@@ -2405,7 +2295,7 @@ function concat$1() {
  * // 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3 -immediate-> 1 ... 10
  *
  *
- * @example <caption>Concatenate an array of 3 Observables</caption>
+ * @example <caption>连接3个 Observables</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -2419,7 +2309,7 @@ function concat$1() {
  * // -500ms-> 0 -500ms-> 1 -500ms-> ... 9
  *
  *
- * @example <caption>Concatenate the same Observable to repeat it</caption>
+ * @example <caption>连接同一个 Observable 多次</caption>
  * const timer = Rx.Observable.interval(1000).take(2);
  *
  * Rx.Observable.concat(timer, timer) // concating the same Observable!
@@ -2440,13 +2330,11 @@ function concat$1() {
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} input1 An input Observable to concatenate with others.
- * @param {ObservableInput} input2 An input Observable to concatenate with others.
- * More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} input1 等待被连接的输入 Observable。
+ * @param {ObservableInput} input2 等待被连接的输入 Observable。
+ * 可以传递多个输入Observable.
+ * @param {Scheduler} [scheduler=null] 可选的调度器，调度每个 Observable 的订阅。
+ * @return {Observable} 有序的、串行的将所有输入 Observable 的值合并到单一的输出 Observable。
  * @static true
  * @name concat
  * @owner Observable
@@ -2483,24 +2371,19 @@ var DeferObservable = (function (_super) {
         this.observableFactory = observableFactory;
     }
     /**
-     * Creates an Observable that, on subscribe, calls an Observable factory to
-     * make an Observable for each new Observer.
+     * 创建一个 Observable，当被订阅的时候，调用 Observable 工厂为每个观察者创建新的 Observable。
      *
-     * <span class="informal">Creates the Observable lazily, that is, only when it
-     * is subscribed.
+     * <span class="informal">惰性创建 Observable, 也就是说, 当且仅当它被订阅的时候才创建。
      * </span>
      *
      * <img src="./img/defer.png" width="100%">
      *
-     * `defer` allows you to create the Observable only when the Observer
-     * subscribes, and create a fresh Observable for each Observer. It waits until
-     * an Observer subscribes to it, and then it generates an Observable,
-     * typically with an Observable factory function. It does this afresh for each
-     * subscriber, so although each subscriber may think it is subscribing to the
-     * same Observable, in fact each subscriber gets its own individual
-     * Observable.
+     * `defer`允许你创建一个 Observable 当且仅当它被订阅的时候，并且为每个订阅者创建新的 Observable。
+     * 它一直在等待直到观察者订阅了它, 然后它创建一个新的 Observable,通常会以 Observable 工厂函数的方式。
+     * 对每个订阅者它都是新的, 所以即使每个订阅者也许会认为它们订阅的是同一个 Observable, 事实上每个订阅
+     * 者获得的是只属于它们的 Observable。
      *
-     * @example <caption>Subscribe to either an Observable of clicks or an Observable of interval, at random</caption>
+     * @example <caption>随机订阅点击或者 interval Observable</caption>
      * var clicksOrInterval = Rx.Observable.defer(function () {
      *   if (Math.random() > 0.5) {
      *     return Rx.Observable.fromEvent(document, 'click');
@@ -2510,20 +2393,16 @@ var DeferObservable = (function (_super) {
      * });
      * clicksOrInterval.subscribe(x => console.log(x));
      *
-     * // Results in the following behavior:
-     * // If the result of Math.random() is greater than 0.5 it will listen
-     * // for clicks anywhere on the "document"; when document is clicked it
-     * // will log a MouseEvent object to the console. If the result is less
-     * // than 0.5 it will emit ascending numbers, one every second(1000ms).
+     * // 结果如下:
+     * // 如果Math.random()返回的值大于0.5，它会监听"document"上的点击事件; 当document
+     * // 被点击，它会将点击事件对象打印到控制台。 如果结果小于0.5它会每秒发出一个从0开始自增数。
      *
      * @see {@link create}
      *
-     * @param {function(): SubscribableOrPromise} observableFactory The Observable
-     * factory function to invoke for each Observer that subscribes to the output
-     * Observable. May also return a Promise, which will be converted on the fly
-     * to an Observable.
-     * @return {Observable} An Observable whose Observers' subscriptions trigger
-     * an invocation of the given Observable factory function.
+     * @param {function(): SubscribableOrPromise} observableFactory Observable 的工
+     * 厂函数，它会在每个 Observer 订阅 Observable 的时候被触发调用. 也可以返回一个 Promise, Promise 将会立刻被转
+     * 化为 Observable。
+     * @return {Observable} Observable，该 Observable 的观察者的订阅会触发对 Observable 工厂函数的调用。
      * @static true
      * @name defer
      * @owner Observable
@@ -2685,27 +2564,24 @@ var PromiseObservable = (function (_super) {
         this.scheduler = scheduler;
     }
     /**
-     * Converts a Promise to an Observable.
+     * 将 Promise 转化为 Observable。
      *
-     * <span class="informal">Returns an Observable that just emits the Promise's
-     * resolved value, then completes.</span>
+     * <span class="informal">返回一个仅仅发出 Promise resolve 过的值然后完成的 Observable。</span>
      *
-     * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
-     * Observable. If the Promise resolves with a value, the output Observable
-     * emits that resolved value as a `next`, and then completes. If the Promise
-     * is rejected, then the output Observable emits the corresponding Error.
+     * 把 ES2015 的 Promise 或者兼容 Promises/A+ 规范的 Promise 转化为 Observable。 如果 Promise resolves
+     * 一个值, 输出 Observable 发出这个值然后完成。 如果 Promise 被 rejected, 输出 Observable 会发出相应的
+     * 错误。
      *
-     * @example <caption>Convert the Promise returned by Fetch to an Observable</caption>
+     * @example <caption>将 Fetch 返回的 Promise 转化为 Observable。</caption>
      * var result = Rx.Observable.fromPromise(fetch('http://myserver.com/'));
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
      * @see {@link bindCallback}
      * @see {@link from}
      *
-     * @param {PromiseLike<T>} promise The promise to be converted.
-     * @param {Scheduler} [scheduler] An optional IScheduler to use for scheduling
-     * the delivery of the resolved value (or the rejection).
-     * @return {Observable<T>} An Observable which wraps the Promise.
+     * @param {PromiseLike<T>} promise 被转化的 promise。
+     * @param {Scheduler} [scheduler] 可选的调度器，用来调度 resolved 或者 rejection 的值。
+     * @return {Observable<T>} 包装了 Promise 的 Observable。
      * @static true
      * @name fromPromise
      * @owner Observable
@@ -3123,46 +2999,38 @@ var Notification = (function () {
 
 /**
  *
- * Re-emits all notifications from source Observable with specified scheduler.
+ * 使用指定的调度器来重新发出源 Observable 的所有通知。
  *
- * <span class="informal">Ensure a specific scheduler is used, from outside of an Observable.</span>
+ * <span class="informal">确保从 Observable 的外部使用特定的调度器。</span>
  *
- * `observeOn` is an operator that accepts a scheduler as a first parameter, which will be used to reschedule
- * notifications emitted by the source Observable. It might be useful, if you do not have control over
- * internal scheduler of a given Observable, but want to control when its values are emitted nevertheless.
+ * `observeOn` 操作符接收一个 scheduler 作为第一个参数，它将用于重新安排源 Observable 所发送的通知。如果你不能控制
+ * 给定 Observable 的内部调度器，但是想要控制何时发出值，那么这个操作符可能是有用的。
  *
- * Returned Observable emits the same notifications (nexted values, complete and error events) as the source Observable,
- * but rescheduled with provided scheduler. Note that this doesn't mean that source Observables internal
- * scheduler will be replaced in any way. Original scheduler still will be used, but when the source Observable emits
- * notification, it will be immediately scheduled again - this time with scheduler passed to `observeOn`.
- * An anti-pattern would be calling `observeOn` on Observable that emits lots of values synchronously, to split
- * that emissions into asynchronous chunks. For this to happen, scheduler would have to be passed into the source
- * Observable directly (usually into the operator that creates it). `observeOn` simply delays notifications a
- * little bit more, to ensure that they are emitted at expected moments.
+ * 返回的 Observable 发出与源 Observable 相同的通知(`next`、`complete` 和 `error`)，但是使用提供的调度器进行了重新安排。
+ * 注意，这并不意味着源 Observables 的内部调度器会以任何形式被替换。原始的调度器仍然会被使用，但是当源 Observable 发出
+ * 通知时，它会立即重新安排(这时候使用传给 `observeOn` 的调度器)。在同步地发出大量的值的 Observalbe 上调用 `observeOn`
+ * 是一种反模式，这会将 Observable 的发送分解成异步块。为了实现这一点，调度器必须直接传递给源 Observable (通常是创建它的操作符)。
+ * `observeOn` 只是简单地像通知延迟一些，以确保这些通知在预期的时间点发出。
  *
- * As a matter of fact, `observeOn` accepts second parameter, which specifies in milliseconds with what delay notifications
- * will be emitted. The main difference between {@link delay} operator and `observeOn` is that `observeOn`
- * will delay all notifications - including error notifications - while `delay` will pass through error
- * from source Observable immediately when it is emitted. In general it is highly recommended to use `delay` operator
- * for any kind of delaying of values in the stream, while using `observeOn` to specify which scheduler should be used
- * for notification emissions in general.
+ * 事实上，`observeOn` 接收第二个参数，它以毫秒为单位指定延迟通知的发送时间。`observeOn` 与 {@link delay}
+ * 操作符最主要的区别是它会延迟所有通知，包括错误通知，而 `delay` 会当源 Observable 发出错误时立即通过错误。
+ * 通常来说，对于想延迟流中的任何值，强烈推荐使用 `delay` 操作符，而使用 `observeOn` 时，用来指定应该使用
+ * 哪个调度器来进行通知发送。
  *
- * @example <caption>Ensure values in subscribe are called just before browser repaint.</caption>
- * const intervals = Rx.Observable.interval(10); // Intervals are scheduled
- *                                               // with async scheduler by default...
+ * @example <caption>确保在浏览器重绘前调用订阅中的值。</caption>
+ * const intervals = Rx.Observable.interval(10); // 默认情况下，interval 使用异步调度器进行调度
  *
  * intervals
- * .observeOn(Rx.Scheduler.animationFrame)       // ...but we will observe on animationFrame
- * .subscribe(val => {                           // scheduler to ensure smooth animation.
+ * .observeOn(Rx.Scheduler.animationFrame)       // 但我们将在 animationFrame 调度器上进行观察，
+ * .subscribe(val => {                           // 以确保动画的流畅性。
  *   someDiv.style.height = val + 'px';
  * });
  *
  * @see {@link delay}
  *
- * @param {IScheduler} scheduler Scheduler that will be used to reschedule notifications from source Observable.
- * @param {number} [delay] Number of milliseconds that states with what delay every notification should be rescheduled.
- * @return {Observable<T>} Observable that emits the same notifications as the source Observable,
- * but with provided scheduler.
+ * @param {IScheduler} scheduler 用于重新安排源 Observable 的通知的调度器。
+ * @param {number} [delay] 应该重新安排的每个通知的延迟时间的毫秒数。
+ * @return {Observable<T>} 该 Observable 发出与源 Observale 同样的通知，但是使用了提供的调度器。
  *
  * @method observeOn
  * @owner Observable
@@ -3235,30 +3103,26 @@ var FromObservable = (function (_super) {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable from an Array, an array-like object, a Promise, an
-     * iterable object, or an Observable-like object.
+     * 从一个数组、类数组对象、Promise、迭代器对象或者类 Observable 对象创建一个 Observable.
      *
-     * <span class="informal">Converts almost anything to an Observable.</span>
+     * <span class="informal">几乎可以把任何东西都能转化为Observable.</span>
      *
      * <img src="./img/from.png" width="100%">
      *
-     * Convert various other objects and data types into Observables. `from`
-     * converts a Promise or an array-like or an
-     * [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable)
-     * object into an Observable that emits the items in that promise or array or
-     * iterable. A String, in this context, is treated as an array of characters.
-     * Observable-like objects (contains a function named with the ES2015 Symbol
-     * for Observable) can also be converted through this operator.
+     * 将各种其他对象和数据类型转化为 Observables。 `from`将 Promise、类数组对象、迭代器对象
+     * (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable)
+     * 转化为 Observable ，该 Observable 发出 promise、数组或者迭代器的成员。 字符串，在这种上下文里，会被当做字符数组。
+     * 类 Observable 对象(包括ES2015里的 Observable 方法)也可以通过此操作符进行转换。
      *
-     * @example <caption>Converts an array to an Observable</caption>
+     * @example <caption>将数组转化为 Observable</caption>
      * var array = [10, 20, 30];
      * var result = Rx.Observable.from(array);
      * result.subscribe(x => console.log(x));
      *
-     * // Results in the following:
+     * // 结果如下:
      * // 10 20 30
      *
-     * @example <caption>Convert an infinite iterable (from a generator) to an Observable</caption>
+     * @example <caption>将一个无限的迭代器(来自于 generator)转化为 Observable。</caption>
      * function* generateDoubles(seed) {
      *   var i = seed;
      *   while (true) {
@@ -3279,13 +3143,10 @@ var FromObservable = (function (_super) {
      * @see {@link fromEventPattern}
      * @see {@link fromPromise}
      *
-     * @param {ObservableInput<T>} ish A subscribable object, a Promise, an
-     * Observable-like, an Array, an iterable or an array-like object to be
-     * converted.
-     * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-     * emissions of values.
-     * @return {Observable<T>} The Observable whose values are originally from the
-     * input object that was converted.
+     * @param {ObservableInput<T>} ish 一个可以被订阅的对象, Promise, 类
+     * Observable, 数组, 迭代器或者类数组对象可以被转化。
+     * @param {Scheduler} [scheduler] 调度器，用来调度值的发送。
+     * @return {Observable<T>} Observable的值来自于输入对象的转化。
      * @static true
      * @name from
      * @owner Observable
@@ -3362,40 +3223,32 @@ var FromEventObservable = (function (_super) {
     }
     /* tslint:enable:max-line-length */
     /**
-     * Creates an Observable that emits events of a specific type coming from the
-     * given event target.
+     * 创建一个 Observable，该 Observable 发出来自给定事件对象的指定类型事件。
      *
-     * <span class="informal">Creates an Observable from DOM events, or Node
-     * EventEmitter events or others.</span>
+     * <span class="informal">创建一个来自于 DOM 事件，或者 Node 的 EventEmitter 事件或者其他事件的 Observable。</span>
      *
      * <img src="./img/fromEvent.png" width="100%">
      *
-     * Creates an Observable by attaching an event listener to an "event target",
-     * which may be an object with `addEventListener` and `removeEventListener`,
-     * a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the
-     * DOM, or an HTMLCollection from the DOM. The event handler is attached when
-     * the output Observable is subscribed, and removed when the Subscription is
-     * unsubscribed.
+     * 通过给“事件目标”添加事件监听器的方式创建 Observable，可能会是拥有`addEventListener`和
+     * `removeEventListener`方法的对象，一个 Node.js 的 EventEmitter，一个 jQuery 式的 EventEmitter,
+     * 一个 DOM 的节点集合, 或者 DOM 的 HTMLCollection。 当输出 Observable 被订阅的时候事件处理函数会被添加,
+     * 当取消订阅的时候会将事件处理函数移除。
      *
-     * @example <caption>Emits clicks happening on the DOM document</caption>
+     * @example <caption>发出 DOM document 上的点击事件。</caption>
      * var clicks = Rx.Observable.fromEvent(document, 'click');
      * clicks.subscribe(x => console.log(x));
      *
-     * // Results in:
-     * // MouseEvent object logged to console everytime a click
-     * // occurs on the document.
+     * // 结果:
+     * // 每次点击 document 时，都会在控制台上输出 MouseEvent 。
      *
      * @see {@link from}
      * @see {@link fromEventPattern}
      *
-     * @param {EventTargetLike} target The DOMElement, event target, Node.js
-     * EventEmitter, NodeList or HTMLCollection to attach the event handler to.
-     * @param {string} eventName The event name of interest, being emitted by the
-     * `target`.
-     * @param {EventListenerOptions} [options] Options to pass through to addEventListener
-     * @param {SelectorMethodSignature<T>} [selector] An optional function to
-     * post-process results. It takes the arguments from the event handler and
-     * should return a single value.
+     * @param {EventTargetLike} target DOMElement, 事件目标, Node.js
+     * EventEmitter, NodeList 或者 HTMLCollection 等附加事件处理方法的对象。
+     * @param {string} eventName 感兴趣的事件名称, 被 target 发出。
+     * @param {EventListenerOptions} [options] 可选的传递给 addEventListener 的参数。
+     * @param {SelectorMethodSignature<T>} [selector] 可选的函数处理结果. 接收事件处理函数的参数，应该返回单个值。
      * @return {Observable<T>}
      * @static true
      * @name fromEvent
@@ -3476,21 +3329,17 @@ var FromEventPatternObservable = (function (_super) {
         this.selector = selector;
     }
     /**
-     * Creates an Observable from an API based on addHandler/removeHandler
-     * functions.
+     * 从一个基于 addHandler/removeHandler 方法的API创建 Observable。
      *
-     * <span class="informal">Converts any addHandler/removeHandler API to an
-     * Observable.</span>
+     * <span class="informal">将任何 addHandler/removeHandler 的API转化为 Observable。</span>
      *
      * <img src="./img/fromEventPattern.png" width="100%">
      *
-     * Creates an Observable by using the `addHandler` and `removeHandler`
-     * functions to add and remove the handlers, with an optional selector
-     * function to project the event arguments to a result. The `addHandler` is
-     * called when the output Observable is subscribed, and `removeHandler` is
-     * called when the Subscription is unsubscribed.
+     * 创建 Observable ，该 Observable 通过使用`addHandler` 和 `removeHandler`添加和删除事件处理器,
+     * 使用可选的选择器函数将事件参数转化为结果. `addHandler`当输出 Observable 被订阅的时候调用, `removeHandler`
+     * 方法在取消订阅的时候被调用。
      *
-     * @example <caption>Emits clicks happening on the DOM document</caption>
+     * @example <caption>发出 DOM document 上的点击事件</caption>
      * function addClickHandler(handler) {
      *   document.addEventListener('click', handler);
      * }
@@ -3508,16 +3357,13 @@ var FromEventPatternObservable = (function (_super) {
      * @see {@link from}
      * @see {@link fromEvent}
      *
-     * @param {function(handler: Function): any} addHandler A function that takes
-     * a `handler` function as argument and attaches it somehow to the actual
-     * source of events.
-     * @param {function(handler: Function, signal?: any): void} [removeHandler] An optional function that
-     * takes a `handler` function as argument and removes it in case it was
-     * previously attached using `addHandler`. if addHandler returns signal to teardown when remove,
-     * removeHandler function will forward it.
-     * @param {function(...args: any): T} [selector] An optional function to
-     * post-process results. It takes the arguments from the event handler and
-     * should return a single value.
+     * @param {function(handler: Function): any} addHandler 一个接收处理器的函数，并且将
+     * 该处理器添加到事件源。
+     * @param {function(handler: Function, signal?: any): void} [removeHandler] 可选的
+     * 函数，接受处理器函数做为参数，可以移除处理器当之前使用`addHandler`添加处理器。如果 addHandler
+     * 返回的信号当移除的时候要清理，removeHandler 会去做这件事情。
+     * @param {function(...args: any): T} [selector] 可选的函数处理结果。 接受事件处理的参数返
+     * 回单个的值。
      * @return {Observable<T>}
      * @static true
      * @name fromEventPattern
@@ -3765,9 +3611,8 @@ function isNumeric(val) {
 }
 
 /**
- * A unit of work to be executed in a {@link Scheduler}. An action is typically
- * created from within a Scheduler and an RxJS user does not need to concern
- * themselves about creating and manipulating an Action.
+ * 在调度器（{@link Scheduler}）中要执行的任务单元。action 通常是在调度器内部创建，并且 RxJS 用户
+ * 不需要关注它的创建和维护。
  *
  * ```ts
  * class Action<T> extends Subscription {
@@ -3784,13 +3629,10 @@ var Action = (function (_super) {
         _super.call(this);
     }
     /**
-     * Schedules this action on its parent Scheduler for execution. May be passed
-     * some context object, `state`. May happen at some point in the future,
-     * according to the `delay` parameter, if specified.
-     * @param {T} [state] Some contextual data that the `work` function uses when
-     * called by the Scheduler.
-     * @param {number} [delay] Time to wait before executing the work, where the
-     * time unit is implicit and defined by the Scheduler.
+     * 在它的父调度器上来调度此 action 的执行。可以传递一下上下文对象，`state`。如果指定了
+     * `delay`参数，可能会在未来的某一点发生。
+     * @param {T} [state] `work` 函数在被调度器调用时可以使用的一些上下文数据。
+     * @param {number} [delay] 在执行任务之前的等待时间，时间单元是隐式的，由调度器定义。
      * @return {void}
      */
     Action.prototype.schedule = function (state, delay) {
@@ -4025,37 +3867,35 @@ var AsyncScheduler = (function (_super) {
 
 /**
  *
- * Async Scheduler
+ * Async 调度器
  *
- * <span class="informal">Schedule task as if you used setTimeout(task, duration)</span>
+ * <span class="informal">就像你使用过的 setTimeout(task, duration) 那样调度任务</span>
  *
- * `async` scheduler schedules tasks asynchronously, by putting them on the JavaScript
- * event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
- * in intervals.
+ * `async` 调度器异步地调度任务，通过将它们放入 JavaScript 事件循环中。它被认为是适时地延时任务或者
+ * 按时间间隔重复调度任务的最佳实践。
  *
- * If you just want to "defer" task, that is to perform it right after currently
- * executing synchronous code ends (commonly achieved by `setTimeout(deferredTask, 0)`),
- * better choice will be the {@link asap} scheduler.
+ * 如果你只是想"延时"任务，即在当前执行同步代码结束后执行它（通常会用`setTimeout(deferredTask, 0)`实现），
+ * {@link asap} 调度器会是更好的选择。
  *
- * @example <caption>Use async scheduler to delay task</caption>
+ * @example <caption>使用 async 调度器来延时任务</caption>
  * const task = () => console.log('it works!');
  *
  * Rx.Scheduler.async.schedule(task, 2000);
  *
- * // After 2 seconds logs:
+ * // 2秒后的输出:
  * // "it works!"
  *
  *
- * @example <caption>Use async scheduler to repeat task in intervals</caption>
+ * @example <caption>使用 async 调度器按时间间隔重复执行任务</caption>
  * function task(state) {
  *   console.log(state);
- *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
- *                                   // which we reschedule with new state and delay
+ *   this.schedule(state + 1, 1000); // `this` 指向当前执行的 Action,
+ *                                   // 我们用新的状态和延时来重新调度它
  * }
  *
  * Rx.Scheduler.async.schedule(task, 3000, 0);
  *
- * // Logs:
+ * // 日志:
  * // 0 after 3s
  * // 1 after 4s
  * // 2 after 5s
@@ -4088,34 +3928,26 @@ var IntervalObservable = (function (_super) {
         }
     }
     /**
-     * Creates an Observable that emits sequential numbers every specified
-     * interval of time, on a specified IScheduler.
+     * 创建一个 Observable ，该 Observable 使用指定的 IScheduler ，并以指定时间间隔发出连续的数字。
      *
-     * <span class="informal">Emits incremental numbers periodically in time.
-     * </span>
+     * <span class="informal">定期发出自增的数字。</span>
      *
      * <img src="./img/interval.png" width="100%">
      *
-     * `interval` returns an Observable that emits an infinite sequence of
-     * ascending integers, with a constant interval of time of your choosing
-     * between those emissions. The first emission is not sent immediately, but
-     * only after the first period has passed. By default, this operator uses the
-     * `async` IScheduler to provide a notion of time, but you may pass any
-     * IScheduler to it.
+     * `interval` 返回一个发出无限自增的序列整数, 你可以选择固定的时间间隔进行发送。 第一次并
+     * 没有立马去发送, 而是第一个时间段过后才发出。 默认情况下, 这个操作符使用 async 调度器来
+     * 提供时间的概念，但也可以给它传递任意调度器。
      *
-     * @example <caption>Emits ascending numbers, one every second (1000ms)</caption>
+     * @example <caption>每1秒发出一个自增数</caption>
      * var numbers = Rx.Observable.interval(1000);
      * numbers.subscribe(x => console.log(x));
      *
      * @see {@link timer}
      * @see {@link delay}
      *
-     * @param {number} [period=0] The interval size in milliseconds (by default)
-     * or the time unit determined by the scheduler's clock.
-     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-     * the emission of values, and providing a notion of "time".
-     * @return {Observable} An Observable that emits a sequential number each time
-     * interval.
+     * @param {number} [period=0] 时间间隔，它以毫秒为单位(默认)，或者由调度器的内部时钟决定的时间单位。
+     * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送并提供”时间“的概念。
+     * @return {Observable} 每个时间间隔都发出自增数的 Observable 。
      * @static true
      * @name interval
      * @owner Observable
@@ -4201,33 +4033,28 @@ function merge$1() {
 }
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which concurrently emits all values from every
- * given input Observable.
+ * 创建一个输出 Observable ，它可以同时发出每个给定的输入 Observable 中值。
  *
- * <span class="informal">Flattens multiple Observables together by blending
- * their values into one Observable.</span>
+ * <span class="informal">通过把多个 Observables 的值混合到一个 Observable 中来将其打平。</span>
  *
  * <img src="./img/merge.png" width="100%">
  *
- * `merge` subscribes to each given input Observable (as arguments), and simply
- * forwards (without doing any transformation) all the values from all the input
- * Observables to the output Observable. The output Observable only completes
- * once all input Observables have completed. Any error delivered by an input
- * Observable will be immediately emitted on the output Observable.
+ * `merge` 订阅每个给定的输入 Observable (作为参数)，然后只是将所有输入 Observables 的所有值发
+ * 送(不进行任何转换)到输出 Observable 。所有的输入 Observable 都完成了，输出 Observable 才
+ * 能完成。任何由输入 Observable 发出的错误都会立即在输出 Observalbe 上发出。
  *
- * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
+ * @example <caption>合并两个 Observables: 时间间隔为1秒的 timer 和 clicks</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
  * clicksOrTimer.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // timer will emit ascending values, one every second(1000ms) to console
- * // clicks logs MouseEvents to console everytime the "document" is clicked
- * // Since the two streams are merged you see these happening
- * // as they occur.
+ * // 结果如下:
+ * // 每隔1s发出一个自增值到控制台
+ * // document被点击的时候MouseEvents会被打印到控制台
+ * // 因为两个流被合并了，所以你当它们发生的时候你就可以看见.
  *
- * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
+ * @example <caption>合并3个Observables, 但是只并行运行2个</caption>
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -4235,27 +4062,22 @@ function merge$1() {
  * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
  * merged.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // - First timer1 and timer2 will run concurrently
- * // - timer1 will emit a value every 1000ms for 10 iterations
- * // - timer2 will emit a value every 2000ms for 6 iterations
- * // - after timer1 hits it's max iteration, timer2 will
- * //   continue, and timer3 will start to run concurrently with timer2
- * // - when timer2 hits it's max iteration it terminates, and
- * //   timer3 will continue to emit a value every 500ms until it is complete
+ * // 结果如下:
+ * // - timer1和timer2将会并行运算
+ * // - timer1每隔1s发出值，迭代10次
+ * // - timer2每隔1s发出值，迭代6次
+ * // - timer1达到迭代最大次数,timer2会继续，timer3开始和timer2并行运行
+ * // - 当timer2达到最大迭代次数就停止，timer3将会继续每隔500ms发出数据直到结束
  *
  * @see {@link mergeAll}
  * @see {@link mergeMap}
  * @see {@link mergeMapTo}
  * @see {@link mergeScan}
  *
- * @param {...ObservableInput} observables Input Observables to merge together.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
- * concurrency of input Observables.
- * @return {Observable} an Observable that emits items that are the result of
- * every input Observable.
+ * @param {...ObservableInput} observables 合并到一起的输入Observables。
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] 可以同时订阅的输入 Observables 的最大数量。
+ * @param {Scheduler} [scheduler=null] 调度器用来管理并行的输入Observables。
+ * @return {Observable} 该 Observable 发出的项是每个输入 Observable 的结果。
  * @static true
  * @name merge
  * @owner Observable
@@ -4289,10 +4111,10 @@ Observable.merge = merge$$1;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that mirrors the first source Observable to emit an item
- * from the combination of this Observable and supplied Observables.
- * @param {...Observables} ...observables Sources used to race for which Observable emits first.
- * @return {Observable} An Observable that mirrors the output of the first Observable to emit an item.
+ * 返回 Observable，该 Observable 是源 Observable 和提供的 Observables 的组合中
+ * 第一个发出项的 Observable 的镜像。
+ * @param {...Observables} ...observables 用于竞争的 Observables 源，以比试哪个 Observable 会首先发出项。
+ * @return {Observable} 该 Observable 是第一个发出项的 Observable 输出镜像。
  * @method race
  * @owner Observable
  */
@@ -4400,20 +4222,17 @@ var NeverObservable = (function (_super) {
         _super.call(this);
     }
     /**
-     * Creates an Observable that emits no items to the Observer.
+     * 创建一个不向观察者发出任何项的 Observable 。
      *
-     * <span class="informal">An Observable that never emits anything.</span>
+     * <span class="informal">从不发出任何项的 Observable 。</span>
      *
      * <img src="./img/never.png" width="100%">
      *
-     * This static operator is useful for creating a simple Observable that emits
-     * neither values nor errors nor the completion notification. It can be used
-     * for testing purposes or for composing with other Observables. Please not
-     * that by never emitting a complete notification, this Observable keeps the
-     * subscription from being disposed automatically. Subscriptions need to be
-     * manually disposed.
+     * 这个静态操作符对于创建既不发出数据也不触发错误和完成通知的 Observable。 可以用来测试或
+     * 者和其他 Observables进行组合。 注意，由于不会发送完成通知，这个 Observable 的 subscription
+     * 不会被自动地清理。Subscriptions 需要手动清理。
      *
-     * @example <caption>Emit the number 7, then never emit anything else (not even complete).</caption>
+     * @example <caption>发出7, 然后不发出任何值(也不发出完成通知)。</caption>
      * function info() {
      *   console.log('Will not be called');
      * }
@@ -4425,7 +4244,7 @@ var NeverObservable = (function (_super) {
      * @see {@link of}
      * @see {@link throw}
      *
-     * @return {Observable} A "never" Observable: never emits anything.
+     * @return {Observable} A "never" Observable:从不发出任何东西的 Observable 。
      * @static true
      * @name never
      * @owner Observable
@@ -4449,36 +4268,30 @@ Observable.of = of;
 
 /* tslint:enable:max-line-length */
 /**
- * When any of the provided Observable emits an complete or error notification, it immediately subscribes to the next one
- * that was passed.
+ * 当任何提供的 Observable 发出完成或错误通知时，它会立即地订阅已传入下一个 Observable 。
  *
- * <span class="informal">Execute series of Observables no matter what, even if it means swallowing errors.</span>
+ * <span class="informal">无论发生什么，都会执行一系列的 Observables ，即使这意味着要吞咽错误。</span>
  *
  * <img src="./img/onErrorResumeNext.png" width="100%">
  *
- * `onErrorResumeNext` is an operator that accepts a series of Observables, provided either directly as
- * arguments or as an array. If no single Observable is provided, returned Observable will simply behave the same
- * as the source.
+ * `onErrorResumeNext` 操作符接收一系列的 Observables ，可与直接作为参数或数组提供。如果没提供 Observable ，
+ * 返回的 Observable 与源 Observable 的行为是相同的。
  *
- * `onErrorResumeNext` returns an Observable that starts by subscribing and re-emitting values from the source Observable.
- * When its stream of values ends - no matter if Observable completed or emitted an error - `onErrorResumeNext`
- * will subscribe to the first Observable that was passed as an argument to the method. It will start re-emitting
- * its values as well and - again - when that stream ends, `onErrorResumeNext` will proceed to subscribing yet another
- * Observable in provided series, no matter if previous Observable completed or ended with an error. This will
- * be happening until there is no more Observables left in the series, at which point returned Observable will
- * complete - even if the last subscribed stream ended with an error.
+ * `onErrorResumeNext` 返回的 Observable 通过订阅和重新发出源 Observable 的值开始。当流的值完成时，无论 Observable
+ * 是完成还是发出错误，`onErrorResumeNext` 都会订阅作为参数传给该方法的第一个 Observable 。它也会开始重新发出它的值，
+ * 再一次，当流完成时，`onErrorResumeNext` 又会继续订阅已提供的系列 Observable 中另一个，无论前一个 Observable
+ * 是否完成或发生错误。这样的行为会持续到系列中没有更多的 Observable ，返回的 Observale 将在此时完成，即使最后订阅的
+ * 流是以错误结束的。
  *
- * `onErrorResumeNext` can be therefore though of as version of {@link concat} operator, which is more permissive
- * when it comes to the errors emitted by its input Observables. While `concat` subscribes to the next Observable
- * in series only if previous one successfully completed, `onErrorResumeNext` subscribes even if it ended with
- * an error.
+ * 因此， `onErrorResumeNext` 可以认为是某个版本的 {@link concat} 操作符，只是当它的输入 Observables 发生
+ * 错误时，它更为宽容。然而，`concat` 只有当前一个 Observable 成功完成了，它才会订阅系列中的下个 Observable ，
+ * 而 `onErrorResumeNext` 即使是以错误完成某个 Observalbe 时，它也会订阅下一个。
  *
- * Note that you do not get any access to errors emitted by the Observables. In particular do not
- * expect these errors to appear in error callback passed to {@link subscribe}. If you want to take
- * specific actions based on what error was emitted by an Observable, you should try out {@link catch} instead.
+ * 注意，对于由 Observables 发出的错误，你无法获得访问权限。特别是不要指望可以将这些出现在错误回调函数中的
+ * 错误传递给  {@link subscribe} 。如果要根据 Observable 发出的错误采取特定的操作，应该尝试使用 {@link catch} 。
  *
  *
- * @example <caption>Subscribe to the next Observable after map fails</caption>
+ * @example <caption>在 map 操作失败后订阅下一个 Observable </caption>
  * Rx.Observable.of(1, 2, 3, 0)
  *   .map(x => {
  *       if (x === 0) { throw Error(); }
@@ -4487,11 +4300,11 @@ Observable.of = of;
  *   .onErrorResumeNext(Rx.Observable.of(1, 2, 3))
  *   .subscribe(
  *     val => console.log(val),
- *     err => console.log(err),          // Will never be called.
+ *     err => console.log(err),          // 永远不会调用
  *     () => console.log('that\'s it!')
  *   );
  *
- * // Logs:
+ * // 输出：
  * // 10
  * // 5
  * // 3.3333333333333335
@@ -4503,9 +4316,9 @@ Observable.of = of;
  * @see {@link concat}
  * @see {@link catch}
  *
- * @param {...ObservableInput} observables Observables passed either directly or as an array.
- * @return {Observable} An Observable that emits values from source Observable, but - if it errors - subscribes
- * to the next passed Observable and so on, until it completes or runs out of Observables.
+ * @param {...ObservableInput} observables 传入的 Observables，可以直接传入，也可以作为数组传入。
+ * @return {Observable} 该 Observable 发出源 Observable 的值，但如果发出错误，它会订阅下一个传入的
+ * Observable ，并以此类推，直到它完成或用完所有的 Observable 。
  * @method onErrorResumeNext
  * @owner Observable
  */
@@ -4669,31 +4482,26 @@ var RangeObservable = (function (_super) {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits a sequence of numbers within a specified
-     * range.
+     * 创建一个 Observable ，它发出指定范围内的数字序列。
      *
-     * <span class="informal">Emits a sequence of numbers in a range.</span>
+     * <span class="informal">发出区间范围内的数字序列。</span>
      *
      * <img src="./img/range.png" width="100%">
      *
-     * `range` operator emits a range of sequential integers, in order, where you
-     * select the `start` of the range and its `length`. By default, uses no
-     * IScheduler and just delivers the notifications synchronously, but may use
-     * an optional IScheduler to regulate those deliveries.
+     * `range` 操作符顺序发出一个区间范围内的连续整数, 你可以决定区间的开始和长度。 默认情况下, 不使用
+     * 调度器仅仅同步的发送通知, 但是也可以可选的使用可选的调度器来控制发送。
      *
-     * @example <caption>Emits the numbers 1 to 10</caption>
+     * @example <caption>发出从1到10的数</caption>
      * var numbers = Rx.Observable.range(1, 10);
      * numbers.subscribe(x => console.log(x));
      *
      * @see {@link timer}
      * @see {@link interval}
      *
-     * @param {number} [start=0] The value of the first integer in the sequence.
-     * @param {number} [count=0] The number of sequential integers to generate.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emissions of the notifications.
-     * @return {Observable} An Observable of numbers that emits a finite range of
-     * sequential integers.
+     * @param {number} [start=0] 序列中的第一个整数值。
+     * @param {number} [count=0] 要生成序列的长度。
+     * @param {Scheduler} [scheduler] 调度器 ( {@link IScheduler} )，用来调度通知的发送。
+     * @return {Observable} 该 Observable 发出有限区间范围内的连续整数。
      * @static true
      * @name range
      * @owner Observable
@@ -4815,23 +4623,20 @@ var ErrorObservable = (function (_super) {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits no items to the Observer and immediately
-     * emits an error notification.
+     * 创建一个不发送数据给观察者并且立马发出错误通知的 Observable。
      *
-     * <span class="informal">Just emits 'error', and nothing else.
-     * </span>
+     * <span class="informal">仅仅发出 error 通知，其他什么也不做。</span>
      *
      * <img src="./img/throw.png" width="100%">
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the error notification. It can be used for composing with other
-     * Observables, such as in a {@link mergeMap}.
+     * 这个静态操作符对于创建简单的只发出错误通知的 Observable 十分有用。 可以被用来和其他
+     * Observables 组合, 比如在 {@link mergeMap} 中使用。
      *
-     * @example <caption>Emit the number 7, then emit an error.</caption>
+     * @example <caption>先发出数字7，然后发出错误通知。</caption>
      * var result = Rx.Observable.throw(new Error('oops!')).startWith(7);
      * result.subscribe(x => console.log(x), e => console.error(e));
      *
-     * @example <caption>Map and flatten numbers to the sequence 'a', 'b', 'c', but throw an error for 13</caption>
+     * @example <caption>映射并打平成字母序列abc，但当数字为13时抛出错误。</caption>
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =>
      *   x === 13 ?
@@ -4845,11 +4650,9 @@ var ErrorObservable = (function (_super) {
      * @see {@link never}
      * @see {@link of}
      *
-     * @param {any} error The particular Error to pass to the error notification.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emission of the error notification.
-     * @return {Observable} An error Observable: emits only the error notification
-     * using the given error argument.
+     * @param {any} 将具体的 Error 传递给错误通知。
+     * @param {Scheduler} [scheduler] 调度器{@link IScheduler}，用来调度错误通知的发送。
+     * @return {Observable} 错误的 Observable：只使用给定的错误参数发出错误通知。
      * @static true
      * @name throw
      * @owner Observable
@@ -4912,43 +4715,31 @@ var TimerObservable = (function (_super) {
             dueTime;
     }
     /**
-     * Creates an Observable that starts emitting after an `initialDelay` and
-     * emits ever increasing numbers after each `period` of time thereafter.
+     * 创建一个 Observable，该 Observable 在初始延时（`initialDelay`）之后开始发送并且在每个时间周期（ `period`）后发出自增的数字。
      *
-     * <span class="informal">Its like {@link interval}, but you can specify when
-     * should the emissions start.</span>
+     * <span class="informal">就像是{@link interval}, 但是你可以指定什么时候开始发送。</span>
      *
      * <img src="./img/timer.png" width="100%">
      *
-     * `timer` returns an Observable that emits an infinite sequence of ascending
-     * integers, with a constant interval of time, `period` of your choosing
-     * between those emissions. The first emission happens after the specified
-     * `initialDelay`. The initial delay may be a {@link Date}. By default, this
-     * operator uses the `async` IScheduler to provide a notion of time, but you
-     * may pass any IScheduler to it. If `period` is not specified, the output
-     * Observable emits only one value, `0`. Otherwise, it emits an infinite
-     * sequence.
+     * `timer` 返回一个发出有限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
+     * 初始延时之后. 初始延时就像是{@link Date}。 默认情况下, 这个操作符使用 async 调度器来提供时间的概念,
+     * 但是你也可以传递任何调度器。 如果时间周期没有被指定, 输出 Observable 只发出0。 否则,会发送一个无限数列。
      *
-     * @example <caption>Emits ascending numbers, one every second (1000ms), starting after 3 seconds</caption>
+     * @example <caption>每隔1秒发出自增的数字，3秒后开始发送。</caption>
      * var numbers = Rx.Observable.timer(3000, 1000);
      * numbers.subscribe(x => console.log(x));
      *
-     * @example <caption>Emits one number after five seconds</caption>
+     * @example <caption>5秒后发出一个数字</caption>
      * var numbers = Rx.Observable.timer(5000);
      * numbers.subscribe(x => console.log(x));
      *
      * @see {@link interval}
      * @see {@link delay}
      *
-     * @param {number|Date} initialDelay The initial delay time to wait before
-     * emitting the first value of `0`.
-     * @param {number} [period] The period of time between emissions of the
-     * subsequent numbers.
-     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-     * the emission of values, and providing a notion of "time".
-     * @return {Observable} An Observable that emits a `0` after the
-     * `initialDelay` and ever increasing numbers after each `period` of time
-     * thereafter.
+     * @param {number|Date} initialDelay 在发出第一个值 0 之i前等待的初始延迟时间。
+     * @param {number} [period] 连续数字发送之间的时间周期。
+     * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送, 提供“时间”的概念。
+     * @return {Observable} 该 Observable 在初始时延(initialDelay)后发出0，并且在之后的每个时间周期(period)后发出按自增的数字。
      * @static true
      * @name timer
      * @owner Observable
@@ -5000,13 +4791,11 @@ function zipProto() {
 }
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are calculated from the values, in order, of each
- * of its input Observables.
+ * 将多个 Observable 组合以创建一个 Observable，该 Observable 的值是由所有输入 Observables 的值按顺序计算而来的。
  *
- * If the latest parameter is a function, this function is used to compute the created value from the input values.
- * Otherwise, an array of the input values is returned.
+ * 如果最后一个参数是函数, 这个函数被用来计算最终发出的值.否则, 返回一个顺序包含所有输入值的数组.
  *
- * @example <caption>Combine age and name from different sources</caption>
+ * @example <caption>从不同的源头结合年龄和名称</caption>
  *
  * let age$ = Observable.of<number>(27, 25, 29);
  * let name$ = Observable.of<string>('Foo', 'Bar', 'Beer');
@@ -5019,7 +4808,7 @@ function zipProto() {
  *          (age: number, name: string, isDev: boolean) => ({ age, name, isDev }))
  *     .subscribe(x => console.log(x));
  *
- * // outputs
+ * // 输出：
  * // { age: 27, name: 'Foo', isDev: true }
  * // { age: 25, name: 'Bar', isDev: true }
  * // { age: 29, name: 'Beer', isDev: false }
@@ -5771,43 +5560,40 @@ var QueueScheduler = (function (_super) {
  *
  * Queue Scheduler
  *
- * <span class="informal">Put every next task on a queue, instead of executing it immediately</span>
+ * <span class="informal">将每个任务都放到队列里，而不是立刻执行它们</span>
  *
- * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.
+ * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。
  *
- * When used without delay, it schedules given task synchronously - executes it right when
- * it is scheduled. However when called recursively, that is when inside the scheduled task,
- * another task is scheduled with queue scheduler, instead of executing immediately as well,
- * that task will be put on a queue and wait for current one to finish.
+ * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，
+ * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。
  *
- * This means that when you execute task with `queue` scheduler, you are sure it will end
- * before any other task scheduled with that scheduler will start.
+ * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。
  *
- * @examples <caption>Schedule recursively first, then do something</caption>
+ * @examples <caption>首先递归调度, 然后做一些事情</caption>
  *
  * Rx.Scheduler.queue.schedule(() => {
- *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue
+ *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里
  *
  *   console.log('first');
  * });
  *
- * // Logs:
+ * // 日志:
  * // "first"
  * // "second"
  *
  *
- * @example <caption>Reschedule itself recursively</caption>
+ * @example <caption>递归的重新调度自身</caption>
  *
  * Rx.Scheduler.queue.schedule(function(state) {
  *   if (state !== 0) {
  *     console.log('before', state);
- *     this.schedule(state - 1); // `this` references currently executing Action,
- *                               // which we reschedule with new state
+ *     this.schedule(state - 1); // `this` 指向当前执行的 Action,
+ *                               // 我们使用新的状态重新调度
  *     console.log('after', state);
  *   }
  * }, 0, 3);
  *
- * // In scheduler that runs recursively, you would expect:
+ * // 递归运行的调度器， 你的期望:
  * // "before", 3
  * // "before", 2
  * // "before", 1
@@ -5815,7 +5601,7 @@ var QueueScheduler = (function (_super) {
  * // "after", 2
  * // "after", 3
  *
- * // But with queue it logs:
+ * // 但实际使用队列的输入:
  * // "before", 3
  * // "after", 3
  * // "before", 2
@@ -5973,9 +5759,9 @@ var WebSocketSubject = (function (_super) {
         return JSON.parse(e.data);
     };
     /**
-     * Wrapper around the w3c-compatible WebSocket object provided by the browser.
+     * 包装浏览器提供的兼容w3c的WebSocket对象.
      *
-     * @example <caption>Wraps browser WebSocket</caption>
+     * @example <caption>包装浏览器的WebSocket</caption>
      *
      * let socket$ = Observable.webSocket('ws://localhost:8081');
      *
@@ -5987,7 +5773,7 @@ var WebSocketSubject = (function (_super) {
      *
      * socket$.next(JSON.stringify({ op: 'hello' }));
      *
-     * @example <caption>Wraps WebSocket from nodejs-websocket (using node.js)</caption>
+     * @example <caption>包装nodejs的WebSocket</caption>
      *
      * import { w3cwebsocket } from 'websocket';
      *
@@ -6180,19 +5966,16 @@ var webSocket = WebSocketSubject.create;
 Observable.webSocket = webSocket;
 
 /**
- * Buffers the source Observable values until `closingNotifier` emits.
+ * 缓冲源 Observable 的值直到 `closingNotifier` 发出。
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * that array only when another Observable emits.</span>
+ * <span class="informal">将过往的值收集到一个数组中，并且仅当另一个 Observable 发出通知时才发出此数组。</span>
  *
  * <img src="./img/buffer.png" width="100%">
  *
- * Buffers the incoming Observable values until the given `closingNotifier`
- * Observable emits a value, at which point it emits the buffer on the output
- * Observable and starts a new buffer internally, awaiting the next time
- * `closingNotifier` emits.
+ * 将 Observable 发出的值缓冲起来直到 `closingNotifier` 发出数据, 在这个时候在输出
+ * Observable 上发出该缓冲区的值并且内部开启一个新的缓冲区, 等待下一个`closingNotifier`的发送。
  *
- * @example <caption>On every click, emit array of most recent interval events</caption>
+ * @example <caption>每次点击发出 interval Observable 最新缓冲的数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
@@ -6204,10 +5987,8 @@ Observable.webSocket = webSocket;
  * @see {@link bufferWhen}
  * @see {@link window}
  *
- * @param {Observable<any>} closingNotifier An Observable that signals the
- * buffer to be emitted on the output Observable.
- * @return {Observable<T[]>} An Observable of buffers, which are arrays of
- * values.
+ * @param {Observable<any>} closingNotifier 该 Observable 向输出 Observale 发出信号以通知发出缓冲区。
+ * @return {Observable<T[]>} 数组缓冲的 Observable。
  * @method buffer
  * @owner Observable
  */
@@ -6249,26 +6030,21 @@ var BufferSubscriber = (function (_super) {
 Observable.prototype.buffer = buffer;
 
 /**
- * Buffers the source Observable values until the size hits the maximum
- * `bufferSize` given.
+ * 缓冲源 Observable 的值直到缓冲数量到达设定的 `bufferSize`.
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * that array only when its size reaches `bufferSize`.</span>
+ * <span class="informal">将过往的值收集到一个数组中，当数组数量到达设定的 bufferSize 时发出该数组。</span>
  *
  * <img src="./img/bufferCount.png" width="100%">
  *
- * Buffers a number of values from the source Observable by `bufferSize` then
- * emits the buffer and clears it, and starts a new buffer each
- * `startBufferEvery` values. If `startBufferEvery` is not provided or is
- * `null`, then new buffers are started immediately at the start of the source
- * and when each buffer closes and is emitted.
+ * 缓冲源 Observable 的N个值(N = bufferSize)，然后发出该缓冲区并进行清理，再然后开启一个新的缓存区，新缓存区会新缓存M个值(M = startBufferEvery)。
+ * 如果`startBufferEvery`没有提供或者为`null`, 新的缓冲会在源开始的时候开启并且在每次发出的时候关闭。
  *
- * @example <caption>Emit the last two click events as an array</caption>
+ * @example <caption>将最后两次点击事件作为数组发出</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>On every click, emit the last two click events as an array</caption>
+ * @example <caption>在每次点击的时候, 以数组的形势发出最后两次的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x => console.log(x));
@@ -6280,12 +6056,11 @@ Observable.prototype.buffer = buffer;
  * @see {@link pairwise}
  * @see {@link windowCount}
  *
- * @param {number} bufferSize The maximum size of the buffer emitted.
- * @param {number} [startBufferEvery] Interval at which to start a new buffer.
- * For example if `startBufferEvery` is `2`, then a new buffer will be started
- * on every other value from the source. A new buffer is started at the
- * beginning of the source by default.
- * @return {Observable<T[]>} An Observable of arrays of buffered values.
+ * @param {number} bufferSize 缓存区的最大长度。
+ * @param {number} [startBufferEvery] 确定何时启用新的缓冲区。
+ * 例如上面图中所示，如果`startBufferEvery`是`2`, 那么隔一个数据会开一个新
+ * 的缓冲区。 默认情况下，将在源的起始处启用新的缓冲区。
+ * @return {Observable<T[]>} 缓存值数组的 Observable 。
  * @method bufferCount
  * @owner Observable
  */
@@ -6384,28 +6159,23 @@ Observable.prototype.bufferCount = bufferCount;
 
 /* tslint:enable:max-line-length */
 /**
- * Buffers the source Observable values for a specific time period.
+ * 在特定时间周期内缓冲源 Observable 的值。
  *
- * <span class="informal">Collects values from the past as an array, and emits
- * those arrays periodically in time.</span>
+ * <span class="informal">将过往的值收集到数组中，并周期性地发出这些数组。</span>
  *
  * <img src="./img/bufferTime.png" width="100%">
  *
- * Buffers values from the source for a specific time duration `bufferTimeSpan`.
- * Unless the optional argument `bufferCreationInterval` is given, it emits and
- * resets the buffer every `bufferTimeSpan` milliseconds. If
- * `bufferCreationInterval` is given, this operator opens the buffer every
- * `bufferCreationInterval` milliseconds and closes (emits and resets) the
- * buffer every `bufferTimeSpan` milliseconds. When the optional argument
- * `maxBufferSize` is specified, the buffer will be closed either after
- * `bufferTimeSpan` milliseconds or when it contains `maxBufferSize` elements.
+ * 在一个特定的持续时间`bufferTimeSpan`内缓存源 Observable 的值。 除非指定了可选参数`bufferCreationInterval`
+ * , 它会发出数组并且重置缓冲区每个`bufferTimeSpan`毫秒。这个操作符会在每个 bufferCreationInterval 毫秒时开启缓冲区，
+ * 并在每个 bufferTimeSpan 毫秒时关闭(发出并重置)缓冲区。如果可选参数`maxBufferSize`被指定, 缓冲区会在`bufferTimeSpan`毫秒
+ * 之后或者缓冲区元素个数达到`maxBufferSize`时发出。
  *
- * @example <caption>Every second, emit an array of the recent click events</caption>
+ * @example <caption>每一秒都发出最新点击事件的数组</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(1000);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>Every 5 seconds, emit the click events from the next 2 seconds</caption>
+ * @example <caption>每5秒钟，发出接下来2秒内的点击事件(译者注：后3秒内的点击会被忽略)</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferTime(2000, 5000);
  * buffered.subscribe(x => console.log(x));
@@ -6416,13 +6186,11 @@ Observable.prototype.bufferCount = bufferCount;
  * @see {@link bufferWhen}
  * @see {@link windowTime}
  *
- * @param {number} bufferTimeSpan The amount of time to fill each buffer array.
- * @param {number} [bufferCreationInterval] The interval at which to start new
- * buffers.
- * @param {number} [maxBufferSize] The maximum buffer size.
- * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
- * intervals that determine buffer boundaries.
- * @return {Observable<T[]>} An observable of arrays of buffered values.
+ * @param {number} bufferTimeSpan 填满每个缓冲数组的时间。
+ * @param {number} [bufferCreationInterval] 开启新缓冲区的时间间隔。
+ * @param {number} [maxBufferSize] 缓冲区的最大容量。
+ * @param {Scheduler} [scheduler=async] 调度器，调度缓冲区。
+ * @return {Observable<T[]>} 值为缓冲数组的 observable。
  * @method bufferTime
  * @owner Observable
  */
@@ -6574,20 +6342,17 @@ function dispatchBufferClose(arg) {
 Observable.prototype.bufferTime = bufferTime;
 
 /**
- * Buffers the source Observable values starting from an emission from
- * `openings` and ending when the output of `closingSelector` emits.
+ *  缓冲源 Observable 的值，`openings` 发送的时候开始缓冲，`closingSelector` 发送的时候结束缓冲。
  *
- * <span class="informal">Collects values from the past as an array. Starts
- * collecting only when `opening` emits, and calls the `closingSelector`
- * function to get an Observable that tells when to close the buffer.</span>
+ * <span class="informal">将过往数据收集到数组中. 当`opening`发送的时候开始收集, 然后调用`closingSelector`
+ * 函数获取 Observable ，该Observable 告知什么时候关闭缓冲。</span>
  *
  * <img src="./img/bufferToggle.png" width="100%">
  *
- * Buffers values from the source by opening the buffer via signals from an
- * Observable provided to `openings`, and closing and sending the buffers when
- * a Subscribable or Promise returned by the `closingSelector` function emits.
+ * 缓冲源Observable的值，当`openings`Observable发出信号的时候开始缓冲数据, 当`closingSelector`返回的Subscribable
+ * 或者Promise发送的时候结束并且发送缓冲区.
  *
- * @example <caption>Every other second, emit the click events from the next 500ms</caption>
+ * @example <caption>每隔一秒钟，发出接下来500毫秒内的点击事件。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var openings = Rx.Observable.interval(1000);
  * var buffered = clicks.bufferToggle(openings, i =>
@@ -6601,13 +6366,10 @@ Observable.prototype.bufferTime = bufferTime;
  * @see {@link bufferWhen}
  * @see {@link windowToggle}
  *
- * @param {SubscribableOrPromise<O>} openings A Subscribable or Promise of notifications to start new
- * buffers.
- * @param {function(value: O): SubscribableOrPromise} closingSelector A function that takes
- * the value emitted by the `openings` observable and returns a Subscribable or Promise,
- * which, when it emits, signals that the associated buffer should be emitted
- * and cleared.
- * @return {Observable<T[]>} An observable of arrays of buffered values.
+ * @param {SubscribableOrPromise<O>} openings 开启新缓冲区的通知，可以是 Subscribable 或 Promise 。
+ * @param {function(value: O): SubscribableOrPromise} closingSelector 接受`openings`observable
+ * 发出的数据返回一个可以被订阅的对象或者Promise的函数,当它发出时，会发信号给相关的缓冲区以通知它们应该发出并清理。
+ * @return {Observable<T[]>} 缓冲数组的 observable。
  * @method bufferToggle
  * @owner Observable
  */
@@ -6718,20 +6480,17 @@ var BufferToggleSubscriber = (function (_super) {
 Observable.prototype.bufferToggle = bufferToggle;
 
 /**
- * Buffers the source Observable values, using a factory function of closing
- * Observables to determine when to close, emit, and reset the buffer.
+ * 缓冲源 Observable 的值, 使用关闭 Observable 的工厂函数来决定何时关闭、发出和重置缓冲区。
  *
- * <span class="informal">Collects values from the past as an array. When it
- * starts collecting values, it calls a function that returns an Observable that
- * tells when to close the buffer and restart collecting.</span>
+ * <span class="informal">将过往的值收集到数组中， 当开始收集数据的时候, 调用函数返回
+ * Observable, 该 Observable 告知何时关闭缓冲区并重新开始收集。</span>
  *
  * <img src="./img/bufferWhen.png" width="100%">
  *
- * Opens a buffer immediately, then closes the buffer when the observable
- * returned by calling `closingSelector` function emits a value. When it closes
- * the buffer, it immediately opens a new buffer and repeats the process.
+ * 立马开启缓冲区, 然后当`closingSelector`函数返回的observable发出数据的时候关闭缓冲区.
+ * 当关闭缓冲区的时候, 会立马开启新的缓冲区，并不断重复此过程。
  *
- * @example <caption>Emit an array of the last clicks every [1-5] random seconds</caption>
+ * @example <caption>发出每个随机秒(1-5秒)数内的最新点击事件数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferWhen(() =>
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
@@ -6744,9 +6503,8 @@ Observable.prototype.bufferToggle = bufferToggle;
  * @see {@link bufferToggle}
  * @see {@link windowWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals buffer closure.
- * @return {Observable<T[]>} An observable of arrays of buffered values.
+ * @param {function(): Observable} closingSelector 该函数不接受参数，并返回通知缓冲区关闭的 Observable 。
+ * @return {Observable<T[]>} 缓冲数组的 Observable 。
  * @method bufferWhen
  * @owner Observable
  */
@@ -6830,11 +6588,11 @@ var BufferWhenSubscriber = (function (_super) {
 Observable.prototype.bufferWhen = bufferWhen;
 
 /**
- * Catches errors on the observable to be handled by returning a new observable or throwing an error.
+ * 捕获 observable 中的错误，可以通过返回一个新的 observable 或者抛出错误对象来处理。
  *
  * <img src="./img/catch.png" width="100%">
  *
- * @example <caption>Continues with a different Observable when there's an error</caption>
+ * @example <caption>当发生错误的时候通过返回一个新的 Observable 继续运行</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -6847,7 +6605,7 @@ Observable.prototype.bufferWhen = bufferWhen;
  *   .subscribe(x => console.log(x));
  *   // 1, 2, 3, I, II, III, IV, V
  *
- * @example <caption>Retries the caught source Observable again in case of error, similar to retry() operator</caption>
+ * @example <caption>当发生错误的时候重试源 Observable, 和retry()操作符类似</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -6861,7 +6619,7 @@ Observable.prototype.bufferWhen = bufferWhen;
  *   .subscribe(x => console.log(x));
  *   // 1, 2, 3, 1, 2, 3, ...
  *
- * @example <caption>Throws a new error when the source Observable throws an error</caption>
+ * @example <caption>当源 Observable 发生错误的时候，抛出一个新的错误</caption>
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n => {
@@ -6879,11 +6637,9 @@ Observable.prototype.bufferWhen = bufferWhen;
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
- * @param {function} selector a function that takes as arguments `err`, which is the error, and `caught`, which
- *  is the source observable, in case you'd like to "retry" that observable by returning it again. Whatever observable
- *  is returned by the `selector` will be used to continue the observable chain.
- * @return {Observable} An observable that originates from either the source or the observable returned by the
- *  catch `selector` function.
+ * @param {function} selector 该函数接受 err 参数，即错误对象，还接受 catch 参数，即源 Observable，
+ * 当你想“重试”的时候返回它即可。 任何被`selector`返回的 observable 都会被用来代替源 observable。
+ * @return {Observable} 该 Observable 源自源 Observable 或 selector 函数返回的 Observable。
  * @method catch
  * @name catch
  * @owner Observable
@@ -6940,27 +6696,21 @@ Observable.prototype.catch = _catch;
 Observable.prototype._catch = _catch;
 
 /**
- * Converts a higher-order Observable into a first-order Observable by waiting
- * for the outer Observable to complete, then applying {@link combineLatest}.
+ * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。
  *
- * <span class="informal">Flattens an Observable-of-Observables by applying
- * {@link combineLatest} when the Observable-of-Observables completes.</span>
+ * <span class="informal">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>
  *
  * <img src="./img/combineAll.png" width="100%">
  *
- * Takes an Observable of Observables, and collects all Observables from it.
- * Once the outer Observable completes, it subscribes to all collected
- * Observables and combines their values using the {@link combineLatest}
- * strategy, such that:
- * - Every time an inner Observable emits, the output Observable emits.
- * - When the returned observable emits, it emits all of the latest values by:
- *   - If a `project` function is provided, it is called with each recent value
- *     from each inner Observable in whatever order they arrived, and the result
- *     of the `project` function is what is emitted by the output Observable.
- *   - If there is no `project` function, an array of all of the most recent
- *     values is emitted by the output Observable.
+ * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的
+ * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,
+ *  这样:
+ * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。
+ * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：
+ *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。
+ *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。
  *
- * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>
+ * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev =>
  *   Rx.Observable.interval(Math.random()*2000).take(3)
@@ -6971,11 +6721,8 @@ Observable.prototype._catch = _catch;
  * @see {@link combineLatest}
  * @see {@link mergeAll}
  *
- * @param {function} [project] An optional function to map the most recent
- * values from each inner Observable into a new result. Takes each of the most
- * recent values from each collected inner Observable as arguments, in order.
- * @return {Observable} An Observable of projected results or arrays of recent
- * values.
+ * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。
+ * @return {Observable} 该 Observable 为最新值的投射结果或数组。
  * @method combineAll
  * @owner Observable
  */
@@ -6991,37 +6738,29 @@ Observable.prototype.concat = concat$1;
 
 /* tslint:enable:max-line-length */
 /**
- * Converts a higher-order Observable into a first-order Observable by
- * concatenating the inner Observables in order.
+ * 通过顺序地连接内部 Observable，将高阶 Observable 转化为一阶 Observable 。
  *
- * <span class="informal">Flattens an Observable-of-Observables by putting one
- * inner Observable after the other.</span>
+ * <span class="informal">通过一个接一个的连接内部 Observable ，将高阶 Observable 打平。</span>
  *
  * <img src="./img/concatAll.png" width="100%">
  *
- * Joins every Observable emitted by the source (a higher-order Observable), in
- * a serial fashion. It subscribes to each inner Observable only after the
- * previous inner Observable has completed, and merges all of their values into
- * the returned observable.
+ * 串行连接源(高阶 Observable)所发出的每个 Observable，只有当一个内部 Observable 完成的时候才订阅下
+ * 一个内部 Observable，并将它们的所有值合并到返回的 Observable 中。
  *
- * __Warning:__ If the source Observable emits Observables quickly and
- * endlessly, and the inner Observables it emits generally complete slower than
- * the source emits, you can run into memory issues as the incoming Observables
- * collect in an unbounded buffer.
+ * 警告: 如果源 Observable 很快并且不停的发送 Observables, 内部 Observables 发送的完成
+ * 通知比源 Observable 慢, 你会遇到内存问题，因为传入的 Observables 在无界缓冲区中收集.
  *
- * Note: `concatAll` is equivalent to `mergeAll` with concurrency parameter set
- * to `1`.
+ * 注意: concatAll 等价于 concurrency 参数(最大并发数)为1的 mergeAll 。
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var higherOrder = clicks.map(ev => Rx.Observable.interval(1000).take(4));
  * var firstOrder = higherOrder.concatAll();
  * firstOrder.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果是串行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link combineAll}
@@ -7033,8 +6772,7 @@ Observable.prototype.concat = concat$1;
  * @see {@link switch}
  * @see {@link zipAll}
  *
- * @return {Observable} An Observable emitting values from all the inner
- * Observables concatenated.
+ * @return {Observable} Observable，该 Observable 串联地发出所有内部 Observables 的值。
  * @method concatAll
  * @owner Observable
  */
@@ -7199,37 +6937,30 @@ var MergeMapSubscriber = (function (_super) {
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable, in a serialized fashion waiting for each one to complete before
- * merging the next.
+ * 将源值投射为一个合并到输出 Observable 的 Observable,以串行的方式等待前一个完成再合并下一个
+ * Observable。
  *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link concatAll}.</span>
+ * <span class="informal">将每个值映射为 Observable, 然后使用{@link concatAll}将所有的
+ * 内部 Observables 打平。</span>
  *
  * <img src="./img/concatMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called "inner") Observable. Each new inner Observable is
- * concatenated with the previous inner Observable.
+ * 返回一个 Observable，该 Observable 发出基于对源 Observable 发出的值调用提供的函数,
+ * 该函数返回所谓的内部 Observable。 每个新的内部 Observable 和前一个内部 Observable 连接在一起。
  *
- * __Warning:__ if source values arrive endlessly and faster than their
- * corresponding inner Observables can complete, it will result in memory issues
- * as inner Observables amass in an unbounded buffer waiting for their turn to
- * be subscribed to.
+ * 警告: 如果源值不断的到达并且速度快于内部 Observables 完成的速度, 它会导致内存问题，
+ * 因为内部的 Observable 在无限制的缓冲区中聚集，以等待轮流订阅。
  *
- * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
- * to `1`.
+ * Note: ｀concatMap｀ 等价于 ｀concurrency｀ 参数(最大并发数)为1的 ｀mergeMap｀ 。
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMap(ev => Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果是串行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
@@ -7239,24 +6970,17 @@ var MergeMapSubscriber = (function (_super) {
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project
+ * 用在源Observable发出的每个值上,返回Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An observable of values merged from the projected
- * Observables as they were subscribed to, one at a time. Optionally, these
- * values may have been projected from a passed `projectResult` argument.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and taking values from each projected inner
- * Observable sequentially.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} Observable，发出对源Observable发出的每个值使用投射函数
+ * (和可选的`resultSelector`)的结果并且顺序的取出每个投射过的内部Observable的值.
  * @method concatMap
  * @owner Observable
  */
@@ -7408,37 +7132,30 @@ var MergeMapToSubscriber = (function (_super) {
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to the same Observable which is merged multiple
- * times in a serialized fashion on the output Observable.
+ * 将每个源值投射成同一个 Observable ，该 Observable 会以串行的方式多次合并到输出 Observable 中 。
  *
- * <span class="informal">It's like {@link concatMap}, but maps each value
- * always to the same inner Observable.</span>
+ * <span class="informal">就像是{@link concatMap}, 但是将每个值总是映射为同一个内部 Observable。</span>
  *
  * <img src="./img/concatMapTo.png" width="100%">
  *
- * Maps each source value to the given Observable `innerObservable` regardless
- * of the source value, and then flattens those resulting Observables into one
- * single Observable, which is the output Observable. Each new `innerObservable`
- * instance emitted on the output Observable is concatenated with the previous
- * `innerObservable` instance.
+ * 不管源值是多少都将其映射为给定的`innerObservable`, 然后将其打平为单个 Observable,也就
+ * 是所谓的输出 Observable。 在输出 Observable 上发出的每个新的 innerObservable 实例与
+ * 先前的 innerObservable 实例相连接。
  *
- * __Warning:__ if source values arrive endlessly and faster than their
- * corresponding inner Observables can complete, it will result in memory issues
- * as inner Observables amass in an unbounded buffer waiting for their turn to
- * be subscribed to.
+ * 警告: 如果源值不断的到达并且速度快于内部Observables完成的速度, 它会导致内存问题
+ * 因为内部的 Observable 在无限制的缓冲区中聚集，以等待轮流订阅。
  *
  * Note: `concatMapTo` is equivalent to `mergeMapTo` with concurrency parameter
  * set to `1`.
  *
- * @example <caption>For each click event, tick every second from 0 to 3, with no concurrency</caption>
+ * @example <caption>每次点击都会触发从0到3的定时器(时间间隔为1秒)，定时器之间是串行的</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.concatMapTo(Rx.Observable.interval(1000).take(4));
  * result.subscribe(x => console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the "document" it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // 结果如下:
+ * // (结果不是并行的)
+ * // 对于"document"对象上的点击事件，都会以1秒的间隔发出从0到3的值
  * // one click = 1000ms-> 0 -1000ms-> 1 -1000ms-> 2 -1000ms-> 3
  *
  * @see {@link concat}
@@ -7447,19 +7164,15 @@ var MergeMapToSubscriber = (function (_super) {
  * @see {@link mergeMapTo}
  * @see {@link switchMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
- * the source Observable.
+ * @param {ObservableInput} innerObservable Observable，替换源Observable的每个值.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An observable of values merged together by joining the
- * passed observable with itself, one after the other, for each value emitted
- * from the source.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} observable，值由将每个源值投射的observable串行合并而成.
  * @method concatMapTo
  * @owner Observable
  */
@@ -7470,36 +7183,30 @@ function concatMapTo(innerObservable, resultSelector) {
 Observable.prototype.concatMapTo = concatMapTo;
 
 /**
- * Counts the number of emissions on the source and emits that number when the
- * source completes.
+ * 计算源的发送数量，并当源完成时发出该数值。
  *
- * <span class="informal">Tells how many values were emitted, when the source
- * completes.</span>
+ * <span class="informal">当源完成的时候，告知总共发送了多少个值。</span>
  *
  * <img src="./img/count.png" width="100%">
  *
- * `count` transforms an Observable that emits values into an Observable that
- * emits a single value that represents the number of values emitted by the
- * source Observable. If the source Observable terminates with an error, `count`
- * will pass this error notification along without emitting a value first. If
- * the source Observable does not terminate at all, `count` will neither emit
- * a value nor terminate. This operator takes an optional `predicate` function
- * as argument, in which case the output emission will represent the number of
- * source values that matched `true` with the `predicate`.
+ * `count` 将发送数据的 Observable 转化为只发出源 Observable 总共发出的数据项的 Observable。
+ * 如果源 Observable 发生错误, `count`将会发出错误而不是发出值。 如果源 Observable
+ * 一直不终结, `count` 既不会终结也不会发出数据。 这个操作符接受可选的`predicate`函数做为参数,
+ * 在这种情况下，输出则表示源值中满足 predicate 函数的值的数量。
  *
- * @example <caption>Counts how many seconds have passed before the first click happened</caption>
+ * @example <caption>记录第一次点击之前经过了几秒</caption>
  * var seconds = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var secondsBeforeClick = seconds.takeUntil(clicks);
  * var result = secondsBeforeClick.count();
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Counts how many odd numbers are there between 1 and 7</caption>
+ * @example <caption>记录1到7中间有多少个素数</caption>
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i => i % 2 === 1);
  * result.subscribe(x => console.log(x));
  *
- * // Results in:
+ * // 结果是:
  * // 4
  *
  * @see {@link max}
@@ -7507,13 +7214,11 @@ Observable.prototype.concatMapTo = concatMapTo;
  * @see {@link reduce}
  *
  * @param {function(value: T, i: number, source: Observable<T>): boolean} [predicate] A
- * boolean function to select what values are to be counted. It is provided with
- * arguments of:
- * - `value`: the value from the source Observable.
- * - `index`: the (zero-based) "index" of the value from the source Observable.
- * - `source`: the source Observable instance itself.
- * @return {Observable} An Observable of one number that represents the count as
- * described above.
+ * boolean 函数，用来选择哪些值会被计数。 参数如下：
+ * - `value`: 来自源的值
+ * - `index`: 来自投射的 Observable 的值的 "index"（从0开始）
+ * - `source`: 源 Observable 自身实例。
+ * @return {Observable} 数字类型的 Observable，该数字表示如上所述的计数。
  * @method count
  * @owner Observable
  */
@@ -7642,29 +7347,24 @@ var DeMaterializeSubscriber = (function (_super) {
 Observable.prototype.dematerialize = dematerialize;
 
 /**
- * Emits a value from the source Observable only after a particular time span
- * determined by another Observable has passed without another source emission.
+ * 只有在另一个 Observable 决定的一段特定时间经过后并且没有发出另一个源值之后，才从源 Observable 中发出一个值。
  *
- * <span class="informal">It's like {@link debounceTime}, but the time span of
- * emission silence is determined by a second Observable.</span>
+ * <span class="informal">就像是 {@link debounceTime}, 但是静默时间段由第二个 Observable
+ * 决定。</span>
  *
  * <img src="./img/debounce.png" width="100%">
  *
- * `debounce` delays values emitted by the source Observable, but drops previous
- * pending delayed emissions if a new value arrives on the source Observable.
- * This operator keeps track of the most recent value from the source
- * Observable, and spawns a duration Observable by calling the
- * `durationSelector` function. The value is emitted only when the duration
- * Observable emits a value or completes, and if no other value was emitted on
- * the source Observable since the duration Observable was spawned. If a new
- * value appears before the duration Observable emits, the previous value will
- * be dropped and will not be emitted on the output Observable.
+ * `debounce` 延时发送源 Observable 发出的值,但如果源 Observable 发出了新值
+ * 的话，它会丢弃掉前一个等待中的延迟发送。这个操作符会追踪源 Observable 的最新值,
+ * 并通过调用 durationSelector 函数来生产 duration Observable。只有当
+ * duration Observable 发出值或完成时，才会发出值，如果源 Observable 上没有发
+ * 出其他值，那么 duration Observable 就会产生。如果在 duration Observable 发
+ * 出前出现了新值，那么前一个值会被丢弃并且不会在输出 Observable 上发出。
  *
- * Like {@link debounceTime}, this is a rate-limiting operator, and also a
- * delay-like operator since output emissions do not necessarily occur at the
- * same time as they did on the source Observable.
+ * 就像{@link debounceTime}, 这是一个限制发出频率的操作符, 因为输出发送并不一定是
+ * 在同一时间发生的，就像它们在源 Observable 上所做的那样。
  *
- * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * @example <caption>在一顿狂点后只发出最新的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounce(() => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -7674,12 +7374,10 @@ Observable.prototype.dematerialize = dematerialize;
  * @see {@link delayWhen}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the timeout
- * duration for each source value, returned as an Observable or a Promise.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified duration Observable returned by
- * `durationSelector`, and may drop some values if they occur too frequently.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数接受
+ * 源Observable的值, 用于计算每个值的延迟持续时间, 返回一个Observable或者Promise.
+ * @return {Observable} Observable，通过 durationSelector 返回的特定 duration Observable
+ * 来延迟源 Observable 的发送，如果发送过于频繁可能会丢弃一些值。
  * @method debounce
  * @owner Observable
  */
@@ -7762,29 +7460,21 @@ var DebounceSubscriber = (function (_super) {
 Observable.prototype.debounce = debounce;
 
 /**
- * Emits a value from the source Observable only after a particular time span
- * has passed without another source emission.
+ * 只有在特定的一段时间经过后并且没有发出另一个源值，才从源 Observable 中发出一个值。
  *
- * <span class="informal">It's like {@link delay}, but passes only the most
- * recent value from each burst of emissions.</span>
+ * <span class="informal">就像是{@link delay}, 但是只通过每次大量发送中的最新值。</span>
  *
  * <img src="./img/debounceTime.png" width="100%">
  *
- * `debounceTime` delays values emitted by the source Observable, but drops
- * previous pending delayed emissions if a new value arrives on the source
- * Observable. This operator keeps track of the most recent value from the
- * source Observable, and emits that only when `dueTime` enough time has passed
- * without any other value appearing on the source Observable. If a new value
- * appears before `dueTime` silence occurs, the previous value will be dropped
- * and will not be emitted on the output Observable.
+ * `debounceTime`延时发送源Observable发送的值,但是会丢弃正在排队的发送如果源Observable
+ * 又发出新值。 该操作符追逐了源Observable中最新的值, 并且发出它当且仅当在`dueTime`时间段内
+ * 没有发送行为。 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出Observable
+ * 中发出。
  *
- * This is a rate-limiting operator, because it is impossible for more than one
- * value to be emitted in any time window of duration `dueTime`, but it is also
- * a delay-like operator since output emissions do not occur at the same time as
- * they did on the source Observable. Optionally takes a {@link IScheduler} for
- * managing timers.
+ * 这是一个控制发送频率的操作符，因为不可能在任何时间窗口的持续时间(dueTime)内发出一个以上的值，同样也是一个延时类操作符因为输出
+ * 并不一定发生在同一时间因为是源Observable上发生的。 可选性的接收一个 {@link IScheduler} 用于管理定时器。
  *
- * @example <caption>Emit the most recent click after a burst of clicks</caption>
+ * @example <caption>在一顿狂点后只发出最新的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.debounceTime(1000);
  * result.subscribe(x => console.log(x));
@@ -7795,15 +7485,10 @@ Observable.prototype.debounce = debounce;
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} dueTime The timeout duration in milliseconds (or the time
- * unit determined internally by the optional `scheduler`) for the window of
- * time required to wait for emission silence before emitting the most recent
- * source value.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the timeout for each value.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified `dueTime`, and may drop some values if they occur
- * too frequently.
+ * @param {number} dueTime 在发送最新的源值之前需要等待的以毫秒为单位(或者由可选的`scheduler`
+ * 提供的时间单位)的时间间隔。
+ * @param {Scheduler} [scheduler=async] 调节器( {@link IScheduler} )，用于管理处理每个值的延时的定时器。
+ * @return {Observable} Observable，通过指定的 dueTime 来延迟源 Observable 的发送，如果发送过于频繁可能会丢弃一些值。
  * @method debounceTime
  * @owner Observable
  */
@@ -7872,19 +7557,16 @@ Observable.prototype.debounceTime = debounceTime;
 
 /* tslint:enable:max-line-length */
 /**
- * Emits a given value if the source Observable completes without emitting any
- * `next` value, otherwise mirrors the source Observable.
+ * 如果源 Observable 在完成之前没有发出任何 next 值，则发出给定的值，否则返回 Observable 的镜像。
  *
- * <span class="informal">If the source Observable turns out to be empty, then
- * this operator will emit a default value.</span>
+ * <span class="informal">如果源Observable本来就是空的,那么这个操作符会发出一个默认值。</span>
  *
  * <img src="./img/defaultIfEmpty.png" width="100%">
  *
- * `defaultIfEmpty` emits the values emitted by the source Observable or a
- * specified default value if the source Observable is empty (completes without
- * having emitted any `next` value).
+ * 如果源 Observable 是空的(在完成之前没有发出任何 next 值)，那么 defaultIfEmpty
+ * 会发出源 Observable 或指定的默认值。
  *
- * @example <caption>If no clicks happen in 5 seconds, then emit "no clicks"</caption>
+ * @example <caption>如果在5秒内没有点击事件发生,发出"no clicks"</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
  * var result = clicksBeforeFive.defaultIfEmpty('no clicks');
@@ -7893,11 +7575,9 @@ Observable.prototype.debounceTime = debounceTime;
  * @see {@link empty}
  * @see {@link last}
  *
- * @param {any} [defaultValue=null] The default value used if the source
- * Observable is empty.
- * @return {Observable} An Observable that emits either the specified
- * `defaultValue` if the source Observable emits no items, or the values emitted
- * by the source Observable.
+ * @param {any} [defaultValue=null] 如果源Observable是空的话使用的默认值。
+ * @return {Observable} Observable，如果源
+ * Observable不发送数据，要么发出特定的`defaultValue`, 要么发出源Observable发出的数据。
  * @method defaultIfEmpty
  * @owner Observable
  */
@@ -7942,27 +7622,23 @@ var DefaultIfEmptySubscriber = (function (_super) {
 Observable.prototype.defaultIfEmpty = defaultIfEmpty;
 
 /**
- * Delays the emission of items from the source Observable by a given timeout or
- * until a given Date.
+ * 通过给定的超时或者直到一个给定的时间来延迟源 Observable 的发送。
  *
- * <span class="informal">Time shifts each item by some specified amount of
- * milliseconds.</span>
+ * <span class="informal">每个数据项的发出时间都往后推移固定的毫秒数.</span>
  *
  * <img src="./img/delay.png" width="100%">
  *
- * If the delay argument is a Number, this operator time shifts the source
- * Observable by that amount of time expressed in milliseconds. The relative
- * time intervals between the values are preserved.
+ * 如果延时参数是数字, 这个操作符会将源 Observable 的发出时间都往后推移固定的毫秒数。
+ * 保存值之间的相对时间间隔.
  *
- * If the delay argument is a Date, this operator time shifts the start of the
- * Observable execution until the given date occurs.
+ * 如果延迟参数是日期类型, 这个操作符会延时Observable的执行直到到了给定的时间.
  *
- * @example <caption>Delay each click by one second</caption>
+ * @example <caption>每次点击延迟1秒</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
  * delayedClicks.subscribe(x => console.log(x));
  *
- * @example <caption>Delay all clicks until a future date happens</caption>
+ * @example <caption>延时所有的点击直到到达未来的时间点</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var date = new Date('March 15, 2050 12:00:00'); // in the future
  * var delayedClicks = clicks.delay(date); // click emitted only after that date
@@ -7971,12 +7647,9 @@ Observable.prototype.defaultIfEmpty = defaultIfEmpty;
  * @see {@link debounceTime}
  * @see {@link delayWhen}
  *
- * @param {number|Date} delay The delay duration in milliseconds (a `number`) or
- * a `Date` until which the emission of the source items is delayed.
- * @param {Scheduler} [scheduler=async] The IScheduler to use for
- * managing the timers that handle the time-shift for each item.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified timeout or Date.
+ * @param {number|Date} delay 延迟时间(以毫秒为单位的数字)或 Date 对象(发送延迟到这个时间点)。
+ * @param {Scheduler} [scheduler=async] 调度器，用来管理处理每项时延的定时器。
+ * @return {Observable} 该 Observalbe 通过指定的超时时间或日期来延迟源 Observable 的发送。
  * @method delay
  * @owner Observable
  */
@@ -8068,29 +7741,22 @@ var DelayMessage = (function () {
 Observable.prototype.delay = delay;
 
 /**
- * Delays the emission of items from the source Observable by a given time span
- * determined by the emissions of another Observable.
+ * 延时源 Observabl e的所有的数据项的发送一个固定的时间段，该时间段由另一个 Observable 的发送决定。
  *
- * <span class="informal">It's like {@link delay}, but the time span of the
- * delay duration is determined by a second Observable.</span>
+ * <span class="informal">就像是{@link delay}, 但是延时的时间间隔由第二个Observable决定.</span>
  *
  * <img src="./img/delayWhen.png" width="100%">
  *
- * `delayWhen` time shifts each emitted value from the source Observable by a
- * time span determined by another Observable. When the source emits a value,
- * the `delayDurationSelector` function is called with the source value as
- * argument, and should return an Observable, called the "duration" Observable.
- * The source value is emitted on the output Observable only when the duration
- * Observable emits a value or completes.
+ * `delayWhen` 通过由另一个 Observable 决定的时间段来延迟源 Observable 的每个发出值。
+ * 当源发出一个数据,`delayDurationSelector`函数将该源值当做参数, 返回一个被称为"持续"Observable。
+ * 当且仅当持续发出或者完成时，源值才会在输出 Observable 上发出。
  *
- * Optionally, `delayWhen` takes a second argument, `subscriptionDelay`, which
- * is an Observable. When `subscriptionDelay` emits its first value or
- * completes, the source Observable is subscribed to and starts behaving like
- * described in the previous paragraph. If `subscriptionDelay` is not provided,
- * `delayWhen` will subscribe to the source Observable as soon as the output
- * Observable is subscribed.
+ * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`, 它是一个Observable.
+ * 当`subscriptionDelay`发出第一个值或者完成, 源Observable被订阅并且开始像前一段描
+ * 述的一样. 如果`subscriptionDelay`没有提供,`delayWhen` 将会订阅源Observable只
+ * 要输出Observable被订阅.
  *
- * @example <caption>Delay each click by a random amount of time, between 0 and 5 seconds</caption>
+ * @example <caption>将每次点击延迟0到5秒的随机时间</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var delayedClicks = clicks.delayWhen(event =>
  *   Rx.Observable.interval(Math.random() * 5000)
@@ -8100,15 +7766,11 @@ Observable.prototype.delay = delay;
  * @see {@link debounce}
  * @see {@link delay}
  *
- * @param {function(value: T): Observable} delayDurationSelector A function that
- * returns an Observable for each value emitted by the source Observable, which
- * is then used to delay the emission of that item on the output Observable
- * until the Observable returned from this function emits a value.
- * @param {Observable} subscriptionDelay An Observable that triggers the
- * subscription to the source Observable once it emits any value.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by an amount of time specified by the Observable returned by
- * `delayDurationSelector`.
+ * @param {function(value: T): Observable} delayDurationSelector 该函数为源 Observable
+ * 发出的每个值返回一个 Observable，用于延迟在输出 Observable 上的发送，直到返回的 Observable 发出值。
+ * @param {Observable} subscriptionDelay Observable，该 Observable 一旦发出任何值则触发源 Observable 的订阅。
+ * @return {Observable} Observable，延时源Observable的发出时间，该时间由`delayDurationSelector`
+ * 返回的Observable决定.
  * @method delayWhen
  * @owner Observable
  */
@@ -9932,27 +9594,19 @@ var IsEmptySubscriber = (function (_super) {
 Observable.prototype.isEmpty = isEmpty;
 
 /**
- * Ignores source values for a duration determined by another Observable, then
- * emits the most recent value from the source Observable, then repeats this
- * process.
+ * 在由另外一个 Observable 决定的时间段里忽略源数据，然后发出源 Observable 最新发出的值，
+ * 然后重复此过程。
  *
- * <span class="informal">It's like {@link auditTime}, but the silencing
- * duration is determined by a second Observable.</span>
+ * <span class="informal">就像是{@link auditTime}, 但是沉默持续时间由第二个 Observable 决定。</span>
  *
  * <img src="./img/audit.png" width="100%">
  *
- * `audit` is similar to `throttle`, but emits the last value from the silenced
- * time window, instead of the first value. `audit` emits the most recent value
- * from the source Observable on the output Observable as soon as its internal
- * timer becomes disabled, and ignores source values while the timer is enabled.
- * Initially, the timer is disabled. As soon as the first source value arrives,
- * the timer is enabled by calling the `durationSelector` function with the
- * source value, which returns the "duration" Observable. When the duration
- * Observable emits a value or completes, the timer is disabled, then the most
- * recent source value is emitted on the output Observable, and this process
- * repeats for the next source value.
+ * `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
+ * 忽略源值。一旦第一个源值达到，它会被转发到输出 Observable ，然后通过使用源值调用 durationSelector 函数来
+ * 启动定时器，这个函数返回 "duration" Observable 。当 duration Observable 发出值或完成时，定时器会被禁用，
+ * 并且下一个源值也是重复此过程。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.audit(ev => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -9963,11 +9617,8 @@ Observable.prototype.isEmpty = isEmpty;
  * @see {@link sample}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the silencing
- * duration, returned as an Observable or a Promise.
- * @return {Observable<T>} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数从源 Observable 中接收值，用于为每个源值计算沉默持续时间，并返回 Observable 或 Promise 。
+ * @return {Observable<T>} 该 Observable 限制源 Observable 的发送频率。
  * @method audit
  * @owner Observable
  */
@@ -10033,27 +9684,19 @@ var AuditSubscriber = (function (_super) {
 Observable.prototype.audit = audit;
 
 /**
- * Ignores source values for `duration` milliseconds, then emits the most recent
- * value from the source Observable, then repeats this process.
+ * 在 duration 毫秒内忽略源值并发出源 Observable 的最新值， 然后重复此过程。
  *
- * <span class="informal">When it sees a source values, it ignores that plus
- * the next ones for `duration` milliseconds, and then it emits the most recent
- * value from the source.</span>
+ * <span class="informal">当它看见一个源值，它会在接下来的 duration 毫秒内忽略这个值和接下来的源值，然后发出最新的源值。</span>
  *
  * <img src="./img/auditTime.png" width="100%">
  *
- * `auditTime` is similar to `throttleTime`, but emits the last value from the
- * silenced time window, instead of the first value. `auditTime` emits the most
- * recent value from the source Observable on the output Observable as soon as
- * its internal timer becomes disabled, and ignores source values while the
- * timer is enabled. Initially, the timer is disabled. As soon as the first
- * source value arrives, the timer is enabled. After `duration` milliseconds (or
- * the time unit determined internally by the optional `scheduler`) has passed,
- * the timer is disabled, then the most recent source value is emitted on the
- * output Observable, and this process repeats for the next source value.
- * Optionally takes a {@link IScheduler} for managing timers.
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ *  `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在
+ * 输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
+ * 忽略源值。只要源 Observable 发出第一值, 时间间隔被启用。度过持续时间后(或者时间单位由内部可选的参数调度器决定),
+ * 时间间隔被禁用, 输出 Observable 发出最新的值, 不断的重复这个过程。
+ *
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.auditTime(1000);
  * result.subscribe(x => console.log(x));
@@ -10064,13 +9707,9 @@ Observable.prototype.audit = audit;
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} duration Time to wait before emitting the most recent source
- * value, measured in milliseconds or the time unit determined internally
- * by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the rate-limiting behavior.
- * @return {Observable<T>} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {number} duration 以毫秒为单位或以可选的 scheduler 内部决定的时间单位来衡量。
+ * @param {Scheduler} [scheduler=async] 调度器( {@link IScheduler} )，用来管理处理限制发送频率的定时器。
+ * @return {Observable<T>} 该 Observable 限制源 Observable 的发送频率。
  * @method auditTime
  * @owner Observable
  */
@@ -10458,29 +10097,25 @@ Observable.prototype.materialize = materialize;
 
 /* tslint:enable:max-line-length */
 /**
- * Applies an accumulator function over the source Observable, and returns the
- * accumulated result when the source completes, given an optional seed value.
+ * 在源 Observalbe 上应用 accumulator (累加器) 函数，然后当源 Observable 完成时，返回
+ * 累加的结果，可以提供一个可选的 seed 值。
  *
- * <span class="informal">Combines together all values emitted on the source,
- * using an accumulator function that knows how to join a new source value into
- * the accumulation from the past.</span>
+ * <span class="informal">使用 accumulator (累加器) 函数将源 Observable 所发出的所有值归并在一起，
+ * 该函数知道如何将新的源值纳入到过往的累加结果中。</span>
  *
  * <img src="./img/reduce.png" width="100%">
  *
- * Like
- * [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce),
- * `reduce` applies an `accumulator` function against an accumulation and each
- * value of the source Observable (from the past) to reduce it to a single
- * value, emitted on the output Observable. Note that `reduce` will only emit
- * one value, only when the source Observable completes. It is equivalent to
- * applying operator {@link scan} followed by operator {@link last}.
+ * 类似于 [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)，
+ * `reduce` 可以对累加值和源 Observable (过去的)的每个值应用 `accumulator` 函数，
+ * 然后将其归并成一个值并且在输出 Observable 上发出。注意，`reduce` 只会发出一个值，
+ * 并且是当源 Observable 完成时才发出。它等价于使用 {@link scan} 操作符后面再跟
+ * {@link last} 操作符。
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * 返回的 Observable 为由源 Observable 发出的每项应用指定的 `accumulator` 函数。
+ * 如果指定了 `seed` 值，那么这个值会作为 `accumulator` 函数的初始值。如果没有指定
+ * `seed` 值，那么源中的第一项会作为 `seed` 来使用。
  *
- * @example <caption>Count the number of click events that happened in 5 seconds</caption>
+ * @example <caption>计算5秒内发生的点击次数</caption>
  * var clicksInFiveSeconds = Rx.Observable.fromEvent(document, 'click')
  *   .takeUntil(Rx.Observable.interval(5000));
  * var ones = clicksInFiveSeconds.mapTo(1);
@@ -10493,11 +10128,11 @@ Observable.prototype.materialize = materialize;
  * @see {@link mergeScan}
  * @see {@link scan}
  *
- * @param {function(acc: R, value: T, index: number): R} accumulator The accumulator function
- * called on each source value.
- * @param {R} [seed] The initial accumulation value.
- * @return {Observable<R>} An Observable that emits a single value that is the
- * result of accumulating the values emitted by the source Observable.
+ * @param {function(acc: R, value: T, index: number): R} accumulator 调用每个
+ * 源值的累加器函数。
+ * @param {R} [seed] 初始累加值。
+ * @return {Observable<R>} 该 Observable 发出单个值，这个值是由源 Observable
+ * 发出值累加的结果。
  * @method reduce
  * @owner Observable
  */
@@ -10989,21 +10624,18 @@ Observable.prototype.observeOn = observeOn;
 Observable.prototype.onErrorResumeNext = onErrorResumeNext;
 
 /**
- * Groups pairs of consecutive emissions together and emits them as an array of
- * two values.
+ * 将一系列连续的发送成对的组合在一起，并将这些分组作为两个值的数组发出。
  *
- * <span class="informal">Puts the current value and previous value together as
- * an array, and emits that.</span>
+ * <span class="informal">将当前值和前一个值作为数组放在一起，然后将其发出。</span>
  *
  * <img src="./img/pairwise.png" width="100%">
  *
- * The Nth emission from the source Observable will cause the output Observable
- * to emit an array [(N-1)th, Nth] of the previous and the current value, as a
- * pair. For this reason, `pairwise` emits on the second and subsequent
- * emissions from the source Observable, but not on the first emission, because
- * there is no previous value in that case.
+ * 源 Observable 的第N个发送会使输出 Observable 发出一个数组 [(N-1)th, Nth]，即前一个
+ * 值和当前值的数组，它们作为一对。出于这个原因，`pairwise` 发出源 Observable 的
+ * 第二个和随后的发送，而不发送第一个，因为它没有前一个值。
  *
- * @example <caption>On every click (starting from the second), emit the relative distance to the previous click</caption>
+ *
+ * @example <caption>每次点击(从第二次开始)，都会发出与前一次点击的相对距离</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var pairs = clicks.pairwise();
  * var distance = pairs.map(pair => {
@@ -11018,8 +10650,8 @@ Observable.prototype.onErrorResumeNext = onErrorResumeNext;
  * @see {@link buffer}
  * @see {@link bufferCount}
  *
- * @return {Observable<Array<T>>} An Observable of pairs (as arrays) of
- * consecutive values from the source Observable.
+ * @return {Observable<Array<T>>} 该 Observabale 为源 Observable 的
+ * 成对的连续值(数组)。
  * @method pairwise
  * @owner Observable
  */
@@ -11069,23 +10701,20 @@ function not(pred, thisArg) {
 }
 
 /**
- * Splits the source Observable into two, one with values that satisfy a
- * predicate, and another with values that don't satisfy the predicate.
+ * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有
+ * 不满足 predicate 的值。
  *
- * <span class="informal">It's like {@link filter}, but returns two Observables:
- * one like the output of {@link filter}, and the other with values that did not
- * pass the condition.</span>
+ * <span class="informal">它很像 {@link filter}，但是返回两个 Observables ：
+ * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>
  *
  * <img src="./img/partition.png" width="100%">
  *
- * `partition` outputs an array with two Observables that partition the values
- * from the source Observable through the given `predicate` function. The first
- * Observable in that array emits source values for which the predicate argument
- * returns true. The second Observable emits source values for which the
- * predicate returns false. The first behaves like {@link filter} and the second
- * behaves like {@link filter} with the predicate negated.
+ * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate`
+ * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数
+ * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是
+ * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。
  *
- * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>
+ * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');
  * var clicksOnDivs = parts[0];
@@ -11095,17 +10724,13 @@ function not(pred, thisArg) {
  *
  * @see {@link filter}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates each value emitted by the source Observable. If it returns `true`,
- * the value is emitted on the first Observable in the returned array, if
- * `false` the value is emitted on the second Observable in the array. The
- * `index` parameter is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {[Observable<T>, Observable<T>]} An array with two Observables: one
- * with values that passed the predicate, and another with values that did not
- * pass the predicate.
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable
+ * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个
+ * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个
+ * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。
+ * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。
+ * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：
+ * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。
  * @method partition
  * @owner Observable
  */
@@ -11119,28 +10744,24 @@ function partition(predicate, thisArg) {
 Observable.prototype.partition = partition;
 
 /**
- * Maps each source value (an object) to its specified nested property.
+ * 将每个源值(对象)映射成它指定的嵌套属性。
  *
- * <span class="informal">Like {@link map}, but meant only for picking one of
- * the nested properties of every emitted object.</span>
+ * <span class="informal">类似于 {@link map}，但仅用于选择每个发出对象的某个嵌套属性。</span>
  *
  * <img src="./img/pluck.png" width="100%">
  *
- * Given a list of strings describing a path to an object property, retrieves
- * the value of a specified nested property from all values in the source
- * Observable. If a property can't be resolved, it will return `undefined` for
- * that value.
+ * 给定描述对象属性路径的字符串的列表，然后从源 Observable 中的所有值中检索指定嵌套
+ * 属性的值。如果属性无法解析，它会返回 `undefined` 。
  *
- * @example <caption>Map every every click to the tagName of the clicked target element</caption>
+ * @example <caption>将每次点击映射成点击的 target 元素的 tagName 属性</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var tagNames = clicks.pluck('target', 'tagName');
  * tagNames.subscribe(x => console.log(x));
  *
  * @see {@link map}
  *
- * @param {...string} properties The nested properties to pluck from each source
- * value (an object).
- * @return {Observable} A new Observable of property values from the source values.
+ * @param {...string} properties 从每个源值(对象啊)中提取的嵌套属性。
+ * @return {Observable} 全新的 Observable，它发出源自源值的属性值。
  * @method pluck
  * @owner Observable
  */
@@ -11176,15 +10797,13 @@ Observable.prototype.pluck = pluck;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
- * before it begins emitting items to those Observers that have subscribed to it.
+ * 返回 ConnectableObservable，它是 Observable 的变种，它会一直等待，直到 connnect 方法被调用才会开始把值发送给那些订阅它的观察者。
  *
  * <img src="./img/publish.png" width="100%">
  *
- * @param {Function} [selector] - Optional selector function which can use the multicasted source sequence as many times
- * as needed, without causing multiple subscriptions to the source sequence.
- * Subscribers to the given source will receive all notifications of the source from the time of the subscription on.
- * @return A ConnectableObservable that upon connection causes the source Observable to emit items to its Observers.
+ * @param {Function} [selector] - 可选的选择器函数，可以根据需要多次使用以多播源序列，而不会导致源序列
+ * 生成多个 subscriptions 。给定源的订阅者会从订阅开始的一刻起，接收源的所有通知。
+ * @return ConnectableObservable，一旦连接，源 Observable 便会向它的观察者发出项。
  * @method publish
  * @owner Observable
  */
@@ -11279,14 +10898,12 @@ Observable.prototype.race = race;
 Observable.prototype.reduce = reduce;
 
 /**
- * Returns an Observable that repeats the stream of items emitted by the source Observable at most count times.
+ * 返回的 Observable 重复由源 Observable 所发出的项的流，最多可以重复 count 次。
  *
  * <img src="./img/repeat.png" width="100%">
  *
- * @param {number} [count] The number of times the source Observable items are repeated, a count of 0 will yield
- * an empty Observable.
- * @return {Observable} An Observable that repeats the stream of items emitted by the source Observable at most
- * count times.
+ * @param {number} [count] 源 Observable 项重复的次数，如果 count 为0则产生一个空的 Observable 。
+ * @return {Observable} 该 Observable 重复由源 Observable 所发出的项的流，最多可以重复 count 次。
  * @method repeat
  * @owner Observable
  */
@@ -11342,16 +10959,15 @@ var RepeatSubscriber = (function (_super) {
 Observable.prototype.repeat = repeat;
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of a `complete`. If the source
- * Observable calls `complete`, this method will emit to the Observable returned from `notifier`. If that Observable
- * calls `complete` or `error`, then this method will call `complete` or `error` on the child subscription. Otherwise
- * this method will resubscribe to the source Observable.
+ * 返回的 Observalb 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier`
+ * 返回的 Observable 。如果这个 Observale 调用了 `complete` 或 `error`，那么这个方法会在子 subscription 上调用
+ * `complete` 或 `error` 。否则，此方法将重新订阅源 Observable。
  *
  * <img src="./img/repeatWhen.png" width="100%">
  *
- * @param {function(notifications: Observable): Observable} notifier - Receives an Observable of notifications with
- * which a user can `complete` or `error`, aborting the repetition.
- * @return {Observable} The source Observable modified with repeat logic.
+ * @param {function(notifications: Observable): Observable} notifier - 接收 Observable 的通知，用户可以该通知
+ * 的 `complete` 或`error` 来中止重复。
+ * @return {Observable} 使用重复逻辑修改过的源 Observable 。
  * @method repeatWhen
  * @owner Observable
  */
@@ -11440,18 +11056,15 @@ var RepeatWhenSubscriber = (function (_super) {
 Observable.prototype.repeatWhen = repeatWhen;
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will resubscribe to the source Observable for a maximum of `count` resubscriptions (given
- * as a number parameter) rather than propagating the `error` call.
+ * 返回一个 Observable， 该 Observable 是源 Observable 不包含错误异常的镜像。 如果源 Observable 发生错误, 这个方法不会传播错误而是会不
+ * 断的重新订阅源 Observable 直到达到最大重试次数 (由数字参数指定)。
  *
  * <img src="./img/retry.png" width="100%">
  *
- * Any and all items emitted by the source Observable will be emitted by the resulting Observable, even those emitted
- * during failed subscriptions. For example, if an Observable fails at first but emits [1, 2] then succeeds the second
- * time and emits: [1, 2, 3, 4, 5] then the complete stream of emissions and notifications
- * would be: [1, 2, 1, 2, 3, 4, 5, `complete`].
- * @param {number} count - Number of retry attempts before failing.
- * @return {Observable} The source Observable modified with the retry logic.
+ * 任何所有被源 Observable 发出的数据项都会被做为结果的 Observable 发出, 即使这些发送是在失败的订阅期间。 举个例子, 如果一个 Observable
+ * 第一次发送[1, 2]后失败了，紧接着第二次成功的发出: [1, 2, 3, 4, 5]后触发完成， 最后发送流和通知为: [1, 2, 1, 2, 3, 4, 5, `complete`]。
+ * @param {number} count - 在失败之前重试的次数。
+ * @return {Observable} 使用重试逻辑修改过的源 Observable。
  * @method retry
  * @owner Observable
  */
@@ -11499,16 +11112,14 @@ var RetrySubscriber = (function (_super) {
 Observable.prototype.retry = retry;
 
 /**
- * Returns an Observable that mirrors the source Observable with the exception of an `error`. If the source Observable
- * calls `error`, this method will emit the Throwable that caused the error to the Observable returned from `notifier`.
- * If that Observable calls `complete` or `error` then this method will call `complete` or `error` on the child
- * subscription. Otherwise this method will resubscribe to the source Observable.
+ * 返回一个 Observable， 该 Observable 是源 Observable 不包含错误异常的镜像。 如果源头 Observable 触发
+ * `error`， 这个方法会发出引起错误的 Throwable 给 `notifier` 返回的 Observable。 如果该 Observable 触发 `complete` 或者 `error`
+ * 则该方法会使子订阅触发 `complete` 和 `error`。 否则该方法会重新订阅源 Observable。
  *
  * <img src="./img/retryWhen.png" width="100%">
  *
- * @param {function(errors: Observable): Observable} notifier - Receives an Observable of notifications with which a
- * user can `complete` or `error`, aborting the retry.
- * @return {Observable} The source Observable modified with retry logic.
+ * @param {function(errors: Observable): Observable} notifier - 接受一个用户可以`complete` 或者 `error`的通知型 Observable， 终止重试。
+ * @return {Observable} 使用重试逻辑修改过的源 Observable。
  * @method retryWhen
  * @owner Observable
  */
@@ -11590,21 +11201,18 @@ var RetryWhenSubscriber = (function (_super) {
 Observable.prototype.retryWhen = retryWhen;
 
 /**
- * Emits the most recently emitted value from the source Observable whenever
- * another Observable, the `notifier`, emits.
+ * 发出源 Observable 最新发出的值当另一个 `notifier` Observable发送时。
  *
- * <span class="informal">It's like {@link sampleTime}, but samples whenever
- * the `notifier` Observable emits something.</span>
+ * <span class="informal">就像是 {@link sampleTime}， 但是无论何时`notifier` Observable
+ * 进行了发送都会去取样。</span>
  *
  * <img src="./img/sample.png" width="100%">
  *
- * Whenever the `notifier` Observable emits a value or completes, `sample`
- * looks at the source Observable and emits whichever value it has most recently
- * emitted since the previous sampling, unless the source has not emitted
- * anything since the previous sampling. The `notifier` is subscribed to as soon
- * as the output Observable is subscribed.
+ * 无论何时 `notifier` Observable 发出一个值或者完成， `sample` 会去源 Observable 中发送上次
+ * 取样后源 Observable 发出的最新值， 除非源在上一次取样后没有发出值。 `notifier`会被订阅只要输出
+ * Observable 被订阅。
  *
- * @example <caption>On every click, sample the most recent "seconds" timer</caption>
+ * @example <caption>每次点击， 取样最新的 "seconds" 时间器</caption>
  * var seconds = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = seconds.sample(clicks);
@@ -11615,11 +11223,9 @@ Observable.prototype.retryWhen = retryWhen;
  * @see {@link sampleTime}
  * @see {@link throttle}
  *
- * @param {Observable<any>} notifier The Observable to use for sampling the
- * source Observable.
- * @return {Observable<T>} An Observable that emits the results of sampling the
- * values emitted by the source Observable whenever the notifier Observable
- * emits value or completes.
+ * @param {Observable<any>} notifier 被用来取样的源 Observable。
+ * @return {Observable<T>} Observable，该 Observable 发出当通知 Observable
+ * 发出值或者完成时从源 Observable 取样的最新值。
  * @method sample
  * @owner Observable
  */
@@ -11671,22 +11277,17 @@ var SampleSubscriber = (function (_super) {
 Observable.prototype.sample = sample;
 
 /**
- * Emits the most recently emitted value from the source Observable within
- * periodic time intervals.
+ * 在周期时间间隔内发出源 Observable 发出的最新值。
  *
- * <span class="informal">Samples the source Observable at periodic time
- * intervals, emitting what it samples.</span>
+ * <span class="informal">在周期时间间隔内取样源 Observable ， 发出取样的。</span>
  *
  * <img src="./img/sampleTime.png" width="100%">
  *
- * `sampleTime` periodically looks at the source Observable and emits whichever
- * value it has most recently emitted since the previous sampling, unless the
- * source has not emitted anything since the previous sampling. The sampling
- * happens periodically in time every `period` milliseconds (or the time unit
- * defined by the optional `scheduler` argument). The sampling starts as soon as
- * the output Observable is subscribed.
+ * `sampleTime` 周期性的查看源 Observable 并且发出上次取样后发出的最新的值， 除非上次取样后
+ * 就没有再发出数据了。 取样在每个周期毫秒(或者时间单位由可选的调度器参数决定)内定期发生。 只要
+ * 输出 Observable 被订阅取样就开始。
  *
- * @example <caption>Every second, emit the most recent click at most once</caption>
+ * @example <caption>每秒， 发出最近的一个点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.sampleTime(1000);
  * result.subscribe(x => console.log(x));
@@ -11697,12 +11298,10 @@ Observable.prototype.sample = sample;
  * @see {@link sample}
  * @see {@link throttleTime}
  *
- * @param {number} period The sampling period expressed in milliseconds or the
- * time unit determined internally by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the sampling.
- * @return {Observable<T>} An Observable that emits the results of sampling the
- * values emitted by the source Observable at the specified time interval.
+ * @param {number} period 用毫秒或者由可选的调度器参数决定的时间单位表示的取样周期。
+ * @param {Scheduler} [scheduler=async] {@link IScheduler}用来管理取样的时间。
+ * @return {Observable<T>} Observable，该 Observable 发出特定的时间周期从源 Observable
+ * 取样的最新值。
  * @method sampleTime
  * @owner Observable
  */
@@ -11756,25 +11355,19 @@ Observable.prototype.sampleTime = sampleTime;
 
 /* tslint:enable:max-line-length */
 /**
- * Applies an accumulator function over the source Observable, and returns each
- * intermediate result, with an optional seed value.
+ * 对源 Observable 使用累加器函数， 返回生成的中间值， 可选的初始值。
  *
- * <span class="informal">It's like {@link reduce}, but emits the current
- * accumulation whenever the source emits a value.</span>
+ * <span class="informal">就想是 {@link reduce}, 但是发出目前的累计数当源发出数据的时候。</span>
  *
  * <img src="./img/scan.png" width="100%">
  *
- * Combines together all values emitted on the source, using an accumulator
- * function that knows how to join a new source value into the accumulation from
- * the past. Is similar to {@link reduce}, but emits the intermediate
- * accumulations.
+ * 将所有源发出的数据结合起来， 使用一个累加器函数，该函数知道如何将新的值加入到累加器中。
+ * 这就像是{@link reduce}， 但是会发出中间的累加值。
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * 返回一个 Observable， 该 Observable 对每个源 Observable 发出的值使用特定的累加器。
+ * 如果`seed`值提供了， 这个值会被累加器用作初始值。 如果`seed`值没有被提供， 源数据的第一项会被当做初始值。
  *
- * @example <caption>Count the number of click events</caption>
+ * @example <caption>计数点击次数</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var ones = clicks.mapTo(1);
  * var seed = 0;
@@ -11786,9 +11379,9 @@ Observable.prototype.sampleTime = sampleTime;
  * @see {@link reduce}
  *
  * @param {function(acc: R, value: T, index: number): R} accumulator
- * The accumulator function called on each source value.
- * @param {T|R} [seed] The initial accumulation value.
- * @return {Observable<R>} An observable of the accumulated values.
+ * 对每个源数据调用的累加器函数。
+ * @param {T|R} [seed] 初始值。
+ * @return {Observable<R>} 带有累加功能的observable。
  * @method scan
  * @owner Observable
  */
@@ -11868,22 +11461,17 @@ var ScanSubscriber = (function (_super) {
 Observable.prototype.scan = scan;
 
 /**
- * Compares all values of two observables in sequence using an optional comparor function
- * and returns an observable of a single boolean value representing whether or not the two sequences
- * are equal.
- *
- * <span class="informal">Checks to see of all values emitted by both observables are equal, in order.</span>
+ * 使用可选的比较函数，按顺序比较两个 Observables 的所有值，然后返回单个布尔值的 Observable， 以表示两个序列是否相等。
+ * <span class="informal">按顺序检查两个 Observables 所发出的所有值是否相等。</span>
  *
  * <img src="./img/sequenceEqual.png" width="100%">
  *
- * `sequenceEqual` subscribes to two observables and buffers incoming values from each observable. Whenever either
- * observable emits a value, the value is buffered and the buffers are shifted and compared from the bottom
- * up; If any value pair doesn't match, the returned observable will emit `false` and complete. If one of the
- * observables completes, the operator will wait for the other observable to complete; If the other
- * observable emits before completing, the returned observable will emit `false` and complete. If one observable never
- * completes or emits after the other complets, the returned observable will never complete.
+ * `sequenceEqual` 订阅两个 observables 并且缓冲每个 observable 发出的值。 当任何一个 observable 发出数据， 该值会被缓冲
+ * 并且缓冲区从底部向上移动和比较； 如果任何一对值不匹配， 返回的 observable 会发出 `false` 和完成。 如果其中一个 observables 完
+ * 成了， 操作符会等待另一个 observable 完成； 如果另一个 observable 在完成之前又发出了数据， 返回 observable 会发出 `false` 和完
+ * 成。 如果其中一个 observable 永远不会完成或者在另一个完成后还发出数据， 返回的 observable 永远不会结束。
  *
- * @example <caption>figure out if the Konami code matches</caption>
+ * @example <caption>指出 Konami 码是否匹配</caption>
  * var code = Rx.Observable.from([
  *  "ArrowUp",
  *  "ArrowUp",
@@ -11912,10 +11500,9 @@ Observable.prototype.scan = scan;
  * @see {@link zip}
  * @see {@link withLatestFrom}
  *
- * @param {Observable} compareTo The observable sequence to compare the source sequence to.
- * @param {function} [comparor] An optional function to compare each value pair
- * @return {Observable} An Observable of a single boolean value representing whether or not
- * the values emitted by both observables were equal in sequence.
+ * @param {Observable} compareTo 用来与源 Observable 进行比较的 Observable 序列。
+ * @param {function} [comparor] 用来比较每一对值的比较函数。
+ * @return {Observable} 该 Observable 发出单个布尔值，该布尔值表示两个 Observables 所发出的值是否依次相等。
  * @method sequenceEqual
  * @owner Observable
  */
@@ -12025,14 +11612,12 @@ function shareSubjectFactory() {
     return new Subject();
 }
 /**
- * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one
- * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will
- * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.
- * This is an alias for .publish().refCount().
+ * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。
+ * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。
+ * 它是 ｀.publish().refCount()｀ 的别名。
  *
  * <img src="./img/share.png" width="100%">
- *
- * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.
+ * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。
  * @method share
  * @owner Observable
  */
@@ -12062,17 +11647,14 @@ function shareReplay(bufferSize, windowTime, scheduler) {
 Observable.prototype.shareReplay = shareReplay;
 
 /**
- * Returns an Observable that emits the single item emitted by the source Observable that matches a specified
- * predicate, if that Observable emits one such item. If the source Observable emits more than one such item or no
- * such items, notify of an IllegalArgumentException or NoSuchElementException respectively.
+ * 该 Observable 发出源 Observable 所发出的值中匹配指定 predicate 函数的单个项。
+ * 如果源 Observable 发出多于1个数据项或者没有发出数据项, 分别以 IllegalArgumentException 和 NoSuchElementException 进行通知。
  *
  * <img src="./img/single.png" width="100%">
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer's `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {Function} predicate - A predicate function to evaluate items emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits the single item emitted by the source Observable that matches
- * the predicate.
+ * @throws {EmptyError} 如果 Observable 在完成之前发送了 `next` 通知，发送 EmptyError 给观察者的 `error` 回调回调函数。
+ * @param {Function} predicate - 断言函数，用来评估源 Observable 的数据项。
+ * @return {Observable<T>} 该 Observable 发出源 Observable 所发出的值中匹配指定 predicate 函数的单个项。
  .
  * @method single
  * @owner Observable
@@ -12148,12 +11730,12 @@ var SingleSubscriber = (function (_super) {
 Observable.prototype.single = single;
 
 /**
- * Returns an Observable that skips the first `count` items emitted by the source Observable.
+ * 返回一个 Observable， 该 Observable 跳过源 Observable 发出的前N个值(N = count)。
  *
  * <img src="./img/skip.png" width="100%">
  *
- * @param {Number} count - The number of times, items emitted by source Observable should be skipped.
- * @return {Observable} An Observable that skips values emitted by the source Observable.
+ * @param {Number} count - 由源 Observable 所发出项应该被跳过的次数。
+ * @return {Observable} 跳过源 Observable 发出值的 Observable。
  *
  * @method skip
  * @owner Observable
@@ -12193,16 +11775,14 @@ var SkipSubscriber = (function (_super) {
 Observable.prototype.skip = skip;
 
 /**
- * Skip the last `count` values emitted by the source Observable.
+ * 跳过源 Observable 最后发出的的N个值 (N = count)。
  *
  * <img src="./img/skipLast.png" width="100%">
  *
- * `skipLast` returns an Observable that accumulates a queue with a length
- * enough to store the first `count` values. As more values are received,
- * values are taken from the front of the queue and produced on the result
- * sequence. This causes values to be delayed.
+ * `skipLast` 返回一个 Observable，该 Observable 累积足够长的队列以存储最初的N个值 (N = count)。
+ * 当接收到更多值时，将从队列的前面取值并在结果序列上产生。 这种情况下值会被延时。
  *
- * @example <caption>Skip the last 2 values of an Observable with many values</caption>
+ * @example <caption>跳过有多个值的 Observable 的最后2个值</caption>
  * var many = Rx.Observable.range(1, 5);
  * var skipLastTwo = many.skipLast(2);
  * skipLastTwo.subscribe(x => console.log(x));
@@ -12215,12 +11795,12 @@ Observable.prototype.skip = skip;
  * @see {@link skipWhile}
  * @see {@link take}
  *
- * @throws {ArgumentOutOfRangeError} When using `skipLast(i)`, it throws
- * ArgumentOutOrRangeError if `i < 0`.
+ * @throws {ArgumentOutOfRangeError} 当使用 `skipLast(i)` 时, 如果`i < 0`，则
+ * 抛出 ArgumentOutOrRangeError。
  *
- * @param {number} count Number of elements to skip from the end of the source Observable.
- * @returns {Observable<T>} An Observable that skips the last count values
- * emitted by the source Observable.
+ * @param {number} count 源 Observable 中从后往前要跳过的值的数量。
+ * @returns {Observable<T>} Observable 跳过源 Observable 发出
+ * 的最后几个值。
  * @method skipLast
  * @owner Observable
  */
@@ -12279,14 +11859,12 @@ var SkipLastSubscriber = (function (_super) {
 Observable.prototype.skipLast = skipLast;
 
 /**
- * Returns an Observable that skips items emitted by the source Observable until a second Observable emits an item.
+ * 返回一个 Observable，该 Observable 会跳过源 Observable 发出的值直到第二个 Observable 开始发送。
  *
  * <img src="./img/skipUntil.png" width="100%">
  *
- * @param {Observable} notifier - The second Observable that has to emit an item before the source Observable's elements begin to
- * be mirrored by the resulting Observable.
- * @return {Observable<T>} An Observable that skips items from the source Observable until the second Observable emits
- * an item, then emits the remaining items.
+ * @param {Observable} notifier - 第二个 Observable ，它发出后，结果 Observable 开始镜像源 Observable 的元素。
+ * @return {Observable<T>} Observable 跳过源 Observable 发出的值直到第二个 Observable 开始发送, 然后发出剩下的数据项。
  * @method skipUntil
  * @owner Observable
  */
@@ -12343,14 +11921,13 @@ var SkipUntilSubscriber = (function (_super) {
 Observable.prototype.skipUntil = skipUntil;
 
 /**
- * Returns an Observable that skips all items emitted by the source Observable as long as a specified condition holds
- * true, but emits all further source items as soon as the condition becomes false.
+ * 返回一个 Observable， 该 Observable 会跳过由源 Observable 发出的所有满足指定条件的数据项，
+ * 但是一旦出现了不满足条件的项，则发出在此之后的所有项。
  *
  * <img src="./img/skipWhile.png" width="100%">
  *
- * @param {Function} predicate - A function to test each item emitted from the source Observable.
- * @return {Observable<T>} An Observable that begins emitting items emitted by the source Observable when the
- * specified predicate becomes false.
+ * @param {Function} predicate - 函数，用来测试源 Observable 发出的每个数据项。
+ * @return {Observable<T>} Observable，当指定的 predicate 函数返回 false 时，该 Observable 开始发出由源 Observable 发出的项。
  * @method skipWhile
  * @owner Observable
  */
@@ -12404,16 +11981,13 @@ Observable.prototype.skipWhile = skipWhile;
 
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits the items you specify as arguments before it begins to emit
- * items emitted by the source Observable.
+ * 返回的 Observable 会先发出作为参数指定的项，然后再发出由源 Observable 所发出的项。
  *
  * <img src="./img/startWith.png" width="100%">
  *
- * @param {...T} values - Items you want the modified Observable to emit first.
- * @param {Scheduler} [scheduler] - A {@link IScheduler} to use for scheduling
- * the emissions of the `next` notifications.
- * @return {Observable} An Observable that emits the items in the specified Iterable and then emits the items
- * emitted by the source Observable.
+ * @param {...T} values - 你希望修改过的 Observable 可以先发出的项。
+ * @param {Scheduler} [scheduler] - 用于调度 `next` 通知发送的 {@link IScheduler} 。
+ * @return {Observable} 该 Observable 发出指定的 Iterable 中的项，然后发出由源 Observable 所发出的项。
  * @method startWith
  * @owner Observable
  */
@@ -12726,33 +12300,28 @@ var AsapScheduler = (function (_super) {
 
 /**
  *
- * Asap Scheduler
+ * Asap 调度器
  *
- * <span class="informal">Perform task as fast as it can be performed asynchronously</span>
+ * <span class="informal">尽可能快的异步地执行任务</span>
  *
- * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task
- * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing
- * code to end and then it will try to execute given task as fast as possible.
+ * 当你用它来延时任务的时候，`asap` 调度器的行为和 {@link async} 一样。如果你将延时时间设置为 `0`，
+ * `asap` 会等待当前同步执行结束然后立刻执行当前任务。
  *
- * `asap` scheduler will do its best to minimize time between end of currently executing code
- * and start of scheduled task. This makes it best candidate for performing so called "deferring".
- * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves
- * some (although minimal) unwanted delay.
+ * `asap` 会尽全力最小化当前执行代码和开始调度任务的时间。这使得它成为执行“deferring”的最佳候选人。以前，可以通过
+ * 调用 `setTimeout(deferredTask, 0)` 来做到，但是这种方式仍热包含一些非期望的延时。
  *
- * Note that using `asap` scheduler does not necessarily mean that your task will be first to process
- * after currently executing code. In particular, if some task was also scheduled with `asap` before,
- * that task will execute first. That being said, if you need to schedule task asynchronously, but
- * as soon as possible, `asap` scheduler is your best bet.
+ * 注意，使用 `asap` 调度器并不一定意味着你的任务将会在当前执行代码后第一个执行。尤其是如果之前有其他 `asap` 调度器的
+ * 任务，该任务会首先执行。也就是说，如果你需要异步地调用任务，但是尽可能快的执行，`asap` 调度器是你最好的选择。
  *
- * @example <caption>Compare async and asap scheduler</caption>
+ * @example <caption>比较 async 和 asap 调度器</caption>
  *
- * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...
+ * Rx.Scheduler.async.schedule(() => console.log('async')); // 首先调度 'async'
  * Rx.Scheduler.asap.schedule(() => console.log('asap'));
  *
- * // Logs:
+ * // 日志:
  * // "asap"
  * // "async"
- * // ... but 'asap' goes first!
+ * // 但是 'asap' 首先执行!
  *
  * @static true
  * @name asap
@@ -12802,12 +12371,12 @@ var SubscribeOnObservable = (function (_super) {
 }(Observable));
 
 /**
- * Asynchronously subscribes Observers to this Observable on the specified IScheduler.
+ * 使用指定的 IScheduler 异步地订阅此 Observable 的观察者。
  *
  * <img src="./img/subscribeOn.png" width="100%">
  *
- * @param {Scheduler} scheduler - The IScheduler to perform subscription actions on.
- * @return {Observable<T>} The source Observable modified so that its subscriptions happen on the specified IScheduler.
+ * @param {Scheduler} scheduler - 执行 subscription 操作的 IScheduler 。
+ * @return {Observable<T>} 修改过的源 Observable 以便它的 subscriptions 发生在指定的 IScheduler 上。
  .
  * @method subscribeOn
  * @owner Observable
@@ -12830,31 +12399,27 @@ var SubscribeOnOperator = (function () {
 Observable.prototype.subscribeOn = subscribeOn;
 
 /**
- * Converts a higher-order Observable into a first-order Observable by
- * subscribing to only the most recently emitted of those inner Observables.
+ * 通过只订阅最新发出的内部 Observable ，将高阶 Observable 转换成一阶 Observable 。
  *
- * <span class="informal">Flattens an Observable-of-Observables by dropping the
- * previous inner Observable once a new one appears.</span>
+ * <span class="informal">一旦有新的内部 Observable 出现，通过丢弃前一个，将
+ * 高级 Observable 打平。</span>
  *
  * <img src="./img/switch.png" width="100%">
  *
- * `switch` subscribes to an Observable that emits Observables, also known as a
- * higher-order Observable. Each time it observes one of these emitted inner
- * Observables, the output Observable subscribes to the inner Observable and
- * begins emitting the items emitted by that. So far, it behaves
- * like {@link mergeAll}. However, when a new inner Observable is emitted,
- * `switch` unsubscribes from the earlier-emitted inner Observable and
- * subscribes to the new inner Observable and begins emitting items from it. It
- * continues to behave like this for subsequent inner Observables.
+ *  `switch` 订阅发出 Observables 的 Observable，也就是高阶 Observable 。
+ * 每次观察到这些已发出的内部 Observables 中的其中一个时，输出 Observable 订阅
+ * 这个内部 Observable 并开始发出该 Observable 所发出的项。到目前为止，
+ * 它的行为就像 {@link mergeAll} 。然而，当发出一个新的内部 Observable 时，
+ * `switch` 会从先前发送的内部 Observable 那取消订阅，然后订阅新的内部 Observable
+ * 并开始发出它的值。后续的内部 Observables 也是如此。
  *
- * @example <caption>Rerun an interval Observable on every click event</caption>
+ * @example <caption>每次点击返回一个 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * // Each click event is mapped to an Observable that ticks every second
+ * // 每次点击事件都会映射成间隔1秒的 interval Observable
  * var higherOrder = clicks.map((ev) => Rx.Observable.interval(1000));
  * var switched = higherOrder.switch();
- * // The outcome is that `switched` is essentially a timer that restarts
- * // on every click. The interval Observables from older clicks do not merge
- * // with the current interval Observable.
+ * // 结果是 `switched` 本质上是一个每次点击时会重新启动的计时器。
+ * // 之前点击产生的 interval Observables 不会与当前的合并。
  * switched.subscribe(x => console.log(x));
  *
  * @see {@link combineAll}
@@ -12865,8 +12430,8 @@ Observable.prototype.subscribeOn = subscribeOn;
  * @see {@link switchMapTo}
  * @see {@link zipAll}
  *
- * @return {Observable<T>} An Observable that emits the items emitted by the
- * Observable most recently emitted by the source Observable.
+ * @return {Observable<T>} 该 Observable 发出由源 Observable 最新发出的
+ * Observable 所发出的项。
  * @method switch
  * @name switch
  * @owner Observable
@@ -12933,24 +12498,21 @@ Observable.prototype._switch = _switch;
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable, emitting values only from the most recently projected Observable.
+ * 将每个源值投射成 Observable，该 Observable 会合并到输出 Observable 中，
+ * 并且只发出最新投射的 Observable 中的值。
  *
- * <span class="informal">Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link switch}.</span>
+ * <span class="informal">将每个值映射成 Observable ，然后使用 {@link switch}
+ * 打平所有的内部 Observables 。</span>
  *
  * <img src="./img/switchMap.png" width="100%">
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called "inner") Observable. Each time it observes one of these
- * inner Observables, the output Observable begins emitting the items emitted by
- * that inner Observable. When a new inner Observable is emitted, `switchMap`
- * stops emitting items from the earlier-emitted inner Observable and begins
- * emitting items from the new one. It continues to behave like this for
- * subsequent inner Observables.
+ * 返回的 Observable 基于应用一个函数来发送项，该函数提供给源 Observable 发出的每个项，
+ * 并返回一个(所谓的“内部”) Observable 。每次观察到这些内部 Observables 的其中一个时，
+ * 输出 Observable 将开始发出该内部 Observable 所发出的项。当发出一个新的内部
+ * Observable 时，`switchMap` 会停止发出先前发出的内部 Observable 并开始发出新的内部
+ * Observable 的值。后续的内部 Observables 也是如此。
  *
- * @example <caption>Rerun an interval Observable on every click event</caption>
+ * @example <caption>每次点击返回一个 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMap((ev) => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -12961,21 +12523,17 @@ Observable.prototype._switch = _switch;
  * @see {@link switch}
  * @see {@link switchMapTo}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project 函数，
+ * 当应用于源 Observable 发出的项时，返回一个 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and taking only the values from the most recently
- * projected inner Observable.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} 该 Observable 发出由源 Observable 发出的每项应用投射函数
+ * (和可选的 `resultSelector`)后的结果，并只接收最新投射的内部 Observable 的值。
  * @method switchMap
  * @owner Observable
  */
@@ -13066,21 +12624,19 @@ Observable.prototype.switchMap = switchMap;
 
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to the same Observable which is flattened multiple
- * times with {@link switch} in the output Observable.
+ * 将每个源值投射成同一个 Observable ，该 Observable 会使用 {@link switch} 多次被打平
+ * 到输出 Observable 中。
  *
- * <span class="informal">It's like {@link switchMap}, but maps each value
- * always to the same inner Observable.</span>
+ * <span class="informal">它很像 {@link switchMap}，但永远将每个值映射到同一个内部
+ + * Observable 。</span>
  *
  * <img src="./img/switchMapTo.png" width="100%">
  *
- * Maps each source value to the given Observable `innerObservable` regardless
- * of the source value, and then flattens those resulting Observables into one
- * single Observable, which is the output Observable. The output Observables
- * emits values only from the most recently emitted instance of
- * `innerObservable`.
+ * 将每个源值映射成给定的 Observable ：`innerObservable` ，而无论源值是什么，然后
+ * 将这些结果 Observables 合并到单个的 Observable ，也就是输出 Observable 。
+ * 输出 Observables 只会发出 `innerObservable` 实例最新发出的值。
  *
- * @example <caption>Rerun an interval Observable on every click event</caption>
+ * @example <caption>每次点击返回一个 interval Observable</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.switchMapTo(Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -13090,20 +12646,18 @@ Observable.prototype.switchMap = switchMap;
  * @see {@link switchMap}
  * @see {@link mergeMapTo}
  *
- * @param {ObservableInput} innerObservable An Observable to replace each value from
- * the source Observable.
+ * @param {ObservableInput} innerObservable 用来替换源 Observable 中的每个值
+ * 的 Observable 。
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the "index" of the value that came from the source
- * - `innerIndex`: the "index" of the value from the projected Observable
- * @return {Observable} An Observable that emits items from the given
- * `innerObservable` (and optionally transformed through `resultSelector`) every
- * time a value is emitted on the source Observable, and taking only the values
- * from the most recently projected inner Observable.
+ * 函数，它用于产生基于值的输出 Observable 和源(外部)发送和内部 Observable 发送的索引。
+ * 传递给这个函数参数有：
+ * - `outerValue`: 来自源的值
+ * - `innerValue`: 来自投射的 Observable 的值
+ * - `outerIndex`: 来自源的值的 "index"
+ * - `innerIndex`: 来自投射的 Observable 的值的 "index"
+ * @return {Observable} 每次源 Observable 发出值时，该 Observable 发出来自
+ * 给定 `innerObservable` (和通过 `resultSelector` 的可选的转换)的项，
+ * 并只接收最新投射的内部 Observable 的值。
  * @method switchMapTo
  * @owner Observable
  */
@@ -13183,19 +12737,17 @@ var SwitchMapToSubscriber = (function (_super) {
 Observable.prototype.switchMapTo = switchMapTo;
 
 /**
- * Emits only the first `count` values emitted by the source Observable.
+ * 只发出源 Observable 最初发出的的N个值 (N = `count`)。
  *
- * <span class="informal">Takes the first `count` values from the source, then
- * completes.</span>
+ * <span class="informal">接收源 Observable 最初的N个值 (N = `count`)，然后完成。</span>
  *
  * <img src="./img/take.png" width="100%">
  *
- * `take` returns an Observable that emits only the first `count` values emitted
- * by the source Observable. If the source emits fewer than `count` values then
- * all of its values are emitted. After that, it completes, regardless if the
- * source completes.
+ * `take` 返回的 Observable 只发出源 Observable 最初发出的的N个值 (N = `count`)。
+ * 如果源发出值的数量小于 `count` 的话，那么它的所有值都将发出。然后它便完成，无论源
+ * Observable 是否完成。
  *
- * @example <caption>Take the first 5 seconds of an infinite 1-second interval Observable</caption>
+ * @example <caption>获取时间间隔为1秒的 interval Observable 的最初的5秒</caption>
  * var interval = Rx.Observable.interval(1000);
  * var five = interval.take(5);
  * five.subscribe(x => console.log(x));
@@ -13205,13 +12757,12 @@ Observable.prototype.switchMapTo = switchMapTo;
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @throws {ArgumentOutOfRangeError} When using `take(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0`.
+ * @throws {ArgumentOutOfRangeError} 当使用 `take(i)` 时，如果 `i < 0`，
+ * 它会发送 ArgumentOutOrRangeError 给观察者的 `error` 回调函数。
  *
- * @param {number} count The maximum number of `next` values to emit.
- * @return {Observable<T>} An Observable that emits only the first `count`
- * values emitted by the source Observable, or all of the values from the source
- * if the source emits fewer than `count` values.
+ * @param {number} count 发出 `next` 通知的最大次数。
+ * @return {Observable<T>} 该 Observable 只发出源 Observable 最初发出的的N个值 (N = `count`)，
+ * 或者发出源 Observable 的所有值，如果源发出值的数量小于 `count` 的话。
  * @method take
  * @owner Observable
  */
@@ -13264,22 +12815,20 @@ var TakeSubscriber = (function (_super) {
 Observable.prototype.take = take;
 
 /**
- * Emits only the last `count` values emitted by the source Observable.
+ * 只发出源 Observable 最后发出的的N个值 (N = `count`)。
  *
- * <span class="informal">Remembers the latest `count` values, then emits those
- * only when the source completes.</span>
+ * <span class="informal">记住源 Observable 的最后N个值 (N = `count`)，然后只有当
+ * 它完成时发出这些值。</span>
  *
  * <img src="./img/takeLast.png" width="100%">
  *
- * `takeLast` returns an Observable that emits at most the last `count` values
- * emitted by the source Observable. If the source emits fewer than `count`
- * values then all of its values are emitted. This operator must wait until the
- * `complete` notification emission from the source in order to emit the `next`
- * values on the output Observable, because otherwise it is impossible to know
- * whether or not more values will be emitted on the source. For this reason,
- * all values are emitted synchronously, followed by the complete notification.
+ * `takeLast` 返回的 Observable 只发出源 Observable 最后发出的的N个值 (N = `count`)。
+ * 如果源发出值的数量小于 `count` 的话，那么它的所有值都将发出。此操作符必须等待
+ * 源 Observable 的 `complete` 通知发送才能在输出 Observable 上发出 `next` 值，
+ * 因为不这样的话它无法知道源 Observable 上是否还有更多值要发出。出于这个原因，
+ * 所有值都将同步发出，然后是 `complete` 通知。
  *
- * @example <caption>Take the last 3 values of an Observable with many values</caption>
+ * @example <caption>获取有多个值的 Observable 的最后3个值</caption>
  * var many = Rx.Observable.range(1, 100);
  * var lastThree = many.takeLast(3);
  * lastThree.subscribe(x => console.log(x));
@@ -13289,13 +12838,12 @@ Observable.prototype.take = take;
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @throws {ArgumentOutOfRangeError} When using `takeLast(i)`, it delivers an
- * ArgumentOutOrRangeError to the Observer's `error` callback if `i < 0`.
+ * @throws {ArgumentOutOfRangeError} 当使用 `takeLast(i)` 时，如果 `i < 0`，
+ * 它会发送 ArgumentOutOrRangeError 给观察者的 `error` 回调函数。
  *
- * @param {number} count The maximum number of values to emit from the end of
- * the sequence of values emitted by the source Observable.
- * @return {Observable<T>} An Observable that emits at most the last count
- * values emitted by the source Observable.
+ * @param {number} count 从源 Observable 的值序列的末尾处，要发出的值的最大数量。
+ * @return {Observable<T>} 该 Observable 只发出源 Observable 最后发出的的N个值 (N = `count`)，
+ * 或者发出源 Observable 的所有值，如果源发出值的数量小于 `count` 的话。
  * @method takeLast
  * @owner Observable
  */
@@ -13363,20 +12911,18 @@ var TakeLastSubscriber = (function (_super) {
 Observable.prototype.takeLast = takeLast;
 
 /**
- * Emits the values emitted by the source Observable until a `notifier`
- * Observable emits a value.
+ * 发出源 Observable 发出的值，直到 `notifier` Observable 发出值。
  *
- * <span class="informal">Lets values pass until a second Observable,
- * `notifier`, emits something. Then, it completes.</span>
+ * <span class="informal">它发出源 Observable 的值，然后直到第二个
+ * Observable (即 notifier )发出项，它便完成。</span>
  *
  * <img src="./img/takeUntil.png" width="100%">
  *
- * `takeUntil` subscribes and begins mirroring the source Observable. It also
- * monitors a second Observable, `notifier` that you provide. If the `notifier`
- * emits a value or a complete notification, the output Observable stops
- * mirroring the source Observable and completes.
+ * `takeUntil` 订阅并开始镜像源 Observable 。它还监视另外一个 Observable，即你
+ * 提供的 `notifier` 。如果 `notifier` 发出值或 `complete` 通知，那么输出 Observable
+ * 停止镜像源 Observable ，然后完成。
  *
- * @example <caption>Tick every second until the first click happens</caption>
+ * @example <caption>每秒都发出值，直到第一次点击发生</caption>
  * var interval = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = interval.takeUntil(clicks);
@@ -13387,11 +12933,10 @@ Observable.prototype.takeLast = takeLast;
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @param {Observable} notifier The Observable whose first emitted value will
- * cause the output Observable of `takeUntil` to stop emitting values from the
- * source Observable.
- * @return {Observable<T>} An Observable that emits the values from the source
- * Observable until such time as `notifier` emits its first value.
+ * @param {Observable} notifier 该 Observable 第一次发出值会使 `takeUntil` 的
+ * 输出 Observable 停止发出由源 Observable 所发出的值。
+ * @return {Observable<T>} 该 Observable 发出源 Observable 所发出的值，直到某个
+ * 时间点 `notifier` 发出它的第一个值。
  * @method takeUntil
  * @owner Observable
  */
@@ -13431,23 +12976,20 @@ var TakeUntilSubscriber = (function (_super) {
 Observable.prototype.takeUntil = takeUntil;
 
 /**
- * Emits values emitted by the source Observable so long as each value satisfies
- * the given `predicate`, and then completes as soon as this `predicate` is not
- * satisfied.
+ * 发出在源 Observable 中满足 `predicate` 函数的每个值，并且一旦出现不满足 `predicate`
+ * 的值就立即完成。
  *
- * <span class="informal">Takes values from the source only while they pass the
- * condition given. When the first value does not satisfy, it completes.</span>
+ * <span class="informal">只要当通过给定的条件时才接收源 Observable 的值。
+ * 当第一个不满足条件的值出现时，它便完成。</span>
  *
  * <img src="./img/takeWhile.png" width="100%">
  *
- * `takeWhile` subscribes and begins mirroring the source Observable. Each value
- * emitted on the source is given to the `predicate` function which returns a
- * boolean, representing a condition to be satisfied by the source values. The
- * output Observable emits the source values until such time as the `predicate`
- * returns false, at which point `takeWhile` stops mirroring the source
- * Observable and completes the output Observable.
+ * `takeWhile` 订阅并开始镜像源 Observable 。每个源 Observable 发出的值都会传给
+ * `predicate` 函数，它会返回源值是否满足条件的布尔值。输出 Observable 会发出源值，
+ * 直到某个时间点 `predicate` 返回了 false，此时 `takeWhile` 会停止镜像源 Observable
+ * 并且完成输出 Observable 。
  *
- * @example <caption>Emit click events only while the clientX property is greater than 200</caption>
+ * @example <caption>只有当 clientX 属性大于200时才发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.takeWhile(ev => ev.clientX > 200);
  * result.subscribe(x => console.log(x));
@@ -13457,12 +12999,10 @@ Observable.prototype.takeUntil = takeUntil;
  * @see {@link takeUntil}
  * @see {@link skip}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates a value emitted by the source Observable and returns a boolean.
- * Also takes the (zero-based) index as the second argument.
- * @return {Observable<T>} An Observable that emits the values from the source
- * Observable so long as each value satisfies the condition defined by the
- * `predicate`, then completes.
+ * @param {function(value: T, index: number): boolean} predicate 评估源 Observable
+ * 所发出值的函数并返回布尔值。还接收 `index`(从0开始) 作为第二个参数。
+ * @return {Observable<T>} 只要每个值满足 `predicate` 函数所定义的条件，那么该
+ * Observable 就会从源 Observable 中发出值，然后完成。
  * @method takeWhile
  * @owner Observable
  */
@@ -13521,25 +13061,21 @@ var defaultThrottleConfig = {
     trailing: false
 };
 /**
- * Emits a value from the source Observable, then ignores subsequent source
- * values for a duration determined by another Observable, then repeats this
- * process.
+ * 从源 Observable 中发出一个值，然后在由另一个 Observable 决定的期间内忽略
+ * 随后发出的源值，然后重复此过程。
  *
- * <span class="informal">It's like {@link throttleTime}, but the silencing
- * duration is determined by a second Observable.</span>
+ * <span class="informal">它很像 {@link throttleTime}，但是沉默持续时间是由
+ * 第二个 Observable 决定的。</span>
  *
  * <img src="./img/throttle.png" width="100%">
  *
- * `throttle` emits the source Observable values on the output Observable
- * when its internal timer is disabled, and ignores source values when the timer
- * is enabled. Initially, the timer is disabled. As soon as the first source
- * value arrives, it is forwarded to the output Observable, and then the timer
- * is enabled by calling the `durationSelector` function with the source value,
- * which returns the "duration" Observable. When the duration Observable emits a
- * value or completes, the timer is disabled, and this process repeats for the
- * next source value.
+ * 当 `throttle` 的内部定时器禁用时，它会在输出 Observable 上发出源 Observable 的值，
+ * 并当定时器启用时忽略源值。最开始时，定时器是禁用的。一旦第一个源值达到，它会被转发
+ * 到输出 Observable ，然后通过使用源值调用 `durationSelector` 函数来启动定时器，这
+ * 个函数返回 "duration" Observable 。当 duration Observable 发出值或完成时，定时器
+ * 会被禁用，并且下一个源值也是重复此过程。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttle(ev => Rx.Observable.interval(1000));
  * result.subscribe(x => console.log(x));
@@ -13550,13 +13086,12 @@ var defaultThrottleConfig = {
  * @see {@link sample}
  * @see {@link throttleTime}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the silencing
- * duration for each source value, returned as an Observable or a Promise.
- * @param {Object} config a configuration object to define `leading` and `trailing` behavior. Defaults
- * to `{ leading: true, trailing: false }`.
- * @return {Observable<T>} An Observable that performs the throttle operation to
- * limit the rate of emissions from the source.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector 该函数
+ * 从源 Observable 中接收值，用于为每个源值计算沉默持续时间，并返回 Observable 或 Promise 。
+ * @param {Object} config 用来定义 `leading` 和 `trailing` 行为的配置对象。
+ * 默认为 `{ leading: true, trailing: false }` 。
+ * @return {Observable<T>} 该 Observable 执行节流操作，以限制源 Observable 的
+ * 发送频率。
  * @method throttle
  * @owner Observable
  */
@@ -13652,24 +13187,20 @@ var ThrottleSubscriber = (function (_super) {
 Observable.prototype.throttle = throttle;
 
 /**
- * Emits a value from the source Observable, then ignores subsequent source
- * values for `duration` milliseconds, then repeats this process.
+ * 从源 Observable 中发出一个值，然后在 `duration` 毫秒内忽略随后发出的源值，
+ * 然后重复此过程。
  *
- * <span class="informal">Lets a value pass, then ignores source values for the
- * next `duration` milliseconds.</span>
+ * <span class="informal">让一个值通过，然后在接下来的 `duration` 毫秒内忽略源值。</span>
  *
  * <img src="./img/throttleTime.png" width="100%">
  *
- * `throttleTime` emits the source Observable values on the output Observable
- * when its internal timer is disabled, and ignores source values when the timer
- * is enabled. Initially, the timer is disabled. As soon as the first source
- * value arrives, it is forwarded to the output Observable, and then the timer
- * is enabled. After `duration` milliseconds (or the time unit determined
- * internally by the optional `scheduler`) has passed, the timer is disabled,
- * and this process repeats for the next source value. Optionally takes a
- * {@link IScheduler} for managing timers.
+ * 当 `throttle` 的内部定时器禁用时，它会在输出 Observable 上发出源 Observable 的值，
+ * 并当定时器启用时忽略源值。最开始时，定时器是禁用的。一旦第一个源值达到，它会被转发
+ * 到输出 Observable ，然后启动定时器。在 `duration` 毫秒(或由可选的 `scheduler`
+ * 内部确定的时间单位)后，定时器会被禁用，并且下一个源值也是重复此过程。可选择性地
+ * 接收一个 {@link IScheduler} 用来管理定时器。
  *
- * @example <caption>Emit clicks at a rate of at most one click per second</caption>
+ * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.throttleTime(1000);
  * result.subscribe(x => console.log(x));
@@ -13680,13 +13211,12 @@ Observable.prototype.throttle = throttle;
  * @see {@link sampleTime}
  * @see {@link throttle}
  *
- * @param {number} duration Time to wait before emitting another value after
- * emitting the last value, measured in milliseconds or the time unit determined
- * internally by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the sampling.
- * @return {Observable<T>} An Observable that performs the throttle operation to
- * limit the rate of emissions from the source.
+ * @param {number} duration 在发出一个最新的值后，到再发出另外一个值之间的等待时间，
+ * 以毫秒为单位或以可选的 `scheduler` 内部决定的时间单位来衡量。
+ * @param {Scheduler} [scheduler=async] 调度器( {@link IScheduler} )，用来
+ * 管理处理节流的定时器。
+ * @return {Observable<T>} 该 Observable 执行节流操作，以限制源 Observable 的
+ * 发送频率。
  * @method throttleTime
  * @owner Observable
  */
@@ -14063,10 +13593,10 @@ Observable.prototype.toArray = toArray;
 
 /* tslint:enable:max-line-length */
 /**
- * Converts an Observable sequence to a ES2015 compliant promise.
+ * 将 Observable 序列转换为符合 ES2015 标准的 Promise 。
  *
  * @example
- * // Using normal ES2015
+ * // 使用普通的 ES2015
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise();
@@ -14074,8 +13604,8 @@ Observable.prototype.toArray = toArray;
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * // Rejected Promise
- * // Using normal ES2015
+ * // 被拒的 Promise
+ * // 使用标准的 ES2015
  * let source = Rx.Observable
  *   .throw(new Error('woops'))
  *   .toPromise();
@@ -14085,7 +13615,7 @@ Observable.prototype.toArray = toArray;
  *   .catch((err) => console.log('Error: %s', err));
  * // => Error: Error: woops
  *
- * // Setting via the config
+ * // 通过 config 进行设置
  * Rx.config.Promise = RSVP.Promise;
  *
  * let source = Rx.Observable
@@ -14095,7 +13625,7 @@ Observable.prototype.toArray = toArray;
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * // Setting via the method
+ * // 通过方法进行设置
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise(RSVP.Promise);
@@ -14103,11 +13633,10 @@ Observable.prototype.toArray = toArray;
  * source.then((value) => console.log('Value: %s', value));
  * // => Value: 42
  *
- * @param PromiseCtor promise The constructor of the promise. If not provided,
- * it will look for a constructor first in Rx.config.Promise then fall back to
- * the native Promise constructor if available.
- * @return {Promise<T>} An ES2015 compatible promise with the last value from
- * the observable sequence.
+ * @param {PromiseConstructor} [PromiseCtor] Promise 的构造函数。如果没有提供的话，
+ * 它首先会在 `Rx.config.Promise` 中寻找构造函数，然后会回退成原生的 Promise 构造函数
+ * (如果有的话)。
+ * @return {Promise<T>} 符合 ES2015 标准的 Promise，它使用 Observable 序列的最后一个值。
  * @method toPromise
  * @owner Observable
  */
@@ -14133,26 +13662,22 @@ function toPromise(PromiseCtor) {
 Observable.prototype.toPromise = toPromise;
 
 /**
- * Branch out the source Observable values as a nested Observable whenever
- * `windowBoundaries` emits.
+ * 每当 `windowBoundaries` 发出项时，将源 Observable 的值分支成嵌套的 Observable 。
  *
- * <span class="informal">It's like {@link buffer}, but emits a nested Observable
- * instead of an array.</span>
+ * <span class="informal">就像是 {@link buffer}, 但发出的是嵌套的 Observable ，而不是数组。</span>
  *
  * <img src="./img/window.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping
- * windows. It emits the current window and opens a new one whenever the
- * Observable `windowBoundaries` emits an item. Because each window is an
- * Observable, the output is a higher-order Observable.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。 输出 Observable 发出连接的，不重叠的
+ * 窗口. 当`windowBoundaries` Observable 开始发出数据，它会发出目前的窗口并且会打开一个新的。
+ * 因为每个窗口都是 Observable， 所以输出 Observable 是高阶 Observable。
  *
- * @example <caption>In every window of 1 second each, emit at most 2 click events</caption>
+ * @example <caption>在每个窗口(窗口间的时间间隔为1秒)中，最多发出两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var result = clicks.window(interval)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两个发送
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link windowCount}
@@ -14161,10 +13686,8 @@ Observable.prototype.toPromise = toPromise;
  * @see {@link windowWhen}
  * @see {@link buffer}
  *
- * @param {Observable<any>} windowBoundaries An Observable that completes the
- * previous window and starts a new window.
- * @return {Observable<Observable<T>>} An Observable of windows, which are
- * Observables emitting values of the source Observable.
+ * @param {Observable<any>} windowBoundaries 完成上一个窗口并且开启新窗口的 Observable。
+ * @return {Observable<Observable<T>>} 每个窗口都是一个 Observable，它发出源 Observable 所发出的值。
  * @method window
  * @owner Observable
  */
@@ -14235,34 +13758,28 @@ var WindowSubscriber = (function (_super) {
 Observable.prototype.window = window$1;
 
 /**
- * Branch out the source Observable values as a nested Observable with each
- * nested Observable emitting at most `windowSize` values.
+ * 将源 Observable 的值分支成多个嵌套的 Observable ，每个嵌套的 Observable 最多发出 windowSize 个值。
  *
- * <span class="informal">It's like {@link bufferCount}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferCount}, 但是返回嵌套的 Observable 而不是数组。</span>
  *
  * <img src="./img/windowCount.png" width="100%">
+
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。
+ * 输出 Observable 每M(M = startWindowEvery)个项发出新窗口，每个窗口包含的项数不得超过N个(N = windowSize)。
+ * 当源 Observable 完成或者遇到错误,输出 Observable 发出当前窗口并且传播从源 Observable 收到的通知。
+ * 如果没有提供 startWindowEvery ，那么在源 Observable 的起始处立即开启新窗口，并且当每个窗口的大小达到 windowSize 时完成。
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits windows every `startWindowEvery`
- * items, each containing no more than `windowSize` items. When the source
- * Observable completes or encounters an error, the output Observable emits
- * the current window and propagates the notification from the source
- * Observable. If `startWindowEvery` is not provided, then new windows are
- * started immediately at the start of the source and when each window completes
- * with size `windowSize`.
- *
- * @example <caption>Ignore every 3rd click event, starting from the first one</caption>
+ * @example <caption>从第一个点击事件开始，忽略第3N次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(3)
- *   .map(win => win.skip(1)) // skip first of every 3 clicks
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.skip(1)) // 跳过每三个点击中的第一个
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>Ignore every 3rd click event, starting from the third one</caption>
+ * @example <caption>从第三个点击事件开始，忽略第3N次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(2, 3)
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link window}
@@ -14271,14 +13788,10 @@ Observable.prototype.window = window$1;
  * @see {@link windowWhen}
  * @see {@link bufferCount}
  *
- * @param {number} windowSize The maximum number of values emitted by each
- * window.
- * @param {number} [startWindowEvery] Interval at which to start a new window.
- * For example if `startWindowEvery` is `2`, then a new window will be started
- * on every other value from the source. A new window is started at the
- * beginning of the source by default.
- * @return {Observable<Observable<T>>} An Observable of windows, which in turn
- * are Observable of values.
+ * @param {number} windowSize 每个窗口最多可以发送的个数。
+ * @param {number} [startWindowEvery] 开启新窗口的间隔。
+ * 比如，如果 `startWindowEvery` 是 `2`, 新窗口会在源中每个第二个值开启。默认情况下，新窗口是在源 Observable 的起始处开启的。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowCount
  * @owner Observable
  */
@@ -14510,22 +14023,16 @@ function dispatchWindowClose(state) {
 Observable.prototype.windowTime = windowTime;
 
 /**
- * Branch out the source Observable values as a nested Observable starting from
- * an emission from `openings` and ending when the output of `closingSelector`
- * emits.
+ * 将源 Observable 的值分支成嵌套的 Observable，分支策略是以 openings 发出项为起始，以 closingSelector 发出为结束。
  *
- * <span class="informal">It's like {@link bufferToggle}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferToggle}, 但是发出的是嵌套 Observable 而不是数组。</span>
  *
  * <img src="./img/windowToggle.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits windows that contain those items
- * emitted by the source Observable between the time when the `openings`
- * Observable emits an item and when the Observable returned by
- * `closingSelector` emits an item.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。输出 Observable 发出窗口 ，每一个窗口
+ * 包括当 `openings` 发出时开始收集源 Observable 的数据项并且 `closingSelector` 返回的 Observable 发出项时结束收集。
  *
- * @example <caption>Every other second, emit the click events from the next 500ms</caption>
+ * @example <caption>每隔一秒钟, 发出接下来 500ms 的点击事件。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var openings = Rx.Observable.interval(1000);
  * var result = clicks.windowToggle(openings, i =>
@@ -14539,14 +14046,10 @@ Observable.prototype.windowTime = windowTime;
  * @see {@link windowWhen}
  * @see {@link bufferToggle}
  *
- * @param {Observable<O>} openings An observable of notifications to start new
- * windows.
- * @param {function(value: O): Observable} closingSelector A function that takes
- * the value emitted by the `openings` observable and returns an Observable,
- * which, when it emits (either `next` or `complete`), signals that the
- * associated window should complete.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {Observable<O>} openings 通知开启新窗口的 observable。
+ * @param {function(value: O): Observable} closingSelector 是一个接受`openings` observable
+ * 发出的值作为参数，并且返回 Observable 的函数, 当该 observable 发出 `next` 或者 `complete`时，会发信号给相关的窗口以通知它们应该完成。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowToggle
  * @owner Observable
  */
@@ -14679,27 +14182,23 @@ var WindowToggleSubscriber = (function (_super) {
 Observable.prototype.windowToggle = windowToggle;
 
 /**
- * Branch out the source Observable values as a nested Observable using a
- * factory function of closing Observables to determine when to start a new
- * window.
+ * 将源 Observable 的值分支成嵌套的 Observable ，通过使用关闭 Observable 的工厂函数来决定何时开启新的窗口。
  *
- * <span class="informal">It's like {@link bufferWhen}, but emits a nested
- * Observable instead of an array.</span>
+ * <span class="informal">就像是 {@link bufferWhen}, 但是发出的是嵌套的 Observable
+ * 而不是数组。</span>
  *
  * <img src="./img/windowWhen.png" width="100%">
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping windows.
- * It emits the current window and opens a new one whenever the Observable
- * produced by the specified `closingSelector` function emits an item. The first
- * window is opened immediately when subscribing to the output Observable.
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。 输出 Observable 发出连接的，非重叠的窗口。
+ * 每当由指定的 closingSelector 函数产生的 Observable 发出项，它会发出当前窗口并开启一个新窗口。
+ * 当输出 Observable 被订阅的时候立马开启第一个窗口。
  *
- * @example <caption>Emit only the first two clicks events in every window of [1-5] random seconds</caption>
+ * @example <caption>在每个秒速随机(1-5秒)的窗口中，只发出最开始的两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks
  *   .windowWhen(() => Rx.Observable.interval(1000 + Math.random() * 4000))
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两个发送
+ *   .mergeAll(); // 打平高阶Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link window}
@@ -14708,11 +14207,9 @@ Observable.prototype.windowToggle = windowToggle;
  * @see {@link windowToggle}
  * @see {@link bufferWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals (on either `next` or
- * `complete`) when to close the previous window and start a new one.
- * @return {Observable<Observable<T>>} An observable of windows, which in turn
- * are Observables.
+ * @param {function(): Observable} closingSelector 函数，不接受参数并且返回 Observable，
+ * 该 Observable 发出信号(`next` 或者 `complete`)以决定何时关闭前一个窗口，开启新一个窗口。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable(译者注：其实就是高阶 Observable )。
  * @method windowWhen
  * @owner Observable
  */
@@ -14797,23 +14294,18 @@ Observable.prototype.windowWhen = windowWhen;
 
 /* tslint:enable:max-line-length */
 /**
- * Combines the source Observable with other Observables to create an Observable
- * whose values are calculated from the latest values of each, only when the
- * source emits.
+ * 结合源 Observable 和另外的 Observables 以创建新的 Observable， 该 Observable 的值由每
+ * 个 Observable 最新的值计算得出，当且仅当源发出的时候。
  *
- * <span class="informal">Whenever the source Observable emits a value, it
- * computes a formula using that value plus the latest values from other input
- * Observables, then emits the output of that formula.</span>
+ * <span class="informal">每当源 Observable 发出值，它会计算一个公式，此公式使用该值加上其他输入 Observable 的最新值，然后发出公式的输出结果。</span>
  *
  * <img src="./img/withLatestFrom.png" width="100%">
  *
- * `withLatestFrom` combines each value from the source Observable (the
- * instance) with the latest values from the other input Observables only when
- * the source emits a value, optionally using a `project` function to determine
- * the value to be emitted on the output Observable. All input Observables must
- * emit at least one value before the output Observable will emit a value.
+ * `withLatestFrom` 结合源 Observablecombines（实例）和其他输入 Observables 的最新值，当且仅当
+ * source 发出数据时, 可选的使用 `project` 函数以决定输出 Observable 将要发出的值。
+ * 在输出 Observable 发出值之前，所有的输入 Observables 都必须发出至少一个值。
  *
- * @example <caption>On every click event, emit an array with the latest timer event plus the click event</caption>
+ * @example <caption>对于每个点击事件，发出一个包含最新时间和点击事件的数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var timer = Rx.Observable.interval(1000);
  * var result = clicks.withLatestFrom(timer);
@@ -14821,16 +14313,10 @@ Observable.prototype.windowWhen = windowWhen;
  *
  * @see {@link combineLatest}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Function} [project] Projection function for combining values
- * together. Receives all values in order of the Observables passed, where the
- * first parameter is a value from the source Observable. (e.g.
- * `a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`). If this is not
- * passed, arrays will be emitted on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other 输入 Observable ，用来和源 Observable 结合。 可以传入多个输入 Observables。
+ * @param {Function} [project] 将多个值合并的投射函数。顺序地接受所有 Observables 传入的值，第一个参数是源 Observable
+ * 的值。 (`a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`)。 如果没有传入, 输入 Observable 会一直发送数组。
+ * @return {Observable} 该 Observable 为一个拥有将每个输入 Observable 最新的值投射后的值, 或者一个包含所有输入 Observable 的最新值的数组。
  * @method withLatestFrom
  * @owner Observable
  */
@@ -15461,28 +14947,25 @@ var AnimationFrameScheduler = (function (_super) {
 
 /**
  *
- * Animation Frame Scheduler
+ * 动画帧调度器
  *
- * <span class="informal">Perform task when `window.requestAnimationFrame` would fire</span>
+ * <span class="informal">当 `window.requestAnimationFrame` 执行的时候触发执行此任务。</span>
  *
- * When `animationFrame` scheduler is used with delay, it will fall back to {@link async} scheduler
- * behaviour.
+ * 当 `animationFrame` 调度器和延时一起使用， 它的行为会回退到 {@link async} 调度器。
  *
- * Without delay, `animationFrame` scheduler can be used to create smooth browser animations.
- * It makes sure scheduled task will happen just before next browser content repaint,
- * thus performing animations as efficiently as possible.
+ * 如果没有延时, `animationFrame` 调度器可以被用来创建丝滑的浏览器动画。它可以保证在下一次浏览器重绘之前
+ * 调度执行任务，从而尽可能高效的执行动画。
  *
- * @example <caption>Schedule div height animation</caption>
+ * @example <caption>调度 div 高度的动画</caption>
  * const div = document.querySelector('.some-div');
  *
  * Rx.Scheduler.schedule(function(height) {
  *   div.style.height = height + "px";
  *
- *   this.schedule(height + 1);  // `this` references currently executing Action,
- *                               // which we reschedule with new state
+ *   this.schedule(height + 1);  // `this` 指向当前正在执行的 Action, 我们用新的状态来重新调度它
  * }, 0, 0);
  *
- * // You will see .some-div element growing in height
+ * // 你将会看到 .some-div 元素的高度一直增长
  *
  *
  * @static true

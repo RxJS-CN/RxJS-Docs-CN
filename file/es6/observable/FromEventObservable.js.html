@@ -115,40 +115,32 @@ export class FromEventObservable extends Observable {
     }
     /* tslint:enable:max-line-length */
     /**
-     * Creates an Observable that emits events of a specific type coming from the
-     * given event target.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x53D1;&#x51FA;&#x6765;&#x81EA;&#x7ED9;&#x5B9A;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x7684;&#x6307;&#x5B9A;&#x7C7B;&#x578B;&#x4E8B;&#x4EF6;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Creates an Observable from DOM events, or Node
-     * EventEmitter events or others.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6765;&#x81EA;&#x4E8E; DOM &#x4E8B;&#x4EF6;&#xFF0C;&#x6216;&#x8005; Node &#x7684; EventEmitter &#x4E8B;&#x4EF6;&#x6216;&#x8005;&#x5176;&#x4ED6;&#x4E8B;&#x4EF6;&#x7684; Observable&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/fromEvent.png&quot; width=&quot;100%&quot;&gt;
      *
-     * Creates an Observable by attaching an event listener to an &quot;event target&quot;,
-     * which may be an object with `addEventListener` and `removeEventListener`,
-     * a Node.js EventEmitter, a jQuery style EventEmitter, a NodeList from the
-     * DOM, or an HTMLCollection from the DOM. The event handler is attached when
-     * the output Observable is subscribed, and removed when the Subscription is
-     * unsubscribed.
+     * &#x901A;&#x8FC7;&#x7ED9;&#x201C;&#x4E8B;&#x4EF6;&#x76EE;&#x6807;&#x201D;&#x6DFB;&#x52A0;&#x4E8B;&#x4EF6;&#x76D1;&#x542C;&#x5668;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA; Observable&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x662F;&#x62E5;&#x6709;`addEventListener`&#x548C;
+     * `removeEventListener`&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4E00;&#x4E2A; Node.js &#x7684; EventEmitter&#xFF0C;&#x4E00;&#x4E2A; jQuery &#x5F0F;&#x7684; EventEmitter,
+     * &#x4E00;&#x4E2A; DOM &#x7684;&#x8282;&#x70B9;&#x96C6;&#x5408;, &#x6216;&#x8005; DOM &#x7684; HTMLCollection&#x3002; &#x5F53;&#x8F93;&#x51FA; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x4F1A;&#x88AB;&#x6DFB;&#x52A0;,
+     * &#x5F53;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x5C06;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x79FB;&#x9664;&#x3002;
      *
-     * @example &lt;caption&gt;Emits clicks happening on the DOM document&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA; DOM document &#x4E0A;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;&lt;/caption&gt;
      * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
      * clicks.subscribe(x =&gt; console.log(x));
      *
-     * // Results in:
-     * // MouseEvent object logged to console everytime a click
-     * // occurs on the document.
+     * // &#x7ED3;&#x679C;:
+     * // &#x6BCF;&#x6B21;&#x70B9;&#x51FB; document &#x65F6;&#xFF0C;&#x90FD;&#x4F1A;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x4E0A;&#x8F93;&#x51FA; MouseEvent &#x3002;
      *
      * @see {@link from}
      * @see {@link fromEventPattern}
      *
-     * @param {EventTargetLike} target The DOMElement, event target, Node.js
-     * EventEmitter, NodeList or HTMLCollection to attach the event handler to.
-     * @param {string} eventName The event name of interest, being emitted by the
-     * `target`.
-     * @param {EventListenerOptions} [options] Options to pass through to addEventListener
-     * @param {SelectorMethodSignature&lt;T&gt;} [selector] An optional function to
-     * post-process results. It takes the arguments from the event handler and
-     * should return a single value.
+     * @param {EventTargetLike} target DOMElement, &#x4E8B;&#x4EF6;&#x76EE;&#x6807;, Node.js
+     * EventEmitter, NodeList &#x6216;&#x8005; HTMLCollection &#x7B49;&#x9644;&#x52A0;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002;
+     * @param {string} eventName &#x611F;&#x5174;&#x8DA3;&#x7684;&#x4E8B;&#x4EF6;&#x540D;&#x79F0;, &#x88AB; target &#x53D1;&#x51FA;&#x3002;
+     * @param {EventListenerOptions} [options] &#x53EF;&#x9009;&#x7684;&#x4F20;&#x9012;&#x7ED9; addEventListener &#x7684;&#x53C2;&#x6570;&#x3002;
+     * @param {SelectorMethodSignature&lt;T&gt;} [selector] &#x53EF;&#x9009;&#x7684;&#x51FD;&#x6570;&#x5904;&#x7406;&#x7ED3;&#x679C;. &#x63A5;&#x6536;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x5E94;&#x8BE5;&#x8FD4;&#x56DE;&#x5355;&#x4E2A;&#x503C;&#x3002;
      * @return {Observable&lt;T&gt;}
      * @static true
      * @name fromEvent

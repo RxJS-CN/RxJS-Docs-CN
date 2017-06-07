@@ -99,80 +99,55 @@ export class BoundCallbackObservable extends Observable {
     }
     /* tslint:enable:max-line-length */
     /**
-     * Converts a callback API to a function that returns an Observable.
+     * &#x628A;&#x56DE;&#x8C03;API&#x8F6C;&#x5316;&#x4E3A;&#x8FD4;&#x56DE;Observable&#x7684;&#x51FD;&#x6570;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Give it a function `f` of type `f(x, callback)` and
-     * it will return a function `g` that when called as `g(x)` will output an
-     * Observable.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x7ED9;&#x5B83;&#x4E00;&#x4E2A;&#x7B7E;&#x540D;&#x4E3A;`f(x, callback)`&#x7684;&#x51FD;&#x6570;f,&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;g,
+     * &#x8C03;&#x7528;&apos;g(x)&apos;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#x3002;&lt;/span&gt;
      *
-     * `bindCallback` is not an operator because its input and output are not
-     * Observables. The input is a function `func` with some parameters, but the
-     * last parameter must be a callback function that `func` calls when it is
-     * done.
+     * `bindCallback` &#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x7684;&#x8F93;&#x5165;&#x548C;&#x8F93;&#x51FA;&#x5E76;&#x4E0D;&#x662F; Observable &#x3002;&#x8F93;&#x5165;&#x7684;&#x662F;&#x4E00;&#x4E2A;
+     * &#x5E26;&#x6709;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5FC5;&#x987B;&#x662F;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x5F53;&#x8BE5;&#x51FD;&#x6570;&#x6267;&#x884C;&#x5B8C;&#x4E4B;&#x540E;&#x4F1A;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
      *
-     * The output of `bindCallback` is a function that takes the same parameters
-     * as `func`, except the last one (the callback). When the output function
-     * is called with arguments, it will return an Observable. If `func` function
-     * calls its callback with one argument, the Observable will emit that value.
-     * If on the other hand callback is called with multiple values, resulting
-     * Observable will emit an array with these arguments.
+     * `bindCallback` &#x7684;&#x8F93;&#x51FA;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x7684;&#x53C2;&#x6570;&#x548C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x4E00;&#x6837;(&#x9664;&#x4E86;&#x6CA1;&#x6709;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;
+     * &#x6570;)&#x3002;&#x5F53;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x4F1A;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable &#x3002;&#x5982;&#x679C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x7ED9;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;&#x5219;&#x8BE5; Observable
+     * &#x4F1A;&#x53D1;&#x51FA;&#x8FD9;&#x4E2A;&#x503C;&#x3002;&#x5982;&#x679C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x7ED9;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4F20;&#x9012;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x5219;&#x8BE5; Observable &#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6240;&#x6709;&#x503C;&#x7684;&#x6570;&#x7EC4;&#x3002;
      *
-     * It is very important to remember, that input function `func` is not called
-     * when output function is, but rather when Observable returned by output
-     * function is subscribed. This means if `func` makes AJAX request, that request
-     * will be made every time someone subscribes to resulting Observable, but not before.
+     * &#x5F88;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x70B9;&#x662F;&#xFF0C;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684; Observable &#x88AB;&#x8BA2;&#x9605;&#x4E4B;&#x524D;&#xFF0C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x662F;&#x4E0D;&#x4F1A;&#x6267;&#x884C;&#x7684;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5982;&#x679C;&#x8F93;&#x5165;
+     * &#x51FD;&#x6570;&#x53D1;&#x8D77; AJAX &#x8BF7;&#x6C42;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;&#x8BF7;&#x6C42;&#x5728;&#x6BCF;&#x6B21;&#x8BA2;&#x9605;&#x8FD4;&#x56DE;&#x7684; Observable &#x4E4B;&#x540E;&#x624D;&#x4F1A;&#x53D1;&#x51FA;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E4B;&#x524D;&#x3002;
      *
-     * Optionally, selector function can be passed to `bindObservable`. That function
-     * takes the same arguments as callback, and returns value
-     * that will be emitted by Observable instead of callback parameters themselves.
-     * Even though by default multiple arguments passed to callback appear in the stream as array,
-     * selector function will be called with arguments directly, just as callback would.
-     * This means you can imagine default selector (when one is not provided explicitly)
-     * as function that aggregates all its arguments into array, or simply returns first argument,
-     * if there is only one.
+     * &#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x9879;&#xFF0C;selector &#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4F20;&#x7ED9;`bindObservable`&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x548C;&#x56DE;&#x8C03;&#x4E00;&#x6837;&#x7684;&#x53C2;&#x6570;&#x3002;&#x8FD4;&#x56DE; Observable
+     * &#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x56DE;&#x8C03;&#x53C2;&#x6570;&#x672C;&#x8EAB;&#xFF0C;&#x5373;&#x4F7F;&#x5728;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4F20;&#x9012;&#x7ED9;&#x56DE;&#x8C03;&#x7684;&#x591A;&#x4E2A;&#x53C2;&#x6570;&#x5C06;&#x5728;&#x6D41;&#x4E2D;&#x663E;&#x793A;&#x4E3A;&#x6570;&#x7EC4;&#x3002;&#x9009;&#x62E9;&#x5668;
+     * &#x51FD;&#x6570;&#x76F4;&#x63A5;&#x7528;&#x53C2;&#x6570;&#x8C03;&#x7528;&#xFF0C;&#x5C31;&#x50CF;&#x56DE;&#x8C03;&#x4E00;&#x6837;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x4F60;&#x53EF;&#x4EE5;&#x60F3;&#x8C61;&#x9ED8;&#x8BA4;&#x9009;&#x62E9;&#x5668;&#xFF08;&#x5F53;&#x6CA1;&#x6709;&#x663E;&#x793A;&#x63D0;&#x4F9B;&#x7684;&#x65F6;&#x5019;&#xFF09;&#x662F;&#x8FD9;&#x6837;
+     * &#x4E00;&#x4E2A;&#x51FD;&#x6570;:&#x5C06;&#x5B83;&#x7684;&#x6240;&#x6709;&#x53C2;&#x6570;&#x805A;&#x96C6;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x6216;&#x8005;&#x4EC5;&#x4EC5;&#x8FD4;&#x56DE;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;(&#x5F53;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x65F6;&#x5019;)&#x3002;
      *
-     * Last optional parameter - {@link Scheduler} - can be used to control when call
-     * to `func` happens after someone subscribes to Observable, as well as when results
-     * passed to callback will be emitted. By default subscription to Observable calls `func`
-     * synchronously, but using `Scheduler.async` as last parameter will defer call to input function,
-     * just like wrapping that call in `setTimeout` with time `0` would. So if you use async Scheduler
-     * and call `subscribe` on output Observable, all function calls that are currently executing,
-     * will end before `func` is invoked.
+     * &#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x53C2;&#x6570; - {@link Scheduler} - &#x5F53; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x63A7;&#x5236;&#x8C03;&#x7528;&#x8F93;&#x5165;&#x51FD;
+     * &#x6570;&#x4EE5;&#x53CA;&#x53D1;&#x51FA;&#x7ED3;&#x679C;&#x7684;&#x65F6;&#x673A;&#x3002;&#x9ED8;&#x8BA4;&#x8BA2;&#x9605; Observable &#x540E;&#x8C03;&#x7528;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x662F;&#x540C;&#x6B65;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;`Scheduler.async`
+     * &#x4F5C;&#x4E3A;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x5C06;&#x4F1A;&#x5EF6;&#x8FDF;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x5C31;&#x50CF;&#x662F;&#x7528;0&#x6BEB;&#x79D2;&#x7684;setTimeout&#x5305;&#x88C5;&#x8FC7;&#x3002;&#x6240;&#x4EE5;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528;&#x4E86;&#x5F02;
+     * &#x6B65;&#x8C03;&#x5EA6;&#x5668;&#x5E76;&#x4E14;&#x8BA2;&#x9605;&#x4E86; Observable &#xFF0C;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x6240;&#x6709;&#x51FD;&#x6570;&#x8C03;&#x7528;&#xFF0C;&#x5C06;&#x5728;&#x8C03;&#x7528;&#x201C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x201D;&#x4E4B;&#x524D;&#x7ED3;&#x675F;&#x3002;
      *
-     * When it comes to emitting results passed to callback, by default they are emitted
-     * immediately after `func` invokes callback. In particular, if callback is called synchronously,
-     * then subscription to resulting Observable will call `next` function synchronously as well.
-     * If you want to defer that call, using `Scheduler.async` will, again, do the job.
-     * This means that by using `Scheduler.async` you can, in a sense, ensure that `func`
-     * always calls its callback asynchronously, thus avoiding terrifying Zalgo.
+     * &#x5F53;&#x6D89;&#x53CA;&#x5230;&#x4F20;&#x9012;&#x7ED9;&#x56DE;&#x8C03;&#x7684;&#x7ED3;&#x679C;&#x65F6;&#xFF0C;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#x5F53;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x4E4B;&#x540E;&#x4F1A;&#x7ACB;&#x9A6C;&#x53D1;&#x51FA;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5982;&#x679C;&#x56DE;&#x8C03;&#x4E5F;&#x662F;&#x540C;&#x6B65;&#x8C03;&#x52A8;&#x7684;&#x8BDD;&#xFF0C;
+     * &#x90A3;&#x4E48; Observable &#x7684;&#x8BA2;&#x9605;&#x4E5F;&#x4F1A;&#x540C;&#x6B65;&#x8C03;&#x7528;`next`&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x5EF6;&#x8FDF;&#x8C03;&#x7528;&#xFF0C;&#x4F7F;&#x7528;`Scheduler.async`&#x3002;
+     * &#x8FD9;&#x610F;&#x5473;&#x7740;&#x901A;&#x8FC7;&#x4F7F;&#x7528;`Scheduler.async`&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x786E;&#x4FDD;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x6C38;&#x8FDC;&#x5F02;&#x6B65;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x4ECE;&#x800C;&#x907F;&#x514D;&#x4E86;&#x53EF;&#x6015;&#x7684;Zalgo&#x3002;
      *
-     * Note that Observable created by output function will always emit only one value
-     * and then complete right after. Even if `func` calls callback multiple times, values from
-     * second and following calls will never appear in the stream. If you need to
-     * listen for multiple calls, you probably want to use {@link fromEvent} or
-     * {@link fromEventPattern} instead.
+     * &#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;Observable&#x53EA;&#x80FD;&#x53D1;&#x51FA;&#x4E00;&#x6B21;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;&#x5373;&#x4F7F;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x591A;&#x6B21;&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x7B2C;&#x4E8C;&#x6B21;
+     * &#x4EE5;&#x53CA;&#x4E4B;&#x540E;&#x7684;&#x8C03;&#x7528;&#x90FD;&#x4E0D;&#x4F1A;&#x51FA;&#x73B0;&#x5728;&#x6D41;&#x4E2D;&#x3002;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x76D1;&#x542C;&#x591A;&#x6B21;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x4F60;&#x5927;&#x6982;&#x9700;&#x8981;&#x4F7F;&#x7528;{@link fromEvent}&#x6216;&#x8005;
+     * {@link fromEventPattern}&#x6765;&#x4EE3;&#x66FF;&#x3002;
      *
-     * If `func` depends on some context (`this` property), that context will be set
-     * to the same context that output function has at call time. In particular, if `func`
-     * is called as method of some object, in order to preserve proper behaviour,
-     * it is recommended to set context of output function to that object as well,
-     * provided `func` is not already bound.
+     * &#x5982;&#x679C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x4F9D;&#x8D56;&#x4E0A;&#x4E0B;&#x6587;(this)&#xFF0C;&#x8BE5;&#x4E0A;&#x4E0B;&#x6587;&#x5C06;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x5728;&#x8C03;&#x7528;&#x65F6;&#x7684;&#x540C;&#x4E00;&#x4E0A;&#x4E0B;&#x6587;&#x3002;&#x7279;&#x522B;&#x662F;&#x5982;&#x679C;&#x8F93;&#x5165;&#x51FD;&#x6570;
+     * &#x88AB;&#x5F53;&#x4F5C;&#x662F;&#x67D0;&#x4E2A;&#x5BF9;&#x8C61;&#x7684;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#xFF0C;&#x4E3A;&#x4E86;&#x4FDD;&#x6301;&#x540C;&#x6837;&#x7684;&#x884C;&#x4E3A;&#xFF0C;&#x5EFA;&#x8BAE;&#x5C06;&#x8F93;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x4E0A;&#x4E0B;&#x6587;&#x8BBE;&#x7F6E;&#x4E3A;&#x8BE5;&#x5BF9;&#x8C61;&#xFF0C;&#x8F93;&#x5165;&#x65B9;&#x6CD5;&#x4E0D;
+     * &#x662F;&#x5DF2;&#x7ECF;&#x7ED1;&#x5B9A;&#x597D;&#x7684;&#x3002;
      *
-     * If input function calls its callback in &quot;node style&quot; (i.e. first argument to callback is
-     * optional error parameter signaling whether call failed or not), {@link bindNodeCallback}
-     * provides convenient error handling and probably is a better choice.
-     * `bindCallback` will treat such functions without any difference and error parameter
-     * (whether passed or not) will always be interpreted as regular callback argument.
+     * &#x5982;&#x679C;&#x8F93;&#x5165;&#x51FD;&#x6570;&#x4EE5; node &#x7684;&#x65B9;&#x5F0F;(&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x53EF;&#x9009;&#x7684;&#x9519;&#x8BEF;&#x53C2;&#x6570;&#x7528;&#x6765;&#x6807;&#x793A;&#x8C03;&#x7528;&#x662F;&#x5426;&#x6210;&#x529F;)&#x8C03;&#x7528;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;{@link bindNodeCallback}
+     * &#x63D0;&#x4F9B;&#x4E86;&#x65B9;&#x4FBF;&#x7684;&#x9519;&#x8BEF;&#x5904;&#x7406;&#xFF0C;&#x4E5F;&#x8BB8;&#x662F;&#x66F4;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002; `bindCallback` &#x4E0D;&#x4F1A;&#x533A;&#x522B;&#x5BF9;&#x5F85;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#xFF0C;&#x9519;&#x8BEF;&#x53C2;&#x6570;(&#x662F;&#x5426;&#x4F20;&#x9012;)
+     * &#x88AB;&#x89E3;&#x91CA;&#x6210;&#x6B63;&#x5E38;&#x7684;&#x53C2;&#x6570;&#x3002;
      *
-     *
-     * @example &lt;caption&gt;Convert jQuery&apos;s getJSON to an Observable API&lt;/caption&gt;
-     * // Suppose we have jQuery.getJSON(&apos;/my/url&apos;, callback)
+     * @example &lt;caption&gt;&#x628A;jQuery&#x7684;getJSON&#x65B9;&#x6CD5;&#x8F6C;&#x5316;&#x4E3A;Observable API&lt;/caption&gt;
+     * // &#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;:jQuery.getJSON(&apos;/my/url&apos;, callback)
      * var getJSONAsObservable = Rx.Observable.bindCallback(jQuery.getJSON);
      * var result = getJSONAsObservable(&apos;/my/url&apos;);
      * result.subscribe(x =&gt; console.log(x), e =&gt; console.error(e));
      *
      *
-     * @example &lt;caption&gt;Receive array of arguments passed to callback&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x63A5;&#x6536;&#x4F20;&#x9012;&#x7ED9;&#x56DE;&#x8C03;&#x7684;&#x6570;&#x7EC4;&#x53C2;&#x6570;&#x3002;&lt;/caption&gt;
      * someFunction((a, b, c) =&gt; {
      *   console.log(a); // 5
      *   console.log(b); // &apos;some string&apos;
@@ -185,7 +160,7 @@ export class BoundCallbackObservable extends Observable {
      * });
      *
      *
-     * @example &lt;caption&gt;Use bindCallback with selector function&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x4F7F;&#x7528;&#x5E26; selector &#x51FD;&#x6570;&#x7684; bindCallback&#x3002;&lt;/caption&gt;
      * someFunction((a, b, c) =&gt; {
      *   console.log(a); // &apos;a&apos;
      *   console.log(b); // &apos;b&apos;
@@ -198,7 +173,7 @@ export class BoundCallbackObservable extends Observable {
      * });
      *
      *
-     * @example &lt;caption&gt;Compare behaviour with and without async Scheduler&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5BF9;&#x4F7F;&#x7528;&#x548C;&#x4E0D;&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x7684;&#x884C;&#x4E3A;&#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x3002;&lt;/caption&gt;
      * function iCallMyCallbackSynchronously(cb) {
      *   cb();
      * }
@@ -216,9 +191,9 @@ export class BoundCallbackObservable extends Observable {
      * // I was async!
      *
      *
-     * @example &lt;caption&gt;Use bindCallback on object method&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5728;&#x5BF9;&#x8C61;&#x65B9;&#x6CD5;&#x4E0A;&#x4F7F;&#x7528; bindCallback&lt;/caption&gt;
      * const boundMethod = Rx.Observable.bindCallback(someObject.methodWithCallback);
-     * boundMethod.call(someObject) // make sure methodWithCallback has access to someObject
+     * boundMethod.call(someObject) // &#x786E;&#x4FDD;methodWithCallback&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;someObject
      * .subscribe(subscriber);
      *
      *
@@ -226,13 +201,10 @@ export class BoundCallbackObservable extends Observable {
      * @see {@link from}
      * @see {@link fromPromise}
      *
-     * @param {function} func Function with a callback as the last parameter.
-     * @param {function} [selector] A function which takes the arguments from the
-     * callback and maps those to a value to emit on the output Observable.
-     * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-     * callbacks.
-     * @return {function(...params: *): Observable} A function which returns the
-     * Observable that delivers the same values the callback would deliver.
+     * @param {function} func &#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x56DE;&#x8C03;&#x7684;&#x51FD;&#x6570;&#x3002;
+     * @param {function} [selector] &#x9009;&#x62E9;&#x5668;&#xFF0C;&#x4ECE;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4E2D;&#x83B7;&#x53D6;&#x53C2;&#x6570;&#x5E76;&#x5C06;&#x8FD9;&#x4E9B;&#x6620;&#x5C04;&#x4E3A;&#x4E00;&#x4E2A; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+     * @param {Scheduler} [scheduler] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x8C03;&#x5EA6;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @return {function(...params: *): Observable} &#x4E00;&#x4E2A;&#x8FD4;&#x56DE;Observable&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;Observable&#x53D1;&#x51FA;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#x3002;
      * @static true
      * @name bindCallback
      * @owner Observable

@@ -82,37 +82,30 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { MergeMapOperator } from &apos;./mergeMap&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Projects each source value to an Observable which is merged in the output
- * Observable, in a serialized fashion waiting for each one to complete before
- * merging the next.
+ * &#x5C06;&#x6E90;&#x503C;&#x6295;&#x5C04;&#x4E3A;&#x4E00;&#x4E2A;&#x5408;&#x5E76;&#x5230;&#x8F93;&#x51FA; Observable &#x7684; Observable,&#x4EE5;&#x4E32;&#x884C;&#x7684;&#x65B9;&#x5F0F;&#x7B49;&#x5F85;&#x524D;&#x4E00;&#x4E2A;&#x5B8C;&#x6210;&#x518D;&#x5408;&#x5E76;&#x4E0B;&#x4E00;&#x4E2A;
+ * Observable&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Maps each value to an Observable, then flattens all of
- * these inner Observables using {@link concatAll}.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x6BCF;&#x4E2A;&#x503C;&#x6620;&#x5C04;&#x4E3A; Observable, &#x7136;&#x540E;&#x4F7F;&#x7528;{@link concatAll}&#x5C06;&#x6240;&#x6709;&#x7684;
+ * &#x5185;&#x90E8; Observables &#x6253;&#x5E73;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/concatMap.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns an Observable that emits items based on applying a function that you
- * supply to each item emitted by the source Observable, where that function
- * returns an (so-called &quot;inner&quot;) Observable. Each new inner Observable is
- * concatenated with the previous inner Observable.
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x53D1;&#x51FA;&#x57FA;&#x4E8E;&#x5BF9;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x8C03;&#x7528;&#x63D0;&#x4F9B;&#x7684;&#x51FD;&#x6570;,
+ * &#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x6240;&#x8C13;&#x7684;&#x5185;&#x90E8; Observable&#x3002; &#x6BCF;&#x4E2A;&#x65B0;&#x7684;&#x5185;&#x90E8; Observable &#x548C;&#x524D;&#x4E00;&#x4E2A;&#x5185;&#x90E8; Observable &#x8FDE;&#x63A5;&#x5728;&#x4E00;&#x8D77;&#x3002;
  *
- * __Warning:__ if source values arrive endlessly and faster than their
- * corresponding inner Observables can complete, it will result in memory issues
- * as inner Observables amass in an unbounded buffer waiting for their turn to
- * be subscribed to.
+ * &#x8B66;&#x544A;: &#x5982;&#x679C;&#x6E90;&#x503C;&#x4E0D;&#x65AD;&#x7684;&#x5230;&#x8FBE;&#x5E76;&#x4E14;&#x901F;&#x5EA6;&#x5FEB;&#x4E8E;&#x5185;&#x90E8; Observables &#x5B8C;&#x6210;&#x7684;&#x901F;&#x5EA6;, &#x5B83;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x95EE;&#x9898;&#xFF0C;
+ * &#x56E0;&#x4E3A;&#x5185;&#x90E8;&#x7684; Observable &#x5728;&#x65E0;&#x9650;&#x5236;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x805A;&#x96C6;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x8F6E;&#x6D41;&#x8BA2;&#x9605;&#x3002;
  *
- * Note: `concatMap` is equivalent to `mergeMap` with concurrency parameter set
- * to `1`.
+ * Note: &#xFF40;concatMap&#xFF40; &#x7B49;&#x4EF7;&#x4E8E; &#xFF40;concurrency&#xFF40; &#x53C2;&#x6570;(&#x6700;&#x5927;&#x5E76;&#x53D1;&#x6570;)&#x4E3A;1&#x7684; &#xFF40;mergeMap&#xFF40; &#x3002;
  *
- * @example &lt;caption&gt;For each click event, tick every second from 0 to 3, with no concurrency&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x90FD;&#x4F1A;&#x89E6;&#x53D1;&#x4ECE;0&#x5230;3&#x7684;&#x5B9A;&#x65F6;&#x5668;(&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x4E3A;1&#x79D2;)&#xFF0C;&#x5B9A;&#x65F6;&#x5668;&#x4E4B;&#x95F4;&#x662F;&#x4E32;&#x884C;&#x7684;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.concatMap(ev =&gt; Rx.Observable.interval(1000).take(4));
  * result.subscribe(x =&gt; console.log(x));
  *
- * // Results in the following:
- * // (results are not concurrent)
- * // For every click on the &quot;document&quot; it will emit values 0 to 3 spaced
- * // on a 1000ms interval
+ * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;:
+ * // (&#x7ED3;&#x679C;&#x662F;&#x4E32;&#x884C;&#x7684;)
+ * // &#x5BF9;&#x4E8E;&quot;document&quot;&#x5BF9;&#x8C61;&#x4E0A;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#xFF0C;&#x90FD;&#x4F1A;&#x4EE5;1&#x79D2;&#x7684;&#x95F4;&#x9694;&#x53D1;&#x51FA;&#x4ECE;0&#x5230;3&#x7684;&#x503C;
  * // one click = 1000ms-&gt; 0 -1000ms-&gt; 1 -1000ms-&gt; 2 -1000ms-&gt; 3
  *
  * @see {@link concat}
@@ -122,24 +115,17 @@
  * @see {@link mergeMap}
  * @see {@link switchMap}
  *
- * @param {function(value: T, ?index: number): ObservableInput} project A function
- * that, when applied to an item emitted by the source Observable, returns an
- * Observable.
+ * @param {function(value: T, ?index: number): ObservableInput} project
+ * &#x7528;&#x5728;&#x6E90;Observable&#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x4E0A;,&#x8FD4;&#x56DE;Observable.
  * @param {function(outerValue: T, innerValue: I, outerIndex: number, innerIndex: number): any} [resultSelector]
- * A function to produce the value on the output Observable based on the values
- * and the indices of the source (outer) emission and the inner Observable
- * emission. The arguments passed to this function are:
- * - `outerValue`: the value that came from the source
- * - `innerValue`: the value that came from the projected Observable
- * - `outerIndex`: the &quot;index&quot; of the value that came from the source
- * - `innerIndex`: the &quot;index&quot; of the value from the projected Observable
- * @return {Observable} An observable of values merged from the projected
- * Observables as they were subscribed to, one at a time. Optionally, these
- * values may have been projected from a passed `projectResult` argument.
- * @return {Observable} An Observable that emits the result of applying the
- * projection function (and the optional `resultSelector`) to each item emitted
- * by the source Observable and taking values from each projected inner
- * Observable sequentially.
+ * &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x4EA7;&#x751F;&#x57FA;&#x4E8E;&#x503C;&#x7684;&#x8F93;&#x51FA; Observable &#x548C;&#x6E90;(&#x5916;&#x90E8;)&#x53D1;&#x9001;&#x548C;&#x5185;&#x90E8; Observable &#x53D1;&#x9001;&#x7684;&#x7D22;&#x5F15;&#x3002;
+ * &#x4F20;&#x9012;&#x7ED9;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x6709;&#xFF1A;
+ * - `outerValue`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;
+ * - `innerValue`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;
+ * - `outerIndex`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;&#x7684; &quot;index&quot;
+ * - `innerIndex`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;&#x7684; &quot;index&quot;
+ * @return {Observable} Observable&#xFF0C;&#x53D1;&#x51FA;&#x5BF9;&#x6E90;Observable&#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x4F7F;&#x7528;&#x6295;&#x5C04;&#x51FD;&#x6570;
+ * (&#x548C;&#x53EF;&#x9009;&#x7684;`resultSelector`)&#x7684;&#x7ED3;&#x679C;&#x5E76;&#x4E14;&#x987A;&#x5E8F;&#x7684;&#x53D6;&#x51FA;&#x6BCF;&#x4E2A;&#x6295;&#x5C04;&#x8FC7;&#x7684;&#x5185;&#x90E8;Observable&#x7684;&#x503C;.
  * @method concatMap
  * @owner Observable
  */

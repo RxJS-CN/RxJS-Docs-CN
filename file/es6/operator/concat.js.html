@@ -85,20 +85,16 @@ import { ArrayObservable } from &apos;../observable/ArrayObservable&apos;;
 import { MergeAllOperator } from &apos;./mergeAll&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from every
- * given input Observable after the current Observable.
+ * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8F93;&#x51FA; Observable&#xFF0C;&#x5B83;&#x5728;&#x5F53;&#x524D; Observable &#x4E4B;&#x540E;&#x987A;&#x5E8F;&#x5730;&#x53D1;&#x51FA;&#x6BCF;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x8F93;&#x5165; Observable &#x4E2D;&#x7684;&#x6240;&#x6709;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x901A;&#x8FC7;&#x987A;&#x5E8F;&#x5730;&#x53D1;&#x51FA;&#x591A;&#x4E2A; Observables &#x7684;&#x503C;&#x5C06;&#x5B83;&#x4EEC;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x4E00;&#x4E2A;&#x63A5;&#x4E00;&#x4E2A;&#x7684;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/concat.png&quot; width=&quot;100%&quot;&gt;
  *
- * Joins this Observable with multiple other Observables by subscribing to them
- * one at a time, starting with the source, and merging their results into the
- * output Observable. Will wait for each Observable to complete before moving
- * on to the next.
+ * &#x901A;&#x8FC7;&#x4F9D;&#x6B21;&#x8BA2;&#x9605;&#x8F93;&#x5165;Observable&#x5C06;&#x8F93;&#x51FA;Observable&#x52A0;&#x5165;&#x591A;&#x4E2A;&#x8F93;&#x5165;Observable&#xFF0C;&#x4ECE;&#x6E90;&#x5934;&#x5F00;&#x59CB;&#xFF0C;
+ * &#x5408;&#x5E76;&#x5B83;&#x4EEC;&#x7684;&#x503C;&#x7ED9;&#x8F93;&#x51FA;Observable. &#x53EA;&#x6709;&#x524D;&#x4E00;&#x4E2A;Observable&#x7ED3;&#x675F;&#x624D;&#x4F1A;&#x8FDB;&#x884C;&#x4E0B;&#x4E00;&#x4E2A;Observable&#x3002;
  *
- * @example &lt;caption&gt;Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x4ECE;0&#x6570;&#x5230;3&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x548C;&#x4ECE;1&#x5230;10&#x7684;&#x540C;&#x6B65;&#x5E8F;&#x5217;&#x8FDB;&#x884C;&#x8FDE;&#x63A5;&lt;/caption&gt;
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = timer.concat(sequence);
@@ -107,7 +103,7 @@ import { MergeAllOperator } from &apos;./mergeAll&apos;;
  * // results in:
  * // 1000ms-&gt; 0 -1000ms-&gt; 1 -1000ms-&gt; 2 -1000ms-&gt; 3 -immediate-&gt; 1 ... 10
  *
- * @example &lt;caption&gt;Concatenate 3 Observables&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8FDE;&#x63A5;3&#x4E2A;Observables&lt;/caption&gt;
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -124,12 +120,9 @@ import { MergeAllOperator } from &apos;./mergeAll&apos;;
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} other An input Observable to concatenate after the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} other &#x7B49;&#x5F85;&#x88AB;&#x8FDE;&#x63A5;&#x7684; Observable&#x3002; &#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x591A;&#x4E2A;&#x8F93;&#x5165; Observable&#x3002;
+ * @param {Scheduler} [scheduler=null] &#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x63A7;&#x5236;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;
+ * @return {Observable} &#x987A;&#x5E8F;&#x7684;&#x3001;&#x4E32;&#x884C;&#x7684;&#x5C06;&#x6240;&#x6709;&#x8F93;&#x5165; Observable &#x7684;&#x503C;&#x5408;&#x5E76;&#x7ED9;&#x8F93;&#x51FA; Observable&#x3002;
  * @method concat
  * @owner Observable
  */
@@ -138,43 +131,36 @@ export function concat(...observables) {
 }
 /* tslint:enable:max-line-length */
 /**
- * Creates an output Observable which sequentially emits all values from given
- * Observable and then moves on to the next.
+ * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8F93;&#x51FA; Observable&#xFF0C;&#x8BE5; Observable &#x987A;&#x5E8F;&#x7684;&#x53D1;&#x51FA;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6240;&#x6709;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Concatenates multiple Observables together by
- * sequentially emitting their values, one Observable after the other.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x8FDE;&#x63A5;&#x591A;&#x4E2A;&#x8F93;&#x5165; Observable&#xFF0C;&#x987A;&#x5E8F;&#x7684;&#x53D1;&#x51FA;&#x5B83;&#x4EEC;&#x7684;&#x503C;&#xFF0C;&#x4E00;&#x4E2A;
+ * Observable &#x63A5;&#x4E00;&#x4E2A; Observable&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/concat.png&quot; width=&quot;100%&quot;&gt;
  *
- * `concat` joins multiple Observables together, by subscribing to them one at a time and
- * merging their results into the output Observable. You can pass either an array of
- * Observables, or put them directly as arguments. Passing an empty array will result
- * in Observable that completes immediately.
+ * `concat`&#x901A;&#x8FC7;&#x4E00;&#x6B21;&#x8BA2;&#x9605;&#x4E00;&#x4E2A;&#x5C06;&#x591A;&#x4E2A; Observables &#x8FDE;&#x63A5;&#x8D77;&#x6765;&#xFF0C;&#x5E76;&#x5C06;&#x503C;&#x5408;&#x5E76;&#x5230;&#x8F93;&#x51FA; Observable &#x4E2D;&#x3002;
+ * &#x4F60;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x6570;&#x7EC4;&#xFF0C;&#x6216;&#x8005;&#x76F4;&#x63A5;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x505A;&#x53C2;&#x6570;&#x4F20;&#x9012;&#x3002; &#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x7A7A;&#x6570;&#x7EC4;&#x4F1A;
+ * &#x5BFC;&#x81F4;&#x8F93;&#x51FA; Observable &#x7ACB;&#x9A6C;&#x89E6;&#x53D1;&#x5B8C;&#x6210;&#x72B6;&#x6001;&#x3002;
  *
- * `concat` will subscribe to first input Observable and emit all its values, without
- * changing or affecting them in any way. When that Observable completes, it will
- * subscribe to then next Observable passed and, again, emit its values. This will be
- * repeated, until the operator runs out of Observables. When last input Observable completes,
- * `concat` will complete as well. At any given moment only one Observable passed to operator
- * emits values. If you would like to emit values from passed Observables concurrently, check out
- * {@link merge} instead, especially with optional `concurrent` parameter. As a matter of fact,
- * `concat` is an equivalent of `merge` operator with `concurrent` parameter set to `1`.
+ * `concat`&#x4F1A;&#x8BA2;&#x9605;&#x7B2C;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x5E76;&#x4E14;&#x53D1;&#x51FA;&#x5B83;&#x7684;&#x6240;&#x6709;&#x503C;, &#x4E0D;&#x53BB;&#x505A;&#x4EFB;&#x4F55;&#x5E72;&#x9884;&#x3002; &#x5F53;&#x8FD9;&#x4E2A;
+ * &#x8F93;&#x5165; Observable &#x5B8C;&#x6210;&#x65F6;&#xFF0C; &#x8BA2;&#x9605;&#x7B2C;&#x4E8C;&#x4E2A;&#x8F93;&#x5165; Observable&#xFF0C;&#x540C;&#x6837;&#x7684;&#x53D1;&#x51FA;&#x5B83;&#x7684;&#x6240;&#x6709;&#x503C;&#x3002;&#x8FD9;&#x4E2A;&#x8FC7;
+ * &#x7A0B;&#x4F1A;&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x76F4;&#x5230;&#x8F93;&#x5165; Observable &#x90FD;&#x7528;&#x8FC7;&#x4E86;&#x3002;&#x5F53;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x5B8C;&#x6210;&#x65F6;&#xFF0C;`concat`
+ * &#x4E5F;&#x4F1A;&#x5B8C;&#x6210;&#x3002; &#x4EFB;&#x4F55;&#x65F6;&#x523B;&#x90FD;&#x53EA;&#x4F1A;&#x6709;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x53D1;&#x51FA;&#x503C;&#x3002; &#x5982;&#x679C;&#x4F60;&#x60F3;&#x8BA9;&#x6240;&#x6709;&#x7684;&#x8F93;&#x5165; Observable
+ * &#x5E76;&#x884C;&#x53D1;&#x51FA;&#x6570;&#x636E;&#xFF0C;&#x8BF7;&#x67E5;&#x770B;{@link merge}, &#x7279;&#x522B;&#x7684;&#x5E26;&#x4E0A;`concurrent`&#x53C2;&#x6570;&#x3002; &#x4E8B;&#x5B9E;&#x4E0A;,`concat`&#x548C;
+ * `concurrent`&#x8BBE;&#x7F6E;&#x4E3A;1&#x7684;`merge`&#x6548;&#x679C;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;
  *
- * Note that if some input Observable never completes, `concat` will also never complete
- * and Observables following the one that did not complete will never be subscribed. On the other
- * hand, if some Observable simply completes immediately after it is subscribed, it will be
- * invisible for `concat`, which will just move on to the next Observable.
+ * &#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x8F93;&#x5165; Observable &#x4E00;&#x76F4;&#x90FD;&#x4E0D;&#x5B8C;&#x6210;, `concat` &#x4E5F;&#x4F1A;&#x4E00;&#x76F4;&#x4E0D;&#x80FD;&#x5B8C;&#x6210;&#x5E76;&#x4E14;&#x4E0B;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable
+ * &#x5C06;&#x6C38;&#x8FDC;&#x4E0D;&#x80FD;&#x88AB;&#x8BA2;&#x9605;. &#x53E6;&#x4E00;&#x65B9;&#x9762;, &#x5982;&#x679C;&#x67D0;&#x4E2A;&#x8F93;&#x5165; Observable &#x5728;&#x5B83;&#x88AB;&#x8BA2;&#x9605;&#x540E;&#x7ACB;&#x9A6C;&#x5904;&#x4E8E;&#x5B8C;&#x6210;&#x72B6;&#x6001;, &#x90A3;&#x4E48;&#x5B83;&#x5BF9;
+ * `concat`&#x662F;&#x4E0D;&#x53EF;&#x89C1;&#x7684;, &#x4EC5;&#x4EC5;&#x4F1A;&#x8F6C;&#x5411;&#x4E0B;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable.
  *
- * If any Observable in chain errors, instead of passing control to the next Observable,
- * `concat` will error immediately as well. Observables that would be subscribed after
- * the one that emitted error, never will.
+ * &#x5982;&#x679C;&#x8F93;&#x5165; Observable &#x94FE;&#x4E2D;&#x7684;&#x4EFB;&#x4E00;&#x6210;&#x5458;&#x53D1;&#x751F;&#x9519;&#x8BEF;, `concat`&#x4F1A;&#x7ACB;&#x9A6C;&#x89E6;&#x53D1;&#x9519;&#x8BEF;&#x72B6;&#x6001;&#xFF0C;&#x800C;&#x4E0D;&#x53BB;&#x63A7;&#x5236;&#x4E0B;&#x4E00;&#x4E2A;&#x8F93;&#x5165;
+ * Observable. &#x53D1;&#x751F;&#x9519;&#x8BEF;&#x7684;&#x8F93;&#x5165; Observable &#x4E4B;&#x540E;&#x7684;&#x8F93;&#x5165; Observable &#x4E0D;&#x4F1A;&#x88AB;&#x8BA2;&#x9605;.
  *
- * If you pass to `concat` the same Observable many times, its stream of values
- * will be &quot;replayed&quot; on every subscription, which means you can repeat given Observable
- * as many times as you like. If passing the same Observable to `concat` 1000 times becomes tedious,
- * you can always use {@link repeat}.
+ * &#x5982;&#x679C;&#x4F60;&#x5C06;&#x540C;&#x4E00;&#x8F93;&#x5165; Observable &#x4F20;&#x9012;&#x7ED9;`concat`&#x591A;&#x6B21;&#xFF0C;&#x7ED3;&#x679C;&#x6D41;&#x4F1A;&#x5728;&#x6BCF;&#x6B21;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x201C;&#x91CD;&#x590D;&#x64AD;&#x653E;&#x201D;, &#x8FD9;&#x610F;&#x5473;&#x7740;
+ * &#x4F60;&#x53EF;&#x4EE5;&#x91CD;&#x590D; Observable &#x591A;&#x6B21;. &#x5982;&#x679C;&#x4F60;&#x4E4F;&#x5473;&#x7684;&#x7ED9;`concat`&#x4F20;&#x9012;&#x540C;&#x4E00;&#x8F93;&#x5165; Observable 1000&#x6B21;,&#x4F60;&#x53EF;&#x4EE5;&#x8BD5;&#x7740;
+ * &#x7528;&#x7528;{@link repeat}.
  *
- * @example &lt;caption&gt;Concatenate a timer counting from 0 to 3 with a synchronous sequence from 1 to 10&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x4ECE;0&#x6570;&#x5230;3&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x548C;&#x4ECE;1&#x5230;10&#x7684;&#x540C;&#x6B65;&#x5E8F;&#x5217;&#x8FDB;&#x884C;&#x8FDE;&#x63A5;&lt;/caption&gt;
  * var timer = Rx.Observable.interval(1000).take(4);
  * var sequence = Rx.Observable.range(1, 10);
  * var result = Rx.Observable.concat(timer, sequence);
@@ -184,7 +170,7 @@ export function concat(...observables) {
  * // 0 -1000ms-&gt; 1 -1000ms-&gt; 2 -1000ms-&gt; 3 -immediate-&gt; 1 ... 10
  *
  *
- * @example &lt;caption&gt;Concatenate an array of 3 Observables&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8FDE;&#x63A5;3&#x4E2A; Observables&lt;/caption&gt;
  * var timer1 = Rx.Observable.interval(1000).take(10);
  * var timer2 = Rx.Observable.interval(2000).take(6);
  * var timer3 = Rx.Observable.interval(500).take(10);
@@ -198,7 +184,7 @@ export function concat(...observables) {
  * // -500ms-&gt; 0 -500ms-&gt; 1 -500ms-&gt; ... 9
  *
  *
- * @example &lt;caption&gt;Concatenate the same Observable to repeat it&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8FDE;&#x63A5;&#x540C;&#x4E00;&#x4E2A; Observable &#x591A;&#x6B21;&lt;/caption&gt;
  * const timer = Rx.Observable.interval(1000).take(2);
  *
  * Rx.Observable.concat(timer, timer) // concating the same Observable!
@@ -219,13 +205,11 @@ export function concat(...observables) {
  * @see {@link concatMap}
  * @see {@link concatMapTo}
  *
- * @param {ObservableInput} input1 An input Observable to concatenate with others.
- * @param {ObservableInput} input2 An input Observable to concatenate with others.
- * More than one input Observables may be given as argument.
- * @param {Scheduler} [scheduler=null] An optional IScheduler to schedule each
- * Observable subscription on.
- * @return {Observable} All values of each passed Observable merged into a
- * single Observable, in order, in serial fashion.
+ * @param {ObservableInput} input1 &#x7B49;&#x5F85;&#x88AB;&#x8FDE;&#x63A5;&#x7684;&#x8F93;&#x5165; Observable&#x3002;
+ * @param {ObservableInput} input2 &#x7B49;&#x5F85;&#x88AB;&#x8FDE;&#x63A5;&#x7684;&#x8F93;&#x5165; Observable&#x3002;
+ * &#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x591A;&#x4E2A;&#x8F93;&#x5165;Observable.
+ * @param {Scheduler} [scheduler=null] &#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x8C03;&#x5EA6;&#x6BCF;&#x4E2A; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;
+ * @return {Observable} &#x6709;&#x5E8F;&#x7684;&#x3001;&#x4E32;&#x884C;&#x7684;&#x5C06;&#x6240;&#x6709;&#x8F93;&#x5165; Observable &#x7684;&#x503C;&#x5408;&#x5E76;&#x5230;&#x5355;&#x4E00;&#x7684;&#x8F93;&#x51FA; Observable&#x3002;
  * @static true
  * @name concat
  * @owner Observable

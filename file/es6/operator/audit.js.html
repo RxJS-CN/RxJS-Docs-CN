@@ -84,27 +84,19 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Ignores source values for a duration determined by another Observable, then
- * emits the most recent value from the source Observable, then repeats this
- * process.
+ * &#x5728;&#x7531;&#x53E6;&#x5916;&#x4E00;&#x4E2A; Observable &#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6BB5;&#x91CC;&#x5FFD;&#x7565;&#x6E90;&#x6570;&#x636E;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x6E90; Observable &#x6700;&#x65B0;&#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;
+ * &#x7136;&#x540E;&#x91CD;&#x590D;&#x6B64;&#x8FC7;&#x7A0B;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link auditTime}, but the silencing
- * duration is determined by a second Observable.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F;{@link auditTime}, &#x4F46;&#x662F;&#x6C89;&#x9ED8;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#x7531;&#x7B2C;&#x4E8C;&#x4E2A; Observable &#x51B3;&#x5B9A;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/audit.png&quot; width=&quot;100%&quot;&gt;
  *
- * `audit` is similar to `throttle`, but emits the last value from the silenced
- * time window, instead of the first value. `audit` emits the most recent value
- * from the source Observable on the output Observable as soon as its internal
- * timer becomes disabled, and ignores source values while the timer is enabled.
- * Initially, the timer is disabled. As soon as the first source value arrives,
- * the timer is enabled by calling the `durationSelector` function with the
- * source value, which returns the &quot;duration&quot; Observable. When the duration
- * Observable emits a value or completes, the timer is disabled, then the most
- * recent source value is emitted on the output Observable, and this process
- * repeats for the next source value.
+ * `auditTime`&#x548C;`throttleTime`&#x5F88;&#x50CF;, &#x4F46;&#x662F;&#x53D1;&#x9001;&#x6C89;&#x9ED8;&#x65F6;&#x95F4;&#x7A97;&#x53E3;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;, &#x800C;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;&#x53EA;&#x8981; audit &#x7684;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x95F4;&#x88AB;&#x7981;&#x7528;&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x6E90; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x5B9A;&#x65F6;&#x5668;&#x542F;&#x7528;&#x65F6;
+ * &#x5FFD;&#x7565;&#x6E90;&#x503C;&#x3002;&#x4E00;&#x65E6;&#x7B2C;&#x4E00;&#x4E2A;&#x6E90;&#x503C;&#x8FBE;&#x5230;&#xFF0C;&#x5B83;&#x4F1A;&#x88AB;&#x8F6C;&#x53D1;&#x5230;&#x8F93;&#x51FA; Observable &#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x6E90;&#x503C;&#x8C03;&#x7528; durationSelector &#x51FD;&#x6570;&#x6765;
+ * &#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x8FD4;&#x56DE; &quot;duration&quot; Observable &#x3002;&#x5F53; duration Observable &#x53D1;&#x51FA;&#x503C;&#x6216;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x5B9A;&#x65F6;&#x5668;&#x4F1A;&#x88AB;&#x7981;&#x7528;&#xFF0C;
+ * &#x5E76;&#x4E14;&#x4E0B;&#x4E00;&#x4E2A;&#x6E90;&#x503C;&#x4E5F;&#x662F;&#x91CD;&#x590D;&#x6B64;&#x8FC7;&#x7A0B;&#x3002;
  *
- * @example &lt;caption&gt;Emit clicks at a rate of at most one click per second&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4EE5;&#x6BCF;&#x79D2;&#x6700;&#x591A;&#x70B9;&#x51FB;&#x4E00;&#x6B21;&#x7684;&#x9891;&#x7387;&#x53D1;&#x51FA;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.audit(ev =&gt; Rx.Observable.interval(1000));
  * result.subscribe(x =&gt; console.log(x));
@@ -115,11 +107,8 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link sample}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the silencing
- * duration, returned as an Observable or a Promise.
- * @return {Observable&lt;T&gt;} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector &#x8BE5;&#x51FD;&#x6570;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x63A5;&#x6536;&#x503C;&#xFF0C;&#x7528;&#x4E8E;&#x4E3A;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;&#x8BA1;&#x7B97;&#x6C89;&#x9ED8;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE; Observable &#x6216; Promise &#x3002;
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x9650;&#x5236;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#x9891;&#x7387;&#x3002;
  * @method audit
  * @owner Observable
  */

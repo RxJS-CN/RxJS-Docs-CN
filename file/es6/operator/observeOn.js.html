@@ -83,46 +83,38 @@
 import { Notification } from &apos;../Notification&apos;;
 /**
  *
- * Re-emits all notifications from source Observable with specified scheduler.
+ * &#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x6765;&#x91CD;&#x65B0;&#x53D1;&#x51FA;&#x6E90; Observable &#x7684;&#x6240;&#x6709;&#x901A;&#x77E5;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Ensure a specific scheduler is used, from outside of an Observable.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x786E;&#x4FDD;&#x4ECE; Observable &#x7684;&#x5916;&#x90E8;&#x4F7F;&#x7528;&#x7279;&#x5B9A;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x3002;&lt;/span&gt;
  *
- * `observeOn` is an operator that accepts a scheduler as a first parameter, which will be used to reschedule
- * notifications emitted by the source Observable. It might be useful, if you do not have control over
- * internal scheduler of a given Observable, but want to control when its values are emitted nevertheless.
+ * `observeOn` &#x64CD;&#x4F5C;&#x7B26;&#x63A5;&#x6536;&#x4E00;&#x4E2A; scheduler &#x4F5C;&#x4E3A;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x5C06;&#x7528;&#x4E8E;&#x91CD;&#x65B0;&#x5B89;&#x6392;&#x6E90; Observable &#x6240;&#x53D1;&#x9001;&#x7684;&#x901A;&#x77E5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x80FD;&#x63A7;&#x5236;
+ * &#x7ED9;&#x5B9A; Observable &#x7684;&#x5185;&#x90E8;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x4F46;&#x662F;&#x60F3;&#x8981;&#x63A7;&#x5236;&#x4F55;&#x65F6;&#x53D1;&#x51FA;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x53EF;&#x80FD;&#x662F;&#x6709;&#x7528;&#x7684;&#x3002;
  *
- * Returned Observable emits the same notifications (nexted values, complete and error events) as the source Observable,
- * but rescheduled with provided scheduler. Note that this doesn&apos;t mean that source Observables internal
- * scheduler will be replaced in any way. Original scheduler still will be used, but when the source Observable emits
- * notification, it will be immediately scheduled again - this time with scheduler passed to `observeOn`.
- * An anti-pattern would be calling `observeOn` on Observable that emits lots of values synchronously, to split
- * that emissions into asynchronous chunks. For this to happen, scheduler would have to be passed into the source
- * Observable directly (usually into the operator that creates it). `observeOn` simply delays notifications a
- * little bit more, to ensure that they are emitted at expected moments.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x4E0E;&#x6E90; Observable &#x76F8;&#x540C;&#x7684;&#x901A;&#x77E5;(`next`&#x3001;`complete` &#x548C; `error`)&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x63D0;&#x4F9B;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x8FDB;&#x884C;&#x4E86;&#x91CD;&#x65B0;&#x5B89;&#x6392;&#x3002;
+ * &#x6CE8;&#x610F;&#xFF0C;&#x8FD9;&#x5E76;&#x4E0D;&#x610F;&#x5473;&#x7740;&#x6E90; Observables &#x7684;&#x5185;&#x90E8;&#x8C03;&#x5EA6;&#x5668;&#x4F1A;&#x4EE5;&#x4EFB;&#x4F55;&#x5F62;&#x5F0F;&#x88AB;&#x66FF;&#x6362;&#x3002;&#x539F;&#x59CB;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x4ECD;&#x7136;&#x4F1A;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA;
+ * &#x901A;&#x77E5;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x7ACB;&#x5373;&#x91CD;&#x65B0;&#x5B89;&#x6392;(&#x8FD9;&#x65F6;&#x5019;&#x4F7F;&#x7528;&#x4F20;&#x7ED9; `observeOn` &#x7684;&#x8C03;&#x5EA6;&#x5668;)&#x3002;&#x5728;&#x540C;&#x6B65;&#x5730;&#x53D1;&#x51FA;&#x5927;&#x91CF;&#x7684;&#x503C;&#x7684; Observalbe &#x4E0A;&#x8C03;&#x7528; `observeOn`
+ * &#x662F;&#x4E00;&#x79CD;&#x53CD;&#x6A21;&#x5F0F;&#xFF0C;&#x8FD9;&#x4F1A;&#x5C06; Observable &#x7684;&#x53D1;&#x9001;&#x5206;&#x89E3;&#x6210;&#x5F02;&#x6B65;&#x5757;&#x3002;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x8C03;&#x5EA6;&#x5668;&#x5FC5;&#x987B;&#x76F4;&#x63A5;&#x4F20;&#x9012;&#x7ED9;&#x6E90; Observable (&#x901A;&#x5E38;&#x662F;&#x521B;&#x5EFA;&#x5B83;&#x7684;&#x64CD;&#x4F5C;&#x7B26;)&#x3002;
+ * `observeOn` &#x53EA;&#x662F;&#x7B80;&#x5355;&#x5730;&#x50CF;&#x901A;&#x77E5;&#x5EF6;&#x8FDF;&#x4E00;&#x4E9B;&#xFF0C;&#x4EE5;&#x786E;&#x4FDD;&#x8FD9;&#x4E9B;&#x901A;&#x77E5;&#x5728;&#x9884;&#x671F;&#x7684;&#x65F6;&#x95F4;&#x70B9;&#x53D1;&#x51FA;&#x3002;
  *
- * As a matter of fact, `observeOn` accepts second parameter, which specifies in milliseconds with what delay notifications
- * will be emitted. The main difference between {@link delay} operator and `observeOn` is that `observeOn`
- * will delay all notifications - including error notifications - while `delay` will pass through error
- * from source Observable immediately when it is emitted. In general it is highly recommended to use `delay` operator
- * for any kind of delaying of values in the stream, while using `observeOn` to specify which scheduler should be used
- * for notification emissions in general.
+ * &#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;`observeOn` &#x63A5;&#x6536;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B83;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x6307;&#x5B9A;&#x5EF6;&#x8FDF;&#x901A;&#x77E5;&#x7684;&#x53D1;&#x9001;&#x65F6;&#x95F4;&#x3002;`observeOn` &#x4E0E; {@link delay}
+ * &#x64CD;&#x4F5C;&#x7B26;&#x6700;&#x4E3B;&#x8981;&#x7684;&#x533A;&#x522B;&#x662F;&#x5B83;&#x4F1A;&#x5EF6;&#x8FDF;&#x6240;&#x6709;&#x901A;&#x77E5;&#xFF0C;&#x5305;&#x62EC;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#xFF0C;&#x800C; `delay` &#x4F1A;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x65F6;&#x7ACB;&#x5373;&#x901A;&#x8FC7;&#x9519;&#x8BEF;&#x3002;
+ * &#x901A;&#x5E38;&#x6765;&#x8BF4;&#xFF0C;&#x5BF9;&#x4E8E;&#x60F3;&#x5EF6;&#x8FDF;&#x6D41;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x503C;&#xFF0C;&#x5F3A;&#x70C8;&#x63A8;&#x8350;&#x4F7F;&#x7528; `delay` &#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x800C;&#x4F7F;&#x7528; `observeOn` &#x65F6;&#xFF0C;&#x7528;&#x6765;&#x6307;&#x5B9A;&#x5E94;&#x8BE5;&#x4F7F;&#x7528;
+ * &#x54EA;&#x4E2A;&#x8C03;&#x5EA6;&#x5668;&#x6765;&#x8FDB;&#x884C;&#x901A;&#x77E5;&#x53D1;&#x9001;&#x3002;
  *
- * @example &lt;caption&gt;Ensure values in subscribe are called just before browser repaint.&lt;/caption&gt;
- * const intervals = Rx.Observable.interval(10); // Intervals are scheduled
- *                                               // with async scheduler by default...
+ * @example &lt;caption&gt;&#x786E;&#x4FDD;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x91CD;&#x7ED8;&#x524D;&#x8C03;&#x7528;&#x8BA2;&#x9605;&#x4E2D;&#x7684;&#x503C;&#x3002;&lt;/caption&gt;
+ * const intervals = Rx.Observable.interval(10); // &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;interval &#x4F7F;&#x7528;&#x5F02;&#x6B65;&#x8C03;&#x5EA6;&#x5668;&#x8FDB;&#x884C;&#x8C03;&#x5EA6;
  *
  * intervals
- * .observeOn(Rx.Scheduler.animationFrame)       // ...but we will observe on animationFrame
- * .subscribe(val =&gt; {                           // scheduler to ensure smooth animation.
+ * .observeOn(Rx.Scheduler.animationFrame)       // &#x4F46;&#x6211;&#x4EEC;&#x5C06;&#x5728; animationFrame &#x8C03;&#x5EA6;&#x5668;&#x4E0A;&#x8FDB;&#x884C;&#x89C2;&#x5BDF;&#xFF0C;
+ * .subscribe(val =&gt; {                           // &#x4EE5;&#x786E;&#x4FDD;&#x52A8;&#x753B;&#x7684;&#x6D41;&#x7545;&#x6027;&#x3002;
  *   someDiv.style.height = val + &apos;px&apos;;
  * });
  *
  * @see {@link delay}
  *
- * @param {IScheduler} scheduler Scheduler that will be used to reschedule notifications from source Observable.
- * @param {number} [delay] Number of milliseconds that states with what delay every notification should be rescheduled.
- * @return {Observable&lt;T&gt;} Observable that emits the same notifications as the source Observable,
- * but with provided scheduler.
+ * @param {IScheduler} scheduler &#x7528;&#x4E8E;&#x91CD;&#x65B0;&#x5B89;&#x6392;&#x6E90; Observable &#x7684;&#x901A;&#x77E5;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x3002;
+ * @param {number} [delay] &#x5E94;&#x8BE5;&#x91CD;&#x65B0;&#x5B89;&#x6392;&#x7684;&#x6BCF;&#x4E2A;&#x901A;&#x77E5;&#x7684;&#x5EF6;&#x8FDF;&#x65F6;&#x95F4;&#x7684;&#x6BEB;&#x79D2;&#x6570;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x4E0E;&#x6E90; Observale &#x540C;&#x6837;&#x7684;&#x901A;&#x77E5;&#xFF0C;&#x4F46;&#x662F;&#x4F7F;&#x7528;&#x4E86;&#x63D0;&#x4F9B;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x3002;
  *
  * @method observeOn
  * @owner Observable

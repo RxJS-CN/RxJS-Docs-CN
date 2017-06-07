@@ -85,27 +85,23 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Branch out the source Observable values as a nested Observable using a
- * factory function of closing Observables to determine when to start a new
- * window.
+ * &#x5C06;&#x6E90; Observable &#x7684;&#x503C;&#x5206;&#x652F;&#x6210;&#x5D4C;&#x5957;&#x7684; Observable &#xFF0C;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x5173;&#x95ED; Observable &#x7684;&#x5DE5;&#x5382;&#x51FD;&#x6570;&#x6765;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7A97;&#x53E3;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link bufferWhen}, but emits a nested
- * Observable instead of an array.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F; {@link bufferWhen}, &#x4F46;&#x662F;&#x53D1;&#x51FA;&#x7684;&#x662F;&#x5D4C;&#x5957;&#x7684; Observable
+ * &#x800C;&#x4E0D;&#x662F;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/windowWhen.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits connected, non-overlapping windows.
- * It emits the current window and opens a new one whenever the Observable
- * produced by the specified `closingSelector` function emits an item. The first
- * window is opened immediately when subscribing to the output Observable.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x4ECE;&#x6E90; Observable &#x6536;&#x96C6;&#x5230;&#x7684;&#x9879;&#x7684;&#x7A97;&#x53E3;&#x3002; &#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x8FDE;&#x63A5;&#x7684;&#xFF0C;&#x975E;&#x91CD;&#x53E0;&#x7684;&#x7A97;&#x53E3;&#x3002;
+ * &#x6BCF;&#x5F53;&#x7531;&#x6307;&#x5B9A;&#x7684; closingSelector &#x51FD;&#x6570;&#x4EA7;&#x751F;&#x7684; Observable &#x53D1;&#x51FA;&#x9879;&#xFF0C;&#x5B83;&#x4F1A;&#x53D1;&#x51FA;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x5E76;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7A97;&#x53E3;&#x3002;
+ * &#x5F53;&#x8F93;&#x51FA; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x7ACB;&#x9A6C;&#x5F00;&#x542F;&#x7B2C;&#x4E00;&#x4E2A;&#x7A97;&#x53E3;&#x3002;
  *
- * @example &lt;caption&gt;Emit only the first two clicks events in every window of [1-5] random seconds&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5728;&#x6BCF;&#x4E2A;&#x79D2;&#x901F;&#x968F;&#x673A;(1-5&#x79D2;)&#x7684;&#x7A97;&#x53E3;&#x4E2D;&#xFF0C;&#x53EA;&#x53D1;&#x51FA;&#x6700;&#x5F00;&#x59CB;&#x7684;&#x4E24;&#x6B21;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks
  *   .windowWhen(() =&gt; Rx.Observable.interval(1000 + Math.random() * 4000))
- *   .map(win =&gt; win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win =&gt; win.take(2)) // &#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x6700;&#x591A;&#x4E24;&#x4E2A;&#x53D1;&#x9001;
+ *   .mergeAll(); // &#x6253;&#x5E73;&#x9AD8;&#x9636;Observable
  * result.subscribe(x =&gt; console.log(x));
  *
  * @see {@link window}
@@ -114,11 +110,9 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link windowToggle}
  * @see {@link bufferWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals (on either `next` or
- * `complete`) when to close the previous window and start a new one.
- * @return {Observable&lt;Observable&lt;T&gt;&gt;} An observable of windows, which in turn
- * are Observables.
+ * @param {function(): Observable} closingSelector &#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#x5E76;&#x4E14;&#x8FD4;&#x56DE; Observable&#xFF0C;
+ * &#x8BE5; Observable &#x53D1;&#x51FA;&#x4FE1;&#x53F7;(`next` &#x6216;&#x8005; `complete`)&#x4EE5;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x5173;&#x95ED;&#x524D;&#x4E00;&#x4E2A;&#x7A97;&#x53E3;&#xFF0C;&#x5F00;&#x542F;&#x65B0;&#x4E00;&#x4E2A;&#x7A97;&#x53E3;&#x3002;
+ * @return {Observable&lt;Observable&lt;T&gt;&gt;} &#x7A97;&#x53E3;&#x7684; Observable&#xFF0C;&#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x53C8;&#x662F;&#x503C;&#x7684; Observable(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x9AD8;&#x9636; Observable )&#x3002;
  * @method windowWhen
  * @owner Observable
  */

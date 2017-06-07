@@ -295,10 +295,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one\n * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will\n * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.\n * This is an alias for .publish().refCount().\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n *\n * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.\n * @method share\n * @owner Observable\n ",
+          "value": "*\n * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。\n * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。\n * 它是 ｀.publish().refCount()｀ 的别名。\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。\n * @method share\n * @owner Observable\n ",
           "range": [
             140,
-            740
+            511
           ],
           "loc": {
             "start": {
@@ -306,7 +306,7 @@
               "column": 0
             },
             "end": {
-              "line": 17,
+              "line": 15,
               "column": 3
             }
           }
@@ -321,16 +321,16 @@
           "type": "Identifier",
           "name": "share",
           "range": [
-            757,
-            762
+            528,
+            533
           ],
           "loc": {
             "start": {
-              "line": 18,
+              "line": 16,
               "column": 16
             },
             "end": {
-              "line": 18,
+              "line": 16,
               "column": 21
             }
           }
@@ -355,16 +355,16 @@
                         "type": "Identifier",
                         "name": "multicast",
                         "range": [
-                          778,
-                          787
+                          549,
+                          558
                         ],
                         "loc": {
                           "start": {
-                            "line": 19,
+                            "line": 17,
                             "column": 11
                           },
                           "end": {
-                            "line": 19,
+                            "line": 17,
                             "column": 20
                           }
                         }
@@ -373,31 +373,31 @@
                         "type": "Identifier",
                         "name": "call",
                         "range": [
-                          788,
-                          792
+                          559,
+                          563
                         ],
                         "loc": {
                           "start": {
-                            "line": 19,
+                            "line": 17,
                             "column": 21
                           },
                           "end": {
-                            "line": 19,
+                            "line": 17,
                             "column": 25
                           }
                         }
                       },
                       "range": [
-                        778,
-                        792
+                        549,
+                        563
                       ],
                       "loc": {
                         "start": {
-                          "line": 19,
+                          "line": 17,
                           "column": 11
                         },
                         "end": {
-                          "line": 19,
+                          "line": 17,
                           "column": 25
                         }
                       }
@@ -406,16 +406,16 @@
                       {
                         "type": "ThisExpression",
                         "range": [
-                          793,
-                          797
+                          564,
+                          568
                         ],
                         "loc": {
                           "start": {
-                            "line": 19,
+                            "line": 17,
                             "column": 26
                           },
                           "end": {
-                            "line": 19,
+                            "line": 17,
                             "column": 30
                           }
                         }
@@ -424,32 +424,32 @@
                         "type": "Identifier",
                         "name": "shareSubjectFactory",
                         "range": [
-                          799,
-                          818
+                          570,
+                          589
                         ],
                         "loc": {
                           "start": {
-                            "line": 19,
+                            "line": 17,
                             "column": 32
                           },
                           "end": {
-                            "line": 19,
+                            "line": 17,
                             "column": 51
                           }
                         }
                       }
                     ],
                     "range": [
-                      778,
-                      819
+                      549,
+                      590
                     ],
                     "loc": {
                       "start": {
-                        "line": 19,
+                        "line": 17,
                         "column": 11
                       },
                       "end": {
-                        "line": 19,
+                        "line": 17,
                         "column": 52
                       }
                     }
@@ -458,78 +458,78 @@
                     "type": "Identifier",
                     "name": "refCount",
                     "range": [
-                      820,
-                      828
+                      591,
+                      599
                     ],
                     "loc": {
                       "start": {
-                        "line": 19,
+                        "line": 17,
                         "column": 53
                       },
                       "end": {
-                        "line": 19,
+                        "line": 17,
                         "column": 61
                       }
                     }
                   },
                   "range": [
-                    778,
-                    828
+                    549,
+                    599
                   ],
                   "loc": {
                     "start": {
-                      "line": 19,
+                      "line": 17,
                       "column": 11
                     },
                     "end": {
-                      "line": 19,
+                      "line": 17,
                       "column": 61
                     }
                   }
                 },
                 "arguments": [],
                 "range": [
-                  778,
-                  830
+                  549,
+                  601
                 ],
                 "loc": {
                   "start": {
-                    "line": 19,
+                    "line": 17,
                     "column": 11
                   },
                   "end": {
-                    "line": 19,
+                    "line": 17,
                     "column": 63
                   }
                 }
               },
               "range": [
-                771,
-                831
+                542,
+                602
               ],
               "loc": {
                 "start": {
-                  "line": 19,
+                  "line": 17,
                   "column": 4
                 },
                 "end": {
-                  "line": 19,
+                  "line": 17,
                   "column": 64
                 }
               }
             }
           ],
           "range": [
-            765,
-            833
+            536,
+            604
           ],
           "loc": {
             "start": {
-              "line": 18,
+              "line": 16,
               "column": 24
             },
             "end": {
-              "line": 20,
+              "line": 18,
               "column": 1
             }
           }
@@ -537,26 +537,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          748,
-          833
+          519,
+          604
         ],
         "loc": {
           "start": {
-            "line": 18,
+            "line": 16,
             "column": 7
           },
           "end": {
-            "line": 20,
+            "line": 18,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one\n * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will\n * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.\n * This is an alias for .publish().refCount().\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n *\n * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.\n * @method share\n * @owner Observable\n ",
+            "value": "*\n * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。\n * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。\n * 它是 ｀.publish().refCount()｀ 的别名。\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。\n * @method share\n * @owner Observable\n ",
             "range": [
               140,
-              740
+              511
             ],
             "loc": {
               "start": {
@@ -564,7 +564,7 @@
                 "column": 0
               },
               "end": {
-                "line": 17,
+                "line": 15,
                 "column": 3
               }
             }
@@ -575,26 +575,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        741,
-        833
+        512,
+        604
       ],
       "loc": {
         "start": {
-          "line": 18,
+          "line": 16,
           "column": 0
         },
         "end": {
-          "line": 20,
+          "line": 18,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one\n * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will\n * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.\n * This is an alias for .publish().refCount().\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n *\n * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.\n * @method share\n * @owner Observable\n ",
+          "value": "*\n * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。\n * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。\n * 它是 ｀.publish().refCount()｀ 的别名。\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。\n * @method share\n * @owner Observable\n ",
           "range": [
             140,
-            740
+            511
           ],
           "loc": {
             "start": {
@@ -602,7 +602,7 @@
               "column": 0
             },
             "end": {
-              "line": 17,
+              "line": 15,
               "column": 3
             }
           }
@@ -612,16 +612,16 @@
     {
       "type": "EmptyStatement",
       "range": [
-        834,
-        835
+        605,
+        606
       ],
       "loc": {
         "start": {
-          "line": 21,
+          "line": 19,
           "column": 0
         },
         "end": {
-          "line": 21,
+          "line": 19,
           "column": 1
         }
       },
@@ -630,16 +630,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=share.js.map",
           "range": [
-            836,
-            869
+            607,
+            640
           ],
           "loc": {
             "start": {
-              "line": 22,
+              "line": 20,
               "column": 0
             },
             "end": {
-              "line": 22,
+              "line": 20,
               "column": 33
             }
           }
@@ -650,7 +650,7 @@
   "sourceType": "module",
   "range": [
     0,
-    835
+    606
   ],
   "loc": {
     "start": {
@@ -658,17 +658,17 @@
       "column": 0
     },
     "end": {
-      "line": 21,
+      "line": 19,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one\n * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will\n * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.\n * This is an alias for .publish().refCount().\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n *\n * @return {Observable<T>} An Observable that upon connection causes the source Observable to emit items to its Observers.\n * @method share\n * @owner Observable\n ",
+      "value": "*\n * 返回一个新的 Observable，该 Observable 多播(共享)源 Observable。 至少要有一个订阅者，该 Observable 才会被订阅并发出数据。\n * 当所有的订阅者都取消订阅了，它会取消对源 Observable 的订阅。 因为 Observable 是多路传播的它使得流是 `hot`。\n * 它是 ｀.publish().refCount()｀ 的别名。\n *\n * <img src=\"./img/share.png\" width=\"100%\">\n * @return {Observable<T>} Observable，连接该 Observable 后会导致源 Observable 向它的观察者发送数据。\n * @method share\n * @owner Observable\n ",
       "range": [
         140,
-        740
+        511
       ],
       "loc": {
         "start": {
@@ -676,7 +676,7 @@
           "column": 0
         },
         "end": {
-          "line": 17,
+          "line": 15,
           "column": 3
         }
       }
@@ -685,16 +685,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=share.js.map",
       "range": [
-        836,
-        869
+        607,
+        640
       ],
       "loc": {
         "start": {
-          "line": 22,
+          "line": 20,
           "column": 0
         },
         "end": {
-          "line": 22,
+          "line": 20,
           "column": 33
         }
       }

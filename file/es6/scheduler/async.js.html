@@ -83,37 +83,35 @@
 import { AsyncScheduler } from &apos;./AsyncScheduler&apos;;
 /**
  *
- * Async Scheduler
+ * Async &#x8C03;&#x5EA6;&#x5668;
  *
- * &lt;span class=&quot;informal&quot;&gt;Schedule task as if you used setTimeout(task, duration)&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x4F60;&#x4F7F;&#x7528;&#x8FC7;&#x7684; setTimeout(task, duration) &#x90A3;&#x6837;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&lt;/span&gt;
  *
- * `async` scheduler schedules tasks asynchronously, by putting them on the JavaScript
- * event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
- * in intervals.
+ * `async` &#x8C03;&#x5EA6;&#x5668;&#x5F02;&#x6B65;&#x5730;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&#xFF0C;&#x901A;&#x8FC7;&#x5C06;&#x5B83;&#x4EEC;&#x653E;&#x5165; JavaScript &#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E2D;&#x3002;&#x5B83;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x9002;&#x65F6;&#x5730;&#x5EF6;&#x65F6;&#x4EFB;&#x52A1;&#x6216;&#x8005;
+ * &#x6309;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x91CD;&#x590D;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&#x7684;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x3002;
  *
- * If you just want to &quot;defer&quot; task, that is to perform it right after currently
- * executing synchronous code ends (commonly achieved by `setTimeout(deferredTask, 0)`),
- * better choice will be the {@link asap} scheduler.
+ * &#x5982;&#x679C;&#x4F60;&#x53EA;&#x662F;&#x60F3;&quot;&#x5EF6;&#x65F6;&quot;&#x4EFB;&#x52A1;&#xFF0C;&#x5373;&#x5728;&#x5F53;&#x524D;&#x6267;&#x884C;&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x5B83;&#xFF08;&#x901A;&#x5E38;&#x4F1A;&#x7528;`setTimeout(deferredTask, 0)`&#x5B9E;&#x73B0;&#xFF09;&#xFF0C;
+ * {@link asap} &#x8C03;&#x5EA6;&#x5668;&#x4F1A;&#x662F;&#x66F4;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;
  *
- * @example &lt;caption&gt;Use async scheduler to delay task&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6765;&#x5EF6;&#x65F6;&#x4EFB;&#x52A1;&lt;/caption&gt;
  * const task = () =&gt; console.log(&apos;it works!&apos;);
  *
  * Rx.Scheduler.async.schedule(task, 2000);
  *
- * // After 2 seconds logs:
+ * // 2&#x79D2;&#x540E;&#x7684;&#x8F93;&#x51FA;:
  * // &quot;it works!&quot;
  *
  *
- * @example &lt;caption&gt;Use async scheduler to repeat task in intervals&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6309;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x91CD;&#x590D;&#x6267;&#x884C;&#x4EFB;&#x52A1;&lt;/caption&gt;
  * function task(state) {
  *   console.log(state);
- *   this.schedule(state + 1, 1000); // `this` references currently executing Action,
- *                                   // which we reschedule with new state and delay
+ *   this.schedule(state + 1, 1000); // `this` &#x6307;&#x5411;&#x5F53;&#x524D;&#x6267;&#x884C;&#x7684; Action,
+ *                                   // &#x6211;&#x4EEC;&#x7528;&#x65B0;&#x7684;&#x72B6;&#x6001;&#x548C;&#x5EF6;&#x65F6;&#x6765;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;&#x5B83;
  * }
  *
  * Rx.Scheduler.async.schedule(task, 3000, 0);
  *
- * // Logs:
+ * // &#x65E5;&#x5FD7;:
  * // 0 after 3s
  * // 1 after 4s
  * // 2 after 5s

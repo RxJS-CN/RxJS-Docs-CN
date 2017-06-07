@@ -84,27 +84,23 @@ import { isDate } from &apos;../util/isDate&apos;;
 import { Subscriber } from &apos;../Subscriber&apos;;
 import { Notification } from &apos;../Notification&apos;;
 /**
- * Delays the emission of items from the source Observable by a given timeout or
- * until a given Date.
+ * &#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x8D85;&#x65F6;&#x6216;&#x8005;&#x76F4;&#x5230;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6765;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Time shifts each item by some specified amount of
- * milliseconds.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x7684;&#x53D1;&#x51FA;&#x65F6;&#x95F4;&#x90FD;&#x5F80;&#x540E;&#x63A8;&#x79FB;&#x56FA;&#x5B9A;&#x7684;&#x6BEB;&#x79D2;&#x6570;.&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/delay.png&quot; width=&quot;100%&quot;&gt;
  *
- * If the delay argument is a Number, this operator time shifts the source
- * Observable by that amount of time expressed in milliseconds. The relative
- * time intervals between the values are preserved.
+ * &#x5982;&#x679C;&#x5EF6;&#x65F6;&#x53C2;&#x6570;&#x662F;&#x6570;&#x5B57;, &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x5C06;&#x6E90; Observable &#x7684;&#x53D1;&#x51FA;&#x65F6;&#x95F4;&#x90FD;&#x5F80;&#x540E;&#x63A8;&#x79FB;&#x56FA;&#x5B9A;&#x7684;&#x6BEB;&#x79D2;&#x6570;&#x3002;
+ * &#x4FDD;&#x5B58;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x5BF9;&#x65F6;&#x95F4;&#x95F4;&#x9694;.
  *
- * If the delay argument is a Date, this operator time shifts the start of the
- * Observable execution until the given date occurs.
+ * &#x5982;&#x679C;&#x5EF6;&#x8FDF;&#x53C2;&#x6570;&#x662F;&#x65E5;&#x671F;&#x7C7B;&#x578B;, &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x5EF6;&#x65F6;Observable&#x7684;&#x6267;&#x884C;&#x76F4;&#x5230;&#x5230;&#x4E86;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;.
  *
- * @example &lt;caption&gt;Delay each click by one second&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x5EF6;&#x8FDF;1&#x79D2;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var delayedClicks = clicks.delay(1000); // each click emitted after 1 second
  * delayedClicks.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Delay all clicks until a future date happens&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5EF6;&#x65F6;&#x6240;&#x6709;&#x7684;&#x70B9;&#x51FB;&#x76F4;&#x5230;&#x5230;&#x8FBE;&#x672A;&#x6765;&#x7684;&#x65F6;&#x95F4;&#x70B9;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var date = new Date(&apos;March 15, 2050 12:00:00&apos;); // in the future
  * var delayedClicks = clicks.delay(date); // click emitted only after that date
@@ -113,12 +109,9 @@ import { Notification } from &apos;../Notification&apos;;
  * @see {@link debounceTime}
  * @see {@link delayWhen}
  *
- * @param {number|Date} delay The delay duration in milliseconds (a `number`) or
- * a `Date` until which the emission of the source items is delayed.
- * @param {Scheduler} [scheduler=async] The IScheduler to use for
- * managing the timers that handle the time-shift for each item.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified timeout or Date.
+ * @param {number|Date} delay &#x5EF6;&#x8FDF;&#x65F6;&#x95F4;(&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x6570;&#x5B57;)&#x6216; Date &#x5BF9;&#x8C61;(&#x53D1;&#x9001;&#x5EF6;&#x8FDF;&#x5230;&#x8FD9;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;)&#x3002;
+ * @param {Scheduler} [scheduler=async] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x7BA1;&#x7406;&#x5904;&#x7406;&#x6BCF;&#x9879;&#x65F6;&#x5EF6;&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x3002;
+ * @return {Observable} &#x8BE5; Observalbe &#x901A;&#x8FC7;&#x6307;&#x5B9A;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x6216;&#x65E5;&#x671F;&#x6765;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#x3002;
  * @method delay
  * @owner Observable
  */

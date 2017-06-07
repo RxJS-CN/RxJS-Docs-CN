@@ -94,10 +94,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Converts a higher-order Observable into a first-order Observable by waiting\n * for the outer Observable to complete, then applying {@link combineLatest}.\n *\n * <span class=\"informal\">Flattens an Observable-of-Observables by applying\n * {@link combineLatest} when the Observable-of-Observables completes.</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * Takes an Observable of Observables, and collects all Observables from it.\n * Once the outer Observable completes, it subscribes to all collected\n * Observables and combines their values using the {@link combineLatest}\n * strategy, such that:\n * - Every time an inner Observable emits, the output Observable emits.\n * - When the returned observable emits, it emits all of the latest values by:\n *   - If a `project` function is provided, it is called with each recent value\n *     from each inner Observable in whatever order they arrived, and the result\n *     of the `project` function is what is emitted by the output Observable.\n *   - If there is no `project` function, an array of all of the most recent\n *     values is emitted by the output Observable.\n *\n * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] An optional function to map the most recent\n * values from each inner Observable into a new result. Takes each of the most\n * recent values from each collected inner Observable as arguments, in order.\n * @return {Observable} An Observable of projected results or arrays of recent\n * values.\n * @method combineAll\n * @owner Observable\n ",
+          "value": "*\n * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。\n *\n * <span class=\"informal\">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的\n * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,\n *  这样:\n * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。\n * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：\n *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。\n *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。\n *\n * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。\n * @return {Observable} 该 Observable 为最新值的投射结果或数组。\n * @method combineAll\n * @owner Observable\n ",
           "range": [
             57,
-            1984
+            1223
           ],
           "loc": {
             "start": {
@@ -105,7 +105,7 @@
               "column": 0
             },
             "end": {
-              "line": 41,
+              "line": 32,
               "column": 3
             }
           }
@@ -120,16 +120,16 @@
           "type": "Identifier",
           "name": "combineAll",
           "range": [
-            2001,
-            2011
+            1240,
+            1250
           ],
           "loc": {
             "start": {
-              "line": 42,
+              "line": 33,
               "column": 16
             },
             "end": {
-              "line": 42,
+              "line": 33,
               "column": 26
             }
           }
@@ -139,16 +139,16 @@
             "type": "Identifier",
             "name": "project",
             "range": [
-              2012,
-              2019
+              1251,
+              1258
             ],
             "loc": {
               "start": {
-                "line": 42,
+                "line": 33,
                 "column": 27
               },
               "end": {
-                "line": 42,
+                "line": 33,
                 "column": 34
               }
             }
@@ -167,16 +167,16 @@
                   "object": {
                     "type": "ThisExpression",
                     "range": [
-                      2034,
-                      2038
+                      1273,
+                      1277
                     ],
                     "loc": {
                       "start": {
-                        "line": 43,
+                        "line": 34,
                         "column": 11
                       },
                       "end": {
-                        "line": 43,
+                        "line": 34,
                         "column": 15
                       }
                     }
@@ -185,31 +185,31 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      2039,
-                      2043
+                      1278,
+                      1282
                     ],
                     "loc": {
                       "start": {
-                        "line": 43,
+                        "line": 34,
                         "column": 16
                       },
                       "end": {
-                        "line": 43,
+                        "line": 34,
                         "column": 20
                       }
                     }
                   },
                   "range": [
-                    2034,
-                    2043
+                    1273,
+                    1282
                   ],
                   "loc": {
                     "start": {
-                      "line": 43,
+                      "line": 34,
                       "column": 11
                     },
                     "end": {
-                      "line": 43,
+                      "line": 34,
                       "column": 20
                     }
                   }
@@ -221,16 +221,16 @@
                       "type": "Identifier",
                       "name": "CombineLatestOperator",
                       "range": [
-                        2048,
-                        2069
+                        1287,
+                        1308
                       ],
                       "loc": {
                         "start": {
-                          "line": 43,
+                          "line": 34,
                           "column": 25
                         },
                         "end": {
-                          "line": 43,
+                          "line": 34,
                           "column": 46
                         }
                       }
@@ -240,79 +240,79 @@
                         "type": "Identifier",
                         "name": "project",
                         "range": [
-                          2070,
-                          2077
+                          1309,
+                          1316
                         ],
                         "loc": {
                           "start": {
-                            "line": 43,
+                            "line": 34,
                             "column": 47
                           },
                           "end": {
-                            "line": 43,
+                            "line": 34,
                             "column": 54
                           }
                         }
                       }
                     ],
                     "range": [
-                      2044,
-                      2078
+                      1283,
+                      1317
                     ],
                     "loc": {
                       "start": {
-                        "line": 43,
+                        "line": 34,
                         "column": 21
                       },
                       "end": {
-                        "line": 43,
+                        "line": 34,
                         "column": 55
                       }
                     }
                   }
                 ],
                 "range": [
-                  2034,
-                  2079
+                  1273,
+                  1318
                 ],
                 "loc": {
                   "start": {
-                    "line": 43,
+                    "line": 34,
                     "column": 11
                   },
                   "end": {
-                    "line": 43,
+                    "line": 34,
                     "column": 56
                   }
                 }
               },
               "range": [
-                2027,
-                2080
+                1266,
+                1319
               ],
               "loc": {
                 "start": {
-                  "line": 43,
+                  "line": 34,
                   "column": 4
                 },
                 "end": {
-                  "line": 43,
+                  "line": 34,
                   "column": 57
                 }
               }
             }
           ],
           "range": [
-            2021,
-            2082
+            1260,
+            1321
           ],
           "loc": {
             "start": {
-              "line": 42,
+              "line": 33,
               "column": 36
             },
             "end": {
-              "line": 44,
+              "line": 35,
               "column": 1
             }
           }
@@ -320,26 +320,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          1992,
-          2082
+          1231,
+          1321
         ],
         "loc": {
           "start": {
-            "line": 42,
+            "line": 33,
             "column": 7
           },
           "end": {
-            "line": 44,
+            "line": 35,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Converts a higher-order Observable into a first-order Observable by waiting\n * for the outer Observable to complete, then applying {@link combineLatest}.\n *\n * <span class=\"informal\">Flattens an Observable-of-Observables by applying\n * {@link combineLatest} when the Observable-of-Observables completes.</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * Takes an Observable of Observables, and collects all Observables from it.\n * Once the outer Observable completes, it subscribes to all collected\n * Observables and combines their values using the {@link combineLatest}\n * strategy, such that:\n * - Every time an inner Observable emits, the output Observable emits.\n * - When the returned observable emits, it emits all of the latest values by:\n *   - If a `project` function is provided, it is called with each recent value\n *     from each inner Observable in whatever order they arrived, and the result\n *     of the `project` function is what is emitted by the output Observable.\n *   - If there is no `project` function, an array of all of the most recent\n *     values is emitted by the output Observable.\n *\n * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] An optional function to map the most recent\n * values from each inner Observable into a new result. Takes each of the most\n * recent values from each collected inner Observable as arguments, in order.\n * @return {Observable} An Observable of projected results or arrays of recent\n * values.\n * @method combineAll\n * @owner Observable\n ",
+            "value": "*\n * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。\n *\n * <span class=\"informal\">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的\n * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,\n *  这样:\n * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。\n * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：\n *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。\n *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。\n *\n * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。\n * @return {Observable} 该 Observable 为最新值的投射结果或数组。\n * @method combineAll\n * @owner Observable\n ",
             "range": [
               57,
-              1984
+              1223
             ],
             "loc": {
               "start": {
@@ -347,7 +347,7 @@
                 "column": 0
               },
               "end": {
-                "line": 41,
+                "line": 32,
                 "column": 3
               }
             }
@@ -358,16 +358,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=combineAll.js.map",
             "range": [
-              2083,
-              2121
+              1322,
+              1360
             ],
             "loc": {
               "start": {
-                "line": 45,
+                "line": 36,
                 "column": 0
               },
               "end": {
-                "line": 45,
+                "line": 36,
                 "column": 38
               }
             }
@@ -377,26 +377,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1985,
-        2082
+        1224,
+        1321
       ],
       "loc": {
         "start": {
-          "line": 42,
+          "line": 33,
           "column": 0
         },
         "end": {
-          "line": 44,
+          "line": 35,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Converts a higher-order Observable into a first-order Observable by waiting\n * for the outer Observable to complete, then applying {@link combineLatest}.\n *\n * <span class=\"informal\">Flattens an Observable-of-Observables by applying\n * {@link combineLatest} when the Observable-of-Observables completes.</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * Takes an Observable of Observables, and collects all Observables from it.\n * Once the outer Observable completes, it subscribes to all collected\n * Observables and combines their values using the {@link combineLatest}\n * strategy, such that:\n * - Every time an inner Observable emits, the output Observable emits.\n * - When the returned observable emits, it emits all of the latest values by:\n *   - If a `project` function is provided, it is called with each recent value\n *     from each inner Observable in whatever order they arrived, and the result\n *     of the `project` function is what is emitted by the output Observable.\n *   - If there is no `project` function, an array of all of the most recent\n *     values is emitted by the output Observable.\n *\n * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] An optional function to map the most recent\n * values from each inner Observable into a new result. Takes each of the most\n * recent values from each collected inner Observable as arguments, in order.\n * @return {Observable} An Observable of projected results or arrays of recent\n * values.\n * @method combineAll\n * @owner Observable\n ",
+          "value": "*\n * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。\n *\n * <span class=\"informal\">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的\n * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,\n *  这样:\n * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。\n * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：\n *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。\n *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。\n *\n * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。\n * @return {Observable} 该 Observable 为最新值的投射结果或数组。\n * @method combineAll\n * @owner Observable\n ",
           "range": [
             57,
-            1984
+            1223
           ],
           "loc": {
             "start": {
@@ -404,7 +404,7 @@
               "column": 0
             },
             "end": {
-              "line": 41,
+              "line": 32,
               "column": 3
             }
           }
@@ -415,16 +415,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=combineAll.js.map",
           "range": [
-            2083,
-            2121
+            1322,
+            1360
           ],
           "loc": {
             "start": {
-              "line": 45,
+              "line": 36,
               "column": 0
             },
             "end": {
-              "line": 45,
+              "line": 36,
               "column": 38
             }
           }
@@ -435,7 +435,7 @@
   "sourceType": "module",
   "range": [
     0,
-    2082
+    1321
   ],
   "loc": {
     "start": {
@@ -443,17 +443,17 @@
       "column": 0
     },
     "end": {
-      "line": 44,
+      "line": 35,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Converts a higher-order Observable into a first-order Observable by waiting\n * for the outer Observable to complete, then applying {@link combineLatest}.\n *\n * <span class=\"informal\">Flattens an Observable-of-Observables by applying\n * {@link combineLatest} when the Observable-of-Observables completes.</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * Takes an Observable of Observables, and collects all Observables from it.\n * Once the outer Observable completes, it subscribes to all collected\n * Observables and combines their values using the {@link combineLatest}\n * strategy, such that:\n * - Every time an inner Observable emits, the output Observable emits.\n * - When the returned observable emits, it emits all of the latest values by:\n *   - If a `project` function is provided, it is called with each recent value\n *     from each inner Observable in whatever order they arrived, and the result\n *     of the `project` function is what is emitted by the output Observable.\n *   - If there is no `project` function, an array of all of the most recent\n *     values is emitted by the output Observable.\n *\n * @example <caption>Map two click events to a finite interval Observable, then apply combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] An optional function to map the most recent\n * values from each inner Observable into a new result. Takes each of the most\n * recent values from each collected inner Observable as arguments, in order.\n * @return {Observable} An Observable of projected results or arrays of recent\n * values.\n * @method combineAll\n * @owner Observable\n ",
+      "value": "*\n * 通过等待外部 Observable 完成然后应用 {@link combineLatest} ，将高阶 Observable 转化为一阶 Observable。\n *\n * <span class=\"informal\">当高阶 Observable 完成时，通过使用 {@link combineLatest} 将其打平。</span>\n *\n * <img src=\"./img/combineAll.png\" width=\"100%\">\n *\n * 接受一个返回 Observables 的 Observable, 并从中收集所有的 Observables 。 一旦最外部的\n * Observable 完成, 会订阅所有收集的 Observables 然后通过{@link combineLatest}合并值,\n *  这样:\n * - 每次内部 Observable 发出的时候, 外部 Observable 也发出。\n * - 当返回的 observable 发出的时候, 它会通过如下方式发出所有最新的值：\n *   - 如果提供了｀project｀函数, 该函数会按内部 Observable 到达的顺序依次使用每个内部 Observable 的最新值进行调用。\n *   - 如果没有提供｀project｀函数, 包含所有最新数据的数组会被输出 Observable 发出。\n *\n * @example <caption>将两个点击事件映射为有限的 interval Observable，然后应用 combineAll</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var higherOrder = clicks.map(ev =>\n *   Rx.Observable.interval(Math.random()*2000).take(3)\n * ).take(2);\n * var result = higherOrder.combineAll();\n * result.subscribe(x => console.log(x));\n *\n * @see {@link combineLatest}\n * @see {@link mergeAll}\n *\n * @param {function} [project] 它按顺序的从每个收集到的内部 Observable 中接收最新值作为参数。\n * @return {Observable} 该 Observable 为最新值的投射结果或数组。\n * @method combineAll\n * @owner Observable\n ",
       "range": [
         57,
-        1984
+        1223
       ],
       "loc": {
         "start": {
@@ -461,7 +461,7 @@
           "column": 0
         },
         "end": {
-          "line": 41,
+          "line": 32,
           "column": 3
         }
       }
@@ -470,16 +470,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=combineAll.js.map",
       "range": [
-        2083,
-        2121
+        1322,
+        1360
       ],
       "loc": {
         "start": {
-          "line": 45,
+          "line": 36,
           "column": 0
         },
         "end": {
-          "line": 45,
+          "line": 36,
           "column": 38
         }
       }

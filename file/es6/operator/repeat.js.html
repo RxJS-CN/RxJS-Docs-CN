@@ -82,14 +82,12 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { EmptyObservable } from &apos;../observable/EmptyObservable&apos;;
 /**
- * Returns an Observable that repeats the stream of items emitted by the source Observable at most count times.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x91CD;&#x590D;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x7684;&#x6D41;&#xFF0C;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x91CD;&#x590D; count &#x6B21;&#x3002;
  *
  * &lt;img src=&quot;./img/repeat.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {number} [count] The number of times the source Observable items are repeated, a count of 0 will yield
- * an empty Observable.
- * @return {Observable} An Observable that repeats the stream of items emitted by the source Observable at most
- * count times.
+ * @param {number} [count] &#x6E90; Observable &#x9879;&#x91CD;&#x590D;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x5982;&#x679C; count &#x4E3A;0&#x5219;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x7A7A;&#x7684; Observable &#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x91CD;&#x590D;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x7684;&#x6D41;&#xFF0C;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x91CD;&#x590D; count &#x6B21;&#x3002;
  * @method repeat
  * @owner Observable
  */

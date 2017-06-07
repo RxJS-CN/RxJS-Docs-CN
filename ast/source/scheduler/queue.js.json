@@ -185,10 +185,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">Put every next task on a queue, instead of executing it immediately</span>\n *\n * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.\n *\n * When used without delay, it schedules given task synchronously - executes it right when\n * it is scheduled. However when called recursively, that is when inside the scheduled task,\n * another task is scheduled with queue scheduler, instead of executing immediately as well,\n * that task will be put on a queue and wait for current one to finish.\n *\n * This means that when you execute task with `queue` scheduler, you are sure it will end\n * before any other task scheduled with that scheduler will start.\n *\n * @examples <caption>Schedule recursively first, then do something</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue\n *\n *   console.log('first');\n * });\n *\n * // Logs:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>Reschedule itself recursively</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` references currently executing Action,\n *                               // which we reschedule with new state\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // In scheduler that runs recursively, you would expect:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // But with queue it logs:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
           "range": [
             96,
-            1903
+            1294
           ],
           "loc": {
             "start": {
@@ -196,7 +196,7 @@
               "column": 0
             },
             "end": {
-              "line": 63,
+              "line": 60,
               "column": 3
             }
           }
@@ -214,16 +214,16 @@
               "type": "Identifier",
               "name": "queue",
               "range": [
-                1917,
-                1922
+                1308,
+                1313
               ],
               "loc": {
                 "start": {
-                  "line": 64,
+                  "line": 61,
                   "column": 13
                 },
                 "end": {
-                  "line": 64,
+                  "line": 61,
                   "column": 18
                 }
               }
@@ -234,16 +234,16 @@
                 "type": "Identifier",
                 "name": "QueueScheduler",
                 "range": [
-                  1929,
-                  1943
+                  1320,
+                  1334
                 ],
                 "loc": {
                   "start": {
-                    "line": 64,
+                    "line": 61,
                     "column": 25
                   },
                   "end": {
-                    "line": 64,
+                    "line": 61,
                     "column": 39
                   }
                 }
@@ -253,47 +253,47 @@
                   "type": "Identifier",
                   "name": "QueueAction",
                   "range": [
-                    1944,
-                    1955
+                    1335,
+                    1346
                   ],
                   "loc": {
                     "start": {
-                      "line": 64,
+                      "line": 61,
                       "column": 40
                     },
                     "end": {
-                      "line": 64,
+                      "line": 61,
                       "column": 51
                     }
                   }
                 }
               ],
               "range": [
-                1925,
-                1956
+                1316,
+                1347
               ],
               "loc": {
                 "start": {
-                  "line": 64,
+                  "line": 61,
                   "column": 21
                 },
                 "end": {
-                  "line": 64,
+                  "line": 61,
                   "column": 52
                 }
               }
             },
             "range": [
-              1917,
-              1956
+              1308,
+              1347
             ],
             "loc": {
               "start": {
-                "line": 64,
+                "line": 61,
                 "column": 13
               },
               "end": {
-                "line": 64,
+                "line": 61,
                 "column": 52
               }
             }
@@ -301,26 +301,26 @@
         ],
         "kind": "const",
         "range": [
-          1911,
-          1957
+          1302,
+          1348
         ],
         "loc": {
           "start": {
-            "line": 64,
+            "line": 61,
             "column": 7
           },
           "end": {
-            "line": 64,
+            "line": 61,
             "column": 53
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">Put every next task on a queue, instead of executing it immediately</span>\n *\n * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.\n *\n * When used without delay, it schedules given task synchronously - executes it right when\n * it is scheduled. However when called recursively, that is when inside the scheduled task,\n * another task is scheduled with queue scheduler, instead of executing immediately as well,\n * that task will be put on a queue and wait for current one to finish.\n *\n * This means that when you execute task with `queue` scheduler, you are sure it will end\n * before any other task scheduled with that scheduler will start.\n *\n * @examples <caption>Schedule recursively first, then do something</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue\n *\n *   console.log('first');\n * });\n *\n * // Logs:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>Reschedule itself recursively</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` references currently executing Action,\n *                               // which we reschedule with new state\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // In scheduler that runs recursively, you would expect:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // But with queue it logs:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+            "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
             "range": [
               96,
-              1903
+              1294
             ],
             "loc": {
               "start": {
@@ -328,7 +328,7 @@
                 "column": 0
               },
               "end": {
-                "line": 63,
+                "line": 60,
                 "column": 3
               }
             }
@@ -339,16 +339,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=queue.js.map",
             "range": [
-              1958,
-              1991
+              1349,
+              1382
             ],
             "loc": {
               "start": {
-                "line": 65,
+                "line": 62,
                 "column": 0
               },
               "end": {
-                "line": 65,
+                "line": 62,
                 "column": 33
               }
             }
@@ -358,26 +358,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1904,
-        1957
+        1295,
+        1348
       ],
       "loc": {
         "start": {
-          "line": 64,
+          "line": 61,
           "column": 0
         },
         "end": {
-          "line": 64,
+          "line": 61,
           "column": 53
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">Put every next task on a queue, instead of executing it immediately</span>\n *\n * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.\n *\n * When used without delay, it schedules given task synchronously - executes it right when\n * it is scheduled. However when called recursively, that is when inside the scheduled task,\n * another task is scheduled with queue scheduler, instead of executing immediately as well,\n * that task will be put on a queue and wait for current one to finish.\n *\n * This means that when you execute task with `queue` scheduler, you are sure it will end\n * before any other task scheduled with that scheduler will start.\n *\n * @examples <caption>Schedule recursively first, then do something</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue\n *\n *   console.log('first');\n * });\n *\n * // Logs:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>Reschedule itself recursively</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` references currently executing Action,\n *                               // which we reschedule with new state\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // In scheduler that runs recursively, you would expect:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // But with queue it logs:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
           "range": [
             96,
-            1903
+            1294
           ],
           "loc": {
             "start": {
@@ -385,7 +385,7 @@
               "column": 0
             },
             "end": {
-              "line": 63,
+              "line": 60,
               "column": 3
             }
           }
@@ -396,16 +396,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=queue.js.map",
           "range": [
-            1958,
-            1991
+            1349,
+            1382
           ],
           "loc": {
             "start": {
-              "line": 65,
+              "line": 62,
               "column": 0
             },
             "end": {
-              "line": 65,
+              "line": 62,
               "column": 33
             }
           }
@@ -416,7 +416,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1957
+    1348
   ],
   "loc": {
     "start": {
@@ -424,17 +424,17 @@
       "column": 0
     },
     "end": {
-      "line": 64,
+      "line": 61,
       "column": 53
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">Put every next task on a queue, instead of executing it immediately</span>\n *\n * `queue` scheduler, when used with delay, behaves the same as {@link async} scheduler.\n *\n * When used without delay, it schedules given task synchronously - executes it right when\n * it is scheduled. However when called recursively, that is when inside the scheduled task,\n * another task is scheduled with queue scheduler, instead of executing immediately as well,\n * that task will be put on a queue and wait for current one to finish.\n *\n * This means that when you execute task with `queue` scheduler, you are sure it will end\n * before any other task scheduled with that scheduler will start.\n *\n * @examples <caption>Schedule recursively first, then do something</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // will not happen now, but will be put on a queue\n *\n *   console.log('first');\n * });\n *\n * // Logs:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>Reschedule itself recursively</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` references currently executing Action,\n *                               // which we reschedule with new state\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // In scheduler that runs recursively, you would expect:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // But with queue it logs:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+      "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
       "range": [
         96,
-        1903
+        1294
       ],
       "loc": {
         "start": {
@@ -442,7 +442,7 @@
           "column": 0
         },
         "end": {
-          "line": 63,
+          "line": 60,
           "column": 3
         }
       }
@@ -451,16 +451,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=queue.js.map",
       "range": [
-        1958,
-        1991
+        1349,
+        1382
       ],
       "loc": {
         "start": {
-          "line": 65,
+          "line": 62,
           "column": 0
         },
         "end": {
-          "line": 65,
+          "line": 62,
           "column": 33
         }
       }

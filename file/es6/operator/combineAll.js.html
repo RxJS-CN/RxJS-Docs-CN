@@ -81,27 +81,21 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/combineAll.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { CombineLatestOperator } from &apos;./combineLatest&apos;;
 /**
- * Converts a higher-order Observable into a first-order Observable by waiting
- * for the outer Observable to complete, then applying {@link combineLatest}.
+ * &#x901A;&#x8FC7;&#x7B49;&#x5F85;&#x5916;&#x90E8; Observable &#x5B8C;&#x6210;&#x7136;&#x540E;&#x5E94;&#x7528; {@link combineLatest} &#xFF0C;&#x5C06;&#x9AD8;&#x9636; Observable &#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x9636; Observable&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Flattens an Observable-of-Observables by applying
- * {@link combineLatest} when the Observable-of-Observables completes.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5F53;&#x9AD8;&#x9636; Observable &#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x4F7F;&#x7528; {@link combineLatest} &#x5C06;&#x5176;&#x6253;&#x5E73;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/combineAll.png&quot; width=&quot;100%&quot;&gt;
  *
- * Takes an Observable of Observables, and collects all Observables from it.
- * Once the outer Observable completes, it subscribes to all collected
- * Observables and combines their values using the {@link combineLatest}
- * strategy, such that:
- * - Every time an inner Observable emits, the output Observable emits.
- * - When the returned observable emits, it emits all of the latest values by:
- *   - If a `project` function is provided, it is called with each recent value
- *     from each inner Observable in whatever order they arrived, and the result
- *     of the `project` function is what is emitted by the output Observable.
- *   - If there is no `project` function, an array of all of the most recent
- *     values is emitted by the output Observable.
+ * &#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x8FD4;&#x56DE; Observables &#x7684; Observable, &#x5E76;&#x4ECE;&#x4E2D;&#x6536;&#x96C6;&#x6240;&#x6709;&#x7684; Observables &#x3002; &#x4E00;&#x65E6;&#x6700;&#x5916;&#x90E8;&#x7684;
+ * Observable &#x5B8C;&#x6210;, &#x4F1A;&#x8BA2;&#x9605;&#x6240;&#x6709;&#x6536;&#x96C6;&#x7684; Observables &#x7136;&#x540E;&#x901A;&#x8FC7;{@link combineLatest}&#x5408;&#x5E76;&#x503C;,
+ *  &#x8FD9;&#x6837;:
+ * - &#x6BCF;&#x6B21;&#x5185;&#x90E8; Observable &#x53D1;&#x51FA;&#x7684;&#x65F6;&#x5019;, &#x5916;&#x90E8; Observable &#x4E5F;&#x53D1;&#x51FA;&#x3002;
+ * - &#x5F53;&#x8FD4;&#x56DE;&#x7684; observable &#x53D1;&#x51FA;&#x7684;&#x65F6;&#x5019;, &#x5B83;&#x4F1A;&#x901A;&#x8FC7;&#x5982;&#x4E0B;&#x65B9;&#x5F0F;&#x53D1;&#x51FA;&#x6240;&#x6709;&#x6700;&#x65B0;&#x7684;&#x503C;&#xFF1A;
+ *   - &#x5982;&#x679C;&#x63D0;&#x4F9B;&#x4E86;&#xFF40;project&#xFF40;&#x51FD;&#x6570;, &#x8BE5;&#x51FD;&#x6570;&#x4F1A;&#x6309;&#x5185;&#x90E8; Observable &#x5230;&#x8FBE;&#x7684;&#x987A;&#x5E8F;&#x4F9D;&#x6B21;&#x4F7F;&#x7528;&#x6BCF;&#x4E2A;&#x5185;&#x90E8; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#x3002;
+ *   - &#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#xFF40;project&#xFF40;&#x51FD;&#x6570;, &#x5305;&#x542B;&#x6240;&#x6709;&#x6700;&#x65B0;&#x6570;&#x636E;&#x7684;&#x6570;&#x7EC4;&#x4F1A;&#x88AB;&#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x3002;
  *
- * @example &lt;caption&gt;Map two click events to a finite interval Observable, then apply combineAll&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x4E24;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x6620;&#x5C04;&#x4E3A;&#x6709;&#x9650;&#x7684; interval Observable&#xFF0C;&#x7136;&#x540E;&#x5E94;&#x7528; combineAll&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var higherOrder = clicks.map(ev =&gt;
  *   Rx.Observable.interval(Math.random()*2000).take(3)
@@ -112,11 +106,8 @@
  * @see {@link combineLatest}
  * @see {@link mergeAll}
  *
- * @param {function} [project] An optional function to map the most recent
- * values from each inner Observable into a new result. Takes each of the most
- * recent values from each collected inner Observable as arguments, in order.
- * @return {Observable} An Observable of projected results or arrays of recent
- * values.
+ * @param {function} [project] &#x5B83;&#x6309;&#x987A;&#x5E8F;&#x7684;&#x4ECE;&#x6BCF;&#x4E2A;&#x6536;&#x96C6;&#x5230;&#x7684;&#x5185;&#x90E8; Observable &#x4E2D;&#x63A5;&#x6536;&#x6700;&#x65B0;&#x503C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x4E3A;&#x6700;&#x65B0;&#x503C;&#x7684;&#x6295;&#x5C04;&#x7ED3;&#x679C;&#x6216;&#x6570;&#x7EC4;&#x3002;
  * @method combineAll
  * @owner Observable
  */

@@ -100,34 +100,26 @@ export class IntervalObservable extends Observable {
         }
     }
     /**
-     * Creates an Observable that emits sequential numbers every specified
-     * interval of time, on a specified IScheduler.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable &#xFF0C;&#x8BE5; Observable &#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x7684; IScheduler &#xFF0C;&#x5E76;&#x4EE5;&#x6307;&#x5B9A;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x53D1;&#x51FA;&#x8FDE;&#x7EED;&#x7684;&#x6570;&#x5B57;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Emits incremental numbers periodically in time.
-     * &lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x5B9A;&#x671F;&#x53D1;&#x51FA;&#x81EA;&#x589E;&#x7684;&#x6570;&#x5B57;&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/interval.png&quot; width=&quot;100%&quot;&gt;
      *
-     * `interval` returns an Observable that emits an infinite sequence of
-     * ascending integers, with a constant interval of time of your choosing
-     * between those emissions. The first emission is not sent immediately, but
-     * only after the first period has passed. By default, this operator uses the
-     * `async` IScheduler to provide a notion of time, but you may pass any
-     * IScheduler to it.
+     * `interval` &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x53D1;&#x51FA;&#x65E0;&#x9650;&#x81EA;&#x589E;&#x7684;&#x5E8F;&#x5217;&#x6574;&#x6570;, &#x4F60;&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x56FA;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x8FDB;&#x884C;&#x53D1;&#x9001;&#x3002; &#x7B2C;&#x4E00;&#x6B21;&#x5E76;
+     * &#x6CA1;&#x6709;&#x7ACB;&#x9A6C;&#x53BB;&#x53D1;&#x9001;, &#x800C;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x65F6;&#x95F4;&#x6BB5;&#x8FC7;&#x540E;&#x624D;&#x53D1;&#x51FA;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;, &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6765;
+     * &#x63D0;&#x4F9B;&#x65F6;&#x95F4;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x4F46;&#x4E5F;&#x53EF;&#x4EE5;&#x7ED9;&#x5B83;&#x4F20;&#x9012;&#x4EFB;&#x610F;&#x8C03;&#x5EA6;&#x5668;&#x3002;
      *
-     * @example &lt;caption&gt;Emits ascending numbers, one every second (1000ms)&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x6BCF;1&#x79D2;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x81EA;&#x589E;&#x6570;&lt;/caption&gt;
      * var numbers = Rx.Observable.interval(1000);
      * numbers.subscribe(x =&gt; console.log(x));
      *
      * @see {@link timer}
      * @see {@link delay}
      *
-     * @param {number} [period=0] The interval size in milliseconds (by default)
-     * or the time unit determined by the scheduler&apos;s clock.
-     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-     * the emission of values, and providing a notion of &quot;time&quot;.
-     * @return {Observable} An Observable that emits a sequential number each time
-     * interval.
+     * @param {number} [period=0] &#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x5B83;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;(&#x9ED8;&#x8BA4;)&#xFF0C;&#x6216;&#x8005;&#x7531;&#x8C03;&#x5EA6;&#x5668;&#x7684;&#x5185;&#x90E8;&#x65F6;&#x949F;&#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5355;&#x4F4D;&#x3002;
+     * @param {Scheduler} [scheduler=async] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6;&#x503C;&#x7684;&#x53D1;&#x9001;&#x5E76;&#x63D0;&#x4F9B;&#x201D;&#x65F6;&#x95F4;&#x201C;&#x7684;&#x6982;&#x5FF5;&#x3002;
+     * @return {Observable} &#x6BCF;&#x4E2A;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x90FD;&#x53D1;&#x51FA;&#x81EA;&#x589E;&#x6570;&#x7684; Observable &#x3002;
      * @static true
      * @name interval
      * @owner Observable

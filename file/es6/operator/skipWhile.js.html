@@ -81,14 +81,13 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/skipWhile.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Returns an Observable that skips all items emitted by the source Observable as long as a specified condition holds
- * true, but emits all further source items as soon as the condition becomes false.
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C; &#x8BE5; Observable &#x4F1A;&#x8DF3;&#x8FC7;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x6EE1;&#x8DB3;&#x6307;&#x5B9A;&#x6761;&#x4EF6;&#x7684;&#x6570;&#x636E;&#x9879;&#xFF0C;
+ * &#x4F46;&#x662F;&#x4E00;&#x65E6;&#x51FA;&#x73B0;&#x4E86;&#x4E0D;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x9879;&#xFF0C;&#x5219;&#x53D1;&#x51FA;&#x5728;&#x6B64;&#x4E4B;&#x540E;&#x7684;&#x6240;&#x6709;&#x9879;&#x3002;
  *
  * &lt;img src=&quot;./img/skipWhile.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {Function} predicate - A function to test each item emitted from the source Observable.
- * @return {Observable&lt;T&gt;} An Observable that begins emitting items emitted by the source Observable when the
- * specified predicate becomes false.
+ * @param {Function} predicate - &#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x6D4B;&#x8BD5;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x3002;
+ * @return {Observable&lt;T&gt;} Observable&#xFF0C;&#x5F53;&#x6307;&#x5B9A;&#x7684; predicate &#x51FD;&#x6570;&#x8FD4;&#x56DE; false &#x65F6;&#xFF0C;&#x8BE5; Observable &#x5F00;&#x59CB;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;
  * @method skipWhile
  * @owner Observable
  */

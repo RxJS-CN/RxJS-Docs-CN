@@ -81,23 +81,20 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/takeWhile.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Emits values emitted by the source Observable so long as each value satisfies
- * the given `predicate`, and then completes as soon as this `predicate` is not
- * satisfied.
+ * &#x53D1;&#x51FA;&#x5728;&#x6E90; Observable &#x4E2D;&#x6EE1;&#x8DB3; `predicate` &#x51FD;&#x6570;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x4E00;&#x65E6;&#x51FA;&#x73B0;&#x4E0D;&#x6EE1;&#x8DB3; `predicate`
+ * &#x7684;&#x503C;&#x5C31;&#x7ACB;&#x5373;&#x5B8C;&#x6210;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Takes values from the source only while they pass the
- * condition given. When the first value does not satisfy, it completes.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x53EA;&#x8981;&#x5F53;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684;&#x6761;&#x4EF6;&#x65F6;&#x624D;&#x63A5;&#x6536;&#x6E90; Observable &#x7684;&#x503C;&#x3002;
+ * &#x5F53;&#x7B2C;&#x4E00;&#x4E2A;&#x4E0D;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x503C;&#x51FA;&#x73B0;&#x65F6;&#xFF0C;&#x5B83;&#x4FBF;&#x5B8C;&#x6210;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/takeWhile.png&quot; width=&quot;100%&quot;&gt;
  *
- * `takeWhile` subscribes and begins mirroring the source Observable. Each value
- * emitted on the source is given to the `predicate` function which returns a
- * boolean, representing a condition to be satisfied by the source values. The
- * output Observable emits the source values until such time as the `predicate`
- * returns false, at which point `takeWhile` stops mirroring the source
- * Observable and completes the output Observable.
+ * `takeWhile` &#x8BA2;&#x9605;&#x5E76;&#x5F00;&#x59CB;&#x955C;&#x50CF;&#x6E90; Observable &#x3002;&#x6BCF;&#x4E2A;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x90FD;&#x4F1A;&#x4F20;&#x7ED9;
+ * `predicate` &#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x8FD4;&#x56DE;&#x6E90;&#x503C;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#x7684;&#x5E03;&#x5C14;&#x503C;&#x3002;&#x8F93;&#x51FA; Observable &#x4F1A;&#x53D1;&#x51FA;&#x6E90;&#x503C;&#xFF0C;
+ * &#x76F4;&#x5230;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x70B9; `predicate` &#x8FD4;&#x56DE;&#x4E86; false&#xFF0C;&#x6B64;&#x65F6; `takeWhile` &#x4F1A;&#x505C;&#x6B62;&#x955C;&#x50CF;&#x6E90; Observable
+ * &#x5E76;&#x4E14;&#x5B8C;&#x6210;&#x8F93;&#x51FA; Observable &#x3002;
  *
- * @example &lt;caption&gt;Emit click events only while the clientX property is greater than 200&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53EA;&#x6709;&#x5F53; clientX &#x5C5E;&#x6027;&#x5927;&#x4E8E;200&#x65F6;&#x624D;&#x53D1;&#x51FA;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.takeWhile(ev =&gt; ev.clientX &gt; 200);
  * result.subscribe(x =&gt; console.log(x));
@@ -107,12 +104,10 @@
  * @see {@link takeUntil}
  * @see {@link skip}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates a value emitted by the source Observable and returns a boolean.
- * Also takes the (zero-based) index as the second argument.
- * @return {Observable&lt;T&gt;} An Observable that emits the values from the source
- * Observable so long as each value satisfies the condition defined by the
- * `predicate`, then completes.
+ * @param {function(value: T, index: number): boolean} predicate &#x8BC4;&#x4F30;&#x6E90; Observable
+ * &#x6240;&#x53D1;&#x51FA;&#x503C;&#x7684;&#x51FD;&#x6570;&#x5E76;&#x8FD4;&#x56DE;&#x5E03;&#x5C14;&#x503C;&#x3002;&#x8FD8;&#x63A5;&#x6536; `index`(&#x4ECE;0&#x5F00;&#x59CB;) &#x4F5C;&#x4E3A;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x53EA;&#x8981;&#x6BCF;&#x4E2A;&#x503C;&#x6EE1;&#x8DB3; `predicate` &#x51FD;&#x6570;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x6761;&#x4EF6;&#xFF0C;&#x90A3;&#x4E48;&#x8BE5;
+ * Observable &#x5C31;&#x4F1A;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x53D1;&#x51FA;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;
  * @method takeWhile
  * @owner Observable
  */

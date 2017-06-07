@@ -86,24 +86,17 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 const none = {};
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * &#x7EC4;&#x5408;&#x591A;&#x4E2A; Observables &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable &#xFF0C;&#x8BE5; Observable &#x7684;&#x503C;&#x6839;&#x636E;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#x7684;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x5C06;&#x4F7F;&#x7528;&#x6240;&#x6709;&#x8F93;&#x5165;&#x4E2D;&#x7684;&#x6700;&#x65B0;&#x503C;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x8BE5;&#x516C;&#x5F0F;&#x7684;&#x8F93;&#x51FA;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/combineLatest.png&quot; width=&quot;100%&quot;&gt;
  *
- * `combineLatest` combines the values from this Observable with values from
- * Observables passed as arguments. This is done by subscribing to each
- * Observable, in order, and collecting an array of each of the most recent
- * values any time any of the input Observables emits, then either taking that
- * array and passing it as arguments to an optional `project` function and
- * emitting the return value of that, or just emitting the array of recent
- * values directly if there is no `project` function.
+ * `combineLatest` &#x7ED3;&#x5408;&#x4F20;&#x5165;&#x7684;&#x591A;&#x4E2A; Observables&#x3002; &#x901A;&#x8FC7;&#x987A;&#x5E8F;&#x7684;&#x8BA2;&#x9605;&#x6BCF;&#x4E2A;&#x8F93;&#x5165;Observable, &#x5728;&#x6BCF;&#x6B21;&#x4EFB;&#x4E00;&#x8F93;&#x5165;Observables&#x53D1;&#x9001;&#x7684;&#x65F6;&#x5019;&#x6536;&#x96C6;
+ * &#x6BCF;&#x4E2A;&#x8F93;&#x5165;Observables&#x6700;&#x65B0;&#x7684;&#x503C;&#x7EC4;&#x6210;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;, &#x7136;&#x540E;&#x8981;&#x4E48;&#x5C06;&#x8FD9;&#x4E2A;&#x6570;&#x7EC4;&#x4F20;&#x7ED9;&#x53EF;&#x9009;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5E76;&#x53D1;&#x9001;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;,
+ * &#x6216;&#x8005;&#x5728;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x65F6;&#x4EC5;&#x4EC5;&#x53D1;&#x51FA;&#x8BE5;&#x6570;&#x7EC4;&#x3002;
  *
- * @example &lt;caption&gt;Dynamically calculate the Body-Mass Index from an Observable of weight and one for height&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x8EAB;&#x9AD8;&#x7684; Observable &#x548C;&#x4E00;&#x4E2A;&#x4F53;&#x91CD;&#x7684; Observable &#x52A8;&#x6001;&#x7684;&#x8BA1;&#x7B97;BMI&#x6307;&#x6570;&lt;/caption&gt;
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = weight.combineLatest(height, (w, h) =&gt; w / (h * h));
@@ -118,13 +111,9 @@ const none = {};
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other &#x5C06;&#x8981;&#x548C;&#x6E90; Observable &#x7ED3;&#x5408;&#x7684;&#x8F93;&#x5165; Observable&#x3002; &#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x591A;&#x4E2A;&#x8F93;&#x5165; Observables&#x3002;
+ * @param {function} [project] &#x53EF;&#x9009;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#xFF0C;&#x5C06;&#x8F93;&#x51FA; Observable &#x8FD4;&#x56DE;&#x7684;&#x503C;&#x6295;&#x5C04;&#x4E3A;&#x8981;&#x53D1;&#x51FA;&#x7684;&#x65B0;&#x7684;&#x503C;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x4E3A;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x7684;&#x6295;&#x5C04;&#x7ED3;&#x679C;&#x6216;&#x6570;&#x7EC4;&#x3002;
  * @method combineLatest
  * @owner Observable
  */

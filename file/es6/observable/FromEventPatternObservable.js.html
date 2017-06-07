@@ -95,21 +95,17 @@ export class FromEventPatternObservable extends Observable {
         this.selector = selector;
     }
     /**
-     * Creates an Observable from an API based on addHandler/removeHandler
-     * functions.
+     * &#x4ECE;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E; addHandler/removeHandler &#x65B9;&#x6CD5;&#x7684;API&#x521B;&#x5EFA; Observable&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Converts any addHandler/removeHandler API to an
-     * Observable.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x4EFB;&#x4F55; addHandler/removeHandler &#x7684;API&#x8F6C;&#x5316;&#x4E3A; Observable&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/fromEventPattern.png&quot; width=&quot;100%&quot;&gt;
      *
-     * Creates an Observable by using the `addHandler` and `removeHandler`
-     * functions to add and remove the handlers, with an optional selector
-     * function to project the event arguments to a result. The `addHandler` is
-     * called when the output Observable is subscribed, and `removeHandler` is
-     * called when the Subscription is unsubscribed.
+     * &#x521B;&#x5EFA; Observable &#xFF0C;&#x8BE5; Observable &#x901A;&#x8FC7;&#x4F7F;&#x7528;`addHandler` &#x548C; `removeHandler`&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x5668;,
+     * &#x4F7F;&#x7528;&#x53EF;&#x9009;&#x7684;&#x9009;&#x62E9;&#x5668;&#x51FD;&#x6570;&#x5C06;&#x4E8B;&#x4EF6;&#x53C2;&#x6570;&#x8F6C;&#x5316;&#x4E3A;&#x7ED3;&#x679C;. `addHandler`&#x5F53;&#x8F93;&#x51FA; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x8C03;&#x7528;, `removeHandler`
+     * &#x65B9;&#x6CD5;&#x5728;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x88AB;&#x8C03;&#x7528;&#x3002;
      *
-     * @example &lt;caption&gt;Emits clicks happening on the DOM document&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA; DOM document &#x4E0A;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
      * function addClickHandler(handler) {
      *   document.addEventListener(&apos;click&apos;, handler);
      * }
@@ -127,16 +123,13 @@ export class FromEventPatternObservable extends Observable {
      * @see {@link from}
      * @see {@link fromEvent}
      *
-     * @param {function(handler: Function): any} addHandler A function that takes
-     * a `handler` function as argument and attaches it somehow to the actual
-     * source of events.
-     * @param {function(handler: Function, signal?: any): void} [removeHandler] An optional function that
-     * takes a `handler` function as argument and removes it in case it was
-     * previously attached using `addHandler`. if addHandler returns signal to teardown when remove,
-     * removeHandler function will forward it.
-     * @param {function(...args: any): T} [selector] An optional function to
-     * post-process results. It takes the arguments from the event handler and
-     * should return a single value.
+     * @param {function(handler: Function): any} addHandler &#x4E00;&#x4E2A;&#x63A5;&#x6536;&#x5904;&#x7406;&#x5668;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x5C06;
+     * &#x8BE5;&#x5904;&#x7406;&#x5668;&#x6DFB;&#x52A0;&#x5230;&#x4E8B;&#x4EF6;&#x6E90;&#x3002;
+     * @param {function(handler: Function, signal?: any): void} [removeHandler] &#x53EF;&#x9009;&#x7684;
+     * &#x51FD;&#x6570;&#xFF0C;&#x63A5;&#x53D7;&#x5904;&#x7406;&#x5668;&#x51FD;&#x6570;&#x505A;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x79FB;&#x9664;&#x5904;&#x7406;&#x5668;&#x5F53;&#x4E4B;&#x524D;&#x4F7F;&#x7528;`addHandler`&#x6DFB;&#x52A0;&#x5904;&#x7406;&#x5668;&#x3002;&#x5982;&#x679C; addHandler
+     * &#x8FD4;&#x56DE;&#x7684;&#x4FE1;&#x53F7;&#x5F53;&#x79FB;&#x9664;&#x7684;&#x65F6;&#x5019;&#x8981;&#x6E05;&#x7406;&#xFF0C;removeHandler &#x4F1A;&#x53BB;&#x505A;&#x8FD9;&#x4EF6;&#x4E8B;&#x60C5;&#x3002;
+     * @param {function(...args: any): T} [selector] &#x53EF;&#x9009;&#x7684;&#x51FD;&#x6570;&#x5904;&#x7406;&#x7ED3;&#x679C;&#x3002; &#x63A5;&#x53D7;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7684;&#x53C2;&#x6570;&#x8FD4;
+     * &#x56DE;&#x5355;&#x4E2A;&#x7684;&#x503C;&#x3002;
      * @return {Observable&lt;T&gt;}
      * @static true
      * @name fromEventPattern

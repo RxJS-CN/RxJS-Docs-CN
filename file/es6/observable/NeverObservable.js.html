@@ -91,20 +91,17 @@ export class NeverObservable extends Observable {
         super();
     }
     /**
-     * Creates an Observable that emits no items to the Observer.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x5411;&#x89C2;&#x5BDF;&#x8005;&#x53D1;&#x51FA;&#x4EFB;&#x4F55;&#x9879;&#x7684; Observable &#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;An Observable that never emits anything.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x4ECE;&#x4E0D;&#x53D1;&#x51FA;&#x4EFB;&#x4F55;&#x9879;&#x7684; Observable &#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/never.png&quot; width=&quot;100%&quot;&gt;
      *
-     * This static operator is useful for creating a simple Observable that emits
-     * neither values nor errors nor the completion notification. It can be used
-     * for testing purposes or for composing with other Observables. Please not
-     * that by never emitting a complete notification, this Observable keeps the
-     * subscription from being disposed automatically. Subscriptions need to be
-     * manually disposed.
+     * &#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x64CD;&#x4F5C;&#x7B26;&#x5BF9;&#x4E8E;&#x521B;&#x5EFA;&#x65E2;&#x4E0D;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x4E5F;&#x4E0D;&#x89E6;&#x53D1;&#x9519;&#x8BEF;&#x548C;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#x7684; Observable&#x3002; &#x53EF;&#x4EE5;&#x7528;&#x6765;&#x6D4B;&#x8BD5;&#x6216;
+     * &#x8005;&#x548C;&#x5176;&#x4ED6; Observables&#x8FDB;&#x884C;&#x7EC4;&#x5408;&#x3002; &#x6CE8;&#x610F;&#xFF0C;&#x7531;&#x4E8E;&#x4E0D;&#x4F1A;&#x53D1;&#x9001;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#xFF0C;&#x8FD9;&#x4E2A; Observable &#x7684; subscription
+     * &#x4E0D;&#x4F1A;&#x88AB;&#x81EA;&#x52A8;&#x5730;&#x6E05;&#x7406;&#x3002;Subscriptions &#x9700;&#x8981;&#x624B;&#x52A8;&#x6E05;&#x7406;&#x3002;
      *
-     * @example &lt;caption&gt;Emit the number 7, then never emit anything else (not even complete).&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA;7, &#x7136;&#x540E;&#x4E0D;&#x53D1;&#x51FA;&#x4EFB;&#x4F55;&#x503C;(&#x4E5F;&#x4E0D;&#x53D1;&#x51FA;&#x5B8C;&#x6210;&#x901A;&#x77E5;)&#x3002;&lt;/caption&gt;
      * function info() {
      *   console.log(&apos;Will not be called&apos;);
      * }
@@ -116,7 +113,7 @@ export class NeverObservable extends Observable {
      * @see {@link of}
      * @see {@link throw}
      *
-     * @return {Observable} A &quot;never&quot; Observable: never emits anything.
+     * @return {Observable} A &quot;never&quot; Observable:&#x4ECE;&#x4E0D;&#x53D1;&#x51FA;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#x7684; Observable &#x3002;
      * @static true
      * @name never
      * @owner Observable

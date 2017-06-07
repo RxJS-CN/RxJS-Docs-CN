@@ -82,14 +82,12 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Returns an Observable that skips items emitted by the source Observable until a second Observable emits an item.
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x4F1A;&#x8DF3;&#x8FC7;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x76F4;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A; Observable &#x5F00;&#x59CB;&#x53D1;&#x9001;&#x3002;
  *
  * &lt;img src=&quot;./img/skipUntil.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {Observable} notifier - The second Observable that has to emit an item before the source Observable&apos;s elements begin to
- * be mirrored by the resulting Observable.
- * @return {Observable&lt;T&gt;} An Observable that skips items from the source Observable until the second Observable emits
- * an item, then emits the remaining items.
+ * @param {Observable} notifier - &#x7B2C;&#x4E8C;&#x4E2A; Observable &#xFF0C;&#x5B83;&#x53D1;&#x51FA;&#x540E;&#xFF0C;&#x7ED3;&#x679C; Observable &#x5F00;&#x59CB;&#x955C;&#x50CF;&#x6E90; Observable &#x7684;&#x5143;&#x7D20;&#x3002;
+ * @return {Observable&lt;T&gt;} Observable &#x8DF3;&#x8FC7;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x76F4;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A; Observable &#x5F00;&#x59CB;&#x53D1;&#x9001;, &#x7136;&#x540E;&#x53D1;&#x51FA;&#x5269;&#x4E0B;&#x7684;&#x6570;&#x636E;&#x9879;&#x3002;
  * @method skipUntil
  * @owner Observable
  */

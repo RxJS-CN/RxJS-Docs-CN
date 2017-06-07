@@ -175,7 +175,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Animation Frame Scheduler</p>
+        <div data-ice="description"><p>&#x52A8;&#x753B;&#x5E27;&#x8C03;&#x5EA6;&#x5668;</p>
 </div>
       </div>
     </td>
@@ -201,7 +201,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Asap Scheduler</p>
+        <div data-ice="description"><p>Asap &#x8C03;&#x5EA6;&#x5668;</p>
 </div>
       </div>
     </td>
@@ -227,7 +227,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Async Scheduler</p>
+        <div data-ice="description"><p>Async &#x8C03;&#x5EA6;&#x5668;</p>
 </div>
       </div>
     </td>
@@ -398,20 +398,18 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/scheduler/animationFrame.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/scheduler/animationFrame.js.html#lineNumber30">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {animationFrame} from &apos;<span><a href="file/es6/scheduler/animationFrame.js.html#lineNumber33">@reactivex/rxjs/es6/scheduler/animationFrame.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {animationFrame} from &apos;<span><a href="file/es6/scheduler/animationFrame.js.html#lineNumber30">@reactivex/rxjs/es6/scheduler/animationFrame.js</a></span>&apos;</code></pre></div>
   
   
-  <div data-ice="description"><p>Animation Frame Scheduler</p>
-<p><span class="informal">Perform task when <code>window.requestAnimationFrame</code> would fire</span></p>
-<p>When <code>animationFrame</code> scheduler is used with delay, it will fall back to <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> scheduler
-behaviour.</p>
-<p>Without delay, <code>animationFrame</code> scheduler can be used to create smooth browser animations.
-It makes sure scheduled task will happen just before next browser content repaint,
-thus performing animations as efficiently as possible.</p>
+  <div data-ice="description"><p>&#x52A8;&#x753B;&#x5E27;&#x8C03;&#x5EA6;&#x5668;</p>
+<p><span class="informal">&#x5F53; <code>window.requestAnimationFrame</code> &#x6267;&#x884C;&#x7684;&#x65F6;&#x5019;&#x89E6;&#x53D1;&#x6267;&#x884C;&#x6B64;&#x4EFB;&#x52A1;&#x3002;</span></p>
+<p>&#x5F53; <code>animationFrame</code> &#x8C03;&#x5EA6;&#x5668;&#x548C;&#x5EF6;&#x65F6;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C; &#x5B83;&#x7684;&#x884C;&#x4E3A;&#x4F1A;&#x56DE;&#x9000;&#x5230; <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> &#x8C03;&#x5EA6;&#x5668;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5EF6;&#x65F6;, <code>animationFrame</code> &#x8C03;&#x5EA6;&#x5668;&#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x4E1D;&#x6ED1;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x52A8;&#x753B;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x5728;&#x4E0B;&#x4E00;&#x6B21;&#x6D4F;&#x89C8;&#x5668;&#x91CD;&#x7ED8;&#x4E4B;&#x524D;
+&#x8C03;&#x5EA6;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#xFF0C;&#x4ECE;&#x800C;&#x5C3D;&#x53EF;&#x80FD;&#x9AD8;&#x6548;&#x7684;&#x6267;&#x884C;&#x52A8;&#x753B;&#x3002;</p>
 </div>
 
   
@@ -431,17 +429,16 @@ thus performing animations as efficiently as possible.</p>
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Schedule div height animation</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x8C03;&#x5EA6; div &#x9AD8;&#x5EA6;&#x7684;&#x52A8;&#x753B;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const div = document.querySelector(&apos;.some-div&apos;);
 
 Rx.Scheduler.schedule(function(height) {
   div.style.height = height + &quot;px&quot;;
 
-  this.schedule(height + 1);  // `this` references currently executing Action,
-                              // which we reschedule with new state
+  this.schedule(height + 1);  // `this` &#x6307;&#x5411;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684; Action, &#x6211;&#x4EEC;&#x7528;&#x65B0;&#x7684;&#x72B6;&#x6001;&#x6765;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;&#x5B83;
 }, 0, 0);
 
-// You will see .some-div element growing in height</code></pre>
+// &#x4F60;&#x5C06;&#x4F1A;&#x770B;&#x5230; .some-div &#x5143;&#x7D20;&#x7684;&#x9AD8;&#x5EA6;&#x4E00;&#x76F4;&#x589E;&#x957F;</code></pre>
     </div>
 </div>
 
@@ -461,26 +458,21 @@ Rx.Scheduler.schedule(function(height) {
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/scheduler/asap.js.html#lineNumber37">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/scheduler/asap.js.html#lineNumber32">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {asap} from &apos;<span><a href="file/es6/scheduler/asap.js.html#lineNumber37">@reactivex/rxjs/es6/scheduler/asap.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {asap} from &apos;<span><a href="file/es6/scheduler/asap.js.html#lineNumber32">@reactivex/rxjs/es6/scheduler/asap.js</a></span>&apos;</code></pre></div>
   
   
-  <div data-ice="description"><p>Asap Scheduler</p>
-<p><span class="informal">Perform task as fast as it can be performed asynchronously</span></p>
-<p><code>asap</code> scheduler behaves the same as <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> scheduler when you use it to delay task
-in time. If however you set delay to <code>0</code>, <code>asap</code> will wait for current synchronously executing
-code to end and then it will try to execute given task as fast as possible.</p>
-<p><code>asap</code> scheduler will do its best to minimize time between end of currently executing code
-and start of scheduled task. This makes it best candidate for performing so called &quot;deferring&quot;.
-Traditionally this was achieved by calling <code>setTimeout(deferredTask, 0)</code>, but that technique involves
-some (although minimal) unwanted delay.</p>
-<p>Note that using <code>asap</code> scheduler does not necessarily mean that your task will be first to process
-after currently executing code. In particular, if some task was also scheduled with <code>asap</code> before,
-that task will execute first. That being said, if you need to schedule task asynchronously, but
-as soon as possible, <code>asap</code> scheduler is your best bet.</p>
+  <div data-ice="description"><p>Asap &#x8C03;&#x5EA6;&#x5668;</p>
+<p><span class="informal">&#x5C3D;&#x53EF;&#x80FD;&#x5FEB;&#x7684;&#x5F02;&#x6B65;&#x5730;&#x6267;&#x884C;&#x4EFB;&#x52A1;</span></p>
+<p>&#x5F53;&#x4F60;&#x7528;&#x5B83;&#x6765;&#x5EF6;&#x65F6;&#x4EFB;&#x52A1;&#x7684;&#x65F6;&#x5019;&#xFF0C;<code>asap</code> &#x8C03;&#x5EA6;&#x5668;&#x7684;&#x884C;&#x4E3A;&#x548C; <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> &#x4E00;&#x6837;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5C06;&#x5EF6;&#x65F6;&#x65F6;&#x95F4;&#x8BBE;&#x7F6E;&#x4E3A; <code>0</code>&#xFF0C;
+<code>asap</code> &#x4F1A;&#x7B49;&#x5F85;&#x5F53;&#x524D;&#x540C;&#x6B65;&#x6267;&#x884C;&#x7ED3;&#x675F;&#x7136;&#x540E;&#x7ACB;&#x523B;&#x6267;&#x884C;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x3002;</p>
+<p><code>asap</code> &#x4F1A;&#x5C3D;&#x5168;&#x529B;&#x6700;&#x5C0F;&#x5316;&#x5F53;&#x524D;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x548C;&#x5F00;&#x59CB;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x8FD9;&#x4F7F;&#x5F97;&#x5B83;&#x6210;&#x4E3A;&#x6267;&#x884C;&#x201C;deferring&#x201D;&#x7684;&#x6700;&#x4F73;&#x5019;&#x9009;&#x4EBA;&#x3002;&#x4EE5;&#x524D;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;
+&#x8C03;&#x7528; <code>setTimeout(deferredTask, 0)</code> &#x6765;&#x505A;&#x5230;&#xFF0C;&#x4F46;&#x662F;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x4ECD;&#x70ED;&#x5305;&#x542B;&#x4E00;&#x4E9B;&#x975E;&#x671F;&#x671B;&#x7684;&#x5EF6;&#x65F6;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x4F7F;&#x7528; <code>asap</code> &#x8C03;&#x5EA6;&#x5668;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x610F;&#x5473;&#x7740;&#x4F60;&#x7684;&#x4EFB;&#x52A1;&#x5C06;&#x4F1A;&#x5728;&#x5F53;&#x524D;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x540E;&#x7B2C;&#x4E00;&#x4E2A;&#x6267;&#x884C;&#x3002;&#x5C24;&#x5176;&#x662F;&#x5982;&#x679C;&#x4E4B;&#x524D;&#x6709;&#x5176;&#x4ED6; <code>asap</code> &#x8C03;&#x5EA6;&#x5668;&#x7684;
+&#x4EFB;&#x52A1;&#xFF0C;&#x8BE5;&#x4EFB;&#x52A1;&#x4F1A;&#x9996;&#x5148;&#x6267;&#x884C;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x9700;&#x8981;&#x5F02;&#x6B65;&#x5730;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#xFF0C;&#x4F46;&#x662F;&#x5C3D;&#x53EF;&#x80FD;&#x5FEB;&#x7684;&#x6267;&#x884C;&#xFF0C;<code>asap</code> &#x8C03;&#x5EA6;&#x5668;&#x662F;&#x4F60;&#x6700;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
 </div>
 
   
@@ -500,15 +492,15 @@ as soon as possible, <code>asap</code> scheduler is your best bet.</p>
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Compare async and asap scheduler</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x6BD4;&#x8F83; async &#x548C; asap &#x8C03;&#x5EA6;&#x5668;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">
-Rx.Scheduler.async.schedule(() =&gt; console.log(&apos;async&apos;)); // scheduling &apos;async&apos; first...
+Rx.Scheduler.async.schedule(() =&gt; console.log(&apos;async&apos;)); // &#x9996;&#x5148;&#x8C03;&#x5EA6; &apos;async&apos;
 Rx.Scheduler.asap.schedule(() =&gt; console.log(&apos;asap&apos;));
 
-// Logs:
+// &#x65E5;&#x5FD7;:
 // &quot;asap&quot;
 // &quot;async&quot;
-// ... but &apos;asap&apos; goes first!</code></pre>
+// &#x4F46;&#x662F; &apos;asap&apos; &#x9996;&#x5148;&#x6267;&#x884C;!</code></pre>
     </div>
 </div>
 
@@ -528,21 +520,19 @@ Rx.Scheduler.asap.schedule(() =&gt; console.log(&apos;asap&apos;));
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/scheduler/async.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/scheduler/async.js.html#lineNumber43">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {async} from &apos;<span><a href="file/es6/scheduler/async.js.html#lineNumber45">@reactivex/rxjs/es6/scheduler/async.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {async} from &apos;<span><a href="file/es6/scheduler/async.js.html#lineNumber43">@reactivex/rxjs/es6/scheduler/async.js</a></span>&apos;</code></pre></div>
   
   
-  <div data-ice="description"><p>Async Scheduler</p>
-<p><span class="informal">Schedule task as if you used setTimeout(task, duration)</span></p>
-<p><code>async</code> scheduler schedules tasks asynchronously, by putting them on the JavaScript
-event loop queue. It is best used to delay tasks in time or to schedule tasks repeating
-in intervals.</p>
-<p>If you just want to &quot;defer&quot; task, that is to perform it right after currently
-executing synchronous code ends (commonly achieved by <code>setTimeout(deferredTask, 0)</code>),
-better choice will be the <span><a href="variable/index.html#static-variable-asap">asap</a></span> scheduler.</p>
+  <div data-ice="description"><p>Async &#x8C03;&#x5EA6;&#x5668;</p>
+<p><span class="informal">&#x5C31;&#x50CF;&#x4F60;&#x4F7F;&#x7528;&#x8FC7;&#x7684; setTimeout(task, duration) &#x90A3;&#x6837;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;</span></p>
+<p><code>async</code> &#x8C03;&#x5EA6;&#x5668;&#x5F02;&#x6B65;&#x5730;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&#xFF0C;&#x901A;&#x8FC7;&#x5C06;&#x5B83;&#x4EEC;&#x653E;&#x5165; JavaScript &#x4E8B;&#x4EF6;&#x5FAA;&#x73AF;&#x4E2D;&#x3002;&#x5B83;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x9002;&#x65F6;&#x5730;&#x5EF6;&#x65F6;&#x4EFB;&#x52A1;&#x6216;&#x8005;
+&#x6309;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x91CD;&#x590D;&#x8C03;&#x5EA6;&#x4EFB;&#x52A1;&#x7684;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F60;&#x53EA;&#x662F;&#x60F3;&quot;&#x5EF6;&#x65F6;&quot;&#x4EFB;&#x52A1;&#xFF0C;&#x5373;&#x5728;&#x5F53;&#x524D;&#x6267;&#x884C;&#x540C;&#x6B65;&#x4EE3;&#x7801;&#x7ED3;&#x675F;&#x540E;&#x6267;&#x884C;&#x5B83;&#xFF08;&#x901A;&#x5E38;&#x4F1A;&#x7528;<code>setTimeout(deferredTask, 0)</code>&#x5B9E;&#x73B0;&#xFF09;&#xFF0C;
+<span><a href="variable/index.html#static-variable-asap">asap</a></span> &#x8C03;&#x5EA6;&#x5668;&#x4F1A;&#x662F;&#x66F4;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;</p>
 </div>
 
   
@@ -562,25 +552,25 @@ better choice will be the <span><a href="variable/index.html#static-variable-asa
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use async scheduler to delay task</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6765;&#x5EF6;&#x65F6;&#x4EFB;&#x52A1;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const task = () =&gt; console.log(&apos;it works!&apos;);
 
 Rx.Scheduler.async.schedule(task, 2000);
 
-// After 2 seconds logs:
+// 2&#x79D2;&#x540E;&#x7684;&#x8F93;&#x51FA;:
 // &quot;it works!&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use async scheduler to repeat task in intervals</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6309;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x91CD;&#x590D;&#x6267;&#x884C;&#x4EFB;&#x52A1;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">function task(state) {
   console.log(state);
-  this.schedule(state + 1, 1000); // `this` references currently executing Action,
-                                  // which we reschedule with new state and delay
+  this.schedule(state + 1, 1000); // `this` &#x6307;&#x5411;&#x5F53;&#x524D;&#x6267;&#x884C;&#x7684; Action,
+                                  // &#x6211;&#x4EEC;&#x7528;&#x65B0;&#x7684;&#x72B6;&#x6001;&#x548C;&#x5EF6;&#x65F6;&#x6765;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;&#x5B83;
 }
 
 Rx.Scheduler.async.schedule(task, 3000, 0);
 
-// Logs:
+// &#x65E5;&#x5FD7;:
 // 0 after 3s
 // 1 after 4s
 // 2 after 5s
@@ -604,22 +594,19 @@ Rx.Scheduler.async.schedule(task, 3000, 0);
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/scheduler/queue.js.html#lineNumber64">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/scheduler/queue.js.html#lineNumber61">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {queue} from &apos;<span><a href="file/es6/scheduler/queue.js.html#lineNumber64">@reactivex/rxjs/es6/scheduler/queue.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {queue} from &apos;<span><a href="file/es6/scheduler/queue.js.html#lineNumber61">@reactivex/rxjs/es6/scheduler/queue.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Queue Scheduler</p>
-<p><span class="informal">Put every next task on a queue, instead of executing it immediately</span></p>
-<p><code>queue</code> scheduler, when used with delay, behaves the same as <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> scheduler.</p>
-<p>When used without delay, it schedules given task synchronously - executes it right when
-it is scheduled. However when called recursively, that is when inside the scheduled task,
-another task is scheduled with queue scheduler, instead of executing immediately as well,
-that task will be put on a queue and wait for current one to finish.</p>
-<p>This means that when you execute task with <code>queue</code> scheduler, you are sure it will end
-before any other task scheduled with that scheduler will start.</p>
+<p><span class="informal">&#x5C06;&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x653E;&#x5230;&#x961F;&#x5217;&#x91CC;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7ACB;&#x523B;&#x6267;&#x884C;&#x5B83;&#x4EEC;</span></p>
+<p><code>queue</code> &#x8C03;&#x5EA6;&#x5668;, &#x5F53;&#x548C;&#x5EF6;&#x65F6;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;, &#x548C; <span><a href="class/es6/observable/dom/MiscJSDoc.js~AjaxRequestDoc.html#instance-member-async">async</a></span> &#x8C03;&#x5EA6;&#x5668;&#x884C;&#x4E3A;&#x4E00;&#x6837;&#x3002;</p>
+<p>&#x5F53;&#x548C;&#x5EF6;&#x65F6;&#x4E00;&#x8D77;&#x4F7F;&#x7528;&#xFF0C; &#x5B83;&#x540C;&#x6B65;&#x5730;&#x8C03;&#x7528;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#xFF0C;&#x5373;&#x8C03;&#x5EA6;&#x7684;&#x65F6;&#x5019;&#x6267;&#x884C;&#x3002;&#x7136;&#x800C;&#x5F53;&#x9012;&#x5F52;&#x8C03;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5373;&#x5728;&#x8C03;&#x5EA6;&#x7684;&#x4EFB;&#x52A1;&#x5185;&#xFF0C;
+&#x53E6;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x7531;&#x8C03;&#x5EA6;&#x961F;&#x5217;&#x8C03;&#x5EA6;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x7ACB;&#x5373;&#x6267;&#x884C;&#xFF0C;&#x8BE5;&#x4EFB;&#x52A1;&#x5C06;&#x88AB;&#x653E;&#x5728;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7B49;&#x5F85;&#x5F53;&#x524D;&#x4E00;&#x4E2A;&#x5B8C;&#x6210;&#x3002;</p>
+<p>&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5F53;&#x4F60;&#x7528; <code>queue</code> &#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x6267;&#x884C;&#x4EFB;&#x52A1;&#x65F6;&#xFF0C;&#x4F60;&#x786E;&#x4FE1;&#x5B83;&#x4F1A;&#x5728;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x4E4B;&#x524D;&#x7684;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x7ED3;&#x675F;&#x4E4B;&#x524D;&#x7ED3;&#x675F;&#x3002;</p>
 </div>
 
   
@@ -639,18 +626,18 @@ before any other task scheduled with that scheduler will start.</p>
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Reschedule itself recursively</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x9012;&#x5F52;&#x7684;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;&#x81EA;&#x8EAB;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">
 Rx.Scheduler.queue.schedule(function(state) {
   if (state !== 0) {
     console.log(&apos;before&apos;, state);
-    this.schedule(state - 1); // `this` references currently executing Action,
-                              // which we reschedule with new state
+    this.schedule(state - 1); // `this` &#x6307;&#x5411;&#x5F53;&#x524D;&#x6267;&#x884C;&#x7684; Action,
+                              // &#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x72B6;&#x6001;&#x91CD;&#x65B0;&#x8C03;&#x5EA6;
     console.log(&apos;after&apos;, state);
   }
 }, 0, 3);
 
-// In scheduler that runs recursively, you would expect:
+// &#x9012;&#x5F52;&#x8FD0;&#x884C;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C; &#x4F60;&#x7684;&#x671F;&#x671B;:
 // &quot;before&quot;, 3
 // &quot;before&quot;, 2
 // &quot;before&quot;, 1
@@ -658,7 +645,7 @@ Rx.Scheduler.queue.schedule(function(state) {
 // &quot;after&quot;, 2
 // &quot;after&quot;, 3
 
-// But with queue it logs:
+// &#x4F46;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x961F;&#x5217;&#x7684;&#x8F93;&#x5165;:
 // &quot;before&quot;, 3
 // &quot;after&quot;, 3
 // &quot;before&quot;, 2

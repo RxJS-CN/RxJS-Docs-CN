@@ -82,16 +82,14 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { ArgumentOutOfRangeError } from &apos;../util/ArgumentOutOfRangeError&apos;;
 /**
- * Skip the last `count` values emitted by the source Observable.
+ * &#x8DF3;&#x8FC7;&#x6E90; Observable &#x6700;&#x540E;&#x53D1;&#x51FA;&#x7684;&#x7684;N&#x4E2A;&#x503C; (N = count)&#x3002;
  *
  * &lt;img src=&quot;./img/skipLast.png&quot; width=&quot;100%&quot;&gt;
  *
- * `skipLast` returns an Observable that accumulates a queue with a length
- * enough to store the first `count` values. As more values are received,
- * values are taken from the front of the queue and produced on the result
- * sequence. This causes values to be delayed.
+ * `skipLast` &#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x7D2F;&#x79EF;&#x8DB3;&#x591F;&#x957F;&#x7684;&#x961F;&#x5217;&#x4EE5;&#x5B58;&#x50A8;&#x6700;&#x521D;&#x7684;N&#x4E2A;&#x503C; (N = count)&#x3002;
+ * &#x5F53;&#x63A5;&#x6536;&#x5230;&#x66F4;&#x591A;&#x503C;&#x65F6;&#xFF0C;&#x5C06;&#x4ECE;&#x961F;&#x5217;&#x7684;&#x524D;&#x9762;&#x53D6;&#x503C;&#x5E76;&#x5728;&#x7ED3;&#x679C;&#x5E8F;&#x5217;&#x4E0A;&#x4EA7;&#x751F;&#x3002; &#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x503C;&#x4F1A;&#x88AB;&#x5EF6;&#x65F6;&#x3002;
  *
- * @example &lt;caption&gt;Skip the last 2 values of an Observable with many values&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8DF3;&#x8FC7;&#x6709;&#x591A;&#x4E2A;&#x503C;&#x7684; Observable &#x7684;&#x6700;&#x540E;2&#x4E2A;&#x503C;&lt;/caption&gt;
  * var many = Rx.Observable.range(1, 5);
  * var skipLastTwo = many.skipLast(2);
  * skipLastTwo.subscribe(x =&gt; console.log(x));
@@ -104,12 +102,12 @@ import { ArgumentOutOfRangeError } from &apos;../util/ArgumentOutOfRangeError&ap
  * @see {@link skipWhile}
  * @see {@link take}
  *
- * @throws {ArgumentOutOfRangeError} When using `skipLast(i)`, it throws
- * ArgumentOutOrRangeError if `i &lt; 0`.
+ * @throws {ArgumentOutOfRangeError} &#x5F53;&#x4F7F;&#x7528; `skipLast(i)` &#x65F6;, &#x5982;&#x679C;`i &lt; 0`&#xFF0C;&#x5219;
+ * &#x629B;&#x51FA; ArgumentOutOrRangeError&#x3002;
  *
- * @param {number} count Number of elements to skip from the end of the source Observable.
- * @returns {Observable&lt;T&gt;} An Observable that skips the last count values
- * emitted by the source Observable.
+ * @param {number} count &#x6E90; Observable &#x4E2D;&#x4ECE;&#x540E;&#x5F80;&#x524D;&#x8981;&#x8DF3;&#x8FC7;&#x7684;&#x503C;&#x7684;&#x6570;&#x91CF;&#x3002;
+ * @returns {Observable&lt;T&gt;} Observable &#x8DF3;&#x8FC7;&#x6E90; Observable &#x53D1;&#x51FA;
+ * &#x7684;&#x6700;&#x540E;&#x51E0;&#x4E2A;&#x503C;&#x3002;
  * @method skipLast
  * @owner Observable
  */

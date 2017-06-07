@@ -93,24 +93,19 @@ export class DeferObservable extends Observable {
         this.observableFactory = observableFactory;
     }
     /**
-     * Creates an Observable that, on subscribe, calls an Observable factory to
-     * make an Observable for each new Observer.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x5F53;&#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8C03;&#x7528; Observable &#x5DE5;&#x5382;&#x4E3A;&#x6BCF;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#x521B;&#x5EFA;&#x65B0;&#x7684; Observable&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Creates the Observable lazily, that is, only when it
-     * is subscribed.
+     * &lt;span class=&quot;informal&quot;&gt;&#x60F0;&#x6027;&#x521B;&#x5EFA; Observable, &#x4E5F;&#x5C31;&#x662F;&#x8BF4;, &#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x5B83;&#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x624D;&#x521B;&#x5EFA;&#x3002;
      * &lt;/span&gt;
      *
      * &lt;img src=&quot;./img/defer.png&quot; width=&quot;100%&quot;&gt;
      *
-     * `defer` allows you to create the Observable only when the Observer
-     * subscribes, and create a fresh Observable for each Observer. It waits until
-     * an Observer subscribes to it, and then it generates an Observable,
-     * typically with an Observable factory function. It does this afresh for each
-     * subscriber, so although each subscriber may think it is subscribing to the
-     * same Observable, in fact each subscriber gets its own individual
-     * Observable.
+     * `defer`&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable &#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x5B83;&#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E76;&#x4E14;&#x4E3A;&#x6BCF;&#x4E2A;&#x8BA2;&#x9605;&#x8005;&#x521B;&#x5EFA;&#x65B0;&#x7684; Observable&#x3002;
+     * &#x5B83;&#x4E00;&#x76F4;&#x5728;&#x7B49;&#x5F85;&#x76F4;&#x5230;&#x89C2;&#x5BDF;&#x8005;&#x8BA2;&#x9605;&#x4E86;&#x5B83;, &#x7136;&#x540E;&#x5B83;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable,&#x901A;&#x5E38;&#x4F1A;&#x4EE5; Observable &#x5DE5;&#x5382;&#x51FD;&#x6570;&#x7684;&#x65B9;&#x5F0F;&#x3002;
+     * &#x5BF9;&#x6BCF;&#x4E2A;&#x8BA2;&#x9605;&#x8005;&#x5B83;&#x90FD;&#x662F;&#x65B0;&#x7684;, &#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x6BCF;&#x4E2A;&#x8BA2;&#x9605;&#x8005;&#x4E5F;&#x8BB8;&#x4F1A;&#x8BA4;&#x4E3A;&#x5B83;&#x4EEC;&#x8BA2;&#x9605;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A; Observable, &#x4E8B;&#x5B9E;&#x4E0A;&#x6BCF;&#x4E2A;&#x8BA2;&#x9605;
+     * &#x8005;&#x83B7;&#x5F97;&#x7684;&#x662F;&#x53EA;&#x5C5E;&#x4E8E;&#x5B83;&#x4EEC;&#x7684; Observable&#x3002;
      *
-     * @example &lt;caption&gt;Subscribe to either an Observable of clicks or an Observable of interval, at random&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x968F;&#x673A;&#x8BA2;&#x9605;&#x70B9;&#x51FB;&#x6216;&#x8005; interval Observable&lt;/caption&gt;
      * var clicksOrInterval = Rx.Observable.defer(function () {
      *   if (Math.random() &gt; 0.5) {
      *     return Rx.Observable.fromEvent(document, &apos;click&apos;);
@@ -120,20 +115,16 @@ export class DeferObservable extends Observable {
      * });
      * clicksOrInterval.subscribe(x =&gt; console.log(x));
      *
-     * // Results in the following behavior:
-     * // If the result of Math.random() is greater than 0.5 it will listen
-     * // for clicks anywhere on the &quot;document&quot;; when document is clicked it
-     * // will log a MouseEvent object to the console. If the result is less
-     * // than 0.5 it will emit ascending numbers, one every second(1000ms).
+     * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;:
+     * // &#x5982;&#x679C;Math.random()&#x8FD4;&#x56DE;&#x7684;&#x503C;&#x5927;&#x4E8E;0.5&#xFF0C;&#x5B83;&#x4F1A;&#x76D1;&#x542C;&quot;document&quot;&#x4E0A;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;; &#x5F53;document
+     * // &#x88AB;&#x70B9;&#x51FB;&#xFF0C;&#x5B83;&#x4F1A;&#x5C06;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x6253;&#x5370;&#x5230;&#x63A7;&#x5236;&#x53F0;&#x3002; &#x5982;&#x679C;&#x7ED3;&#x679C;&#x5C0F;&#x4E8E;0.5&#x5B83;&#x4F1A;&#x6BCF;&#x79D2;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x4ECE;0&#x5F00;&#x59CB;&#x81EA;&#x589E;&#x6570;&#x3002;
      *
      * @see {@link create}
      *
-     * @param {function(): SubscribableOrPromise} observableFactory The Observable
-     * factory function to invoke for each Observer that subscribes to the output
-     * Observable. May also return a Promise, which will be converted on the fly
-     * to an Observable.
-     * @return {Observable} An Observable whose Observers&apos; subscriptions trigger
-     * an invocation of the given Observable factory function.
+     * @param {function(): SubscribableOrPromise} observableFactory Observable &#x7684;&#x5DE5;
+     * &#x5382;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x6BCF;&#x4E2A; Observer &#x8BA2;&#x9605; Observable &#x7684;&#x65F6;&#x5019;&#x88AB;&#x89E6;&#x53D1;&#x8C03;&#x7528;. &#x4E5F;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Promise, Promise &#x5C06;&#x4F1A;&#x7ACB;&#x523B;&#x88AB;&#x8F6C;
+     * &#x5316;&#x4E3A; Observable&#x3002;
+     * @return {Observable} Observable&#xFF0C;&#x8BE5; Observable &#x7684;&#x89C2;&#x5BDF;&#x8005;&#x7684;&#x8BA2;&#x9605;&#x4F1A;&#x89E6;&#x53D1;&#x5BF9; Observable &#x5DE5;&#x5382;&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#x3002;
      * @static true
      * @name defer
      * @owner Observable

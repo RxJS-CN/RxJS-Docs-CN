@@ -81,28 +81,24 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/pluck.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { map } from &apos;./map&apos;;
 /**
- * Maps each source value (an object) to its specified nested property.
+ * &#x5C06;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;(&#x5BF9;&#x8C61;)&#x6620;&#x5C04;&#x6210;&#x5B83;&#x6307;&#x5B9A;&#x7684;&#x5D4C;&#x5957;&#x5C5E;&#x6027;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Like {@link map}, but meant only for picking one of
- * the nested properties of every emitted object.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x7C7B;&#x4F3C;&#x4E8E; {@link map}&#xFF0C;&#x4F46;&#x4EC5;&#x7528;&#x4E8E;&#x9009;&#x62E9;&#x6BCF;&#x4E2A;&#x53D1;&#x51FA;&#x5BF9;&#x8C61;&#x7684;&#x67D0;&#x4E2A;&#x5D4C;&#x5957;&#x5C5E;&#x6027;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/pluck.png&quot; width=&quot;100%&quot;&gt;
  *
- * Given a list of strings describing a path to an object property, retrieves
- * the value of a specified nested property from all values in the source
- * Observable. If a property can&apos;t be resolved, it will return `undefined` for
- * that value.
+ * &#x7ED9;&#x5B9A;&#x63CF;&#x8FF0;&#x5BF9;&#x8C61;&#x5C5E;&#x6027;&#x8DEF;&#x5F84;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5217;&#x8868;&#xFF0C;&#x7136;&#x540E;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x7684;&#x6240;&#x6709;&#x503C;&#x4E2D;&#x68C0;&#x7D22;&#x6307;&#x5B9A;&#x5D4C;&#x5957;
+ * &#x5C5E;&#x6027;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;&#x5C5E;&#x6027;&#x65E0;&#x6CD5;&#x89E3;&#x6790;&#xFF0C;&#x5B83;&#x4F1A;&#x8FD4;&#x56DE; `undefined` &#x3002;
  *
- * @example &lt;caption&gt;Map every every click to the tagName of the clicked target element&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x6620;&#x5C04;&#x6210;&#x70B9;&#x51FB;&#x7684; target &#x5143;&#x7D20;&#x7684; tagName &#x5C5E;&#x6027;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var tagNames = clicks.pluck(&apos;target&apos;, &apos;tagName&apos;);
  * tagNames.subscribe(x =&gt; console.log(x));
  *
  * @see {@link map}
  *
- * @param {...string} properties The nested properties to pluck from each source
- * value (an object).
- * @return {Observable} A new Observable of property values from the source values.
+ * @param {...string} properties &#x4ECE;&#x6BCF;&#x4E2A;&#x6E90;&#x503C;(&#x5BF9;&#x8C61;&#x554A;)&#x4E2D;&#x63D0;&#x53D6;&#x7684;&#x5D4C;&#x5957;&#x5C5E;&#x6027;&#x3002;
+ * @return {Observable} &#x5168;&#x65B0;&#x7684; Observable&#xFF0C;&#x5B83;&#x53D1;&#x51FA;&#x6E90;&#x81EA;&#x6E90;&#x503C;&#x7684;&#x5C5E;&#x6027;&#x503C;&#x3002;
  * @method pluck
  * @owner Observable
  */

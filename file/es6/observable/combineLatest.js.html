@@ -85,60 +85,42 @@ import { ArrayObservable } from &apos;./ArrayObservable&apos;;
 import { CombineLatestOperator } from &apos;../operator/combineLatest&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are
- * calculated from the latest values of each of its input Observables.
+ * &#x7EC4;&#x5408;&#x591A;&#x4E2A; Observables &#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable &#xFF0C;&#x8BE5; Observable &#x7684;&#x503C;&#x6839;&#x636E;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#x7684;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Whenever any input Observable emits a value, it
- * computes a formula using the latest values from all the inputs, then emits
- * the output of that formula.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x5C06;&#x4F7F;&#x7528;&#x6240;&#x6709;&#x8F93;&#x5165;&#x4E2D;&#x7684;&#x6700;&#x65B0;&#x503C;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x8BE5;&#x516C;&#x5F0F;&#x7684;&#x8F93;&#x51FA;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/combineLatest.png&quot; width=&quot;100%&quot;&gt;
  *
- * `combineLatest` combines the values from all the Observables passed as
- * arguments. This is done by subscribing to each Observable in order and,
- * whenever any Observable emits, collecting an array of the most recent
- * values from each Observable. So if you pass `n` Observables to operator,
- * returned Observable will always emit an array of `n` values, in order
- * corresponding to order of passed Observables (value from the first Observable
- * on the first place and so on).
+ * `combineLatest` &#x7ED3;&#x5408;&#x6240;&#x6709;&#x8F93;&#x5165; Observable &#x53C2;&#x6570;&#x7684;&#x503C;. &#x987A;&#x5E8F;&#x8BA2;&#x9605;&#x6BCF;&#x4E2A; Observable&#xFF0C;
+ * &#x6BCF;&#x5F53;&#x4EFB;&#x4E00;&#x8F93;&#x5165; Observable &#x53D1;&#x51FA;&#xFF0C;&#x6536;&#x96C6;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x7EC4;&#x6210;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x5F53;&#x4F60;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;
+ * &#x4F20;&#x5165; n &#x4E2A; Observable&#xFF0C;&#x8FD4;&#x56DE;&#x7684; Observable &#x603B;&#x662F;&#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x957F;&#x5EA6;&#x4E3A; n &#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5BF9;&#x5E94;&#x8F93;&#x5165; Observable
+ * &#x7684;&#x987A;&#x5E8F;&#xFF08;&#x7B2C;&#x4E00;&#x4E2A; Observable &#x7684;&#x503C;&#x653E;&#x5230;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#xFF09;&#x3002;
  *
- * Static version of `combineLatest` accepts either an array of Observables
- * or each Observable can be put directly as an argument. Note that array of
- * Observables is good choice, if you don&apos;t know beforehand how many Observables
- * you will combine. Passing empty array will result in Observable that
- * completes immediately.
+ * &#x9759;&#x6001;&#x7248;&#x672C;&#x7684; `combineLatest` &#x63A5;&#x53D7;&#x4E00;&#x4E2A; Observables &#x6570;&#x7EC4;&#x6216;&#x8005;&#x6BCF;&#x4E2A; Observable &#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x3002;
+ * &#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4E8B;&#x5148;&#x4E0D;&#x77E5;&#x9053;&#x4F60;&#x5C06;&#x8981;&#x7ED3;&#x5408;&#x591A;&#x5C11;&#x4E2A; Observable&#xFF0C; &#x90A3;&#x4E48; Observables &#x6570;&#x7EC4;&#x662F;&#x4E00;&#x4E2A;&#x597D;&#x7684;&#x9009;&#x62E9;&#x3002;
+ * &#x4F20;&#x9012;&#x7A7A;&#x7684;&#x6570;&#x7EC4;&#x5C06;&#x4F1A;&#x5BFC;&#x81F4;&#x8FD4;&#x56DE; Observable &#x7ACB;&#x9A6C;&#x5B8C;&#x6210;&#x3002;
  *
- * To ensure output array has always the same length, `combineLatest` will
- * actually wait for all input Observables to emit at least once,
- * before it starts emitting results. This means if some Observable emits
- * values before other Observables started emitting, all that values but last
- * will be lost. On the other hand, is some Observable does not emit value but
- * completes, resulting Observable will complete at the same moment without
- * emitting anything, since it will be now impossible to include value from
- * completed Observable in resulting array. Also, if some input Observable does
- * not emit any value and never completes, `combineLatest` will also never emit
- * and never complete, since, again, it will wait for all streams to emit some
- * value.
+ * &#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x8F93;&#x51FA;&#x6570;&#x7EC4;&#x7684;&#x957F;&#x5EA6;&#x76F8;&#x540C;&#xFF0C;`combineLatest` &#x5B9E;&#x9645;&#x4E0A;&#x4F1A;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7684;&#x8F93;&#x5165; Observable &#x81F3;&#x5C11;&#x53D1;&#x51FA;&#x4E00;&#x6B21;&#xFF0C;
+ * &#x5728;&#x8FD4;&#x56DE; Observable &#x53D1;&#x51FA;&#x4E4B;&#x524D;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x8F93;&#x5165; Observable &#x5728;&#x5176;&#x4F59;&#x7684;&#x8F93;&#x5165; Observable &#x4E4B;&#x524D;&#x53D1;&#x51FA;&#xFF0C;&#x5B83;&#x6240;&#x53D1;&#x51FA;
+ * &#x7684;&#x503C;&#x53EA;&#x4FDD;&#x7559;&#x6700;&#x65B0;&#x7684;&#x3002;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x8F93;&#x5165; Observable &#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x503C;&#x5C31;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x8FD4;&#x56DE; Observable &#x4E5F;&#x4E0D;&#x4F1A;&#x53D1;
+ * &#x5C04;&#x503C;&#x5E76;&#x7ACB;&#x9A6C;&#x5B8C;&#x6210;&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x53EF;&#x80FD;&#x4ECE;&#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x7684; Observable &#x4E2D;&#x6536;&#x96C6;&#x5230;&#x503C;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x8F93;&#x5165; Observable
+ * &#x4E0D;&#x53D1;&#x51FA;&#x503C;&#x4E5F;&#x4E0D;&#x5B8C;&#x6210;&#xFF0C;`combineLatest`&#x4F1A;&#x6C38;&#x8FDC;&#x4E0D;&#x53D1;&#x51FA;&#x503C;&#x4E5F;&#x4E0D;&#x7ED3;&#x675F;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x518D;&#x6B21;&#x5F3A;&#x8C03;&#x4E0B;&#xFF0C;&#x5B83;&#x4F1A;&#x7B49;&#x5F85;&#x6240;&#x6709;&#x7684;&#x6D41;
+ * &#x53BB;&#x53D1;&#x51FA;&#x503C;&#x3002;
  *
- * If at least one Observable was passed to `combineLatest` and all passed Observables
- * emitted something, resulting Observable will complete when all combined
- * streams complete. So even if some Observable completes, result of
- * `combineLatest` will still emit values when other Observables do. In case
- * of completed Observable, its value from now on will always be the last
- * emitted value. On the other hand, if any Observable errors, `combineLatest`
- * will error immediately as well, and all other Observables will be unsubscribed.
+ * &#x5982;&#x679C;&#x7ED9;`combineLatest`&#x81F3;&#x5C11;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x5E76;&#x4E14;&#x6240;&#x6709;&#x4F20;&#x5165;&#x7684;&#x8F93;&#x5165; Observable &#x90FD;&#x53D1;&#x51FA;&#x4E86;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;
+ * Observable &#x5C06;&#x4F1A;&#x5728;&#x6240;&#x6709;&#x7ED3;&#x5408;&#x6D41;&#x5B8C;&#x6210;&#x540E;&#x5B8C;&#x6210;&#x3002;&#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x67D0;&#x4E9B; Observable &#x5B8C;&#x6210;&#x4E86;&#xFF0C;`combineLatest`&#x8FD4;&#x56DE;
+ * Observable &#x4ECD;&#x7136;&#x4F1A;&#x53D1;&#x51FA;&#x503C;&#x5F53;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable &#x4E5F;&#x53D1;&#x51FA;&#x503C;&#x7684;&#x65F6;&#x5019;&#x3002;&#x5BF9;&#x4E8E;&#x5B8C;&#x6210;&#x7684;&#x8F93;&#x5165; Observable&#xFF0C;&#x5B83;
+ * &#x7684;&#x503C;&#x4E00;&#x76F4;&#x662F;&#x6700;&#x540E;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x4EFB;&#x4E00;&#x8F93;&#x5165; Observable &#x53D1;&#x751F;&#x9519;&#x8BEF;&#xFF0C;`combineLatest`&#x4E5F;&#x4F1A;
+ * &#x7ACB;&#x9A6C;&#x89E6;&#x53D1;&#x9519;&#x8BEF;&#x72B6;&#x6001;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable &#x90FD;&#x4F1A;&#x88AB;&#x89E3;&#x9664;&#x8BA2;&#x9605;&#x3002;
  *
- * `combineLatest` accepts as optional parameter `project` function, which takes
- * as arguments all values that would normally be emitted by resulting Observable.
- * `project` can return any kind of value, which will be then emitted by Observable
- * instead of default array. Note that `project` does not take as argument that array
- * of values, but values themselves. That means default `project` can be imagined
- * as function that takes all its arguments and puts them into an array.
+ * `combineLatest`&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570;&#x6295;&#x5C04;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x8FD4;&#x56DE; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;&#x6295;&#x5C04;&#x51FD;&#x6570;
+ * &#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4EE3;&#x66FF;&#x9ED8;&#x8BA4;&#x7684;&#x6570;&#x7EC4;&#x88AB;&#x8FD4;&#x56DE; Observable &#x53D1;&#x51FA;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5E76;&#x4E0D;&#x63A5;
+ * &#x53D7;&#x503C;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x8FD8;&#x662F;&#x503C;&#x672C;&#x8EAB;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x9ED8;&#x8BA4;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53D7;&#x6240;&#x6709;&#x53C2;&#x6570;&#x5E76;&#x628A;&#x5B83;&#x4EEC;&#x653E;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x91CC;&#x9762;&#x7684;
+ * &#x51FD;&#x6570;&#x3002;
  *
- *
- * @example &lt;caption&gt;Combine two timer Observables&lt;/caption&gt;
- * const firstTimer = Rx.Observable.timer(0, 1000); // emit 0, 1, 2... after every second, starting from now
- * const secondTimer = Rx.Observable.timer(500, 1000); // emit 0, 1, 2... after every second, starting 0,5s from now
+ * @example &lt;caption&gt;&#x7ED3;&#x5408;&#x4E24;&#x4E2A; timer Observables&lt;/caption&gt;
+ * const firstTimer = Rx.Observable.timer(0, 1000); // &#x4ECE;&#x73B0;&#x5728;&#x5F00;&#x59CB;&#xFF0C;&#x6BCF;&#x9694;1&#x79D2;&#x53D1;&#x51FA;0, 1, 2...
+ * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5&#x79D2;&#x540E;&#xFF0C;&#x6BCF;&#x9694;1&#x79D2;&#x53D1;&#x51FA;0, 1, 2...
  * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);
  * combinedTimers.subscribe(value =&gt; console.log(value));
  * // Logs
@@ -148,26 +130,26 @@ import { CombineLatestOperator } from &apos;../operator/combineLatest&apos;;
  * // [2, 1] after 2s
  *
  *
- * @example &lt;caption&gt;Combine an array of Observables&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7ED3;&#x5408; Observables &#x6570;&#x7EC4;&lt;/caption&gt;
  * const observables = [1, 5, 10].map(
- *   n =&gt; Rx.Observable.of(n).delay(n * 1000).startWith(0) // emit 0 and then emit n after n seconds
+ *   n =&gt; Rx.Observable.of(n).delay(n * 1000).startWith(0) // &#x5148;&#x53D1;&#x51FA;0&#xFF0C;&#x7136;&#x540E;&#x5728; n &#x79D2;&#x540E;&#x53D1;&#x51FA; n&#x3002;
  * );
  * const combined = Rx.Observable.combineLatest(observables);
  * combined.subscribe(value =&gt; console.log(value));
- * // Logs
- * // [0, 0, 0] immediately
- * // [1, 0, 0] after 1s
- * // [1, 5, 0] after 5s
- * // [1, 5, 10] after 10s
+ * // &#x65E5;&#x5FD7;
+ * // [0, 0, 0] &#x7ACB;&#x523B;
+ * // [1, 0, 0] 1s &#x540E;
+ * // [1, 5, 0] 5s &#x540E;
+ * // [1, 5, 10] 10s &#x540E;
  *
  *
- * @example &lt;caption&gt;Use project function to dynamically calculate the Body-Mass Index&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4F7F;&#x7528; project &#x51FD;&#x6570;&#x52A8;&#x6001;&#x8BA1;&#x7B97;&#x4F53;&#x91CD;&#x6307;&#x6570;&lt;/caption&gt;
  * var weight = Rx.Observable.of(70, 72, 76, 79, 75);
  * var height = Rx.Observable.of(1.76, 1.77, 1.78);
  * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) =&gt; w / (h * h));
  * bmi.subscribe(x =&gt; console.log(&apos;BMI is &apos; + x));
  *
- * // With output to console:
+ * // &#x63A7;&#x5236;&#x53F0;&#x8F93;&#x51FA;:
  * // BMI is 24.212293388429753
  * // BMI is 23.93948099205209
  * // BMI is 23.671253629592222
@@ -177,17 +159,12 @@ import { CombineLatestOperator } from &apos;../operator/combineLatest&apos;;
  * @see {@link merge}
  * @see {@link withLatestFrom}
  *
- * @param {ObservableInput} observable1 An input Observable to combine with other Observables.
- * @param {ObservableInput} observable2 An input Observable to combine with other Observables.
- * More than one input Observables may be given as arguments
- * or an array of Observables may be given as the first argument.
- * @param {function} [project] An optional function to project the values from
- * the combined latest values into a new value on the output Observable.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for subscribing to
- * each input Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} observable1 &#x7528;&#x6765;&#x548C;&#x5176;&#x4ED6; Observables &#x8FDB;&#x884C;&#x7ED3;&#x5408;&#x7684;&#x8F93;&#x5165; Observable &#x3002;
+ * @param {ObservableInput} observable2 &#x7528;&#x6765;&#x548C;&#x5176;&#x4ED6; Observables &#x8FDB;&#x884C;&#x7ED3;&#x5408;&#x7684;&#x8F93;&#x5165; Observable &#x3002;
+ * &#x53EF;&#x4EE5;&#x6709;&#x591A;&#x4E2A;&#x8F93;&#x5165;Observables&#x4F20;&#x5165;&#x6216;&#x8005;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;Observables&#x6570;&#x7EC4;
+ * @param {function} [project] &#x6295;&#x5C04;&#x6210;&#x8F93;&#x51FA; Observable &#x4E0A;&#x7684;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x503C;&#x3002;
+ * @param {Scheduler} [scheduler=null] &#x7528;&#x6765;&#x8BA2;&#x9605;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x8C03;&#x5EA6;&#x5668;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x4E3A;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x7684;&#x6295;&#x5C04;&#xFF0C;&#x6216;&#x8005;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x7684;&#x6570;&#x7EC4;&#x3002;
  * @static true
  * @name combineLatest
  * @owner Observable

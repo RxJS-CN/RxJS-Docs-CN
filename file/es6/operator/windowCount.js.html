@@ -82,34 +82,28 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { Subject } from &apos;../Subject&apos;;
 /**
- * Branch out the source Observable values as a nested Observable with each
- * nested Observable emitting at most `windowSize` values.
+ * &#x5C06;&#x6E90; Observable &#x7684;&#x503C;&#x5206;&#x652F;&#x6210;&#x591A;&#x4E2A;&#x5D4C;&#x5957;&#x7684; Observable &#xFF0C;&#x6BCF;&#x4E2A;&#x5D4C;&#x5957;&#x7684; Observable &#x6700;&#x591A;&#x53D1;&#x51FA; windowSize &#x4E2A;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link bufferCount}, but emits a nested
- * Observable instead of an array.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F; {@link bufferCount}, &#x4F46;&#x662F;&#x8FD4;&#x56DE;&#x5D4C;&#x5957;&#x7684; Observable &#x800C;&#x4E0D;&#x662F;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/windowCount.png&quot; width=&quot;100%&quot;&gt;
+
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x4ECE;&#x6E90; Observable &#x6536;&#x96C6;&#x5230;&#x7684;&#x9879;&#x7684;&#x7A97;&#x53E3;&#x3002;
+ * &#x8F93;&#x51FA; Observable &#x6BCF;M(M = startWindowEvery)&#x4E2A;&#x9879;&#x53D1;&#x51FA;&#x65B0;&#x7A97;&#x53E3;&#xFF0C;&#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x5305;&#x542B;&#x7684;&#x9879;&#x6570;&#x4E0D;&#x5F97;&#x8D85;&#x8FC7;N&#x4E2A;(N = windowSize)&#x3002;
+ * &#x5F53;&#x6E90; Observable &#x5B8C;&#x6210;&#x6216;&#x8005;&#x9047;&#x5230;&#x9519;&#x8BEF;,&#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x5F53;&#x524D;&#x7A97;&#x53E3;&#x5E76;&#x4E14;&#x4F20;&#x64AD;&#x4ECE;&#x6E90; Observable &#x6536;&#x5230;&#x7684;&#x901A;&#x77E5;&#x3002;
+ * &#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B; startWindowEvery &#xFF0C;&#x90A3;&#x4E48;&#x5728;&#x6E90; Observable &#x7684;&#x8D77;&#x59CB;&#x5904;&#x7ACB;&#x5373;&#x5F00;&#x542F;&#x65B0;&#x7A97;&#x53E3;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x7684;&#x5927;&#x5C0F;&#x8FBE;&#x5230; windowSize &#x65F6;&#x5B8C;&#x6210;&#x3002;
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits windows every `startWindowEvery`
- * items, each containing no more than `windowSize` items. When the source
- * Observable completes or encounters an error, the output Observable emits
- * the current window and propagates the notification from the source
- * Observable. If `startWindowEvery` is not provided, then new windows are
- * started immediately at the start of the source and when each window completes
- * with size `windowSize`.
- *
- * @example &lt;caption&gt;Ignore every 3rd click event, starting from the first one&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x5F00;&#x59CB;&#xFF0C;&#x5FFD;&#x7565;&#x7B2C;3N&#x6B21;&#x70B9;&#x51FB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.windowCount(3)
- *   .map(win =&gt; win.skip(1)) // skip first of every 3 clicks
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win =&gt; win.skip(1)) // &#x8DF3;&#x8FC7;&#x6BCF;&#x4E09;&#x4E2A;&#x70B9;&#x51FB;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;
+ *   .mergeAll(); // &#x6253;&#x5E73;&#x9AD8;&#x9636; Observable
  * result.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Ignore every 3rd click event, starting from the third one&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4ECE;&#x7B2C;&#x4E09;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x5F00;&#x59CB;&#xFF0C;&#x5FFD;&#x7565;&#x7B2C;3N&#x6B21;&#x70B9;&#x51FB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.windowCount(2, 3)
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .mergeAll(); // &#x6253;&#x5E73;&#x9AD8;&#x9636; Observable
  * result.subscribe(x =&gt; console.log(x));
  *
  * @see {@link window}
@@ -118,14 +112,10 @@ import { Subject } from &apos;../Subject&apos;;
  * @see {@link windowWhen}
  * @see {@link bufferCount}
  *
- * @param {number} windowSize The maximum number of values emitted by each
- * window.
- * @param {number} [startWindowEvery] Interval at which to start a new window.
- * For example if `startWindowEvery` is `2`, then a new window will be started
- * on every other value from the source. A new window is started at the
- * beginning of the source by default.
- * @return {Observable&lt;Observable&lt;T&gt;&gt;} An Observable of windows, which in turn
- * are Observable of values.
+ * @param {number} windowSize &#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x6700;&#x591A;&#x53EF;&#x4EE5;&#x53D1;&#x9001;&#x7684;&#x4E2A;&#x6570;&#x3002;
+ * @param {number} [startWindowEvery] &#x5F00;&#x542F;&#x65B0;&#x7A97;&#x53E3;&#x7684;&#x95F4;&#x9694;&#x3002;
+ * &#x6BD4;&#x5982;&#xFF0C;&#x5982;&#x679C; `startWindowEvery` &#x662F; `2`, &#x65B0;&#x7A97;&#x53E3;&#x4F1A;&#x5728;&#x6E90;&#x4E2D;&#x6BCF;&#x4E2A;&#x7B2C;&#x4E8C;&#x4E2A;&#x503C;&#x5F00;&#x542F;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x65B0;&#x7A97;&#x53E3;&#x662F;&#x5728;&#x6E90; Observable &#x7684;&#x8D77;&#x59CB;&#x5904;&#x5F00;&#x542F;&#x7684;&#x3002;
+ * @return {Observable&lt;Observable&lt;T&gt;&gt;} &#x7A97;&#x53E3;&#x7684; Observable&#xFF0C;&#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x53C8;&#x662F;&#x503C;&#x7684; Observable &#x3002;(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x9AD8;&#x9636; Observable )
  * @method windowCount
  * @owner Observable
  */

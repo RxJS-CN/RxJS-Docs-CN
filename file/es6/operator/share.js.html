@@ -85,14 +85,12 @@ function shareSubjectFactory() {
     return new Subject();
 }
 /**
- * Returns a new Observable that multicasts (shares) the original Observable. As long as there is at least one
- * Subscriber this Observable will be subscribed and emitting data. When all subscribers have unsubscribed it will
- * unsubscribe from the source Observable. Because the Observable is multicasting it makes the stream `hot`.
- * This is an alias for .publish().refCount().
+ * &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable&#xFF0C;&#x8BE5; Observable &#x591A;&#x64AD;(&#x5171;&#x4EAB;)&#x6E90; Observable&#x3002; &#x81F3;&#x5C11;&#x8981;&#x6709;&#x4E00;&#x4E2A;&#x8BA2;&#x9605;&#x8005;&#xFF0C;&#x8BE5; Observable &#x624D;&#x4F1A;&#x88AB;&#x8BA2;&#x9605;&#x5E76;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x3002;
+ * &#x5F53;&#x6240;&#x6709;&#x7684;&#x8BA2;&#x9605;&#x8005;&#x90FD;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x4E86;&#xFF0C;&#x5B83;&#x4F1A;&#x53D6;&#x6D88;&#x5BF9;&#x6E90; Observable &#x7684;&#x8BA2;&#x9605;&#x3002; &#x56E0;&#x4E3A; Observable &#x662F;&#x591A;&#x8DEF;&#x4F20;&#x64AD;&#x7684;&#x5B83;&#x4F7F;&#x5F97;&#x6D41;&#x662F; `hot`&#x3002;
+ * &#x5B83;&#x662F; &#xFF40;.publish().refCount()&#xFF40; &#x7684;&#x522B;&#x540D;&#x3002;
  *
  * &lt;img src=&quot;./img/share.png&quot; width=&quot;100%&quot;&gt;
- *
- * @return {Observable&lt;T&gt;} An Observable that upon connection causes the source Observable to emit items to its Observers.
+ * @return {Observable&lt;T&gt;} Observable&#xFF0C;&#x8FDE;&#x63A5;&#x8BE5; Observable &#x540E;&#x4F1A;&#x5BFC;&#x81F4;&#x6E90; Observable &#x5411;&#x5B83;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x53D1;&#x9001;&#x6570;&#x636E;&#x3002;
  * @method share
  * @owner Observable
  */

@@ -82,29 +82,25 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Applies an accumulator function over the source Observable, and returns the
- * accumulated result when the source completes, given an optional seed value.
+ * &#x5728;&#x6E90; Observalbe &#x4E0A;&#x5E94;&#x7528; accumulator (&#x7D2F;&#x52A0;&#x5668;) &#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x5F53;&#x6E90; Observable &#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x8FD4;&#x56DE;
+ * &#x7D2F;&#x52A0;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x53EF;&#x4EE5;&#x63D0;&#x4F9B;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684; seed &#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Combines together all values emitted on the source,
- * using an accumulator function that knows how to join a new source value into
- * the accumulation from the past.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x4F7F;&#x7528; accumulator (&#x7D2F;&#x52A0;&#x5668;) &#x51FD;&#x6570;&#x5C06;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x503C;&#x5F52;&#x5E76;&#x5728;&#x4E00;&#x8D77;&#xFF0C;
+ * &#x8BE5;&#x51FD;&#x6570;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x5C06;&#x65B0;&#x7684;&#x6E90;&#x503C;&#x7EB3;&#x5165;&#x5230;&#x8FC7;&#x5F80;&#x7684;&#x7D2F;&#x52A0;&#x7ED3;&#x679C;&#x4E2D;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/reduce.png&quot; width=&quot;100%&quot;&gt;
  *
- * Like
- * [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce),
- * `reduce` applies an `accumulator` function against an accumulation and each
- * value of the source Observable (from the past) to reduce it to a single
- * value, emitted on the output Observable. Note that `reduce` will only emit
- * one value, only when the source Observable completes. It is equivalent to
- * applying operator {@link scan} followed by operator {@link last}.
+ * &#x7C7B;&#x4F3C;&#x4E8E; [Array.prototype.reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)&#xFF0C;
+ * `reduce` &#x53EF;&#x4EE5;&#x5BF9;&#x7D2F;&#x52A0;&#x503C;&#x548C;&#x6E90; Observable (&#x8FC7;&#x53BB;&#x7684;)&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x5E94;&#x7528; `accumulator` &#x51FD;&#x6570;&#xFF0C;
+ * &#x7136;&#x540E;&#x5C06;&#x5176;&#x5F52;&#x5E76;&#x6210;&#x4E00;&#x4E2A;&#x503C;&#x5E76;&#x4E14;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x3002;&#x6CE8;&#x610F;&#xFF0C;`reduce` &#x53EA;&#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x503C;&#xFF0C;
+ * &#x5E76;&#x4E14;&#x662F;&#x5F53;&#x6E90; Observable &#x5B8C;&#x6210;&#x65F6;&#x624D;&#x53D1;&#x51FA;&#x3002;&#x5B83;&#x7B49;&#x4EF7;&#x4E8E;&#x4F7F;&#x7528; {@link scan} &#x64CD;&#x4F5C;&#x7B26;&#x540E;&#x9762;&#x518D;&#x8DDF;
+ * {@link last} &#x64CD;&#x4F5C;&#x7B26;&#x3002;
  *
- * Returns an Observable that applies a specified `accumulator` function to each
- * item emitted by the source Observable. If a `seed` value is specified, then
- * that value will be used as the initial value for the accumulator. If no seed
- * value is specified, the first item of the source is used as the seed.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x4E3A;&#x7531;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x9879;&#x5E94;&#x7528;&#x6307;&#x5B9A;&#x7684; `accumulator` &#x51FD;&#x6570;&#x3002;
+ * &#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86; `seed` &#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x503C;&#x4F1A;&#x4F5C;&#x4E3A; `accumulator` &#x51FD;&#x6570;&#x7684;&#x521D;&#x59CB;&#x503C;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6307;&#x5B9A;
+ * `seed` &#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x6E90;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x9879;&#x4F1A;&#x4F5C;&#x4E3A; `seed` &#x6765;&#x4F7F;&#x7528;&#x3002;
  *
- * @example &lt;caption&gt;Count the number of click events that happened in 5 seconds&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8BA1;&#x7B97;5&#x79D2;&#x5185;&#x53D1;&#x751F;&#x7684;&#x70B9;&#x51FB;&#x6B21;&#x6570;&lt;/caption&gt;
  * var clicksInFiveSeconds = Rx.Observable.fromEvent(document, &apos;click&apos;)
  *   .takeUntil(Rx.Observable.interval(5000));
  * var ones = clicksInFiveSeconds.mapTo(1);
@@ -117,11 +113,11 @@
  * @see {@link mergeScan}
  * @see {@link scan}
  *
- * @param {function(acc: R, value: T, index: number): R} accumulator The accumulator function
- * called on each source value.
- * @param {R} [seed] The initial accumulation value.
- * @return {Observable&lt;R&gt;} An Observable that emits a single value that is the
- * result of accumulating the values emitted by the source Observable.
+ * @param {function(acc: R, value: T, index: number): R} accumulator &#x8C03;&#x7528;&#x6BCF;&#x4E2A;
+ * &#x6E90;&#x503C;&#x7684;&#x7D2F;&#x52A0;&#x5668;&#x51FD;&#x6570;&#x3002;
+ * @param {R} [seed] &#x521D;&#x59CB;&#x7D2F;&#x52A0;&#x503C;&#x3002;
+ * @return {Observable&lt;R&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x5355;&#x4E2A;&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x503C;&#x662F;&#x7531;&#x6E90; Observable
+ * &#x53D1;&#x51FA;&#x503C;&#x7D2F;&#x52A0;&#x7684;&#x7ED3;&#x679C;&#x3002;
  * @method reduce
  * @owner Observable
  */

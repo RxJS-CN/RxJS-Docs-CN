@@ -82,11 +82,11 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Catches errors on the observable to be handled by returning a new observable or throwing an error.
+ * &#x6355;&#x83B7; observable &#x4E2D;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684; observable &#x6216;&#x8005;&#x629B;&#x51FA;&#x9519;&#x8BEF;&#x5BF9;&#x8C61;&#x6765;&#x5904;&#x7406;&#x3002;
  *
  * &lt;img src=&quot;./img/catch.png&quot; width=&quot;100%&quot;&gt;
  *
- * @example &lt;caption&gt;Continues with a different Observable when there&apos;s an error&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5F53;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x7684;&#x65F6;&#x5019;&#x901A;&#x8FC7;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable &#x7EE7;&#x7EED;&#x8FD0;&#x884C;&lt;/caption&gt;
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n =&gt; {
@@ -99,7 +99,7 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  *   .subscribe(x =&gt; console.log(x));
  *   // 1, 2, 3, I, II, III, IV, V
  *
- * @example &lt;caption&gt;Retries the caught source Observable again in case of error, similar to retry() operator&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5F53;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x7684;&#x65F6;&#x5019;&#x91CD;&#x8BD5;&#x6E90; Observable, &#x548C;retry()&#x64CD;&#x4F5C;&#x7B26;&#x7C7B;&#x4F3C;&lt;/caption&gt;
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n =&gt; {
@@ -113,7 +113,7 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  *   .subscribe(x =&gt; console.log(x));
  *   // 1, 2, 3, 1, 2, 3, ...
  *
- * @example &lt;caption&gt;Throws a new error when the source Observable throws an error&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5F53;&#x6E90; Observable &#x53D1;&#x751F;&#x9519;&#x8BEF;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x629B;&#x51FA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x9519;&#x8BEF;&lt;/caption&gt;
  *
  * Observable.of(1, 2, 3, 4, 5)
  *   .map(n =&gt; {
@@ -131,11 +131,9 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
- * @param {function} selector a function that takes as arguments `err`, which is the error, and `caught`, which
- *  is the source observable, in case you&apos;d like to &quot;retry&quot; that observable by returning it again. Whatever observable
- *  is returned by the `selector` will be used to continue the observable chain.
- * @return {Observable} An observable that originates from either the source or the observable returned by the
- *  catch `selector` function.
+ * @param {function} selector &#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7; err &#x53C2;&#x6570;&#xFF0C;&#x5373;&#x9519;&#x8BEF;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD8;&#x63A5;&#x53D7; catch &#x53C2;&#x6570;&#xFF0C;&#x5373;&#x6E90; Observable&#xFF0C;
+ * &#x5F53;&#x4F60;&#x60F3;&#x201C;&#x91CD;&#x8BD5;&#x201D;&#x7684;&#x65F6;&#x5019;&#x8FD4;&#x56DE;&#x5B83;&#x5373;&#x53EF;&#x3002; &#x4EFB;&#x4F55;&#x88AB;`selector`&#x8FD4;&#x56DE;&#x7684; observable &#x90FD;&#x4F1A;&#x88AB;&#x7528;&#x6765;&#x4EE3;&#x66FF;&#x6E90; observable&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x6E90;&#x81EA;&#x6E90; Observable &#x6216; selector &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684; Observable&#x3002;
  * @method catch
  * @name catch
  * @owner Observable

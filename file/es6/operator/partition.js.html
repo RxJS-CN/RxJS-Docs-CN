@@ -82,23 +82,20 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { not } from &apos;../util/not&apos;;
 import { filter } from &apos;./filter&apos;;
 /**
- * Splits the source Observable into two, one with values that satisfy a
- * predicate, and another with values that don&apos;t satisfy the predicate.
+ * &#x5C06;&#x6E90; Observable &#x4E00;&#x5206;&#x4E3A;&#x4E8C;&#xFF0C;&#x4E00;&#x4E2A;&#x662F;&#x6240;&#x6709;&#x6EE1;&#x8DB3; predicate &#x51FD;&#x6570;&#x7684;&#x503C;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x6240;&#x6709;
+ * &#x4E0D;&#x6EE1;&#x8DB3; predicate &#x7684;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link filter}, but returns two Observables:
- * one like the output of {@link filter}, and the other with values that did not
- * pass the condition.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x5F88;&#x50CF; {@link filter}&#xFF0C;&#x4F46;&#x662F;&#x8FD4;&#x56DE;&#x4E24;&#x4E2A; Observables &#xFF1A;
+ * &#x4E00;&#x4E2A;&#x50CF; {@link filter} &#x7684;&#x8F93;&#x51FA;&#xFF0C; &#x800C;&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x6240;&#x6709;&#x4E0D;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/partition.png&quot; width=&quot;100%&quot;&gt;
  *
- * `partition` outputs an array with two Observables that partition the values
- * from the source Observable through the given `predicate` function. The first
- * Observable in that array emits source values for which the predicate argument
- * returns true. The second Observable emits source values for which the
- * predicate returns false. The first behaves like {@link filter} and the second
- * behaves like {@link filter} with the predicate negated.
+ * `partition` &#x8F93;&#x51FA;&#x6709;&#x4E24;&#x4E2A; Observables &#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A; Observables &#x662F;&#x901A;&#x8FC7;&#x7ED9;&#x5B9A;&#x7684; `predicate`
+ * &#x51FD;&#x6570;&#x5C06;&#x6E90; Observable &#x7684;&#x503C;&#x8FDB;&#x884C;&#x5212;&#x5206;&#x5F97;&#x5230;&#x7684;&#x3002;&#x8BE5;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; Observable &#x53D1;&#x51FA; predicate &#x53C2;&#x6570;
+ * &#x8FD4;&#x56DE; true &#x7684;&#x6E90;&#x503C;&#x3002;&#x7B2C;&#x4E8C;&#x4E2A; Observable &#x53D1;&#x51FA; predicate &#x53C2;&#x6570;&#x8FD4;&#x56DE; false &#x7684;&#x6E90;&#x503C;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x50CF;&#x662F;
+ * {@link filter} &#xFF0C;&#x800C;&#x7B2C;&#x4E8C;&#x4E2A;&#x50CF;&#x662F; predicate &#x53D6;&#x53CD;&#x7684; {@link filter} &#x3002;
  *
- * @example &lt;caption&gt;Partition click events into those on DIV elements and those elsewhere&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x5212;&#x5206;&#x4E3A;&#x70B9;&#x51FB; DIV &#x5143;&#x7D20;&#x548C;&#x70B9;&#x51FB;&#x5176;&#x4ED6;&#x5143;&#x7D20;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var parts = clicks.partition(ev =&gt; ev.target.tagName === &apos;DIV&apos;);
  * var clicksOnDivs = parts[0];
@@ -108,17 +105,13 @@ import { filter } from &apos;./filter&apos;;
  *
  * @see {@link filter}
  *
- * @param {function(value: T, index: number): boolean} predicate A function that
- * evaluates each value emitted by the source Observable. If it returns `true`,
- * the value is emitted on the first Observable in the returned array, if
- * `false` the value is emitted on the second Observable in the array. The
- * `index` parameter is the number `i` for the i-th source emission that has
- * happened since the subscription, starting from the number `0`.
- * @param {any} [thisArg] An optional argument to determine the value of `this`
- * in the `predicate` function.
- * @return {[Observable&lt;T&gt;, Observable&lt;T&gt;]} An array with two Observables: one
- * with values that passed the predicate, and another with values that did not
- * pass the predicate.
+ * @param {function(value: T, index: number): boolean} predicate &#x8BC4;&#x4F30;&#x6E90; Observable
+ * &#x6240;&#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x7684;&#x51FD;&#x6570;&#x3002;&#x5982;&#x679C;&#x5B83;&#x8FD4;&#x56DE; `true` &#xFF0C;&#x90A3;&#x4E48;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x5C31;&#x5728;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;
+ * Observable &#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x8FD4;&#x56DE;&#x7684;&#x662F; `false` &#xFF0C;&#x90A3;&#x4E48;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x5C31;&#x5728;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;
+ * Observable &#x4E2D;&#x3002;`index` &#x53C2;&#x6570;&#x662F;&#x81EA;&#x8BA2;&#x9605;&#x5F00;&#x59CB;&#x540E;&#x53D1;&#x9001;&#x5E8F;&#x5217;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x662F;&#x4ECE; `0` &#x5F00;&#x59CB;&#x7684;&#x3002;
+ * @param {any} [thisArg] &#x53EF;&#x9009;&#x53C2;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x51B3;&#x5B9A; `predicate` &#x51FD;&#x6570;&#x4E2D;&#x7684; `this` &#x7684;&#x503C;&#x3002;
+ * @return {[Observable&lt;T&gt;, Observable&lt;T&gt;]} &#x6709;&#x4E24;&#x4E2A; Observables &#x7684;&#x6570;&#x7EC4;&#xFF1A;
+ * &#x4E00;&#x4E2A;&#x662F;&#x901A;&#x8FC7; predicate &#x51FD;&#x6570;&#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;&#x53E6;&#x4E00;&#x4E2A;&#x662F;&#x6CA1;&#x6709;&#x901A;&#x8FC7; predicate &#x7684;&#x6240;&#x6709;&#x503C;&#x3002;
  * @method partition
  * @owner Observable
  */

@@ -85,16 +85,15 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Returns an Observable that mirrors the source Observable with the exception of a `complete`. If the source
- * Observable calls `complete`, this method will emit to the Observable returned from `notifier`. If that Observable
- * calls `complete` or `error`, then this method will call `complete` or `error` on the child subscription. Otherwise
- * this method will resubscribe to the source Observable.
+ * &#x8FD4;&#x56DE;&#x7684; Observalb &#x662F;&#x6E90; Observable &#x7684;&#x955C;&#x50CF;&#xFF0C;&#x9664;&#x4E86; `complete` &#x3002;&#x5982;&#x679C;&#x6E90; Observable &#x8C03;&#x7528;&#x4E86; `complete`&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x53D1;&#x51FA;&#x7ED9; `notifier`
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x3002;&#x5982;&#x679C;&#x8FD9;&#x4E2A; Observale &#x8C03;&#x7528;&#x4E86; `complete` &#x6216; `error`&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x4F1A;&#x5728;&#x5B50; subscription &#x4E0A;&#x8C03;&#x7528;
+ * `complete` &#x6216; `error` &#x3002;&#x5426;&#x5219;&#xFF0C;&#x6B64;&#x65B9;&#x6CD5;&#x5C06;&#x91CD;&#x65B0;&#x8BA2;&#x9605;&#x6E90; Observable&#x3002;
  *
  * &lt;img src=&quot;./img/repeatWhen.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {function(notifications: Observable): Observable} notifier - Receives an Observable of notifications with
- * which a user can `complete` or `error`, aborting the repetition.
- * @return {Observable} The source Observable modified with repeat logic.
+ * @param {function(notifications: Observable): Observable} notifier - &#x63A5;&#x6536; Observable &#x7684;&#x901A;&#x77E5;&#xFF0C;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x8BE5;&#x901A;&#x77E5;
+ * &#x7684; `complete` &#x6216;`error` &#x6765;&#x4E2D;&#x6B62;&#x91CD;&#x590D;&#x3002;
+ * @return {Observable} &#x4F7F;&#x7528;&#x91CD;&#x590D;&#x903B;&#x8F91;&#x4FEE;&#x6539;&#x8FC7;&#x7684;&#x6E90; Observable &#x3002;
  * @method repeatWhen
  * @owner Observable
  */

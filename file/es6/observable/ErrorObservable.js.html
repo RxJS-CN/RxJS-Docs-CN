@@ -92,23 +92,20 @@ export class ErrorObservable extends Observable {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits no items to the Observer and immediately
-     * emits an error notification.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x53D1;&#x9001;&#x6570;&#x636E;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x5E76;&#x4E14;&#x7ACB;&#x9A6C;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x7684; Observable&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Just emits &apos;error&apos;, and nothing else.
-     * &lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x4EC5;&#x4EC5;&#x53D1;&#x51FA; error &#x901A;&#x77E5;&#xFF0C;&#x5176;&#x4ED6;&#x4EC0;&#x4E48;&#x4E5F;&#x4E0D;&#x505A;&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/throw.png&quot; width=&quot;100%&quot;&gt;
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the error notification. It can be used for composing with other
-     * Observables, such as in a {@link mergeMap}.
+     * &#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x64CD;&#x4F5C;&#x7B26;&#x5BF9;&#x4E8E;&#x521B;&#x5EFA;&#x7B80;&#x5355;&#x7684;&#x53EA;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x7684; Observable &#x5341;&#x5206;&#x6709;&#x7528;&#x3002; &#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x6765;&#x548C;&#x5176;&#x4ED6;
+     * Observables &#x7EC4;&#x5408;, &#x6BD4;&#x5982;&#x5728; {@link mergeMap} &#x4E2D;&#x4F7F;&#x7528;&#x3002;
      *
-     * @example &lt;caption&gt;Emit the number 7, then emit an error.&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5148;&#x53D1;&#x51FA;&#x6570;&#x5B57;7&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x3002;&lt;/caption&gt;
      * var result = Rx.Observable.throw(new Error(&apos;oops!&apos;)).startWith(7);
      * result.subscribe(x =&gt; console.log(x), e =&gt; console.error(e));
      *
-     * @example &lt;caption&gt;Map and flatten numbers to the sequence &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, but throw an error for 13&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x6620;&#x5C04;&#x5E76;&#x6253;&#x5E73;&#x6210;&#x5B57;&#x6BCD;&#x5E8F;&#x5217;abc&#xFF0C;&#x4F46;&#x5F53;&#x6570;&#x5B57;&#x4E3A;13&#x65F6;&#x629B;&#x51FA;&#x9519;&#x8BEF;&#x3002;&lt;/caption&gt;
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =&gt;
      *   x === 13 ?
@@ -122,11 +119,9 @@ export class ErrorObservable extends Observable {
      * @see {@link never}
      * @see {@link of}
      *
-     * @param {any} error The particular Error to pass to the error notification.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emission of the error notification.
-     * @return {Observable} An error Observable: emits only the error notification
-     * using the given error argument.
+     * @param {any} &#x5C06;&#x5177;&#x4F53;&#x7684; Error &#x4F20;&#x9012;&#x7ED9;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x3002;
+     * @param {Scheduler} [scheduler] &#x8C03;&#x5EA6;&#x5668;{@link IScheduler}&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x7684;&#x53D1;&#x9001;&#x3002;
+     * @return {Observable} &#x9519;&#x8BEF;&#x7684; Observable&#xFF1A;&#x53EA;&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x9519;&#x8BEF;&#x53C2;&#x6570;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x901A;&#x77E5;&#x3002;
      * @static true
      * @name throw
      * @owner Observable

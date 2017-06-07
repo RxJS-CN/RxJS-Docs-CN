@@ -82,19 +82,16 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Buffers the source Observable values until `closingNotifier` emits.
+ * &#x7F13;&#x51B2;&#x6E90; Observable &#x7684;&#x503C;&#x76F4;&#x5230; `closingNotifier` &#x53D1;&#x51FA;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Collects values from the past as an array, and emits
- * that array only when another Observable emits.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x8FC7;&#x5F80;&#x7684;&#x503C;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x5E76;&#x4E14;&#x4EC5;&#x5F53;&#x53E6;&#x4E00;&#x4E2A; Observable &#x53D1;&#x51FA;&#x901A;&#x77E5;&#x65F6;&#x624D;&#x53D1;&#x51FA;&#x6B64;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/buffer.png&quot; width=&quot;100%&quot;&gt;
  *
- * Buffers the incoming Observable values until the given `closingNotifier`
- * Observable emits a value, at which point it emits the buffer on the output
- * Observable and starts a new buffer internally, awaiting the next time
- * `closingNotifier` emits.
+ * &#x5C06; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x7F13;&#x51B2;&#x8D77;&#x6765;&#x76F4;&#x5230; `closingNotifier` &#x53D1;&#x51FA;&#x6570;&#x636E;, &#x5728;&#x8FD9;&#x4E2A;&#x65F6;&#x5019;&#x5728;&#x8F93;&#x51FA;
+ * Observable &#x4E0A;&#x53D1;&#x51FA;&#x8BE5;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x503C;&#x5E76;&#x4E14;&#x5185;&#x90E8;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7F13;&#x51B2;&#x533A;, &#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x4E2A;`closingNotifier`&#x7684;&#x53D1;&#x9001;&#x3002;
  *
- * @example &lt;caption&gt;On every click, emit array of most recent interval events&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x53D1;&#x51FA; interval Observable &#x6700;&#x65B0;&#x7F13;&#x51B2;&#x7684;&#x6570;&#x7EC4;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var interval = Rx.Observable.interval(1000);
  * var buffered = interval.buffer(clicks);
@@ -106,10 +103,8 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link bufferWhen}
  * @see {@link window}
  *
- * @param {Observable&lt;any&gt;} closingNotifier An Observable that signals the
- * buffer to be emitted on the output Observable.
- * @return {Observable&lt;T[]&gt;} An Observable of buffers, which are arrays of
- * values.
+ * @param {Observable&lt;any&gt;} closingNotifier &#x8BE5; Observable &#x5411;&#x8F93;&#x51FA; Observale &#x53D1;&#x51FA;&#x4FE1;&#x53F7;&#x4EE5;&#x901A;&#x77E5;&#x53D1;&#x51FA;&#x7F13;&#x51B2;&#x533A;&#x3002;
+ * @return {Observable&lt;T[]&gt;} &#x6570;&#x7EC4;&#x7F13;&#x51B2;&#x7684; Observable&#x3002;
  * @method buffer
  * @owner Observable
  */

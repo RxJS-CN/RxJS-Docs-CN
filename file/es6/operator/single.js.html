@@ -82,17 +82,14 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 import { EmptyError } from &apos;../util/EmptyError&apos;;
 /**
- * Returns an Observable that emits the single item emitted by the source Observable that matches a specified
- * predicate, if that Observable emits one such item. If the source Observable emits more than one such item or no
- * such items, notify of an IllegalArgumentException or NoSuchElementException respectively.
+ * &#x8BE5; Observable &#x53D1;&#x51FA;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x4E2D;&#x5339;&#x914D;&#x6307;&#x5B9A; predicate &#x51FD;&#x6570;&#x7684;&#x5355;&#x4E2A;&#x9879;&#x3002;
+ * &#x5982;&#x679C;&#x6E90; Observable &#x53D1;&#x51FA;&#x591A;&#x4E8E;1&#x4E2A;&#x6570;&#x636E;&#x9879;&#x6216;&#x8005;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x9879;, &#x5206;&#x522B;&#x4EE5; IllegalArgumentException &#x548C; NoSuchElementException &#x8FDB;&#x884C;&#x901A;&#x77E5;&#x3002;
  *
  * &lt;img src=&quot;./img/single.png&quot; width=&quot;100%&quot;&gt;
  *
- * @throws {EmptyError} Delivers an EmptyError to the Observer&apos;s `error`
- * callback if the Observable completes before any `next` notification was sent.
- * @param {Function} predicate - A predicate function to evaluate items emitted by the source Observable.
- * @return {Observable&lt;T&gt;} An Observable that emits the single item emitted by the source Observable that matches
- * the predicate.
+ * @throws {EmptyError} &#x5982;&#x679C; Observable &#x5728;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x53D1;&#x9001;&#x4E86; `next` &#x901A;&#x77E5;&#xFF0C;&#x53D1;&#x9001; EmptyError &#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x7684; `error` &#x56DE;&#x8C03;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+ * @param {Function} predicate - &#x65AD;&#x8A00;&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x8BC4;&#x4F30;&#x6E90; Observable &#x7684;&#x6570;&#x636E;&#x9879;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x4E2D;&#x5339;&#x914D;&#x6307;&#x5B9A; predicate &#x51FD;&#x6570;&#x7684;&#x5355;&#x4E2A;&#x9879;&#x3002;
  .
  * @method single
  * @owner Observable

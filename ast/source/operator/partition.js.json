@@ -185,10 +185,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * Splits the source Observable into two, one with values that satisfy a\n * predicate, and another with values that don't satisfy the predicate.\n *\n * <span class=\"informal\">It's like {@link filter}, but returns two Observables:\n * one like the output of {@link filter}, and the other with values that did not\n * pass the condition.</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` outputs an array with two Observables that partition the values\n * from the source Observable through the given `predicate` function. The first\n * Observable in that array emits source values for which the predicate argument\n * returns true. The second Observable emits source values for which the\n * predicate returns false. The first behaves like {@link filter} and the second\n * behaves like {@link filter} with the predicate negated.\n *\n * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate A function that\n * evaluates each value emitted by the source Observable. If it returns `true`,\n * the value is emitted on the first Observable in the returned array, if\n * `false` the value is emitted on the second Observable in the array. The\n * `index` parameter is the number `i` for the i-th source emission that has\n * happened since the subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {[Observable<T>, Observable<T>]} An array with two Observables: one\n * with values that passed the predicate, and another with values that did not\n * pass the predicate.\n * @method partition\n * @owner Observable\n ",
+          "value": "*\n * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有\n * 不满足 predicate 的值。\n *\n * <span class=\"informal\">它很像 {@link filter}，但是返回两个 Observables ：\n * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate`\n * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数\n * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是\n * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。\n *\n * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate 评估源 Observable\n * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个\n * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个\n * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：\n * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。\n * @method partition\n * @owner Observable\n ",
           "range": [
             70,
-            2175
+            1450
           ],
           "loc": {
             "start": {
@@ -196,7 +196,7 @@
               "column": 0
             },
             "end": {
-              "line": 43,
+              "line": 36,
               "column": 3
             }
           }
@@ -211,16 +211,16 @@
           "type": "Identifier",
           "name": "partition",
           "range": [
-            2192,
-            2201
+            1467,
+            1476
           ],
           "loc": {
             "start": {
-              "line": 44,
+              "line": 37,
               "column": 16
             },
             "end": {
-              "line": 44,
+              "line": 37,
               "column": 25
             }
           }
@@ -230,16 +230,16 @@
             "type": "Identifier",
             "name": "predicate",
             "range": [
-              2202,
-              2211
+              1477,
+              1486
             ],
             "loc": {
               "start": {
-                "line": 44,
+                "line": 37,
                 "column": 26
               },
               "end": {
-                "line": 44,
+                "line": 37,
                 "column": 35
               }
             }
@@ -248,16 +248,16 @@
             "type": "Identifier",
             "name": "thisArg",
             "range": [
-              2213,
-              2220
+              1488,
+              1495
             ],
             "loc": {
               "start": {
-                "line": 44,
+                "line": 37,
                 "column": 37
               },
               "end": {
-                "line": 44,
+                "line": 37,
                 "column": 44
               }
             }
@@ -280,16 +280,16 @@
                         "type": "Identifier",
                         "name": "filter",
                         "range": [
-                          2245,
-                          2251
+                          1520,
+                          1526
                         ],
                         "loc": {
                           "start": {
-                            "line": 46,
+                            "line": 39,
                             "column": 8
                           },
                           "end": {
-                            "line": 46,
+                            "line": 39,
                             "column": 14
                           }
                         }
@@ -298,31 +298,31 @@
                         "type": "Identifier",
                         "name": "call",
                         "range": [
-                          2252,
-                          2256
+                          1527,
+                          1531
                         ],
                         "loc": {
                           "start": {
-                            "line": 46,
+                            "line": 39,
                             "column": 15
                           },
                           "end": {
-                            "line": 46,
+                            "line": 39,
                             "column": 19
                           }
                         }
                       },
                       "range": [
-                        2245,
-                        2256
+                        1520,
+                        1531
                       ],
                       "loc": {
                         "start": {
-                          "line": 46,
+                          "line": 39,
                           "column": 8
                         },
                         "end": {
-                          "line": 46,
+                          "line": 39,
                           "column": 19
                         }
                       }
@@ -331,16 +331,16 @@
                       {
                         "type": "ThisExpression",
                         "range": [
-                          2257,
-                          2261
+                          1532,
+                          1536
                         ],
                         "loc": {
                           "start": {
-                            "line": 46,
+                            "line": 39,
                             "column": 20
                           },
                           "end": {
-                            "line": 46,
+                            "line": 39,
                             "column": 24
                           }
                         }
@@ -349,16 +349,16 @@
                         "type": "Identifier",
                         "name": "predicate",
                         "range": [
-                          2263,
-                          2272
+                          1538,
+                          1547
                         ],
                         "loc": {
                           "start": {
-                            "line": 46,
+                            "line": 39,
                             "column": 26
                           },
                           "end": {
-                            "line": 46,
+                            "line": 39,
                             "column": 35
                           }
                         }
@@ -367,32 +367,32 @@
                         "type": "Identifier",
                         "name": "thisArg",
                         "range": [
-                          2274,
-                          2281
+                          1549,
+                          1556
                         ],
                         "loc": {
                           "start": {
-                            "line": 46,
+                            "line": 39,
                             "column": 37
                           },
                           "end": {
-                            "line": 46,
+                            "line": 39,
                             "column": 44
                           }
                         }
                       }
                     ],
                     "range": [
-                      2245,
-                      2282
+                      1520,
+                      1557
                     ],
                     "loc": {
                       "start": {
-                        "line": 46,
+                        "line": 39,
                         "column": 8
                       },
                       "end": {
-                        "line": 46,
+                        "line": 39,
                         "column": 45
                       }
                     }
@@ -406,16 +406,16 @@
                         "type": "Identifier",
                         "name": "filter",
                         "range": [
-                          2292,
-                          2298
+                          1567,
+                          1573
                         ],
                         "loc": {
                           "start": {
-                            "line": 47,
+                            "line": 40,
                             "column": 8
                           },
                           "end": {
-                            "line": 47,
+                            "line": 40,
                             "column": 14
                           }
                         }
@@ -424,31 +424,31 @@
                         "type": "Identifier",
                         "name": "call",
                         "range": [
-                          2299,
-                          2303
+                          1574,
+                          1578
                         ],
                         "loc": {
                           "start": {
-                            "line": 47,
+                            "line": 40,
                             "column": 15
                           },
                           "end": {
-                            "line": 47,
+                            "line": 40,
                             "column": 19
                           }
                         }
                       },
                       "range": [
-                        2292,
-                        2303
+                        1567,
+                        1578
                       ],
                       "loc": {
                         "start": {
-                          "line": 47,
+                          "line": 40,
                           "column": 8
                         },
                         "end": {
-                          "line": 47,
+                          "line": 40,
                           "column": 19
                         }
                       }
@@ -457,16 +457,16 @@
                       {
                         "type": "ThisExpression",
                         "range": [
-                          2304,
-                          2308
+                          1579,
+                          1583
                         ],
                         "loc": {
                           "start": {
-                            "line": 47,
+                            "line": 40,
                             "column": 20
                           },
                           "end": {
-                            "line": 47,
+                            "line": 40,
                             "column": 24
                           }
                         }
@@ -477,16 +477,16 @@
                           "type": "Identifier",
                           "name": "not",
                           "range": [
-                            2310,
-                            2313
+                            1585,
+                            1588
                           ],
                           "loc": {
                             "start": {
-                              "line": 47,
+                              "line": 40,
                               "column": 26
                             },
                             "end": {
-                              "line": 47,
+                              "line": 40,
                               "column": 29
                             }
                           }
@@ -496,16 +496,16 @@
                             "type": "Identifier",
                             "name": "predicate",
                             "range": [
-                              2314,
-                              2323
+                              1589,
+                              1598
                             ],
                             "loc": {
                               "start": {
-                                "line": 47,
+                                "line": 40,
                                 "column": 30
                               },
                               "end": {
-                                "line": 47,
+                                "line": 40,
                                 "column": 39
                               }
                             }
@@ -514,95 +514,95 @@
                             "type": "Identifier",
                             "name": "thisArg",
                             "range": [
-                              2325,
-                              2332
+                              1600,
+                              1607
                             ],
                             "loc": {
                               "start": {
-                                "line": 47,
+                                "line": 40,
                                 "column": 41
                               },
                               "end": {
-                                "line": 47,
+                                "line": 40,
                                 "column": 48
                               }
                             }
                           }
                         ],
                         "range": [
-                          2310,
-                          2333
+                          1585,
+                          1608
                         ],
                         "loc": {
                           "start": {
-                            "line": 47,
+                            "line": 40,
                             "column": 26
                           },
                           "end": {
-                            "line": 47,
+                            "line": 40,
                             "column": 49
                           }
                         }
                       }
                     ],
                     "range": [
-                      2292,
-                      2334
+                      1567,
+                      1609
                     ],
                     "loc": {
                       "start": {
-                        "line": 47,
+                        "line": 40,
                         "column": 8
                       },
                       "end": {
-                        "line": 47,
+                        "line": 40,
                         "column": 50
                       }
                     }
                   }
                 ],
                 "range": [
-                  2235,
-                  2340
+                  1510,
+                  1615
                 ],
                 "loc": {
                   "start": {
-                    "line": 45,
+                    "line": 38,
                     "column": 11
                   },
                   "end": {
-                    "line": 48,
+                    "line": 41,
                     "column": 5
                   }
                 }
               },
               "range": [
-                2228,
-                2341
+                1503,
+                1616
               ],
               "loc": {
                 "start": {
-                  "line": 45,
+                  "line": 38,
                   "column": 4
                 },
                 "end": {
-                  "line": 48,
+                  "line": 41,
                   "column": 6
                 }
               }
             }
           ],
           "range": [
-            2222,
-            2343
+            1497,
+            1618
           ],
           "loc": {
             "start": {
-              "line": 44,
+              "line": 37,
               "column": 46
             },
             "end": {
-              "line": 49,
+              "line": 42,
               "column": 1
             }
           }
@@ -610,26 +610,26 @@
         "generator": false,
         "expression": false,
         "range": [
-          2183,
-          2343
+          1458,
+          1618
         ],
         "loc": {
           "start": {
-            "line": 44,
+            "line": 37,
             "column": 7
           },
           "end": {
-            "line": 49,
+            "line": 42,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Splits the source Observable into two, one with values that satisfy a\n * predicate, and another with values that don't satisfy the predicate.\n *\n * <span class=\"informal\">It's like {@link filter}, but returns two Observables:\n * one like the output of {@link filter}, and the other with values that did not\n * pass the condition.</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` outputs an array with two Observables that partition the values\n * from the source Observable through the given `predicate` function. The first\n * Observable in that array emits source values for which the predicate argument\n * returns true. The second Observable emits source values for which the\n * predicate returns false. The first behaves like {@link filter} and the second\n * behaves like {@link filter} with the predicate negated.\n *\n * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate A function that\n * evaluates each value emitted by the source Observable. If it returns `true`,\n * the value is emitted on the first Observable in the returned array, if\n * `false` the value is emitted on the second Observable in the array. The\n * `index` parameter is the number `i` for the i-th source emission that has\n * happened since the subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {[Observable<T>, Observable<T>]} An array with two Observables: one\n * with values that passed the predicate, and another with values that did not\n * pass the predicate.\n * @method partition\n * @owner Observable\n ",
+            "value": "*\n * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有\n * 不满足 predicate 的值。\n *\n * <span class=\"informal\">它很像 {@link filter}，但是返回两个 Observables ：\n * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate`\n * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数\n * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是\n * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。\n *\n * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate 评估源 Observable\n * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个\n * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个\n * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：\n * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。\n * @method partition\n * @owner Observable\n ",
             "range": [
               70,
-              2175
+              1450
             ],
             "loc": {
               "start": {
@@ -637,7 +637,7 @@
                 "column": 0
               },
               "end": {
-                "line": 43,
+                "line": 36,
                 "column": 3
               }
             }
@@ -648,16 +648,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=partition.js.map",
             "range": [
-              2344,
-              2381
+              1619,
+              1656
             ],
             "loc": {
               "start": {
-                "line": 50,
+                "line": 43,
                 "column": 0
               },
               "end": {
-                "line": 50,
+                "line": 43,
                 "column": 37
               }
             }
@@ -667,26 +667,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        2176,
-        2343
+        1451,
+        1618
       ],
       "loc": {
         "start": {
-          "line": 44,
+          "line": 37,
           "column": 0
         },
         "end": {
-          "line": 49,
+          "line": 42,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Splits the source Observable into two, one with values that satisfy a\n * predicate, and another with values that don't satisfy the predicate.\n *\n * <span class=\"informal\">It's like {@link filter}, but returns two Observables:\n * one like the output of {@link filter}, and the other with values that did not\n * pass the condition.</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` outputs an array with two Observables that partition the values\n * from the source Observable through the given `predicate` function. The first\n * Observable in that array emits source values for which the predicate argument\n * returns true. The second Observable emits source values for which the\n * predicate returns false. The first behaves like {@link filter} and the second\n * behaves like {@link filter} with the predicate negated.\n *\n * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate A function that\n * evaluates each value emitted by the source Observable. If it returns `true`,\n * the value is emitted on the first Observable in the returned array, if\n * `false` the value is emitted on the second Observable in the array. The\n * `index` parameter is the number `i` for the i-th source emission that has\n * happened since the subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {[Observable<T>, Observable<T>]} An array with two Observables: one\n * with values that passed the predicate, and another with values that did not\n * pass the predicate.\n * @method partition\n * @owner Observable\n ",
+          "value": "*\n * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有\n * 不满足 predicate 的值。\n *\n * <span class=\"informal\">它很像 {@link filter}，但是返回两个 Observables ：\n * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate`\n * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数\n * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是\n * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。\n *\n * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate 评估源 Observable\n * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个\n * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个\n * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：\n * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。\n * @method partition\n * @owner Observable\n ",
           "range": [
             70,
-            2175
+            1450
           ],
           "loc": {
             "start": {
@@ -694,7 +694,7 @@
               "column": 0
             },
             "end": {
-              "line": 43,
+              "line": 36,
               "column": 3
             }
           }
@@ -705,16 +705,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=partition.js.map",
           "range": [
-            2344,
-            2381
+            1619,
+            1656
           ],
           "loc": {
             "start": {
-              "line": 50,
+              "line": 43,
               "column": 0
             },
             "end": {
-              "line": 50,
+              "line": 43,
               "column": 37
             }
           }
@@ -725,7 +725,7 @@
   "sourceType": "module",
   "range": [
     0,
-    2343
+    1618
   ],
   "loc": {
     "start": {
@@ -733,17 +733,17 @@
       "column": 0
     },
     "end": {
-      "line": 49,
+      "line": 42,
       "column": 1
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n * Splits the source Observable into two, one with values that satisfy a\n * predicate, and another with values that don't satisfy the predicate.\n *\n * <span class=\"informal\">It's like {@link filter}, but returns two Observables:\n * one like the output of {@link filter}, and the other with values that did not\n * pass the condition.</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` outputs an array with two Observables that partition the values\n * from the source Observable through the given `predicate` function. The first\n * Observable in that array emits source values for which the predicate argument\n * returns true. The second Observable emits source values for which the\n * predicate returns false. The first behaves like {@link filter} and the second\n * behaves like {@link filter} with the predicate negated.\n *\n * @example <caption>Partition click events into those on DIV elements and those elsewhere</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate A function that\n * evaluates each value emitted by the source Observable. If it returns `true`,\n * the value is emitted on the first Observable in the returned array, if\n * `false` the value is emitted on the second Observable in the array. The\n * `index` parameter is the number `i` for the i-th source emission that has\n * happened since the subscription, starting from the number `0`.\n * @param {any} [thisArg] An optional argument to determine the value of `this`\n * in the `predicate` function.\n * @return {[Observable<T>, Observable<T>]} An array with two Observables: one\n * with values that passed the predicate, and another with values that did not\n * pass the predicate.\n * @method partition\n * @owner Observable\n ",
+      "value": "*\n * 将源 Observable 一分为二，一个是所有满足 predicate 函数的值，另一个是所有\n * 不满足 predicate 的值。\n *\n * <span class=\"informal\">它很像 {@link filter}，但是返回两个 Observables ：\n * 一个像 {@link filter} 的输出， 而另一个是所有不符合条件的值。</span>\n *\n * <img src=\"./img/partition.png\" width=\"100%\">\n *\n * `partition` 输出有两个 Observables 的数组，这两个 Observables 是通过给定的 `predicate`\n * 函数将源 Observable 的值进行划分得到的。该数组的第一个 Observable 发出 predicate 参数\n * 返回 true 的源值。第二个 Observable 发出 predicate 参数返回 false 的源值。第一个像是\n * {@link filter} ，而第二个像是 predicate 取反的 {@link filter} 。\n *\n * @example <caption>将点击事件划分为点击 DIV 元素和点击其他元素</caption>\n * var clicks = Rx.Observable.fromEvent(document, 'click');\n * var parts = clicks.partition(ev => ev.target.tagName === 'DIV');\n * var clicksOnDivs = parts[0];\n * var clicksElsewhere = parts[1];\n * clicksOnDivs.subscribe(x => console.log('DIV clicked: ', x));\n * clicksElsewhere.subscribe(x => console.log('Other clicked: ', x));\n *\n * @see {@link filter}\n *\n * @param {function(value: T, index: number): boolean} predicate 评估源 Observable\n * 所发出的每个值的函数。如果它返回 `true` ，那么发出的值就在返回的数组中的第一个\n * Observable 中，如果返回的是 `false` ，那么发出的值就在返回的数组的第二个\n * Observable 中。`index` 参数是自订阅开始后发送序列的索引，是从 `0` 开始的。\n * @param {any} [thisArg] 可选参数，用来决定 `predicate` 函数中的 `this` 的值。\n * @return {[Observable<T>, Observable<T>]} 有两个 Observables 的数组：\n * 一个是通过 predicate 函数的所有值，另一个是没有通过 predicate 的所有值。\n * @method partition\n * @owner Observable\n ",
       "range": [
         70,
-        2175
+        1450
       ],
       "loc": {
         "start": {
@@ -751,7 +751,7 @@
           "column": 0
         },
         "end": {
-          "line": 43,
+          "line": 36,
           "column": 3
         }
       }
@@ -760,16 +760,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=partition.js.map",
       "range": [
-        2344,
-        2381
+        1619,
+        1656
       ],
       "loc": {
         "start": {
-          "line": 50,
+          "line": 43,
           "column": 0
         },
         "end": {
-          "line": 50,
+          "line": 43,
           "column": 37
         }
       }

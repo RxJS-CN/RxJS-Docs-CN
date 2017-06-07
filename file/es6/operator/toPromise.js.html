@@ -82,10 +82,10 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { root } from &apos;../util/root&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Converts an Observable sequence to a ES2015 compliant promise.
+ * &#x5C06; Observable &#x5E8F;&#x5217;&#x8F6C;&#x6362;&#x4E3A;&#x7B26;&#x5408; ES2015 &#x6807;&#x51C6;&#x7684; Promise &#x3002;
  *
  * @example
- * // Using normal ES2015
+ * // &#x4F7F;&#x7528;&#x666E;&#x901A;&#x7684; ES2015
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise();
@@ -93,8 +93,8 @@
  * source.then((value) =&gt; console.log(&apos;Value: %s&apos;, value));
  * // =&gt; Value: 42
  *
- * // Rejected Promise
- * // Using normal ES2015
+ * // &#x88AB;&#x62D2;&#x7684; Promise
+ * // &#x4F7F;&#x7528;&#x6807;&#x51C6;&#x7684; ES2015
  * let source = Rx.Observable
  *   .throw(new Error(&apos;woops&apos;))
  *   .toPromise();
@@ -104,7 +104,7 @@
  *   .catch((err) =&gt; console.log(&apos;Error: %s&apos;, err));
  * // =&gt; Error: Error: woops
  *
- * // Setting via the config
+ * // &#x901A;&#x8FC7; config &#x8FDB;&#x884C;&#x8BBE;&#x7F6E;
  * Rx.config.Promise = RSVP.Promise;
  *
  * let source = Rx.Observable
@@ -114,7 +114,7 @@
  * source.then((value) =&gt; console.log(&apos;Value: %s&apos;, value));
  * // =&gt; Value: 42
  *
- * // Setting via the method
+ * // &#x901A;&#x8FC7;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;
  * let source = Rx.Observable
  *   .of(42)
  *   .toPromise(RSVP.Promise);
@@ -122,11 +122,10 @@
  * source.then((value) =&gt; console.log(&apos;Value: %s&apos;, value));
  * // =&gt; Value: 42
  *
- * @param PromiseCtor promise The constructor of the promise. If not provided,
- * it will look for a constructor first in Rx.config.Promise then fall back to
- * the native Promise constructor if available.
- * @return {Promise&lt;T&gt;} An ES2015 compatible promise with the last value from
- * the observable sequence.
+ * @param {PromiseConstructor} [PromiseCtor] Promise &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x7684;&#x8BDD;&#xFF0C;
+ * &#x5B83;&#x9996;&#x5148;&#x4F1A;&#x5728; `Rx.config.Promise` &#x4E2D;&#x5BFB;&#x627E;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x4F1A;&#x56DE;&#x9000;&#x6210;&#x539F;&#x751F;&#x7684; Promise &#x6784;&#x9020;&#x51FD;&#x6570;
+ * (&#x5982;&#x679C;&#x6709;&#x7684;&#x8BDD;)&#x3002;
+ * @return {Promise&lt;T&gt;} &#x7B26;&#x5408; ES2015 &#x6807;&#x51C6;&#x7684; Promise&#xFF0C;&#x5B83;&#x4F7F;&#x7528; Observable &#x5E8F;&#x5217;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;&#x3002;
  * @method toPromise
  * @owner Observable
  */

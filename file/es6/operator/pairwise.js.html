@@ -81,21 +81,18 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/pairwise.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Groups pairs of consecutive emissions together and emits them as an array of
- * two values.
+ * &#x5C06;&#x4E00;&#x7CFB;&#x5217;&#x8FDE;&#x7EED;&#x7684;&#x53D1;&#x9001;&#x6210;&#x5BF9;&#x7684;&#x7EC4;&#x5408;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5E76;&#x5C06;&#x8FD9;&#x4E9B;&#x5206;&#x7EC4;&#x4F5C;&#x4E3A;&#x4E24;&#x4E2A;&#x503C;&#x7684;&#x6570;&#x7EC4;&#x53D1;&#x51FA;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Puts the current value and previous value together as
- * an array, and emits that.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x5F53;&#x524D;&#x503C;&#x548C;&#x524D;&#x4E00;&#x4E2A;&#x503C;&#x4F5C;&#x4E3A;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5176;&#x53D1;&#x51FA;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/pairwise.png&quot; width=&quot;100%&quot;&gt;
  *
- * The Nth emission from the source Observable will cause the output Observable
- * to emit an array [(N-1)th, Nth] of the previous and the current value, as a
- * pair. For this reason, `pairwise` emits on the second and subsequent
- * emissions from the source Observable, but not on the first emission, because
- * there is no previous value in that case.
+ * &#x6E90; Observable &#x7684;&#x7B2C;N&#x4E2A;&#x53D1;&#x9001;&#x4F1A;&#x4F7F;&#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x6570;&#x7EC4; [(N-1)th, Nth]&#xFF0C;&#x5373;&#x524D;&#x4E00;&#x4E2A;
+ * &#x503C;&#x548C;&#x5F53;&#x524D;&#x503C;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5B83;&#x4EEC;&#x4F5C;&#x4E3A;&#x4E00;&#x5BF9;&#x3002;&#x51FA;&#x4E8E;&#x8FD9;&#x4E2A;&#x539F;&#x56E0;&#xFF0C;`pairwise` &#x53D1;&#x51FA;&#x6E90; Observable &#x7684;
+ * &#x7B2C;&#x4E8C;&#x4E2A;&#x548C;&#x968F;&#x540E;&#x7684;&#x53D1;&#x9001;&#xFF0C;&#x800C;&#x4E0D;&#x53D1;&#x9001;&#x7B2C;&#x4E00;&#x4E2A;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x6CA1;&#x6709;&#x524D;&#x4E00;&#x4E2A;&#x503C;&#x3002;
  *
- * @example &lt;caption&gt;On every click (starting from the second), emit the relative distance to the previous click&lt;/caption&gt;
+ *
+ * @example &lt;caption&gt;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;(&#x4ECE;&#x7B2C;&#x4E8C;&#x6B21;&#x5F00;&#x59CB;)&#xFF0C;&#x90FD;&#x4F1A;&#x53D1;&#x51FA;&#x4E0E;&#x524D;&#x4E00;&#x6B21;&#x70B9;&#x51FB;&#x7684;&#x76F8;&#x5BF9;&#x8DDD;&#x79BB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var pairs = clicks.pairwise();
  * var distance = pairs.map(pair =&gt; {
@@ -110,8 +107,8 @@
  * @see {@link buffer}
  * @see {@link bufferCount}
  *
- * @return {Observable&lt;Array&lt;T&gt;&gt;} An Observable of pairs (as arrays) of
- * consecutive values from the source Observable.
+ * @return {Observable&lt;Array&lt;T&gt;&gt;} &#x8BE5; Observabale &#x4E3A;&#x6E90; Observable &#x7684;
+ * &#x6210;&#x5BF9;&#x7684;&#x8FDE;&#x7EED;&#x503C;(&#x6570;&#x7EC4;)&#x3002;
  * @method pairwise
  * @owner Observable
  */

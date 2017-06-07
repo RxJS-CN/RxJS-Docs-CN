@@ -93,27 +93,24 @@ export class PromiseObservable extends Observable {
         this.scheduler = scheduler;
     }
     /**
-     * Converts a Promise to an Observable.
+     * &#x5C06; Promise &#x8F6C;&#x5316;&#x4E3A; Observable&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Returns an Observable that just emits the Promise&apos;s
-     * resolved value, then completes.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x4EC5;&#x4EC5;&#x53D1;&#x51FA; Promise resolve &#x8FC7;&#x7684;&#x503C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x7684; Observable&#x3002;&lt;/span&gt;
      *
-     * Converts an ES2015 Promise or a Promises/A+ spec compliant Promise to an
-     * Observable. If the Promise resolves with a value, the output Observable
-     * emits that resolved value as a `next`, and then completes. If the Promise
-     * is rejected, then the output Observable emits the corresponding Error.
+     * &#x628A; ES2015 &#x7684; Promise &#x6216;&#x8005;&#x517C;&#x5BB9; Promises/A+ &#x89C4;&#x8303;&#x7684; Promise &#x8F6C;&#x5316;&#x4E3A; Observable&#x3002; &#x5982;&#x679C; Promise resolves
+     * &#x4E00;&#x4E2A;&#x503C;, &#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x8FD9;&#x4E2A;&#x503C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002; &#x5982;&#x679C; Promise &#x88AB; rejected, &#x8F93;&#x51FA; Observable &#x4F1A;&#x53D1;&#x51FA;&#x76F8;&#x5E94;&#x7684;
+     * &#x9519;&#x8BEF;&#x3002;
      *
-     * @example &lt;caption&gt;Convert the Promise returned by Fetch to an Observable&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5C06; Fetch &#x8FD4;&#x56DE;&#x7684; Promise &#x8F6C;&#x5316;&#x4E3A; Observable&#x3002;&lt;/caption&gt;
      * var result = Rx.Observable.fromPromise(fetch(&apos;http://myserver.com/&apos;));
      * result.subscribe(x =&gt; console.log(x), e =&gt; console.error(e));
      *
      * @see {@link bindCallback}
      * @see {@link from}
      *
-     * @param {PromiseLike&lt;T&gt;} promise The promise to be converted.
-     * @param {Scheduler} [scheduler] An optional IScheduler to use for scheduling
-     * the delivery of the resolved value (or the rejection).
-     * @return {Observable&lt;T&gt;} An Observable which wraps the Promise.
+     * @param {PromiseLike&lt;T&gt;} promise &#x88AB;&#x8F6C;&#x5316;&#x7684; promise&#x3002;
+     * @param {Scheduler} [scheduler] &#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6; resolved &#x6216;&#x8005; rejection &#x7684;&#x503C;&#x3002;
+     * @return {Observable&lt;T&gt;} &#x5305;&#x88C5;&#x4E86; Promise &#x7684; Observable&#x3002;
      * @static true
      * @name fromPromise
      * @owner Observable

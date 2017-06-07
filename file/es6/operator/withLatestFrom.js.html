@@ -83,23 +83,18 @@
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Combines the source Observable with other Observables to create an Observable
- * whose values are calculated from the latest values of each, only when the
- * source emits.
+ * &#x7ED3;&#x5408;&#x6E90; Observable &#x548C;&#x53E6;&#x5916;&#x7684; Observables &#x4EE5;&#x521B;&#x5EFA;&#x65B0;&#x7684; Observable&#xFF0C; &#x8BE5; Observable &#x7684;&#x503C;&#x7531;&#x6BCF;
+ * &#x4E2A; Observable &#x6700;&#x65B0;&#x7684;&#x503C;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#xFF0C;&#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x6E90;&#x53D1;&#x51FA;&#x7684;&#x65F6;&#x5019;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Whenever the source Observable emits a value, it
- * computes a formula using that value plus the latest values from other input
- * Observables, then emits the output of that formula.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x6BCF;&#x5F53;&#x6E90; Observable &#x53D1;&#x51FA;&#x503C;&#xFF0C;&#x5B83;&#x4F1A;&#x8BA1;&#x7B97;&#x4E00;&#x4E2A;&#x516C;&#x5F0F;&#xFF0C;&#x6B64;&#x516C;&#x5F0F;&#x4F7F;&#x7528;&#x8BE5;&#x503C;&#x52A0;&#x4E0A;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x516C;&#x5F0F;&#x7684;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/withLatestFrom.png&quot; width=&quot;100%&quot;&gt;
  *
- * `withLatestFrom` combines each value from the source Observable (the
- * instance) with the latest values from the other input Observables only when
- * the source emits a value, optionally using a `project` function to determine
- * the value to be emitted on the output Observable. All input Observables must
- * emit at least one value before the output Observable will emit a value.
+ * `withLatestFrom` &#x7ED3;&#x5408;&#x6E90; Observablecombines&#xFF08;&#x5B9E;&#x4F8B;&#xFF09;&#x548C;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observables &#x7684;&#x6700;&#x65B0;&#x503C;&#xFF0C;&#x5F53;&#x4E14;&#x4EC5;&#x5F53;
+ * source &#x53D1;&#x51FA;&#x6570;&#x636E;&#x65F6;, &#x53EF;&#x9009;&#x7684;&#x4F7F;&#x7528; `project` &#x51FD;&#x6570;&#x4EE5;&#x51B3;&#x5B9A;&#x8F93;&#x51FA; Observable &#x5C06;&#x8981;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+ * &#x5728;&#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x503C;&#x4E4B;&#x524D;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x8F93;&#x5165; Observables &#x90FD;&#x5FC5;&#x987B;&#x53D1;&#x51FA;&#x81F3;&#x5C11;&#x4E00;&#x4E2A;&#x503C;&#x3002;
  *
- * @example &lt;caption&gt;On every click event, emit an array with the latest timer event plus the click event&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#xFF0C;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6700;&#x65B0;&#x65F6;&#x95F4;&#x548C;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x7684;&#x6570;&#x7EC4;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var timer = Rx.Observable.interval(1000);
  * var result = clicks.withLatestFrom(timer);
@@ -107,16 +102,10 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  *
  * @see {@link combineLatest}
  *
- * @param {ObservableInput} other An input Observable to combine with the source
- * Observable. More than one input Observables may be given as argument.
- * @param {Function} [project] Projection function for combining values
- * together. Receives all values in order of the Observables passed, where the
- * first parameter is a value from the source Observable. (e.g.
- * `a.withLatestFrom(b, c, (a1, b1, c1) =&gt; a1 + b1 + c1)`). If this is not
- * passed, arrays will be emitted on the output Observable.
- * @return {Observable} An Observable of projected values from the most recent
- * values from each input Observable, or an array of the most recent values from
- * each input Observable.
+ * @param {ObservableInput} other &#x8F93;&#x5165; Observable &#xFF0C;&#x7528;&#x6765;&#x548C;&#x6E90; Observable &#x7ED3;&#x5408;&#x3002; &#x53EF;&#x4EE5;&#x4F20;&#x5165;&#x591A;&#x4E2A;&#x8F93;&#x5165; Observables&#x3002;
+ * @param {Function} [project] &#x5C06;&#x591A;&#x4E2A;&#x503C;&#x5408;&#x5E76;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x3002;&#x987A;&#x5E8F;&#x5730;&#x63A5;&#x53D7;&#x6240;&#x6709; Observables &#x4F20;&#x5165;&#x7684;&#x503C;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x6E90; Observable
+ * &#x7684;&#x503C;&#x3002; (`a.withLatestFrom(b, c, (a1, b1, c1) =&gt; a1 + b1 + c1)`)&#x3002; &#x5982;&#x679C;&#x6CA1;&#x6709;&#x4F20;&#x5165;, &#x8F93;&#x5165; Observable &#x4F1A;&#x4E00;&#x76F4;&#x53D1;&#x9001;&#x6570;&#x7EC4;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x4E3A;&#x4E00;&#x4E2A;&#x62E5;&#x6709;&#x5C06;&#x6BCF;&#x4E2A;&#x8F93;&#x5165; Observable &#x6700;&#x65B0;&#x7684;&#x503C;&#x6295;&#x5C04;&#x540E;&#x7684;&#x503C;, &#x6216;&#x8005;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x6240;&#x6709;&#x8F93;&#x5165; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#x7684;&#x6570;&#x7EC4;&#x3002;
  * @method withLatestFrom
  * @owner Observable
  */

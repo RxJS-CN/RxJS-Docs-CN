@@ -84,29 +84,22 @@ import { Observable } from &apos;../Observable&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Delays the emission of items from the source Observable by a given time span
- * determined by the emissions of another Observable.
+ * &#x5EF6;&#x65F6;&#x6E90; Observabl e&#x7684;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x9879;&#x7684;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6BB5;&#xFF0C;&#x8BE5;&#x65F6;&#x95F4;&#x6BB5;&#x7531;&#x53E6;&#x4E00;&#x4E2A; Observable &#x7684;&#x53D1;&#x9001;&#x51B3;&#x5B9A;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link delay}, but the time span of the
- * delay duration is determined by a second Observable.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F;{@link delay}, &#x4F46;&#x662F;&#x5EF6;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x7531;&#x7B2C;&#x4E8C;&#x4E2A;Observable&#x51B3;&#x5B9A;.&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/delayWhen.png&quot; width=&quot;100%&quot;&gt;
  *
- * `delayWhen` time shifts each emitted value from the source Observable by a
- * time span determined by another Observable. When the source emits a value,
- * the `delayDurationSelector` function is called with the source value as
- * argument, and should return an Observable, called the &quot;duration&quot; Observable.
- * The source value is emitted on the output Observable only when the duration
- * Observable emits a value or completes.
+ * `delayWhen` &#x901A;&#x8FC7;&#x7531;&#x53E6;&#x4E00;&#x4E2A; Observable &#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6BB5;&#x6765;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x7684;&#x6BCF;&#x4E2A;&#x53D1;&#x51FA;&#x503C;&#x3002;
+ * &#x5F53;&#x6E90;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x6570;&#x636E;,`delayDurationSelector`&#x51FD;&#x6570;&#x5C06;&#x8BE5;&#x6E90;&#x503C;&#x5F53;&#x505A;&#x53C2;&#x6570;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x88AB;&#x79F0;&#x4E3A;&quot;&#x6301;&#x7EED;&quot;Observable&#x3002;
+ * &#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x6301;&#x7EED;&#x53D1;&#x51FA;&#x6216;&#x8005;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6E90;&#x503C;&#x624D;&#x4F1A;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x3002;
  *
- * Optionally, `delayWhen` takes a second argument, `subscriptionDelay`, which
- * is an Observable. When `subscriptionDelay` emits its first value or
- * completes, the source Observable is subscribed to and starts behaving like
- * described in the previous paragraph. If `subscriptionDelay` is not provided,
- * `delayWhen` will subscribe to the source Observable as soon as the output
- * Observable is subscribed.
+ * &#x53EF;&#x9009;&#x7684;, `delayWhen` &#x63A5;&#x53D7;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;, `subscriptionDelay`, &#x5B83;&#x662F;&#x4E00;&#x4E2A;Observable.
+ * &#x5F53;`subscriptionDelay`&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x8005;&#x5B8C;&#x6210;, &#x6E90;Observable&#x88AB;&#x8BA2;&#x9605;&#x5E76;&#x4E14;&#x5F00;&#x59CB;&#x50CF;&#x524D;&#x4E00;&#x6BB5;&#x63CF;
+ * &#x8FF0;&#x7684;&#x4E00;&#x6837;. &#x5982;&#x679C;`subscriptionDelay`&#x6CA1;&#x6709;&#x63D0;&#x4F9B;,`delayWhen` &#x5C06;&#x4F1A;&#x8BA2;&#x9605;&#x6E90;Observable&#x53EA;
+ * &#x8981;&#x8F93;&#x51FA;Observable&#x88AB;&#x8BA2;&#x9605;.
  *
- * @example &lt;caption&gt;Delay each click by a random amount of time, between 0 and 5 seconds&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x5EF6;&#x8FDF;0&#x5230;5&#x79D2;&#x7684;&#x968F;&#x673A;&#x65F6;&#x95F4;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var delayedClicks = clicks.delayWhen(event =&gt;
  *   Rx.Observable.interval(Math.random() * 5000)
@@ -116,15 +109,11 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link debounce}
  * @see {@link delay}
  *
- * @param {function(value: T): Observable} delayDurationSelector A function that
- * returns an Observable for each value emitted by the source Observable, which
- * is then used to delay the emission of that item on the output Observable
- * until the Observable returned from this function emits a value.
- * @param {Observable} subscriptionDelay An Observable that triggers the
- * subscription to the source Observable once it emits any value.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by an amount of time specified by the Observable returned by
- * `delayDurationSelector`.
+ * @param {function(value: T): Observable} delayDurationSelector &#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x6E90; Observable
+ * &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x7528;&#x4E8E;&#x5EF6;&#x8FDF;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x7684;&#x53D1;&#x9001;&#xFF0C;&#x76F4;&#x5230;&#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x503C;&#x3002;
+ * @param {Observable} subscriptionDelay Observable&#xFF0C;&#x8BE5; Observable &#x4E00;&#x65E6;&#x53D1;&#x51FA;&#x4EFB;&#x4F55;&#x503C;&#x5219;&#x89E6;&#x53D1;&#x6E90; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;
+ * @return {Observable} Observable&#xFF0C;&#x5EF6;&#x65F6;&#x6E90;Observable&#x7684;&#x53D1;&#x51FA;&#x65F6;&#x95F4;&#xFF0C;&#x8BE5;&#x65F6;&#x95F4;&#x7531;`delayDurationSelector`
+ * &#x8FD4;&#x56DE;&#x7684;Observable&#x51B3;&#x5B9A;.
  * @method delayWhen
  * @owner Observable
  */

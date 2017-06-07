@@ -86,16 +86,13 @@ import { concatStatic } from &apos;./concat&apos;;
 import { isScheduler } from &apos;../util/isScheduler&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Returns an Observable that emits the items you specify as arguments before it begins to emit
- * items emitted by the source Observable.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x4F1A;&#x5148;&#x53D1;&#x51FA;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x9879;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;
  *
  * &lt;img src=&quot;./img/startWith.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {...T} values - Items you want the modified Observable to emit first.
- * @param {Scheduler} [scheduler] - A {@link IScheduler} to use for scheduling
- * the emissions of the `next` notifications.
- * @return {Observable} An Observable that emits the items in the specified Iterable and then emits the items
- * emitted by the source Observable.
+ * @param {...T} values - &#x4F60;&#x5E0C;&#x671B;&#x4FEE;&#x6539;&#x8FC7;&#x7684; Observable &#x53EF;&#x4EE5;&#x5148;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;
+ * @param {Scheduler} [scheduler] - &#x7528;&#x4E8E;&#x8C03;&#x5EA6; `next` &#x901A;&#x77E5;&#x53D1;&#x9001;&#x7684; {@link IScheduler} &#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6307;&#x5B9A;&#x7684; Iterable &#x4E2D;&#x7684;&#x9879;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;
  * @method startWith
  * @owner Observable
  */

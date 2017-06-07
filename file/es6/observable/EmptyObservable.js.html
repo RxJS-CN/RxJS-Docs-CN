@@ -91,44 +91,40 @@ export class EmptyObservable extends Observable {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits no items to the Observer and immediately
-     * emits a complete notification.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4EC0;&#x4E48;&#x6570;&#x636E;&#x90FD;&#x4E0D;&#x53D1;&#x51FA;&#x5E76;&#x4E14;&#x7ACB;&#x9A6C;&#x5B8C;&#x6210;&#x7684; Observable&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Just emits &apos;complete&apos;, and nothing else.
+     * &lt;span class=&quot;informal&quot;&gt; &#x4EC5;&#x4EC5;&#x53D1;&#x51FA; complete &#x901A;&#x77E5;&#xFF0C;&#x5176;&#x4ED6;&#x4EC0;&#x4E48;&#x4E5F;&#x4E0D;&#x505A;&#x3002;
      * &lt;/span&gt;
      *
      * &lt;img src=&quot;./img/empty.png&quot; width=&quot;100%&quot;&gt;
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the complete notification. It can be used for composing with other
-     * Observables, such as in a {@link mergeMap}.
+     * &#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x64CD;&#x4F5C;&#x7B26;&#x5BF9;&#x4E8E;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x53EA;&#x53D1;&#x51FA;&#x5B8C;&#x6210;&#x72B6;&#x6001;&#x901A;&#x77E5;&#x7684; Observable &#x662F;&#x975E;&#x5E38;&#x6709;&#x7528;&#x7684;&#x3002; &#x5B83;&#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x6765;&#x548C;
+     * &#x5176;&#x4ED6; Observables &#x8FDB;&#x884C;&#x7EC4;&#x5408;, &#x6BD4;&#x5982;&#x5728; {@link mergeMap} &#x4E2D;&#x4F7F;&#x7528;&#x3002;
      *
-     * @example &lt;caption&gt;Emit the number 7, then complete.&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA;&#x6570;&#x5B57;7, &#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;&lt;/caption&gt;
      * var result = Rx.Observable.empty().startWith(7);
      * result.subscribe(x =&gt; console.log(x));
      *
-     * @example &lt;caption&gt;Map and flatten only odd numbers to the sequence &apos;a&apos;, &apos;b&apos;, &apos;c&apos;&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x4EC5;&#x5C06;&#x5947;&#x6570;&#x6620;&#x5C04;&#x5E76;&#x6253;&#x5E73;&#x6210;&#x5B57;&#x6BCD;&#x5E8F;&#x5217;abc&#x3002;&lt;/caption&gt;
      * var interval = Rx.Observable.interval(1000);
      * var result = interval.mergeMap(x =&gt;
      *   x % 2 === 1 ? Rx.Observable.of(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;) : Rx.Observable.empty()
      * );
      * result.subscribe(x =&gt; console.log(x));
      *
-     * // Results in the following to the console:
-     * // x is equal to the count on the interval eg(0,1,2,3,...)
-     * // x will occur every 1000ms
-     * // if x % 2 is equal to 1 print abc
-     * // if x % 2 is not equal to 1 nothing will be output
+     * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;:
+     * // x &#x662F;&#x95F4;&#x9694;&#x7684;&#x8BA1;&#x6570;&#x6BD4;&#x5982;&#xFF1A;0,1,2,3,...
+     * // x 1000ms &#x51FA;&#x73B0;&#x4E00;&#x6B21;
+     * // &#x5982;&#x679C; x % 2 &#x7B49;&#x4E8E; 1 &#x6253;&#x5370; abc
+     * // &#x5982;&#x679C; x % 2 &#x4E0D;&#x7B49;&#x4E8E;1 &#x4EC0;&#x4E48;&#x4E5F;&#x4E0D;&#x8F93;&#x51FA;
      *
      * @see {@link create}
      * @see {@link never}
      * @see {@link of}
      * @see {@link throw}
      *
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emission of the complete notification.
-     * @return {Observable} An &quot;empty&quot; Observable: emits only the complete
-     * notification.
+     * @param {Scheduler} [scheduler] &#x8C03;&#x5EA6;&#x5668; ( {@link IScheduler} )&#xFF0C; &#x7528;&#x6765;&#x8C03;&#x5EA6;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#x3002;
+     * @return {Observable} &#x7A7A;&#x7684;Observable: &#x4EC5;&#x4EC5;&#x53D1;&#x51FA;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#x3002;
      * @static true
      * @name empty
      * @owner Observable

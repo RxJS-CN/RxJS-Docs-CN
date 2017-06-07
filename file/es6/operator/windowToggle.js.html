@@ -86,22 +86,16 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Branch out the source Observable values as a nested Observable starting from
- * an emission from `openings` and ending when the output of `closingSelector`
- * emits.
+ * &#x5C06;&#x6E90; Observable &#x7684;&#x503C;&#x5206;&#x652F;&#x6210;&#x5D4C;&#x5957;&#x7684; Observable&#xFF0C;&#x5206;&#x652F;&#x7B56;&#x7565;&#x662F;&#x4EE5; openings &#x53D1;&#x51FA;&#x9879;&#x4E3A;&#x8D77;&#x59CB;&#xFF0C;&#x4EE5; closingSelector &#x53D1;&#x51FA;&#x4E3A;&#x7ED3;&#x675F;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link bufferToggle}, but emits a nested
- * Observable instead of an array.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F; {@link bufferToggle}, &#x4F46;&#x662F;&#x53D1;&#x51FA;&#x7684;&#x662F;&#x5D4C;&#x5957; Observable &#x800C;&#x4E0D;&#x662F;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/windowToggle.png&quot; width=&quot;100%&quot;&gt;
  *
- * Returns an Observable that emits windows of items it collects from the source
- * Observable. The output Observable emits windows that contain those items
- * emitted by the source Observable between the time when the `openings`
- * Observable emits an item and when the Observable returned by
- * `closingSelector` emits an item.
+ * &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x4ECE;&#x6E90; Observable &#x6536;&#x96C6;&#x5230;&#x7684;&#x9879;&#x7684;&#x7A97;&#x53E3;&#x3002;&#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x7A97;&#x53E3; &#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x7A97;&#x53E3;
+ * &#x5305;&#x62EC;&#x5F53; `openings` &#x53D1;&#x51FA;&#x65F6;&#x5F00;&#x59CB;&#x6536;&#x96C6;&#x6E90; Observable &#x7684;&#x6570;&#x636E;&#x9879;&#x5E76;&#x4E14; `closingSelector` &#x8FD4;&#x56DE;&#x7684; Observable &#x53D1;&#x51FA;&#x9879;&#x65F6;&#x7ED3;&#x675F;&#x6536;&#x96C6;&#x3002;
  *
- * @example &lt;caption&gt;Every other second, emit the click events from the next 500ms&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x9694;&#x4E00;&#x79D2;&#x949F;, &#x53D1;&#x51FA;&#x63A5;&#x4E0B;&#x6765; 500ms &#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var openings = Rx.Observable.interval(1000);
  * var result = clicks.windowToggle(openings, i =&gt;
@@ -115,14 +109,10 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link windowWhen}
  * @see {@link bufferToggle}
  *
- * @param {Observable&lt;O&gt;} openings An observable of notifications to start new
- * windows.
- * @param {function(value: O): Observable} closingSelector A function that takes
- * the value emitted by the `openings` observable and returns an Observable,
- * which, when it emits (either `next` or `complete`), signals that the
- * associated window should complete.
- * @return {Observable&lt;Observable&lt;T&gt;&gt;} An observable of windows, which in turn
- * are Observables.
+ * @param {Observable&lt;O&gt;} openings &#x901A;&#x77E5;&#x5F00;&#x542F;&#x65B0;&#x7A97;&#x53E3;&#x7684; observable&#x3002;
+ * @param {function(value: O): Observable} closingSelector &#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53D7;`openings` observable
+ * &#x53D1;&#x51FA;&#x7684;&#x503C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x4E14;&#x8FD4;&#x56DE; Observable &#x7684;&#x51FD;&#x6570;, &#x5F53;&#x8BE5; observable &#x53D1;&#x51FA; `next` &#x6216;&#x8005; `complete`&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x4FE1;&#x53F7;&#x7ED9;&#x76F8;&#x5173;&#x7684;&#x7A97;&#x53E3;&#x4EE5;&#x901A;&#x77E5;&#x5B83;&#x4EEC;&#x5E94;&#x8BE5;&#x5B8C;&#x6210;&#x3002;
+ * @return {Observable&lt;Observable&lt;T&gt;&gt;} &#x7A97;&#x53E3;&#x7684; Observable&#xFF0C;&#x6BCF;&#x4E2A;&#x7A97;&#x53E3;&#x53C8;&#x662F;&#x503C;&#x7684; Observable &#x3002;(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x9AD8;&#x9636; Observable )
  * @method windowToggle
  * @owner Observable
  */

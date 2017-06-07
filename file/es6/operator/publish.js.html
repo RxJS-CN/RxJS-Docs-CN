@@ -83,15 +83,13 @@
 import { multicast } from &apos;./multicast&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Returns a ConnectableObservable, which is a variety of Observable that waits until its connect method is called
- * before it begins emitting items to those Observers that have subscribed to it.
+ * &#x8FD4;&#x56DE; ConnectableObservable&#xFF0C;&#x5B83;&#x662F; Observable &#x7684;&#x53D8;&#x79CD;&#xFF0C;&#x5B83;&#x4F1A;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#xFF0C;&#x76F4;&#x5230; connnect &#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x624D;&#x4F1A;&#x5F00;&#x59CB;&#x628A;&#x503C;&#x53D1;&#x9001;&#x7ED9;&#x90A3;&#x4E9B;&#x8BA2;&#x9605;&#x5B83;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x3002;
  *
  * &lt;img src=&quot;./img/publish.png&quot; width=&quot;100%&quot;&gt;
  *
- * @param {Function} [selector] - Optional selector function which can use the multicasted source sequence as many times
- * as needed, without causing multiple subscriptions to the source sequence.
- * Subscribers to the given source will receive all notifications of the source from the time of the subscription on.
- * @return A ConnectableObservable that upon connection causes the source Observable to emit items to its Observers.
+ * @param {Function} [selector] - &#x53EF;&#x9009;&#x7684;&#x9009;&#x62E9;&#x5668;&#x51FD;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x9700;&#x8981;&#x591A;&#x6B21;&#x4F7F;&#x7528;&#x4EE5;&#x591A;&#x64AD;&#x6E90;&#x5E8F;&#x5217;&#xFF0C;&#x800C;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x6E90;&#x5E8F;&#x5217;
+ * &#x751F;&#x6210;&#x591A;&#x4E2A; subscriptions &#x3002;&#x7ED9;&#x5B9A;&#x6E90;&#x7684;&#x8BA2;&#x9605;&#x8005;&#x4F1A;&#x4ECE;&#x8BA2;&#x9605;&#x5F00;&#x59CB;&#x7684;&#x4E00;&#x523B;&#x8D77;&#xFF0C;&#x63A5;&#x6536;&#x6E90;&#x7684;&#x6240;&#x6709;&#x901A;&#x77E5;&#x3002;
+ * @return ConnectableObservable&#xFF0C;&#x4E00;&#x65E6;&#x8FDE;&#x63A5;&#xFF0C;&#x6E90; Observable &#x4FBF;&#x4F1A;&#x5411;&#x5B83;&#x7684;&#x89C2;&#x5BDF;&#x8005;&#x53D1;&#x51FA;&#x9879;&#x3002;
  * @method publish
  * @owner Observable
  */

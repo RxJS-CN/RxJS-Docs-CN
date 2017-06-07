@@ -83,20 +83,17 @@
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 /**
- * Buffers the source Observable values starting from an emission from
- * `openings` and ending when the output of `closingSelector` emits.
+ *  &#x7F13;&#x51B2;&#x6E90; Observable &#x7684;&#x503C;&#xFF0C;`openings` &#x53D1;&#x9001;&#x7684;&#x65F6;&#x5019;&#x5F00;&#x59CB;&#x7F13;&#x51B2;&#xFF0C;`closingSelector` &#x53D1;&#x9001;&#x7684;&#x65F6;&#x5019;&#x7ED3;&#x675F;&#x7F13;&#x51B2;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Collects values from the past as an array. Starts
- * collecting only when `opening` emits, and calls the `closingSelector`
- * function to get an Observable that tells when to close the buffer.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x8FC7;&#x5F80;&#x6570;&#x636E;&#x6536;&#x96C6;&#x5230;&#x6570;&#x7EC4;&#x4E2D;. &#x5F53;`opening`&#x53D1;&#x9001;&#x7684;&#x65F6;&#x5019;&#x5F00;&#x59CB;&#x6536;&#x96C6;, &#x7136;&#x540E;&#x8C03;&#x7528;`closingSelector`
+ * &#x51FD;&#x6570;&#x83B7;&#x53D6; Observable &#xFF0C;&#x8BE5;Observable &#x544A;&#x77E5;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5173;&#x95ED;&#x7F13;&#x51B2;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/bufferToggle.png&quot; width=&quot;100%&quot;&gt;
  *
- * Buffers values from the source by opening the buffer via signals from an
- * Observable provided to `openings`, and closing and sending the buffers when
- * a Subscribable or Promise returned by the `closingSelector` function emits.
+ * &#x7F13;&#x51B2;&#x6E90;Observable&#x7684;&#x503C;&#xFF0C;&#x5F53;`openings`Observable&#x53D1;&#x51FA;&#x4FE1;&#x53F7;&#x7684;&#x65F6;&#x5019;&#x5F00;&#x59CB;&#x7F13;&#x51B2;&#x6570;&#x636E;, &#x5F53;`closingSelector`&#x8FD4;&#x56DE;&#x7684;Subscribable
+ * &#x6216;&#x8005;Promise&#x53D1;&#x9001;&#x7684;&#x65F6;&#x5019;&#x7ED3;&#x675F;&#x5E76;&#x4E14;&#x53D1;&#x9001;&#x7F13;&#x51B2;&#x533A;.
  *
- * @example &lt;caption&gt;Every other second, emit the click events from the next 500ms&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x9694;&#x4E00;&#x79D2;&#x949F;&#xFF0C;&#x53D1;&#x51FA;&#x63A5;&#x4E0B;&#x6765;500&#x6BEB;&#x79D2;&#x5185;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var openings = Rx.Observable.interval(1000);
  * var buffered = clicks.bufferToggle(openings, i =&gt;
@@ -110,13 +107,10 @@ import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
  * @see {@link bufferWhen}
  * @see {@link windowToggle}
  *
- * @param {SubscribableOrPromise&lt;O&gt;} openings A Subscribable or Promise of notifications to start new
- * buffers.
- * @param {function(value: O): SubscribableOrPromise} closingSelector A function that takes
- * the value emitted by the `openings` observable and returns a Subscribable or Promise,
- * which, when it emits, signals that the associated buffer should be emitted
- * and cleared.
- * @return {Observable&lt;T[]&gt;} An observable of arrays of buffered values.
+ * @param {SubscribableOrPromise&lt;O&gt;} openings &#x5F00;&#x542F;&#x65B0;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x901A;&#x77E5;&#xFF0C;&#x53EF;&#x4EE5;&#x662F; Subscribable &#x6216; Promise &#x3002;
+ * @param {function(value: O): SubscribableOrPromise} closingSelector &#x63A5;&#x53D7;`openings`observable
+ * &#x53D1;&#x51FA;&#x7684;&#x6570;&#x636E;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x88AB;&#x8BA2;&#x9605;&#x7684;&#x5BF9;&#x8C61;&#x6216;&#x8005;Promise&#x7684;&#x51FD;&#x6570;,&#x5F53;&#x5B83;&#x53D1;&#x51FA;&#x65F6;&#xFF0C;&#x4F1A;&#x53D1;&#x4FE1;&#x53F7;&#x7ED9;&#x76F8;&#x5173;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x4EE5;&#x901A;&#x77E5;&#x5B83;&#x4EEC;&#x5E94;&#x8BE5;&#x53D1;&#x51FA;&#x5E76;&#x6E05;&#x7406;&#x3002;
+ * @return {Observable&lt;T[]&gt;} &#x7F13;&#x51B2;&#x6570;&#x7EC4;&#x7684; observable&#x3002;
  * @method bufferToggle
  * @owner Observable
  */

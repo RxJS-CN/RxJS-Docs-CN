@@ -93,31 +93,26 @@ export class RangeObservable extends Observable {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable that emits a sequence of numbers within a specified
-     * range.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable &#xFF0C;&#x5B83;&#x53D1;&#x51FA;&#x6307;&#x5B9A;&#x8303;&#x56F4;&#x5185;&#x7684;&#x6570;&#x5B57;&#x5E8F;&#x5217;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Emits a sequence of numbers in a range.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x53D1;&#x51FA;&#x533A;&#x95F4;&#x8303;&#x56F4;&#x5185;&#x7684;&#x6570;&#x5B57;&#x5E8F;&#x5217;&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/range.png&quot; width=&quot;100%&quot;&gt;
      *
-     * `range` operator emits a range of sequential integers, in order, where you
-     * select the `start` of the range and its `length`. By default, uses no
-     * IScheduler and just delivers the notifications synchronously, but may use
-     * an optional IScheduler to regulate those deliveries.
+     * `range` &#x64CD;&#x4F5C;&#x7B26;&#x987A;&#x5E8F;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x533A;&#x95F4;&#x8303;&#x56F4;&#x5185;&#x7684;&#x8FDE;&#x7EED;&#x6574;&#x6570;, &#x4F60;&#x53EF;&#x4EE5;&#x51B3;&#x5B9A;&#x533A;&#x95F4;&#x7684;&#x5F00;&#x59CB;&#x548C;&#x957F;&#x5EA6;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;, &#x4E0D;&#x4F7F;&#x7528;
+     * &#x8C03;&#x5EA6;&#x5668;&#x4EC5;&#x4EC5;&#x540C;&#x6B65;&#x7684;&#x53D1;&#x9001;&#x901A;&#x77E5;, &#x4F46;&#x662F;&#x4E5F;&#x53EF;&#x4EE5;&#x53EF;&#x9009;&#x7684;&#x4F7F;&#x7528;&#x53EF;&#x9009;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x6765;&#x63A7;&#x5236;&#x53D1;&#x9001;&#x3002;
      *
-     * @example &lt;caption&gt;Emits the numbers 1 to 10&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA;&#x4ECE;1&#x5230;10&#x7684;&#x6570;&lt;/caption&gt;
      * var numbers = Rx.Observable.range(1, 10);
      * numbers.subscribe(x =&gt; console.log(x));
      *
      * @see {@link timer}
      * @see {@link interval}
      *
-     * @param {number} [start=0] The value of the first integer in the sequence.
-     * @param {number} [count=0] The number of sequential integers to generate.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emissions of the notifications.
-     * @return {Observable} An Observable of numbers that emits a finite range of
-     * sequential integers.
+     * @param {number} [start=0] &#x5E8F;&#x5217;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x6574;&#x6570;&#x503C;&#x3002;
+     * @param {number} [count=0] &#x8981;&#x751F;&#x6210;&#x5E8F;&#x5217;&#x7684;&#x957F;&#x5EA6;&#x3002;
+     * @param {Scheduler} [scheduler] &#x8C03;&#x5EA6;&#x5668; ( {@link IScheduler} )&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6;&#x901A;&#x77E5;&#x7684;&#x53D1;&#x9001;&#x3002;
+     * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6709;&#x9650;&#x533A;&#x95F4;&#x8303;&#x56F4;&#x5185;&#x7684;&#x8FDE;&#x7EED;&#x6574;&#x6570;&#x3002;
      * @static true
      * @name range
      * @owner Observable

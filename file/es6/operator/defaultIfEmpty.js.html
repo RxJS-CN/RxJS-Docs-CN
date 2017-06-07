@@ -82,19 +82,16 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Emits a given value if the source Observable completes without emitting any
- * `next` value, otherwise mirrors the source Observable.
+ * &#x5982;&#x679C;&#x6E90; Observable &#x5728;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x4EFB;&#x4F55; next &#x503C;&#xFF0C;&#x5219;&#x53D1;&#x51FA;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x5426;&#x5219;&#x8FD4;&#x56DE; Observable &#x7684;&#x955C;&#x50CF;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;If the source Observable turns out to be empty, then
- * this operator will emit a default value.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5982;&#x679C;&#x6E90;Observable&#x672C;&#x6765;&#x5C31;&#x662F;&#x7A7A;&#x7684;,&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/defaultIfEmpty.png&quot; width=&quot;100%&quot;&gt;
  *
- * `defaultIfEmpty` emits the values emitted by the source Observable or a
- * specified default value if the source Observable is empty (completes without
- * having emitted any `next` value).
+ * &#x5982;&#x679C;&#x6E90; Observable &#x662F;&#x7A7A;&#x7684;(&#x5728;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x4EFB;&#x4F55; next &#x503C;)&#xFF0C;&#x90A3;&#x4E48; defaultIfEmpty
+ * &#x4F1A;&#x53D1;&#x51FA;&#x6E90; Observable &#x6216;&#x6307;&#x5B9A;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x3002;
  *
- * @example &lt;caption&gt;If no clicks happen in 5 seconds, then emit &quot;no clicks&quot;&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5982;&#x679C;&#x5728;5&#x79D2;&#x5185;&#x6CA1;&#x6709;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x53D1;&#x751F;,&#x53D1;&#x51FA;&quot;no clicks&quot;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var clicksBeforeFive = clicks.takeUntil(Rx.Observable.interval(5000));
  * var result = clicksBeforeFive.defaultIfEmpty(&apos;no clicks&apos;);
@@ -103,11 +100,9 @@
  * @see {@link empty}
  * @see {@link last}
  *
- * @param {any} [defaultValue=null] The default value used if the source
- * Observable is empty.
- * @return {Observable} An Observable that emits either the specified
- * `defaultValue` if the source Observable emits no items, or the values emitted
- * by the source Observable.
+ * @param {any} [defaultValue=null] &#x5982;&#x679C;&#x6E90;Observable&#x662F;&#x7A7A;&#x7684;&#x8BDD;&#x4F7F;&#x7528;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#x3002;
+ * @return {Observable} Observable&#xFF0C;&#x5982;&#x679C;&#x6E90;
+ * Observable&#x4E0D;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x8981;&#x4E48;&#x53D1;&#x51FA;&#x7279;&#x5B9A;&#x7684;`defaultValue`, &#x8981;&#x4E48;&#x53D1;&#x51FA;&#x6E90;Observable&#x53D1;&#x51FA;&#x7684;&#x6570;&#x636E;&#x3002;
  * @method defaultIfEmpty
  * @owner Observable
  */

@@ -82,29 +82,24 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Emits a value from the source Observable only after a particular time span
- * determined by another Observable has passed without another source emission.
+ * &#x53EA;&#x6709;&#x5728;&#x53E6;&#x4E00;&#x4E2A; Observable &#x51B3;&#x5B9A;&#x7684;&#x4E00;&#x6BB5;&#x7279;&#x5B9A;&#x65F6;&#x95F4;&#x7ECF;&#x8FC7;&#x540E;&#x5E76;&#x4E14;&#x6CA1;&#x6709;&#x53D1;&#x51FA;&#x53E6;&#x4E00;&#x4E2A;&#x6E90;&#x503C;&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x4ECE;&#x6E90; Observable &#x4E2D;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;It&apos;s like {@link debounceTime}, but the time span of
- * emission silence is determined by a second Observable.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F; {@link debounceTime}, &#x4F46;&#x662F;&#x9759;&#x9ED8;&#x65F6;&#x95F4;&#x6BB5;&#x7531;&#x7B2C;&#x4E8C;&#x4E2A; Observable
+ * &#x51B3;&#x5B9A;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/debounce.png&quot; width=&quot;100%&quot;&gt;
  *
- * `debounce` delays values emitted by the source Observable, but drops previous
- * pending delayed emissions if a new value arrives on the source Observable.
- * This operator keeps track of the most recent value from the source
- * Observable, and spawns a duration Observable by calling the
- * `durationSelector` function. The value is emitted only when the duration
- * Observable emits a value or completes, and if no other value was emitted on
- * the source Observable since the duration Observable was spawned. If a new
- * value appears before the duration Observable emits, the previous value will
- * be dropped and will not be emitted on the output Observable.
+ * `debounce` &#x5EF6;&#x65F6;&#x53D1;&#x9001;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;,&#x4F46;&#x5982;&#x679C;&#x6E90; Observable &#x53D1;&#x51FA;&#x4E86;&#x65B0;&#x503C;
+ * &#x7684;&#x8BDD;&#xFF0C;&#x5B83;&#x4F1A;&#x4E22;&#x5F03;&#x6389;&#x524D;&#x4E00;&#x4E2A;&#x7B49;&#x5F85;&#x4E2D;&#x7684;&#x5EF6;&#x8FDF;&#x53D1;&#x9001;&#x3002;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x8FFD;&#x8E2A;&#x6E90; Observable &#x7684;&#x6700;&#x65B0;&#x503C;,
+ * &#x5E76;&#x901A;&#x8FC7;&#x8C03;&#x7528; durationSelector &#x51FD;&#x6570;&#x6765;&#x751F;&#x4EA7; duration Observable&#x3002;&#x53EA;&#x6709;&#x5F53;
+ * duration Observable &#x53D1;&#x51FA;&#x503C;&#x6216;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x53D1;&#x51FA;&#x503C;&#xFF0C;&#x5982;&#x679C;&#x6E90; Observable &#x4E0A;&#x6CA1;&#x6709;&#x53D1;
+ * &#x51FA;&#x5176;&#x4ED6;&#x503C;&#xFF0C;&#x90A3;&#x4E48; duration Observable &#x5C31;&#x4F1A;&#x4EA7;&#x751F;&#x3002;&#x5982;&#x679C;&#x5728; duration Observable &#x53D1;
+ * &#x51FA;&#x524D;&#x51FA;&#x73B0;&#x4E86;&#x65B0;&#x503C;&#xFF0C;&#x90A3;&#x4E48;&#x524D;&#x4E00;&#x4E2A;&#x503C;&#x4F1A;&#x88AB;&#x4E22;&#x5F03;&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x3002;
  *
- * Like {@link debounceTime}, this is a rate-limiting operator, and also a
- * delay-like operator since output emissions do not necessarily occur at the
- * same time as they did on the source Observable.
+ * &#x5C31;&#x50CF;{@link debounceTime}, &#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x9650;&#x5236;&#x53D1;&#x51FA;&#x9891;&#x7387;&#x7684;&#x64CD;&#x4F5C;&#x7B26;, &#x56E0;&#x4E3A;&#x8F93;&#x51FA;&#x53D1;&#x9001;&#x5E76;&#x4E0D;&#x4E00;&#x5B9A;&#x662F;
+ * &#x5728;&#x540C;&#x4E00;&#x65F6;&#x95F4;&#x53D1;&#x751F;&#x7684;&#xFF0C;&#x5C31;&#x50CF;&#x5B83;&#x4EEC;&#x5728;&#x6E90; Observable &#x4E0A;&#x6240;&#x505A;&#x7684;&#x90A3;&#x6837;&#x3002;
  *
- * @example &lt;caption&gt;Emit the most recent click after a burst of clicks&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5728;&#x4E00;&#x987F;&#x72C2;&#x70B9;&#x540E;&#x53EA;&#x53D1;&#x51FA;&#x6700;&#x65B0;&#x7684;&#x70B9;&#x51FB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.debounce(() =&gt; Rx.Observable.interval(1000));
  * result.subscribe(x =&gt; console.log(x));
@@ -114,12 +109,10 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link delayWhen}
  * @see {@link throttle}
  *
- * @param {function(value: T): SubscribableOrPromise} durationSelector A function
- * that receives a value from the source Observable, for computing the timeout
- * duration for each source value, returned as an Observable or a Promise.
- * @return {Observable} An Observable that delays the emissions of the source
- * Observable by the specified duration Observable returned by
- * `durationSelector`, and may drop some values if they occur too frequently.
+ * @param {function(value: T): SubscribableOrPromise} durationSelector &#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7;
+ * &#x6E90;Observable&#x7684;&#x503C;, &#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x503C;&#x7684;&#x5EF6;&#x8FDF;&#x6301;&#x7EED;&#x65F6;&#x95F4;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;Observable&#x6216;&#x8005;Promise.
+ * @return {Observable} Observable&#xFF0C;&#x901A;&#x8FC7; durationSelector &#x8FD4;&#x56DE;&#x7684;&#x7279;&#x5B9A; duration Observable
+ * &#x6765;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x9001;&#x8FC7;&#x4E8E;&#x9891;&#x7E41;&#x53EF;&#x80FD;&#x4F1A;&#x4E22;&#x5F03;&#x4E00;&#x4E9B;&#x503C;&#x3002;
  * @method debounce
  * @owner Observable
  */

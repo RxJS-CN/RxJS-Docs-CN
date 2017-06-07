@@ -84,28 +84,23 @@ import { Subscriber } from &apos;../Subscriber&apos;;
 import { isScheduler } from &apos;../util/isScheduler&apos;;
 /* tslint:enable:max-line-length */
 /**
- * Buffers the source Observable values for a specific time period.
+ * &#x5728;&#x7279;&#x5B9A;&#x65F6;&#x95F4;&#x5468;&#x671F;&#x5185;&#x7F13;&#x51B2;&#x6E90; Observable &#x7684;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Collects values from the past as an array, and emits
- * those arrays periodically in time.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x8FC7;&#x5F80;&#x7684;&#x503C;&#x6536;&#x96C6;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x5E76;&#x5468;&#x671F;&#x6027;&#x5730;&#x53D1;&#x51FA;&#x8FD9;&#x4E9B;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/bufferTime.png&quot; width=&quot;100%&quot;&gt;
  *
- * Buffers values from the source for a specific time duration `bufferTimeSpan`.
- * Unless the optional argument `bufferCreationInterval` is given, it emits and
- * resets the buffer every `bufferTimeSpan` milliseconds. If
- * `bufferCreationInterval` is given, this operator opens the buffer every
- * `bufferCreationInterval` milliseconds and closes (emits and resets) the
- * buffer every `bufferTimeSpan` milliseconds. When the optional argument
- * `maxBufferSize` is specified, the buffer will be closed either after
- * `bufferTimeSpan` milliseconds or when it contains `maxBufferSize` elements.
+ * &#x5728;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x6301;&#x7EED;&#x65F6;&#x95F4;`bufferTimeSpan`&#x5185;&#x7F13;&#x5B58;&#x6E90; Observable &#x7684;&#x503C;&#x3002; &#x9664;&#x975E;&#x6307;&#x5B9A;&#x4E86;&#x53EF;&#x9009;&#x53C2;&#x6570;`bufferCreationInterval`
+ * , &#x5B83;&#x4F1A;&#x53D1;&#x51FA;&#x6570;&#x7EC4;&#x5E76;&#x4E14;&#x91CD;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x6BCF;&#x4E2A;`bufferTimeSpan`&#x6BEB;&#x79D2;&#x3002;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x5728;&#x6BCF;&#x4E2A; bufferCreationInterval &#x6BEB;&#x79D2;&#x65F6;&#x5F00;&#x542F;&#x7F13;&#x51B2;&#x533A;&#xFF0C;
+ * &#x5E76;&#x5728;&#x6BCF;&#x4E2A; bufferTimeSpan &#x6BEB;&#x79D2;&#x65F6;&#x5173;&#x95ED;(&#x53D1;&#x51FA;&#x5E76;&#x91CD;&#x7F6E;)&#x7F13;&#x51B2;&#x533A;&#x3002;&#x5982;&#x679C;&#x53EF;&#x9009;&#x53C2;&#x6570;`maxBufferSize`&#x88AB;&#x6307;&#x5B9A;, &#x7F13;&#x51B2;&#x533A;&#x4F1A;&#x5728;`bufferTimeSpan`&#x6BEB;&#x79D2;
+ * &#x4E4B;&#x540E;&#x6216;&#x8005;&#x7F13;&#x51B2;&#x533A;&#x5143;&#x7D20;&#x4E2A;&#x6570;&#x8FBE;&#x5230;`maxBufferSize`&#x65F6;&#x53D1;&#x51FA;&#x3002;
  *
- * @example &lt;caption&gt;Every second, emit an array of the recent click events&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x4E00;&#x79D2;&#x90FD;&#x53D1;&#x51FA;&#x6700;&#x65B0;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x7684;&#x6570;&#x7EC4;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var buffered = clicks.bufferTime(1000);
  * buffered.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Every 5 seconds, emit the click events from the next 2 seconds&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;5&#x79D2;&#x949F;&#xFF0C;&#x53D1;&#x51FA;&#x63A5;&#x4E0B;&#x6765;2&#x79D2;&#x5185;&#x7684;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;(&#x8BD1;&#x8005;&#x6CE8;&#xFF1A;&#x540E;3&#x79D2;&#x5185;&#x7684;&#x70B9;&#x51FB;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;)&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var buffered = clicks.bufferTime(2000, 5000);
  * buffered.subscribe(x =&gt; console.log(x));
@@ -116,13 +111,11 @@ import { isScheduler } from &apos;../util/isScheduler&apos;;
  * @see {@link bufferWhen}
  * @see {@link windowTime}
  *
- * @param {number} bufferTimeSpan The amount of time to fill each buffer array.
- * @param {number} [bufferCreationInterval] The interval at which to start new
- * buffers.
- * @param {number} [maxBufferSize] The maximum buffer size.
- * @param {Scheduler} [scheduler=async] The scheduler on which to schedule the
- * intervals that determine buffer boundaries.
- * @return {Observable&lt;T[]&gt;} An observable of arrays of buffered values.
+ * @param {number} bufferTimeSpan &#x586B;&#x6EE1;&#x6BCF;&#x4E2A;&#x7F13;&#x51B2;&#x6570;&#x7EC4;&#x7684;&#x65F6;&#x95F4;&#x3002;
+ * @param {number} [bufferCreationInterval] &#x5F00;&#x542F;&#x65B0;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x3002;
+ * @param {number} [maxBufferSize] &#x7F13;&#x51B2;&#x533A;&#x7684;&#x6700;&#x5927;&#x5BB9;&#x91CF;&#x3002;
+ * @param {Scheduler} [scheduler=async] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x8C03;&#x5EA6;&#x7F13;&#x51B2;&#x533A;&#x3002;
+ * @return {Observable&lt;T[]&gt;} &#x503C;&#x4E3A;&#x7F13;&#x51B2;&#x6570;&#x7EC4;&#x7684; observable&#x3002;
  * @method bufferTime
  * @owner Observable
  */

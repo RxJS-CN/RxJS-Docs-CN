@@ -97,13 +97,11 @@ export function zipProto(...observables) {
 }
 /* tslint:enable:max-line-length */
 /**
- * Combines multiple Observables to create an Observable whose values are calculated from the values, in order, of each
- * of its input Observables.
+ * &#x5C06;&#x591A;&#x4E2A; Observable &#x7EC4;&#x5408;&#x4EE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x7684;&#x503C;&#x662F;&#x7531;&#x6240;&#x6709;&#x8F93;&#x5165; Observables &#x7684;&#x503C;&#x6309;&#x987A;&#x5E8F;&#x8BA1;&#x7B97;&#x800C;&#x6765;&#x7684;&#x3002;
  *
- * If the latest parameter is a function, this function is used to compute the created value from the input values.
- * Otherwise, an array of the input values is returned.
+ * &#x5982;&#x679C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x51FD;&#x6570;, &#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x88AB;&#x7528;&#x6765;&#x8BA1;&#x7B97;&#x6700;&#x7EC8;&#x53D1;&#x51FA;&#x7684;&#x503C;.&#x5426;&#x5219;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x987A;&#x5E8F;&#x5305;&#x542B;&#x6240;&#x6709;&#x8F93;&#x5165;&#x503C;&#x7684;&#x6570;&#x7EC4;.
  *
- * @example &lt;caption&gt;Combine age and name from different sources&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x4ECE;&#x4E0D;&#x540C;&#x7684;&#x6E90;&#x5934;&#x7ED3;&#x5408;&#x5E74;&#x9F84;&#x548C;&#x540D;&#x79F0;&lt;/caption&gt;
  *
  * let age$ = Observable.of&lt;number&gt;(27, 25, 29);
  * let name$ = Observable.of&lt;string&gt;(&apos;Foo&apos;, &apos;Bar&apos;, &apos;Beer&apos;);
@@ -116,7 +114,7 @@ export function zipProto(...observables) {
  *          (age: number, name: string, isDev: boolean) =&gt; ({ age, name, isDev }))
  *     .subscribe(x =&gt; console.log(x));
  *
- * // outputs
+ * // &#x8F93;&#x51FA;&#xFF1A;
  * // { age: 27, name: &apos;Foo&apos;, isDev: true }
  * // { age: 25, name: &apos;Bar&apos;, isDev: true }
  * // { age: 29, name: &apos;Beer&apos;, isDev: false }

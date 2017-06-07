@@ -82,27 +82,19 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { async } from &apos;../scheduler/async&apos;;
 import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Ignores source values for `duration` milliseconds, then emits the most recent
- * value from the source Observable, then repeats this process.
+ * &#x5728; duration &#x6BEB;&#x79D2;&#x5185;&#x5FFD;&#x7565;&#x6E90;&#x503C;&#x5E76;&#x53D1;&#x51FA;&#x6E90; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#xFF0C; &#x7136;&#x540E;&#x91CD;&#x590D;&#x6B64;&#x8FC7;&#x7A0B;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;When it sees a source values, it ignores that plus
- * the next ones for `duration` milliseconds, and then it emits the most recent
- * value from the source.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5F53;&#x5B83;&#x770B;&#x89C1;&#x4E00;&#x4E2A;&#x6E90;&#x503C;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x63A5;&#x4E0B;&#x6765;&#x7684; duration &#x6BEB;&#x79D2;&#x5185;&#x5FFD;&#x7565;&#x8FD9;&#x4E2A;&#x503C;&#x548C;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6E90;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x6700;&#x65B0;&#x7684;&#x6E90;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/auditTime.png&quot; width=&quot;100%&quot;&gt;
  *
- * `auditTime` is similar to `throttleTime`, but emits the last value from the
- * silenced time window, instead of the first value. `auditTime` emits the most
- * recent value from the source Observable on the output Observable as soon as
- * its internal timer becomes disabled, and ignores source values while the
- * timer is enabled. Initially, the timer is disabled. As soon as the first
- * source value arrives, the timer is enabled. After `duration` milliseconds (or
- * the time unit determined internally by the optional `scheduler`) has passed,
- * the timer is disabled, then the most recent source value is emitted on the
- * output Observable, and this process repeats for the next source value.
- * Optionally takes a {@link IScheduler} for managing timers.
  *
- * @example &lt;caption&gt;Emit clicks at a rate of at most one click per second&lt;/caption&gt;
+ *  `auditTime`&#x548C;`throttleTime`&#x5F88;&#x50CF;, &#x4F46;&#x662F;&#x53D1;&#x9001;&#x6C89;&#x9ED8;&#x65F6;&#x95F4;&#x7A97;&#x53E3;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x503C;, &#x800C;&#x4E0D;&#x662F;&#x7B2C;&#x4E00;&#x4E2A;&#x3002;&#x53EA;&#x8981; audit &#x7684;&#x5185;&#x90E8;&#x5B9A;&#x65F6;&#x95F4;&#x88AB;&#x7981;&#x7528;&#xFF0C;&#x5B83;&#x5C31;&#x4F1A;&#x5728;
+ * &#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x6E90; Observable &#x7684;&#x6700;&#x65B0;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x5F53;&#x5B9A;&#x65F6;&#x5668;&#x542F;&#x7528;&#x65F6;
+ * &#x5FFD;&#x7565;&#x6E90;&#x503C;&#x3002;&#x53EA;&#x8981;&#x6E90; Observable &#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x503C;, &#x65F6;&#x95F4;&#x95F4;&#x9694;&#x88AB;&#x542F;&#x7528;&#x3002;&#x5EA6;&#x8FC7;&#x6301;&#x7EED;&#x65F6;&#x95F4;&#x540E;(&#x6216;&#x8005;&#x65F6;&#x95F4;&#x5355;&#x4F4D;&#x7531;&#x5185;&#x90E8;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570;&#x8C03;&#x5EA6;&#x5668;&#x51B3;&#x5B9A;),
+ * &#x65F6;&#x95F4;&#x95F4;&#x9694;&#x88AB;&#x7981;&#x7528;, &#x8F93;&#x51FA; Observable &#x53D1;&#x51FA;&#x6700;&#x65B0;&#x7684;&#x503C;, &#x4E0D;&#x65AD;&#x7684;&#x91CD;&#x590D;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x3002;
+ *
+ * @example &lt;caption&gt;&#x4EE5;&#x6BCF;&#x79D2;&#x6700;&#x591A;&#x70B9;&#x51FB;&#x4E00;&#x6B21;&#x7684;&#x9891;&#x7387;&#x53D1;&#x51FA;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = clicks.auditTime(1000);
  * result.subscribe(x =&gt; console.log(x));
@@ -113,13 +105,9 @@ import { Subscriber } from &apos;../Subscriber&apos;;
  * @see {@link sampleTime}
  * @see {@link throttleTime}
  *
- * @param {number} duration Time to wait before emitting the most recent source
- * value, measured in milliseconds or the time unit determined internally
- * by the optional `scheduler`.
- * @param {Scheduler} [scheduler=async] The {@link IScheduler} to use for
- * managing the timers that handle the rate-limiting behavior.
- * @return {Observable&lt;T&gt;} An Observable that performs rate-limiting of
- * emissions from the source Observable.
+ * @param {number} duration &#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x6216;&#x4EE5;&#x53EF;&#x9009;&#x7684; scheduler &#x5185;&#x90E8;&#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5355;&#x4F4D;&#x6765;&#x8861;&#x91CF;&#x3002;
+ * @param {Scheduler} [scheduler=async] &#x8C03;&#x5EA6;&#x5668;( {@link IScheduler} )&#xFF0C;&#x7528;&#x6765;&#x7BA1;&#x7406;&#x5904;&#x7406;&#x9650;&#x5236;&#x53D1;&#x9001;&#x9891;&#x7387;&#x7684;&#x5B9A;&#x65F6;&#x5668;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x9650;&#x5236;&#x6E90; Observable &#x7684;&#x53D1;&#x9001;&#x9891;&#x7387;&#x3002;
  * @method auditTime
  * @owner Observable
  */

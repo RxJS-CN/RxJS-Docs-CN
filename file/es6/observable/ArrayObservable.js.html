@@ -102,22 +102,18 @@ export class ArrayObservable extends Observable {
         return new ArrayObservable(array, scheduler);
     }
     /**
-     * Creates an Observable that emits some values you specify as arguments,
-     * immediately one after the other, and then emits a complete notification.
-     *
-     * &lt;span class=&quot;informal&quot;&gt;Emits the arguments you provide, then completes.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x5B83;&#x4F1A;&#x4F9D;&#x6B21;&#x53D1;&#x51FA;&#x7531;&#x4F60;&#x63D0;&#x4F9B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x6700;&#x540E;&#x53D1;&#x51FA;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#x3002;
+     * &lt;span class=&quot;informal&quot;&gt;&#x53D1;&#x51FA;&#x4F60;&#x63D0;&#x4F9B;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;
      * &lt;/span&gt;
      *
      * &lt;img src=&quot;./img/of.png&quot; width=&quot;100%&quot;&gt;
      *
-     * This static operator is useful for creating a simple Observable that only
-     * emits the arguments given, and the complete notification thereafter. It can
-     * be used for composing with other Observables, such as with {@link concat}.
-     * By default, it uses a `null` IScheduler, which means the `next`
-     * notifications are sent synchronously, although with a different IScheduler
-     * it is possible to determine when those notifications will be delivered.
+     * &#x8FD9;&#x4E2A;&#x9759;&#x6001;&#x64CD;&#x4F5C;&#x7B26;&#x9002;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x7B80;&#x5355;&#x7684; Observable &#xFF0C;&#x8BE5; Observable &#x53EA;&#x53D1;&#x51FA;&#x7ED9;&#x5B9A;&#x7684;&#x53C2;&#x6570;&#xFF0C;
+     * &#x5728;&#x53D1;&#x9001;&#x5B8C;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x540E;&#x53D1;&#x51FA;&#x5B8C;&#x6210;&#x901A;&#x77E5;&#x3002;&#x5B83;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x548C;&#x5176;&#x4ED6; Observables &#x7EC4;&#x5408;&#x6BD4;&#x5982;&#x8BF4;{@link concat}&#x3002;
+     * &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;`null`&#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;`next`&#x901A;&#x77E5;&#x662F;&#x540C;&#x6B65;&#x53D1;&#x51FA;&#x7684;,
+     * &#x5C3D;&#x7BA1;&#x4F7F;&#x7528;&#x4E0D;&#x540C;&#x7684;&#x8C03;&#x5EA6;&#x5668;&#x53EF;&#x4EE5;&#x51B3;&#x5B9A;&#x8FD9;&#x4E9B;&#x901A;&#x77E5;&#x4F55;&#x65F6;&#x9001;&#x5230;&#x3002;
      *
-     * @example &lt;caption&gt;Emit 10, 20, 30, then &apos;a&apos;, &apos;b&apos;, &apos;c&apos;, then start ticking every second.&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA; 10&#x3001;20&#x3001; 30, &#x7136;&#x540E;&#x662F; &apos;a&apos;&#x3001; &apos;b&apos;&#x3001; &apos;c&apos;, &#x7D27;&#x63A5;&#x7740;&#x5F00;&#x59CB;&#x6BCF;&#x79D2;&#x53D1;&#x51FA;&#x3002;&lt;/caption&gt;
      * var numbers = Rx.Observable.of(10, 20, 30);
      * var letters = Rx.Observable.of(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;);
      * var interval = Rx.Observable.interval(1000);
@@ -129,10 +125,9 @@ export class ArrayObservable extends Observable {
      * @see {@link never}
      * @see {@link throw}
      *
-     * @param {...T} values Arguments that represent `next` values to be emitted.
-     * @param {Scheduler} [scheduler] A {@link IScheduler} to use for scheduling
-     * the emissions of the `next` notifications.
-     * @return {Observable&lt;T&gt;} An Observable that emits each given input value.
+     * @param {...T} values &#x8868;&#x793A; `next` &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+     * @param {Scheduler} [scheduler] &#x7528;&#x6765;&#x8C03;&#x5EA6; next &#x901A;&#x77E5;&#x53D1;&#x9001;&#x7684;&#x8C03;&#x5EA6;&#x5668;( {@link IScheduler} )&#x3002;
+     * @return {Observable&lt;T&gt;} &#x53D1;&#x51FA;&#x6BCF;&#x4E2A;&#x7ED9;&#x5B9A;&#x8F93;&#x5165;&#x503C;&#x7684; Observable&#x3002;
      * @static true
      * @name of
      * @owner Observable

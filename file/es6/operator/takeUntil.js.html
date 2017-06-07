@@ -82,20 +82,18 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Emits the values emitted by the source Observable until a `notifier`
- * Observable emits a value.
+ * &#x53D1;&#x51FA;&#x6E90; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x76F4;&#x5230; `notifier` Observable &#x53D1;&#x51FA;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Lets values pass until a second Observable,
- * `notifier`, emits something. Then, it completes.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5B83;&#x53D1;&#x51FA;&#x6E90; Observable &#x7684;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x76F4;&#x5230;&#x7B2C;&#x4E8C;&#x4E2A;
+ * Observable (&#x5373; notifier )&#x53D1;&#x51FA;&#x9879;&#xFF0C;&#x5B83;&#x4FBF;&#x5B8C;&#x6210;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/takeUntil.png&quot; width=&quot;100%&quot;&gt;
  *
- * `takeUntil` subscribes and begins mirroring the source Observable. It also
- * monitors a second Observable, `notifier` that you provide. If the `notifier`
- * emits a value or a complete notification, the output Observable stops
- * mirroring the source Observable and completes.
+ * `takeUntil` &#x8BA2;&#x9605;&#x5E76;&#x5F00;&#x59CB;&#x955C;&#x50CF;&#x6E90; Observable &#x3002;&#x5B83;&#x8FD8;&#x76D1;&#x89C6;&#x53E6;&#x5916;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x5373;&#x4F60;
+ * &#x63D0;&#x4F9B;&#x7684; `notifier` &#x3002;&#x5982;&#x679C; `notifier` &#x53D1;&#x51FA;&#x503C;&#x6216; `complete` &#x901A;&#x77E5;&#xFF0C;&#x90A3;&#x4E48;&#x8F93;&#x51FA; Observable
+ * &#x505C;&#x6B62;&#x955C;&#x50CF;&#x6E90; Observable &#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;
  *
- * @example &lt;caption&gt;Tick every second until the first click happens&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6BCF;&#x79D2;&#x90FD;&#x53D1;&#x51FA;&#x503C;&#xFF0C;&#x76F4;&#x5230;&#x7B2C;&#x4E00;&#x6B21;&#x70B9;&#x51FB;&#x53D1;&#x751F;&lt;/caption&gt;
  * var interval = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var result = interval.takeUntil(clicks);
@@ -106,11 +104,10 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link takeWhile}
  * @see {@link skip}
  *
- * @param {Observable} notifier The Observable whose first emitted value will
- * cause the output Observable of `takeUntil` to stop emitting values from the
- * source Observable.
- * @return {Observable&lt;T&gt;} An Observable that emits the values from the source
- * Observable until such time as `notifier` emits its first value.
+ * @param {Observable} notifier &#x8BE5; Observable &#x7B2C;&#x4E00;&#x6B21;&#x53D1;&#x51FA;&#x503C;&#x4F1A;&#x4F7F; `takeUntil` &#x7684;
+ * &#x8F93;&#x51FA; Observable &#x505C;&#x6B62;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+ * @return {Observable&lt;T&gt;} &#x8BE5; Observable &#x53D1;&#x51FA;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x76F4;&#x5230;&#x67D0;&#x4E2A;
+ * &#x65F6;&#x95F4;&#x70B9; `notifier` &#x53D1;&#x51FA;&#x5B83;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#x3002;
  * @method takeUntil
  * @owner Observable
  */

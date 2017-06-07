@@ -102,30 +102,26 @@ export class FromObservable extends Observable {
         this.scheduler = scheduler;
     }
     /**
-     * Creates an Observable from an Array, an array-like object, a Promise, an
-     * iterable object, or an Observable-like object.
+     * &#x4ECE;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x3001;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x3001;Promise&#x3001;&#x8FED;&#x4EE3;&#x5668;&#x5BF9;&#x8C61;&#x6216;&#x8005;&#x7C7B; Observable &#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable.
      *
-     * &lt;span class=&quot;informal&quot;&gt;Converts almost anything to an Observable.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x51E0;&#x4E4E;&#x53EF;&#x4EE5;&#x628A;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#x90FD;&#x80FD;&#x8F6C;&#x5316;&#x4E3A;Observable.&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/from.png&quot; width=&quot;100%&quot;&gt;
      *
-     * Convert various other objects and data types into Observables. `from`
-     * converts a Promise or an array-like or an
-     * [iterable](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable)
-     * object into an Observable that emits the items in that promise or array or
-     * iterable. A String, in this context, is treated as an array of characters.
-     * Observable-like objects (contains a function named with the ES2015 Symbol
-     * for Observable) can also be converted through this operator.
+     * &#x5C06;&#x5404;&#x79CD;&#x5176;&#x4ED6;&#x5BF9;&#x8C61;&#x548C;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#x4E3A; Observables&#x3002; `from`&#x5C06; Promise&#x3001;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x3001;&#x8FED;&#x4EE3;&#x5668;&#x5BF9;&#x8C61;
+     * (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#iterable)
+     * &#x8F6C;&#x5316;&#x4E3A; Observable &#xFF0C;&#x8BE5; Observable &#x53D1;&#x51FA; promise&#x3001;&#x6570;&#x7EC4;&#x6216;&#x8005;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x6210;&#x5458;&#x3002; &#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5728;&#x8FD9;&#x79CD;&#x4E0A;&#x4E0B;&#x6587;&#x91CC;&#xFF0C;&#x4F1A;&#x88AB;&#x5F53;&#x505A;&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#x3002;
+     * &#x7C7B; Observable &#x5BF9;&#x8C61;(&#x5305;&#x62EC;ES2015&#x91CC;&#x7684; Observable &#x65B9;&#x6CD5;)&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6B64;&#x64CD;&#x4F5C;&#x7B26;&#x8FDB;&#x884C;&#x8F6C;&#x6362;&#x3002;
      *
-     * @example &lt;caption&gt;Converts an array to an Observable&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5C06;&#x6570;&#x7EC4;&#x8F6C;&#x5316;&#x4E3A; Observable&lt;/caption&gt;
      * var array = [10, 20, 30];
      * var result = Rx.Observable.from(array);
      * result.subscribe(x =&gt; console.log(x));
      *
-     * // Results in the following:
+     * // &#x7ED3;&#x679C;&#x5982;&#x4E0B;:
      * // 10 20 30
      *
-     * @example &lt;caption&gt;Convert an infinite iterable (from a generator) to an Observable&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5C06;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x7684;&#x8FED;&#x4EE3;&#x5668;(&#x6765;&#x81EA;&#x4E8E; generator)&#x8F6C;&#x5316;&#x4E3A; Observable&#x3002;&lt;/caption&gt;
      * function* generateDoubles(seed) {
      *   var i = seed;
      *   while (true) {
@@ -146,13 +142,10 @@ export class FromObservable extends Observable {
      * @see {@link fromEventPattern}
      * @see {@link fromPromise}
      *
-     * @param {ObservableInput&lt;T&gt;} ish A subscribable object, a Promise, an
-     * Observable-like, an Array, an iterable or an array-like object to be
-     * converted.
-     * @param {Scheduler} [scheduler] The scheduler on which to schedule the
-     * emissions of values.
-     * @return {Observable&lt;T&gt;} The Observable whose values are originally from the
-     * input object that was converted.
+     * @param {ObservableInput&lt;T&gt;} ish &#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x88AB;&#x8BA2;&#x9605;&#x7684;&#x5BF9;&#x8C61;, Promise, &#x7C7B;
+     * Observable, &#x6570;&#x7EC4;, &#x8FED;&#x4EE3;&#x5668;&#x6216;&#x8005;&#x7C7B;&#x6570;&#x7EC4;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x88AB;&#x8F6C;&#x5316;&#x3002;
+     * @param {Scheduler} [scheduler] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6;&#x503C;&#x7684;&#x53D1;&#x9001;&#x3002;
+     * @return {Observable&lt;T&gt;} Observable&#x7684;&#x503C;&#x6765;&#x81EA;&#x4E8E;&#x8F93;&#x5165;&#x5BF9;&#x8C61;&#x7684;&#x8F6C;&#x5316;&#x3002;
      * @static true
      * @name from
      * @owner Observable

@@ -81,26 +81,21 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/bufferCount.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Buffers the source Observable values until the size hits the maximum
- * `bufferSize` given.
+ * &#x7F13;&#x51B2;&#x6E90; Observable &#x7684;&#x503C;&#x76F4;&#x5230;&#x7F13;&#x51B2;&#x6570;&#x91CF;&#x5230;&#x8FBE;&#x8BBE;&#x5B9A;&#x7684; `bufferSize`.
  *
- * &lt;span class=&quot;informal&quot;&gt;Collects values from the past as an array, and emits
- * that array only when its size reaches `bufferSize`.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x8FC7;&#x5F80;&#x7684;&#x503C;&#x6536;&#x96C6;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;&#x5F53;&#x6570;&#x7EC4;&#x6570;&#x91CF;&#x5230;&#x8FBE;&#x8BBE;&#x5B9A;&#x7684; bufferSize &#x65F6;&#x53D1;&#x51FA;&#x8BE5;&#x6570;&#x7EC4;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/bufferCount.png&quot; width=&quot;100%&quot;&gt;
  *
- * Buffers a number of values from the source Observable by `bufferSize` then
- * emits the buffer and clears it, and starts a new buffer each
- * `startBufferEvery` values. If `startBufferEvery` is not provided or is
- * `null`, then new buffers are started immediately at the start of the source
- * and when each buffer closes and is emitted.
+ * &#x7F13;&#x51B2;&#x6E90; Observable &#x7684;N&#x4E2A;&#x503C;(N = bufferSize)&#xFF0C;&#x7136;&#x540E;&#x53D1;&#x51FA;&#x8BE5;&#x7F13;&#x51B2;&#x533A;&#x5E76;&#x8FDB;&#x884C;&#x6E05;&#x7406;&#xFF0C;&#x518D;&#x7136;&#x540E;&#x5F00;&#x542F;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x7F13;&#x5B58;&#x533A;&#xFF0C;&#x65B0;&#x7F13;&#x5B58;&#x533A;&#x4F1A;&#x65B0;&#x7F13;&#x5B58;M&#x4E2A;&#x503C;(M = startBufferEvery)&#x3002;
+ * &#x5982;&#x679C;`startBufferEvery`&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x6216;&#x8005;&#x4E3A;`null`, &#x65B0;&#x7684;&#x7F13;&#x51B2;&#x4F1A;&#x5728;&#x6E90;&#x5F00;&#x59CB;&#x7684;&#x65F6;&#x5019;&#x5F00;&#x542F;&#x5E76;&#x4E14;&#x5728;&#x6BCF;&#x6B21;&#x53D1;&#x51FA;&#x7684;&#x65F6;&#x5019;&#x5173;&#x95ED;&#x3002;
  *
- * @example &lt;caption&gt;Emit the last two click events as an array&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5C06;&#x6700;&#x540E;&#x4E24;&#x6B21;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x4F5C;&#x4E3A;&#x6570;&#x7EC4;&#x53D1;&#x51FA;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;On every click, emit the last two click events as an array&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x5728;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x7684;&#x65F6;&#x5019;, &#x4EE5;&#x6570;&#x7EC4;&#x7684;&#x5F62;&#x52BF;&#x53D1;&#x51FA;&#x6700;&#x540E;&#x4E24;&#x6B21;&#x7684;&#x70B9;&#x51FB;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x =&gt; console.log(x));
@@ -112,12 +107,11 @@
  * @see {@link pairwise}
  * @see {@link windowCount}
  *
- * @param {number} bufferSize The maximum size of the buffer emitted.
- * @param {number} [startBufferEvery] Interval at which to start a new buffer.
- * For example if `startBufferEvery` is `2`, then a new buffer will be started
- * on every other value from the source. A new buffer is started at the
- * beginning of the source by default.
- * @return {Observable&lt;T[]&gt;} An Observable of arrays of buffered values.
+ * @param {number} bufferSize &#x7F13;&#x5B58;&#x533A;&#x7684;&#x6700;&#x5927;&#x957F;&#x5EA6;&#x3002;
+ * @param {number} [startBufferEvery] &#x786E;&#x5B9A;&#x4F55;&#x65F6;&#x542F;&#x7528;&#x65B0;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x3002;
+ * &#x4F8B;&#x5982;&#x4E0A;&#x9762;&#x56FE;&#x4E2D;&#x6240;&#x793A;&#xFF0C;&#x5982;&#x679C;`startBufferEvery`&#x662F;`2`, &#x90A3;&#x4E48;&#x9694;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x4F1A;&#x5F00;&#x4E00;&#x4E2A;&#x65B0;
+ * &#x7684;&#x7F13;&#x51B2;&#x533A;&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5C06;&#x5728;&#x6E90;&#x7684;&#x8D77;&#x59CB;&#x5904;&#x542F;&#x7528;&#x65B0;&#x7684;&#x7F13;&#x51B2;&#x533A;&#x3002;
+ * @return {Observable&lt;T[]&gt;} &#x7F13;&#x5B58;&#x503C;&#x6570;&#x7EC4;&#x7684; Observable &#x3002;
  * @method bufferCount
  * @owner Observable
  */

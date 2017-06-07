@@ -83,22 +83,17 @@
 import { tryCatch } from &apos;../util/tryCatch&apos;;
 import { errorObject } from &apos;../util/errorObject&apos;;
 /**
- * Compares all values of two observables in sequence using an optional comparor function
- * and returns an observable of a single boolean value representing whether or not the two sequences
- * are equal.
- *
- * &lt;span class=&quot;informal&quot;&gt;Checks to see of all values emitted by both observables are equal, in order.&lt;/span&gt;
+ * &#x4F7F;&#x7528;&#x53EF;&#x9009;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#xFF0C;&#x6309;&#x987A;&#x5E8F;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A; Observables &#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x5355;&#x4E2A;&#x5E03;&#x5C14;&#x503C;&#x7684; Observable&#xFF0C; &#x4EE5;&#x8868;&#x793A;&#x4E24;&#x4E2A;&#x5E8F;&#x5217;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x3002;
+ * &lt;span class=&quot;informal&quot;&gt;&#x6309;&#x987A;&#x5E8F;&#x68C0;&#x67E5;&#x4E24;&#x4E2A; Observables &#x6240;&#x53D1;&#x51FA;&#x7684;&#x6240;&#x6709;&#x503C;&#x662F;&#x5426;&#x76F8;&#x7B49;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/sequenceEqual.png&quot; width=&quot;100%&quot;&gt;
  *
- * `sequenceEqual` subscribes to two observables and buffers incoming values from each observable. Whenever either
- * observable emits a value, the value is buffered and the buffers are shifted and compared from the bottom
- * up; If any value pair doesn&apos;t match, the returned observable will emit `false` and complete. If one of the
- * observables completes, the operator will wait for the other observable to complete; If the other
- * observable emits before completing, the returned observable will emit `false` and complete. If one observable never
- * completes or emits after the other complets, the returned observable will never complete.
+ * `sequenceEqual` &#x8BA2;&#x9605;&#x4E24;&#x4E2A; observables &#x5E76;&#x4E14;&#x7F13;&#x51B2;&#x6BCF;&#x4E2A; observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002; &#x5F53;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A; observable &#x53D1;&#x51FA;&#x6570;&#x636E;&#xFF0C; &#x8BE5;&#x503C;&#x4F1A;&#x88AB;&#x7F13;&#x51B2;
+ * &#x5E76;&#x4E14;&#x7F13;&#x51B2;&#x533A;&#x4ECE;&#x5E95;&#x90E8;&#x5411;&#x4E0A;&#x79FB;&#x52A8;&#x548C;&#x6BD4;&#x8F83;&#xFF1B; &#x5982;&#x679C;&#x4EFB;&#x4F55;&#x4E00;&#x5BF9;&#x503C;&#x4E0D;&#x5339;&#x914D;&#xFF0C; &#x8FD4;&#x56DE;&#x7684; observable &#x4F1A;&#x53D1;&#x51FA; `false` &#x548C;&#x5B8C;&#x6210;&#x3002; &#x5982;&#x679C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A; observables &#x5B8C;
+ * &#x6210;&#x4E86;&#xFF0C; &#x64CD;&#x4F5C;&#x7B26;&#x4F1A;&#x7B49;&#x5F85;&#x53E6;&#x4E00;&#x4E2A; observable &#x5B8C;&#x6210;&#xFF1B; &#x5982;&#x679C;&#x53E6;&#x4E00;&#x4E2A; observable &#x5728;&#x5B8C;&#x6210;&#x4E4B;&#x524D;&#x53C8;&#x53D1;&#x51FA;&#x4E86;&#x6570;&#x636E;&#xFF0C; &#x8FD4;&#x56DE; observable &#x4F1A;&#x53D1;&#x51FA; `false` &#x548C;&#x5B8C;
+ * &#x6210;&#x3002; &#x5982;&#x679C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A; observable &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x5728;&#x53E6;&#x4E00;&#x4E2A;&#x5B8C;&#x6210;&#x540E;&#x8FD8;&#x53D1;&#x51FA;&#x6570;&#x636E;&#xFF0C; &#x8FD4;&#x56DE;&#x7684; observable &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x7ED3;&#x675F;&#x3002;
  *
- * @example &lt;caption&gt;figure out if the Konami code matches&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x6307;&#x51FA; Konami &#x7801;&#x662F;&#x5426;&#x5339;&#x914D;&lt;/caption&gt;
  * var code = Rx.Observable.from([
  *  &quot;ArrowUp&quot;,
  *  &quot;ArrowUp&quot;,
@@ -127,10 +122,9 @@ import { errorObject } from &apos;../util/errorObject&apos;;
  * @see {@link zip}
  * @see {@link withLatestFrom}
  *
- * @param {Observable} compareTo The observable sequence to compare the source sequence to.
- * @param {function} [comparor] An optional function to compare each value pair
- * @return {Observable} An Observable of a single boolean value representing whether or not
- * the values emitted by both observables were equal in sequence.
+ * @param {Observable} compareTo &#x7528;&#x6765;&#x4E0E;&#x6E90; Observable &#x8FDB;&#x884C;&#x6BD4;&#x8F83;&#x7684; Observable &#x5E8F;&#x5217;&#x3002;
+ * @param {function} [comparor] &#x7528;&#x6765;&#x6BD4;&#x8F83;&#x6BCF;&#x4E00;&#x5BF9;&#x503C;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;&#x3002;
+ * @return {Observable} &#x8BE5; Observable &#x53D1;&#x51FA;&#x5355;&#x4E2A;&#x5E03;&#x5C14;&#x503C;&#xFF0C;&#x8BE5;&#x5E03;&#x5C14;&#x503C;&#x8868;&#x793A;&#x4E24;&#x4E2A; Observables &#x6240;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x662F;&#x5426;&#x4F9D;&#x6B21;&#x76F8;&#x7B49;&#x3002;
  * @method sequenceEqual
  * @owner Observable
  */

@@ -81,36 +81,30 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/operator/count.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Subscriber } from &apos;../Subscriber&apos;;
 /**
- * Counts the number of emissions on the source and emits that number when the
- * source completes.
+ * &#x8BA1;&#x7B97;&#x6E90;&#x7684;&#x53D1;&#x9001;&#x6570;&#x91CF;&#xFF0C;&#x5E76;&#x5F53;&#x6E90;&#x5B8C;&#x6210;&#x65F6;&#x53D1;&#x51FA;&#x8BE5;&#x6570;&#x503C;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Tells how many values were emitted, when the source
- * completes.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5F53;&#x6E90;&#x5B8C;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x544A;&#x77E5;&#x603B;&#x5171;&#x53D1;&#x9001;&#x4E86;&#x591A;&#x5C11;&#x4E2A;&#x503C;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/count.png&quot; width=&quot;100%&quot;&gt;
  *
- * `count` transforms an Observable that emits values into an Observable that
- * emits a single value that represents the number of values emitted by the
- * source Observable. If the source Observable terminates with an error, `count`
- * will pass this error notification along without emitting a value first. If
- * the source Observable does not terminate at all, `count` will neither emit
- * a value nor terminate. This operator takes an optional `predicate` function
- * as argument, in which case the output emission will represent the number of
- * source values that matched `true` with the `predicate`.
+ * `count` &#x5C06;&#x53D1;&#x9001;&#x6570;&#x636E;&#x7684; Observable &#x8F6C;&#x5316;&#x4E3A;&#x53EA;&#x53D1;&#x51FA;&#x6E90; Observable &#x603B;&#x5171;&#x53D1;&#x51FA;&#x7684;&#x6570;&#x636E;&#x9879;&#x7684; Observable&#x3002;
+ * &#x5982;&#x679C;&#x6E90; Observable &#x53D1;&#x751F;&#x9519;&#x8BEF;, `count`&#x5C06;&#x4F1A;&#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x800C;&#x4E0D;&#x662F;&#x53D1;&#x51FA;&#x503C;&#x3002; &#x5982;&#x679C;&#x6E90; Observable
+ * &#x4E00;&#x76F4;&#x4E0D;&#x7EC8;&#x7ED3;, `count` &#x65E2;&#x4E0D;&#x4F1A;&#x7EC8;&#x7ED3;&#x4E5F;&#x4E0D;&#x4F1A;&#x53D1;&#x51FA;&#x6570;&#x636E;&#x3002; &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x63A5;&#x53D7;&#x53EF;&#x9009;&#x7684;`predicate`&#x51FD;&#x6570;&#x505A;&#x4E3A;&#x53C2;&#x6570;,
+ * &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8F93;&#x51FA;&#x5219;&#x8868;&#x793A;&#x6E90;&#x503C;&#x4E2D;&#x6EE1;&#x8DB3; predicate &#x51FD;&#x6570;&#x7684;&#x503C;&#x7684;&#x6570;&#x91CF;&#x3002;
  *
- * @example &lt;caption&gt;Counts how many seconds have passed before the first click happened&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8BB0;&#x5F55;&#x7B2C;&#x4E00;&#x6B21;&#x70B9;&#x51FB;&#x4E4B;&#x524D;&#x7ECF;&#x8FC7;&#x4E86;&#x51E0;&#x79D2;&lt;/caption&gt;
  * var seconds = Rx.Observable.interval(1000);
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var secondsBeforeClick = seconds.takeUntil(clicks);
  * var result = secondsBeforeClick.count();
  * result.subscribe(x =&gt; console.log(x));
  *
- * @example &lt;caption&gt;Counts how many odd numbers are there between 1 and 7&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x8BB0;&#x5F55;1&#x5230;7&#x4E2D;&#x95F4;&#x6709;&#x591A;&#x5C11;&#x4E2A;&#x7D20;&#x6570;&lt;/caption&gt;
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i =&gt; i % 2 === 1);
  * result.subscribe(x =&gt; console.log(x));
  *
- * // Results in:
+ * // &#x7ED3;&#x679C;&#x662F;:
  * // 4
  *
  * @see {@link max}
@@ -118,13 +112,11 @@
  * @see {@link reduce}
  *
  * @param {function(value: T, i: number, source: Observable&lt;T&gt;): boolean} [predicate] A
- * boolean function to select what values are to be counted. It is provided with
- * arguments of:
- * - `value`: the value from the source Observable.
- * - `index`: the (zero-based) &quot;index&quot; of the value from the source Observable.
- * - `source`: the source Observable instance itself.
- * @return {Observable} An Observable of one number that represents the count as
- * described above.
+ * boolean &#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x9009;&#x62E9;&#x54EA;&#x4E9B;&#x503C;&#x4F1A;&#x88AB;&#x8BA1;&#x6570;&#x3002; &#x53C2;&#x6570;&#x5982;&#x4E0B;&#xFF1A;
+ * - `value`: &#x6765;&#x81EA;&#x6E90;&#x7684;&#x503C;
+ * - `index`: &#x6765;&#x81EA;&#x6295;&#x5C04;&#x7684; Observable &#x7684;&#x503C;&#x7684; &quot;index&quot;&#xFF08;&#x4ECE;0&#x5F00;&#x59CB;&#xFF09;
+ * - `source`: &#x6E90; Observable &#x81EA;&#x8EAB;&#x5B9E;&#x4F8B;&#x3002;
+ * @return {Observable} &#x6570;&#x5B57;&#x7C7B;&#x578B;&#x7684; Observable&#xFF0C;&#x8BE5;&#x6570;&#x5B57;&#x8868;&#x793A;&#x5982;&#x4E0A;&#x6240;&#x8FF0;&#x7684;&#x8BA1;&#x6570;&#x3002;
  * @method count
  * @owner Observable
  */

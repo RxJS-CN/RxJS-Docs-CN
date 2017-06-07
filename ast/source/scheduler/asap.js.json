@@ -185,10 +185,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Asap Scheduler\n *\n * <span class=\"informal\">Perform task as fast as it can be performed asynchronously</span>\n *\n * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task\n * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing\n * code to end and then it will try to execute given task as fast as possible.\n *\n * `asap` scheduler will do its best to minimize time between end of currently executing code\n * and start of scheduled task. This makes it best candidate for performing so called \"deferring\".\n * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves\n * some (although minimal) unwanted delay.\n *\n * Note that using `asap` scheduler does not necessarily mean that your task will be first to process\n * after currently executing code. In particular, if some task was also scheduled with `asap` before,\n * that task will execute first. That being said, if you need to schedule task asynchronously, but\n * as soon as possible, `asap` scheduler is your best bet.\n *\n * @example <caption>Compare async and asap scheduler</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // Logs:\n * // \"asap\"\n * // \"async\"\n * // ... but 'asap' goes first!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
+          "value": "*\n *\n * Asap 调度器\n *\n * <span class=\"informal\">尽可能快的异步地执行任务</span>\n *\n * 当你用它来延时任务的时候，`asap` 调度器的行为和 {@link async} 一样。如果你将延时时间设置为 `0`，\n * `asap` 会等待当前同步执行结束然后立刻执行当前任务。\n *\n * `asap` 会尽全力最小化当前执行代码和开始调度任务的时间。这使得它成为执行“deferring”的最佳候选人。以前，可以通过\n * 调用 `setTimeout(deferredTask, 0)` 来做到，但是这种方式仍热包含一些非期望的延时。\n *\n * 注意，使用 `asap` 调度器并不一定意味着你的任务将会在当前执行代码后第一个执行。尤其是如果之前有其他 `asap` 调度器的\n * 任务，该任务会首先执行。也就是说，如果你需要异步地调用任务，但是尽可能快的执行，`asap` 调度器是你最好的选择。\n *\n * @example <caption>比较 async 和 asap 调度器</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // 首先调度 'async'\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // 日志:\n * // \"asap\"\n * // \"async\"\n * // 但是 'asap' 首先执行!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
           "range": [
             92,
-            1545
+            835
           ],
           "loc": {
             "start": {
@@ -196,7 +196,7 @@
               "column": 0
             },
             "end": {
-              "line": 36,
+              "line": 31,
               "column": 3
             }
           }
@@ -214,16 +214,16 @@
               "type": "Identifier",
               "name": "asap",
               "range": [
-                1559,
-                1563
+                849,
+                853
               ],
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 32,
                   "column": 13
                 },
                 "end": {
-                  "line": 37,
+                  "line": 32,
                   "column": 17
                 }
               }
@@ -234,16 +234,16 @@
                 "type": "Identifier",
                 "name": "AsapScheduler",
                 "range": [
-                  1570,
-                  1583
+                  860,
+                  873
                 ],
                 "loc": {
                   "start": {
-                    "line": 37,
+                    "line": 32,
                     "column": 24
                   },
                   "end": {
-                    "line": 37,
+                    "line": 32,
                     "column": 37
                   }
                 }
@@ -253,47 +253,47 @@
                   "type": "Identifier",
                   "name": "AsapAction",
                   "range": [
-                    1584,
-                    1594
+                    874,
+                    884
                   ],
                   "loc": {
                     "start": {
-                      "line": 37,
+                      "line": 32,
                       "column": 38
                     },
                     "end": {
-                      "line": 37,
+                      "line": 32,
                       "column": 48
                     }
                   }
                 }
               ],
               "range": [
-                1566,
-                1595
+                856,
+                885
               ],
               "loc": {
                 "start": {
-                  "line": 37,
+                  "line": 32,
                   "column": 20
                 },
                 "end": {
-                  "line": 37,
+                  "line": 32,
                   "column": 49
                 }
               }
             },
             "range": [
-              1559,
-              1595
+              849,
+              885
             ],
             "loc": {
               "start": {
-                "line": 37,
+                "line": 32,
                 "column": 13
               },
               "end": {
-                "line": 37,
+                "line": 32,
                 "column": 49
               }
             }
@@ -301,26 +301,26 @@
         ],
         "kind": "const",
         "range": [
-          1553,
-          1596
+          843,
+          886
         ],
         "loc": {
           "start": {
-            "line": 37,
+            "line": 32,
             "column": 7
           },
           "end": {
-            "line": 37,
+            "line": 32,
             "column": 50
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n *\n * Asap Scheduler\n *\n * <span class=\"informal\">Perform task as fast as it can be performed asynchronously</span>\n *\n * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task\n * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing\n * code to end and then it will try to execute given task as fast as possible.\n *\n * `asap` scheduler will do its best to minimize time between end of currently executing code\n * and start of scheduled task. This makes it best candidate for performing so called \"deferring\".\n * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves\n * some (although minimal) unwanted delay.\n *\n * Note that using `asap` scheduler does not necessarily mean that your task will be first to process\n * after currently executing code. In particular, if some task was also scheduled with `asap` before,\n * that task will execute first. That being said, if you need to schedule task asynchronously, but\n * as soon as possible, `asap` scheduler is your best bet.\n *\n * @example <caption>Compare async and asap scheduler</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // Logs:\n * // \"asap\"\n * // \"async\"\n * // ... but 'asap' goes first!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
+            "value": "*\n *\n * Asap 调度器\n *\n * <span class=\"informal\">尽可能快的异步地执行任务</span>\n *\n * 当你用它来延时任务的时候，`asap` 调度器的行为和 {@link async} 一样。如果你将延时时间设置为 `0`，\n * `asap` 会等待当前同步执行结束然后立刻执行当前任务。\n *\n * `asap` 会尽全力最小化当前执行代码和开始调度任务的时间。这使得它成为执行“deferring”的最佳候选人。以前，可以通过\n * 调用 `setTimeout(deferredTask, 0)` 来做到，但是这种方式仍热包含一些非期望的延时。\n *\n * 注意，使用 `asap` 调度器并不一定意味着你的任务将会在当前执行代码后第一个执行。尤其是如果之前有其他 `asap` 调度器的\n * 任务，该任务会首先执行。也就是说，如果你需要异步地调用任务，但是尽可能快的执行，`asap` 调度器是你最好的选择。\n *\n * @example <caption>比较 async 和 asap 调度器</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // 首先调度 'async'\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // 日志:\n * // \"asap\"\n * // \"async\"\n * // 但是 'asap' 首先执行!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
             "range": [
               92,
-              1545
+              835
             ],
             "loc": {
               "start": {
@@ -328,7 +328,7 @@
                 "column": 0
               },
               "end": {
-                "line": 36,
+                "line": 31,
                 "column": 3
               }
             }
@@ -339,16 +339,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=asap.js.map",
             "range": [
-              1597,
-              1629
+              887,
+              919
             ],
             "loc": {
               "start": {
-                "line": 38,
+                "line": 33,
                 "column": 0
               },
               "end": {
-                "line": 38,
+                "line": 33,
                 "column": 32
               }
             }
@@ -358,26 +358,26 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1546,
-        1596
+        836,
+        886
       ],
       "loc": {
         "start": {
-          "line": 37,
+          "line": 32,
           "column": 0
         },
         "end": {
-          "line": 37,
+          "line": 32,
           "column": 50
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Asap Scheduler\n *\n * <span class=\"informal\">Perform task as fast as it can be performed asynchronously</span>\n *\n * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task\n * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing\n * code to end and then it will try to execute given task as fast as possible.\n *\n * `asap` scheduler will do its best to minimize time between end of currently executing code\n * and start of scheduled task. This makes it best candidate for performing so called \"deferring\".\n * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves\n * some (although minimal) unwanted delay.\n *\n * Note that using `asap` scheduler does not necessarily mean that your task will be first to process\n * after currently executing code. In particular, if some task was also scheduled with `asap` before,\n * that task will execute first. That being said, if you need to schedule task asynchronously, but\n * as soon as possible, `asap` scheduler is your best bet.\n *\n * @example <caption>Compare async and asap scheduler</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // Logs:\n * // \"asap\"\n * // \"async\"\n * // ... but 'asap' goes first!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
+          "value": "*\n *\n * Asap 调度器\n *\n * <span class=\"informal\">尽可能快的异步地执行任务</span>\n *\n * 当你用它来延时任务的时候，`asap` 调度器的行为和 {@link async} 一样。如果你将延时时间设置为 `0`，\n * `asap` 会等待当前同步执行结束然后立刻执行当前任务。\n *\n * `asap` 会尽全力最小化当前执行代码和开始调度任务的时间。这使得它成为执行“deferring”的最佳候选人。以前，可以通过\n * 调用 `setTimeout(deferredTask, 0)` 来做到，但是这种方式仍热包含一些非期望的延时。\n *\n * 注意，使用 `asap` 调度器并不一定意味着你的任务将会在当前执行代码后第一个执行。尤其是如果之前有其他 `asap` 调度器的\n * 任务，该任务会首先执行。也就是说，如果你需要异步地调用任务，但是尽可能快的执行，`asap` 调度器是你最好的选择。\n *\n * @example <caption>比较 async 和 asap 调度器</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // 首先调度 'async'\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // 日志:\n * // \"asap\"\n * // \"async\"\n * // 但是 'asap' 首先执行!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
           "range": [
             92,
-            1545
+            835
           ],
           "loc": {
             "start": {
@@ -385,7 +385,7 @@
               "column": 0
             },
             "end": {
-              "line": 36,
+              "line": 31,
               "column": 3
             }
           }
@@ -396,16 +396,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=asap.js.map",
           "range": [
-            1597,
-            1629
+            887,
+            919
           ],
           "loc": {
             "start": {
-              "line": 38,
+              "line": 33,
               "column": 0
             },
             "end": {
-              "line": 38,
+              "line": 33,
               "column": 32
             }
           }
@@ -416,7 +416,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1596
+    886
   ],
   "loc": {
     "start": {
@@ -424,17 +424,17 @@
       "column": 0
     },
     "end": {
-      "line": 37,
+      "line": 32,
       "column": 50
     }
   },
   "comments": [
     {
       "type": "Block",
-      "value": "*\n *\n * Asap Scheduler\n *\n * <span class=\"informal\">Perform task as fast as it can be performed asynchronously</span>\n *\n * `asap` scheduler behaves the same as {@link async} scheduler when you use it to delay task\n * in time. If however you set delay to `0`, `asap` will wait for current synchronously executing\n * code to end and then it will try to execute given task as fast as possible.\n *\n * `asap` scheduler will do its best to minimize time between end of currently executing code\n * and start of scheduled task. This makes it best candidate for performing so called \"deferring\".\n * Traditionally this was achieved by calling `setTimeout(deferredTask, 0)`, but that technique involves\n * some (although minimal) unwanted delay.\n *\n * Note that using `asap` scheduler does not necessarily mean that your task will be first to process\n * after currently executing code. In particular, if some task was also scheduled with `asap` before,\n * that task will execute first. That being said, if you need to schedule task asynchronously, but\n * as soon as possible, `asap` scheduler is your best bet.\n *\n * @example <caption>Compare async and asap scheduler</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // scheduling 'async' first...\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // Logs:\n * // \"asap\"\n * // \"async\"\n * // ... but 'asap' goes first!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
+      "value": "*\n *\n * Asap 调度器\n *\n * <span class=\"informal\">尽可能快的异步地执行任务</span>\n *\n * 当你用它来延时任务的时候，`asap` 调度器的行为和 {@link async} 一样。如果你将延时时间设置为 `0`，\n * `asap` 会等待当前同步执行结束然后立刻执行当前任务。\n *\n * `asap` 会尽全力最小化当前执行代码和开始调度任务的时间。这使得它成为执行“deferring”的最佳候选人。以前，可以通过\n * 调用 `setTimeout(deferredTask, 0)` 来做到，但是这种方式仍热包含一些非期望的延时。\n *\n * 注意，使用 `asap` 调度器并不一定意味着你的任务将会在当前执行代码后第一个执行。尤其是如果之前有其他 `asap` 调度器的\n * 任务，该任务会首先执行。也就是说，如果你需要异步地调用任务，但是尽可能快的执行，`asap` 调度器是你最好的选择。\n *\n * @example <caption>比较 async 和 asap 调度器</caption>\n *\n * Rx.Scheduler.async.schedule(() => console.log('async')); // 首先调度 'async'\n * Rx.Scheduler.asap.schedule(() => console.log('asap'));\n *\n * // 日志:\n * // \"asap\"\n * // \"async\"\n * // 但是 'asap' 首先执行!\n *\n * @static true\n * @name asap\n * @owner Scheduler\n ",
       "range": [
         92,
-        1545
+        835
       ],
       "loc": {
         "start": {
@@ -442,7 +442,7 @@
           "column": 0
         },
         "end": {
-          "line": 36,
+          "line": 31,
           "column": 3
         }
       }
@@ -451,16 +451,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=asap.js.map",
       "range": [
-        1597,
-        1629
+        887,
+        919
       ],
       "loc": {
         "start": {
-          "line": 38,
+          "line": 33,
           "column": 0
         },
         "end": {
-          "line": 38,
+          "line": 33,
           "column": 32
         }
       }

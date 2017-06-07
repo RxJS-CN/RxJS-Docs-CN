@@ -85,20 +85,17 @@ import { errorObject } from &apos;../util/errorObject&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * Buffers the source Observable values, using a factory function of closing
- * Observables to determine when to close, emit, and reset the buffer.
+ * &#x7F13;&#x51B2;&#x6E90; Observable &#x7684;&#x503C;, &#x4F7F;&#x7528;&#x5173;&#x95ED; Observable &#x7684;&#x5DE5;&#x5382;&#x51FD;&#x6570;&#x6765;&#x51B3;&#x5B9A;&#x4F55;&#x65F6;&#x5173;&#x95ED;&#x3001;&#x53D1;&#x51FA;&#x548C;&#x91CD;&#x7F6E;&#x7F13;&#x51B2;&#x533A;&#x3002;
  *
- * &lt;span class=&quot;informal&quot;&gt;Collects values from the past as an array. When it
- * starts collecting values, it calls a function that returns an Observable that
- * tells when to close the buffer and restart collecting.&lt;/span&gt;
+ * &lt;span class=&quot;informal&quot;&gt;&#x5C06;&#x8FC7;&#x5F80;&#x7684;&#x503C;&#x6536;&#x96C6;&#x5230;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C; &#x5F53;&#x5F00;&#x59CB;&#x6536;&#x96C6;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;, &#x8C03;&#x7528;&#x51FD;&#x6570;&#x8FD4;&#x56DE;
+ * Observable, &#x8BE5; Observable &#x544A;&#x77E5;&#x4F55;&#x65F6;&#x5173;&#x95ED;&#x7F13;&#x51B2;&#x533A;&#x5E76;&#x91CD;&#x65B0;&#x5F00;&#x59CB;&#x6536;&#x96C6;&#x3002;&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/bufferWhen.png&quot; width=&quot;100%&quot;&gt;
  *
- * Opens a buffer immediately, then closes the buffer when the observable
- * returned by calling `closingSelector` function emits a value. When it closes
- * the buffer, it immediately opens a new buffer and repeats the process.
+ * &#x7ACB;&#x9A6C;&#x5F00;&#x542F;&#x7F13;&#x51B2;&#x533A;, &#x7136;&#x540E;&#x5F53;`closingSelector`&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;observable&#x53D1;&#x51FA;&#x6570;&#x636E;&#x7684;&#x65F6;&#x5019;&#x5173;&#x95ED;&#x7F13;&#x51B2;&#x533A;.
+ * &#x5F53;&#x5173;&#x95ED;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x65F6;&#x5019;, &#x4F1A;&#x7ACB;&#x9A6C;&#x5F00;&#x542F;&#x65B0;&#x7684;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x5E76;&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x6B64;&#x8FC7;&#x7A0B;&#x3002;
  *
- * @example &lt;caption&gt;Emit an array of the last clicks every [1-5] random seconds&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x53D1;&#x51FA;&#x6BCF;&#x4E2A;&#x968F;&#x673A;&#x79D2;(1-5&#x79D2;)&#x6570;&#x5185;&#x7684;&#x6700;&#x65B0;&#x70B9;&#x51FB;&#x4E8B;&#x4EF6;&#x6570;&#x7EC4;&#x3002;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
  * var buffered = clicks.bufferWhen(() =&gt;
  *   Rx.Observable.interval(1000 + Math.random() * 4000)
@@ -111,9 +108,8 @@ import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
  * @see {@link bufferToggle}
  * @see {@link windowWhen}
  *
- * @param {function(): Observable} closingSelector A function that takes no
- * arguments and returns an Observable that signals buffer closure.
- * @return {Observable&lt;T[]&gt;} An observable of arrays of buffered values.
+ * @param {function(): Observable} closingSelector &#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x901A;&#x77E5;&#x7F13;&#x51B2;&#x533A;&#x5173;&#x95ED;&#x7684; Observable &#x3002;
+ * @return {Observable&lt;T[]&gt;} &#x7F13;&#x51B2;&#x6570;&#x7EC4;&#x7684; Observable &#x3002;
  * @method bufferWhen
  * @owner Observable
  */

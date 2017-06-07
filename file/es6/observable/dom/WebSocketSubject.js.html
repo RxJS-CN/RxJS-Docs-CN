@@ -119,9 +119,9 @@ export class WebSocketSubject extends AnonymousSubject {
         return JSON.parse(e.data);
     }
     /**
-     * Wrapper around the w3c-compatible WebSocket object provided by the browser.
+     * &#x5305;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x63D0;&#x4F9B;&#x7684;&#x517C;&#x5BB9;w3c&#x7684;WebSocket&#x5BF9;&#x8C61;.
      *
-     * @example &lt;caption&gt;Wraps browser WebSocket&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5305;&#x88C5;&#x6D4F;&#x89C8;&#x5668;&#x7684;WebSocket&lt;/caption&gt;
      *
      * let socket$ = Observable.webSocket(&apos;ws://localhost:8081&apos;);
      *
@@ -133,7 +133,7 @@ export class WebSocketSubject extends AnonymousSubject {
      *
      * socket$.next(JSON.stringify({ op: &apos;hello&apos; }));
      *
-     * @example &lt;caption&gt;Wraps WebSocket from nodejs-websocket (using node.js)&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x5305;&#x88C5;nodejs&#x7684;WebSocket&lt;/caption&gt;
      *
      * import { w3cwebsocket } from &apos;websocket&apos;;
      *

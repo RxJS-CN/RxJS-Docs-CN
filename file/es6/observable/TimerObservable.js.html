@@ -109,43 +109,31 @@ export class TimerObservable extends Observable {
             dueTime;
     }
     /**
-     * Creates an Observable that starts emitting after an `initialDelay` and
-     * emits ever increasing numbers after each `period` of time thereafter.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A; Observable&#xFF0C;&#x8BE5; Observable &#x5728;&#x521D;&#x59CB;&#x5EF6;&#x65F6;&#xFF08;`initialDelay`&#xFF09;&#x4E4B;&#x540E;&#x5F00;&#x59CB;&#x53D1;&#x9001;&#x5E76;&#x4E14;&#x5728;&#x6BCF;&#x4E2A;&#x65F6;&#x95F4;&#x5468;&#x671F;&#xFF08; `period`&#xFF09;&#x540E;&#x53D1;&#x51FA;&#x81EA;&#x589E;&#x7684;&#x6570;&#x5B57;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Its like {@link interval}, but you can specify when
-     * should the emissions start.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F;{@link interval}, &#x4F46;&#x662F;&#x4F60;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5F00;&#x59CB;&#x53D1;&#x9001;&#x3002;&lt;/span&gt;
      *
      * &lt;img src=&quot;./img/timer.png&quot; width=&quot;100%&quot;&gt;
      *
-     * `timer` returns an Observable that emits an infinite sequence of ascending
-     * integers, with a constant interval of time, `period` of your choosing
-     * between those emissions. The first emission happens after the specified
-     * `initialDelay`. The initial delay may be a {@link Date}. By default, this
-     * operator uses the `async` IScheduler to provide a notion of time, but you
-     * may pass any IScheduler to it. If `period` is not specified, the output
-     * Observable emits only one value, `0`. Otherwise, it emits an infinite
-     * sequence.
+     * `timer` &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x53D1;&#x51FA;&#x6709;&#x9650;&#x81EA;&#x589E;&#x6570;&#x5217;&#x7684; Observable, &#x5177;&#x6709;&#x4E00;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#xFF0C;&#x8FD9;&#x4E2A;&#x95F4;&#x9694;&#x7531;&#x4F60;&#x6765;&#x9009;&#x62E9;&#x3002; &#x7B2C;&#x4E00;&#x4E2A;&#x53D1;&#x9001;&#x53D1;&#x751F;&#x5728;
+     * &#x521D;&#x59CB;&#x5EF6;&#x65F6;&#x4E4B;&#x540E;. &#x521D;&#x59CB;&#x5EF6;&#x65F6;&#x5C31;&#x50CF;&#x662F;{@link Date}&#x3002; &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;, &#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x4F7F;&#x7528; async &#x8C03;&#x5EA6;&#x5668;&#x6765;&#x63D0;&#x4F9B;&#x65F6;&#x95F4;&#x7684;&#x6982;&#x5FF5;,
+     * &#x4F46;&#x662F;&#x4F60;&#x4E5F;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x4EFB;&#x4F55;&#x8C03;&#x5EA6;&#x5668;&#x3002; &#x5982;&#x679C;&#x65F6;&#x95F4;&#x5468;&#x671F;&#x6CA1;&#x6709;&#x88AB;&#x6307;&#x5B9A;, &#x8F93;&#x51FA; Observable &#x53EA;&#x53D1;&#x51FA;0&#x3002; &#x5426;&#x5219;,&#x4F1A;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x6570;&#x5217;&#x3002;
      *
-     * @example &lt;caption&gt;Emits ascending numbers, one every second (1000ms), starting after 3 seconds&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x6BCF;&#x9694;1&#x79D2;&#x53D1;&#x51FA;&#x81EA;&#x589E;&#x7684;&#x6570;&#x5B57;&#xFF0C;3&#x79D2;&#x540E;&#x5F00;&#x59CB;&#x53D1;&#x9001;&#x3002;&lt;/caption&gt;
      * var numbers = Rx.Observable.timer(3000, 1000);
      * numbers.subscribe(x =&gt; console.log(x));
      *
-     * @example &lt;caption&gt;Emits one number after five seconds&lt;/caption&gt;
+     * @example &lt;caption&gt;5&#x79D2;&#x540E;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&lt;/caption&gt;
      * var numbers = Rx.Observable.timer(5000);
      * numbers.subscribe(x =&gt; console.log(x));
      *
      * @see {@link interval}
      * @see {@link delay}
      *
-     * @param {number|Date} initialDelay The initial delay time to wait before
-     * emitting the first value of `0`.
-     * @param {number} [period] The period of time between emissions of the
-     * subsequent numbers.
-     * @param {Scheduler} [scheduler=async] The IScheduler to use for scheduling
-     * the emission of values, and providing a notion of &quot;time&quot;.
-     * @return {Observable} An Observable that emits a `0` after the
-     * `initialDelay` and ever increasing numbers after each `period` of time
-     * thereafter.
+     * @param {number|Date} initialDelay &#x5728;&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x503C; 0 &#x4E4B;i&#x524D;&#x7B49;&#x5F85;&#x7684;&#x521D;&#x59CB;&#x5EF6;&#x8FDF;&#x65F6;&#x95F4;&#x3002;
+     * @param {number} [period] &#x8FDE;&#x7EED;&#x6570;&#x5B57;&#x53D1;&#x9001;&#x4E4B;&#x95F4;&#x7684;&#x65F6;&#x95F4;&#x5468;&#x671F;&#x3002;
+     * @param {Scheduler} [scheduler=async] &#x8C03;&#x5EA6;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x8C03;&#x5EA6;&#x503C;&#x7684;&#x53D1;&#x9001;, &#x63D0;&#x4F9B;&#x201C;&#x65F6;&#x95F4;&#x201D;&#x7684;&#x6982;&#x5FF5;&#x3002;
+     * @return {Observable} &#x8BE5; Observable &#x5728;&#x521D;&#x59CB;&#x65F6;&#x5EF6;(initialDelay)&#x540E;&#x53D1;&#x51FA;0&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x4E4B;&#x540E;&#x7684;&#x6BCF;&#x4E2A;&#x65F6;&#x95F4;&#x5468;&#x671F;(period)&#x540E;&#x53D1;&#x51FA;&#x6309;&#x81EA;&#x589E;&#x7684;&#x6570;&#x5B57;&#x3002;
      * @static true
      * @name timer
      * @owner Observable
