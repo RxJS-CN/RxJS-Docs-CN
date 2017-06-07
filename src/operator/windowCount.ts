@@ -4,31 +4,28 @@ import { Observable } from '../Observable';
 import { Subject } from '../Subject';
 
 /**
- * 当每个嵌套 Observable 将要发出的值达到了 `windowSize`时，分支源 Observable 的值作为嵌套 Observable。
+ * 将源 Observable 的值分支成多个嵌套的 Observable ，每个嵌套的 Observable 最多发出 windowSize 个值。
  *
- * <span class="informal">就像是 {@link bufferCount}, 但是返回嵌套的 Observable而不是数组。</span>
+ * <span class="informal">就像是 {@link bufferCount}, 但是返回嵌套的 Observable 而不是数组。</span>
  *
  * <img src="./img/windowCount.png" width="100%">
 
- * 返回一个发出从源 Observable 收集到数据的 window Observable。 输出 Observable 发出连接的，不重叠的 
- * windows. 它会发出目前的 window 并且会打开一个新的当`windowBoundaries` Observable开始发出数据。 
- * 因为每个 window 都是 Observable， 所以输出 Observable 是高阶 Observable。
- * 输出 Observable 发出 windows 每个 `startWindowEvery` 数据项, 每个最多包含 `windowSize` 个数据项。 
- * 当源 Observable 完成或者遇到错误,输出 Observable 发出当前 window 并且传播从源 Observable 收到的通知。 
- * 如果 `startWindowEvery` 没有被提供, 那么新的 windows 会在每个 window 的数据项达到`windowSize`时立刻
- * 开启新的 window 在源的起始处。
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。
+ * 输出 Observable 每M(M = startWindowEvery)个项发出新窗口，每个窗口包含的项数不得超过N个(N = windowSize)。
+ * 当源 Observable 完成或者遇到错误,输出 Observable 发出当前窗口并且传播从源 Observable 收到的通知。 
+ * 如果没有提供 startWindowEvery ，那么在源 Observable 的起始处立即开启新窗口，并且当每个窗口的大小达到 windowSize 时完成。
  *
- * @example <caption>忽略每个第三次点击事件, 从第一个开始</caption>
+ * @example <caption>从第一个点击事件开始，忽略第3N次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(3)
- *   .map(win => win.skip(1)) // skip first of every 3 clicks
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.skip(1)) // 跳过每三个点击中的第一个
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>忽略每个第三次点击事件, 从第三个开始</caption>
+ * @example <caption>从第三个点击事件开始，忽略第3N次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowCount(2, 3)
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link window}
@@ -37,12 +34,10 @@ import { Subject } from '../Subject';
  * @see {@link windowWhen}
  * @see {@link bufferCount}
  *
- * @param {number} windowSize 每个 window 最多可以发送的个数。
- * @param {number} [startWindowEvery] 开启新 window 的间隔。
- * 比如，如果 `startWindowEvery` 是 `2`, 新 window 会在源中每个第二个值开启。 每个最新的 window 默认是在源
- * 的头开启。
- * @return {Observable<Observable<T>>} windows 型的 Observable, 相应的是 Observable 
- * 的值。
+ * @param {number} windowSize 每个窗口最多可以发送的个数。
+ * @param {number} [startWindowEvery] 开启新窗口的间隔。
+ * 比如，如果 `startWindowEvery` 是 `2`, 新窗口会在源中每个第二个值开启。默认情况下，新窗口是在源 Observable 的起始处开启的。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowCount
  * @owner Observable
  */

@@ -8,22 +8,22 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 当 `windowBoundaries` 开始发送时，分支源 Observable 的值作为嵌套 Observable。
+ * 每当 `windowBoundaries` 发出项时，将源 Observable 的值分支成嵌套的 Observable 。
  *
- * <span class="informal">就像是 {@link buffer}, 但是发出嵌套 Observable 而不是数组。</span>
+ * <span class="informal">就像是 {@link buffer}, 但发出的是嵌套的 Observable ，而不是数组。</span>
  *
  * <img src="./img/window.png" width="100%">
  *
- * 返回一个发出从源 Observable 收集到数据的 window Observable。 输出 Observable 发出连接的，不重叠的 
- * windows. 它会发出目前的 window 并且会打开一个新的当`windowBoundaries` Observable开始发出数据。 
- * 因为每个 window 都是 Observable， 所以输出 Observable 是高阶 Observable。
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。 输出 Observable 发出连接的，不重叠的 
+ * 窗口. 当`windowBoundaries` Observable 开始发出数据，它会发出目前的窗口并且会打开一个新的。 
+ * 因为每个窗口都是 Observable， 所以输出 Observable 是高阶 Observable。
  *
- * @example <caption>在每个1秒的 window , 发出最近的两次点击事件</caption>
+ * @example <caption>在每个窗口(窗口间的时间间隔为1秒)中，最多发出两次点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var interval = Rx.Observable.interval(1000);
  * var result = clicks.window(interval)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两个发送
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @see {@link windowCount}
@@ -32,9 +32,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  * @see {@link windowWhen}
  * @see {@link buffer}
  *
- * @param {Observable<any>} windowBoundaries 完成上一个 window 并且开启新 window 的 Observable。
- * @return {Observable<Observable<T>>} 有很多 windows 的 Observable, 它们是 Observables 发出源
- * Observables 的值。
+ * @param {Observable<any>} windowBoundaries 完成上一个窗口并且开启新窗口的 Observable。
+ * @return {Observable<Observable<T>>} 每个窗口都是一个 Observable，它发出源 Observable 所发出的值。
  * @method window
  * @owner Observable
  */
