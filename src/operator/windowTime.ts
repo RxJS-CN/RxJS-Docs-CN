@@ -10,7 +10,7 @@ import { isNumeric } from '../util/isNumeric';
 import { isScheduler } from '../util/isScheduler';
 
 /**
- * 周期性的分支源 Observable 的值作为嵌套 Observable。
+ * 周期性地将源 Observable 的值分支成嵌套的 Observable 。
  *
  * <span class="informal">就像是 {@link bufferTime}，但是发出的是嵌套的
  * Observable 而不是数组.</span>
@@ -27,21 +27,21 @@ import { isScheduler } from '../util/isScheduler';
  * @example <caption>在每一个1秒的窗口, 发出最多两个点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowTime(1000)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>每5秒启动一个窗口1秒长, 发出最多两个点击事件每个 window</caption>
+ * @example <caption>每5秒启动一个窗口1秒长, 每个窗口发出最多两个点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var result = clicks.windowTime(1000, 5000)
- *   .map(win => win.take(2)) // each window has at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ *   .map(win => win.take(2)) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
  *
  * @example <caption>和上面的例子一样，但是用 maxWindowCount 代替 take</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var result = clicks.windowTime(1000, 5000, 2) // each window has still at most 2 emissions
- *   .mergeAll(); // flatten the Observable-of-Observables
+ * var result = clicks.windowTime(1000, 5000, 2) // 每个窗口最多两次发射
+ *   .mergeAll(); // 打平高阶 Observable
  * result.subscribe(x => console.log(x));
 
  * @see {@link window}
@@ -54,7 +54,7 @@ import { isScheduler } from '../util/isScheduler';
  * @param {number} [windowCreationInterval] 启动新窗口的间隔。
  * @param {number} [maxWindowSize=Number.POSITIVE_INFINITY] 每个窗口在完成前可以发送的最大值。
  * @param {Scheduler} [scheduler=async] 调度器，以确定确定窗口边界的时间间隔。
- * @return {Observable<Observable<T>>} 返回窗口的 observable, 它反过来又是 Observables。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowTime
  * @owner Observable
  */

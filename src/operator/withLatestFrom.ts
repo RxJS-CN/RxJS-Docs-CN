@@ -23,17 +23,16 @@ export function withLatestFrom<T, R>(this: Observable<T>, array: ObservableInput
 /* tslint:enable:max-line-length */
 
 /**
- * 结合源 Observable 和另外的 Observables 创建新的 Observable， 该 Observable 的值由每
- * 个 Observable 最新的值组成，当且仅当源发出的时候。
+ * 结合源 Observable 和另外的 Observables 以创建新的 Observable， 该 Observable 的值由每
+ * 个 Observable 最新的值计算得出，当且仅当源发出的时候。
  *
- * <span class="informal">每当源 Observable 发出数据，它计算一个公式，使用该值加上从其他输入
- *  Observables 的最新值，然后发出该公式的输出。</span>
+ * <span class="informal">每当源 Observable 发出值，它会计算一个公式，此公式使用该值加上其他输入 Observable 的最新值，然后发出公式的输出结果。</span>
  *
  * <img src="./img/withLatestFrom.png" width="100%">
  *
- * `withLatestFrom` 结合源 Observablecombines（实例）和其他输入 Observables 的最新值当且仅当 
- * source 发出数据时, 可选的使用 `project` 函数决定输出 Observable 将要发出的值。
- * 所有的输入 Observables 都必须发出至少一个值在输出 Observable 发出值之前。
+ * `withLatestFrom` 结合源 Observablecombines（实例）和其他输入 Observables 的最新值，当且仅当 
+ * source 发出数据时, 可选的使用 `project` 函数以决定输出 Observable 将要发出的值。
+ * 在输出 Observable 发出值之前，所有的输入 Observables 都必须发出至少一个值。
  *
  * @example <caption>对于每个点击事件，发出一个包含最新时间和点击事件的数组。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
@@ -43,10 +42,10 @@ export function withLatestFrom<T, R>(this: Observable<T>, array: ObservableInput
  *
  * @see {@link combineLatest}
  *
- * @param {ObservableInput} other 输入 Observable 用来和源 Observable 结合。 可以传入多个输入 Observables。
- * @param {Function} [project] 将多有值合并的投射函数。顺序接受所有 Observables 传入的值，第一个参数是源 Observable
- * 的值。 (`a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`). 如果没有传入, 输入 Observable 会一直发送数组。
- * @return {Observable} 一个拥有将每个输入 Observable 最新的值投射后的值, 或者一个包含所有输入 Observable 的最新值的数组。
+ * @param {ObservableInput} other 输入 Observable ，用来和源 Observable 结合。 可以传入多个输入 Observables。
+ * @param {Function} [project] 将多个值合并的投射函数。顺序地接受所有 Observables 传入的值，第一个参数是源 Observable
+ * 的值。 (`a.withLatestFrom(b, c, (a1, b1, c1) => a1 + b1 + c1)`)。 如果没有传入, 输入 Observable 会一直发送数组。
+ * @return {Observable} 该 Observable 为一个拥有将每个输入 Observable 最新的值投射后的值, 或者一个包含所有输入 Observable 的最新值的数组。
  * @method withLatestFrom
  * @owner Observable
  */

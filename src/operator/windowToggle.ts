@@ -12,17 +12,16 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 分支源 Observable 的值作为嵌套 Observable，当 `openings` 的时候开始，当输出 `closingSelector` 发送的时候结束。
+ * 将源 Observable 的值分支成嵌套的 Observable，分支策略是以 openings 发出项为起始，以 closingSelector 发出为结束。
  *
- * <span class="informal">就像是 {@link bufferToggle}, 但是发出嵌套 Observable 而不是数组。</span>
+ * <span class="informal">就像是 {@link bufferToggle}, 但是发出的是嵌套 Observable 而不是数组。</span>
  *
  * <img src="./img/windowToggle.png" width="100%">
  *
- * 返回一个发出从源 Observable 收集到数据的窗口 Observable。输出 Observable 发出窗口 ，每一个窗口
- * 包括当 `openings` 发出时开始收集源 Observable 的数据项和 `closingSelector` 返回的 Observable 发出时结束收集
- * 的数据项。
+ * 返回的 Observable 发出从源 Observable 收集到的项的窗口。输出 Observable 发出窗口 ，每一个窗口
+ * 包括当 `openings` 发出时开始收集源 Observable 的数据项并且 `closingSelector` 返回的 Observable 发出项时结束收集。
  *
- * @example <caption>每一秒, 发出接下来 500ms 的点击事件。</caption>
+ * @example <caption>每隔一秒钟, 发出接下来 500ms 的点击事件。</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var openings = Rx.Observable.interval(1000);
  * var result = clicks.windowToggle(openings, i =>
@@ -38,9 +37,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *
  * @param {Observable<O>} openings 通知开启新窗口的 observable。
  * @param {function(value: O): Observable} closingSelector 是一个接受`openings` observable
- * 发出的值为参数并且返回 Observable 的函数, 当该 observable 发出 `next` 或者 `complete`时，与其相
- * 关联的窗口应该完成。
- * @return {Observable<Observable<T>>} 返回窗口的 observable, 它反过来又是 Observables。
+ * 发出的值作为参数，并且返回 Observable 的函数, 当该 observable 发出 `next` 或者 `complete`时，会发信号给相关的窗口以通知它们应该完成。
+ * @return {Observable<Observable<T>>} 窗口的 Observable，每个窗口又是值的 Observable 。(译者注：其实就是高阶 Observable )
  * @method windowToggle
  * @owner Observable
  */
