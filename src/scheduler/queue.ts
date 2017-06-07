@@ -5,14 +5,14 @@ import { QueueScheduler } from './QueueScheduler';
  *
  * Queue Scheduler
  *
- * <span class="informal">将每个任务都放到队列里，而不是立刻执行</span>
+ * <span class="informal">将每个任务都放到队列里，而不是立刻执行它们</span>
  *
  * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。
  *
- * 当和延时一起使用， 它同步调用当前任务，即调度的时候里面执行。然而当递归调用的时候，这是在调度的任务内，
+ * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，
  * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。
  * 
- * 这意味着当你用“queue”调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。
+ * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。
  *
  * @examples <caption>首先递归调度, 然后做一些事情</caption>
  *
@@ -46,7 +46,7 @@ import { QueueScheduler } from './QueueScheduler';
  * // "after", 2
  * // "after", 3
  *
- * // 使用队列，输出:
+ * // 但实际使用队列的输入:
  * // "before", 3
  * // "after", 3
  * // "before", 2
