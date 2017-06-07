@@ -17,7 +17,7 @@ export function startWith<T>(this: Observable<T>, ...array: Array<T | IScheduler
 /* tslint:enable:max-line-length */
 
 /**
- * 返回的 Observable 在会先发出作为参数指定的项，然后再发出由源 Observable 所发出的项。
+ * 返回的 Observable 会先发出作为参数指定的项，然后再发出由源 Observable 所发出的项。
  *
  * <img src="./img/startWith.png" width="100%">
  *
