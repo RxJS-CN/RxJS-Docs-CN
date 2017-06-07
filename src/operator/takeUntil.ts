@@ -10,8 +10,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
 /**
  * 发出源 Observable 发出的值，直到 `notifier` Observable 发出值。
  *
- * <span class="informal">让值通过直到第二个 Observable ，
- * 即 `notifier` 发出东西。然后它便完成。</span>
+ * <span class="informal">它发出源 Observable 的值，然后直到第二个 
+ * Observable (即 notifier )发出项，它便完成。</span>
  *
  * <img src="./img/takeUntil.png" width="100%">
  *
