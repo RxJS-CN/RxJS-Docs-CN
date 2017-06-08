@@ -24,29 +24,29 @@ export class ObservableDoc {
    * <img src="./img/create.png" width="100%">
    *
    * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的
-   * 时候，`onSubscription`函数会接收{@link Observer}实例作为唯一参数执行。`onSubscription` 应该
+   * 时候，`onSubscription`函数会接收 {@link Observer} 实例作为唯一参数执行。`onSubscription` 应该
    * 调用观察者对象的 `next`, `error` 和 `complete` 方法。
    *
-   * 带值调用`next`会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。
-   * 调用`error`意味着出现了错误，传给`error`的参数应该提供详细的错误信息。
+   * 带值调用 `next` 会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。
+   * 调用 `error` 意味着出现了错误，传给 `error` 的参数应该提供详细的错误信息。
    *
-   * 一个格式良好的 Observable 可以通过`next`方法发出任意多个值，但是`complete`和`error`方法只能被调用
-   * 一次并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete` 
-   * 或 `error`方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻
-   * 调用`complete`方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。
+   * 一个格式良好的 Observable 可以通过 `next` 方法发出任意多个值，但是 `complete` 和 `error` 方法只能被调用
+   * 一次，并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete` 
+   * 或 `error` 方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻
+   * 调用 `complete` 方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。
    *
-   * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象。 当要取消对 Observable
-   * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说， 如果你在自己的 Observable 里面使用了
+   * `onSubscription` 可以选择性的返回一个函数或者一个拥有 `unsubscribe` 方法的对象。 当要取消对 Observable
+   * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说，如果你在自己的 Observable 里面使用了
    * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览
    * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。
    *
-   * 绝大多数情况下你不需要使用`create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，
-   * `create`是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。
+   * 绝大多数情况下你不需要使用 `create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，
+   * `create` 是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。
    *
    * **TypeScript 签名问题**
    *
-   * 因为 Observable 继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名。
-   * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名。
+   * 因为 Observable 继承的类已经定义了静态 `create` 方法,但是签名不同, 不可能给 `Observable.create` 合适的签名。
+   * 正因为如此，给 `create` 传递的函数将不会进行类型检查，除非你明确指定了特定的签名。
    *
    * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,
    * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。
@@ -64,41 +64,41 @@ export class ObservableDoc {
    *   () => console.log('this is the end')
    * );
    *
-   * // Logs
+   * // 日志:
    * // 1
    * // 2
    * // 3
    * // "this is the end"
    *
    *
-   * @example <caption>Emit an error</caption>
+   * @example <caption>发出一个错误</caption>
    * const observable = Rx.Observable.create((observer) => {
    *   observer.error('something went really wrong...');
    * });
    *
    * observable.subscribe(
-   *   value => console.log(value), // will never be called
+   *   value => console.log(value), // 永远不会被调用
    *   err => console.log(err),
-   *   () => console.log('complete') // will never be called
+   *   () => console.log('complete') // 永远不会被调用
    * );
    *
-   * // Logs
+   * // 日志:
    * // "something went really wrong..."
    *
    *
-   * @example <caption>Return unsubscribe function</caption>
+   * @example <caption>返回取消订阅函数</caption>
    *
    * const observable = Rx.Observable.create(observer => {
-   *   const id = setTimeout(() => observer.next('...'), 5000); // emit value after 5s
+   *   const id = setTimeout(() => observer.next('...'), 5000); // 5s后发出数据
    *
    *   return () => { clearTimeout(id); console.log('cleared!'); };
    * });
    *
    * const subscription = observable.subscribe(value => console.log(value));
    *
-   * setTimeout(() => subscription.unsubscribe(), 3000); // cancel subscription after 3s
+   * setTimeout(() => subscription.unsubscribe(), 3000); // 3s后取消订阅
    *
-   * // Logs:
+   * // 日志:
    * // "cleared!" after 3s
    *
    * // Never logs "..."
@@ -109,12 +109,9 @@ export class ObservableDoc {
    * @see {@link of}
    * @see {@link throw}
    *
-   * @param {function(observer: Observer): TeardownLogic} onSubscription A
-   * function that accepts an Observer, and invokes its `next`,
-   * `error`, and `complete` methods as appropriate, and optionally returns some
-   * logic for cleaning up resources.
-   * @return {Observable} An Observable that, whenever subscribed, will execute the
-   * specified function.
+   * @param {function(observer: Observer): TeardownLogic} onSubscription 该函数接受一个观察者，
+   * 然后在适当的时机调用观察者的 `next` 、`error` 或者 `complete` 方法，也可以返回一些清理资源的逻辑。
+   * @return {Observable} Observable， 当该 Observable 被订阅的时候将会执行特定函数。
    * @static true
    * @name create
    * @owner Observable
@@ -125,8 +122,7 @@ export class ObservableDoc {
 }
 
 /**
- * An interface for a consumer of push-based notifications delivered by an
- * {@link Observable}.
+ * 由 {@link Observable} 发出通知的推送系统的消费接口。
  *
  * ```ts
  * interface Observer<T> {
@@ -137,12 +133,9 @@ export class ObservableDoc {
  * }
  * ```
  *
- * An object conforming to the Observer interface is usually
- * given to the `observable.subscribe(observer)` method, and the Observable will
- * call the Observer's `next(value)` method to provide notifications. A
- * well-behaved Observable will call an Observer's `complete()` method exactly
- * once or the Observer's `error(err)` method exactly once, as the last
- * notification delivered.
+ * 符合观察者接口规范的对象被传递给 `observable.subscribe(observer)` 方法，同时
+ * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的掉用
+ * 观察者的 `complete()` 或者 `error(err)` 方法一次，最为最后的通知。  
  *
  * @interface
  * @name Observer
@@ -150,34 +143,30 @@ export class ObservableDoc {
  */
 export class ObserverDoc<T> {
   /**
-   * An optional flag to indicate whether this Observer, when used as a
-   * subscriber, has already been unsubscribed from its Observable.
+   * 可选的标志位用来表明该 Observer （订阅过的）是否已经被它的 Observable 取消了订阅。
    * @type {boolean}
    */
   closed: boolean = false;
   /**
-   * The callback to receive notifications of type `next` from the Observable,
-   * with a value. The Observable may call this method 0 or more times.
-   * @param {T} value The `next` value.
+   * 该回调函数接收来自 Observable 类型为 `next` 的通知，带着值。Observable 会掉用这个方法0次或者多次。
+   * @param {T} value  `next` 的值。
    * @return {void}
    */
   next(value: T): void {
     return void 0;
   }
   /**
-   * The callback to receive notifications of type `error` from the Observable,
-   * with an attached {@link Error}. Notifies the Observer that the Observable
-   * has experienced an error condition.
-   * @param {any} err The `error` exception.
+   * 该回调函数接收来自 Observable 类型为 `error` 的通知，带着 {@link Error} 。通知观察者，
+   * Observable 经历了错误条件。 
+   * @param {any} err `error` 异常。
    * @return {void}
    */
   error(err: any): void {
     return void 0;
   }
   /**
-   * The callback to receive a valueless notification of type `complete` from
-   * the Observable. Notifies the Observer that the Observable has finished
-   * sending push-based notifications.
+   * 该回调函数接收来自于 Observable 类型为 `complete` 的无值通知。通知观察者，Observable 已经
+   * 完成了发送推送系统通知。
    * @return {void}
    */
   complete(): void {
@@ -186,60 +175,50 @@ export class ObserverDoc<T> {
 }
 
 /**
- * `SubscribableOrPromise` interface describes values that behave like either
- * Observables or Promises. Every operator that accepts arguments annotated
- * with this interface, can be also used with parameters that are not necessarily
- * RxJS Observables.
+ * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符
+ * 接受被这个借口注释过的参数，也可以使用不是 RxJS Observables 的参数。 
  *
- * Following types of values might be passed to operators expecting this interface:
+ * 下列类型的值可以传递给期望此接口的运算符：
  *
  * ## Observable
  *
- * RxJS {@link Observable} instance.
+ * RxJS {@link Observable} 实例。
  *
  * ## Observable-like (Subscribable)
  *
- * This might be any object that has `Symbol.observable` method. This method,
- * when called, should return object with `subscribe` method on it, which should
- * behave the same as RxJS `Observable.subscribe`.
+ * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被掉用的时候应该返回一个带有
+ * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。
  *
- * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.
- * Since currently it is not supported natively, and every symbol is equal only to itself,
- * you should use https://github.com/blesh/symbol-observable polyfill, when implementing
- * custom Observable-likes.
+ * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。
+ * 因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片，
+ * 当实现一个自定义的类 Observable 对象。 
  *
  * **TypeScript Subscribable interface issue**
  *
- * Although TypeScript interface claims that Subscribable is an object that has `subscribe`
- * method declared directly on it, passing custom objects that have `subscribe`
- * method but not `Symbol.observable` method will fail at runtime. Conversely, passing
- * objects with `Symbol.observable` but without `subscribe` will fail at compile time
- * (if you use TypeScript).
+ * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法
+ * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 没有
+ * 定义 `subscribe` 的对象将会在编译器失败（如果你使用 TypeScript）。
  *
- * TypeScript has problem supporting interfaces with methods defined as symbol
- * properties. To get around that, you should implement `subscribe` directly on
- * passed object, and make `Symbol.observable` method simply return `this`. That way
- * everything will work as expected, and compiler will not complain. If you really
- * do not want to put `subscribe` directly on your object, you will have to type cast
- * it to `any`, before passing it to an operator.
+ * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现
+ * `subscribe` 方法，并且使得 `Symbol.observable` 方法简单的返回 `this` 。这种方式能够
+ * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，
+ * 将类型转化为 `any`。
  *
- * When this issue is resolved, Subscribable interface will only permit Observable-like
- * objects with `Symbol.observable` defined, no matter if they themselves implement
- * `subscribe` method or not.
+ * 当这个 issue 被解决了，可订阅的接口仅仅允许定义了 `Symbol.observable` 方法的类 Observable 
+ * 对象，无论该对象是否实现了 `subscribe` 方法。   
  *
  * ## ES6 Promise
  *
- * Promise can be interpreted as Observable that emits value and completes
- * when it is resolved or errors when it is rejected.
+ * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，
+ * 当 rejected 的时候，Observable 发出错误。
  *
  * ## Promise-like (Thenable)
+ * 
+ * 传递给操作符的 Promises 不需要是 ES6 原生 Promises。可以从流行的库，垫片或者
+ * 自定义实现。它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为
+ * 一致。 
  *
- * Promises passed to operators do not have to be native ES6 Promises.
- * They can be implementations from popular Promise libraries, polyfills
- * or even custom ones. They just need to have `then` method that works
- * as the same as ES6 Promise `then`.
- *
- * @example <caption>Use merge and then map with non-RxJS observable</caption>
+ * @example <caption>用非 RxJS 的 observable的参数使用 merge 和 map 操作符</caption>
  * const nonRxJSObservable = {
  *   subscribe(observer) {
  *     observer.next(1000);
@@ -252,17 +231,17 @@ export class ObserverDoc<T> {
  *
  * Rx.Observable.merge(nonRxJSObservable)
  * .map(value => "This value is " + value)
- * .subscribe(result => console.log(result)); // Logs "This value is 1000"
+ * .subscribe(result => console.log(result)); // 输出 "This value is 1000"
  *
  *
- * @example <caption>Use combineLatest with ES6 Promise</caption>
+ * @example <caption>用 ES6 的 Promise 使用 combineLatest 操作符</caption>
  * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))
  * .subscribe(
  *   value => console.log(value),
  *   err => {},
  *   () => console.log('the end!')
  * );
- * // Logs
+ * // 输出:
  * // [5, 10, 15]
  * // "the end!"
  *
@@ -276,50 +255,40 @@ export class SubscribableOrPromiseDoc<T> {
 }
 
 /**
- * `ObservableInput` interface describes all values that are either an
- * {@link SubscribableOrPromise} or some kind of collection of values that
- * can be transformed to Observable emitting that values. Every operator that
- * accepts arguments annotated with this interface, can be also used with
- * parameters that are not necessarily RxJS Observables.
+ * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者
+ * 某些类型的值的集合，可以转化为 Observable 的发出值。
+ * 每个操作符都可以接收被该接口注释过的参数，而不需要是 RxJS Observables 的参数。
  *
- * `ObservableInput` extends {@link SubscribableOrPromise} with following types:
+ * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有下面类型:
  *
- * ## Array
+ * ## 数组
  *
- * Arrays can be interpreted as observables that emit all values in array one by one,
- * from left to right, and then complete immediately.
+ * 数组可以被理解为，observables 会从左到右，一个接一个的发送数组的值，然后完成。
  *
- * ## Array-like
+ * ## 类数组
  *
- * Arrays passed to operators do not have to be built-in JavaScript Arrays. They
- * can be also, for example, `arguments` property available inside every function,
- * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),
- * or, actually, any object that has `length` property (which is a number)
- * and stores values under non-negative (zero and up) integers.
+ * 传递给操作符的数组也可以不是 JavaScript 内置的数组。也可以是，比如说，每个函数的 `arguments`
+ * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者，
+ * 事实上，拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。  
  *
- * ## ES6 Iterable
+ * ## ES6 迭代器
  *
- * Operators will accept both built-in and custom ES6 Iterables, by treating them as
- * observables that emit all its values in order of iteration and then complete
- * when iteration ends. Note that contrary to arrays, Iterables do not have to
- * necessarily be finite, so creating Observables that never complete is possible as well.
+ * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，
+ * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成
+ * 的 Observables 成为可能。
  *
- * Note that you can make iterator an instance of Iterable by having it return itself
- * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,
- * though indirectly, iterators themselves as well. All native ES6 iterators are instances
- * of Iterable by default, so you do not have to implement their `Symbol.iterator` method
- * yourself.
+ * 注意，你可以迭代迭代器实例通过在 `Symbol.iterator` 方法中返回自身。这意味着每个操作符接收可迭代对象，
+ * 间接的，迭代器本身。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。
  *
  * **TypeScript Iterable interface issue**
  *
- * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,
- * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
- * If you want to use Iterable as argument for operator, cast it to `any` first.
- * Remember of course that, because of casting, you have to yourself ensure that passed
- * argument really implements said interface.
+ * TypeScript `ObservableInput` 接口实际上缺乏Iterables的类型签名，
+ * 由于一些项目造成的问题(查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
+ * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数
+ * 确实实现了接口。
  *
  *
- * @example <caption>Use merge with arrays</caption>
+ * @example <caption>用数组使用 merge 操作符</caption>
  * Rx.Observable.merge([1, 2], [4], [5, 6])
  * .subscribe(
  *   value => console.log(value),
@@ -327,7 +296,7 @@ export class SubscribableOrPromiseDoc<T> {
  *   () => console.log('ta dam!')
  * );
  *
- * // Logs
+ * // 日志：
  * // 1
  * // 2
  * // 3
@@ -337,7 +306,7 @@ export class SubscribableOrPromiseDoc<T> {
  * // "ta dam!"
  *
  *
- * @example <caption>Use merge with array-like</caption>
+ * @example <caption>用类数组使用 merge 操作符</caption>
  * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})
  * .subscribe(
  *   value => console.log(value),
@@ -345,33 +314,33 @@ export class SubscribableOrPromiseDoc<T> {
  *   () => console.log('nice, huh?')
  * );
  *
- * // Logs
+ * // 日志：
  * // 1
  * // 2
  * // 3
  * // "nice, huh?"
  *
- * @example <caption>Use merge with an Iterable (Map)</caption>
+ * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>
  * const firstMap = new Map([[1, 'a'], [2, 'b']]);
  * const secondMap = new Map([[3, 'c'], [4, 'd']]);
  *
  * Rx.Observable.merge(
- *   firstMap,          // pass Iterable
- *   secondMap.values() // pass iterator, which is itself an Iterable
+ *   firstMap,          // 传递 Iterable
+ *   secondMap.values() // 传递 iterator, 它本身就是 Iterable
  * ).subscribe(
  *   value => console.log(value),
  *   err => {},
  *   () => console.log('yup!')
  * );
  *
- * // Logs
+ * // 日志：
  * // [1, "a"]
  * // [2, "b"]
  * // "c"
  * // "d"
  * // "yup!"
  *
- * @example <caption>Use from with generator (returning infinite iterator)</caption>
+ * @example <caption>用 generator（返回有限 iterator）使用 from 操作符</caption>
  * // infinite stream of incrementing numbers
  * const infinite = function* () {
  *   let i = 0;
@@ -382,14 +351,14 @@ export class SubscribableOrPromiseDoc<T> {
  * };
  *
  * Rx.Observable.from(infinite())
- * .take(3) // only take 3, cause this is infinite
+ * .take(3) // 仅仅取前三个，因为是有限的
  * .subscribe(
  *   value => console.log(value),
  *   err => {},
  *   () => console.log('ta dam!')
  * );
  *
- * // Logs
+ * // 日志：
  * // 0
  * // 1
  * // 2
@@ -405,26 +374,22 @@ export class ObservableInputDoc<T> {
 
 /**
  *
- * This interface describes what should be returned by function passed to Observable
- * constructor or static {@link create} function. Value of that interface will be used
- * to cancel subscription for given Observable.
+ * 这个接口描述了 Observable 构造函数 和 静态方法 {@link create} 接收的函数的返回对象。这个接口
+ * 的值可以用来取消对当前 Observable 的订阅。
  *
- * `TeardownLogic` can be:
+ * `TeardownLogic` 可以是:
  *
  * ## Function
  *
- * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,
- * that function will be called
+ * 该函数不接收参数。 当创建的 Observable 的消费者掉用 `unsubscribe`，该函数被掉用。
  *
  * ## AnonymousSubscription
  *
- * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method
- * will work the same as function
+ * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。
  *
  * ## void
- *
- * If created Observable does not have any resources to clean up, function does not have to
- * return anything.
+ * 
+ * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。 
  *
  * @interface
  * @name TeardownLogic
