@@ -7,14 +7,15 @@
     "includes": ["(spec)\\.(js|ts)$"]
   },
   "undocumentIdentifier": false,
-  "title": "RxJS",
+  "title": "RxJS 中文文档",
   "styles": ["./doc/styles/main.css"],
   "scripts": [
     "./dist/global/Rx.js",
     "./doc/asset/devtools-welcome.js",
     "./doc/scripts/custom-manual-styles.js",
     "./doc/decision-tree-widget/dist/decision-tree-widget.min.js",
-    "./doc/scripts/theme-toggler.js"
+    "./doc/scripts/theme-toggler.js",
+    "./doc/scripts/translate.js"
   ],
   "index": "./doc/index.md",
   "plugins": [
