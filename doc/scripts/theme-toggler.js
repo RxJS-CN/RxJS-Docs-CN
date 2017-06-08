@@ -1,6 +1,7 @@
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     var themes = ['dark', 'light'];
+    var themesMap = {'dark': '暗色', 'light': '亮色'};
     var themeToggler = document.createElement('div');
     themeToggler.className = 'theme-toggler';
 
@@ -11,7 +12,7 @@
     function createTheme(theme) {
       var themeNode = document.createElement('span');
       themeNode.className = 'theme-selector ' + theme;
-      themeNode.innerHTML = theme + ' theme';
+      themeNode.innerHTML = themesMap[theme] + '主题';
 
       themeNode.addEventListener('click', function () {
         setBodyClassName(theme);
