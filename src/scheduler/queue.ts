@@ -3,7 +3,7 @@ import { QueueScheduler } from './QueueScheduler';
 
 /**
  *
- * Queue Scheduler
+ * 队列调度器
  *
  * <span class="informal">将每个任务都放到队列里，而不是立刻执行它们</span>
  *
