@@ -15,7 +15,8 @@
     "./doc/scripts/custom-manual-styles.js",
     "./doc/decision-tree-widget/dist/decision-tree-widget.min.js",
     "./doc/scripts/theme-toggler.js",
-    "./doc/scripts/translate.js"
+    "./doc/scripts/translate.js",
+    "./doc/scripts/link-hash.js"
   ],
   "index": "./doc/index.md",
   "plugins": [
