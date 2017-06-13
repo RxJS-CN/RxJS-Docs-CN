@@ -16,6 +16,7 @@
 <script data-ice="userScript" src="user/script/3-decision-tree-widget.min.js"></script>
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
+<script data-ice="userScript" src="user/script/6-link-hash.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -2811,6 +2812,32 @@ ConnectableObservable &#x53EF;&#x4EE5;&#x5728;&#x6F5C;&#x5728;&#x7684;&#x591A;&#
         
         
         <div data-ice="description"><p>&#x8FD4;&#x56DE;&#x7684; Observable &#x4F1A;&#x5148;&#x53D1;&#x51FA;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x6307;&#x5B9A;&#x7684;&#x9879;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x53D1;&#x51FA;&#x7531;&#x6E90; Observable &#x6240;&#x53D1;&#x51FA;&#x7684;&#x9879;&#x3002;</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="class/es6/Observable.js~Observable.html#instance-method-subscribe">subscribe</a></span></span><span data-ice="signature">(observerOrNext: <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, error: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, complete: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>ISubscription</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.</p>
 </div>
       </div>
     </td>
@@ -5977,7 +6004,7 @@ can be <code>next</code>ed, or an <code>error</code> method can be called to rai
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber121">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber235">source</a></span></span>
     </span>
   </h3>
 
@@ -8660,7 +8687,7 @@ positions.subscribe(x =&gt; console.log(x));</code></pre>
   
 
   <div data-ice="see"><h4>See:</h4><ul><li><span><span><a href="class/es6/Observable.js~Observable.html#instance-method-map">map</a></span></span></li>
-<li><span><span>subscribe</span></span></li></ul></div>
+<li><span><span><a href="class/es6/Observable.js~Observable.html#instance-method-subscribe">subscribe</a></span></span></li></ul></div>
   
 </div>
 <div class="detail" data-ice="detail">
@@ -9623,7 +9650,7 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber71">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber185">source</a></span></span>
     </span>
   </h3>
 
@@ -11538,7 +11565,7 @@ intervals
 &#x9519;&#x8BEF;&#x65F6;&#xFF0C;&#x5B83;&#x66F4;&#x4E3A;&#x5BBD;&#x5BB9;&#x3002;&#x7136;&#x800C;&#xFF0C;<code>concat</code> &#x53EA;&#x6709;&#x5F53;&#x524D;&#x4E00;&#x4E2A; Observable &#x6210;&#x529F;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x5B83;&#x624D;&#x4F1A;&#x8BA2;&#x9605;&#x7CFB;&#x5217;&#x4E2D;&#x7684;&#x4E0B;&#x4E2A; Observable &#xFF0C;
 &#x800C; <code>onErrorResumeNext</code> &#x5373;&#x4F7F;&#x662F;&#x4EE5;&#x9519;&#x8BEF;&#x5B8C;&#x6210;&#x67D0;&#x4E2A; Observalbe &#x65F6;&#xFF0C;&#x5B83;&#x4E5F;&#x4F1A;&#x8BA2;&#x9605;&#x4E0B;&#x4E00;&#x4E2A;&#x3002;</p>
 <p>&#x6CE8;&#x610F;&#xFF0C;&#x5BF9;&#x4E8E;&#x7531; Observables &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#xFF0C;&#x4F60;&#x65E0;&#x6CD5;&#x83B7;&#x5F97;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3002;&#x7279;&#x522B;&#x662F;&#x4E0D;&#x8981;&#x6307;&#x671B;&#x53EF;&#x4EE5;&#x5C06;&#x8FD9;&#x4E9B;&#x51FA;&#x73B0;&#x5728;&#x9519;&#x8BEF;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x4E2D;&#x7684;
-&#x9519;&#x8BEF;&#x4F20;&#x9012;&#x7ED9;  <span>subscribe</span> &#x3002;&#x5982;&#x679C;&#x8981;&#x6839;&#x636E; Observable &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#x91C7;&#x53D6;&#x7279;&#x5B9A;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5E94;&#x8BE5;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528; <span><a href="class/es6/Observable.js~Observable.html#instance-method-catch">catch</a></span> &#x3002;</p>
+&#x9519;&#x8BEF;&#x4F20;&#x9012;&#x7ED9;  <span><a href="class/es6/Observable.js~Observable.html#instance-method-subscribe">subscribe</a></span> &#x3002;&#x5982;&#x679C;&#x8981;&#x6839;&#x636E; Observable &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#x91C7;&#x53D6;&#x7279;&#x5B9A;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5E94;&#x8BE5;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528; <span><a href="class/es6/Observable.js~Observable.html#instance-method-catch">catch</a></span> &#x3002;</p>
 </div>
 
   
@@ -13742,6 +13769,190 @@ skipLastTwo.subscribe(x =&gt; console.log(x));
     <li data-ice="test"><span><a href="test-file/spec-js/operators/startWith-spec.js.html#lineNumber5">Observable.prototype.startWith</a></span></li>
 </ul>
   </div>
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-subscribe">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">subscribe</span><span data-ice="signature">(observerOrNext: <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, error: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>, complete: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>ISubscription</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber151">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  <div data-ice="description"><p>Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.</p>
+<p><span class="informal">Use it when you have all these Observables, but still nothing is happening.</span></p>
+<p><code>subscribe</code> is not a regular operator, but a method that calls Observables internal <code>subscribe</code> function. It
+might be for example a function that you passed to a <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> static factory, but most of the time it is
+a library implementation, which defines what and when will be emitted by an Observable. This means that calling
+<code>subscribe</code> is actually the moment when Observable starts its work, not when it is created, as it is often
+thought.</p>
+<p>Apart from starting the execution of an Observable, this method allows you to listen for values
+that an Observable emits, as well as for when it completes or errors. You can achieve this in two
+following ways.</p>
+<p>The first way is creating an object that implements <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> interface. It should have methods
+defined by that interface, but note that it should be just a regular JavaScript object, which you can create
+yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
+not attempt to use any RxJS implementation details to create Observers - you don&apos;t need them. Remember also
+that your object does not have to implement all methods. If you find yourself creating a method that doesn&apos;t
+do anything, you can simply omit it. Note however, that if <code>error</code> method is not provided, all errors will
+be left uncaught.</p>
+<p>The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
+This means you can provide three functions as arguments to <code>subscribe</code>, where first function is equivalent
+of a <code>next</code> method, second of an <code>error</code> method and third of a <code>complete</code> method. Just as in case of Observer,
+if you do not need to listen for something, you can omit a function, preferably by passing <code>undefined</code> or <code>null</code>,
+since <code>subscribe</code> recognizes these functions by where they were placed in function call. When it comes
+to <code>error</code> function, just as before, if not provided, errors emitted by an Observable will be thrown.</p>
+<p>Whatever style of calling <code>subscribe</code> you use, in both cases it returns a Subscription object.
+This object allows you to call <code>unsubscribe</code> on it, which in turn will stop work that an Observable does and will clean
+up all resources that an Observable used. Note that cancelling a subscription will not call <code>complete</code> callback
+provided to <code>subscribe</code> function, which is reserved for a regular completion signal that comes from an Observable.</p>
+<p>Remember that callbacks provided to <code>subscribe</code> are not guaranteed to be called asynchronously.
+It is an Observable itself that decides when these functions will be called. For example <span><a href="class/es6/Observable.js~Observable.html#static-method-of">of</a></span>
+by default emits all its values synchronously. Always check documentation for how given Observable
+will behave when subscribed and if its default behavior can be modified with a <span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span>.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">observerOrNext</td>
+      <td data-ice="type"><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>(optional) Either an observer with methods to be called,
+ or the first of three possible handlers, which is the handler for each value emitted from the subscribed
+ Observable.</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">error</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>(optional) A handler for a terminal event resulting from an error. If no error handler is provided,
+ the error will be thrown as unhandled.</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">complete</td>
+      <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>(optional) A handler for a terminal event resulting from successful completion.</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span>ISubscription</span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>a subscription reference to the registered handlers</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  <div data-ice="example">
+    <h4>Example:</h4>
+    
+  <div class="example-doc" data-ice="exampleDoc">
+      <div class="example-caption" data-ice="exampleCaption">Subscribe with an Observer</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const sumObserver = {
+  sum: 0,
+  next(value) {
+    console.log(&apos;Adding: &apos; + value);
+    this.sum = this.sum + value;
+  },
+  error() { // We actually could just remote this method,
+  },        // since we do not really care about errors right now.
+  complete() {
+    console.log(&apos;Sum equals: &apos; + this.sum);
+  }
+};
+
+Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+.subscribe(sumObserver);
+
+// Logs:
+// &quot;Adding: 1&quot;
+// &quot;Adding: 2&quot;
+// &quot;Adding: 3&quot;
+// &quot;Sum equals: 6&quot;</code></pre>
+    </div>
+<div class="example-doc" data-ice="exampleDoc">
+      <div class="example-caption" data-ice="exampleCaption">Subscribe with functions</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">let sum = 0;
+
+Rx.Observable.of(1, 2, 3)
+.subscribe(
+  function(value) {
+    console.log(&apos;Adding: &apos; + value);
+    sum = sum + value;
+  },
+  undefined,
+  function() {
+    console.log(&apos;Sum equals: &apos; + sum);
+  }
+);
+
+// Logs:
+// &quot;Adding: 1&quot;
+// &quot;Adding: 2&quot;
+// &quot;Adding: 3&quot;
+// &quot;Sum equals: 6&quot;</code></pre>
+    </div>
+<div class="example-doc" data-ice="exampleDoc">
+      <div class="example-caption" data-ice="exampleCaption">Cancel a subscription</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">const subscription = Rx.Observable.interval(1000).subscribe(
+  num =&gt; console.log(num),
+  undefined,
+  () =&gt; console.log(&apos;completed!&apos;) // Will not be called, even
+);                                // when cancelling subscription
+
+
+setTimeout(() =&gt; {
+  subscription.unsubscribe();
+  console.log(&apos;unsubscribed!&apos;);
+}, 2500);
+
+// Logs:
+// 0 after 1s
+// 1 after 2s
+// &quot;unsubscribed!&quot; after 2,5s</code></pre>
+    </div>
+</div>
+
+  
 
   
   

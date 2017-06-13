@@ -1789,13 +1789,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/Observable-spec.js.html#lineNumber378",
+    "test-file/spec-js/Observable-spec.js.html#lineNumber421",
     "Observable subscribe when called with an anonymous observer ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/Observable-spec.js.html#lineNumber421",
+    "test-file/spec-js/Observable-spec.js.html#lineNumber391",
     "Observable subscribe when called with an anonymous observer ",
     "test"
   ],
@@ -1807,7 +1807,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/Observable-spec.js.html#lineNumber391",
+    "test-file/spec-js/Observable-spec.js.html#lineNumber378",
     "Observable subscribe when called with an anonymous observer ",
     "test"
   ],
@@ -1987,13 +1987,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/dom/ajax-spec.js.html#lineNumber225",
+    "test-file/spec-js/observables/dom/ajax-spec.js.html#lineNumber197",
     "Observable.ajax should fail on 404",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/observables/dom/ajax-spec.js.html#lineNumber197",
+    "test-file/spec-js/observables/dom/ajax-spec.js.html#lineNumber225",
     "Observable.ajax should fail on 404",
     "test"
   ],
@@ -2551,13 +2551,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/concat-spec.js.html#lineNumber147",
-    "Observable.concat ",
-    "test"
-  ],
-  [
-    "",
-    "test-file/spec-js/observables/concat-spec.js.html#lineNumber257",
+    "test-file/spec-js/observables/concat-spec.js.html#lineNumber209",
     "Observable.concat ",
     "test"
   ],
@@ -2575,7 +2569,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/concat-spec.js.html#lineNumber209",
+    "test-file/spec-js/observables/concat-spec.js.html#lineNumber147",
+    "Observable.concat ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/spec-js/observables/concat-spec.js.html#lineNumber257",
     "Observable.concat ",
     "test"
   ],
@@ -2665,13 +2665,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/concat-spec.js.html#lineNumber231",
+    "test-file/spec-js/observables/concat-spec.js.html#lineNumber268",
     "Observable.concat should not emit collapsing element from second source",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/observables/concat-spec.js.html#lineNumber268",
+    "test-file/spec-js/observables/concat-spec.js.html#lineNumber231",
     "Observable.concat should not emit collapsing element from second source",
     "test"
   ],
@@ -3043,13 +3043,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/from-spec.js.html#lineNumber97",
+    "test-file/spec-js/observables/from-spec.js.html#lineNumber84",
     "Observable.from ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/observables/from-spec.js.html#lineNumber84",
+    "test-file/spec-js/observables/from-spec.js.html#lineNumber97",
     "Observable.from ",
     "test"
   ],
@@ -4483,13 +4483,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/catch-spec.js.html#lineNumber104",
+    "test-file/spec-js/operators/catch-spec.js.html#lineNumber128",
     "Observable.prototype.catch ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/catch-spec.js.html#lineNumber128",
+    "test-file/spec-js/operators/catch-spec.js.html#lineNumber104",
     "Observable.prototype.catch ",
     "test"
   ],
@@ -4999,6 +4999,12 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/spec-js/operators/concat-spec.js.html#lineNumber211",
+    "Observable.prototype.concat ",
+    "test"
+  ],
+  [
+    "",
     "test-file/spec-js/operators/concat-spec.js.html#lineNumber200",
     "Observable.prototype.concat ",
     "test"
@@ -5006,12 +5012,6 @@ window.esdocSearchIndex = [
   [
     "",
     "test-file/spec-js/operators/concat-spec.js.html#lineNumber123",
-    "Observable.prototype.concat ",
-    "test"
-  ],
-  [
-    "",
-    "test-file/spec-js/operators/concat-spec.js.html#lineNumber211",
     "Observable.prototype.concat ",
     "test"
   ],
@@ -5143,6 +5143,12 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/spec-js/operators/concatAll-spec.js.html#lineNumber274",
+    "Observable.prototype.concatAll ",
+    "test"
+  ],
+  [
+    "",
     "test-file/spec-js/operators/concatAll-spec.js.html#lineNumber191",
     "Observable.prototype.concatAll ",
     "test"
@@ -5150,12 +5156,6 @@ window.esdocSearchIndex = [
   [
     "",
     "test-file/spec-js/operators/concatAll-spec.js.html#lineNumber286",
-    "Observable.prototype.concatAll ",
-    "test"
-  ],
-  [
-    "",
-    "test-file/spec-js/operators/concatAll-spec.js.html#lineNumber274",
     "Observable.prototype.concatAll ",
     "test"
   ],
@@ -6193,13 +6193,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/delay-spec.js.html#lineNumber44",
+    "test-file/spec-js/operators/delay-spec.js.html#lineNumber35",
     "Observable.prototype.delay should raise error when source raises error",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/delay-spec.js.html#lineNumber35",
+    "test-file/spec-js/operators/delay-spec.js.html#lineNumber44",
     "Observable.prototype.delay should raise error when source raises error",
     "test"
   ],
@@ -7861,13 +7861,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/groupBy-spec.js.html#lineNumber879",
+    "test-file/spec-js/operators/groupBy-spec.js.html#lineNumber378",
     "Observable.prototype.groupBy ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/groupBy-spec.js.html#lineNumber378",
+    "test-file/spec-js/operators/groupBy-spec.js.html#lineNumber879",
     "Observable.prototype.groupBy ",
     "test"
   ],
@@ -8101,13 +8101,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/ignoreElements-spec.js.html#lineNumber13",
+    "test-file/spec-js/operators/ignoreElements-spec.js.html#lineNumber22",
     "Observable.prototype.ignoreElements should allow unsubscribing early and explicitly",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/ignoreElements-spec.js.html#lineNumber22",
+    "test-file/spec-js/operators/ignoreElements-spec.js.html#lineNumber13",
     "Observable.prototype.ignoreElements should allow unsubscribing early and explicitly",
     "test"
   ],
@@ -8724,14 +8724,14 @@ window.esdocSearchIndex = [
     "test"
   ],
   [
-    "",
-    "test-file/spec-js/operators/merge-spec.js.html#lineNumber221",
+    "mergeall es6/operator/mergeall.js~mergeall,mergeall",
+    "test-file/spec-js/operators/mergeAll-spec.js.html#lineNumber6",
     "Observable.prototype.mergeAll",
     "test"
   ],
   [
-    "mergeall es6/operator/mergeall.js~mergeall,mergeall",
-    "test-file/spec-js/operators/mergeAll-spec.js.html#lineNumber6",
+    "",
+    "test-file/spec-js/operators/merge-spec.js.html#lineNumber221",
     "Observable.prototype.mergeAll",
     "test"
   ],
@@ -10939,13 +10939,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/repeatWhen-spec.js.html#lineNumber221",
+    "test-file/spec-js/operators/repeatWhen-spec.js.html#lineNumber242",
     "Observable.prototype.repeatWhen ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/repeatWhen-spec.js.html#lineNumber242",
+    "test-file/spec-js/operators/repeatWhen-spec.js.html#lineNumber221",
     "Observable.prototype.repeatWhen ",
     "test"
   ],
@@ -11125,13 +11125,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/retryWhen-spec.js.html#lineNumber249",
+    "test-file/spec-js/operators/retryWhen-spec.js.html#lineNumber228",
     "Observable.prototype.retryWhen ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/retryWhen-spec.js.html#lineNumber228",
+    "test-file/spec-js/operators/retryWhen-spec.js.html#lineNumber249",
     "Observable.prototype.retryWhen ",
     "test"
   ],
@@ -13519,6 +13519,18 @@ window.esdocSearchIndex = [
   ],
   [
     "",
+    "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber82",
+    "Observable.prototype.timeoutWith ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber106",
+    "Observable.prototype.timeoutWith ",
+    "test"
+  ],
+  [
+    "",
     "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber197",
     "Observable.prototype.timeoutWith ",
     "test"
@@ -13537,19 +13549,7 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber82",
-    "Observable.prototype.timeoutWith ",
-    "test"
-  ],
-  [
-    "",
     "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber94",
-    "Observable.prototype.timeoutWith ",
-    "test"
-  ],
-  [
-    "",
-    "test-file/spec-js/operators/timeoutWith-spec.js.html#lineNumber106",
     "Observable.prototype.timeoutWith ",
     "test"
   ],
@@ -13915,13 +13915,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/windowTime-spec.js.html#lineNumber156",
+    "test-file/spec-js/operators/windowTime-spec.js.html#lineNumber37",
     "Observable.prototype.windowTime ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/windowTime-spec.js.html#lineNumber37",
+    "test-file/spec-js/operators/windowTime-spec.js.html#lineNumber156",
     "Observable.prototype.windowTime ",
     "test"
   ],
@@ -14515,13 +14515,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/zip-spec.js.html#lineNumber149",
+    "test-file/spec-js/operators/zip-spec.js.html#lineNumber125",
     "Observable.prototype.zip with iterables should work with non-empty observable and empty iterable",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/zip-spec.js.html#lineNumber125",
+    "test-file/spec-js/operators/zip-spec.js.html#lineNumber149",
     "Observable.prototype.zip with iterables should work with non-empty observable and empty iterable",
     "test"
   ],
@@ -14839,13 +14839,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/operators/zipAll-spec.js.html#lineNumber158",
+    "test-file/spec-js/operators/zipAll-spec.js.html#lineNumber134",
     "Observable.prototype.zipAll with iterables should work with non-empty observable and empty iterable",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/operators/zipAll-spec.js.html#lineNumber134",
+    "test-file/spec-js/operators/zipAll-spec.js.html#lineNumber158",
     "Observable.prototype.zipAll with iterables should work with non-empty observable and empty iterable",
     "test"
   ],
@@ -15043,13 +15043,13 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/observables/timer-spec.js.html#lineNumber63",
+    "test-file/spec-js/observables/timer-spec.js.html#lineNumber31",
     "Observable.timer should start after delay and periodically emit values",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/observables/timer-spec.js.html#lineNumber31",
+    "test-file/spec-js/observables/timer-spec.js.html#lineNumber63",
     "Observable.timer should start after delay and periodically emit values",
     "test"
   ],
@@ -15829,13 +15829,13 @@ window.esdocSearchIndex = [
   ],
   [
     "scheduler es6/scheduler.js~scheduler,scheduler",
-    "test-file/spec-js/Scheduler-spec.js.html#lineNumber6",
+    "test-file/spec-js/schedulers/QueueScheduler-spec.js.html#lineNumber8",
     "Scheduler.queue",
     "test"
   ],
   [
     "scheduler es6/scheduler.js~scheduler,scheduler",
-    "test-file/spec-js/schedulers/QueueScheduler-spec.js.html#lineNumber8",
+    "test-file/spec-js/Scheduler-spec.js.html#lineNumber6",
     "Scheduler.queue",
     "test"
   ],
@@ -15901,25 +15901,25 @@ window.esdocSearchIndex = [
   ],
   [
     "",
-    "test-file/spec-js/Subject-spec.js.html#lineNumber86",
-    "Subject ",
-    "test"
-  ],
-  [
-    "",
     "test-file/spec-js/Subject-spec.js.html#lineNumber62",
     "Subject ",
     "test"
   ],
   [
     "",
-    "test-file/spec-js/Subject-spec.js.html#lineNumber110",
+    "test-file/spec-js/Subject-spec.js.html#lineNumber86",
     "Subject ",
     "test"
   ],
   [
     "",
     "test-file/spec-js/Subject-spec.js.html#lineNumber35",
+    "Subject ",
+    "test"
+  ],
+  [
+    "",
+    "test-file/spec-js/Subject-spec.js.html#lineNumber110",
     "Subject ",
     "test"
   ],
@@ -16719,6 +16719,12 @@ window.esdocSearchIndex = [
     "es6/observable.js~observable#lift",
     "class/es6/Observable.js~Observable.html#instance-method-lift",
     "es6/Observable.js~Observable#lift",
+    "method"
+  ],
+  [
+    "es6/observable.js~observable#subscribe",
+    "class/es6/Observable.js~Observable.html#instance-method-subscribe",
+    "es6/Observable.js~Observable#subscribe",
     "method"
   ],
   [

@@ -185,10 +185,10 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+          "value": "*\n *\n * 队列调度器\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
           "range": [
             96,
-            1294
+            1284
           ],
           "loc": {
             "start": {
@@ -214,8 +214,8 @@
               "type": "Identifier",
               "name": "queue",
               "range": [
-                1308,
-                1313
+                1298,
+                1303
               ],
               "loc": {
                 "start": {
@@ -234,8 +234,8 @@
                 "type": "Identifier",
                 "name": "QueueScheduler",
                 "range": [
-                  1320,
-                  1334
+                  1310,
+                  1324
                 ],
                 "loc": {
                   "start": {
@@ -253,8 +253,8 @@
                   "type": "Identifier",
                   "name": "QueueAction",
                   "range": [
-                    1335,
-                    1346
+                    1325,
+                    1336
                   ],
                   "loc": {
                     "start": {
@@ -269,8 +269,8 @@
                 }
               ],
               "range": [
-                1316,
-                1347
+                1306,
+                1337
               ],
               "loc": {
                 "start": {
@@ -284,8 +284,8 @@
               }
             },
             "range": [
-              1308,
-              1347
+              1298,
+              1337
             ],
             "loc": {
               "start": {
@@ -301,8 +301,8 @@
         ],
         "kind": "const",
         "range": [
-          1302,
-          1348
+          1292,
+          1338
         ],
         "loc": {
           "start": {
@@ -317,10 +317,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+            "value": "*\n *\n * 队列调度器\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
             "range": [
               96,
-              1294
+              1284
             ],
             "loc": {
               "start": {
@@ -339,8 +339,8 @@
             "type": "Line",
             "value": "# sourceMappingURL=queue.js.map",
             "range": [
-              1349,
-              1382
+              1339,
+              1372
             ],
             "loc": {
               "start": {
@@ -358,8 +358,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1295,
-        1348
+        1285,
+        1338
       ],
       "loc": {
         "start": {
@@ -374,10 +374,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+          "value": "*\n *\n * 队列调度器\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
           "range": [
             96,
-            1294
+            1284
           ],
           "loc": {
             "start": {
@@ -396,8 +396,8 @@
           "type": "Line",
           "value": "# sourceMappingURL=queue.js.map",
           "range": [
-            1349,
-            1382
+            1339,
+            1372
           ],
           "loc": {
             "start": {
@@ -416,7 +416,7 @@
   "sourceType": "module",
   "range": [
     0,
-    1348
+    1338
   ],
   "loc": {
     "start": {
@@ -431,10 +431,10 @@
   "comments": [
     {
       "type": "Block",
-      "value": "*\n *\n * Queue Scheduler\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
+      "value": "*\n *\n * 队列调度器\n *\n * <span class=\"informal\">将每个任务都放到队列里，而不是立刻执行它们</span>\n *\n * `queue` 调度器, 当和延时一起使用的时候, 和 {@link async} 调度器行为一样。\n *\n * 当和延时一起使用， 它同步地调用当前任务，即调度的时候执行。然而当递归调用的时候，即在调度的任务内，\n * 另一个任务由调度队列调度，而不是立即执行，该任务将被放在队列中，等待当前一个完成。\n *\n * 这意味着当你用 `queue` 调度程序执行任务时，你确信它会在调度程序启动之前的任何其他任务结束之前结束。\n *\n * @examples <caption>首先递归调度, 然后做一些事情</caption>\n *\n * Rx.Scheduler.queue.schedule(() => {\n *   Rx.Scheduler.queue.schedule(() => console.log('second')); // 不会立马执行，但是会放到队列里\n *\n *   console.log('first');\n * });\n *\n * // 日志:\n * // \"first\"\n * // \"second\"\n *\n *\n * @example <caption>递归的重新调度自身</caption>\n *\n * Rx.Scheduler.queue.schedule(function(state) {\n *   if (state !== 0) {\n *     console.log('before', state);\n *     this.schedule(state - 1); // `this` 指向当前执行的 Action,\n *                               // 我们使用新的状态重新调度\n *     console.log('after', state);\n *   }\n * }, 0, 3);\n *\n * // 递归运行的调度器， 你的期望:\n * // \"before\", 3\n * // \"before\", 2\n * // \"before\", 1\n * // \"after\", 1\n * // \"after\", 2\n * // \"after\", 3\n *\n * // 但实际使用队列的输入:\n * // \"before\", 3\n * // \"after\", 3\n * // \"before\", 2\n * // \"after\", 2\n * // \"before\", 1\n * // \"after\", 1\n *\n *\n * @static true\n * @name queue\n * @owner Scheduler\n ",
       "range": [
         96,
-        1294
+        1284
       ],
       "loc": {
         "start": {
@@ -451,8 +451,8 @@
       "type": "Line",
       "value": "# sourceMappingURL=queue.js.map",
       "range": [
-        1349,
-        1382
+        1339,
+        1372
       ],
       "loc": {
         "start": {

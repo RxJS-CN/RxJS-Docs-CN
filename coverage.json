@@ -1,7 +1,7 @@
 {
   "coverage": "100%",
-  "expectCount": 223,
-  "actualCount": 223,
+  "expectCount": 224,
+  "actualCount": 224,
   "files": {
     "es6/symbol/iterator.js": {
       "expectCount": 1,
@@ -159,8 +159,8 @@
       "undocumentLines": []
     },
     "es6/Observable.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "es6/MiscJSDoc.js": {
@@ -298,12 +298,12 @@
       "actualCount": 1,
       "undocumentLines": []
     },
-    "es6/observable/combineLatest.js": {
+    "es6/operator/combineLatest.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
     },
-    "es6/operator/combineLatest.js": {
+    "es6/observable/combineLatest.js": {
       "expectCount": 1,
       "actualCount": 1,
       "undocumentLines": []
