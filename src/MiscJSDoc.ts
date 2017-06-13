@@ -122,7 +122,7 @@ export class ObservableDoc {
 }
 
 /**
- * 由 {@link Observable} 发出通知的推送系统的消费接口。
+ * 消费者接口，消费者接收由 {@link Observable} 推送的通知。
  *
  * ```ts
  * interface Observer<T> {
@@ -133,9 +133,9 @@ export class ObservableDoc {
  * }
  * ```
  *
- * 符合观察者接口规范的对象被传递给 `observable.subscribe(observer)` 方法，同时
- * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的掉用
- * 观察者的 `complete()` 或者 `error(err)` 方法一次，最为最后的通知。  
+ * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时
+ * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用
+ * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。  
  *
  * @interface
  * @name Observer
@@ -143,12 +143,12 @@ export class ObservableDoc {
  */
 export class ObserverDoc<T> {
   /**
-   * 可选的标志位用来表明该 Observer （订阅过的）是否已经被它的 Observable 取消了订阅。
+   * 可选的标志位，用来表示该观察者作为订阅者时，是否已经对它观察的 Observable 取消了订阅。
    * @type {boolean}
    */
   closed: boolean = false;
   /**
-   * 该回调函数接收来自 Observable 类型为 `next` 的通知，带着值。Observable 会掉用这个方法0次或者多次。
+   * 该回调函数接收来自 Observable 的 `next` 类型(附带值)的通知。Observable 会调用这个方法0次或者多次。
    * @param {T} value  `next` 的值。
    * @return {void}
    */
@@ -156,8 +156,8 @@ export class ObserverDoc<T> {
     return void 0;
   }
   /**
-   * 该回调函数接收来自 Observable 类型为 `error` 的通知，带着 {@link Error} 。通知观察者，
-   * Observable 经历了错误条件。 
+   * 该回调函数接收来自 Observable 的 `error` 类型(附带值)的通知，带着 {@link Error} 。通知观察者，
+   * Observable 发生了错误。 
    * @param {any} err `error` 异常。
    * @return {void}
    */
@@ -165,8 +165,8 @@ export class ObserverDoc<T> {
     return void 0;
   }
   /**
-   * 该回调函数接收来自于 Observable 类型为 `complete` 的无值通知。通知观察者，Observable 已经
-   * 完成了发送推送系统通知。
+   * 该回调函数接收来自于 Observable 的 `complete` 类型(附带值)的通知。通知观察者，Observable 已经
+   * 完成了发送推送体系的通知。
    * @return {void}
    */
   complete(): void {
@@ -176,35 +176,34 @@ export class ObserverDoc<T> {
 
 /**
  * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符
- * 接受被这个借口注释过的参数，也可以使用不是 RxJS Observables 的参数。 
+ * 接受被这个接口注释过的参数，也可以使用不是 RxJS Observables 的参数。 
  *
- * 下列类型的值可以传递给期望此接口的运算符：
+ * 下列类型的值可以传递给期望此接口的操作符：
  *
  * ## Observable
  *
  * RxJS {@link Observable} 实例。
  *
- * ## Observable-like (Subscribable)
+ * ## 类 Observable 对象 (Subscribable)
  *
- * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被掉用的时候应该返回一个带有
+ * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有
  * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。
  *
  * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。
- * 因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片，
- * 当实现一个自定义的类 Observable 对象。 
+ * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。
  *
- * **TypeScript Subscribable interface issue**
+ * **TypeScript Subscribable 接口问题**
  *
  * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法
- * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 没有
- * 定义 `subscribe` 的对象将会在编译器失败（如果你使用 TypeScript）。
+ * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有
+ * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。
  *
  * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现
- * `subscribe` 方法，并且使得 `Symbol.observable` 方法简单的返回 `this` 。这种方式能够
+ * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够
  * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，
  * 将类型转化为 `any`。
  *
- * 当这个 issue 被解决了，可订阅的接口仅仅允许定义了 `Symbol.observable` 方法的类 Observable 
+ * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable 
  * 对象，无论该对象是否实现了 `subscribe` 方法。   
  *
  * ## ES6 Promise
@@ -212,13 +211,13 @@ export class ObserverDoc<T> {
  * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，
  * 当 rejected 的时候，Observable 发出错误。
  *
- * ## Promise-like (Thenable)
+ * ## 类 Promise 对象 (可使用 then 方法的)
  * 
- * 传递给操作符的 Promises 不需要是 ES6 原生 Promises。可以从流行的库，垫片或者
- * 自定义实现。它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为
+ * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。
+ * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为
  * 一致。 
  *
- * @example <caption>用非 RxJS 的 observable的参数使用 merge 和 map 操作符</caption>
+ * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>
  * const nonRxJSObservable = {
  *   subscribe(observer) {
  *     observer.next(1000);
@@ -234,7 +233,7 @@ export class ObserverDoc<T> {
  * .subscribe(result => console.log(result)); // 输出 "This value is 1000"
  *
  *
- * @example <caption>用 ES6 的 Promise 使用 combineLatest 操作符</caption>
+ * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>
  * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))
  * .subscribe(
  *   value => console.log(value),
@@ -256,36 +255,36 @@ export class SubscribableOrPromiseDoc<T> {
 
 /**
  * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者
- * 某些类型的值的集合，可以转化为 Observable 的发出值。
- * 每个操作符都可以接收被该接口注释过的参数，而不需要是 RxJS Observables 的参数。
+ * 此类型的值可以转化为能发出值的 Observable 。
+ * 每个操作符都可以接收被该接口注释过的参数，而不一定需要是 RxJS 的 Observables。
  *
- * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有下面类型:
+ * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:
  *
  * ## 数组
  *
- * 数组可以被理解为，observables 会从左到右，一个接一个的发送数组的值，然后完成。
+ * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。
  *
  * ## 类数组
  *
- * 传递给操作符的数组也可以不是 JavaScript 内置的数组。也可以是，比如说，每个函数的 `arguments`
- * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者，
- * 事实上，拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。  
+ * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`
+ * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，
+ * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。  
  *
  * ## ES6 迭代器
  *
  * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，
  * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成
- * 的 Observables 成为可能。
+ * 的 Observables 使之成为可能。
  *
- * 注意，你可以迭代迭代器实例通过在 `Symbol.iterator` 方法中返回自身。这意味着每个操作符接收可迭代对象，
- * 间接的，迭代器本身。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。
+ * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，
+ * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。
  *
- * **TypeScript Iterable interface issue**
+ * **TypeScript Iterable 接口 issue **
  *
- * TypeScript `ObservableInput` 接口实际上缺乏Iterables的类型签名，
- * 由于一些项目造成的问题(查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
+ * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，
+ * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
  * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数
- * 确实实现了接口。
+ * 确实实现了此接口。
  *
  *
  * @example <caption>用数组使用 merge 操作符</caption>
@@ -340,8 +339,8 @@ export class SubscribableOrPromiseDoc<T> {
  * // "d"
  * // "yup!"
  *
- * @example <caption>用 generator（返回有限 iterator）使用 from 操作符</caption>
- * // infinite stream of incrementing numbers
+ * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>
+ * // 无限的自增数列流
  * const infinite = function* () {
  *   let i = 0;
  *
@@ -351,7 +350,7 @@ export class SubscribableOrPromiseDoc<T> {
  * };
  *
  * Rx.Observable.from(infinite())
- * .take(3) // 仅仅取前三个，因为是有限的
+ * .take(3) // 因为是无限的，仅仅取前三个
  * .subscribe(
  *   value => console.log(value),
  *   err => {},
@@ -374,14 +373,14 @@ export class ObservableInputDoc<T> {
 
 /**
  *
- * 这个接口描述了 Observable 构造函数 和 静态方法 {@link create} 接收的函数的返回对象。这个接口
+ * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口
  * 的值可以用来取消对当前 Observable 的订阅。
  *
  * `TeardownLogic` 可以是:
  *
- * ## Function
+ * ## 函数
  *
- * 该函数不接收参数。 当创建的 Observable 的消费者掉用 `unsubscribe`，该函数被掉用。
+ * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。
  *
  * ## AnonymousSubscription
  *
