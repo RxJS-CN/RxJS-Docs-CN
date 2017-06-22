@@ -17,7 +17,8 @@
     "./doc/scripts/theme-toggler.js",
     "./doc/scripts/translate.js",
     "./doc/scripts/link-hash.js",
-    "./doc/scripts/language.js"
+    "./doc/scripts/language.js",
+    "./doc/scripts/about-link.js"
   ],
   "index": "./doc/index.md",
   "plugins": [
