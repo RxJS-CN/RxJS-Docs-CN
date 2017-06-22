@@ -75,7 +75,7 @@
     }
 
     function translateMenu(menuLink) {
-      menuLink.innerHTML = menuMap[menuLink.innerHTML];
+      menuLink.innerHTML = menuMap[menuLink.innerHTML] || menuLink.innerHTML;
     }
 
     function translateMethodDetail(methodDetail) {
