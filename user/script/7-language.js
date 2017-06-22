@@ -24,6 +24,6 @@
     languageNode.className = 'dropdown language-selection';
     languageNode.innerHTML = tpl;
     document.querySelector('header').appendChild(languageNode);
-    document.querySelector('.search-box').setAttribute('style', 'right: 110px');
+    document.querySelector('.search-box').setAttribute('style', 'right: 70px');
   });
 })();
