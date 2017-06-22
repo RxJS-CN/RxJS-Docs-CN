@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -120,8 +121,8 @@ of RxJS.</p>
     <ul>
       
     <li data-ice="test"><span><a href="test-file/spec-js/Observable-spec.js.html#lineNumber20">Observable</a></span></li>
-<li data-ice="test"><span><a href="test-file/spec-js/Observable-spec.js.html#lineNumber517">Observable.create</a></span></li>
-<li data-ice="test"><span><a href="test-file/spec-js/Observable-spec.js.html#lineNumber555">Observable.lift</a></span></li>
+<li data-ice="test"><span><a href="test-file/spec-js/Observable-spec.js.html#lineNumber527">Observable.create</a></span></li>
+<li data-ice="test"><span><a href="test-file/spec-js/Observable-spec.js.html#lineNumber565">Observable.lift</a></span></li>
 </ul>
   </div>
 
@@ -6420,7 +6421,7 @@ var buffered = clicks.bufferCount(2);
 buffered.subscribe(x =&gt; console.log(x));</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">&#x5728;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x7684;&#x65F6;&#x5019;, &#x4EE5;&#x6570;&#x7EC4;&#x7684;&#x5F62;&#x52BF;&#x53D1;&#x51FA;&#x6700;&#x540E;&#x4E24;&#x6B21;&#x7684;&#x70B9;&#x51FB;</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x5728;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x7684;&#x65F6;&#x5019;, &#x4EE5;&#x6570;&#x7EC4;&#x7684;&#x5F62;&#x5F0F;&#x53D1;&#x51FA;&#x6700;&#x540E;&#x4E24;&#x6B21;&#x70B9;&#x51FB;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
 var buffered = clicks.bufferCount(2, 1);
 buffered.subscribe(x =&gt; console.log(x));</code></pre>
@@ -9397,7 +9398,7 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
     <h4>Test:</h4>
     <ul>
       
-    <li data-ice="test"><span><a href="test-file/spec-js/operators/find-spec.js.html#lineNumber7">Observable.prototype.find</a></span></li>
+    <li data-ice="test"><span><a href="test-file/spec-js/operators/find-spec.js.html#lineNumber6">Observable.prototype.find</a></span></li>
 </ul>
   </div>
 

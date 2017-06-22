@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -198,7 +199,6 @@ export class AsyncAction extends Action {
         const actions = scheduler.actions;
         const index = actions.indexOf(this);
         this.work = null;
-        this.delay = null;
         this.state = null;
         this.pending = false;
         this.scheduler = null;
@@ -208,6 +208,7 @@ export class AsyncAction extends Action {
         if (id != null) {
             this.id = this.recycleAsyncId(scheduler, id, null);
         }
+        this.delay = null;
     }
 }
 //# sourceMappingURL=AsyncAction.js.map</code></pre>

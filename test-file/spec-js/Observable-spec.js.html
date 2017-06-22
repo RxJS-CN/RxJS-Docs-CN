@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -119,6 +120,16 @@ describe(&apos;Observable&apos;, function () {
                 done();
             }
         });
+    });
+    it(&apos;should not send error to error handler for observable have source&apos;, function () {
+        var source = Observable.of(1);
+        var observable = new Observable();
+        observable.source = source;
+        chai_1.expect(function () {
+            observable.subscribe(function (x) {
+                throw new Error(&apos;error&apos;);
+            });
+        }).to.throw();
     });
     describe(&apos;forEach&apos;, function () {
         it(&apos;should iterate and return a Promise&apos;, function (done) {

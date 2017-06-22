@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -103,6 +104,20 @@ describe(&apos;Scheduler.animationFrame&apos;, function () {
         chai_1.expect(actionHappened).to.be.false;
         fakeTimer.tick(25);
         chai_1.expect(actionHappened).to.be.true;
+        sandbox.restore();
+    });
+    it(&apos;should cancel animationFrame actions when delay &gt; 0&apos;, function () {
+        var actionHappened = false;
+        var sandbox = sinon.sandbox.create();
+        var fakeTimer = sandbox.useFakeTimers();
+        animationFrame.schedule(function () {
+            actionHappened = true;
+        }, 50).unsubscribe();
+        chai_1.expect(actionHappened).to.be.false;
+        fakeTimer.tick(25);
+        chai_1.expect(actionHappened).to.be.false;
+        fakeTimer.tick(25);
+        chai_1.expect(actionHappened).to.be.false;
         sandbox.restore();
     });
     it(&apos;should schedule an action to happen later&apos;, function (done) {

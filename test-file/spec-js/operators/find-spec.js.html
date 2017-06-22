@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -84,7 +85,6 @@
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">&quot;use strict&quot;;
 var chai_1 = require(&apos;chai&apos;);
 var Rx = require(&apos;../../dist/cjs/Rx&apos;);
-var doNotUnsubscribe_1 = require(&apos;../helpers/doNotUnsubscribe&apos;);
 var Observable = Rx.Observable;
 /** @test {find} */
 describe(&apos;Observable.prototype.find&apos;, function () {
@@ -202,26 +202,6 @@ describe(&apos;Observable.prototype.find&apos;, function () {
             throw &apos;error&apos;;
         };
         expectObservable(source.find(predicate)).toBe(expected);
-        expectSubscriptions(source.subscriptions).toBe(subs);
-    });
-    it(&apos;should unsubscribe from source when complete, even if following operator does not unsubscribe&apos;, function () {
-        var values = { a: 3, b: 9, c: 15, d: 20 };
-        var source = hot(&apos;---a--b--c--d---|&apos;, values);
-        var subs = &apos;^        !       &apos;;
-        var expected = &apos;---------(c|)    &apos;;
-        var predicate = function (x) { return x % 5 === 0; };
-        expectObservable(source.find(predicate).let(doNotUnsubscribe_1.doNotUnsubscribe)).toBe(expected, values);
-        expectSubscriptions(source.subscriptions).toBe(subs);
-    });
-    it(&apos;should unsubscribe from source when predicate function errors,&apos; +
-        &apos; even if followring operator does not unsubscribe&apos;, function () {
-        var source = hot(&apos;--a--b--c--|&apos;);
-        var subs = &apos;^ !&apos;;
-        var expected = &apos;--#&apos;;
-        var predicate = function (value) {
-            throw &apos;error&apos;;
-        };
-        expectObservable(source.find(predicate).let(doNotUnsubscribe_1.doNotUnsubscribe)).toBe(expected);
         expectSubscriptions(source.subscriptions).toBe(subs);
     });
     it(&apos;should support type guards without breaking previous behavior&apos;, function () {

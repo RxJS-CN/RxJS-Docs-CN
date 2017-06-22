@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -272,27 +273,20 @@ class GroupBySubscriber extends Subscriber {
  */
 class GroupDurationSubscriber extends Subscriber {
     constructor(key, group, parent) {
-        super();
+        super(group);
         this.key = key;
         this.group = group;
         this.parent = parent;
     }
     _next(value) {
-        this._complete();
+        this.complete();
     }
-    _error(err) {
-        const group = this.group;
-        if (!group.closed) {
-            group.error(err);
+    _unsubscribe() {
+        const { parent, key } = this;
+        this.key = this.parent = null;
+        if (parent) {
+            parent.removeGroup(key);
         }
-        this.parent.removeGroup(this.key);
-    }
-    _complete() {
-        const group = this.group;
-        if (!group.closed) {
-            group.complete();
-        }
-        this.parent.removeGroup(this.key);
     }
 }
 /**

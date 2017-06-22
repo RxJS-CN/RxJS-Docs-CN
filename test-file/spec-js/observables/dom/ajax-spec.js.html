@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -366,6 +367,55 @@ describe(&apos;Observable.ajax&apos;, function () {
             &apos;status&apos;: 500,
             &apos;contentType&apos;: &apos;text/plain&apos;,
             &apos;responseText&apos;: expected
+        });
+    });
+    it(&apos;should create an asynchronous request&apos;, function () {
+        var obj = {
+            url: &apos;/flibbertyJibbet&apos;,
+            responseType: &apos;text&apos;,
+            timeout: 10
+        };
+        Rx.Observable.ajax(obj)
+            .subscribe(function (x) {
+            chai_1.expect(x.status).to.equal(200);
+            chai_1.expect(x.xhr.method).to.equal(&apos;GET&apos;);
+            chai_1.expect(x.xhr.async).to.equal(true);
+            chai_1.expect(x.xhr.timeout).to.equal(10);
+            chai_1.expect(x.xhr.responseType).to.equal(&apos;text&apos;);
+        }, function () {
+            throw &apos;should not have been called&apos;;
+        });
+        var request = MockXMLHttpRequest.mostRecent;
+        chai_1.expect(request.url).to.equal(&apos;/flibbertyJibbet&apos;);
+        request.respondWith({
+            &apos;status&apos;: 200,
+            &apos;contentType&apos;: &apos;text/plain&apos;,
+            &apos;responseText&apos;: &apos;Wee! I am text!&apos;
+        });
+    });
+    it(&apos;should create a synchronous request&apos;, function () {
+        var obj = {
+            url: &apos;/flibbertyJibbet&apos;,
+            responseType: &apos;text&apos;,
+            timeout: 10,
+            async: false
+        };
+        Rx.Observable.ajax(obj)
+            .subscribe(function (x) {
+            chai_1.expect(x.status).to.equal(200);
+            chai_1.expect(x.xhr.method).to.equal(&apos;GET&apos;);
+            chai_1.expect(x.xhr.async).to.equal(false);
+            chai_1.expect(x.xhr.timeout).to.be.undefined;
+            chai_1.expect(x.xhr.responseType).to.equal(&apos;&apos;);
+        }, function () {
+            throw &apos;should not have been called&apos;;
+        });
+        var request = MockXMLHttpRequest.mostRecent;
+        chai_1.expect(request.url).to.equal(&apos;/flibbertyJibbet&apos;);
+        request.respondWith({
+            &apos;status&apos;: 200,
+            &apos;contentType&apos;: &apos;text/plain&apos;,
+            &apos;responseText&apos;: &apos;Wee! I am text!&apos;
         });
     });
     describe(&apos;ajax request body&apos;, function () {
@@ -821,6 +871,7 @@ var MockXMLHttpRequest = (function () {
         this.responseType = &apos;&apos;;
         this.eventHandlers = [];
         this.readyState = 0;
+        this.async = true;
         this.requestHeaders = {};
         this.withCredentials = false;
         this.upload = {};
@@ -852,6 +903,7 @@ var MockXMLHttpRequest = (function () {
     MockXMLHttpRequest.prototype.open = function (method, url, async, user, password) {
         this.method = method;
         this.url = url;
+        this.async = async;
         this.user = user;
         this.password = password;
         this.readyState = 1;
@@ -890,7 +942,12 @@ var MockXMLHttpRequest = (function () {
         }
     };
     MockXMLHttpRequest.prototype.defaultResponseValue = function () {
-        throw new Error(&apos;unhandled type &quot;&apos; + this.responseType + &apos;&quot;&apos;);
+        if (this.async === false) {
+            this.response = this.responseText;
+        }
+        else {
+            throw new Error(&apos;unhandled type &quot;&apos; + this.responseType + &apos;&quot;&apos;);
+        }
     };
     MockXMLHttpRequest.prototype.respondWith = function (response, progressTimes) {
         if (progressTimes) {

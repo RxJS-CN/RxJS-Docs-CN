@@ -786,7 +786,7 @@ var Observable = (function () {
             operator.call(sink, this.source);
         }
         else {
-            sink.add(this._trySubscribe(sink));
+            sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
         }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
@@ -3875,7 +3875,6 @@ var AsyncAction = (function (_super) {
         var actions = scheduler.actions;
         var index = actions.indexOf(this);
         this.work = null;
-        this.delay = null;
         this.state = null;
         this.pending = false;
         this.scheduler = null;
@@ -3885,6 +3884,7 @@ var AsyncAction = (function (_super) {
         if (id != null) {
             this.id = this.recycleAsyncId(scheduler, id, null);
         }
+        this.delay = null;
     };
     return AsyncAction;
 }(Action));
@@ -5422,8 +5422,10 @@ var AjaxSubscriber = (function (_super) {
                 return null;
             }
             // timeout, responseType and withCredentials can be set once the XHR is open
-            xhr.timeout = request.timeout;
-            xhr.responseType = request.responseType;
+            if (async) {
+                xhr.timeout = request.timeout;
+                xhr.responseType = request.responseType;
+            }
             if ('withCredentials' in xhr) {
                 xhr.withCredentials = !!request.withCredentials;
             }
@@ -6158,7 +6160,7 @@ Observable.prototype.buffer = buffer;
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>在每次点击的时候, 以数组的形势发出最后两次的点击</caption>
+ * @example <caption>在每次点击的时候, 以数组的形式发出最后两次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x => console.log(x));
@@ -9062,7 +9064,6 @@ var FindValueSubscriber = (function (_super) {
         var destination = this.destination;
         destination.next(value);
         destination.complete();
-        this.unsubscribe();
     };
     FindValueSubscriber.prototype._next = function (value) {
         var _a = this, predicate = _a.predicate, thisArg = _a.thisArg;
@@ -9075,7 +9076,6 @@ var FindValueSubscriber = (function (_super) {
         }
         catch (err) {
             this.destination.error(err);
-            this.unsubscribe();
         }
     };
     FindValueSubscriber.prototype._complete = function () {
@@ -9545,27 +9545,20 @@ var GroupBySubscriber = (function (_super) {
 var GroupDurationSubscriber = (function (_super) {
     __extends(GroupDurationSubscriber, _super);
     function GroupDurationSubscriber(key, group, parent) {
-        _super.call(this);
+        _super.call(this, group);
         this.key = key;
         this.group = group;
         this.parent = parent;
     }
     GroupDurationSubscriber.prototype._next = function (value) {
-        this._complete();
+        this.complete();
     };
-    GroupDurationSubscriber.prototype._error = function (err) {
-        var group = this.group;
-        if (!group.closed) {
-            group.error(err);
+    GroupDurationSubscriber.prototype._unsubscribe = function () {
+        var _a = this, parent = _a.parent, key = _a.key;
+        this.key = this.parent = null;
+        if (parent) {
+            parent.removeGroup(key);
         }
-        this.parent.removeGroup(this.key);
-    };
-    GroupDurationSubscriber.prototype._complete = function () {
-        var group = this.group;
-        if (!group.closed) {
-            group.complete();
-        }
-        this.parent.removeGroup(this.key);
     };
     return GroupDurationSubscriber;
 }(Subscriber));
@@ -9769,7 +9762,13 @@ var AuditSubscriber = (function (_super) {
                 this.destination.error(errorObject.e);
             }
             else {
-                this.add(this.throttled = subscribeToResult(this, duration));
+                var innerSubscription = subscribeToResult(this, duration);
+                if (innerSubscription.closed) {
+                    this.clearThrottle();
+                }
+                else {
+                    this.add(this.throttled = innerSubscription);
+                }
             }
         }
     };

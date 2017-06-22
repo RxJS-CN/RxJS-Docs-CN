@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -851,6 +852,30 @@ describe(&apos;Observable.prototype.groupBy&apos;, function () {
             return arr;
         });
         expectObservable(source, unsub).toBe(expected, expectedGroups);
+    });
+    it(&apos;should dispose a durationSelector after closing the group&apos;, function () {
+        var obs = hot(&apos;-0-1--------2-|&apos;);
+        var sub = &apos;^              !&apos;;
+        var unsubs = [
+            &apos;-^--!&apos;,
+            &apos;---^--!&apos;,
+            &apos;------------^-!&apos;,
+        ];
+        var dur = &apos;---s&apos;;
+        var durations = [
+            cold(dur),
+            cold(dur),
+            cold(dur)
+        ];
+        var unsubscribedFrame = Rx.TestScheduler
+            .parseMarblesAsSubscriptions(sub)
+            .unsubscribedFrame;
+        obs.groupBy(function (val) { return val; }, function (val) { return val; }, function (group) { return durations[group.key]; }).subscribe();
+        rxTestScheduler.schedule(function () {
+            durations.forEach(function (d, i) {
+                expectSubscriptions(d.subscriptions).toBe(unsubs[i]);
+            });
+        }, unsubscribedFrame);
     });
     it(&apos;should allow using a durationSelector, but keySelector throws&apos;, function () {
         var values = {

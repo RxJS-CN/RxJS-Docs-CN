@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -146,7 +147,6 @@ export class FindValueSubscriber extends Subscriber {
         const destination = this.destination;
         destination.next(value);
         destination.complete();
-        this.unsubscribe();
     }
     _next(value) {
         const { predicate, thisArg } = this;
@@ -159,7 +159,6 @@ export class FindValueSubscriber extends Subscriber {
         }
         catch (err) {
             this.destination.error(err);
-            this.unsubscribe();
         }
     }
     _complete() {

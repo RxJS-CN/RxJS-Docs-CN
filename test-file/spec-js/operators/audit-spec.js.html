@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -176,6 +177,15 @@ describe(&apos;Observable.prototype.audit&apos;, function () {
         var e1 = hot(&apos;abcdefabcdefabcdefabcdefa|&apos;);
         var e1subs = &apos;^                        !&apos;;
         var e2 = cold(&apos;|&apos;);
+        var expected = &apos;abcdefabcdefabcdefabcdefa|&apos;;
+        var result = e1.audit(function () { return e2; });
+        expectObservable(result).toBe(expected);
+        expectSubscriptions(e1.subscriptions).toBe(e1subs);
+    });
+    it(&apos;should mirror source if durations are Observable.empty()&apos;, function () {
+        var e1 = hot(&apos;abcdefabcdefabcdefabcdefa|&apos;);
+        var e1subs = &apos;^                        !&apos;;
+        var e2 = Rx.Observable.empty();
         var expected = &apos;abcdefabcdefabcdefabcdefa|&apos;;
         var result = e1.audit(function () { return e2; });
         expectObservable(result).toBe(expected);

@@ -17,6 +17,7 @@
 <script data-ice="userScript" src="user/script/4-theme-toggler.js"></script>
 <script data-ice="userScript" src="user/script/5-translate.js"></script>
 <script data-ice="userScript" src="user/script/6-link-hash.js"></script>
+<script data-ice="userScript" src="user/script/7-language.js"></script>
 <link data-ice="userStyle" rel="stylesheet" href="user/css/0-main.css">
 </head>
 <body class="layout-container" data-ice="rootContainer">
@@ -278,8 +279,10 @@ export class AjaxSubscriber extends Subscriber {
                 return null;
             }
             // timeout, responseType and withCredentials can be set once the XHR is open
-            xhr.timeout = request.timeout;
-            xhr.responseType = request.responseType;
+            if (async) {
+                xhr.timeout = request.timeout;
+                xhr.responseType = request.responseType;
+            }
             if (&apos;withCredentials&apos; in xhr) {
                 xhr.withCredentials = !!request.withCredentials;
             }
