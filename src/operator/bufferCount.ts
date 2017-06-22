@@ -18,7 +18,7 @@ import { TeardownLogic } from '../Subscription';
  * var buffered = clicks.bufferCount(2);
  * buffered.subscribe(x => console.log(x));
  *
- * @example <caption>在每次点击的时候, 以数组的形势发出最后两次的点击</caption>
+ * @example <caption>在每次点击的时候, 以数组的形式发出最后两次点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
  * var buffered = clicks.bufferCount(2, 1);
  * buffered.subscribe(x => console.log(x));
