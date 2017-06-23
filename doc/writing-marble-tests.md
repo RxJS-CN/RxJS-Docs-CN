@@ -1,101 +1,95 @@
-# Writing Marble Tests
+# 编写弹珠测试
 
-"Marble Tests" are tests that use a specialized VirtualScheduler called the `TestScheduler`. They enable us to test
-asynchronous operations in a synchronous and dependable manner. The "marble notation" is something that's been adapted
-from many teachings and documents by people such as @jhusain, @headinthebox, @mattpodwysocki and @staltz. In fact,
-@staltz first recommended this as a DSL for creating unit tests, and it has since been altered and adopted.
+“弹珠测试”是使用一种叫做 `TestScheduler` 的专用的虚拟调度器 (VirtualScheduler) 的测试。它们可以使我们以同步且可靠的方式来测试异步操作。“弹珠符号”是源自许多人的教程与文档，例如，@jhusain、@headinthebox、@mattpodwysocki 和 @staltz 。实际上，是由 @staltz 首先提出建议将其作为创建单元测试的 DSL (Domain Specific Language 领域专用语言)，并且它已经经过改造并被采纳。
 
-#### links
+#### 链接
 
-- [Contribution](../CONTRIBUTING.md)
-- [Code of Conduct](../CODE_OF_CONDUCT.md)
+- [贡献指南](https://github.com/ReactiveX/rxjs/blob/master/CONTRIBUTING.md)
+- [行为准则](https://github.com/ReactiveX/rxjs/blob/master/CODE_OF_CONDUCT.md)
 
-## Basic methods
+## 基础方法
 
-The unit tests have helper methods that have been added to make creating tests easier.
+单元测试添加了一些辅助方法，以使创建测试更容易。
 
-- `hot(marbles: string, values?: object, error?: any)` - creates a "hot" observable (a subject) that will behave 
-  as though it's already "running" when the test begins. An interesting difference is that `hot` marbles allow a 
-  `^` character to signal where the "zero frame" is. That is the point at which the subscription to observables 
-  being tested begins.
-- `cold(marbles: string, values?: object, error?: any)` - creates a "cold" observable whose subscription starts when 
-  the test begins.
-- `expectObservable(actual: Observable<T>).toBe(marbles: string, values?: object, error?: any)` - schedules an assertion
-  for when the TestScheduler flushes. The TestScheduler will automatically flush at the end of your jasmine `it` block.
-- `expectSubscriptions(actualSubscriptionLogs: SubscriptionLog[]).toBe(subscriptionMarbles: string)` - like `expectObservable` schedules an assertion for when the testScheduler flushes. Both `cold()` and `hot()` return an observable with a property `subscriptions` of type `SubscriptionLog[]`. Give `subscriptions` as parameter to `expectSubscriptions` to assert whether it matches the `subscriptionsMarbles` marble diagram given in `toBe()`. Subscription marble diagrams are slightly different than Observable marble diagrams. Read more below.
+- `hot(marbles: string, values?: object, error?: any)` - 创建一个“热的” Observable (Subject)，它将在测试开始时表现得
+  好像已经在“运行中”了。一个有趣的不同点是 `hot` 弹珠允许使用`^`字符来标志“零帧”所在处。这正是 Observables 订阅的起始点，
+  同时也是测试的起始点。
+- `cold(marbles: string, values?: object, error?: any)` - 创建一个“冷的” Observable ，当测试开始时它便开始订阅。
+- `expectObservable(actual: Observable<T>).toBe(marbles: string, values?: object, error?: any)` - 当 TestScheduler flush时，   安排一个断言。在 jasmine 的 `it` 块结束处 TestScheduler 会自动进行 flush 。
+- `expectSubscriptions(actualSubscriptionLogs: SubscriptionLog[]).toBe(subscriptionMarbles: string)` - 
+  类似 `expectObservable` ，当 TestScheduler flush时，安排一个断言。`cold()` 和 `hot()` 都返回带有`subscriptions` 属性
+  (类型为  `SubscriptionLog[]`)的 Observable 。将 `subscriptions` 作为参数传给 `expectSubscriptions` 以断言是否匹配在 `toBe()` 中
+  给定的 `expectObservable` 弹珠图。Subscription 的弹珠图与 Observable 的弹珠图略有不同。详情请参见下面。
 
-### Ergonomic defaults for `hot` and `cold`
+### `hot` 和 `cold` 的默认行为是符合人类认知的
 
-In both `hot` and `cold` methods, value charecters specified in marble diagrams are emitted as strings unless a `values`
-argument is passed to the method. Therefor:
+在 `hot` 和 `cold` 方法中，弹珠图中指定的值的字符都会作为字符串发出，除非将 `values` 参数传给了方法。因此：
 
-`hot('--a--b')` will emit `"a"` and `"b"` whereas
+`hot('--a--b')` 会发出 `"a"` 和 `"b"` ，但
 
-`hot('--a--b', { a: 1, b: 2 })` will emit `1` and `2`.
+`hot('--a--b', { a: 1, b: 2 })` 会发出 `1` 和 `2` 。
 
-Likewise, unspecified errors will just default to the string `"error"`, so:
+同样的，未指明的错误就只发出默认字符串 `"error"`，所以：
 
-`hot('---#')` will emit error `"error"` whereas
+`hot('---#')` 会发出错误 `"error"` , 但
 
-`hot('---#', null, new SpecialError('test'))` will emit `new SpecialError('test')`
+`hot('---#', null, new SpecialError('test'))` 会发出 `new SpecialError('test')` 。
 
 
-## Marble Syntax
+## 弹珠语法
 
-Marble syntax is a string represents events happening over "time". The first character of any marble string
-always represents the "zero frame". A "frame" is somewhat analogous to a virtual millisecond.
+弹珠语法是用字符串表示随“时间”流逝而发生的事件。任何弹珠字符串的首字符永远都表示“零帧”。“帧”是有点类似于虚拟毫秒的概念。
 
-- `"-"` time: 10 "frames" of time passage.
-- `"|"` complete: The successful completion of an observable. This is the observable producer signaling `complete()`
-- `"#"` error: An error terminating the observable. This is the observable producer signaling `error()`
-- `"a"` any character: All other characters represent a value being emitted by the producure signaling `next()`
-- `"()"` sync groupings: When multiple events need to single in the same frame synchronously, parenthesis are used
-  to group those events. You can group nexted values, a completion or an error in this manner. The position of the 
-  initial `(` determines the time at which its values are emitted.
-- `"^"` subscription point: (hot observables only) shows the point at which the tested observables will be subscribed
-  to the hot observable. This is the "zero frame" for that observable, every frame before the `^` will be negative.
+- `"-"` 时间: 10“帧”的时间段。
+- `"|"` 完成: 表示 Observalbe 成功完成。这是 Observable 生产者所发出的 `complete()` 信号。
+- `"#"` 错误: 终止 Observable 的错误。 这是 Observable 生产者所发出的 `error()` 信号。
+- `"a"` 任意字符: 所有其他字符表示由 Observalbe 生产者所发出的 `next()` 信号的值。
+- `"()"` 同步分组: 当多个事件需要在同一帧中同步地发出，用圆括号来将这些事件聚集在一起。你可以以这种形式来聚合值、完成或错误。
+  起始 `(` 的位置决定了值发出的时间。
+- `"^"` 订阅时间点: (只适用于热的 Observabe) 显示测试 Observable 订阅热的 Observable 的点。它是此 Observable 的“零帧”，在 `^` 
+  前的所有帧都将是无效的。
 
-### Examples
+### 示例
 
-`'-'` or `'------'`: Equivalent to `Observable.never()`, or an observable that never emits or completes
+`'-'` 或 `'------'`: 相当于 `Observable.never()`，或一个从不发出值或完成的 Observable 
 
-`|`: Equivalent to `Observable.empty()`
+`|`: 相当于 `Observable.empty()`
 
-`#`: Equivalent to `Observable.throw()`
+`#`: 相当于 `Observable.throw()`
 
-`'--a--'`: An observable that waits 20 "frames", emits value `a` and then never completes.
+`'--a--'`: 此 Observable 等待20“帧”后发出值 `a` ，然后永远不发出 `complete`
 
-`'--a--b--|`: On frame 20 emit `a`, on frame 50 emit `b`, and on frame 80, `complete`
+`'--a--b--|`: 在20帧处发出 `a`，在50帧处发出 `b`，然后在80帧处发出 `complete`
 
-`'--a--b--#`: On frame 20 emit `a`, on frame 50 emit `b`, and on frame 80, `error`
+`'--a--b--#`: 在20帧处发出 `a`，在50帧处发出 `b`，然后在80帧处发出 `error`
 
-`'-a-^-b--|`: In a hot observable, on frame -20 emit `a`, then on frame 20 emit `b`, and on frame 50, `complete`.
+`'-a-^-b--|`: 这是个热的 Observable ，在-20帧处发出 `a`，然后在20帧处发出 `b` ，在50帧出发出 `complete`
 
-`'--(abc)-|'`: on frame 20, emit `a`, `b`, and `c`, then on frame 80 `complete`
+`'--(abc)-|'`: 在20帧处发出 `a`、`b` 和 `c`，然后在80帧处发出 `complete` 
 
-`'-----(a|)'`: on frame 50, emit `a` and `complete`.
+`'-----(a|)'`: 在50帧处发出 `a` 和 `complete`
 
-## Subscription Marble Syntax
+## Subscription 的弹珠语法
 
-The subscription marble syntax is slightly different to conventional marble syntax. It represents the **subscription** and an **unsubscription** points happening over time. There should be no other type of event represented in such diagram.
+Subscription 的弹珠语法与常见的弹珠语法略有不同。它表示随“时间”流逝而发生的**订阅**和**取消订阅**的时间点。在此类图中不应该出现其他类型的事件。
 
-- `"-"` time: 10 "frames" of the passage.
-- `"^"` subscription point: shows the point in time at which a subscription happen.
-- `"!"` unsubscription point: shows the point in time at which a subscription is unsubscribed.
+- `"-"` 时间: 10“帧”的时间段。
+- `"^"` 订阅时间点: 显示订阅发生的时间点。
+- `"!"` 取消订阅时间点: 显示取消订阅发生的时间点。
 
-There should be **at most one** `^` point in a subscription marble diagram, and **at most one** `!` point. Other than that, the `-` character is the only one allowed in a subscription marble diagram.
+在 Subscription 的弹珠语法中 `^` 和 `!` 时间点**最多只有一个**。 除此之外，`-` 字符是唯一允许出现的字符。
 
-### Examples
+### 示例
 
-`'-'` or `'------'`: no subscription ever happened.
+`'-'` 或 `'------'`: 没有订阅发生。
 
-`'--^--'`: a subscription happened after 20 "frames" of time passed, and the subscription was not unsubscribed.
+`'--^--'`: 在20帧处发生了订阅，并且订阅没有被取消。
 
-`'--^--!-`: on frame 20 a subscription happened, and on frame 50 was unsubscribed.
+`'--^--!-`: 在20帧处发生了订阅，在50帧处订阅被取消了
 
-## Anatomy of a Test
+## 测试剖析
 
-A basic test might look as follows:
+一个基础的测试看起来应该是下面这样的：
 
 ```js
 
@@ -106,12 +100,11 @@ var expected =      '---(be)----c-f-----|';
 expectObservable(e1.merge(e2)).toBe(expected);
 ```
 
-- The `^` characters of `hot` observables should **always** be aligned.
-- The **first charactor** of `cold` observables or expected observables should **always** be aligned
-  with each other, and with the `^` of hot observables.
-- Use default emission values when you can. Specify `values` when you have to.
+- `hot` observables 的 `^` 字符应该**永远**是对齐的。
+- `cold` observables 或预期 observables 的**首字符**和 `hot` observables 的 `^` 应该**永远**彼此对齐的。
+- 尽量使用默认的发送值。当必要的时候才指定值 。
 
-A test example with specified values:
+使用指定值的测试用例：
 
 ```js
 var values = {
@@ -130,13 +123,11 @@ expectObservable(e1.zip(e2, function(x, y) { return x + y; }))
   .toBe(expected, values);
 ```
 
-- Use the same hash to look up all values, this ensures that multiple uses of the same character have the
-  same value.
-- Make the result values as obvious as possible as to what they represent, these are *tests* afterall, we want
-  clarity more than efficiency, so `x: 1 + 3, // a + c` is better than just `x: 4`. The former conveys *why* it's 4,
-  the latter does not.
+- 使用同一个散列表来查找所有的值，这可以确保多次使用的同一个字符有着同样的值。
+- 将结果值所表示的含义表达的越明显越好，毕竟这些是**测试**，我们最想要的是代码的清晰程度，而不是执行效率，所以 `x: 1 + 3, // a + c` 
+  比 `x: 4` 要好。前者传达了**为什么**是4，而后者并没有做到这点。
 
-A test example with subscription assertions:
+使用 subscription 断言的测试用例：
 
 ```js
 var x = cold(        '--a---b---c--|');
@@ -151,14 +142,14 @@ expectSubscriptions(x.subscriptions).toBe(xsubs);
 expectSubscriptions(y.subscriptions).toBe(ysubs);
 ```
 
-- Align the start of `xsubs` and `ysubs` diagrams with `expected` diagram.
-- Notice how the `x` cold observable is unsubscribed at the same time `e1` emits `y`.
+- 将 `xsubs` 图和 `ysubs` 图的开头与 `expected` 图对齐。
+- 注意冷的 observable `x` 取消订阅的同时 `e1` 发出了 `y` 。
 
-In most tests it will be unnecessary to test subscription and unsubscription points, be either obvious or can be implied from the `expected` diagram. In those cases do not write subscription assertions. In test cases that have inner subscriptions or cold observables with multiple subscribers, these subscription assertions can be useful.
+在大多数测试中，是没有必要测试订阅时间点和取消订阅时间点的，它们要不就非常明显，要不就在 `expected` 图中有所暗示。在这些情况下是不需要编写 subscription 断言的。在有内部 subscriptions 或冷的 observables 有多个订阅者的测试用例中，这些 subscription 断言还是有用的。
 
-## Generating PNG marble diagrams from tests
+## 基于测试生成 PNG 弹珠图
 
-Typically, each test case in Jasmine is written as `it('should do something', function () { /* ... */ })`. To mark a test case for PNG diagram generation, you must use the `asDiagram(label)` function, like this:
+通常，Jasmine 中的测试用例都是这样写的：`it('should do something', function () { /* ... */ })` 。要想时测试用例可以用来生成 PNG 弹珠图，你必须使用 `asDiagram(label)` 函数，像这样：
 
 <!-- skip-example -->
 ```js
@@ -167,7 +158,7 @@ it.asDiagram(operatorLabel)('should do something', function () {
 });
 ```
 
-For instance, with `zip`, we would write
+举例来说，对于 `zip` 操作符，我们可以这样写：
 
 ```js
 it.asDiagram('zip')('should zip by concatenating', function () {
@@ -182,4 +173,4 @@ it.asDiagram('zip')('should zip by concatenating', function () {
 });
 ```
 
-Then, when running `npm run tests2png`, this test case will be parsed and a PNG file `zip.png` (filename determined by `${operatorLabel}.png`) will be created in the `img/` folder.
+然后当运行 `npm run tests2png` 时，这个测试用例会解析并且在 `img/` 文件夹下创建一个 PNG 文件 `zip.png` (文件名取决于 `${operatorLabel}.png`)。

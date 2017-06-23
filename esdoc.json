@@ -7,14 +7,18 @@
     "includes": ["(spec)\\.(js|ts)$"]
   },
   "undocumentIdentifier": false,
-  "title": "RxJS",
+  "title": "RxJS 中文文档",
   "styles": ["./doc/styles/main.css"],
   "scripts": [
     "./dist/global/Rx.js",
     "./doc/asset/devtools-welcome.js",
     "./doc/scripts/custom-manual-styles.js",
     "./doc/decision-tree-widget/dist/decision-tree-widget.min.js",
-    "./doc/scripts/theme-toggler.js"
+    "./doc/scripts/theme-toggler.js",
+    "./doc/scripts/translate.js",
+    "./doc/scripts/link-hash.js",
+    "./doc/scripts/language.js",
+    "./doc/scripts/about-link.js"
   ],
   "index": "./doc/index.md",
   "plugins": [
@@ -38,6 +42,10 @@
       "./doc/tutorial/basics.md",
       "./doc/tutorial/applications.md",
       "./doc/external-references.md"
+    ],
+    "usage": [
+      "./doc/writing-marble-tests.md",
+      "./doc/operator-creation.md"
     ]
   }
 }

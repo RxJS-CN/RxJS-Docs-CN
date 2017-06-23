@@ -80,7 +80,6 @@ export class FindValueSubscriber<T> extends Subscriber<T> {
 
     destination.next(value);
     destination.complete();
-    this.unsubscribe();
   }
 
   protected _next(value: T): void {
@@ -93,7 +92,6 @@ export class FindValueSubscriber<T> extends Subscriber<T> {
       }
     } catch (err) {
       this.destination.error(err);
-      this.unsubscribe();
     }
   }
 
