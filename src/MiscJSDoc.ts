@@ -176,7 +176,7 @@ export class ObserverDoc<T> {
 
 /**
  * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符
- * 接受被这个接口注释过的参数，也可以使用不是 RxJS Observables 的参数。 
+ * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。 
  *
  * 下列类型的值可以传递给期望此接口的操作符：
  *
@@ -256,7 +256,7 @@ export class SubscribableOrPromiseDoc<T> {
 /**
  * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者
  * 此类型的值可以转化为能发出值的 Observable 。
- * 每个操作符都可以接收被该接口注释过的参数，而不一定需要是 RxJS 的 Observables。
+ * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。
  *
  * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:
  *
