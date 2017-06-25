@@ -5,9 +5,7 @@
     var menus = document.querySelectorAll('header > a, .manual-toc-title > a, .manual-breadcrumb-list > a, .manual-breadcrumb-list > span[data-ice=title]');
     
     menus.forEach(translateMenu);
-
-    // title
-    transformTitle();
+    
 
     // API 相关
     var tagMap = {'Params:': '参数:', 'Return:': '返回:', 'Example:': '示例:', 'Test:': '测试:', 'See:': '参见:'};
@@ -35,32 +33,6 @@
       summary && summary.forEach(translateSummary);
       inheritedSummary && translateInheritedSummary(inheritedSummary);
       traslateVariableTitle(content);
-    }
-
-    function transformTitle(title) {
-      var title = document.querySelector('title');
-      var text = title.innerText;
-      var hasPiple = text.indexOf('|') > -1 ? true : false;
-
-      if (hasPiple) {
-        text = text.replace('API Document', '');
-        var separator = ' | ';
-        var textArr = text.split(separator);
-
-        if (menuMap[textArr[0]]) {
-          textArr[0] = menuMap[textArr[0]];
-        }
-        text = textArr.join(separator);
-      } else if (text.indexOf('RxJS') > -1) {
-        text = text.replace('API Document', '');
-      } else {
-        if (menuMap[text]) {
-          text = menuMap[text];
-        }
-        text += ' | RxJS 中文文档';
-      }
-
-      title.innerText = text;
     }
 
     function translateInheritedSummary(summary) {
