@@ -7,7 +7,7 @@
     "includes": ["(spec)\\.(js|ts)$"]
   },
   "undocumentIdentifier": false,
-  "title": "RxJS 中文文档",
+  "title": "RxJS",
   "styles": ["./doc/styles/main.css"],
   "scripts": [
     "./dist/global/Rx.js",
