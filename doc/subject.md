@@ -202,7 +202,8 @@ observerB unsubscribed
 
 ## BehaviorSubject
 
-Subject 的其中一个变体就是 `BehaviorSubject`，它有一个“当前值”的概念。它保存了发送给消费者的最新值。并且当有新的观察者订阅时，会立即从 `BehaviorSubject` 那接收到“当前值”。
+Subject 的其中一个变体就是 `BehaviorSubject`，它有一个“当前值”的概念。它保存了发送个消费者的最新值。并且当有新的观察者订阅时，会立即从 `BehaviorSubject` 那接收到“当前值”。
+
 
 <span class="informal">BehaviorSubjects 适合用来表示“随时间推移的值”。举例来说，生日的流是一个 Subject，但年龄的流应该是一个 BehaviorSubject 。</span>
 
@@ -277,7 +278,9 @@ observerA: 5
 observerB: 5
 ```
 
+
 除了缓冲数量，你还可以指定 *window time* (以毫秒为单位)来确定多久之前的值可以记录。在下面的示例中，我们使用了较大的缓存数量`100`，但 window time 参数只设置了`500`毫秒。
+
 
 <!-- skip-example -->
 ```js
