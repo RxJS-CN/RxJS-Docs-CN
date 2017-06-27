@@ -1,3 +1,7 @@
+if (typeof NodeList.prototype.forEach !== 'function') {
+  NodeList.prototype.forEach = Array.prototype.forEach;
+}
+
 (function () {
   document.addEventListener('DOMContentLoaded', function () {
     var allHeaders = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
