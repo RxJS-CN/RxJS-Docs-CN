@@ -1,5 +1,5 @@
 /**
- * An error thrown when duetime elapses.
+ * 当及时逝去时抛出该错误。
  *
  * @see {@link timeout}
  *

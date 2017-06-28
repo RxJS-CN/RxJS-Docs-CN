@@ -1,7 +1,7 @@
 /**
- * An error thrown when an element was queried at a certain index of an
- * Observable, but no such index or position exists in that sequence.
- *
+ * 当在 Observable 的特定下标查询元素时，没有该下标或者位置存在于该序列时，抛出该
+ * 错误。
+ * 
  * @see {@link elementAt}
  * @see {@link take}
  * @see {@link takeLast}
