@@ -12,7 +12,7 @@ if (typeof NodeList.prototype.forEach !== 'function') {
     
 
     // API 相关
-    var tagMap = {'Params:': '参数:', 'Return:': '返回:', 'Example:': '示例:', 'Test:': '测试:', 'See:': '参见:'};
+    var tagMap = {'Params:': '参数:', 'Return:': '返回:', 'Example:': '示例:', 'Test:': '测试:', 'See:': '参见:', 'Properties:': '属性:'};
     var paramTitleMap = {'Name': '名称', 'Type': '类型', 'Attribute': '属性', 'Description': '描述'};
     var selfDetailTitleMap = {'Direct Subclass:': '直接子类:', 'Indirect Subclass:': '间接子类:', 'Test:': '测试:', 'Extends:': '继承:', 'See:': '参见:', 'Example:': '示例:'};
     var summaryTitileMap = {'Static Method Summary': '静态方法汇总', 'Constructor Summary': '构造函数汇总', 'Method Summary': '方法汇总', 'Inherited Summary': '继承汇总', 'Static Public Summary': '静态公有汇总'};
