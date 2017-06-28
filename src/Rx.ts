@@ -179,16 +179,12 @@ import { observable } from './symbol/observable';
 
 /**
  * @typedef {Object} Rx.Scheduler
- * @property {Scheduler} queue Schedules on a queue in the current event frame
- * (trampoline scheduler). Use this for iteration operations.
- * @property {Scheduler} asap Schedules on the micro task queue, which uses the
- * fastest transport mechanism available, either Node.js' `process.nextTick()`
- * or Web Worker MessageChannel or setTimeout or others. Use this for
- * asynchronous conversions.
- * @property {Scheduler} async Schedules work with `setInterval`. Use this for
- * time-based operations.
- * @property {Scheduler} animationFrame Schedules work with `requestAnimationFrame`.
- * Use this for synchronizing with the platform's painting
+ * @property {Scheduler} queue 在当前事件帧中调度队列(trampoline 调度器)。将此用于迭代操作符。
+ * @property {Scheduler} asap 微任务队列上的调度, 使用尽可能快的转化机制, 或者是 Node.js 的 
+ * `process.nextTick()`，或者是 Web Worker 的消息通道，或者 setTimeout ， 或者其他。将此用于异步转化.
+ * @property {Scheduler} async 使用 `setInterval` 调度工作。将此用于基于时间的操作符。
+ * @property {Scheduler} animationFrame 使用 `requestAnimationFrame` 调度工作。将此
+ * 用于异步平台渲染。
  */
 let Scheduler = {
   asap,
@@ -199,16 +195,12 @@ let Scheduler = {
 
 /**
  * @typedef {Object} Rx.Symbol
- * @property {Symbol|string} rxSubscriber A symbol to use as a property name to
- * retrieve an "Rx safe" Observer from an object. "Rx safety" can be defined as
- * an object that has all of the traits of an Rx Subscriber, including the
- * ability to add and remove subscriptions to the subscription chain and
- * guarantees involving event triggering (can't "next" after unsubscription,
- * etc).
- * @property {Symbol|string} observable A symbol to use as a property name to
- * retrieve an Observable as defined by the [ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable).
- * @property {Symbol|string} iterator The ES6 symbol to use as a property name
- * to retrieve an iterator from an object.
+ * @property {Symbol|string} rxSubscriber symbol 用来检索对象中 "Rx safe" 的 Observer的属性名称。
+ * "Rx safety"可以被定义为拥有 Rx Subscriber 所有特性的对象，包括在 subscription 链中添加和删除 subscriptions
+ * 的能力并且确保事件正确触发。（不会在取消订阅后触发 "next" 等 ）。
+ * @property {Symbol|string} observable symbol 用来检索符合[ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable)
+ * 定义的 Observable 对象的属性名称。
+ * @property {Symbol|string} iterator ES6 的 symbol 用来当作检索对象中的迭代器属性名称。
  */
 let Symbol = {
   rxSubscriber,
