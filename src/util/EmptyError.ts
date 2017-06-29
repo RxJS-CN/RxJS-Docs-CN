@@ -1,6 +1,5 @@
 /**
- * An error thrown when an Observable or a sequence was queried but has no
- * elements.
+ * 当查询 Observable 或者序列没有元素时，则抛出该错误。
  *
  * @see {@link first}
  * @see {@link last}

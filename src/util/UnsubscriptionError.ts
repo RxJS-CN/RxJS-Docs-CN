@@ -1,6 +1,5 @@
 /**
- * An error thrown when one or more errors have occurred during the
- * `unsubscribe` of a {@link Subscription}.
+ * 在 {@link Subscription} 的 `unsubscribe` 期间，发送一个或者多个错误，则抛出该错误。
  */
 export class UnsubscriptionError extends Error {
   constructor(public errors: any[]) {
