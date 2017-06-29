@@ -17,11 +17,11 @@ export interface ISubscription extends AnonymousSubscription {
 }
 
 /**
- * 代表一个一次性的资源，比如 Observable 的执行。Subscription 有一个重要的方法，`unsubscribe`，
- * 该方法不接受参数并且处理该 subscription 持有的资源。
+ * 表示可清理的资源，比如 Observable 的执行。Subscription 有一个重要的方法，`unsubscribe`，
+ * 该方法不接受参数并且清理该 subscription 持有的资源。
  *
  * 另外，subscriptions 可以通过 `add()` 方法进行分组，即可以给当前 Subscription 添加子 Subscription。
- * 当 Subscription 被取消订阅，它所有的子子孙孙都会被取消订阅。
+ * 当 Subscription 被取消订阅，它所有的子孙 Subscription 都会被取消订阅。
  *
  * @class Subscription
  */
@@ -42,7 +42,7 @@ export class Subscription implements ISubscription {
   private _subscriptions: ISubscription[] = null;
 
   /**
-   * @param {function(): void} [unsubscribe] 描述 `unsubscribe` 方法被调用时该如何执行资源处理的函数。
+   * @param {function(): void} [unsubscribe] 描述 `unsubscribe` 方法被调用时该如何执行资源清理的函数。
    */
   constructor(unsubscribe?: () => void) {
     if (unsubscribe) {
@@ -51,7 +51,7 @@ export class Subscription implements ISubscription {
   }
 
   /**
-   * 处理 subscription 持有的资源。例如，可以取消正在进行的 Observable 执行或取消在创建 Subscription 时启动的任何其他类型的工作。
+   * 清理 subscription 持有的资源。例如，可以取消正在进行的 Observable 执行或取消在创建 Subscription 时启动的任何其他类型的工作。
    * @return {void}
    */
   unsubscribe(): void {
@@ -125,14 +125,14 @@ export class Subscription implements ISubscription {
   /**
    * 添加一个 tear down 在该 Subscription 的  unsubscribe() 期间调用。
    *
-   * 如果 tear down 是在 subscription 被取消订阅的时候添加的，是相同的引用 `add`
-   * 被调用，或者 `Subscription.EMPTY`， 它都不会被添加。
+   * 如果清理是在已取消订阅的 subscription 时候添加的，那么它和 add 正在调用的引用是同一个，
+   * 或者是 `Subscription.EMPTY`， 它都不会被添加。
    *
-   * 如果该 subscription 已经在 `closed` 状态，传入的 tear down 逻辑将会立即执行。
+   * 如果该 subscription 已经在 `closed` 状态，传入的清理逻辑将会立即执行。
    *
-   * @param {TeardownLogic} teardown 执行 teardown 时新增加的逻辑。
+   * @param {TeardownLogic} teardown 执行清理程序时的附加逻辑。
    * @return {Subscription} 返回用于创建或添加到内部 Subscription 列表中的 Subscription。
-   * 该 Subscription 可以使用 `remove()` 删除内部的 subscriptions 列表中传入的 teardown 逻辑。
+   * 该 Subscription 可以使用 `remove()` 删除内部的 subscriptions 列表中传入的清理逻辑。
    */
   add(teardown: TeardownLogic): Subscription {
     if (!teardown || (teardown === Subscription.EMPTY)) {
@@ -173,7 +173,7 @@ export class Subscription implements ISubscription {
   }
 
   /**
-   * 从 Subscription 的内部列表中删除 Subscription。在 Subscription 取消订阅的过程中
+   * 从 Subscription 的内部列表中删除一个 Subscription。在该 Subscription 取消订阅的过程中
    * 取消订阅。
    * @param {Subscription} subscription 被移除的 subscription。
    * @return {void}
