@@ -6,11 +6,10 @@ export interface IScheduler {
   schedule<T>(work: (this: Action<T>, state?: T) => void, delay?: number, state?: T): Subscription;
 }
 /**
- * An execution context and a data structure to order tasks and schedule their
- * execution. Provides a notion of (potentially virtual) time, through the
- * `now()` getter method.
+ * 用来安排任务并调度执行的执行上下文和数据结构。通过获取方法 `now()` 提供
+ * 虚拟时间的概念。
  *
- * Each unit of work in a Scheduler is called an {@link Action}.
+ * 调度器的每个工作单元被称为 {@link Action}.
  *
  * ```ts
  * class Scheduler {
@@ -31,31 +30,22 @@ export class Scheduler implements IScheduler {
   }
 
   /**
-   * A getter method that returns a number representing the current time
-   * (at the time this function was called) according to the scheduler's own
-   * internal clock.
-   * @return {number} A number that represents the current time. May or may not
-   * have a relation to wall-clock time. May or may not refer to a time unit
-   * (e.g. milliseconds).
+   * 获取方法，返回的数字表示取决于调度器的内部时钟的当前时间(该方法被调用的时刻)。
+   * @return {number} 代表当前时间的数字。可能与真实时间有关，或者无关。
+   * 可能指的是单位时间(例如，毫秒)，或者不是。
    */
   public now: () => number;
 
   /**
-   * Schedules a function, `work`, for execution. May happen at some point in
-   * the future, according to the `delay` parameter, if specified. May be passed
-   * some context object, `state`, which will be passed to the `work` function.
+   * 调度并执行 `work` 函数。如果指定了 `delay` 参数，那么根据此参数可能会在未来某个时间点发生。
+   * 可以传递一些上下文对象，`state`，该对象将会被传递给 `work` 函数。
+   * 给定的参数将作为一个动作对象存储在一个行动队列。
    *
-   * The given arguments will be processed an stored as an Action object in a
-   * queue of actions.
-   *
-   * @param {function(state: ?T): ?Subscription} work A function representing a
-   * task, or some unit of work to be executed by the Scheduler.
-   * @param {number} [delay] Time to wait before executing the work, where the
-   * time unit is implicit and defined by the Scheduler itself.
-   * @param {T} [state] Some contextual data that the `work` function uses when
-   * called by the Scheduler.
-   * @return {Subscription} A subscription in order to be able to unsubscribe
-   * the scheduled work.
+   * @param {function(state: ?T): ?Subscription} work 代表任务的函数，或者某些可以被调度器执行
+   * 的工作单元。
+   * @param {number} [delay] 在执行任务之前的等待时间，时间单位是隐式的，由调度器本身定义。
+   * @param {T} [state] 当调度器调用 `work` 函数时使用时的一些上下文数据。
+   * @return {Subscription} 该 subscription 是为了能够退订已调度工作。
    */
   public schedule<T>(work: (this: Action<T>, state?: T) => void, delay: number = 0, state?: T): Subscription {
     return new this.SchedulerAction<T>(this, work).schedule(state, delay);
