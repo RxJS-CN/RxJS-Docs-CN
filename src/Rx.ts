@@ -179,12 +179,11 @@ import { observable } from './symbol/observable';
 
 /**
  * @typedef {Object} Rx.Scheduler
- * @property {Scheduler} queue 在当前事件帧中调度队列(trampoline 调度器)。将此用于迭代操作符。
+ * @property {Scheduler} queue 在当前事件帧中调度队列(trampoline 调度器)。迭代操作符使用此调度器。
  * @property {Scheduler} asap 微任务队列上的调度, 使用尽可能快的转化机制, 或者是 Node.js 的 
- * `process.nextTick()`，或者是 Web Worker 的消息通道，或者 setTimeout ， 或者其他。将此用于异步转化.
- * @property {Scheduler} async 使用 `setInterval` 调度工作。将此用于基于时间的操作符。
- * @property {Scheduler} animationFrame 使用 `requestAnimationFrame` 调度工作。将此
- * 用于异步平台渲染。
+ * `process.nextTick()`，或者是 Web Worker 的消息通道，或者 setTimeout ， 或者其他。异步转化使用此调度器.
+ * @property {Scheduler} async 使用 `setInterval` 调度工作。基于时间的操作符使用此调度器。
+ * @property {Scheduler} animationFrame 使用 `requestAnimationFrame` 调度工作。与平台的重绘同步使用此调度器。
  */
 let Scheduler = {
   asap,
@@ -195,12 +194,12 @@ let Scheduler = {
 
 /**
  * @typedef {Object} Rx.Symbol
- * @property {Symbol|string} rxSubscriber symbol 用来检索对象中 "Rx safe" 的 Observer的属性名称。
+ * @property {Symbol|string} rxSubscriber 用作属性名称的 symbol，用于从对象中检索 “Rx safe” 的 Observer 。
  * "Rx safety"可以被定义为拥有 Rx Subscriber 所有特性的对象，包括在 subscription 链中添加和删除 subscriptions
- * 的能力并且确保事件正确触发。（不会在取消订阅后触发 "next" 等 ）。
- * @property {Symbol|string} observable symbol 用来检索符合[ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable)
- * 定义的 Observable 对象的属性名称。
- * @property {Symbol|string} iterator ES6 的 symbol 用来当作检索对象中的迭代器属性名称。
+ * 的能力并且确保事件正确地触发，等等。（不会在取消订阅后触发 "next" 等 ）。
+ * @property {Symbol|string} observable 用作属性名称的 symbol，用来检索符合[ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable)
+ * 定义的 Observable 对象。
+ * @property {Symbol|string} iterator 用作属性名称的 ES6 的 symbol， 用来检索对象中的迭代器。
  */
 let Symbol = {
   rxSubscriber,
