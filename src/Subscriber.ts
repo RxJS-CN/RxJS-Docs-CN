@@ -6,11 +6,10 @@ import { rxSubscriber as rxSubscriberSymbol } from './symbol/rxSubscriber';
 
 /**
  * 实现 {@link Observer} 接口并且继承 {@link Subscription} 类。
- * 
- * 虽然 {@link Observer} 是消费 {@link Observable} 值的公共API, 所有 Observers 都转化成了
- * Subscriber，以便于提供订阅功能，比如说`unsubscribe`。
- * Subscriber 是 RxJS 的公共类型, 并且是实现操作符的关键, 但是很少在公共 API
- * 中使用。
+ * 虽然 {@link Observer} 是消费 {@link Observable} 值的公有 API, 所有 Observers 都转化成了
+ * Subscriber，以便提供类似 Subscription 的能力，比如 `unsubscribe`。
+ * Subscriber 是 RxJS 的常见类型, 并且是实现操作符的关键, 但是很少作为公有 API
+ * 使用。
  *
  * @class Subscriber<T>
  */
@@ -19,11 +18,11 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   [rxSubscriberSymbol]() { return this; }
 
   /**
-   * Subscriber 的静态工厂，给定了（潜在的部分）Observer 的定义。
+   * Subscriber 的静态工厂，给定了 Observer （潜在的部分）的定义。
    * @param {function(x: ?T): void} [next] Observer 的 `next` 回调函数。
    * @param {function(e: ?any): void} [error] Observer 的 `error` 回调函数。
    * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
-   * @return {Subscriber<T>} 包装了（部分定义）的传入参数定义的 Observer 的  Subscriber。
+   * @return {Subscriber<T>} 包装了作为参数传入的（部分定义）Observer 的  Subscriber。
    */
   static create<T>(next?: (x?: T) => void,
                    error?: (e?: any) => void,
@@ -77,8 +76,8 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer} 回调从 Observable 接收值为 `next` 的通知。
-   * Observable 也许会掉用这个方法 0 次 或者多次。
+   * {@link Observer} 的回调，用来接收 Observable 中的 next 类型通知，此通知带有值。
+   * Observable 可能会掉用这个方法 0 次，或者多次。
    * @param {T} [value] The `next` value.
    * @return {void}
    */
@@ -89,8 +88,8 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer} 回调从 Observable 接收值为 `error` 的通知，附加 {@link Error}。
-   * 通知 Observer，Observable发出了错误。
+   * {@link Observer} 的回调，用来接收 Observable 中的 error 类型通知，此通知带有 {@link Error} 。
+   * 通知 Observer，Observable 发出了错误。
    * @param {any} [err] `error` 异常.
    * @return {void}
    */
@@ -102,8 +101,8 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer}  回调从 Observable 接收没值的 `complete` 的通知。
-   * 通知 Observer， Observable完成了推送通知。
+   * {@link Observer}  的回调，用来接收 Observable 中的 `complete` 类型通知。
+   * 通知 Observer， Observable 完成了基于推送体系的通知。
    * @return {void}
    */
   complete(): void {
