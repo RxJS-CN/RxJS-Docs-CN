@@ -18,7 +18,7 @@ export type SubscribableOrPromise<T> = Subscribable<T> | PromiseLike<T>;
 export type ObservableInput<T> = SubscribableOrPromise<T> | ArrayLike<T>;
 
 /**
- * 任意时间内任意一组值的表示。 这是 RxJS 最基本的构建块。
+ * 表示在任意时间内的任意一组值。 这是 RxJS 最基本的构建块。
  *
  * @class Observable<T>
  */
@@ -32,7 +32,7 @@ export class Observable<T> implements Subscribable<T> {
   /**
    * @constructor
    * @param {Function} subscribe 当 Observable 初始订阅的时候会调用该方法. 该函数接受 Subscriber, 这样就可以 `next`
-   * 值，或者 `error` 方法会被调用显示错误，或者 `complete` 别调用通知成功的完成。
+   * 值，或者 `error` 方法会被调用以引发错误，或者 `complete` 被调用以通知成功的完成。
    */
   constructor(subscribe?: (this: Observable<T>, subscriber: Subscriber<T>) => TeardownLogic) {
     if (subscribe) {
@@ -43,7 +43,7 @@ export class Observable<T> implements Subscribable<T> {
   // HACK: Since TypeScript inherits static properties too, we have to
   // fight against TypeScript here so Subject can have a different static create signature
   /**
-   * 创建一个新的冷 Observable，通过调用 Observable 的构造函数。
+   * 通过调用 Observable 的构造函数，创建一个新的冷 Observable。
    * @static true
    * @owner Observable
    * @method create
@@ -55,9 +55,9 @@ export class Observable<T> implements Subscribable<T> {
   }
 
   /**
-   * 创建一个新 Observable，当前 Observable 为源，传递的操作符被定义为新 observable 的操作符。
+   * 创建一个新的 Observable，以它作为源，并传递操作符的定义作为新的 observable 操作符。
    * @method lift
-   * @param {Operator} operator 定义了 observable 的操作符。
+   * @param {Operator} operator 定义了如何操作 observable 的操作符。
    * @return {Observable} 应用了操作符的新 observable。
    */
   lift<R>(operator: Operator<T, R>): Observable<R> {
@@ -71,33 +71,32 @@ export class Observable<T> implements Subscribable<T> {
   subscribe(observer: PartialObserver<T>): Subscription;
   subscribe(next?: (value: T) => void, error?: (error: any) => void, complete?: () => void): Subscription;
   /**
-   * 
-   * 调用 Observable 和注册 Observer 的处理器以便于发出通知。
+   * 调用 Observable 的执行并注册 Observer 的处理器以便于发出通知。
    *
-   * <span class="informal">当你拥有所有这些 Observables 时使用它，但是仍然什么都没有发生。</span>
+   * <span class="informal">当你拥有这些 Observables 却仍然什么也没发生时使用它。</span>
    *
-   * `subscribe` 不是一个通用操作符，但是是一个调用 Observables 内部 `subscribe` 方法的方法。它也许是一个你传递给 {@link create}
-   * 静态工厂的方法，但是大多数情况下它是一个库的实现，它定义了 Observable 什么时候发出，发出什么。这意味着调用 `subscribe` 就是 Observable
-   * 开始工作的时刻，而不是人们常想的它创建的时候。
+   * `subscribe` 不是一个常规的操作符，而是方法，它调用 Observables 内部的 subscribe 函数。它也许是一个你传递给 {@link create}
+   * 静态工厂的方法，但是大多数情况下它是一个库的实现，它定义了 Observable 什么时候发出，发出什么。这意味着实际上是 Observable 开始工
+   * 作的那一刻才调用 subscribe ， 而不是像人们经常认为的那样，即创建 Observable 的时候。
    *
-   * 除了开始 Observable 的执行，该方法允许你监听 Observable 发出的值，也包括完成或者发生错误。你可以通过两种方式达到
+   * 除了开始 Observable 的执行，该方法允许你监听 Observable 发出的值，也包括完成或者发生错误。你可以通过以下两种方式达到
    * 这种目的。
    *
-   * 第一种方式是创建一个实现了 {@link Observer} 接口的对象。它应该实现接口定义的方法，但是注意它仅仅是一个普通的 JavaScript
-   * 对象，你可以用任何你想要的方式创建(ES6 class, 常见的构造函数, 对象字面值)。 特别地，不要尝试使用任何 RxJS 的实现细节去创建
+   * 第一种方式是创建一个实现了 {@link Observer} 接口的对象。它应该实现接口定义的方法，但是要注意的是它仅仅是一个普通的 JavaScript
+   * 对象，你可以用任何你想要的方式创建(ES6 class, 常见的构造函数, 对象字面量等等)。 特别地，不要尝试使用任何 RxJS 的实现细节去创建
    * Observers－你不需要这样做。 同样要记住，你的对象不需要实现所有的方法。如果你发现自己创建一个不做任何事情的方法，你可以简化它。
-   * 然而注意，如果 `error` 方法没用被提供，所有的 errors 都不会被捕获。
+   * 不过要注意，如果 `error` 方法没用被提供，所有的错误都不会被捕获。
    *
-   * 第二种方式是放弃 Observer 对象 并且简单提供回调函数代替它的方法。这意味你你可以提高3个方法作为参数给 `subscribe`， 第一个回调
-   * 等价于 `next` 方法，第二个是 `error` 方法，第三个是 `complete` 方法。就像在 Observer 中情况一样，如果你不需要监听某些，你可以
-   * 省略该函数，通过传递 `undefined` 或者 `null`，由于 `subscribe` 在函数调用中的位置识别了这些函数。提到 `error` 函数，正如上文说述，
-   * 如果没有提供，Observable 发出的错误会被抛出。
+   * 第二种方式是放弃 Observer 对象，只需提供回调函数来替代它的方法。这意味你可以给 `subscribe` 提供3个方法作为参数， 第一个回调
+   * 等价于 `next` 方法，第二个等价于 `error` 方法，第三个等价于 `complete` 方法。就如同 Observer 一样，如果你不需要监听某中某个，你可以
+   * 省略该函数，通过传递 `undefined` 或者 `null`，因为 `subscribe` 可以通过在函数调用中的位置识别了这些函数。提到 `error` 函数，正如上文所述，
+   * 如果没有提供，Observable 发出的错误会被抛弃。
    *
    * 不管你使用了哪种方式调用 `subscribe`，所有情况都返回 Subscription 对象。该对象允许你调用 `unsubscribe`，该方法会停止 Observable 
-   * 的工作并且清理 Observable 持有的资源。注意，取消订阅不会掉用 `subscribe` 提供的 `complete` 回调函数，该函数保留了 Observable 定期完成信号。
+   * 的工作并且清理 Observable 持有的资源。注意，取消订阅不会调用 `subscribe` 提供的 `complete` 回调函数，`complete` 回调函数是为来自 Observable 的常规完成信号保留的。
    *
-   * 记住，`subscribe` 提供的回调函数不会保证异步的掉用。是 Observable 自身决定这些方法的执行。例如：{@link of}
-   * 默认同步发出所有的值。经常查看文档确定给定 Observable 被订阅的时候会有什么行为，同时你可以改变默认行为通过 {@link Scheduler}。
+   * 记住，提供给 `subscribe` 的回调函数无法保证是被异步地调用。是 Observable 自身决定这些方法的执行。例如：{@link of}
+   * 默认同步地发出所有的值。经常查看文档以确认给定的 Observable 被订阅时的行为是怎样的，以及它的默认行为是否可以通过使用 {@link Scheduler} 进行更改。
    *
    * @example <caption>用 Observer 对象订阅</caption>
    * const sumObserver = {
@@ -113,7 +112,7 @@ export class Observable<T> implements Subscribable<T> {
    *   }
    * };
    *
-   * Rx.Observable.of(1, 2, 3) // 同步发出 1， 2， 3 然后完成。
+   * Rx.Observable.of(1, 2, 3) // 同步发出 1， 2， 3，然后完成。
    * .subscribe(sumObserver);
    *
    * // 日志:
@@ -149,7 +148,7 @@ export class Observable<T> implements Subscribable<T> {
    * const subscription = Rx.Observable.interval(1000).subscribe(
    *   num => console.log(num),
    *   undefined,
-   *   () => console.log('completed!') // 不会被掉用, 即使取消订阅
+   *   () => console.log('completed!') // 即使当取消订阅时，也不会被调用
    * );                                
    *
    *
@@ -164,10 +163,10 @@ export class Observable<T> implements Subscribable<T> {
    * // "unsubscribed!" after 2,5s
    *
    *
-   * @param {Observer|Function} observerOrNext (可选) 或者是 observer 对象, 或者是1个到3个处理器，处理有订阅的 Observable
+   * @param {Observer|Function} observerOrNext [可选] 或者是 observer 对象, 或者是1个到3个处理器，处理已订阅的 Observable
    * 发出的值。
-   * @param {Function} error (可选) 由错误导致的终结事件的处理器。如果没有提供处理器，错误会被抛出。
-   * @param {Function} complete (可选) 由成功完成导致的终结事件的处理器。
+   * @param {Function} error [可选] 由错误导致的终结事件的处理器。如果没有提供处理器，错误将不做处理直接抛弃。
+   * @param {Function} complete [可选] 由成功完成导致的终结事件的处理器。
    * @return {ISubscription} 注册处理程序的订阅引用。
    * @method subscribe
    */
