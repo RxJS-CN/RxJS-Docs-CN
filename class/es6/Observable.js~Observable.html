@@ -84,13 +84,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Observable} from &apos;<span><a href="file/es6/Observable.js.html#lineNumber10">@reactivex/rxjs/es6/Observable.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Observable} from &apos;<span><a href="file/es6/Observable.js.html#lineNumber9">@reactivex/rxjs/es6/Observable.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/Observable.js.html#lineNumber10">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/Observable.js.html#lineNumber9">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,8 +110,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>A representation of any set of values over any amount of time. This the most basic building block
-of RxJS.</p>
+  <div class="description" data-ice="description"><p>&#x8868;&#x793A;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x5185;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x7EC4;&#x503C;&#x3002; &#x8FD9;&#x662F; RxJS &#x6700;&#x57FA;&#x672C;&#x7684;&#x6784;&#x5EFA;&#x5757;&#x3002;</p>
 </div>
 
   
@@ -1811,8 +1810,7 @@ Observable&#x3002;</p>
       <div>
         
         
-        <div data-ice="description"><p>Creates a new Observable, with this Observable as the source, and the passed
-operator defined as the new observable&apos;s operator.</p>
+        <div data-ice="description"><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable&#xFF0C;&#x4EE5;&#x5B83;&#x4F5C;&#x4E3A;&#x6E90;&#xFF0C;&#x5E76;&#x4F20;&#x9012;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5B9A;&#x4E49;&#x4F5C;&#x4E3A;&#x65B0;&#x7684; observable &#x64CD;&#x4F5C;&#x7B26;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -2840,7 +2838,7 @@ ConnectableObservable &#x53EF;&#x4EE5;&#x5728;&#x6F5C;&#x5728;&#x7684;&#x591A;&#
       <div>
         
         
-        <div data-ice="description"><p>Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.</p>
+        <div data-ice="description"><p>&#x8C03;&#x7528; Observable &#x7684;&#x6267;&#x884C;&#x5E76;&#x6CE8;&#x518C; Observer &#x7684;&#x5904;&#x7406;&#x5668;&#x4EE5;&#x4FBF;&#x4E8E;&#x53D1;&#x51FA;&#x901A;&#x77E5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -4133,7 +4131,7 @@ Rx.Observable.concat(timer, timer) // concating the same Observable!
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber112">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber109">source</a></span></span>
     </span>
   </h3>
 
@@ -4144,23 +4142,23 @@ Rx.Observable.concat(timer, timer) // concating the same Observable!
 <p><span class="informal">&#x521B;&#x5EFA;&#x81EA;&#x5B9A;&#x4E49;&#x7684; Observable &#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x505A;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x505A;&#x7684;&#x4E8B;&#x60C5;</span></p>
 <p><img src="./img/create.png" width="100%"></p>
 <p><code>create</code> &#x5C06; <code>onSubscription</code> &#x51FD;&#x6570;&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x5B9E;&#x9645;&#x7684; Observable &#x3002;&#x6BCF;&#x5F53;&#x6709;&#x4EBA;&#x8BA2;&#x9605;&#x8BE5; Observable &#x7684;
-&#x65F6;&#x5019;&#xFF0C;<code>onSubscription</code>&#x51FD;&#x6570;&#x4F1A;&#x63A5;&#x6536;<span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span>&#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x53C2;&#x6570;&#x6267;&#x884C;&#x3002;<code>onSubscription</code> &#x5E94;&#x8BE5;
+&#x65F6;&#x5019;&#xFF0C;<code>onSubscription</code>&#x51FD;&#x6570;&#x4F1A;&#x63A5;&#x6536; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x53C2;&#x6570;&#x6267;&#x884C;&#x3002;<code>onSubscription</code> &#x5E94;&#x8BE5;
 &#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x8C61;&#x7684; <code>next</code>, <code>error</code> &#x548C; <code>complete</code> &#x65B9;&#x6CD5;&#x3002;</p>
-<p>&#x5E26;&#x503C;&#x8C03;&#x7528;<code>next</code>&#x4F1A;&#x5C06;&#x8BE5;&#x503C;&#x53D1;&#x51FA;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x8C03;&#x7528; complete &#x610F;&#x5473;&#x7740;&#x8BE5; Observable &#x7ED3;&#x675F;&#x4E86;&#x53D1;&#x51FA;&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x4E86;&#x3002;
-&#x8C03;&#x7528;<code>error</code>&#x610F;&#x5473;&#x7740;&#x51FA;&#x73B0;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x4F20;&#x7ED9;<code>error</code>&#x7684;&#x53C2;&#x6570;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B;&#x8BE6;&#x7EC6;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x3002;</p>
-<p>&#x4E00;&#x4E2A;&#x683C;&#x5F0F;&#x826F;&#x597D;&#x7684; Observable &#x53EF;&#x4EE5;&#x901A;&#x8FC7;<code>next</code>&#x65B9;&#x6CD5;&#x53D1;&#x51FA;&#x4EFB;&#x610F;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x4F46;&#x662F;<code>complete</code>&#x548C;<code>error</code>&#x65B9;&#x6CD5;&#x53EA;&#x80FD;&#x88AB;&#x8C03;&#x7528;
-&#x4E00;&#x6B21;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x8C03;&#x7528;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x3002; &#x5982;&#x679C;&#x4F60;&#x8BD5;&#x56FE;&#x5728; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x4E4B;&#x540E;&#x8C03;&#x7528;<code>next</code>&#x3001; <code>complete</code>
-&#x6216; <code>error</code>&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x5C06;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4EE5;&#x4FDD;&#x62A4;&#x6240;&#x8C13;&#x7684; Observable &#x5408;&#x540C;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x4F60;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x523B;
-&#x8C03;&#x7528;<code>complete</code>&#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x4F1A;&#x88AB;&#x7EC8;&#x6B62;&#x7684; Observable &#x4E5F;&#x662F;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4E00;&#x5207;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x9700;&#x6C42;&#x3002;</p>
-<p><code>onSubscription</code>&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6027;&#x7684;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x62E5;&#x6709;<code>unsubscribe</code>&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002; &#x5F53;&#x8981;&#x53D6;&#x6D88;&#x5BF9; Observable
-&#x7684;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x6216;&#x8005;&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6E05;&#x7406;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C; &#x5982;&#x679C;&#x4F60;&#x5728;&#x81EA;&#x5DF1;&#x7684; Observable &#x91CC;&#x9762;&#x4F7F;&#x7528;&#x4E86;
+<p>&#x5E26;&#x503C;&#x8C03;&#x7528; <code>next</code> &#x4F1A;&#x5C06;&#x8BE5;&#x503C;&#x53D1;&#x51FA;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x8C03;&#x7528; complete &#x610F;&#x5473;&#x7740;&#x8BE5; Observable &#x7ED3;&#x675F;&#x4E86;&#x53D1;&#x51FA;&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x4E86;&#x3002;
+&#x8C03;&#x7528; <code>error</code> &#x610F;&#x5473;&#x7740;&#x51FA;&#x73B0;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x4F20;&#x7ED9; <code>error</code> &#x7684;&#x53C2;&#x6570;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B;&#x8BE6;&#x7EC6;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x683C;&#x5F0F;&#x826F;&#x597D;&#x7684; Observable &#x53EF;&#x4EE5;&#x901A;&#x8FC7; <code>next</code> &#x65B9;&#x6CD5;&#x53D1;&#x51FA;&#x4EFB;&#x610F;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x4F46;&#x662F; <code>complete</code> &#x548C; <code>error</code> &#x65B9;&#x6CD5;&#x53EA;&#x80FD;&#x88AB;&#x8C03;&#x7528;
+&#x4E00;&#x6B21;&#xFF0C;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x8C03;&#x7528;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x3002; &#x5982;&#x679C;&#x4F60;&#x8BD5;&#x56FE;&#x5728; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x4E4B;&#x540E;&#x8C03;&#x7528;<code>next</code>&#x3001; <code>complete</code>
+&#x6216; <code>error</code> &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x5C06;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4EE5;&#x4FDD;&#x62A4;&#x6240;&#x8C13;&#x7684; Observable &#x5408;&#x540C;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x4F60;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x523B;
+&#x8C03;&#x7528; <code>complete</code> &#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x4F1A;&#x88AB;&#x7EC8;&#x6B62;&#x7684; Observable &#x4E5F;&#x662F;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4E00;&#x5207;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x9700;&#x6C42;&#x3002;</p>
+<p><code>onSubscription</code> &#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6027;&#x7684;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x62E5;&#x6709; <code>unsubscribe</code> &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002; &#x5F53;&#x8981;&#x53D6;&#x6D88;&#x5BF9; Observable
+&#x7684;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x6216;&#x8005;&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6E05;&#x7406;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x81EA;&#x5DF1;&#x7684; Observable &#x91CC;&#x9762;&#x4F7F;&#x7528;&#x4E86;
 <code>setTimeout</code>&#xFF0C; &#x5F53;&#x6709;&#x4EBA;&#x8981;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#xFF0C; &#x4F60;&#x53EF;&#x4EE5;&#x6E05;&#x7406;&#x5B9A;&#x65F6;&#x5668;&#xFF0C; &#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x89E6;&#x53D1;&#xFF0C;&#x5E76;&#x4E14;&#x6D4F;&#x89C8;
 &#x5668;(&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5BBF;&#x4E3B;&#x73AF;&#x5883;)&#x4E5F;&#x4E0D;&#x7528;&#x5C06;&#x8BA1;&#x7B97;&#x80FD;&#x529B;&#x6D6A;&#x8D39;&#x5728;&#x8FD9;&#x79CD;&#x65E0;&#x4EBA;&#x76D1;&#x542C;&#x7684;&#x5B9A;&#x65F6;&#x4E8B;&#x4EF6;&#x4E0A;&#x3002;</p>
-<p>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;<code>create</code>&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684; Observable &#x80FD;&#x6EE1;&#x8DB3;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;&#x8FD9;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;
-<code>create</code>&#x662F;&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x4EFB;&#x4F55; Observable &#x7684;&#x5E95;&#x5C42;&#x673A;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x975E;&#x5E38;&#x7279;&#x6B8A;&#x7684;&#x9700;&#x6C42;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
+<p>&#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528; <code>create</code>&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684; Observable &#x80FD;&#x6EE1;&#x8DB3;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;&#x8FD9;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;
+<code>create</code> &#x662F;&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x4EFB;&#x4F55; Observable &#x7684;&#x5E95;&#x5C42;&#x673A;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x975E;&#x5E38;&#x7279;&#x6B8A;&#x7684;&#x9700;&#x6C42;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x3002;</p>
 <p><strong>TypeScript &#x7B7E;&#x540D;&#x95EE;&#x9898;</strong></p>
-<p>&#x56E0;&#x4E3A; Observable &#x7EE7;&#x627F;&#x7684;&#x7C7B;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;&#x9759;&#x6001;<code>create</code>&#x65B9;&#x6CD5;,&#x4F46;&#x662F;&#x7B7E;&#x540D;&#x4E0D;&#x540C;, &#x4E0D;&#x53EF;&#x80FD;&#x7ED9;<code>Observable.create</code>&#x5408;&#x9002;&#x7684;&#x7B7E;&#x540D;&#x3002;
-&#x6B63;&#x56E0;&#x4E3A;&#x5982;&#x6B64;&#xFF0C;&#x7ED9;<code>create</code>&#x4F20;&#x9012;&#x7684;&#x51FD;&#x6570;&#x5C06;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x7B7E;&#x540D;&#x3002;</p>
+<p>&#x56E0;&#x4E3A; Observable &#x7EE7;&#x627F;&#x7684;&#x7C7B;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;&#x9759;&#x6001; <code>create</code> &#x65B9;&#x6CD5;,&#x4F46;&#x662F;&#x7B7E;&#x540D;&#x4E0D;&#x540C;, &#x4E0D;&#x53EF;&#x80FD;&#x7ED9; <code>Observable.create</code> &#x5408;&#x9002;&#x7684;&#x7B7E;&#x540D;&#x3002;
+&#x6B63;&#x56E0;&#x4E3A;&#x5982;&#x6B64;&#xFF0C;&#x7ED9; <code>create</code> &#x4F20;&#x9012;&#x7684;&#x51FD;&#x6570;&#x5C06;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x7B7E;&#x540D;&#x3002;</p>
 <p>&#x5F53;&#x4F7F;&#x7528; TypeScript &#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5EFA;&#x8BAE;&#x5C06;&#x4F20;&#x9012;&#x7ED9; create &#x7684;&#x51FD;&#x6570;&#x7B7E;&#x540D;&#x58F0;&#x660E;&#x4E3A;<code>(observer: Observer) =&gt; TeardownLogic</code>,
 &#x5176;&#x4E2D;<span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x548C; <span><a href="class/es6/MiscJSDoc.js~TeardownLogicDoc.html">TeardownLogic</a></span> &#x662F;&#x5E93;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;&#x3002;</p>
 </div>
@@ -4179,10 +4177,8 @@ Rx.Observable.concat(timer, timer) // concating the same Observable!
       <td data-ice="name" data-depth="0">onSubscription</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(observer: <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span>)</span>: <span><a href="class/es6/MiscJSDoc.js~TeardownLogicDoc.html">TeardownLogic</a></span></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>A
-function that accepts an Observer, and invokes its <code>next</code>,
-<code>error</code>, and <code>complete</code> methods as appropriate, and optionally returns some
-logic for cleaning up resources.</p>
+      <td data-ice="description"><p>&#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;
+&#x7136;&#x540E;&#x5728;&#x9002;&#x5F53;&#x7684;&#x65F6;&#x673A;&#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x7684; <code>next</code> &#x3001;<code>error</code> &#x6216;&#x8005; <code>complete</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E9B;&#x6E05;&#x7406;&#x8D44;&#x6E90;&#x7684;&#x903B;&#x8F91;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -4195,8 +4191,7 @@ logic for cleaning up resources.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Observable.js~Observable.html">Observable</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>An Observable that, whenever subscribed, will execute the
-specified function.</p>
+        <td class="return-desc" data-ice="returnDescription"><p>Observable&#xFF0C; &#x5F53;&#x8BE5; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x5C06;&#x4F1A;&#x6267;&#x884C;&#x7279;&#x5B9A;&#x51FD;&#x6570;&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -4227,41 +4222,41 @@ observable.subscribe(
   () =&gt; console.log(&apos;this is the end&apos;)
 );
 
-// Logs
+// &#x65E5;&#x5FD7;:
 // 1
 // 2
 // 3
 // &quot;this is the end&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Emit an error</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const observable = Rx.Observable.create((observer) =&gt; {
   observer.error(&apos;something went really wrong...&apos;);
 });
 
 observable.subscribe(
-  value =&gt; console.log(value), // will never be called
+  value =&gt; console.log(value), // &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
   err =&gt; console.log(err),
-  () =&gt; console.log(&apos;complete&apos;) // will never be called
+  () =&gt; console.log(&apos;complete&apos;) // &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
 );
 
-// Logs
+// &#x65E5;&#x5FD7;:
 // &quot;something went really wrong...&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Return unsubscribe function</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x8FD4;&#x56DE;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x51FD;&#x6570;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">
 const observable = Rx.Observable.create(observer =&gt; {
-  const id = setTimeout(() =&gt; observer.next(&apos;...&apos;), 5000); // emit value after 5s
+  const id = setTimeout(() =&gt; observer.next(&apos;...&apos;), 5000); // 5s&#x540E;&#x53D1;&#x51FA;&#x6570;&#x636E;
 
   return () =&gt; { clearTimeout(id); console.log(&apos;cleared!&apos;); };
 });
 
 const subscription = observable.subscribe(value =&gt; console.log(value));
 
-setTimeout(() =&gt; subscription.unsubscribe(), 3000); // cancel subscription after 3s
+setTimeout(() =&gt; subscription.unsubscribe(), 3000); // 3s&#x540E;&#x53D6;&#x6D88;&#x8BA2;&#x9605;
 
-// Logs:
+// &#x65E5;&#x5FD7;:
 // &quot;cleared!&quot; after 3s
 
 // Never logs &quot;...&quot;</code></pre>
@@ -5943,7 +5938,7 @@ Observable
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber18">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber15">source</a></span></span>
     </span>
   </h3>
 
@@ -5966,10 +5961,8 @@ Observable
       <td data-ice="name" data-depth="0">subscribe</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the function that is  called when the Observable is
-initially subscribed to. This function is given a Subscriber, to which new values
-can be <code>next</code>ed, or an <code>error</code> method can be called to raise an error, or
-<code>complete</code> can be called to notify of a successful completion.</p>
+      <td data-ice="description"><p>&#x5F53; Observable &#x521D;&#x59CB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;. &#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7; Subscriber, &#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5; <code>next</code>
+&#x503C;&#xFF0C;&#x6216;&#x8005; <code>error</code> &#x65B9;&#x6CD5;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x4EE5;&#x5F15;&#x53D1;&#x9519;&#x8BEF;&#xFF0C;&#x6216;&#x8005; <code>complete</code> &#x88AB;&#x8C03;&#x7528;&#x4EE5;&#x901A;&#x77E5;&#x6210;&#x529F;&#x7684;&#x5B8C;&#x6210;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -6007,7 +6000,7 @@ can be <code>next</code>ed, or an <code>error</code> method can be called to rai
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber235">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber216">source</a></span></span>
     </span>
   </h3>
 
@@ -9653,7 +9646,7 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber185">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber166">source</a></span></span>
     </span>
   </h3>
 
@@ -9676,14 +9669,14 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
       <td data-ice="name" data-depth="0">next</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>a handler for each value emitted by the observable</p>
+      <td data-ice="description"><p>observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">PromiseCtor</td>
       <td data-ice="type"><span>PromiseConstructor</span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>a constructor function used to instantiate the Promise</p>
+      <td data-ice="description"><p>&#x7528;&#x6765;&#x751F;&#x6210; Promise &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -9696,8 +9689,7 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>a promise that either resolves on observable completion or
- rejects with the handled error</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x4E00;&#x4E2A; observable &#x5B8C;&#x6210;&#x5219; resolves&#xFF0C;&#x9519;&#x8BEF;&#x5219; rejects &#x7684; promise&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -10154,15 +10146,14 @@ result.subscribe(x =&gt; console.log(x));</code></pre>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Creates a new Observable, with this Observable as the source, and the passed
-operator defined as the new observable&apos;s operator.</p>
+  <div data-ice="description"><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable&#xFF0C;&#x4EE5;&#x5B83;&#x4F5C;&#x4E3A;&#x6E90;&#xFF0C;&#x5E76;&#x4F20;&#x9012;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5B9A;&#x4E49;&#x4F5C;&#x4E3A;&#x65B0;&#x7684; observable &#x64CD;&#x4F5C;&#x7B26;&#x3002;</p>
 </div>
 
   
@@ -10179,7 +10170,7 @@ operator defined as the new observable&apos;s operator.</p>
       <td data-ice="name" data-depth="0">operator</td>
       <td data-ice="type"><span>Operator</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>the operator defining the operation to take on the observable</p>
+      <td data-ice="description"><p>&#x5B9A;&#x4E49;&#x4E86;&#x5982;&#x4F55;&#x64CD;&#x4F5C; observable &#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -10192,7 +10183,7 @@ operator defined as the new observable&apos;s operator.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Observable.js~Observable.html">Observable</a></span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>a new observable with the Operator applied</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x5E94;&#x7528;&#x4E86;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x65B0; observable&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -13787,44 +13778,32 @@ skipLastTwo.subscribe(x =&gt; console.log(x));
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber151">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Observable.js.html#lineNumber133">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.</p>
-<p><span class="informal">Use it when you have all these Observables, but still nothing is happening.</span></p>
-<p><code>subscribe</code> is not a regular operator, but a method that calls Observables internal <code>subscribe</code> function. It
-might be for example a function that you passed to a <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> static factory, but most of the time it is
-a library implementation, which defines what and when will be emitted by an Observable. This means that calling
-<code>subscribe</code> is actually the moment when Observable starts its work, not when it is created, as it is often
-thought.</p>
-<p>Apart from starting the execution of an Observable, this method allows you to listen for values
-that an Observable emits, as well as for when it completes or errors. You can achieve this in two
-following ways.</p>
-<p>The first way is creating an object that implements <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> interface. It should have methods
-defined by that interface, but note that it should be just a regular JavaScript object, which you can create
-yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
-not attempt to use any RxJS implementation details to create Observers - you don&apos;t need them. Remember also
-that your object does not have to implement all methods. If you find yourself creating a method that doesn&apos;t
-do anything, you can simply omit it. Note however, that if <code>error</code> method is not provided, all errors will
-be left uncaught.</p>
-<p>The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
-This means you can provide three functions as arguments to <code>subscribe</code>, where first function is equivalent
-of a <code>next</code> method, second of an <code>error</code> method and third of a <code>complete</code> method. Just as in case of Observer,
-if you do not need to listen for something, you can omit a function, preferably by passing <code>undefined</code> or <code>null</code>,
-since <code>subscribe</code> recognizes these functions by where they were placed in function call. When it comes
-to <code>error</code> function, just as before, if not provided, errors emitted by an Observable will be thrown.</p>
-<p>Whatever style of calling <code>subscribe</code> you use, in both cases it returns a Subscription object.
-This object allows you to call <code>unsubscribe</code> on it, which in turn will stop work that an Observable does and will clean
-up all resources that an Observable used. Note that cancelling a subscription will not call <code>complete</code> callback
-provided to <code>subscribe</code> function, which is reserved for a regular completion signal that comes from an Observable.</p>
-<p>Remember that callbacks provided to <code>subscribe</code> are not guaranteed to be called asynchronously.
-It is an Observable itself that decides when these functions will be called. For example <span><a href="class/es6/Observable.js~Observable.html#static-method-of">of</a></span>
-by default emits all its values synchronously. Always check documentation for how given Observable
-will behave when subscribed and if its default behavior can be modified with a <span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span>.</p>
+  <div data-ice="description"><p>&#x8C03;&#x7528; Observable &#x7684;&#x6267;&#x884C;&#x5E76;&#x6CE8;&#x518C; Observer &#x7684;&#x5904;&#x7406;&#x5668;&#x4EE5;&#x4FBF;&#x4E8E;&#x53D1;&#x51FA;&#x901A;&#x77E5;&#x3002;</p>
+<p><span class="informal">&#x5F53;&#x4F60;&#x62E5;&#x6709;&#x8FD9;&#x4E9B; Observables &#x5374;&#x4ECD;&#x7136;&#x4EC0;&#x4E48;&#x4E5F;&#x6CA1;&#x53D1;&#x751F;&#x65F6;&#x4F7F;&#x7528;&#x5B83;&#x3002;</span></p>
+<p><code>subscribe</code> &#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x89C4;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x800C;&#x662F;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x8C03;&#x7528; Observables &#x5185;&#x90E8;&#x7684; subscribe &#x51FD;&#x6570;&#x3002;&#x5B83;&#x4E5F;&#x8BB8;&#x662F;&#x4E00;&#x4E2A;&#x4F60;&#x4F20;&#x9012;&#x7ED9; <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span>
+&#x9759;&#x6001;&#x5DE5;&#x5382;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5E93;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86; Observable &#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53D1;&#x51FA;&#xFF0C;&#x53D1;&#x51FA;&#x4EC0;&#x4E48;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B9E;&#x9645;&#x4E0A;&#x662F; Observable &#x5F00;&#x59CB;&#x5DE5;
+&#x4F5C;&#x7684;&#x90A3;&#x4E00;&#x523B;&#x624D;&#x8C03;&#x7528; subscribe &#xFF0C; &#x800C;&#x4E0D;&#x662F;&#x50CF;&#x4EBA;&#x4EEC;&#x7ECF;&#x5E38;&#x8BA4;&#x4E3A;&#x7684;&#x90A3;&#x6837;&#xFF0C;&#x5373;&#x521B;&#x5EFA; Observable &#x7684;&#x65F6;&#x5019;&#x3002;</p>
+<p>&#x9664;&#x4E86;&#x5F00;&#x59CB; Observable &#x7684;&#x6267;&#x884C;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x5141;&#x8BB8;&#x4F60;&#x76D1;&#x542C; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x4E5F;&#x5305;&#x62EC;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x8FBE;&#x5230;
+&#x8FD9;&#x79CD;&#x76EE;&#x7684;&#x3002;</p>
+<p>&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5B83;&#x5E94;&#x8BE5;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5B83;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684; JavaScript
+&#x5BF9;&#x8C61;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;(ES6 class, &#x5E38;&#x89C1;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;, &#x5BF9;&#x8C61;&#x5B57;&#x9762;&#x91CF;&#x7B49;&#x7B49;)&#x3002; &#x7279;&#x522B;&#x5730;&#xFF0C;&#x4E0D;&#x8981;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55; RxJS &#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x53BB;&#x521B;&#x5EFA;
+Observers&#xFF0D;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x6837;&#x505A;&#x3002; &#x540C;&#x6837;&#x8981;&#x8BB0;&#x4F4F;&#xFF0C;&#x4F60;&#x7684;&#x5BF9;&#x8C61;&#x4E0D;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x6240;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x5B83;&#x3002;
+&#x4E0D;&#x8FC7;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C; <code>error</code> &#x65B9;&#x6CD5;&#x6CA1;&#x7528;&#x88AB;&#x63D0;&#x4F9B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x9519;&#x8BEF;&#x90FD;&#x4E0D;&#x4F1A;&#x88AB;&#x6355;&#x83B7;&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x653E;&#x5F03; Observer &#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x9700;&#x63D0;&#x4F9B;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x6765;&#x66FF;&#x4EE3;&#x5B83;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x4F60;&#x53EF;&#x4EE5;&#x7ED9; <code>subscribe</code> &#x63D0;&#x4F9B;3&#x4E2A;&#x65B9;&#x6CD5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C; &#x7B2C;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;
+&#x7B49;&#x4EF7;&#x4E8E; <code>next</code> &#x65B9;&#x6CD5;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x7B49;&#x4EF7;&#x4E8E; <code>error</code> &#x65B9;&#x6CD5;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x7B49;&#x4EF7;&#x4E8E; <code>complete</code> &#x65B9;&#x6CD5;&#x3002;&#x5C31;&#x5982;&#x540C; Observer &#x4E00;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x76D1;&#x542C;&#x67D0;&#x4E2D;&#x67D0;&#x4E2A;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;
+&#x7701;&#x7565;&#x8BE5;&#x51FD;&#x6570;&#xFF0C;&#x901A;&#x8FC7;&#x4F20;&#x9012; <code>undefined</code> &#x6216;&#x8005; <code>null</code>&#xFF0C;&#x56E0;&#x4E3A; <code>subscribe</code> &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x8BC6;&#x522B;&#x4E86;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x3002;&#x63D0;&#x5230; <code>error</code> &#x51FD;&#x6570;&#xFF0C;&#x6B63;&#x5982;&#x4E0A;&#x6587;&#x6240;&#x8FF0;&#xFF0C;
+&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#xFF0C;Observable &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#x4F1A;&#x88AB;&#x629B;&#x5F03;&#x3002;</p>
+<p>&#x4E0D;&#x7BA1;&#x4F60;&#x4F7F;&#x7528;&#x4E86;&#x54EA;&#x79CD;&#x65B9;&#x5F0F;&#x8C03;&#x7528; <code>subscribe</code>&#xFF0C;&#x6240;&#x6709;&#x60C5;&#x51B5;&#x90FD;&#x8FD4;&#x56DE; Subscription &#x5BF9;&#x8C61;&#x3002;&#x8BE5;&#x5BF9;&#x8C61;&#x5141;&#x8BB8;&#x4F60;&#x8C03;&#x7528; <code>unsubscribe</code>&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4F1A;&#x505C;&#x6B62; Observable
+&#x7684;&#x5DE5;&#x4F5C;&#x5E76;&#x4E14;&#x6E05;&#x7406; Observable &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x4E0D;&#x4F1A;&#x8C03;&#x7528; <code>subscribe</code> &#x63D0;&#x4F9B;&#x7684; <code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;<code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x662F;&#x4E3A;&#x6765;&#x81EA; Observable &#x7684;&#x5E38;&#x89C4;&#x5B8C;&#x6210;&#x4FE1;&#x53F7;&#x4FDD;&#x7559;&#x7684;&#x3002;</p>
+<p>&#x8BB0;&#x4F4F;&#xFF0C;&#x63D0;&#x4F9B;&#x7ED9; <code>subscribe</code> &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x65E0;&#x6CD5;&#x4FDD;&#x8BC1;&#x662F;&#x88AB;&#x5F02;&#x6B65;&#x5730;&#x8C03;&#x7528;&#x3002;&#x662F; Observable &#x81EA;&#x8EAB;&#x51B3;&#x5B9A;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x3002;&#x4F8B;&#x5982;&#xFF1A;<span><a href="class/es6/Observable.js~Observable.html#static-method-of">of</a></span>
+&#x9ED8;&#x8BA4;&#x540C;&#x6B65;&#x5730;&#x53D1;&#x51FA;&#x6240;&#x6709;&#x7684;&#x503C;&#x3002;&#x7ECF;&#x5E38;&#x67E5;&#x770B;&#x6587;&#x6863;&#x4EE5;&#x786E;&#x8BA4;&#x7ED9;&#x5B9A;&#x7684; Observable &#x88AB;&#x8BA2;&#x9605;&#x65F6;&#x7684;&#x884C;&#x4E3A;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF0C;&#x4EE5;&#x53CA;&#x5B83;&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; <span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span> &#x8FDB;&#x884C;&#x66F4;&#x6539;&#x3002;</p>
 </div>
 
   
@@ -13841,24 +13820,22 @@ will behave when subscribed and if its default behavior can be modified with a <
       <td data-ice="name" data-depth="0">observerOrNext</td>
       <td data-ice="type"><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>(optional) Either an observer with methods to be called,
- or the first of three possible handlers, which is the handler for each value emitted from the subscribed
- Observable.</p>
+      <td data-ice="description"><p>[&#x53EF;&#x9009;] &#x6216;&#x8005;&#x662F; observer &#x5BF9;&#x8C61;, &#x6216;&#x8005;&#x662F;1&#x4E2A;&#x5230;3&#x4E2A;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x5904;&#x7406;&#x5DF2;&#x8BA2;&#x9605;&#x7684; Observable
+&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">error</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>(optional) A handler for a terminal event resulting from an error. If no error handler is provided,
- the error will be thrown as unhandled.</p>
+      <td data-ice="description"><p>[&#x53EF;&#x9009;] &#x7531;&#x9519;&#x8BEF;&#x5BFC;&#x81F4;&#x7684;&#x7EC8;&#x7ED3;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x9519;&#x8BEF;&#x5C06;&#x4E0D;&#x505A;&#x5904;&#x7406;&#x76F4;&#x63A5;&#x629B;&#x5F03;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">complete</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>(optional) A handler for a terminal event resulting from successful completion.</p>
+      <td data-ice="description"><p>[&#x53EF;&#x9009;] &#x7531;&#x6210;&#x529F;&#x5B8C;&#x6210;&#x5BFC;&#x81F4;&#x7684;&#x7EC8;&#x7ED3;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -13871,7 +13848,7 @@ will behave when subscribed and if its default behavior can be modified with a <
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span>ISubscription</span></td>
-        <td class="return-desc" data-ice="returnDescription"><p>a subscription reference to the registered handlers</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6CE8;&#x518C;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7684;&#x8BA2;&#x9605;&#x5F15;&#x7528;&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -13889,7 +13866,7 @@ will behave when subscribed and if its default behavior can be modified with a <
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Subscribe with an Observer</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528; Observer &#x5BF9;&#x8C61;&#x8BA2;&#x9605;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const sumObserver = {
   sum: 0,
   next(value) {
@@ -13903,17 +13880,17 @@ will behave when subscribed and if its default behavior can be modified with a <
   }
 };
 
-Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+Rx.Observable.of(1, 2, 3) // &#x540C;&#x6B65;&#x53D1;&#x51FA; 1&#xFF0C; 2&#xFF0C; 3&#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;
 .subscribe(sumObserver);
 
-// Logs:
+// &#x65E5;&#x5FD7;:
 // &quot;Adding: 1&quot;
 // &quot;Adding: 2&quot;
 // &quot;Adding: 3&quot;
 // &quot;Sum equals: 6&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Subscribe with functions</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528;&#x51FD;&#x6570;&#x8BA2;&#x9605;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">let sum = 0;
 
 Rx.Observable.of(1, 2, 3)
@@ -13928,19 +13905,19 @@ Rx.Observable.of(1, 2, 3)
   }
 );
 
-// Logs:
+// &#x65E5;&#x5FD7;:
 // &quot;Adding: 1&quot;
 // &quot;Adding: 2&quot;
 // &quot;Adding: 3&quot;
 // &quot;Sum equals: 6&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Cancel a subscription</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x53D6;&#x6D88;&#x8BA2;&#x9605;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const subscription = Rx.Observable.interval(1000).subscribe(
   num =&gt; console.log(num),
   undefined,
-  () =&gt; console.log(&apos;completed!&apos;) // Will not be called, even
-);                                // when cancelling subscription
+  () =&gt; console.log(&apos;completed!&apos;) // &#x5373;&#x4F7F;&#x5F53;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
+);
 
 
 setTimeout(() =&gt; {

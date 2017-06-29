@@ -154,7 +154,7 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Rx.js.html#lineNumber176">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Rx.js.html#lineNumber171">source</a></span></span>
     </span>
   </h3>
 
@@ -177,34 +177,29 @@
       <td data-ice="name" data-depth="0">queue</td>
       <td data-ice="type"><span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Schedules on a queue in the current event frame
-(trampoline scheduler). Use this for iteration operations.</p>
+      <td data-ice="description"><p>&#x5728;&#x5F53;&#x524D;&#x4E8B;&#x4EF6;&#x5E27;&#x4E2D;&#x8C03;&#x5EA6;&#x961F;&#x5217;(trampoline &#x8C03;&#x5EA6;&#x5668;)&#x3002;&#x8FED;&#x4EE3;&#x64CD;&#x4F5C;&#x7B26;&#x4F7F;&#x7528;&#x6B64;&#x8C03;&#x5EA6;&#x5668;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">asap</td>
       <td data-ice="type"><span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Schedules on the micro task queue, which uses the
-fastest transport mechanism available, either Node.js&apos; <code>process.nextTick()</code>
-or Web Worker MessageChannel or setTimeout or others. Use this for
-asynchronous conversions.</p>
+      <td data-ice="description"><p>&#x5FAE;&#x4EFB;&#x52A1;&#x961F;&#x5217;&#x4E0A;&#x7684;&#x8C03;&#x5EA6;, &#x4F7F;&#x7528;&#x5C3D;&#x53EF;&#x80FD;&#x5FEB;&#x7684;&#x8F6C;&#x5316;&#x673A;&#x5236;, &#x6216;&#x8005;&#x662F; Node.js &#x7684;
+<code>process.nextTick()</code>&#xFF0C;&#x6216;&#x8005;&#x662F; Web Worker &#x7684;&#x6D88;&#x606F;&#x901A;&#x9053;&#xFF0C;&#x6216;&#x8005; setTimeout &#xFF0C; &#x6216;&#x8005;&#x5176;&#x4ED6;&#x3002;&#x5F02;&#x6B65;&#x8F6C;&#x5316;&#x4F7F;&#x7528;&#x6B64;&#x8C03;&#x5EA6;&#x5668;.</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">async</td>
       <td data-ice="type"><span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Schedules work with <code>setInterval</code>. Use this for
-time-based operations.</p>
+      <td data-ice="description"><p>&#x4F7F;&#x7528; <code>setInterval</code> &#x8C03;&#x5EA6;&#x5DE5;&#x4F5C;&#x3002;&#x57FA;&#x4E8E;&#x65F6;&#x95F4;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x4F7F;&#x7528;&#x6B64;&#x8C03;&#x5EA6;&#x5668;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">animationFrame</td>
       <td data-ice="type"><span><a href="class/es6/Scheduler.js~Scheduler.html">Scheduler</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Schedules work with <code>requestAnimationFrame</code>.
-Use this for synchronizing with the platform&apos;s painting</p>
+      <td data-ice="description"><p>&#x4F7F;&#x7528; <code>requestAnimationFrame</code> &#x8C03;&#x5EA6;&#x5DE5;&#x4F5C;&#x3002;&#x4E0E;&#x5E73;&#x53F0;&#x7684;&#x91CD;&#x7ED8;&#x540C;&#x6B65;&#x4F7F;&#x7528;&#x6B64;&#x8C03;&#x5EA6;&#x5668;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -238,7 +233,7 @@ Use this for synchronizing with the platform&apos;s painting</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Rx.js.html#lineNumber195">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Rx.js.html#lineNumber186">source</a></span></span>
     </span>
   </h3>
 
@@ -261,28 +256,24 @@ Use this for synchronizing with the platform&apos;s painting</p>
       <td data-ice="name" data-depth="0">rxSubscriber</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>A symbol to use as a property name to
-retrieve an &quot;Rx safe&quot; Observer from an object. &quot;Rx safety&quot; can be defined as
-an object that has all of the traits of an Rx Subscriber, including the
-ability to add and remove subscriptions to the subscription chain and
-guarantees involving event triggering (can&apos;t &quot;next&quot; after unsubscription,
-etc).</p>
+      <td data-ice="description"><p>&#x7528;&#x4F5C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x7684; symbol&#xFF0C;&#x7528;&#x4E8E;&#x4ECE;&#x5BF9;&#x8C61;&#x4E2D;&#x68C0;&#x7D22; &#x201C;Rx safe&#x201D; &#x7684; Observer &#x3002;
+&quot;Rx safety&quot;&#x53EF;&#x4EE5;&#x88AB;&#x5B9A;&#x4E49;&#x4E3A;&#x62E5;&#x6709; Rx Subscriber &#x6240;&#x6709;&#x7279;&#x6027;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5305;&#x62EC;&#x5728; subscription &#x94FE;&#x4E2D;&#x6DFB;&#x52A0;&#x548C;&#x5220;&#x9664; subscriptions
+&#x7684;&#x80FD;&#x529B;&#x5E76;&#x4E14;&#x786E;&#x4FDD;&#x4E8B;&#x4EF6;&#x6B63;&#x786E;&#x5730;&#x89E6;&#x53D1;&#xFF0C;&#x7B49;&#x7B49;&#x3002;&#xFF08;&#x4E0D;&#x4F1A;&#x5728;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x540E;&#x89E6;&#x53D1; &quot;next&quot; &#x7B49; &#xFF09;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">observable</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>A symbol to use as a property name to
-retrieve an Observable as defined by the <a href="https://github.com/zenparsing/es-observable">ECMAScript &quot;Observable&quot; spec</a>.</p>
+      <td data-ice="description"><p>&#x7528;&#x4F5C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x7684; symbol&#xFF0C;&#x7528;&#x6765;&#x68C0;&#x7D22;&#x7B26;&#x5408;<a href="https://github.com/zenparsing/es-observable">ECMAScript &quot;Observable&quot; spec</a>
+&#x5B9A;&#x4E49;&#x7684; Observable &#x5BF9;&#x8C61;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">iterator</td>
       <td data-ice="type"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The ES6 symbol to use as a property name
-to retrieve an iterator from an object.</p>
+      <td data-ice="description"><p>&#x7528;&#x4F5C;&#x5C5E;&#x6027;&#x540D;&#x79F0;&#x7684; ES6 &#x7684; symbol&#xFF0C; &#x7528;&#x6765;&#x68C0;&#x7D22;&#x5BF9;&#x8C61;&#x4E2D;&#x7684;&#x8FED;&#x4EE3;&#x5668;&#x3002;</p>
 </td>
     </tr>
 </tbody>

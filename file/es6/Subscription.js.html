@@ -91,25 +91,21 @@ import { tryCatch } from &apos;./util/tryCatch&apos;;
 import { errorObject } from &apos;./util/errorObject&apos;;
 import { UnsubscriptionError } from &apos;./util/UnsubscriptionError&apos;;
 /**
- * Represents a disposable resource, such as the execution of an Observable. A
- * Subscription has one important method, `unsubscribe`, that takes no argument
- * and just disposes the resource held by the subscription.
+ * &#x8868;&#x793A;&#x53EF;&#x6E05;&#x7406;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x6BD4;&#x5982; Observable &#x7684;&#x6267;&#x884C;&#x3002;Subscription &#x6709;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;`unsubscribe`&#xFF0C;
+ * &#x8BE5;&#x65B9;&#x6CD5;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#x5E76;&#x4E14;&#x6E05;&#x7406;&#x8BE5; subscription &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;
  *
- * Additionally, subscriptions may be grouped together through the `add()`
- * method, which will attach a child Subscription to the current Subscription.
- * When a Subscription is unsubscribed, all its children (and its grandchildren)
- * will be unsubscribed as well.
+ * &#x53E6;&#x5916;&#xFF0C;subscriptions &#x53EF;&#x4EE5;&#x901A;&#x8FC7; `add()` &#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x5206;&#x7EC4;&#xFF0C;&#x5373;&#x53EF;&#x4EE5;&#x7ED9;&#x5F53;&#x524D; Subscription &#x6DFB;&#x52A0;&#x5B50; Subscription&#x3002;
+ * &#x5F53; Subscription &#x88AB;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#xFF0C;&#x5B83;&#x6240;&#x6709;&#x7684;&#x5B50;&#x5B59; Subscription &#x90FD;&#x4F1A;&#x88AB;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x3002;
  *
  * @class Subscription
  */
 export class Subscription {
     /**
-     * @param {function(): void} [unsubscribe] A function describing how to
-     * perform the disposal of resources when the `unsubscribe` method is called.
+     * @param {function(): void} [unsubscribe] &#x63CF;&#x8FF0; `unsubscribe` &#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x65F6;&#x8BE5;&#x5982;&#x4F55;&#x6267;&#x884C;&#x8D44;&#x6E90;&#x6E05;&#x7406;&#x7684;&#x51FD;&#x6570;&#x3002;
      */
     constructor(unsubscribe) {
         /**
-         * A flag to indicate whether this Subscription has already been unsubscribed.
+         * &#x7528;&#x6765;&#x6807;&#x793A;&#x8BE5; Subscription &#x662F;&#x5426;&#x88AB;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x6807;&#x793A;&#x4F4D;&#x3002;
          * @type {boolean}
          */
         this.closed = false;
@@ -121,9 +117,7 @@ export class Subscription {
         }
     }
     /**
-     * Disposes the resources held by the subscription. May, for instance, cancel
-     * an ongoing Observable execution or cancel any other type of work that
-     * started when the Subscription was created.
+     * &#x6E05;&#x7406; subscription &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x53EF;&#x4EE5;&#x53D6;&#x6D88;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x7684; Observable &#x6267;&#x884C;&#x6216;&#x53D6;&#x6D88;&#x5728;&#x521B;&#x5EFA; Subscription &#x65F6;&#x542F;&#x52A8;&#x7684;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x5DE5;&#x4F5C;&#x3002;
      * @return {void}
      */
     unsubscribe() {
@@ -183,22 +177,16 @@ export class Subscription {
         }
     }
     /**
-     * Adds a tear down to be called during the unsubscribe() of this
-     * Subscription.
+     * &#x6DFB;&#x52A0;&#x4E00;&#x4E2A; tear down &#x5728;&#x8BE5; Subscription &#x7684;  unsubscribe() &#x671F;&#x95F4;&#x8C03;&#x7528;&#x3002;
      *
-     * If the tear down being added is a subscription that is already
-     * unsubscribed, is the same reference `add` is being called on, or is
-     * `Subscription.EMPTY`, it will not be added.
+     * &#x5982;&#x679C;&#x6E05;&#x7406;&#x662F;&#x5728;&#x5DF2;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684; subscription &#x65F6;&#x5019;&#x6DFB;&#x52A0;&#x7684;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x548C; add &#x6B63;&#x5728;&#x8C03;&#x7528;&#x7684;&#x5F15;&#x7528;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#xFF0C;
+     * &#x6216;&#x8005;&#x662F; `Subscription.EMPTY`&#xFF0C; &#x5B83;&#x90FD;&#x4E0D;&#x4F1A;&#x88AB;&#x6DFB;&#x52A0;&#x3002;
      *
-     * If this subscription is already in an `closed` state, the passed
-     * tear down logic will be executed immediately.
+     * &#x5982;&#x679C;&#x8BE5; subscription &#x5DF2;&#x7ECF;&#x5728; `closed` &#x72B6;&#x6001;&#xFF0C;&#x4F20;&#x5165;&#x7684;&#x6E05;&#x7406;&#x903B;&#x8F91;&#x5C06;&#x4F1A;&#x7ACB;&#x5373;&#x6267;&#x884C;&#x3002;
      *
-     * @param {TeardownLogic} teardown The additional logic to execute on
-     * teardown.
-     * @return {Subscription} Returns the Subscription used or created to be
-     * added to the inner subscriptions list. This Subscription can be used with
-     * `remove()` to remove the passed teardown logic from the inner subscriptions
-     * list.
+     * @param {TeardownLogic} teardown &#x6267;&#x884C;&#x6E05;&#x7406;&#x7A0B;&#x5E8F;&#x65F6;&#x7684;&#x9644;&#x52A0;&#x903B;&#x8F91;&#x3002;
+     * @return {Subscription} &#x8FD4;&#x56DE;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x6216;&#x6DFB;&#x52A0;&#x5230;&#x5185;&#x90E8; Subscription &#x5217;&#x8868;&#x4E2D;&#x7684; Subscription&#x3002;
+     * &#x8BE5; Subscription &#x53EF;&#x4EE5;&#x4F7F;&#x7528; `remove()` &#x5220;&#x9664;&#x5185;&#x90E8;&#x7684; subscriptions &#x5217;&#x8868;&#x4E2D;&#x4F20;&#x5165;&#x7684;&#x6E05;&#x7406;&#x903B;&#x8F91;&#x3002;
      */
     add(teardown) {
         if (!teardown || (teardown === Subscription.EMPTY)) {
@@ -234,9 +222,9 @@ export class Subscription {
         return subscription;
     }
     /**
-     * Removes a Subscription from the internal list of subscriptions that will
-     * unsubscribe during the unsubscribe process of this Subscription.
-     * @param {Subscription} subscription The subscription to remove.
+     * &#x4ECE; Subscription &#x7684;&#x5185;&#x90E8;&#x5217;&#x8868;&#x4E2D;&#x5220;&#x9664;&#x4E00;&#x4E2A; Subscription&#x3002;&#x5728;&#x8BE5; Subscription &#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;
+     * &#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x3002;
+     * @param {Subscription} subscription &#x88AB;&#x79FB;&#x9664;&#x7684; subscription&#x3002;
      * @return {void}
      */
     remove(subscription) {

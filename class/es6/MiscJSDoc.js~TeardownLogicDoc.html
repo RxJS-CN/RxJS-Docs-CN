@@ -90,7 +90,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber420">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber384">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,19 +110,15 @@
 
   
   
-  <div class="description" data-ice="description"><p>This interface describes what should be returned by function passed to Observable
-constructor or static <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> function. Value of that interface will be used
-to cancel subscription for given Observable.</p>
-<p><code>TeardownLogic</code> can be:</p>
-<h2 id="function">Function</h2>
-<p>Function that takes no parameters. When consumer of created Observable calls <code>unsubscribe</code>,
-that function will be called</p>
+  <div class="description" data-ice="description"><p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86; Observable &#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x9759;&#x6001;&#x65B9;&#x6CD5; <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> &#x63A5;&#x6536;&#x7684;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;
+&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x53D6;&#x6D88;&#x5BF9;&#x5F53;&#x524D; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;</p>
+<p><code>TeardownLogic</code> &#x53EF;&#x4EE5;&#x662F;:</p>
+<h2 id="-">&#x51FD;&#x6570;</h2>
+<p>&#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x63A5;&#x6536;&#x53C2;&#x6570;&#x3002; &#x5F53;&#x521B;&#x5EFA;&#x7684; Observable &#x7684;&#x6D88;&#x8D39;&#x8005;&#x8C03;&#x7528; <code>unsubscribe</code>&#x65F6;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x3002;</p>
 <h2 id="anonymoussubscription">AnonymousSubscription</h2>
-<p><code>AnonymousSubscription</code> is simply an object with <code>unsubscribe</code> method on it. That method
-will work the same as function</p>
+<p><code>AnonymousSubscription</code> &#x662F;&#x4E00;&#x4E2A;&#x62E5;&#x6709; <code>unsubscribe</code> &#x65B9;&#x6CD5;&#x7684;&#x7B80;&#x5355;&#x5BF9;&#x8C61;&#x3002; &#x8BE5;&#x65B9;&#x6CD5;&#x548C;&#x4E0A;&#x9762;&#x51FD;&#x6570;&#x884C;&#x4E3A;&#x4E00;&#x81F4;&#x3002;</p>
 <h2 id="void">void</h2>
-<p>If created Observable does not have any resources to clean up, function does not have to
-return anything.</p>
+<p>&#x5982;&#x679C;&#x521B;&#x5EFA;&#x7684; Observable &#x4E0D;&#x9700;&#x8981;&#x6E05;&#x7406;&#x4EFB;&#x4F55;&#x8D44;&#x6E90;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x503C;&#x3002;</p>
 </div>
 
   

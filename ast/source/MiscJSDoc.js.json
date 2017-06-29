@@ -181,16 +181,16 @@
                 "type": "Identifier",
                 "name": "create",
                 "range": [
-                  3895,
-                  3901
+                  3683,
+                  3689
                 ],
                 "loc": {
                   "start": {
-                    "line": 112,
+                    "line": 109,
                     "column": 11
                   },
                   "end": {
-                    "line": 112,
+                    "line": 109,
                     "column": 17
                   }
                 }
@@ -203,16 +203,16 @@
                     "type": "Identifier",
                     "name": "onSubscription",
                     "range": [
-                      3902,
-                      3916
+                      3690,
+                      3704
                     ],
                     "loc": {
                       "start": {
-                        "line": 112,
+                        "line": 109,
                         "column": 18
                       },
                       "end": {
-                        "line": 112,
+                        "line": 109,
                         "column": 32
                       }
                     }
@@ -229,16 +229,16 @@
                           "type": "Identifier",
                           "name": "Observable",
                           "range": [
-                            3939,
-                            3949
+                            3727,
+                            3737
                           ],
                           "loc": {
                             "start": {
-                              "line": 113,
+                              "line": 110,
                               "column": 19
                             },
                             "end": {
-                              "line": 113,
+                              "line": 110,
                               "column": 29
                             }
                           }
@@ -248,63 +248,63 @@
                             "type": "Identifier",
                             "name": "onSubscription",
                             "range": [
-                              3950,
-                              3964
+                              3738,
+                              3752
                             ],
                             "loc": {
                               "start": {
-                                "line": 113,
+                                "line": 110,
                                 "column": 30
                               },
                               "end": {
-                                "line": 113,
+                                "line": 110,
                                 "column": 44
                               }
                             }
                           }
                         ],
                         "range": [
-                          3935,
-                          3965
+                          3723,
+                          3753
                         ],
                         "loc": {
                           "start": {
-                            "line": 113,
+                            "line": 110,
                             "column": 15
                           },
                           "end": {
-                            "line": 113,
+                            "line": 110,
                             "column": 45
                           }
                         }
                       },
                       "range": [
-                        3928,
-                        3966
+                        3716,
+                        3754
                       ],
                       "loc": {
                         "start": {
-                          "line": 113,
+                          "line": 110,
                           "column": 8
                         },
                         "end": {
-                          "line": 113,
+                          "line": 110,
                           "column": 46
                         }
                       }
                     }
                   ],
                   "range": [
-                    3918,
-                    3972
+                    3706,
+                    3760
                   ],
                   "loc": {
                     "start": {
-                      "line": 112,
+                      "line": 109,
                       "column": 34
                     },
                     "end": {
-                      "line": 114,
+                      "line": 111,
                       "column": 5
                     }
                   }
@@ -312,16 +312,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  3901,
-                  3972
+                  3689,
+                  3760
                 ],
                 "loc": {
                   "start": {
-                    "line": 112,
+                    "line": 109,
                     "column": 17
                   },
                   "end": {
-                    "line": 114,
+                    "line": 111,
                     "column": 5
                   }
                 }
@@ -329,26 +329,26 @@
               "kind": "method",
               "computed": false,
               "range": [
-                3888,
-                3972
+                3676,
+                3760
               ],
               "loc": {
                 "start": {
-                  "line": 112,
+                  "line": 109,
                   "column": 4
                 },
                 "end": {
-                  "line": 114,
+                  "line": 111,
                   "column": 5
                 }
               },
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * 创建一个新的 Observable ，当观察者( {@link Observer} )订阅该 Observable 时，它会执行指定的函数。\n     *\n     * <span class=\"informal\">创建自定义的 Observable ，它可以做任何你想做的事情</span>\n     *\n     * <img src=\"./img/create.png\" width=\"100%\">\n     *\n     * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的\n     * 时候，`onSubscription`函数会接收{@link Observer}实例作为唯一参数执行。`onSubscription` 应该\n     * 调用观察者对象的 `next`, `error` 和 `complete` 方法。\n     *\n     * 带值调用`next`会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。\n     * 调用`error`意味着出现了错误，传给`error`的参数应该提供详细的错误信息。\n     *\n     * 一个格式良好的 Observable 可以通过`next`方法发出任意多个值，但是`complete`和`error`方法只能被调用\n     * 一次并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete`\n     * 或 `error`方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻\n     * 调用`complete`方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。\n     *\n     * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象。 当要取消对 Observable\n     * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说， 如果你在自己的 Observable 里面使用了\n     * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览\n     * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。\n     *\n     * 绝大多数情况下你不需要使用`create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，\n     * `create`是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。\n     *\n     * **TypeScript 签名问题**\n     *\n     * 因为 Observable 继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名。\n     * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名。\n     *\n     * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,\n     * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。\n     *\n     * @example <caption>发出三个数字，然后完成。</caption>\n     * var observable = Rx.Observable.create(function (observer) {\n     *   observer.next(1);\n     *   observer.next(2);\n     *   observer.next(3);\n     *   observer.complete();\n     * });\n     * observable.subscribe(\n     *   value => console.log(value),\n     *   err => {},\n     *   () => console.log('this is the end')\n     * );\n     *\n     * // Logs\n     * // 1\n     * // 2\n     * // 3\n     * // \"this is the end\"\n     *\n     *\n     * @example <caption>Emit an error</caption>\n     * const observable = Rx.Observable.create((observer) => {\n     *   observer.error('something went really wrong...');\n     * });\n     *\n     * observable.subscribe(\n     *   value => console.log(value), // will never be called\n     *   err => console.log(err),\n     *   () => console.log('complete') // will never be called\n     * );\n     *\n     * // Logs\n     * // \"something went really wrong...\"\n     *\n     *\n     * @example <caption>Return unsubscribe function</caption>\n     *\n     * const observable = Rx.Observable.create(observer => {\n     *   const id = setTimeout(() => observer.next('...'), 5000); // emit value after 5s\n     *\n     *   return () => { clearTimeout(id); console.log('cleared!'); };\n     * });\n     *\n     * const subscription = observable.subscribe(value => console.log(value));\n     *\n     * setTimeout(() => subscription.unsubscribe(), 3000); // cancel subscription after 3s\n     *\n     * // Logs:\n     * // \"cleared!\" after 3s\n     *\n     * // Never logs \"...\"\n     *\n     *\n     * @see {@link empty}\n     * @see {@link never}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @param {function(observer: Observer): TeardownLogic} onSubscription A\n     * function that accepts an Observer, and invokes its `next`,\n     * `error`, and `complete` methods as appropriate, and optionally returns some\n     * logic for cleaning up resources.\n     * @return {Observable} An Observable that, whenever subscribed, will execute the\n     * specified function.\n     * @static true\n     * @name create\n     * @owner Observable\n     ",
+                  "value": "*\n     * 创建一个新的 Observable ，当观察者( {@link Observer} )订阅该 Observable 时，它会执行指定的函数。\n     *\n     * <span class=\"informal\">创建自定义的 Observable ，它可以做任何你想做的事情</span>\n     *\n     * <img src=\"./img/create.png\" width=\"100%\">\n     *\n     * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的\n     * 时候，`onSubscription`函数会接收 {@link Observer} 实例作为唯一参数执行。`onSubscription` 应该\n     * 调用观察者对象的 `next`, `error` 和 `complete` 方法。\n     *\n     * 带值调用 `next` 会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。\n     * 调用 `error` 意味着出现了错误，传给 `error` 的参数应该提供详细的错误信息。\n     *\n     * 一个格式良好的 Observable 可以通过 `next` 方法发出任意多个值，但是 `complete` 和 `error` 方法只能被调用\n     * 一次，并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete`\n     * 或 `error` 方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻\n     * 调用 `complete` 方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。\n     *\n     * `onSubscription` 可以选择性的返回一个函数或者一个拥有 `unsubscribe` 方法的对象。 当要取消对 Observable\n     * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说，如果你在自己的 Observable 里面使用了\n     * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览\n     * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。\n     *\n     * 绝大多数情况下你不需要使用 `create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，\n     * `create` 是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。\n     *\n     * **TypeScript 签名问题**\n     *\n     * 因为 Observable 继承的类已经定义了静态 `create` 方法,但是签名不同, 不可能给 `Observable.create` 合适的签名。\n     * 正因为如此，给 `create` 传递的函数将不会进行类型检查，除非你明确指定了特定的签名。\n     *\n     * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,\n     * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。\n     *\n     * @example <caption>发出三个数字，然后完成。</caption>\n     * var observable = Rx.Observable.create(function (observer) {\n     *   observer.next(1);\n     *   observer.next(2);\n     *   observer.next(3);\n     *   observer.complete();\n     * });\n     * observable.subscribe(\n     *   value => console.log(value),\n     *   err => {},\n     *   () => console.log('this is the end')\n     * );\n     *\n     * // 日志:\n     * // 1\n     * // 2\n     * // 3\n     * // \"this is the end\"\n     *\n     *\n     * @example <caption>发出一个错误</caption>\n     * const observable = Rx.Observable.create((observer) => {\n     *   observer.error('something went really wrong...');\n     * });\n     *\n     * observable.subscribe(\n     *   value => console.log(value), // 永远不会被调用\n     *   err => console.log(err),\n     *   () => console.log('complete') // 永远不会被调用\n     * );\n     *\n     * // 日志:\n     * // \"something went really wrong...\"\n     *\n     *\n     * @example <caption>返回取消订阅函数</caption>\n     *\n     * const observable = Rx.Observable.create(observer => {\n     *   const id = setTimeout(() => observer.next('...'), 5000); // 5s后发出数据\n     *\n     *   return () => { clearTimeout(id); console.log('cleared!'); };\n     * });\n     *\n     * const subscription = observable.subscribe(value => console.log(value));\n     *\n     * setTimeout(() => subscription.unsubscribe(), 3000); // 3s后取消订阅\n     *\n     * // 日志:\n     * // \"cleared!\" after 3s\n     *\n     * // Never logs \"...\"\n     *\n     *\n     * @see {@link empty}\n     * @see {@link never}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @param {function(observer: Observer): TeardownLogic} onSubscription 该函数接受一个观察者，\n     * 然后在适当的时机调用观察者的 `next` 、`error` 或者 `complete` 方法，也可以返回一些清理资源的逻辑。\n     * @return {Observable} Observable， 当该 Observable 被订阅的时候将会执行特定函数。\n     * @static true\n     * @name create\n     * @owner Observable\n     ",
                   "range": [
                     208,
-                    3883
+                    3671
                   ],
                   "loc": {
                     "start": {
@@ -356,7 +356,7 @@
                       "column": 4
                     },
                     "end": {
-                      "line": 111,
+                      "line": 108,
                       "column": 7
                     }
                   }
@@ -367,7 +367,7 @@
           ],
           "range": [
             202,
-            3980
+            3768
           ],
           "loc": {
             "start": {
@@ -375,14 +375,14 @@
               "column": 27
             },
             "end": {
-              "line": 116,
+              "line": 113,
               "column": 1
             }
           }
         },
         "range": [
           182,
-          3980
+          3768
         ],
         "loc": {
           "start": {
@@ -390,7 +390,7 @@
             "column": 7
           },
           "end": {
-            "line": 116,
+            "line": 113,
             "column": 1
           }
         },
@@ -417,18 +417,18 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * An interface for a consumer of push-based notifications delivered by an\n * {@link Observable}.\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * An object conforming to the Observer interface is usually\n * given to the `observable.subscribe(observer)` method, and the Observable will\n * call the Observer's `next(value)` method to provide notifications. A\n * well-behaved Observable will call an Observer's `complete()` method exactly\n * once or the Observer's `error(err)` method exactly once, as the last\n * notification delivered.\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
+            "value": "*\n * 消费者接口，消费者接收由 {@link Observable} 推送的通知。\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时\n * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用\n * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
             "range": [
-              3981,
-              4698
+              3769,
+              4216
             ],
             "loc": {
               "start": {
-                "line": 117,
+                "line": 114,
                 "column": 0
               },
               "end": {
-                "line": 140,
+                "line": 133,
                 "column": 3
               }
             }
@@ -439,7 +439,7 @@
       "source": null,
       "range": [
         175,
-        3980
+        3768
       ],
       "loc": {
         "start": {
@@ -447,7 +447,7 @@
           "column": 0
         },
         "end": {
-          "line": 116,
+          "line": 113,
           "column": 1
         }
       },
@@ -474,18 +474,18 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * An interface for a consumer of push-based notifications delivered by an\n * {@link Observable}.\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * An object conforming to the Observer interface is usually\n * given to the `observable.subscribe(observer)` method, and the Observable will\n * call the Observer's `next(value)` method to provide notifications. A\n * well-behaved Observable will call an Observer's `complete()` method exactly\n * once or the Observer's `error(err)` method exactly once, as the last\n * notification delivered.\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
+          "value": "*\n * 消费者接口，消费者接收由 {@link Observable} 推送的通知。\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时\n * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用\n * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
           "range": [
-            3981,
-            4698
+            3769,
+            4216
           ],
           "loc": {
             "start": {
-              "line": 117,
+              "line": 114,
               "column": 0
             },
             "end": {
-              "line": 140,
+              "line": 133,
               "column": 3
             }
           }
@@ -500,16 +500,16 @@
           "type": "Identifier",
           "name": "ObserverDoc",
           "range": [
-            4712,
-            4723
+            4230,
+            4241
           ],
           "loc": {
             "start": {
-              "line": 141,
+              "line": 134,
               "column": 13
             },
             "end": {
-              "line": 141,
+              "line": 134,
               "column": 24
             }
           }
@@ -524,16 +524,16 @@
                 "type": "Identifier",
                 "name": "constructor",
                 "range": [
-                  4730,
-                  4741
+                  4248,
+                  4259
                 ],
                 "loc": {
                   "start": {
-                    "line": 142,
+                    "line": 135,
                     "column": 4
                   },
                   "end": {
-                    "line": 142,
+                    "line": 135,
                     "column": 15
                   }
                 }
@@ -556,16 +556,16 @@
                           "object": {
                             "type": "ThisExpression",
                             "range": [
-                              4957,
-                              4961
+                              4384,
+                              4388
                             ],
                             "loc": {
                               "start": {
-                                "line": 148,
+                                "line": 140,
                                 "column": 8
                               },
                               "end": {
-                                "line": 148,
+                                "line": 140,
                                 "column": 12
                               }
                             }
@@ -574,31 +574,31 @@
                             "type": "Identifier",
                             "name": "closed",
                             "range": [
-                              4962,
-                              4968
+                              4389,
+                              4395
                             ],
                             "loc": {
                               "start": {
-                                "line": 148,
+                                "line": 140,
                                 "column": 13
                               },
                               "end": {
-                                "line": 148,
+                                "line": 140,
                                 "column": 19
                               }
                             }
                           },
                           "range": [
-                            4957,
-                            4968
+                            4384,
+                            4395
                           ],
                           "loc": {
                             "start": {
-                              "line": 148,
+                              "line": 140,
                               "column": 8
                             },
                             "end": {
-                              "line": 148,
+                              "line": 140,
                               "column": 19
                             }
                           }
@@ -608,64 +608,64 @@
                           "value": false,
                           "raw": "false",
                           "range": [
-                            4971,
-                            4976
+                            4398,
+                            4403
                           ],
                           "loc": {
                             "start": {
-                              "line": 148,
+                              "line": 140,
                               "column": 22
                             },
                             "end": {
-                              "line": 148,
+                              "line": 140,
                               "column": 27
                             }
                           }
                         },
                         "range": [
-                          4957,
-                          4976
+                          4384,
+                          4403
                         ],
                         "loc": {
                           "start": {
-                            "line": 148,
+                            "line": 140,
                             "column": 8
                           },
                           "end": {
-                            "line": 148,
+                            "line": 140,
                             "column": 27
                           }
                         }
                       },
                       "range": [
-                        4957,
-                        4977
+                        4384,
+                        4404
                       ],
                       "loc": {
                         "start": {
-                          "line": 148,
+                          "line": 140,
                           "column": 8
                         },
                         "end": {
-                          "line": 148,
+                          "line": 140,
                           "column": 28
                         }
                       },
                       "leadingComments": [
                         {
                           "type": "Block",
-                          "value": "*\n         * An optional flag to indicate whether this Observer, when used as a\n         * subscriber, has already been unsubscribed from its Observable.\n         * @type {boolean}\n         ",
+                          "value": "*\n         * 可选的标志位，用来表示该观察者作为订阅者时，是否已经对它观察的 Observable 取消了订阅。\n         * @type {boolean}\n         ",
                           "range": [
-                            4754,
-                            4948
+                            4272,
+                            4375
                           ],
                           "loc": {
                             "start": {
-                              "line": 143,
+                              "line": 136,
                               "column": 8
                             },
                             "end": {
-                              "line": 147,
+                              "line": 139,
                               "column": 11
                             }
                           }
@@ -674,16 +674,16 @@
                     }
                   ],
                   "range": [
-                    4744,
-                    4983
+                    4262,
+                    4410
                   ],
                   "loc": {
                     "start": {
-                      "line": 142,
+                      "line": 135,
                       "column": 18
                     },
                     "end": {
-                      "line": 149,
+                      "line": 141,
                       "column": 5
                     }
                   }
@@ -691,16 +691,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  4741,
-                  4983
+                  4259,
+                  4410
                 ],
                 "loc": {
                   "start": {
-                    "line": 142,
+                    "line": 135,
                     "column": 15
                   },
                   "end": {
-                    "line": 149,
+                    "line": 141,
                     "column": 5
                   }
                 }
@@ -708,34 +708,34 @@
               "kind": "constructor",
               "computed": false,
               "range": [
-                4730,
-                4983
+                4248,
+                4410
               ],
               "loc": {
                 "start": {
-                  "line": 142,
+                  "line": 135,
                   "column": 4
                 },
                 "end": {
-                  "line": 149,
+                  "line": 141,
                   "column": 5
                 }
               },
               "trailingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * The callback to receive notifications of type `next` from the Observable,\n     * with a value. The Observable may call this method 0 or more times.\n     * @param {T} value The `next` value.\n     * @return {void}\n     ",
+                  "value": "*\n     * 该回调函数接收来自 Observable 的 `next` 类型(附带值)的通知。Observable 会调用这个方法0次或者多次。\n     * @param {T} value  `next` 的值。\n     * @return {void}\n     ",
                   "range": [
-                    4988,
-                    5218
+                    4415,
+                    4558
                   ],
                   "loc": {
                     "start": {
-                      "line": 150,
+                      "line": 142,
                       "column": 4
                     },
                     "end": {
-                      "line": 155,
+                      "line": 146,
                       "column": 7
                     }
                   }
@@ -749,16 +749,16 @@
                 "type": "Identifier",
                 "name": "next",
                 "range": [
-                  5223,
-                  5227
+                  4563,
+                  4567
                 ],
                 "loc": {
                   "start": {
-                    "line": 156,
+                    "line": 147,
                     "column": 4
                   },
                   "end": {
-                    "line": 156,
+                    "line": 147,
                     "column": 8
                   }
                 }
@@ -771,16 +771,16 @@
                     "type": "Identifier",
                     "name": "value",
                     "range": [
-                      5228,
-                      5233
+                      4568,
+                      4573
                     ],
                     "loc": {
                       "start": {
-                        "line": 156,
+                        "line": 147,
                         "column": 9
                       },
                       "end": {
-                        "line": 156,
+                        "line": 147,
                         "column": 14
                       }
                     }
@@ -799,63 +799,63 @@
                           "value": 0,
                           "raw": "0",
                           "range": [
-                            5257,
-                            5258
+                            4597,
+                            4598
                           ],
                           "loc": {
                             "start": {
-                              "line": 157,
+                              "line": 148,
                               "column": 20
                             },
                             "end": {
-                              "line": 157,
+                              "line": 148,
                               "column": 21
                             }
                           }
                         },
                         "prefix": true,
                         "range": [
-                          5252,
-                          5258
+                          4592,
+                          4598
                         ],
                         "loc": {
                           "start": {
-                            "line": 157,
+                            "line": 148,
                             "column": 15
                           },
                           "end": {
-                            "line": 157,
+                            "line": 148,
                             "column": 21
                           }
                         }
                       },
                       "range": [
-                        5245,
-                        5259
+                        4585,
+                        4599
                       ],
                       "loc": {
                         "start": {
-                          "line": 157,
+                          "line": 148,
                           "column": 8
                         },
                         "end": {
-                          "line": 157,
+                          "line": 148,
                           "column": 22
                         }
                       }
                     }
                   ],
                   "range": [
-                    5235,
-                    5265
+                    4575,
+                    4605
                   ],
                   "loc": {
                     "start": {
-                      "line": 156,
+                      "line": 147,
                       "column": 16
                     },
                     "end": {
-                      "line": 158,
+                      "line": 149,
                       "column": 5
                     }
                   }
@@ -863,16 +863,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  5227,
-                  5265
+                  4567,
+                  4605
                 ],
                 "loc": {
                   "start": {
-                    "line": 156,
+                    "line": 147,
                     "column": 8
                   },
                   "end": {
-                    "line": 158,
+                    "line": 149,
                     "column": 5
                   }
                 }
@@ -880,26 +880,46 @@
               "kind": "method",
               "computed": false,
               "range": [
-                5223,
-                5265
+                4563,
+                4605
               ],
               "loc": {
                 "start": {
-                  "line": 156,
+                  "line": 147,
                   "column": 4
                 },
                 "end": {
-                  "line": 158,
+                  "line": 149,
                   "column": 5
                 }
               },
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * The callback to receive notifications of type `next` from the Observable,\n     * with a value. The Observable may call this method 0 or more times.\n     * @param {T} value The `next` value.\n     * @return {void}\n     ",
+                  "value": "*\n     * 该回调函数接收来自 Observable 的 `next` 类型(附带值)的通知。Observable 会调用这个方法0次或者多次。\n     * @param {T} value  `next` 的值。\n     * @return {void}\n     ",
                   "range": [
-                    4988,
-                    5218
+                    4415,
+                    4558
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 142,
+                      "column": 4
+                    },
+                    "end": {
+                      "line": 146,
+                      "column": 7
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n     * 该回调函数接收来自 Observable 的 `error` 类型(附带值)的通知，带着 {@link Error} 。通知观察者，\n     * Observable 发生了错误。\n     * @param {any} err `error` 异常。\n     * @return {void}\n     ",
+                  "range": [
+                    4610,
+                    4778
                   ],
                   "loc": {
                     "start": {
@@ -913,26 +933,6 @@
                   }
                 }
               ],
-              "trailingComments": [
-                {
-                  "type": "Block",
-                  "value": "*\n     * The callback to receive notifications of type `error` from the Observable,\n     * with an attached {@link Error}. Notifies the Observer that the Observable\n     * has experienced an error condition.\n     * @param {any} err The `error` exception.\n     * @return {void}\n     ",
-                  "range": [
-                    5270,
-                    5556
-                  ],
-                  "loc": {
-                    "start": {
-                      "line": 159,
-                      "column": 4
-                    },
-                    "end": {
-                      "line": 165,
-                      "column": 7
-                    }
-                  }
-                }
-              ],
               "static": false
             },
             {
@@ -941,16 +941,16 @@
                 "type": "Identifier",
                 "name": "error",
                 "range": [
-                  5561,
-                  5566
+                  4783,
+                  4788
                 ],
                 "loc": {
                   "start": {
-                    "line": 166,
+                    "line": 156,
                     "column": 4
                   },
                   "end": {
-                    "line": 166,
+                    "line": 156,
                     "column": 9
                   }
                 }
@@ -963,16 +963,16 @@
                     "type": "Identifier",
                     "name": "err",
                     "range": [
-                      5567,
-                      5570
+                      4789,
+                      4792
                     ],
                     "loc": {
                       "start": {
-                        "line": 166,
+                        "line": 156,
                         "column": 10
                       },
                       "end": {
-                        "line": 166,
+                        "line": 156,
                         "column": 13
                       }
                     }
@@ -991,63 +991,63 @@
                           "value": 0,
                           "raw": "0",
                           "range": [
-                            5594,
-                            5595
+                            4816,
+                            4817
                           ],
                           "loc": {
                             "start": {
-                              "line": 167,
+                              "line": 157,
                               "column": 20
                             },
                             "end": {
-                              "line": 167,
+                              "line": 157,
                               "column": 21
                             }
                           }
                         },
                         "prefix": true,
                         "range": [
-                          5589,
-                          5595
+                          4811,
+                          4817
                         ],
                         "loc": {
                           "start": {
-                            "line": 167,
+                            "line": 157,
                             "column": 15
                           },
                           "end": {
-                            "line": 167,
+                            "line": 157,
                             "column": 21
                           }
                         }
                       },
                       "range": [
-                        5582,
-                        5596
+                        4804,
+                        4818
                       ],
                       "loc": {
                         "start": {
-                          "line": 167,
+                          "line": 157,
                           "column": 8
                         },
                         "end": {
-                          "line": 167,
+                          "line": 157,
                           "column": 22
                         }
                       }
                     }
                   ],
                   "range": [
-                    5572,
-                    5602
+                    4794,
+                    4824
                   ],
                   "loc": {
                     "start": {
-                      "line": 166,
+                      "line": 156,
                       "column": 15
                     },
                     "end": {
-                      "line": 168,
+                      "line": 158,
                       "column": 5
                     }
                   }
@@ -1055,16 +1055,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  5566,
-                  5602
+                  4788,
+                  4824
                 ],
                 "loc": {
                   "start": {
-                    "line": 166,
+                    "line": 156,
                     "column": 9
                   },
                   "end": {
-                    "line": 168,
+                    "line": 158,
                     "column": 5
                   }
                 }
@@ -1072,34 +1072,34 @@
               "kind": "method",
               "computed": false,
               "range": [
-                5561,
-                5602
+                4783,
+                4824
               ],
               "loc": {
                 "start": {
-                  "line": 166,
+                  "line": 156,
                   "column": 4
                 },
                 "end": {
-                  "line": 168,
+                  "line": 158,
                   "column": 5
                 }
               },
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * The callback to receive notifications of type `error` from the Observable,\n     * with an attached {@link Error}. Notifies the Observer that the Observable\n     * has experienced an error condition.\n     * @param {any} err The `error` exception.\n     * @return {void}\n     ",
+                  "value": "*\n     * 该回调函数接收来自 Observable 的 `error` 类型(附带值)的通知，带着 {@link Error} 。通知观察者，\n     * Observable 发生了错误。\n     * @param {any} err `error` 异常。\n     * @return {void}\n     ",
                   "range": [
-                    5270,
-                    5556
+                    4610,
+                    4778
                   ],
                   "loc": {
                     "start": {
-                      "line": 159,
+                      "line": 150,
                       "column": 4
                     },
                     "end": {
-                      "line": 165,
+                      "line": 155,
                       "column": 7
                     }
                   }
@@ -1108,18 +1108,18 @@
               "trailingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * The callback to receive a valueless notification of type `complete` from\n     * the Observable. Notifies the Observer that the Observable has finished\n     * sending push-based notifications.\n     * @return {void}\n     ",
+                  "value": "*\n     * 该回调函数接收来自于 Observable 的 `complete` 类型(附带值)的通知。通知观察者，Observable 已经\n     * 完成了发送推送体系的通知。\n     * @return {void}\n     ",
                   "range": [
-                    5607,
-                    5839
+                    4829,
+                    4956
                   ],
                   "loc": {
                     "start": {
-                      "line": 169,
+                      "line": 159,
                       "column": 4
                     },
                     "end": {
-                      "line": 174,
+                      "line": 163,
                       "column": 7
                     }
                   }
@@ -1133,16 +1133,16 @@
                 "type": "Identifier",
                 "name": "complete",
                 "range": [
-                  5844,
-                  5852
+                  4961,
+                  4969
                 ],
                 "loc": {
                   "start": {
-                    "line": 175,
+                    "line": 164,
                     "column": 4
                   },
                   "end": {
-                    "line": 175,
+                    "line": 164,
                     "column": 12
                   }
                 }
@@ -1164,63 +1164,63 @@
                           "value": 0,
                           "raw": "0",
                           "range": [
-                            5877,
-                            5878
+                            4994,
+                            4995
                           ],
                           "loc": {
                             "start": {
-                              "line": 176,
+                              "line": 165,
                               "column": 20
                             },
                             "end": {
-                              "line": 176,
+                              "line": 165,
                               "column": 21
                             }
                           }
                         },
                         "prefix": true,
                         "range": [
-                          5872,
-                          5878
+                          4989,
+                          4995
                         ],
                         "loc": {
                           "start": {
-                            "line": 176,
+                            "line": 165,
                             "column": 15
                           },
                           "end": {
-                            "line": 176,
+                            "line": 165,
                             "column": 21
                           }
                         }
                       },
                       "range": [
-                        5865,
-                        5879
+                        4982,
+                        4996
                       ],
                       "loc": {
                         "start": {
-                          "line": 176,
+                          "line": 165,
                           "column": 8
                         },
                         "end": {
-                          "line": 176,
+                          "line": 165,
                           "column": 22
                         }
                       }
                     }
                   ],
                   "range": [
-                    5855,
-                    5885
+                    4972,
+                    5002
                   ],
                   "loc": {
                     "start": {
-                      "line": 175,
+                      "line": 164,
                       "column": 15
                     },
                     "end": {
-                      "line": 177,
+                      "line": 166,
                       "column": 5
                     }
                   }
@@ -1228,16 +1228,16 @@
                 "generator": false,
                 "expression": false,
                 "range": [
-                  5852,
-                  5885
+                  4969,
+                  5002
                 ],
                 "loc": {
                   "start": {
-                    "line": 175,
+                    "line": 164,
                     "column": 12
                   },
                   "end": {
-                    "line": 177,
+                    "line": 166,
                     "column": 5
                   }
                 }
@@ -1245,34 +1245,34 @@
               "kind": "method",
               "computed": false,
               "range": [
-                5844,
-                5885
+                4961,
+                5002
               ],
               "loc": {
                 "start": {
-                  "line": 175,
+                  "line": 164,
                   "column": 4
                 },
                 "end": {
-                  "line": 177,
+                  "line": 166,
                   "column": 5
                 }
               },
               "leadingComments": [
                 {
                   "type": "Block",
-                  "value": "*\n     * The callback to receive a valueless notification of type `complete` from\n     * the Observable. Notifies the Observer that the Observable has finished\n     * sending push-based notifications.\n     * @return {void}\n     ",
+                  "value": "*\n     * 该回调函数接收来自于 Observable 的 `complete` 类型(附带值)的通知。通知观察者，Observable 已经\n     * 完成了发送推送体系的通知。\n     * @return {void}\n     ",
                   "range": [
-                    5607,
-                    5839
+                    4829,
+                    4956
                   ],
                   "loc": {
                     "start": {
-                      "line": 169,
+                      "line": 159,
                       "column": 4
                     },
                     "end": {
-                      "line": 174,
+                      "line": 163,
                       "column": 7
                     }
                   }
@@ -1282,49 +1282,49 @@
             }
           ],
           "range": [
-            4724,
-            5887
+            4242,
+            5004
           ],
           "loc": {
             "start": {
-              "line": 141,
+              "line": 134,
               "column": 25
             },
             "end": {
-              "line": 178,
+              "line": 167,
               "column": 1
             }
           }
         },
         "range": [
-          4706,
-          5887
+          4224,
+          5004
         ],
         "loc": {
           "start": {
-            "line": 141,
+            "line": 134,
             "column": 7
           },
           "end": {
-            "line": 178,
+            "line": 167,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * An interface for a consumer of push-based notifications delivered by an\n * {@link Observable}.\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * An object conforming to the Observer interface is usually\n * given to the `observable.subscribe(observer)` method, and the Observable will\n * call the Observer's `next(value)` method to provide notifications. A\n * well-behaved Observable will call an Observer's `complete()` method exactly\n * once or the Observer's `error(err)` method exactly once, as the last\n * notification delivered.\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
+            "value": "*\n * 消费者接口，消费者接收由 {@link Observable} 推送的通知。\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时\n * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用\n * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
             "range": [
-              3981,
-              4698
+              3769,
+              4216
             ],
             "loc": {
               "start": {
-                "line": 117,
+                "line": 114,
                 "column": 0
               },
               "end": {
-                "line": 140,
+                "line": 133,
                 "column": 3
               }
             }
@@ -1333,18 +1333,18 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * `SubscribableOrPromise` interface describes values that behave like either\n * Observables or Promises. Every operator that accepts arguments annotated\n * with this interface, can be also used with parameters that are not necessarily\n * RxJS Observables.\n *\n * Following types of values might be passed to operators expecting this interface:\n *\n * ## Observable\n *\n * RxJS {@link Observable} instance.\n *\n * ## Observable-like (Subscribable)\n *\n * This might be any object that has `Symbol.observable` method. This method,\n * when called, should return object with `subscribe` method on it, which should\n * behave the same as RxJS `Observable.subscribe`.\n *\n * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.\n * Since currently it is not supported natively, and every symbol is equal only to itself,\n * you should use https://github.com/blesh/symbol-observable polyfill, when implementing\n * custom Observable-likes.\n *\n * **TypeScript Subscribable interface issue**\n *\n * Although TypeScript interface claims that Subscribable is an object that has `subscribe`\n * method declared directly on it, passing custom objects that have `subscribe`\n * method but not `Symbol.observable` method will fail at runtime. Conversely, passing\n * objects with `Symbol.observable` but without `subscribe` will fail at compile time\n * (if you use TypeScript).\n *\n * TypeScript has problem supporting interfaces with methods defined as symbol\n * properties. To get around that, you should implement `subscribe` directly on\n * passed object, and make `Symbol.observable` method simply return `this`. That way\n * everything will work as expected, and compiler will not complain. If you really\n * do not want to put `subscribe` directly on your object, you will have to type cast\n * it to `any`, before passing it to an operator.\n *\n * When this issue is resolved, Subscribable interface will only permit Observable-like\n * objects with `Symbol.observable` defined, no matter if they themselves implement\n * `subscribe` method or not.\n *\n * ## ES6 Promise\n *\n * Promise can be interpreted as Observable that emits value and completes\n * when it is resolved or errors when it is rejected.\n *\n * ## Promise-like (Thenable)\n *\n * Promises passed to operators do not have to be native ES6 Promises.\n * They can be implementations from popular Promise libraries, polyfills\n * or even custom ones. They just need to have `then` method that works\n * as the same as ES6 Promise `then`.\n *\n * @example <caption>Use merge and then map with non-RxJS observable</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // Logs \"This value is 1000\"\n *\n *\n * @example <caption>Use combineLatest with ES6 Promise</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // Logs\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
+            "value": "*\n * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符\n * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。\n *\n * 下列类型的值可以传递给期望此接口的操作符：\n *\n * ## Observable\n *\n * RxJS {@link Observable} 实例。\n *\n * ## 类 Observable 对象 (Subscribable)\n *\n * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有\n * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。\n *\n * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。\n * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。\n *\n * **TypeScript Subscribable 接口问题**\n *\n * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法\n * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有\n * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。\n *\n * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现\n * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够\n * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，\n * 将类型转化为 `any`。\n *\n * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable\n * 对象，无论该对象是否实现了 `subscribe` 方法。\n *\n * ## ES6 Promise\n *\n * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，\n * 当 rejected 的时候，Observable 发出错误。\n *\n * ## 类 Promise 对象 (可使用 then 方法的)\n *\n * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。\n * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为\n * 一致。\n *\n * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // 输出 \"This value is 1000\"\n *\n *\n * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // 输出:\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
             "range": [
-              5888,
-              9206
+              5005,
+              7215
             ],
             "loc": {
               "start": {
-                "line": 179,
+                "line": 168,
                 "column": 0
               },
               "end": {
-                "line": 264,
+                "line": 242,
                 "column": 3
               }
             }
@@ -1354,34 +1354,34 @@
       "specifiers": [],
       "source": null,
       "range": [
-        4699,
-        5887
+        4217,
+        5004
       ],
       "loc": {
         "start": {
-          "line": 141,
+          "line": 134,
           "column": 0
         },
         "end": {
-          "line": 178,
+          "line": 167,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * An interface for a consumer of push-based notifications delivered by an\n * {@link Observable}.\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * An object conforming to the Observer interface is usually\n * given to the `observable.subscribe(observer)` method, and the Observable will\n * call the Observer's `next(value)` method to provide notifications. A\n * well-behaved Observable will call an Observer's `complete()` method exactly\n * once or the Observer's `error(err)` method exactly once, as the last\n * notification delivered.\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
+          "value": "*\n * 消费者接口，消费者接收由 {@link Observable} 推送的通知。\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时\n * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用\n * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
           "range": [
-            3981,
-            4698
+            3769,
+            4216
           ],
           "loc": {
             "start": {
-              "line": 117,
+              "line": 114,
               "column": 0
             },
             "end": {
-              "line": 140,
+              "line": 133,
               "column": 3
             }
           }
@@ -1390,18 +1390,18 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * `SubscribableOrPromise` interface describes values that behave like either\n * Observables or Promises. Every operator that accepts arguments annotated\n * with this interface, can be also used with parameters that are not necessarily\n * RxJS Observables.\n *\n * Following types of values might be passed to operators expecting this interface:\n *\n * ## Observable\n *\n * RxJS {@link Observable} instance.\n *\n * ## Observable-like (Subscribable)\n *\n * This might be any object that has `Symbol.observable` method. This method,\n * when called, should return object with `subscribe` method on it, which should\n * behave the same as RxJS `Observable.subscribe`.\n *\n * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.\n * Since currently it is not supported natively, and every symbol is equal only to itself,\n * you should use https://github.com/blesh/symbol-observable polyfill, when implementing\n * custom Observable-likes.\n *\n * **TypeScript Subscribable interface issue**\n *\n * Although TypeScript interface claims that Subscribable is an object that has `subscribe`\n * method declared directly on it, passing custom objects that have `subscribe`\n * method but not `Symbol.observable` method will fail at runtime. Conversely, passing\n * objects with `Symbol.observable` but without `subscribe` will fail at compile time\n * (if you use TypeScript).\n *\n * TypeScript has problem supporting interfaces with methods defined as symbol\n * properties. To get around that, you should implement `subscribe` directly on\n * passed object, and make `Symbol.observable` method simply return `this`. That way\n * everything will work as expected, and compiler will not complain. If you really\n * do not want to put `subscribe` directly on your object, you will have to type cast\n * it to `any`, before passing it to an operator.\n *\n * When this issue is resolved, Subscribable interface will only permit Observable-like\n * objects with `Symbol.observable` defined, no matter if they themselves implement\n * `subscribe` method or not.\n *\n * ## ES6 Promise\n *\n * Promise can be interpreted as Observable that emits value and completes\n * when it is resolved or errors when it is rejected.\n *\n * ## Promise-like (Thenable)\n *\n * Promises passed to operators do not have to be native ES6 Promises.\n * They can be implementations from popular Promise libraries, polyfills\n * or even custom ones. They just need to have `then` method that works\n * as the same as ES6 Promise `then`.\n *\n * @example <caption>Use merge and then map with non-RxJS observable</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // Logs \"This value is 1000\"\n *\n *\n * @example <caption>Use combineLatest with ES6 Promise</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // Logs\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
+          "value": "*\n * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符\n * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。\n *\n * 下列类型的值可以传递给期望此接口的操作符：\n *\n * ## Observable\n *\n * RxJS {@link Observable} 实例。\n *\n * ## 类 Observable 对象 (Subscribable)\n *\n * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有\n * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。\n *\n * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。\n * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。\n *\n * **TypeScript Subscribable 接口问题**\n *\n * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法\n * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有\n * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。\n *\n * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现\n * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够\n * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，\n * 将类型转化为 `any`。\n *\n * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable\n * 对象，无论该对象是否实现了 `subscribe` 方法。\n *\n * ## ES6 Promise\n *\n * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，\n * 当 rejected 的时候，Observable 发出错误。\n *\n * ## 类 Promise 对象 (可使用 then 方法的)\n *\n * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。\n * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为\n * 一致。\n *\n * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // 输出 \"This value is 1000\"\n *\n *\n * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // 输出:\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
           "range": [
-            5888,
-            9206
+            5005,
+            7215
           ],
           "loc": {
             "start": {
-              "line": 179,
+              "line": 168,
               "column": 0
             },
             "end": {
-              "line": 264,
+              "line": 242,
               "column": 3
             }
           }
@@ -1416,16 +1416,16 @@
           "type": "Identifier",
           "name": "SubscribableOrPromiseDoc",
           "range": [
-            9220,
-            9244
+            7229,
+            7253
           ],
           "loc": {
             "start": {
-              "line": 265,
+              "line": 243,
               "column": 13
             },
             "end": {
-              "line": 265,
+              "line": 243,
               "column": 37
             }
           }
@@ -1435,49 +1435,49 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            9245,
-            9248
+            7254,
+            7257
           ],
           "loc": {
             "start": {
-              "line": 265,
+              "line": 243,
               "column": 38
             },
             "end": {
-              "line": 266,
+              "line": 244,
               "column": 1
             }
           }
         },
         "range": [
-          9214,
-          9248
+          7223,
+          7257
         ],
         "loc": {
           "start": {
-            "line": 265,
+            "line": 243,
             "column": 7
           },
           "end": {
-            "line": 266,
+            "line": 244,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * `SubscribableOrPromise` interface describes values that behave like either\n * Observables or Promises. Every operator that accepts arguments annotated\n * with this interface, can be also used with parameters that are not necessarily\n * RxJS Observables.\n *\n * Following types of values might be passed to operators expecting this interface:\n *\n * ## Observable\n *\n * RxJS {@link Observable} instance.\n *\n * ## Observable-like (Subscribable)\n *\n * This might be any object that has `Symbol.observable` method. This method,\n * when called, should return object with `subscribe` method on it, which should\n * behave the same as RxJS `Observable.subscribe`.\n *\n * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.\n * Since currently it is not supported natively, and every symbol is equal only to itself,\n * you should use https://github.com/blesh/symbol-observable polyfill, when implementing\n * custom Observable-likes.\n *\n * **TypeScript Subscribable interface issue**\n *\n * Although TypeScript interface claims that Subscribable is an object that has `subscribe`\n * method declared directly on it, passing custom objects that have `subscribe`\n * method but not `Symbol.observable` method will fail at runtime. Conversely, passing\n * objects with `Symbol.observable` but without `subscribe` will fail at compile time\n * (if you use TypeScript).\n *\n * TypeScript has problem supporting interfaces with methods defined as symbol\n * properties. To get around that, you should implement `subscribe` directly on\n * passed object, and make `Symbol.observable` method simply return `this`. That way\n * everything will work as expected, and compiler will not complain. If you really\n * do not want to put `subscribe` directly on your object, you will have to type cast\n * it to `any`, before passing it to an operator.\n *\n * When this issue is resolved, Subscribable interface will only permit Observable-like\n * objects with `Symbol.observable` defined, no matter if they themselves implement\n * `subscribe` method or not.\n *\n * ## ES6 Promise\n *\n * Promise can be interpreted as Observable that emits value and completes\n * when it is resolved or errors when it is rejected.\n *\n * ## Promise-like (Thenable)\n *\n * Promises passed to operators do not have to be native ES6 Promises.\n * They can be implementations from popular Promise libraries, polyfills\n * or even custom ones. They just need to have `then` method that works\n * as the same as ES6 Promise `then`.\n *\n * @example <caption>Use merge and then map with non-RxJS observable</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // Logs \"This value is 1000\"\n *\n *\n * @example <caption>Use combineLatest with ES6 Promise</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // Logs\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
+            "value": "*\n * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符\n * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。\n *\n * 下列类型的值可以传递给期望此接口的操作符：\n *\n * ## Observable\n *\n * RxJS {@link Observable} 实例。\n *\n * ## 类 Observable 对象 (Subscribable)\n *\n * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有\n * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。\n *\n * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。\n * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。\n *\n * **TypeScript Subscribable 接口问题**\n *\n * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法\n * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有\n * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。\n *\n * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现\n * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够\n * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，\n * 将类型转化为 `any`。\n *\n * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable\n * 对象，无论该对象是否实现了 `subscribe` 方法。\n *\n * ## ES6 Promise\n *\n * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，\n * 当 rejected 的时候，Observable 发出错误。\n *\n * ## 类 Promise 对象 (可使用 then 方法的)\n *\n * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。\n * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为\n * 一致。\n *\n * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // 输出 \"This value is 1000\"\n *\n *\n * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // 输出:\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
             "range": [
-              5888,
-              9206
+              5005,
+              7215
             ],
             "loc": {
               "start": {
-                "line": 179,
+                "line": 168,
                 "column": 0
               },
               "end": {
-                "line": 264,
+                "line": 242,
                 "column": 3
               }
             }
@@ -1486,18 +1486,18 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n * `ObservableInput` interface describes all values that are either an\n * {@link SubscribableOrPromise} or some kind of collection of values that\n * can be transformed to Observable emitting that values. Every operator that\n * accepts arguments annotated with this interface, can be also used with\n * parameters that are not necessarily RxJS Observables.\n *\n * `ObservableInput` extends {@link SubscribableOrPromise} with following types:\n *\n * ## Array\n *\n * Arrays can be interpreted as observables that emit all values in array one by one,\n * from left to right, and then complete immediately.\n *\n * ## Array-like\n *\n * Arrays passed to operators do not have to be built-in JavaScript Arrays. They\n * can be also, for example, `arguments` property available inside every function,\n * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),\n * or, actually, any object that has `length` property (which is a number)\n * and stores values under non-negative (zero and up) integers.\n *\n * ## ES6 Iterable\n *\n * Operators will accept both built-in and custom ES6 Iterables, by treating them as\n * observables that emit all its values in order of iteration and then complete\n * when iteration ends. Note that contrary to arrays, Iterables do not have to\n * necessarily be finite, so creating Observables that never complete is possible as well.\n *\n * Note that you can make iterator an instance of Iterable by having it return itself\n * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,\n * though indirectly, iterators themselves as well. All native ES6 iterators are instances\n * of Iterable by default, so you do not have to implement their `Symbol.iterator` method\n * yourself.\n *\n * **TypeScript Iterable interface issue**\n *\n * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,\n * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * If you want to use Iterable as argument for operator, cast it to `any` first.\n * Remember of course that, because of casting, you have to yourself ensure that passed\n * argument really implements said interface.\n *\n *\n * @example <caption>Use merge with arrays</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>Use merge with array-like</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>Use merge with an Iterable (Map)</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // pass Iterable\n *   secondMap.values() // pass iterator, which is itself an Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // Logs\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>Use from with generator (returning infinite iterator)</caption>\n * // infinite stream of incrementing numbers\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // only take 3, cause this is infinite\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
+            "value": "*\n * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者\n * 此类型的值可以转化为能发出值的 Observable 。\n * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。\n *\n * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:\n *\n * ## 数组\n *\n * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。\n *\n * ## 类数组\n *\n * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`\n * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，\n * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。\n *\n * ## ES6 迭代器\n *\n * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，\n * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成\n * 的 Observables 使之成为可能。\n *\n * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，\n * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。\n *\n * **TypeScript Iterable 接口 issue **\n *\n * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，\n * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数\n * 确实实现了此接口。\n *\n *\n * @example <caption>用数组使用 merge 操作符</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>用类数组使用 merge 操作符</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // 传递 Iterable\n *   secondMap.values() // 传递 iterator, 它本身就是 Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // 日志：\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>\n * // 无限的自增数列流\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // 因为是无限的，仅仅取前三个\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
             "range": [
-              9249,
-              13068
+              7258,
+              9840
             ],
             "loc": {
               "start": {
-                "line": 267,
+                "line": 245,
                 "column": 0
               },
               "end": {
-                "line": 390,
+                "line": 358,
                 "column": 3
               }
             }
@@ -1507,34 +1507,34 @@
       "specifiers": [],
       "source": null,
       "range": [
-        9207,
-        9248
+        7216,
+        7257
       ],
       "loc": {
         "start": {
-          "line": 265,
+          "line": 243,
           "column": 0
         },
         "end": {
-          "line": 266,
+          "line": 244,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * `SubscribableOrPromise` interface describes values that behave like either\n * Observables or Promises. Every operator that accepts arguments annotated\n * with this interface, can be also used with parameters that are not necessarily\n * RxJS Observables.\n *\n * Following types of values might be passed to operators expecting this interface:\n *\n * ## Observable\n *\n * RxJS {@link Observable} instance.\n *\n * ## Observable-like (Subscribable)\n *\n * This might be any object that has `Symbol.observable` method. This method,\n * when called, should return object with `subscribe` method on it, which should\n * behave the same as RxJS `Observable.subscribe`.\n *\n * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.\n * Since currently it is not supported natively, and every symbol is equal only to itself,\n * you should use https://github.com/blesh/symbol-observable polyfill, when implementing\n * custom Observable-likes.\n *\n * **TypeScript Subscribable interface issue**\n *\n * Although TypeScript interface claims that Subscribable is an object that has `subscribe`\n * method declared directly on it, passing custom objects that have `subscribe`\n * method but not `Symbol.observable` method will fail at runtime. Conversely, passing\n * objects with `Symbol.observable` but without `subscribe` will fail at compile time\n * (if you use TypeScript).\n *\n * TypeScript has problem supporting interfaces with methods defined as symbol\n * properties. To get around that, you should implement `subscribe` directly on\n * passed object, and make `Symbol.observable` method simply return `this`. That way\n * everything will work as expected, and compiler will not complain. If you really\n * do not want to put `subscribe` directly on your object, you will have to type cast\n * it to `any`, before passing it to an operator.\n *\n * When this issue is resolved, Subscribable interface will only permit Observable-like\n * objects with `Symbol.observable` defined, no matter if they themselves implement\n * `subscribe` method or not.\n *\n * ## ES6 Promise\n *\n * Promise can be interpreted as Observable that emits value and completes\n * when it is resolved or errors when it is rejected.\n *\n * ## Promise-like (Thenable)\n *\n * Promises passed to operators do not have to be native ES6 Promises.\n * They can be implementations from popular Promise libraries, polyfills\n * or even custom ones. They just need to have `then` method that works\n * as the same as ES6 Promise `then`.\n *\n * @example <caption>Use merge and then map with non-RxJS observable</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // Logs \"This value is 1000\"\n *\n *\n * @example <caption>Use combineLatest with ES6 Promise</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // Logs\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
+          "value": "*\n * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符\n * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。\n *\n * 下列类型的值可以传递给期望此接口的操作符：\n *\n * ## Observable\n *\n * RxJS {@link Observable} 实例。\n *\n * ## 类 Observable 对象 (Subscribable)\n *\n * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有\n * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。\n *\n * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。\n * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。\n *\n * **TypeScript Subscribable 接口问题**\n *\n * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法\n * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有\n * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。\n *\n * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现\n * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够\n * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，\n * 将类型转化为 `any`。\n *\n * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable\n * 对象，无论该对象是否实现了 `subscribe` 方法。\n *\n * ## ES6 Promise\n *\n * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，\n * 当 rejected 的时候，Observable 发出错误。\n *\n * ## 类 Promise 对象 (可使用 then 方法的)\n *\n * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。\n * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为\n * 一致。\n *\n * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // 输出 \"This value is 1000\"\n *\n *\n * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // 输出:\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
           "range": [
-            5888,
-            9206
+            5005,
+            7215
           ],
           "loc": {
             "start": {
-              "line": 179,
+              "line": 168,
               "column": 0
             },
             "end": {
-              "line": 264,
+              "line": 242,
               "column": 3
             }
           }
@@ -1543,18 +1543,18 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n * `ObservableInput` interface describes all values that are either an\n * {@link SubscribableOrPromise} or some kind of collection of values that\n * can be transformed to Observable emitting that values. Every operator that\n * accepts arguments annotated with this interface, can be also used with\n * parameters that are not necessarily RxJS Observables.\n *\n * `ObservableInput` extends {@link SubscribableOrPromise} with following types:\n *\n * ## Array\n *\n * Arrays can be interpreted as observables that emit all values in array one by one,\n * from left to right, and then complete immediately.\n *\n * ## Array-like\n *\n * Arrays passed to operators do not have to be built-in JavaScript Arrays. They\n * can be also, for example, `arguments` property available inside every function,\n * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),\n * or, actually, any object that has `length` property (which is a number)\n * and stores values under non-negative (zero and up) integers.\n *\n * ## ES6 Iterable\n *\n * Operators will accept both built-in and custom ES6 Iterables, by treating them as\n * observables that emit all its values in order of iteration and then complete\n * when iteration ends. Note that contrary to arrays, Iterables do not have to\n * necessarily be finite, so creating Observables that never complete is possible as well.\n *\n * Note that you can make iterator an instance of Iterable by having it return itself\n * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,\n * though indirectly, iterators themselves as well. All native ES6 iterators are instances\n * of Iterable by default, so you do not have to implement their `Symbol.iterator` method\n * yourself.\n *\n * **TypeScript Iterable interface issue**\n *\n * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,\n * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * If you want to use Iterable as argument for operator, cast it to `any` first.\n * Remember of course that, because of casting, you have to yourself ensure that passed\n * argument really implements said interface.\n *\n *\n * @example <caption>Use merge with arrays</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>Use merge with array-like</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>Use merge with an Iterable (Map)</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // pass Iterable\n *   secondMap.values() // pass iterator, which is itself an Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // Logs\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>Use from with generator (returning infinite iterator)</caption>\n * // infinite stream of incrementing numbers\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // only take 3, cause this is infinite\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
+          "value": "*\n * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者\n * 此类型的值可以转化为能发出值的 Observable 。\n * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。\n *\n * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:\n *\n * ## 数组\n *\n * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。\n *\n * ## 类数组\n *\n * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`\n * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，\n * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。\n *\n * ## ES6 迭代器\n *\n * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，\n * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成\n * 的 Observables 使之成为可能。\n *\n * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，\n * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。\n *\n * **TypeScript Iterable 接口 issue **\n *\n * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，\n * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数\n * 确实实现了此接口。\n *\n *\n * @example <caption>用数组使用 merge 操作符</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>用类数组使用 merge 操作符</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // 传递 Iterable\n *   secondMap.values() // 传递 iterator, 它本身就是 Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // 日志：\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>\n * // 无限的自增数列流\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // 因为是无限的，仅仅取前三个\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
           "range": [
-            9249,
-            13068
+            7258,
+            9840
           ],
           "loc": {
             "start": {
-              "line": 267,
+              "line": 245,
               "column": 0
             },
             "end": {
-              "line": 390,
+              "line": 358,
               "column": 3
             }
           }
@@ -1569,16 +1569,16 @@
           "type": "Identifier",
           "name": "ObservableInputDoc",
           "range": [
-            13082,
-            13100
+            9854,
+            9872
           ],
           "loc": {
             "start": {
-              "line": 391,
+              "line": 359,
               "column": 13
             },
             "end": {
-              "line": 391,
+              "line": 359,
               "column": 31
             }
           }
@@ -1588,49 +1588,49 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            13101,
-            13104
+            9873,
+            9876
           ],
           "loc": {
             "start": {
-              "line": 391,
+              "line": 359,
               "column": 32
             },
             "end": {
-              "line": 392,
+              "line": 360,
               "column": 1
             }
           }
         },
         "range": [
-          13076,
-          13104
+          9848,
+          9876
         ],
         "loc": {
           "start": {
-            "line": 391,
+            "line": 359,
             "column": 7
           },
           "end": {
-            "line": 392,
+            "line": 360,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * `ObservableInput` interface describes all values that are either an\n * {@link SubscribableOrPromise} or some kind of collection of values that\n * can be transformed to Observable emitting that values. Every operator that\n * accepts arguments annotated with this interface, can be also used with\n * parameters that are not necessarily RxJS Observables.\n *\n * `ObservableInput` extends {@link SubscribableOrPromise} with following types:\n *\n * ## Array\n *\n * Arrays can be interpreted as observables that emit all values in array one by one,\n * from left to right, and then complete immediately.\n *\n * ## Array-like\n *\n * Arrays passed to operators do not have to be built-in JavaScript Arrays. They\n * can be also, for example, `arguments` property available inside every function,\n * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),\n * or, actually, any object that has `length` property (which is a number)\n * and stores values under non-negative (zero and up) integers.\n *\n * ## ES6 Iterable\n *\n * Operators will accept both built-in and custom ES6 Iterables, by treating them as\n * observables that emit all its values in order of iteration and then complete\n * when iteration ends. Note that contrary to arrays, Iterables do not have to\n * necessarily be finite, so creating Observables that never complete is possible as well.\n *\n * Note that you can make iterator an instance of Iterable by having it return itself\n * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,\n * though indirectly, iterators themselves as well. All native ES6 iterators are instances\n * of Iterable by default, so you do not have to implement their `Symbol.iterator` method\n * yourself.\n *\n * **TypeScript Iterable interface issue**\n *\n * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,\n * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * If you want to use Iterable as argument for operator, cast it to `any` first.\n * Remember of course that, because of casting, you have to yourself ensure that passed\n * argument really implements said interface.\n *\n *\n * @example <caption>Use merge with arrays</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>Use merge with array-like</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>Use merge with an Iterable (Map)</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // pass Iterable\n *   secondMap.values() // pass iterator, which is itself an Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // Logs\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>Use from with generator (returning infinite iterator)</caption>\n * // infinite stream of incrementing numbers\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // only take 3, cause this is infinite\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
+            "value": "*\n * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者\n * 此类型的值可以转化为能发出值的 Observable 。\n * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。\n *\n * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:\n *\n * ## 数组\n *\n * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。\n *\n * ## 类数组\n *\n * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`\n * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，\n * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。\n *\n * ## ES6 迭代器\n *\n * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，\n * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成\n * 的 Observables 使之成为可能。\n *\n * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，\n * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。\n *\n * **TypeScript Iterable 接口 issue **\n *\n * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，\n * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数\n * 确实实现了此接口。\n *\n *\n * @example <caption>用数组使用 merge 操作符</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>用类数组使用 merge 操作符</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // 传递 Iterable\n *   secondMap.values() // 传递 iterator, 它本身就是 Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // 日志：\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>\n * // 无限的自增数列流\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // 因为是无限的，仅仅取前三个\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
             "range": [
-              9249,
-              13068
+              7258,
+              9840
             ],
             "loc": {
               "start": {
-                "line": 267,
+                "line": 245,
                 "column": 0
               },
               "end": {
-                "line": 390,
+                "line": 358,
                 "column": 3
               }
             }
@@ -1639,18 +1639,18 @@
         "trailingComments": [
           {
             "type": "Block",
-            "value": "*\n *\n * This interface describes what should be returned by function passed to Observable\n * constructor or static {@link create} function. Value of that interface will be used\n * to cancel subscription for given Observable.\n *\n * `TeardownLogic` can be:\n *\n * ## Function\n *\n * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,\n * that function will be called\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method\n * will work the same as function\n *\n * ## void\n *\n * If created Observable does not have any resources to clean up, function does not have to\n * return anything.\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
+            "value": "*\n *\n * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口\n * 的值可以用来取消对当前 Observable 的订阅。\n *\n * `TeardownLogic` 可以是:\n *\n * ## 函数\n *\n * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。\n *\n * ## void\n *\n * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
             "range": [
-              13105,
-              13860
+              9877,
+              10304
             ],
             "loc": {
               "start": {
-                "line": 393,
+                "line": 361,
                 "column": 0
               },
               "end": {
-                "line": 419,
+                "line": 383,
                 "column": 3
               }
             }
@@ -1660,34 +1660,34 @@
       "specifiers": [],
       "source": null,
       "range": [
-        13069,
-        13104
+        9841,
+        9876
       ],
       "loc": {
         "start": {
-          "line": 391,
+          "line": 359,
           "column": 0
         },
         "end": {
-          "line": 392,
+          "line": 360,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * `ObservableInput` interface describes all values that are either an\n * {@link SubscribableOrPromise} or some kind of collection of values that\n * can be transformed to Observable emitting that values. Every operator that\n * accepts arguments annotated with this interface, can be also used with\n * parameters that are not necessarily RxJS Observables.\n *\n * `ObservableInput` extends {@link SubscribableOrPromise} with following types:\n *\n * ## Array\n *\n * Arrays can be interpreted as observables that emit all values in array one by one,\n * from left to right, and then complete immediately.\n *\n * ## Array-like\n *\n * Arrays passed to operators do not have to be built-in JavaScript Arrays. They\n * can be also, for example, `arguments` property available inside every function,\n * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),\n * or, actually, any object that has `length` property (which is a number)\n * and stores values under non-negative (zero and up) integers.\n *\n * ## ES6 Iterable\n *\n * Operators will accept both built-in and custom ES6 Iterables, by treating them as\n * observables that emit all its values in order of iteration and then complete\n * when iteration ends. Note that contrary to arrays, Iterables do not have to\n * necessarily be finite, so creating Observables that never complete is possible as well.\n *\n * Note that you can make iterator an instance of Iterable by having it return itself\n * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,\n * though indirectly, iterators themselves as well. All native ES6 iterators are instances\n * of Iterable by default, so you do not have to implement their `Symbol.iterator` method\n * yourself.\n *\n * **TypeScript Iterable interface issue**\n *\n * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,\n * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * If you want to use Iterable as argument for operator, cast it to `any` first.\n * Remember of course that, because of casting, you have to yourself ensure that passed\n * argument really implements said interface.\n *\n *\n * @example <caption>Use merge with arrays</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>Use merge with array-like</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>Use merge with an Iterable (Map)</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // pass Iterable\n *   secondMap.values() // pass iterator, which is itself an Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // Logs\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>Use from with generator (returning infinite iterator)</caption>\n * // infinite stream of incrementing numbers\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // only take 3, cause this is infinite\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
+          "value": "*\n * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者\n * 此类型的值可以转化为能发出值的 Observable 。\n * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。\n *\n * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:\n *\n * ## 数组\n *\n * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。\n *\n * ## 类数组\n *\n * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`\n * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，\n * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。\n *\n * ## ES6 迭代器\n *\n * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，\n * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成\n * 的 Observables 使之成为可能。\n *\n * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，\n * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。\n *\n * **TypeScript Iterable 接口 issue **\n *\n * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，\n * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数\n * 确实实现了此接口。\n *\n *\n * @example <caption>用数组使用 merge 操作符</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>用类数组使用 merge 操作符</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // 传递 Iterable\n *   secondMap.values() // 传递 iterator, 它本身就是 Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // 日志：\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>\n * // 无限的自增数列流\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // 因为是无限的，仅仅取前三个\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
           "range": [
-            9249,
-            13068
+            7258,
+            9840
           ],
           "loc": {
             "start": {
-              "line": 267,
+              "line": 245,
               "column": 0
             },
             "end": {
-              "line": 390,
+              "line": 358,
               "column": 3
             }
           }
@@ -1696,18 +1696,18 @@
       "trailingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * This interface describes what should be returned by function passed to Observable\n * constructor or static {@link create} function. Value of that interface will be used\n * to cancel subscription for given Observable.\n *\n * `TeardownLogic` can be:\n *\n * ## Function\n *\n * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,\n * that function will be called\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method\n * will work the same as function\n *\n * ## void\n *\n * If created Observable does not have any resources to clean up, function does not have to\n * return anything.\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
+          "value": "*\n *\n * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口\n * 的值可以用来取消对当前 Observable 的订阅。\n *\n * `TeardownLogic` 可以是:\n *\n * ## 函数\n *\n * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。\n *\n * ## void\n *\n * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
           "range": [
-            13105,
-            13860
+            9877,
+            10304
           ],
           "loc": {
             "start": {
-              "line": 393,
+              "line": 361,
               "column": 0
             },
             "end": {
-              "line": 419,
+              "line": 383,
               "column": 3
             }
           }
@@ -1722,16 +1722,16 @@
           "type": "Identifier",
           "name": "TeardownLogicDoc",
           "range": [
-            13874,
-            13890
+            10318,
+            10334
           ],
           "loc": {
             "start": {
-              "line": 420,
+              "line": 384,
               "column": 13
             },
             "end": {
-              "line": 420,
+              "line": 384,
               "column": 29
             }
           }
@@ -1741,49 +1741,49 @@
           "type": "ClassBody",
           "body": [],
           "range": [
-            13891,
-            13894
+            10335,
+            10338
           ],
           "loc": {
             "start": {
-              "line": 420,
+              "line": 384,
               "column": 30
             },
             "end": {
-              "line": 421,
+              "line": 385,
               "column": 1
             }
           }
         },
         "range": [
-          13868,
-          13894
+          10312,
+          10338
         ],
         "loc": {
           "start": {
-            "line": 420,
+            "line": 384,
             "column": 7
           },
           "end": {
-            "line": 421,
+            "line": 385,
             "column": 1
           }
         },
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n *\n * This interface describes what should be returned by function passed to Observable\n * constructor or static {@link create} function. Value of that interface will be used\n * to cancel subscription for given Observable.\n *\n * `TeardownLogic` can be:\n *\n * ## Function\n *\n * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,\n * that function will be called\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method\n * will work the same as function\n *\n * ## void\n *\n * If created Observable does not have any resources to clean up, function does not have to\n * return anything.\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
+            "value": "*\n *\n * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口\n * 的值可以用来取消对当前 Observable 的订阅。\n *\n * `TeardownLogic` 可以是:\n *\n * ## 函数\n *\n * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。\n *\n * ## void\n *\n * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
             "range": [
-              13105,
-              13860
+              9877,
+              10304
             ],
             "loc": {
               "start": {
-                "line": 393,
+                "line": 361,
                 "column": 0
               },
               "end": {
-                "line": 419,
+                "line": 383,
                 "column": 3
               }
             }
@@ -1794,16 +1794,16 @@
             "type": "Line",
             "value": "# sourceMappingURL=MiscJSDoc.js.map",
             "range": [
-              13895,
-              13932
+              10339,
+              10376
             ],
             "loc": {
               "start": {
-                "line": 422,
+                "line": 386,
                 "column": 0
               },
               "end": {
-                "line": 422,
+                "line": 386,
                 "column": 37
               }
             }
@@ -1813,34 +1813,34 @@
       "specifiers": [],
       "source": null,
       "range": [
-        13861,
-        13894
+        10305,
+        10338
       ],
       "loc": {
         "start": {
-          "line": 420,
+          "line": 384,
           "column": 0
         },
         "end": {
-          "line": 421,
+          "line": 385,
           "column": 1
         }
       },
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n *\n * This interface describes what should be returned by function passed to Observable\n * constructor or static {@link create} function. Value of that interface will be used\n * to cancel subscription for given Observable.\n *\n * `TeardownLogic` can be:\n *\n * ## Function\n *\n * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,\n * that function will be called\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method\n * will work the same as function\n *\n * ## void\n *\n * If created Observable does not have any resources to clean up, function does not have to\n * return anything.\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
+          "value": "*\n *\n * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口\n * 的值可以用来取消对当前 Observable 的订阅。\n *\n * `TeardownLogic` 可以是:\n *\n * ## 函数\n *\n * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。\n *\n * ## void\n *\n * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
           "range": [
-            13105,
-            13860
+            9877,
+            10304
           ],
           "loc": {
             "start": {
-              "line": 393,
+              "line": 361,
               "column": 0
             },
             "end": {
-              "line": 419,
+              "line": 383,
               "column": 3
             }
           }
@@ -1851,16 +1851,16 @@
           "type": "Line",
           "value": "# sourceMappingURL=MiscJSDoc.js.map",
           "range": [
-            13895,
-            13932
+            10339,
+            10376
           ],
           "loc": {
             "start": {
-              "line": 422,
+              "line": 386,
               "column": 0
             },
             "end": {
-              "line": 422,
+              "line": 386,
               "column": 37
             }
           }
@@ -1871,7 +1871,7 @@
   "sourceType": "module",
   "range": [
     0,
-    13894
+    10338
   ],
   "loc": {
     "start": {
@@ -1879,7 +1879,7 @@
       "column": 0
     },
     "end": {
-      "line": 421,
+      "line": 385,
       "column": 1
     }
   },
@@ -1904,10 +1904,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n     * 创建一个新的 Observable ，当观察者( {@link Observer} )订阅该 Observable 时，它会执行指定的函数。\n     *\n     * <span class=\"informal\">创建自定义的 Observable ，它可以做任何你想做的事情</span>\n     *\n     * <img src=\"./img/create.png\" width=\"100%\">\n     *\n     * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的\n     * 时候，`onSubscription`函数会接收{@link Observer}实例作为唯一参数执行。`onSubscription` 应该\n     * 调用观察者对象的 `next`, `error` 和 `complete` 方法。\n     *\n     * 带值调用`next`会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。\n     * 调用`error`意味着出现了错误，传给`error`的参数应该提供详细的错误信息。\n     *\n     * 一个格式良好的 Observable 可以通过`next`方法发出任意多个值，但是`complete`和`error`方法只能被调用\n     * 一次并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete`\n     * 或 `error`方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻\n     * 调用`complete`方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。\n     *\n     * `onSubscription`可以选择性的返回一个函数或者一个拥有`unsubscribe`方法的对象。 当要取消对 Observable\n     * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说， 如果你在自己的 Observable 里面使用了\n     * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览\n     * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。\n     *\n     * 绝大多数情况下你不需要使用`create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，\n     * `create`是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。\n     *\n     * **TypeScript 签名问题**\n     *\n     * 因为 Observable 继承的类已经定义了静态`create`方法,但是签名不同, 不可能给`Observable.create`合适的签名。\n     * 正因为如此，给`create`传递的函数将不会进行类型检查，除非你明确指定了特定的签名。\n     *\n     * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,\n     * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。\n     *\n     * @example <caption>发出三个数字，然后完成。</caption>\n     * var observable = Rx.Observable.create(function (observer) {\n     *   observer.next(1);\n     *   observer.next(2);\n     *   observer.next(3);\n     *   observer.complete();\n     * });\n     * observable.subscribe(\n     *   value => console.log(value),\n     *   err => {},\n     *   () => console.log('this is the end')\n     * );\n     *\n     * // Logs\n     * // 1\n     * // 2\n     * // 3\n     * // \"this is the end\"\n     *\n     *\n     * @example <caption>Emit an error</caption>\n     * const observable = Rx.Observable.create((observer) => {\n     *   observer.error('something went really wrong...');\n     * });\n     *\n     * observable.subscribe(\n     *   value => console.log(value), // will never be called\n     *   err => console.log(err),\n     *   () => console.log('complete') // will never be called\n     * );\n     *\n     * // Logs\n     * // \"something went really wrong...\"\n     *\n     *\n     * @example <caption>Return unsubscribe function</caption>\n     *\n     * const observable = Rx.Observable.create(observer => {\n     *   const id = setTimeout(() => observer.next('...'), 5000); // emit value after 5s\n     *\n     *   return () => { clearTimeout(id); console.log('cleared!'); };\n     * });\n     *\n     * const subscription = observable.subscribe(value => console.log(value));\n     *\n     * setTimeout(() => subscription.unsubscribe(), 3000); // cancel subscription after 3s\n     *\n     * // Logs:\n     * // \"cleared!\" after 3s\n     *\n     * // Never logs \"...\"\n     *\n     *\n     * @see {@link empty}\n     * @see {@link never}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @param {function(observer: Observer): TeardownLogic} onSubscription A\n     * function that accepts an Observer, and invokes its `next`,\n     * `error`, and `complete` methods as appropriate, and optionally returns some\n     * logic for cleaning up resources.\n     * @return {Observable} An Observable that, whenever subscribed, will execute the\n     * specified function.\n     * @static true\n     * @name create\n     * @owner Observable\n     ",
+      "value": "*\n     * 创建一个新的 Observable ，当观察者( {@link Observer} )订阅该 Observable 时，它会执行指定的函数。\n     *\n     * <span class=\"informal\">创建自定义的 Observable ，它可以做任何你想做的事情</span>\n     *\n     * <img src=\"./img/create.png\" width=\"100%\">\n     *\n     * `create` 将 `onSubscription` 函数转化为一个实际的 Observable 。每当有人订阅该 Observable 的\n     * 时候，`onSubscription`函数会接收 {@link Observer} 实例作为唯一参数执行。`onSubscription` 应该\n     * 调用观察者对象的 `next`, `error` 和 `complete` 方法。\n     *\n     * 带值调用 `next` 会将该值发出给观察者。调用 complete 意味着该 Observable 结束了发出并且不会做任何事情了。\n     * 调用 `error` 意味着出现了错误，传给 `error` 的参数应该提供详细的错误信息。\n     *\n     * 一个格式良好的 Observable 可以通过 `next` 方法发出任意多个值，但是 `complete` 和 `error` 方法只能被调用\n     * 一次，并且调用之后不会再调用任何方法。 如果你试图在 Observable 已经完成或者发生错误之后调用`next`、 `complete`\n     * 或 `error` 方法，这些调用将会被忽略，以保护所谓的 Observable 合同。注意，你并不需要一定要在某个时刻\n     * 调用 `complete` 方法，创建一个不会被终止的 Observable 也是完全可以的，一切取决于你的需求。\n     *\n     * `onSubscription` 可以选择性的返回一个函数或者一个拥有 `unsubscribe` 方法的对象。 当要取消对 Observable\n     * 的订阅时，函数或者方法将会被调用，清理所有的资源。比如说，如果你在自己的 Observable 里面使用了\n     * `setTimeout`， 当有人要取消订阅的时候， 你可以清理定时器， 这样就可以减少不必要的触发，并且浏览\n     * 器(或者其他宿主环境)也不用将计算能力浪费在这种无人监听的定时事件上。\n     *\n     * 绝大多数情况下你不需要使用 `create`，因为现有的操作符创建出来的 Observable 能满足绝大多数使用场景。这也就意味着，\n     * `create` 是允许你创建任何 Observable 的底层机制，如果你有非常特殊的需求的话，可以使用它。\n     *\n     * **TypeScript 签名问题**\n     *\n     * 因为 Observable 继承的类已经定义了静态 `create` 方法,但是签名不同, 不可能给 `Observable.create` 合适的签名。\n     * 正因为如此，给 `create` 传递的函数将不会进行类型检查，除非你明确指定了特定的签名。\n     *\n     * 当使用 TypeScript 时，我们建议将传递给 create 的函数签名声明为`(observer: Observer) => TeardownLogic`,\n     * 其中{@link Observer} 和 {@link TeardownLogic} 是库提供的接口。\n     *\n     * @example <caption>发出三个数字，然后完成。</caption>\n     * var observable = Rx.Observable.create(function (observer) {\n     *   observer.next(1);\n     *   observer.next(2);\n     *   observer.next(3);\n     *   observer.complete();\n     * });\n     * observable.subscribe(\n     *   value => console.log(value),\n     *   err => {},\n     *   () => console.log('this is the end')\n     * );\n     *\n     * // 日志:\n     * // 1\n     * // 2\n     * // 3\n     * // \"this is the end\"\n     *\n     *\n     * @example <caption>发出一个错误</caption>\n     * const observable = Rx.Observable.create((observer) => {\n     *   observer.error('something went really wrong...');\n     * });\n     *\n     * observable.subscribe(\n     *   value => console.log(value), // 永远不会被调用\n     *   err => console.log(err),\n     *   () => console.log('complete') // 永远不会被调用\n     * );\n     *\n     * // 日志:\n     * // \"something went really wrong...\"\n     *\n     *\n     * @example <caption>返回取消订阅函数</caption>\n     *\n     * const observable = Rx.Observable.create(observer => {\n     *   const id = setTimeout(() => observer.next('...'), 5000); // 5s后发出数据\n     *\n     *   return () => { clearTimeout(id); console.log('cleared!'); };\n     * });\n     *\n     * const subscription = observable.subscribe(value => console.log(value));\n     *\n     * setTimeout(() => subscription.unsubscribe(), 3000); // 3s后取消订阅\n     *\n     * // 日志:\n     * // \"cleared!\" after 3s\n     *\n     * // Never logs \"...\"\n     *\n     *\n     * @see {@link empty}\n     * @see {@link never}\n     * @see {@link of}\n     * @see {@link throw}\n     *\n     * @param {function(observer: Observer): TeardownLogic} onSubscription 该函数接受一个观察者，\n     * 然后在适当的时机调用观察者的 `next` 、`error` 或者 `complete` 方法，也可以返回一些清理资源的逻辑。\n     * @return {Observable} Observable， 当该 Observable 被订阅的时候将会执行特定函数。\n     * @static true\n     * @name create\n     * @owner Observable\n     ",
       "range": [
         208,
-        3883
+        3671
       ],
       "loc": {
         "start": {
@@ -1915,53 +1915,71 @@
           "column": 4
         },
         "end": {
-          "line": 111,
+          "line": 108,
           "column": 7
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n * An interface for a consumer of push-based notifications delivered by an\n * {@link Observable}.\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * An object conforming to the Observer interface is usually\n * given to the `observable.subscribe(observer)` method, and the Observable will\n * call the Observer's `next(value)` method to provide notifications. A\n * well-behaved Observable will call an Observer's `complete()` method exactly\n * once or the Observer's `error(err)` method exactly once, as the last\n * notification delivered.\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
+      "value": "*\n * 消费者接口，消费者接收由 {@link Observable} 推送的通知。\n *\n * ```ts\n * interface Observer<T> {\n *   closed?: boolean;\n *   next: (value: T) => void;\n *   error: (err: any) => void;\n *   complete: () => void;\n * }\n * ```\n *\n * 符合观察者接口规范的对象，通常用来传给 `observable.subscribe(observer)` 方法，同时\n * Observable 会调用观察者的 `next(value)` 提供通知。定义良好的 Observable 会确切的调用\n * 观察者的 `complete()` 或者 `error(err)` 方法一次，作为最后的通知。\n *\n * @interface\n * @name Observer\n * @noimport true\n ",
       "range": [
-        3981,
-        4698
+        3769,
+        4216
       ],
       "loc": {
         "start": {
-          "line": 117,
+          "line": 114,
           "column": 0
         },
         "end": {
-          "line": 140,
+          "line": 133,
           "column": 3
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n         * An optional flag to indicate whether this Observer, when used as a\n         * subscriber, has already been unsubscribed from its Observable.\n         * @type {boolean}\n         ",
+      "value": "*\n         * 可选的标志位，用来表示该观察者作为订阅者时，是否已经对它观察的 Observable 取消了订阅。\n         * @type {boolean}\n         ",
       "range": [
-        4754,
-        4948
+        4272,
+        4375
       ],
       "loc": {
         "start": {
-          "line": 143,
+          "line": 136,
           "column": 8
         },
         "end": {
-          "line": 147,
+          "line": 139,
           "column": 11
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n     * The callback to receive notifications of type `next` from the Observable,\n     * with a value. The Observable may call this method 0 or more times.\n     * @param {T} value The `next` value.\n     * @return {void}\n     ",
+      "value": "*\n     * 该回调函数接收来自 Observable 的 `next` 类型(附带值)的通知。Observable 会调用这个方法0次或者多次。\n     * @param {T} value  `next` 的值。\n     * @return {void}\n     ",
       "range": [
-        4988,
-        5218
+        4415,
+        4558
+      ],
+      "loc": {
+        "start": {
+          "line": 142,
+          "column": 4
+        },
+        "end": {
+          "line": 146,
+          "column": 7
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n     * 该回调函数接收来自 Observable 的 `error` 类型(附带值)的通知，带着 {@link Error} 。通知观察者，\n     * Observable 发生了错误。\n     * @param {any} err `error` 异常。\n     * @return {void}\n     ",
+      "range": [
+        4610,
+        4778
       ],
       "loc": {
         "start": {
@@ -1976,10 +1994,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n     * The callback to receive notifications of type `error` from the Observable,\n     * with an attached {@link Error}. Notifies the Observer that the Observable\n     * has experienced an error condition.\n     * @param {any} err The `error` exception.\n     * @return {void}\n     ",
+      "value": "*\n     * 该回调函数接收来自于 Observable 的 `complete` 类型(附带值)的通知。通知观察者，Observable 已经\n     * 完成了发送推送体系的通知。\n     * @return {void}\n     ",
       "range": [
-        5270,
-        5556
+        4829,
+        4956
       ],
       "loc": {
         "start": {
@@ -1987,79 +2005,61 @@
           "column": 4
         },
         "end": {
-          "line": 165,
+          "line": 163,
           "column": 7
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n     * The callback to receive a valueless notification of type `complete` from\n     * the Observable. Notifies the Observer that the Observable has finished\n     * sending push-based notifications.\n     * @return {void}\n     ",
+      "value": "*\n * `SubscribableOrPromise` 接口描述行为像 Observables 或者 Promises 的值。每个操作符\n * 接受被这个接口 annotate 过的参数，也可以使用不是 RxJS Observables 的参数。\n *\n * 下列类型的值可以传递给期望此接口的操作符：\n *\n * ## Observable\n *\n * RxJS {@link Observable} 实例。\n *\n * ## 类 Observable 对象 (Subscribable)\n *\n * 这可以是任何拥有 `Symbol.observable` 方法的对象。当这个方法被调用的时候，应该返回一个带有\n * `subscribe` 方法的对象，这个方法的行为应该和 RxJS 的 `Observable.subscribe` 一致。\n *\n * `Symbol.observable` 是 https://github.com/tc39/proposal-observable 提案的一部分。\n * 当实现一个自定义的类 Observable 对象，因为现在还没有被原生支持, 每个符号只和自己相等，你应该使用 https://github.com/blesh/symbol-observable 垫片。\n *\n * **TypeScript Subscribable 接口问题**\n *\n * 尽管 TypeScript 接口声明，可订阅对象是一个声明了 `subscribe` 方法的对象，但是传递定义了 `subscribe` 方法\n * 但是没有定义 `Symbol.observable` 方法的对象在运行时会失败。相反地，传递定义了 `Symbol.observable` 而没有\n * 定义 `subscribe` 的对象将会在编译时失败（如果你使用 TypeScript）。\n *\n * TypeScript 在支持定义了 symbol 属性方法的接口时是有问题的。为了绕过它，你应该直接实现\n * `subscribe` 方法，并且使 `Symbol.observable` 方法简单地返回 `this` 。这种方式能够\n * 起作用，编译器也不会报错。如果你真的不想添加 `subscribe` 方法，你可以在将其传递给操作符之前，\n * 将类型转化为 `any`。\n *\n * 当这个 issue 被解决了，可订阅的接口仅允许定义了 `Symbol.observable` 方法的类 Observable\n * 对象，无论该对象是否实现了 `subscribe` 方法。\n *\n * ## ES6 Promise\n *\n * Promise 可以被认为是 Observable，当 resolved 的时候，Observable 发出值并完成，\n * 当 rejected 的时候，Observable 发出错误。\n *\n * ## 类 Promise 对象 (可使用 then 方法的)\n *\n * 传递给操作符的 Promises 不需要是 ES6 原生的 Promises。可以直接使用流行库或垫片中的实现，甚至自己来实现。\n * 它只需要拥有 `then` 方法，并且该方法和 ES6 Promise 的 `then` 行为\n * 一致。\n *\n * @example <caption>用非 RxJS 的 observable 作为参数来使用 merge 和 map 操作符</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // 输出 \"This value is 1000\"\n *\n *\n * @example <caption>用 ES6 的 Promise 来使用 combineLatest 操作符</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // 输出:\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
       "range": [
-        5607,
-        5839
+        5005,
+        7215
       ],
       "loc": {
         "start": {
-          "line": 169,
-          "column": 4
-        },
-        "end": {
-          "line": 174,
-          "column": 7
-        }
-      }
-    },
-    {
-      "type": "Block",
-      "value": "*\n * `SubscribableOrPromise` interface describes values that behave like either\n * Observables or Promises. Every operator that accepts arguments annotated\n * with this interface, can be also used with parameters that are not necessarily\n * RxJS Observables.\n *\n * Following types of values might be passed to operators expecting this interface:\n *\n * ## Observable\n *\n * RxJS {@link Observable} instance.\n *\n * ## Observable-like (Subscribable)\n *\n * This might be any object that has `Symbol.observable` method. This method,\n * when called, should return object with `subscribe` method on it, which should\n * behave the same as RxJS `Observable.subscribe`.\n *\n * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.\n * Since currently it is not supported natively, and every symbol is equal only to itself,\n * you should use https://github.com/blesh/symbol-observable polyfill, when implementing\n * custom Observable-likes.\n *\n * **TypeScript Subscribable interface issue**\n *\n * Although TypeScript interface claims that Subscribable is an object that has `subscribe`\n * method declared directly on it, passing custom objects that have `subscribe`\n * method but not `Symbol.observable` method will fail at runtime. Conversely, passing\n * objects with `Symbol.observable` but without `subscribe` will fail at compile time\n * (if you use TypeScript).\n *\n * TypeScript has problem supporting interfaces with methods defined as symbol\n * properties. To get around that, you should implement `subscribe` directly on\n * passed object, and make `Symbol.observable` method simply return `this`. That way\n * everything will work as expected, and compiler will not complain. If you really\n * do not want to put `subscribe` directly on your object, you will have to type cast\n * it to `any`, before passing it to an operator.\n *\n * When this issue is resolved, Subscribable interface will only permit Observable-like\n * objects with `Symbol.observable` defined, no matter if they themselves implement\n * `subscribe` method or not.\n *\n * ## ES6 Promise\n *\n * Promise can be interpreted as Observable that emits value and completes\n * when it is resolved or errors when it is rejected.\n *\n * ## Promise-like (Thenable)\n *\n * Promises passed to operators do not have to be native ES6 Promises.\n * They can be implementations from popular Promise libraries, polyfills\n * or even custom ones. They just need to have `then` method that works\n * as the same as ES6 Promise `then`.\n *\n * @example <caption>Use merge and then map with non-RxJS observable</caption>\n * const nonRxJSObservable = {\n *   subscribe(observer) {\n *     observer.next(1000);\n *     observer.complete();\n *   },\n *   [Symbol.observable]() {\n *     return this;\n *   }\n * };\n *\n * Rx.Observable.merge(nonRxJSObservable)\n * .map(value => \"This value is \" + value)\n * .subscribe(result => console.log(result)); // Logs \"This value is 1000\"\n *\n *\n * @example <caption>Use combineLatest with ES6 Promise</caption>\n * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('the end!')\n * );\n * // Logs\n * // [5, 10, 15]\n * // \"the end!\"\n *\n *\n * @interface\n * @name SubscribableOrPromise\n * @noimport true\n ",
-      "range": [
-        5888,
-        9206
-      ],
-      "loc": {
-        "start": {
-          "line": 179,
+          "line": 168,
           "column": 0
         },
         "end": {
-          "line": 264,
+          "line": 242,
           "column": 3
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n * `ObservableInput` interface describes all values that are either an\n * {@link SubscribableOrPromise} or some kind of collection of values that\n * can be transformed to Observable emitting that values. Every operator that\n * accepts arguments annotated with this interface, can be also used with\n * parameters that are not necessarily RxJS Observables.\n *\n * `ObservableInput` extends {@link SubscribableOrPromise} with following types:\n *\n * ## Array\n *\n * Arrays can be interpreted as observables that emit all values in array one by one,\n * from left to right, and then complete immediately.\n *\n * ## Array-like\n *\n * Arrays passed to operators do not have to be built-in JavaScript Arrays. They\n * can be also, for example, `arguments` property available inside every function,\n * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),\n * or, actually, any object that has `length` property (which is a number)\n * and stores values under non-negative (zero and up) integers.\n *\n * ## ES6 Iterable\n *\n * Operators will accept both built-in and custom ES6 Iterables, by treating them as\n * observables that emit all its values in order of iteration and then complete\n * when iteration ends. Note that contrary to arrays, Iterables do not have to\n * necessarily be finite, so creating Observables that never complete is possible as well.\n *\n * Note that you can make iterator an instance of Iterable by having it return itself\n * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,\n * though indirectly, iterators themselves as well. All native ES6 iterators are instances\n * of Iterable by default, so you do not have to implement their `Symbol.iterator` method\n * yourself.\n *\n * **TypeScript Iterable interface issue**\n *\n * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,\n * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * If you want to use Iterable as argument for operator, cast it to `any` first.\n * Remember of course that, because of casting, you have to yourself ensure that passed\n * argument really implements said interface.\n *\n *\n * @example <caption>Use merge with arrays</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>Use merge with array-like</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // Logs\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>Use merge with an Iterable (Map)</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // pass Iterable\n *   secondMap.values() // pass iterator, which is itself an Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // Logs\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>Use from with generator (returning infinite iterator)</caption>\n * // infinite stream of incrementing numbers\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // only take 3, cause this is infinite\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // Logs\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
+      "value": "*\n * `ObservableInput` 接口描述了所有值是一个 {@link SubscribableOrPromise} 或者\n * 此类型的值可以转化为能发出值的 Observable 。\n * 每个操作符都可以接收被该接口 annotate 过的参数，而不一定需要是 RxJS 的 Observables。\n *\n * `ObservableInput` 继承了 {@link SubscribableOrPromise} ，拥有如下类型:\n *\n * ## 数组\n *\n * 数组可以被理解为，observables 会从左到右，一个接一个地发送数组的所有值，然后立即完成。\n *\n * ## 类数组\n *\n * 传递给操作符的数组也可以不是 JavaScript 内置的数组。它们还可以是其他的，例如，每个函数的 `arguments`\n * 属性，[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),或者实际上，\n * 拥有 `length` 属性（是个数字）的对象 并且存储了大于0个数。\n *\n * ## ES6 迭代器\n *\n * 操作符可以接收内置的和自定义的 ES6 迭代器，把它们当做 observables 通过顺序的发出迭代器的所有值，\n * 然后当迭代器完成的时候，触发完成。注意和数组的区别，迭代器不需要是有限的，应该创建一个永远不会完成\n * 的 Observables 使之成为可能。\n *\n * 注意，通过在 `Symbol.iterator` 方法中返回自身，你可以迭代迭代器实例。这意味着每个操作符接收可迭代对象，\n * 但是间接的，迭代器本身也可以。所有原生 ES6 的迭代器默认都是 Iterable 的实例，所以你不需要自己实现 `Symbol.iterator` 方法。\n *\n * **TypeScript Iterable 接口 issue **\n *\n * TypeScript `ObservableInput` 接口实际上缺乏 Iterables 的类型签名，\n * 由于一些项目造成的 issue (查看 [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).\n * 如果你想给操作符传递 Iterable, 首先将它转化为 `any`。当然要铭记，因为类型转化，你需要确保传递的参数\n * 确实实现了此接口。\n *\n *\n * @example <caption>用数组使用 merge 操作符</caption>\n * Rx.Observable.merge([1, 2], [4], [5, 6])\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // 4\n * // 5\n * // 6\n * // \"ta dam!\"\n *\n *\n * @example <caption>用类数组使用 merge 操作符</caption>\n * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('nice, huh?')\n * );\n *\n * // 日志：\n * // 1\n * // 2\n * // 3\n * // \"nice, huh?\"\n *\n * @example <caption>用 Iterable (Map) 使用 merge 操作符</caption>\n * const firstMap = new Map([[1, 'a'], [2, 'b']]);\n * const secondMap = new Map([[3, 'c'], [4, 'd']]);\n *\n * Rx.Observable.merge(\n *   firstMap,          // 传递 Iterable\n *   secondMap.values() // 传递 iterator, 它本身就是 Iterable\n * ).subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('yup!')\n * );\n *\n * // 日志：\n * // [1, \"a\"]\n * // [2, \"b\"]\n * // \"c\"\n * // \"d\"\n * // \"yup!\"\n *\n * @example <caption>用 generator（返回无限的 iterator）使用 from 操作符</caption>\n * // 无限的自增数列流\n * const infinite = function* () {\n *   let i = 0;\n *\n *   while (true) {\n *     yield i++;\n *   }\n * };\n *\n * Rx.Observable.from(infinite())\n * .take(3) // 因为是无限的，仅仅取前三个\n * .subscribe(\n *   value => console.log(value),\n *   err => {},\n *   () => console.log('ta dam!')\n * );\n *\n * // 日志：\n * // 0\n * // 1\n * // 2\n * // \"ta dam!\"\n *\n * @interface\n * @name ObservableInput\n * @noimport true\n ",
       "range": [
-        9249,
-        13068
+        7258,
+        9840
       ],
       "loc": {
         "start": {
-          "line": 267,
+          "line": 245,
           "column": 0
         },
         "end": {
-          "line": 390,
+          "line": 358,
           "column": 3
         }
       }
     },
     {
       "type": "Block",
-      "value": "*\n *\n * This interface describes what should be returned by function passed to Observable\n * constructor or static {@link create} function. Value of that interface will be used\n * to cancel subscription for given Observable.\n *\n * `TeardownLogic` can be:\n *\n * ## Function\n *\n * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,\n * that function will be called\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method\n * will work the same as function\n *\n * ## void\n *\n * If created Observable does not have any resources to clean up, function does not have to\n * return anything.\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
+      "value": "*\n *\n * 这个接口描述了 Observable 构造函数和静态方法 {@link create} 接收的函数的返回对象。这个接口\n * 的值可以用来取消对当前 Observable 的订阅。\n *\n * `TeardownLogic` 可以是:\n *\n * ## 函数\n *\n * 该函数不接收参数。 当创建的 Observable 的消费者调用 `unsubscribe`时，该函数被调用。\n *\n * ## AnonymousSubscription\n *\n * `AnonymousSubscription` 是一个拥有 `unsubscribe` 方法的简单对象。 该方法和上面函数行为一致。\n *\n * ## void\n *\n * 如果创建的 Observable 不需要清理任何资源，该函数不需要返回任何值。\n *\n * @interface\n * @name TeardownLogic\n * @noimport true\n ",
       "range": [
-        13105,
-        13860
+        9877,
+        10304
       ],
       "loc": {
         "start": {
-          "line": 393,
+          "line": 361,
           "column": 0
         },
         "end": {
-          "line": 419,
+          "line": 383,
           "column": 3
         }
       }
@@ -2068,16 +2068,16 @@
       "type": "Line",
       "value": "# sourceMappingURL=MiscJSDoc.js.map",
       "range": [
-        13895,
-        13932
+        10339,
+        10376
       ],
       "loc": {
         "start": {
-          "line": 422,
+          "line": 386,
           "column": 0
         },
         "end": {
-          "line": 422,
+          "line": 386,
           "column": 37
         }
       }

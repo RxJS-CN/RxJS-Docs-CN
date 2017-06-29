@@ -234,8 +234,7 @@
       <div>
         
         
-        <div data-ice="description"><p>An error thrown when an element was queried at a certain index of an
-Observable, but no such index or position exists in that sequence.</p>
+        <div data-ice="description"><p>&#x5F53;&#x67E5;&#x8BE2; Observable &#x7279;&#x5B9A;&#x7D22;&#x5F15;&#x7684;&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x5728; Observable &#x5E8F;&#x5217;&#x4E2D;&#x6CA1;&#x6709;&#x6B64;&#x7D22;&#x5F15;&#x6216;&#x4F4D;&#x7F6E;&#x7684;&#x8BDD;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x6B64;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -336,8 +335,7 @@ Observable, but no such index or position exists in that sequence.</p>
       <div>
         
         
-        <div data-ice="description"><p>An error thrown when an Observable or a sequence was queried but has no
-elements.</p>
+        <div data-ice="description"><p>&#x5F53;&#x67E5;&#x8BE2; Observable &#x6216;&#x8005;&#x5E8F;&#x5217;&#x6CA1;&#x6709;&#x5143;&#x7D20;&#x65F6;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x8BE5;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -390,7 +388,9 @@ elements.</p>
       <div>
         
         
-        <div data-ice="description"><p>Represents a push-based event or value that an <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> can emit.</p>
+        <div data-ice="description"><p>&#x4EE3;&#x8868;&#x53EF;&#x4EE5;&#x88AB; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x53D1;&#x51FA;&#x7684;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x4E8B;&#x4EF6;&#x6216;&#x8005;&#x503C;&#x3002;&#x5BF9;&#x4E8E;&#x50CF; <span><a href="class/es6/Observable.js~Observable.html#instance-method-materialize">materialize</a></span>&#xFF0C;
+ <span><a href="class/es6/Observable.js~Observable.html#instance-method-dematerialize">dematerialize</a></span>&#xFF0C; <span><a href="class/es6/Observable.js~Observable.html#instance-method-observeOn">observeOn</a></span> &#x548C;&#x5176;&#x4ED6;&#x7BA1;&#x7406;&#x901A;&#x77E5;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8BF4;&#xFF0C;Notification &#x7C7B;&#x5C24;&#x5176;&#x9002;&#x7528;&#x3002;
+&#x9664;&#x4E86;&#x5305;&#x88C5;&#x771F;&#x6B63;&#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x5B83;&#x8FD8;&#x4F7F;&#x7528;&#x5143;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6CE8;&#x89E3;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x63A8;&#x9001;&#x6D88;&#x606F;&#x7684;&#x7C7B;&#x578B;&#x662F;&#xFF08;<code>next</code>&#xFF0C;<code>error</code>&#xFF0C; or <code>complete</code>&#xFF09;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -416,8 +416,7 @@ elements.</p>
       <div>
         
         
-        <div data-ice="description"><p>An error thrown when an action is invalid because the object has been
-unsubscribed.</p>
+        <div data-ice="description"><p>&#x5F53; action &#x7531;&#x4E8E;&#x5BF9;&#x8C61;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x5BFC;&#x81F4;&#x975E;&#x6CD5;&#x65F6;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x8BE5;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -443,7 +442,7 @@ unsubscribed.</p>
       <div>
         
         
-        <div data-ice="description"><p>A representation of any set of values over any amount of time.</p>
+        <div data-ice="description"><p>&#x8868;&#x793A;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x5185;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x7EC4;&#x503C;&#x3002; &#x8FD9;&#x662F; RxJS &#x6700;&#x57FA;&#x672C;&#x7684;&#x6784;&#x5EFA;&#x5757;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -494,8 +493,8 @@ unsubscribed.</p>
       <div>
         
         
-        <div data-ice="description"><p>An execution context and a data structure to order tasks and schedule their
-execution.</p>
+        <div data-ice="description"><p>&#x7528;&#x6765;&#x5B89;&#x6392;&#x4EFB;&#x52A1;&#x5E76;&#x8C03;&#x5EA6;&#x6267;&#x884C;&#x7684;&#x6267;&#x884C;&#x4E0A;&#x4E0B;&#x6587;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;&#x901A;&#x8FC7;&#x83B7;&#x53D6;&#x65B9;&#x6CD5; <code>now()</code> &#x63D0;&#x4F9B;
+&#x865A;&#x62DF;&#x65F6;&#x95F4;&#x7684;&#x6982;&#x5FF5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -571,8 +570,11 @@ execution.</p>
       <div>
         
         
-        <div data-ice="description"><p>Implements the <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> interface and extends the
-<span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span> class.</p>
+        <div data-ice="description"><p>&#x5B9E;&#x73B0; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x63A5;&#x53E3;&#x5E76;&#x4E14;&#x7EE7;&#x627F; <span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span> &#x7C7B;&#x3002;
+&#x867D;&#x7136; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x662F;&#x6D88;&#x8D39; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x503C;&#x7684;&#x516C;&#x6709; API, &#x6240;&#x6709; Observers &#x90FD;&#x8F6C;&#x5316;&#x6210;&#x4E86;
+Subscriber&#xFF0C;&#x4EE5;&#x4FBF;&#x63D0;&#x4F9B;&#x7C7B;&#x4F3C; Subscription &#x7684;&#x80FD;&#x529B;&#xFF0C;&#x6BD4;&#x5982; <code>unsubscribe</code>&#x3002;
+Subscriber &#x662F; RxJS &#x7684;&#x5E38;&#x89C1;&#x7C7B;&#x578B;, &#x5E76;&#x4E14;&#x662F;&#x5B9E;&#x73B0;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5173;&#x952E;, &#x4F46;&#x662F;&#x5F88;&#x5C11;&#x4F5C;&#x4E3A;&#x516C;&#x6709; API
+&#x4F7F;&#x7528;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -598,7 +600,8 @@ execution.</p>
       <div>
         
         
-        <div data-ice="description"><p>Represents a disposable resource, such as the execution of an Observable.</p>
+        <div data-ice="description"><p>&#x8868;&#x793A;&#x53EF;&#x6E05;&#x7406;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x6BD4;&#x5982; Observable &#x7684;&#x6267;&#x884C;&#x3002;Subscription &#x6709;&#x4E00;&#x4E2A;&#x91CD;&#x8981;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;<code>unsubscribe</code>&#xFF0C;
+&#x8BE5;&#x65B9;&#x6CD5;&#x4E0D;&#x63A5;&#x53D7;&#x53C2;&#x6570;&#x5E76;&#x4E14;&#x6E05;&#x7406;&#x8BE5; subscription &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -624,7 +627,7 @@ execution.</p>
       <div>
         
         
-        <div data-ice="description"><p>An error thrown when duetime elapses.</p>
+        <div data-ice="description"><p>&#x5F53;&#x8D85;&#x65F6;&#x65F6;&#x629B;&#x51FA;&#x8BE5;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -650,8 +653,7 @@ execution.</p>
       <div>
         
         
-        <div data-ice="description"><p>An error thrown when one or more errors have occurred during the
-<code>unsubscribe</code> of a <span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span>.</p>
+        <div data-ice="description"><p>&#x5728; <span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span> &#x7684; <code>unsubscribe</code> &#x671F;&#x95F4;&#xFF0C;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x6216;&#x8005;&#x591A;&#x4E2A;&#x9519;&#x8BEF;&#xFF0C;&#x5219;&#x629B;&#x51FA;&#x8BE5;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -709,9 +711,9 @@ execution.</p>
       <div>
         
         
-        <div data-ice="description"><p><code>ObservableInput</code> interface describes all values that are either an
-<span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> or some kind of collection of values that
-can be transformed to Observable emitting that values.</p>
+        <div data-ice="description"><p><code>ObservableInput</code> &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86;&#x6240;&#x6709;&#x503C;&#x662F;&#x4E00;&#x4E2A; <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> &#x6216;&#x8005;
+&#x6B64;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x80FD;&#x53D1;&#x51FA;&#x503C;&#x7684; Observable &#x3002;
+&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x90FD;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x88AB;&#x8BE5;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x4E00;&#x5B9A;&#x9700;&#x8981;&#x662F; RxJS &#x7684; Observables&#x3002;</p>
 </div>
       </div>
     </td>
@@ -737,8 +739,7 @@ can be transformed to Observable emitting that values.</p>
       <div>
         
         
-        <div data-ice="description"><p>An interface for a consumer of push-based notifications delivered by an
-<span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>.</p>
+        <div data-ice="description"><p>&#x6D88;&#x8D39;&#x8005;&#x63A5;&#x53E3;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x63A5;&#x6536;&#x7531; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x63A8;&#x9001;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -764,8 +765,8 @@ can be transformed to Observable emitting that values.</p>
       <div>
         
         
-        <div data-ice="description"><p><code>SubscribableOrPromise</code> interface describes values that behave like either
-Observables or Promises.</p>
+        <div data-ice="description"><p><code>SubscribableOrPromise</code> &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x884C;&#x4E3A;&#x50CF; Observables &#x6216;&#x8005; Promises &#x7684;&#x503C;&#x3002;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;
+&#x63A5;&#x53D7;&#x88AB;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0D;&#x662F; RxJS Observables &#x7684;&#x53C2;&#x6570;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -791,8 +792,8 @@ Observables or Promises.</p>
       <div>
         
         
-        <div data-ice="description"><p>This interface describes what should be returned by function passed to Observable
-constructor or static <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> function.</p>
+        <div data-ice="description"><p>&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86; Observable &#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x9759;&#x6001;&#x65B9;&#x6CD5; <span><a href="class/es6/Observable.js~Observable.html#static-method-create">create</a></span> &#x63A5;&#x6536;&#x7684;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;
+&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x53D6;&#x6D88;&#x5BF9;&#x5F53;&#x524D; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;</p>
 </div>
       </div>
     </td>

@@ -126,8 +126,7 @@ function tryCatch(fn) {
 }
 
 /**
- * An error thrown when one or more errors have occurred during the
- * `unsubscribe` of a {@link Subscription}.
+ * 在 {@link Subscription} 的 `unsubscribe` 期间，发送一个或者多个错误，则抛出该错误。
  */
 var UnsubscriptionError = (function (_super) {
     __extends(UnsubscriptionError, _super);
@@ -144,25 +143,21 @@ var UnsubscriptionError = (function (_super) {
 }(Error));
 
 /**
- * Represents a disposable resource, such as the execution of an Observable. A
- * Subscription has one important method, `unsubscribe`, that takes no argument
- * and just disposes the resource held by the subscription.
+ * 表示可清理的资源，比如 Observable 的执行。Subscription 有一个重要的方法，`unsubscribe`，
+ * 该方法不接受参数并且清理该 subscription 持有的资源。
  *
- * Additionally, subscriptions may be grouped together through the `add()`
- * method, which will attach a child Subscription to the current Subscription.
- * When a Subscription is unsubscribed, all its children (and its grandchildren)
- * will be unsubscribed as well.
+ * 另外，subscriptions 可以通过 `add()` 方法进行分组，即可以给当前 Subscription 添加子 Subscription。
+ * 当 Subscription 被取消订阅，它所有的子孙 Subscription 都会被取消订阅。
  *
  * @class Subscription
  */
 var Subscription = (function () {
     /**
-     * @param {function(): void} [unsubscribe] A function describing how to
-     * perform the disposal of resources when the `unsubscribe` method is called.
+     * @param {function(): void} [unsubscribe] 描述 `unsubscribe` 方法被调用时该如何执行资源清理的函数。
      */
     function Subscription(unsubscribe) {
         /**
-         * A flag to indicate whether this Subscription has already been unsubscribed.
+         * 用来标示该 Subscription 是否被取消订阅的标示位。
          * @type {boolean}
          */
         this.closed = false;
@@ -174,9 +169,7 @@ var Subscription = (function () {
         }
     }
     /**
-     * Disposes the resources held by the subscription. May, for instance, cancel
-     * an ongoing Observable execution or cancel any other type of work that
-     * started when the Subscription was created.
+     * 清理 subscription 持有的资源。例如，可以取消正在进行的 Observable 执行或取消在创建 Subscription 时启动的任何其他类型的工作。
      * @return {void}
      */
     Subscription.prototype.unsubscribe = function () {
@@ -236,22 +229,16 @@ var Subscription = (function () {
         }
     };
     /**
-     * Adds a tear down to be called during the unsubscribe() of this
-     * Subscription.
+     * 添加一个 tear down 在该 Subscription 的  unsubscribe() 期间调用。
      *
-     * If the tear down being added is a subscription that is already
-     * unsubscribed, is the same reference `add` is being called on, or is
-     * `Subscription.EMPTY`, it will not be added.
+     * 如果清理是在已取消订阅的 subscription 时候添加的，那么它和 add 正在调用的引用是同一个，
+     * 或者是 `Subscription.EMPTY`， 它都不会被添加。
      *
-     * If this subscription is already in an `closed` state, the passed
-     * tear down logic will be executed immediately.
+     * 如果该 subscription 已经在 `closed` 状态，传入的清理逻辑将会立即执行。
      *
-     * @param {TeardownLogic} teardown The additional logic to execute on
-     * teardown.
-     * @return {Subscription} Returns the Subscription used or created to be
-     * added to the inner subscriptions list. This Subscription can be used with
-     * `remove()` to remove the passed teardown logic from the inner subscriptions
-     * list.
+     * @param {TeardownLogic} teardown 执行清理程序时的附加逻辑。
+     * @return {Subscription} 返回用于创建或添加到内部 Subscription 列表中的 Subscription。
+     * 该 Subscription 可以使用 `remove()` 删除内部的 subscriptions 列表中传入的清理逻辑。
      */
     Subscription.prototype.add = function (teardown) {
         if (!teardown || (teardown === Subscription.EMPTY)) {
@@ -287,9 +274,9 @@ var Subscription = (function () {
         return subscription;
     };
     /**
-     * Removes a Subscription from the internal list of subscriptions that will
-     * unsubscribe during the unsubscribe process of this Subscription.
-     * @param {Subscription} subscription The subscription to remove.
+     * 从 Subscription 的内部列表中删除一个 Subscription。在该 Subscription 取消订阅的过程中
+     * 取消订阅。
+     * @param {Subscription} subscription 被移除的 subscription。
      * @return {void}
      */
     Subscription.prototype.remove = function (subscription) {
@@ -343,24 +330,20 @@ var rxSubscriber = (typeof Symbol$2 === 'function' && typeof Symbol$2.for === 'f
  */
 
 /**
- * Implements the {@link Observer} interface and extends the
- * {@link Subscription} class. While the {@link Observer} is the public API for
- * consuming the values of an {@link Observable}, all Observers get converted to
- * a Subscriber, in order to provide Subscription-like capabilities such as
- * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
- * implementing operators, but it is rarely used as a public API.
+ * 实现 {@link Observer} 接口并且继承 {@link Subscription} 类。
+ * 虽然 {@link Observer} 是消费 {@link Observable} 值的公有 API, 所有 Observers 都转化成了
+ * Subscriber，以便提供类似 Subscription 的能力，比如 `unsubscribe`。
+ * Subscriber 是 RxJS 的常见类型, 并且是实现操作符的关键, 但是很少作为公有 API
+ * 使用。
  *
  * @class Subscriber<T>
  */
 var Subscriber = (function (_super) {
     __extends(Subscriber, _super);
     /**
-     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
-     * defined Observer or a `next` callback function.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
+     * @param {Observer|function(value: T): void} [destinationOrNext] 部分定义的 Observer 或者 `next` 回调函数。
+     * @param {function(e: ?any): void} [error] Observer 的 `error` 回调函数。
+     * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
      */
     function Subscriber(destinationOrNext, error, complete) {
         _super.call(this);
@@ -396,15 +379,11 @@ var Subscriber = (function (_super) {
     }
     Subscriber.prototype[rxSubscriber] = function () { return this; };
     /**
-     * A static factory for a Subscriber, given a (potentially partial) definition
-     * of an Observer.
-     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
-     * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
-     * Observer represented by the given arguments.
+     * Subscriber 的静态工厂，给定了 Observer （潜在的部分）的定义。
+     * @param {function(x: ?T): void} [next] Observer 的 `next` 回调函数。
+     * @param {function(e: ?any): void} [error] Observer 的 `error` 回调函数。
+     * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
+     * @return {Subscriber<T>} 包装了作为参数传入的（部分定义）Observer 的  Subscriber。
      */
     Subscriber.create = function (next, error, complete) {
         var subscriber = new Subscriber(next, error, complete);
@@ -412,9 +391,8 @@ var Subscriber = (function (_super) {
         return subscriber;
     };
     /**
-     * The {@link Observer} callback to receive notifications of type `next` from
-     * the Observable, with a value. The Observable may call this method 0 or more
-     * times.
+     * {@link Observer} 的回调，用来接收 Observable 中的 next 类型通知，此通知带有值。
+     * Observable 可能会掉用这个方法 0 次，或者多次。
      * @param {T} [value] The `next` value.
      * @return {void}
      */
@@ -424,10 +402,9 @@ var Subscriber = (function (_super) {
         }
     };
     /**
-     * The {@link Observer} callback to receive notifications of type `error` from
-     * the Observable, with an attached {@link Error}. Notifies the Observer that
-     * the Observable has experienced an error condition.
-     * @param {any} [err] The `error` exception.
+     * {@link Observer} 的回调，用来接收 Observable 中的 error 类型通知，此通知带有 {@link Error} 。
+     * 通知 Observer，Observable 发出了错误。
+     * @param {any} [err] `error` 异常.
      * @return {void}
      */
     Subscriber.prototype.error = function (err) {
@@ -437,9 +414,8 @@ var Subscriber = (function (_super) {
         }
     };
     /**
-     * The {@link Observer} callback to receive a valueless notification of type
-     * `complete` from the Observable. Notifies the Observer that the Observable
-     * has finished sending push-based notifications.
+     * {@link Observer}  的回调，用来接收 Observable 中的 `complete` 类型通知。
+     * 通知 Observer， Observable 完成了基于推送体系的通知。
      * @return {void}
      */
     Subscriber.prototype.complete = function () {
@@ -633,18 +609,15 @@ var observable = getSymbolObservable(_root);
  */
 
 /**
- * A representation of any set of values over any amount of time. This the most basic building block
- * of RxJS.
+ * 表示在任意时间内的任意一组值。 这是 RxJS 最基本的构建块。
  *
  * @class Observable<T>
  */
 var Observable = (function () {
     /**
      * @constructor
-     * @param {Function} subscribe the function that is  called when the Observable is
-     * initially subscribed to. This function is given a Subscriber, to which new values
-     * can be `next`ed, or an `error` method can be called to raise an error, or
-     * `complete` can be called to notify of a successful completion.
+     * @param {Function} subscribe 当 Observable 初始订阅的时候会调用该方法. 该函数接受 Subscriber, 这样就可以 `next`
+     * 值，或者 `error` 方法会被调用以引发错误，或者 `complete` 被调用以通知成功的完成。
      */
     function Observable(subscribe) {
         this._isScalar = false;
@@ -653,11 +626,10 @@ var Observable = (function () {
         }
     }
     /**
-     * Creates a new Observable, with this Observable as the source, and the passed
-     * operator defined as the new observable's operator.
+     * 创建一个新的 Observable，以它作为源，并传递操作符的定义作为新的 observable 操作符。
      * @method lift
-     * @param {Operator} operator the operator defining the operation to take on the observable
-     * @return {Observable} a new observable with the Operator applied
+     * @param {Operator} operator 定义了如何操作 observable 的操作符。
+     * @return {Observable} 应用了操作符的新 observable。
      */
     Observable.prototype.lift = function (operator) {
         var observable$$1 = new Observable();
@@ -666,46 +638,34 @@ var Observable = (function () {
         return observable$$1;
     };
     /**
-     * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+     * 调用 Observable 的执行并注册 Observer 的处理器以便于发出通知。
      *
-     * <span class="informal">Use it when you have all these Observables, but still nothing is happening.</span>
+     * <span class="informal">当你拥有这些 Observables 却仍然什么也没发生时使用它。</span>
      *
-     * `subscribe` is not a regular operator, but a method that calls Observables internal `subscribe` function. It
-     * might be for example a function that you passed to a {@link create} static factory, but most of the time it is
-     * a library implementation, which defines what and when will be emitted by an Observable. This means that calling
-     * `subscribe` is actually the moment when Observable starts its work, not when it is created, as it is often
-     * thought.
+     * `subscribe` 不是一个常规的操作符，而是方法，它调用 Observables 内部的 subscribe 函数。它也许是一个你传递给 {@link create}
+     * 静态工厂的方法，但是大多数情况下它是一个库的实现，它定义了 Observable 什么时候发出，发出什么。这意味着实际上是 Observable 开始工
+     * 作的那一刻才调用 subscribe ， 而不是像人们经常认为的那样，即创建 Observable 的时候。
      *
-     * Apart from starting the execution of an Observable, this method allows you to listen for values
-     * that an Observable emits, as well as for when it completes or errors. You can achieve this in two
-     * following ways.
+     * 除了开始 Observable 的执行，该方法允许你监听 Observable 发出的值，也包括完成或者发生错误。你可以通过以下两种方式达到
+     * 这种目的。
      *
-     * The first way is creating an object that implements {@link Observer} interface. It should have methods
-     * defined by that interface, but note that it should be just a regular JavaScript object, which you can create
-     * yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
-     * not attempt to use any RxJS implementation details to create Observers - you don't need them. Remember also
-     * that your object does not have to implement all methods. If you find yourself creating a method that doesn't
-     * do anything, you can simply omit it. Note however, that if `error` method is not provided, all errors will
-     * be left uncaught.
+     * 第一种方式是创建一个实现了 {@link Observer} 接口的对象。它应该实现接口定义的方法，但是要注意的是它仅仅是一个普通的 JavaScript
+     * 对象，你可以用任何你想要的方式创建(ES6 class, 常见的构造函数, 对象字面量等等)。 特别地，不要尝试使用任何 RxJS 的实现细节去创建
+     * Observers－你不需要这样做。 同样要记住，你的对象不需要实现所有的方法。如果你发现自己创建一个不做任何事情的方法，你可以简化它。
+     * 不过要注意，如果 `error` 方法没用被提供，所有的错误都不会被捕获。
      *
-     * The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
-     * This means you can provide three functions as arguments to `subscribe`, where first function is equivalent
-     * of a `next` method, second of an `error` method and third of a `complete` method. Just as in case of Observer,
-     * if you do not need to listen for something, you can omit a function, preferably by passing `undefined` or `null`,
-     * since `subscribe` recognizes these functions by where they were placed in function call. When it comes
-     * to `error` function, just as before, if not provided, errors emitted by an Observable will be thrown.
+     * 第二种方式是放弃 Observer 对象，只需提供回调函数来替代它的方法。这意味你可以给 `subscribe` 提供3个方法作为参数， 第一个回调
+     * 等价于 `next` 方法，第二个等价于 `error` 方法，第三个等价于 `complete` 方法。就如同 Observer 一样，如果你不需要监听某中某个，你可以
+     * 省略该函数，通过传递 `undefined` 或者 `null`，因为 `subscribe` 可以通过在函数调用中的位置识别了这些函数。提到 `error` 函数，正如上文所述，
+     * 如果没有提供，Observable 发出的错误会被抛弃。
      *
-     * Whatever style of calling `subscribe` you use, in both cases it returns a Subscription object.
-     * This object allows you to call `unsubscribe` on it, which in turn will stop work that an Observable does and will clean
-     * up all resources that an Observable used. Note that cancelling a subscription will not call `complete` callback
-     * provided to `subscribe` function, which is reserved for a regular completion signal that comes from an Observable.
+     * 不管你使用了哪种方式调用 `subscribe`，所有情况都返回 Subscription 对象。该对象允许你调用 `unsubscribe`，该方法会停止 Observable
+     * 的工作并且清理 Observable 持有的资源。注意，取消订阅不会调用 `subscribe` 提供的 `complete` 回调函数，`complete` 回调函数是为来自 Observable 的常规完成信号保留的。
      *
-     * Remember that callbacks provided to `subscribe` are not guaranteed to be called asynchronously.
-     * It is an Observable itself that decides when these functions will be called. For example {@link of}
-     * by default emits all its values synchronously. Always check documentation for how given Observable
-     * will behave when subscribed and if its default behavior can be modified with a {@link Scheduler}.
+     * 记住，提供给 `subscribe` 的回调函数无法保证是被异步地调用。是 Observable 自身决定这些方法的执行。例如：{@link of}
+     * 默认同步地发出所有的值。经常查看文档以确认给定的 Observable 被订阅时的行为是怎样的，以及它的默认行为是否可以通过使用 {@link Scheduler} 进行更改。
      *
-     * @example <caption>Subscribe with an Observer</caption>
+     * @example <caption>用 Observer 对象订阅</caption>
      * const sumObserver = {
      *   sum: 0,
      *   next(value) {
@@ -719,17 +679,17 @@ var Observable = (function () {
      *   }
      * };
      *
-     * Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+     * Rx.Observable.of(1, 2, 3) // 同步发出 1， 2， 3，然后完成。
      * .subscribe(sumObserver);
      *
-     * // Logs:
+     * // 日志:
      * // "Adding: 1"
      * // "Adding: 2"
      * // "Adding: 3"
      * // "Sum equals: 6"
      *
      *
-     * @example <caption>Subscribe with functions</caption>
+     * @example <caption>用函数订阅</caption>
      * let sum = 0;
      *
      * Rx.Observable.of(1, 2, 3)
@@ -744,19 +704,19 @@ var Observable = (function () {
      *   }
      * );
      *
-     * // Logs:
+     * // 日志:
      * // "Adding: 1"
      * // "Adding: 2"
      * // "Adding: 3"
      * // "Sum equals: 6"
      *
      *
-     * @example <caption>Cancel a subscription</caption>
+     * @example <caption>取消订阅</caption>
      * const subscription = Rx.Observable.interval(1000).subscribe(
      *   num => console.log(num),
      *   undefined,
-     *   () => console.log('completed!') // Will not be called, even
-     * );                                // when cancelling subscription
+     *   () => console.log('completed!') // 即使当取消订阅时，也不会被调用
+     * );
      *
      *
      * setTimeout(() => {
@@ -770,13 +730,11 @@ var Observable = (function () {
      * // "unsubscribed!" after 2,5s
      *
      *
-     * @param {Observer|Function} observerOrNext (optional) Either an observer with methods to be called,
-     *  or the first of three possible handlers, which is the handler for each value emitted from the subscribed
-     *  Observable.
-     * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
-     *  the error will be thrown as unhandled.
-     * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
-     * @return {ISubscription} a subscription reference to the registered handlers
+     * @param {Observer|Function} observerOrNext [可选] 或者是 observer 对象, 或者是1个到3个处理器，处理已订阅的 Observable
+     * 发出的值。
+     * @param {Function} error [可选] 由错误导致的终结事件的处理器。如果没有提供处理器，错误将不做处理直接抛弃。
+     * @param {Function} complete [可选] 由成功完成导致的终结事件的处理器。
+     * @return {ISubscription} 注册处理程序的订阅引用。
      * @method subscribe
      */
     Observable.prototype.subscribe = function (observerOrNext, error, complete) {
@@ -808,10 +766,9 @@ var Observable = (function () {
     };
     /**
      * @method forEach
-     * @param {Function} next a handler for each value emitted by the observable
-     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
-     * @return {Promise} a promise that either resolves on observable completion or
-     *  rejects with the handled error
+     * @param {Function} next  observable 发出的每个值的处理器。
+     * @param {PromiseConstructor} [PromiseCtor] 用来生成 Promise 的构造函数。
+     * @return {Promise} 一个 observable 完成则 resolves，错误则 rejects 的 promise。
      */
     Observable.prototype.forEach = function (next, PromiseCtor) {
         var _this = this;
@@ -870,12 +827,12 @@ var Observable = (function () {
     // HACK: Since TypeScript inherits static properties too, we have to
     // fight against TypeScript here so Subject can have a different static create signature
     /**
-     * Creates a new cold Observable by calling the Observable constructor
+     * 通过调用 Observable 的构造函数，创建一个新的冷 Observable。
      * @static true
      * @owner Observable
      * @method create
-     * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
-     * @return {Observable} a new cold observable
+     * @param {Function} subscribe? subscriber 函数会传递给 Observable 的构造函数。
+     * @return {Observable} 新的冷 observable
      */
     Observable.create = function (subscribe) {
         return new Observable(subscribe);
@@ -884,8 +841,7 @@ var Observable = (function () {
 }());
 
 /**
- * An error thrown when an action is invalid because the object has been
- * unsubscribed.
+ * 当 action 由于对象取消订阅导致非法时，则抛出该错误。
  *
  * @see {@link Subject}
  * @see {@link BehaviorSubject}
@@ -2988,12 +2944,9 @@ var ArrayLikeObservable = (function (_super) {
 }(Observable));
 
 /**
- * Represents a push-based event or value that an {@link Observable} can emit.
- * This class is particularly useful for operators that manage notifications,
- * like {@link materialize}, {@link dematerialize}, {@link observeOn}, and
- * others. Besides wrapping the actual delivered value, it also annotates it
- * with metadata of, for instance, what type of push message it is (`next`,
- * `error`, or `complete`).
+ * 代表可以被 {@link Observable} 发出的基于推送体系的事件或者值。对于像 {@link materialize}，
+ *  {@link dematerialize}， {@link observeOn} 和其他管理通知的操作符来说，Notification 类尤其适用。
+ * 除了包装真正发出的值，它还使用元数据进行注解。例如，推送消息的类型是（`next`，`error`， or `complete`）。
  *
  * @see {@link materialize}
  * @see {@link dematerialize}
@@ -3009,7 +2962,7 @@ var Notification = (function () {
         this.hasValue = kind === 'N';
     }
     /**
-     * Delivers to the given `observer` the value wrapped by this Notification.
+     * 将由 Notification 包装过的值传递给给定的 `observer`。
      * @param {Observer} observer
      * @return
      */
@@ -3024,11 +2977,10 @@ var Notification = (function () {
         }
     };
     /**
-     * Given some {@link Observer} callbacks, deliver the value represented by the
-     * current Notification to the correctly corresponding callback.
-     * @param {function(value: T): void} next An Observer `next` callback.
-     * @param {function(err: any): void} [error] An Observer `error` callback.
-     * @param {function(): void} [complete] An Observer `complete` callback.
+     * 给定一些 {@link Observer} 的回调函数， 将当前 Notification 所表示的值正确的传递给相应的回调函数。
+     * @param {function(value: T): void} next Observer 的 `next` 回调函数。
+     * @param {function(err: any): void} [error] Observer 的 `error` 回调函数。
+     * @param {function(): void} [complete] An Observer 的 `complete` 回调函数。
      * @return {any}
      */
     Notification.prototype.do = function (next, error, complete) {
@@ -3043,12 +2995,11 @@ var Notification = (function () {
         }
     };
     /**
-     * Takes an Observer or its individual callback functions, and calls `observe`
-     * or `do` methods accordingly.
-     * @param {Observer|function(value: T): void} nextOrObserver An Observer or
-     * the `next` callback.
-     * @param {function(err: any): void} [error] An Observer `error` callback.
-     * @param {function(): void} [complete] An Observer `complete` callback.
+     * 接受一个 Observer 或者它的回调函数，然后相应地调用 `observe` 或者 `do` 方法。
+     * @param {Observer|function(value: T): void} nextOrObserver  Observer 或者
+     * `next` 回调函数。
+     * @param {function(err: any): void} [error] Observer 的 `error` 回调函数。
+     * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
      * @return {any}
      */
     Notification.prototype.accept = function (nextOrObserver, error, complete) {
@@ -3060,8 +3011,7 @@ var Notification = (function () {
         }
     };
     /**
-     * Returns a simple Observable that just delivers the notification represented
-     * by this Notification instance.
+     * 返回的 Observable 只传递代表当前 Notification 实例的通知。
      * @return {any}
      */
     Notification.prototype.toObservable = function () {
@@ -3077,11 +3027,9 @@ var Notification = (function () {
         throw new Error('unexpected notification kind value');
     };
     /**
-     * A shortcut to create a Notification instance of the type `next` from a
-     * given value.
-     * @param {T} value The `next` value.
-     * @return {Notification<T>} The "next" Notification representing the
-     * argument.
+     * 使用给定的值创建类型为 `next` 的 Notification 实例的快捷方法。
+     * @param {T} value `next` 的值。
+     * @return {Notification<T>} 代表传入值的`next`型通知实例。
      */
     Notification.createNext = function (value) {
         if (typeof value !== 'undefined') {
@@ -3090,18 +3038,16 @@ var Notification = (function () {
         return this.undefinedValueNotification;
     };
     /**
-     * A shortcut to create a Notification instance of the type `error` from a
-     * given error.
-     * @param {any} [err] The `error` error.
-     * @return {Notification<T>} The "error" Notification representing the
-     * argument.
+     * 使用给定的错误对象创建类型为 `error` 的 Notification 实例的快捷方法。
+     * @param {any} [err]  `error` 错误。
+     * @return {Notification<T>} 代表传入错误的`error`型通知实例。
      */
     Notification.createError = function (err) {
         return new Notification('E', undefined, err);
     };
     /**
-     * A shortcut to create a Notification instance of the type `complete`.
-     * @return {Notification<any>} The valueless "complete" Notification.
+     * 创建类型为 `complete` 的 Notification 实例的快捷方法。
+     * @return {Notification<any>} 没有值的`complete`型的通知。
      */
     Notification.createComplete = function () {
         return this.completeNotification;
@@ -3890,11 +3836,10 @@ var AsyncAction = (function (_super) {
 }(Action));
 
 /**
- * An execution context and a data structure to order tasks and schedule their
- * execution. Provides a notion of (potentially virtual) time, through the
- * `now()` getter method.
+ * 用来安排任务并调度执行的执行上下文和数据结构。通过获取方法 `now()` 提供
+ * 虚拟时间的概念。
  *
- * Each unit of work in a Scheduler is called an {@link Action}.
+ * 调度器的每个工作单元被称为 {@link Action}.
  *
  * ```ts
  * class Scheduler {
@@ -3912,21 +3857,15 @@ var Scheduler$1 = (function () {
         this.now = now;
     }
     /**
-     * Schedules a function, `work`, for execution. May happen at some point in
-     * the future, according to the `delay` parameter, if specified. May be passed
-     * some context object, `state`, which will be passed to the `work` function.
+     * 调度并执行 `work` 函数。如果指定了 `delay` 参数，那么根据此参数可能会在未来某个时间点发生。
+     * 可以传递一些上下文对象，`state`，该对象将会被传递给 `work` 函数。
+     * 给定的参数将作为一个动作对象存储在一个行动队列。
      *
-     * The given arguments will be processed an stored as an Action object in a
-     * queue of actions.
-     *
-     * @param {function(state: ?T): ?Subscription} work A function representing a
-     * task, or some unit of work to be executed by the Scheduler.
-     * @param {number} [delay] Time to wait before executing the work, where the
-     * time unit is implicit and defined by the Scheduler itself.
-     * @param {T} [state] Some contextual data that the `work` function uses when
-     * called by the Scheduler.
-     * @return {Subscription} A subscription in order to be able to unsubscribe
-     * the scheduled work.
+     * @param {function(state: ?T): ?Subscription} work 代表任务的函数，或者某些可以被调度器执行
+     * 的工作单元。
+     * @param {number} [delay] 在执行任务之前的等待时间，时间单位是隐式的，由调度器本身定义。
+     * @param {T} [state] 当调度器调用 `work` 函数时使用时的一些上下文数据。
+     * @return {Subscription} 该 subscription 是为了能够退订已调度工作。
      */
     Scheduler.prototype.schedule = function (work, delay, state) {
         if (delay === void 0) { delay = 0; }
@@ -8770,8 +8709,7 @@ var ExpandSubscriber = (function (_super) {
 Observable.prototype.expand = expand;
 
 /**
- * An error thrown when an element was queried at a certain index of an
- * Observable, but no such index or position exists in that sequence.
+ * 当查询 Observable 特定索引的元素时，在 Observable 序列中没有此索引或位置的话，则抛出此错误。
  *
  * @see {@link elementAt}
  * @see {@link take}
@@ -9122,8 +9060,7 @@ function findIndex(predicate, thisArg) {
 Observable.prototype.findIndex = findIndex;
 
 /**
- * An error thrown when an Observable or a sequence was queried but has no
- * elements.
+ * 当查询 Observable 或者序列没有元素时，则抛出该错误。
  *
  * @see {@link first}
  * @see {@link last}
@@ -13454,7 +13391,7 @@ var TimeIntervalSubscriber = (function (_super) {
 Observable.prototype.timeInterval = timeInterval;
 
 /**
- * An error thrown when duetime elapses.
+ * 当超时时抛出该错误。
  *
  * @see {@link timeout}
  *
@@ -15094,16 +15031,11 @@ var animationFrame = new AnimationFrameScheduler(AnimationFrameAction);
 /* tslint:enable:no-unused-variable */
 /**
  * @typedef {Object} Rx.Scheduler
- * @property {Scheduler} queue Schedules on a queue in the current event frame
- * (trampoline scheduler). Use this for iteration operations.
- * @property {Scheduler} asap Schedules on the micro task queue, which uses the
- * fastest transport mechanism available, either Node.js' `process.nextTick()`
- * or Web Worker MessageChannel or setTimeout or others. Use this for
- * asynchronous conversions.
- * @property {Scheduler} async Schedules work with `setInterval`. Use this for
- * time-based operations.
- * @property {Scheduler} animationFrame Schedules work with `requestAnimationFrame`.
- * Use this for synchronizing with the platform's painting
+ * @property {Scheduler} queue 在当前事件帧中调度队列(trampoline 调度器)。迭代操作符使用此调度器。
+ * @property {Scheduler} asap 微任务队列上的调度, 使用尽可能快的转化机制, 或者是 Node.js 的
+ * `process.nextTick()`，或者是 Web Worker 的消息通道，或者 setTimeout ， 或者其他。异步转化使用此调度器.
+ * @property {Scheduler} async 使用 `setInterval` 调度工作。基于时间的操作符使用此调度器。
+ * @property {Scheduler} animationFrame 使用 `requestAnimationFrame` 调度工作。与平台的重绘同步使用此调度器。
  */
 var Scheduler = {
     asap: asap,
@@ -15113,16 +15045,12 @@ var Scheduler = {
 };
 /**
  * @typedef {Object} Rx.Symbol
- * @property {Symbol|string} rxSubscriber A symbol to use as a property name to
- * retrieve an "Rx safe" Observer from an object. "Rx safety" can be defined as
- * an object that has all of the traits of an Rx Subscriber, including the
- * ability to add and remove subscriptions to the subscription chain and
- * guarantees involving event triggering (can't "next" after unsubscription,
- * etc).
- * @property {Symbol|string} observable A symbol to use as a property name to
- * retrieve an Observable as defined by the [ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable).
- * @property {Symbol|string} iterator The ES6 symbol to use as a property name
- * to retrieve an iterator from an object.
+ * @property {Symbol|string} rxSubscriber 用作属性名称的 symbol，用于从对象中检索 “Rx safe” 的 Observer 。
+ * "Rx safety"可以被定义为拥有 Rx Subscriber 所有特性的对象，包括在 subscription 链中添加和删除 subscriptions
+ * 的能力并且确保事件正确地触发，等等。（不会在取消订阅后触发 "next" 等 ）。
+ * @property {Symbol|string} observable 用作属性名称的 symbol，用来检索符合[ECMAScript "Observable" spec](https://github.com/zenparsing/es-observable)
+ * 定义的 Observable 对象。
+ * @property {Symbol|string} iterator 用作属性名称的 ES6 的 symbol， 用来检索对象中的迭代器。
  */
 var Symbol$1 = {
     rxSubscriber: rxSubscriber,

@@ -100,29 +100,29 @@ export class ObservableDoc {
      * &lt;img src=&quot;./img/create.png&quot; width=&quot;100%&quot;&gt;
      *
      * `create` &#x5C06; `onSubscription` &#x51FD;&#x6570;&#x8F6C;&#x5316;&#x4E3A;&#x4E00;&#x4E2A;&#x5B9E;&#x9645;&#x7684; Observable &#x3002;&#x6BCF;&#x5F53;&#x6709;&#x4EBA;&#x8BA2;&#x9605;&#x8BE5; Observable &#x7684;
-     * &#x65F6;&#x5019;&#xFF0C;`onSubscription`&#x51FD;&#x6570;&#x4F1A;&#x63A5;&#x6536;{@link Observer}&#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x53C2;&#x6570;&#x6267;&#x884C;&#x3002;`onSubscription` &#x5E94;&#x8BE5;
+     * &#x65F6;&#x5019;&#xFF0C;`onSubscription`&#x51FD;&#x6570;&#x4F1A;&#x63A5;&#x6536; {@link Observer} &#x5B9E;&#x4F8B;&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x53C2;&#x6570;&#x6267;&#x884C;&#x3002;`onSubscription` &#x5E94;&#x8BE5;
      * &#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x5BF9;&#x8C61;&#x7684; `next`, `error` &#x548C; `complete` &#x65B9;&#x6CD5;&#x3002;
      *
-     * &#x5E26;&#x503C;&#x8C03;&#x7528;`next`&#x4F1A;&#x5C06;&#x8BE5;&#x503C;&#x53D1;&#x51FA;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x8C03;&#x7528; complete &#x610F;&#x5473;&#x7740;&#x8BE5; Observable &#x7ED3;&#x675F;&#x4E86;&#x53D1;&#x51FA;&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x4E86;&#x3002;
-     * &#x8C03;&#x7528;`error`&#x610F;&#x5473;&#x7740;&#x51FA;&#x73B0;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x4F20;&#x7ED9;`error`&#x7684;&#x53C2;&#x6570;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B;&#x8BE6;&#x7EC6;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x3002;
+     * &#x5E26;&#x503C;&#x8C03;&#x7528; `next` &#x4F1A;&#x5C06;&#x8BE5;&#x503C;&#x53D1;&#x51FA;&#x7ED9;&#x89C2;&#x5BDF;&#x8005;&#x3002;&#x8C03;&#x7528; complete &#x610F;&#x5473;&#x7740;&#x8BE5; Observable &#x7ED3;&#x675F;&#x4E86;&#x53D1;&#x51FA;&#x5E76;&#x4E14;&#x4E0D;&#x4F1A;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x4E86;&#x3002;
+     * &#x8C03;&#x7528; `error` &#x610F;&#x5473;&#x7740;&#x51FA;&#x73B0;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x4F20;&#x7ED9; `error` &#x7684;&#x53C2;&#x6570;&#x5E94;&#x8BE5;&#x63D0;&#x4F9B;&#x8BE6;&#x7EC6;&#x7684;&#x9519;&#x8BEF;&#x4FE1;&#x606F;&#x3002;
      *
-     * &#x4E00;&#x4E2A;&#x683C;&#x5F0F;&#x826F;&#x597D;&#x7684; Observable &#x53EF;&#x4EE5;&#x901A;&#x8FC7;`next`&#x65B9;&#x6CD5;&#x53D1;&#x51FA;&#x4EFB;&#x610F;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x4F46;&#x662F;`complete`&#x548C;`error`&#x65B9;&#x6CD5;&#x53EA;&#x80FD;&#x88AB;&#x8C03;&#x7528;
-     * &#x4E00;&#x6B21;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x8C03;&#x7528;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x3002; &#x5982;&#x679C;&#x4F60;&#x8BD5;&#x56FE;&#x5728; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x4E4B;&#x540E;&#x8C03;&#x7528;`next`&#x3001; `complete`
-     * &#x6216; `error`&#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x5C06;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4EE5;&#x4FDD;&#x62A4;&#x6240;&#x8C13;&#x7684; Observable &#x5408;&#x540C;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x4F60;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x523B;
-     * &#x8C03;&#x7528;`complete`&#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x4F1A;&#x88AB;&#x7EC8;&#x6B62;&#x7684; Observable &#x4E5F;&#x662F;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4E00;&#x5207;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x9700;&#x6C42;&#x3002;
+     * &#x4E00;&#x4E2A;&#x683C;&#x5F0F;&#x826F;&#x597D;&#x7684; Observable &#x53EF;&#x4EE5;&#x901A;&#x8FC7; `next` &#x65B9;&#x6CD5;&#x53D1;&#x51FA;&#x4EFB;&#x610F;&#x591A;&#x4E2A;&#x503C;&#xFF0C;&#x4F46;&#x662F; `complete` &#x548C; `error` &#x65B9;&#x6CD5;&#x53EA;&#x80FD;&#x88AB;&#x8C03;&#x7528;
+     * &#x4E00;&#x6B21;&#xFF0C;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x4E0D;&#x4F1A;&#x518D;&#x8C03;&#x7528;&#x4EFB;&#x4F55;&#x65B9;&#x6CD5;&#x3002; &#x5982;&#x679C;&#x4F60;&#x8BD5;&#x56FE;&#x5728; Observable &#x5DF2;&#x7ECF;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x4E4B;&#x540E;&#x8C03;&#x7528;`next`&#x3001; `complete`
+     * &#x6216; `error` &#x65B9;&#x6CD5;&#xFF0C;&#x8FD9;&#x4E9B;&#x8C03;&#x7528;&#x5C06;&#x4F1A;&#x88AB;&#x5FFD;&#x7565;&#xFF0C;&#x4EE5;&#x4FDD;&#x62A4;&#x6240;&#x8C13;&#x7684; Observable &#x5408;&#x540C;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x4F60;&#x5E76;&#x4E0D;&#x9700;&#x8981;&#x4E00;&#x5B9A;&#x8981;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x523B;
+     * &#x8C03;&#x7528; `complete` &#x65B9;&#x6CD5;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x4F1A;&#x88AB;&#x7EC8;&#x6B62;&#x7684; Observable &#x4E5F;&#x662F;&#x5B8C;&#x5168;&#x53EF;&#x4EE5;&#x7684;&#xFF0C;&#x4E00;&#x5207;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x9700;&#x6C42;&#x3002;
      *
-     * `onSubscription`&#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6027;&#x7684;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x62E5;&#x6709;`unsubscribe`&#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002; &#x5F53;&#x8981;&#x53D6;&#x6D88;&#x5BF9; Observable
-     * &#x7684;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x6216;&#x8005;&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6E05;&#x7406;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C; &#x5982;&#x679C;&#x4F60;&#x5728;&#x81EA;&#x5DF1;&#x7684; Observable &#x91CC;&#x9762;&#x4F7F;&#x7528;&#x4E86;
+     * `onSubscription` &#x53EF;&#x4EE5;&#x9009;&#x62E9;&#x6027;&#x7684;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x6216;&#x8005;&#x4E00;&#x4E2A;&#x62E5;&#x6709; `unsubscribe` &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002; &#x5F53;&#x8981;&#x53D6;&#x6D88;&#x5BF9; Observable
+     * &#x7684;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x51FD;&#x6570;&#x6216;&#x8005;&#x65B9;&#x6CD5;&#x5C06;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x6E05;&#x7406;&#x6240;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6BD4;&#x5982;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5728;&#x81EA;&#x5DF1;&#x7684; Observable &#x91CC;&#x9762;&#x4F7F;&#x7528;&#x4E86;
      * `setTimeout`&#xFF0C; &#x5F53;&#x6709;&#x4EBA;&#x8981;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#xFF0C; &#x4F60;&#x53EF;&#x4EE5;&#x6E05;&#x7406;&#x5B9A;&#x65F6;&#x5668;&#xFF0C; &#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5;&#x51CF;&#x5C11;&#x4E0D;&#x5FC5;&#x8981;&#x7684;&#x89E6;&#x53D1;&#xFF0C;&#x5E76;&#x4E14;&#x6D4F;&#x89C8;
      * &#x5668;(&#x6216;&#x8005;&#x5176;&#x4ED6;&#x5BBF;&#x4E3B;&#x73AF;&#x5883;)&#x4E5F;&#x4E0D;&#x7528;&#x5C06;&#x8BA1;&#x7B97;&#x80FD;&#x529B;&#x6D6A;&#x8D39;&#x5728;&#x8FD9;&#x79CD;&#x65E0;&#x4EBA;&#x76D1;&#x542C;&#x7684;&#x5B9A;&#x65F6;&#x4E8B;&#x4EF6;&#x4E0A;&#x3002;
      *
-     * &#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;`create`&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684; Observable &#x80FD;&#x6EE1;&#x8DB3;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;&#x8FD9;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;
-     * `create`&#x662F;&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x4EFB;&#x4F55; Observable &#x7684;&#x5E95;&#x5C42;&#x673A;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x975E;&#x5E38;&#x7279;&#x6B8A;&#x7684;&#x9700;&#x6C42;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x3002;
+     * &#x7EDD;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528; `create`&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x6709;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684; Observable &#x80FD;&#x6EE1;&#x8DB3;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x4F7F;&#x7528;&#x573A;&#x666F;&#x3002;&#x8FD9;&#x4E5F;&#x5C31;&#x610F;&#x5473;&#x7740;&#xFF0C;
+     * `create` &#x662F;&#x5141;&#x8BB8;&#x4F60;&#x521B;&#x5EFA;&#x4EFB;&#x4F55; Observable &#x7684;&#x5E95;&#x5C42;&#x673A;&#x5236;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x6709;&#x975E;&#x5E38;&#x7279;&#x6B8A;&#x7684;&#x9700;&#x6C42;&#x7684;&#x8BDD;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B83;&#x3002;
      *
      * **TypeScript &#x7B7E;&#x540D;&#x95EE;&#x9898;**
      *
-     * &#x56E0;&#x4E3A; Observable &#x7EE7;&#x627F;&#x7684;&#x7C7B;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;&#x9759;&#x6001;`create`&#x65B9;&#x6CD5;,&#x4F46;&#x662F;&#x7B7E;&#x540D;&#x4E0D;&#x540C;, &#x4E0D;&#x53EF;&#x80FD;&#x7ED9;`Observable.create`&#x5408;&#x9002;&#x7684;&#x7B7E;&#x540D;&#x3002;
-     * &#x6B63;&#x56E0;&#x4E3A;&#x5982;&#x6B64;&#xFF0C;&#x7ED9;`create`&#x4F20;&#x9012;&#x7684;&#x51FD;&#x6570;&#x5C06;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x7B7E;&#x540D;&#x3002;
+     * &#x56E0;&#x4E3A; Observable &#x7EE7;&#x627F;&#x7684;&#x7C7B;&#x5DF2;&#x7ECF;&#x5B9A;&#x4E49;&#x4E86;&#x9759;&#x6001; `create` &#x65B9;&#x6CD5;,&#x4F46;&#x662F;&#x7B7E;&#x540D;&#x4E0D;&#x540C;, &#x4E0D;&#x53EF;&#x80FD;&#x7ED9; `Observable.create` &#x5408;&#x9002;&#x7684;&#x7B7E;&#x540D;&#x3002;
+     * &#x6B63;&#x56E0;&#x4E3A;&#x5982;&#x6B64;&#xFF0C;&#x7ED9; `create` &#x4F20;&#x9012;&#x7684;&#x51FD;&#x6570;&#x5C06;&#x4E0D;&#x4F1A;&#x8FDB;&#x884C;&#x7C7B;&#x578B;&#x68C0;&#x67E5;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x660E;&#x786E;&#x6307;&#x5B9A;&#x4E86;&#x7279;&#x5B9A;&#x7684;&#x7B7E;&#x540D;&#x3002;
      *
      * &#x5F53;&#x4F7F;&#x7528; TypeScript &#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5EFA;&#x8BAE;&#x5C06;&#x4F20;&#x9012;&#x7ED9; create &#x7684;&#x51FD;&#x6570;&#x7B7E;&#x540D;&#x58F0;&#x660E;&#x4E3A;`(observer: Observer) =&gt; TeardownLogic`,
      * &#x5176;&#x4E2D;{@link Observer} &#x548C; {@link TeardownLogic} &#x662F;&#x5E93;&#x63D0;&#x4F9B;&#x7684;&#x63A5;&#x53E3;&#x3002;
@@ -140,41 +140,41 @@ export class ObservableDoc {
      *   () =&gt; console.log(&apos;this is the end&apos;)
      * );
      *
-     * // Logs
+     * // &#x65E5;&#x5FD7;:
      * // 1
      * // 2
      * // 3
      * // &quot;this is the end&quot;
      *
      *
-     * @example &lt;caption&gt;Emit an error&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x9519;&#x8BEF;&lt;/caption&gt;
      * const observable = Rx.Observable.create((observer) =&gt; {
      *   observer.error(&apos;something went really wrong...&apos;);
      * });
      *
      * observable.subscribe(
-     *   value =&gt; console.log(value), // will never be called
+     *   value =&gt; console.log(value), // &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
      *   err =&gt; console.log(err),
-     *   () =&gt; console.log(&apos;complete&apos;) // will never be called
+     *   () =&gt; console.log(&apos;complete&apos;) // &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
      * );
      *
-     * // Logs
+     * // &#x65E5;&#x5FD7;:
      * // &quot;something went really wrong...&quot;
      *
      *
-     * @example &lt;caption&gt;Return unsubscribe function&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x8FD4;&#x56DE;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x51FD;&#x6570;&lt;/caption&gt;
      *
      * const observable = Rx.Observable.create(observer =&gt; {
-     *   const id = setTimeout(() =&gt; observer.next(&apos;...&apos;), 5000); // emit value after 5s
+     *   const id = setTimeout(() =&gt; observer.next(&apos;...&apos;), 5000); // 5s&#x540E;&#x53D1;&#x51FA;&#x6570;&#x636E;
      *
      *   return () =&gt; { clearTimeout(id); console.log(&apos;cleared!&apos;); };
      * });
      *
      * const subscription = observable.subscribe(value =&gt; console.log(value));
      *
-     * setTimeout(() =&gt; subscription.unsubscribe(), 3000); // cancel subscription after 3s
+     * setTimeout(() =&gt; subscription.unsubscribe(), 3000); // 3s&#x540E;&#x53D6;&#x6D88;&#x8BA2;&#x9605;
      *
-     * // Logs:
+     * // &#x65E5;&#x5FD7;:
      * // &quot;cleared!&quot; after 3s
      *
      * // Never logs &quot;...&quot;
@@ -185,12 +185,9 @@ export class ObservableDoc {
      * @see {@link of}
      * @see {@link throw}
      *
-     * @param {function(observer: Observer): TeardownLogic} onSubscription A
-     * function that accepts an Observer, and invokes its `next`,
-     * `error`, and `complete` methods as appropriate, and optionally returns some
-     * logic for cleaning up resources.
-     * @return {Observable} An Observable that, whenever subscribed, will execute the
-     * specified function.
+     * @param {function(observer: Observer): TeardownLogic} onSubscription &#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;
+     * &#x7136;&#x540E;&#x5728;&#x9002;&#x5F53;&#x7684;&#x65F6;&#x673A;&#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x7684; `next` &#x3001;`error` &#x6216;&#x8005; `complete` &#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E9B;&#x6E05;&#x7406;&#x8D44;&#x6E90;&#x7684;&#x903B;&#x8F91;&#x3002;
+     * @return {Observable} Observable&#xFF0C; &#x5F53;&#x8BE5; Observable &#x88AB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x5C06;&#x4F1A;&#x6267;&#x884C;&#x7279;&#x5B9A;&#x51FD;&#x6570;&#x3002;
      * @static true
      * @name create
      * @owner Observable
@@ -201,8 +198,7 @@ export class ObservableDoc {
     ;
 }
 /**
- * An interface for a consumer of push-based notifications delivered by an
- * {@link Observable}.
+ * &#x6D88;&#x8D39;&#x8005;&#x63A5;&#x53E3;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x63A5;&#x6536;&#x7531; {@link Observable} &#x63A8;&#x9001;&#x7684;&#x901A;&#x77E5;&#x3002;
  *
  * ```ts
  * interface Observer&lt;T&gt; {
@@ -213,12 +209,9 @@ export class ObservableDoc {
  * }
  * ```
  *
- * An object conforming to the Observer interface is usually
- * given to the `observable.subscribe(observer)` method, and the Observable will
- * call the Observer&apos;s `next(value)` method to provide notifications. A
- * well-behaved Observable will call an Observer&apos;s `complete()` method exactly
- * once or the Observer&apos;s `error(err)` method exactly once, as the last
- * notification delivered.
+ * &#x7B26;&#x5408;&#x89C2;&#x5BDF;&#x8005;&#x63A5;&#x53E3;&#x89C4;&#x8303;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6765;&#x4F20;&#x7ED9; `observable.subscribe(observer)` &#x65B9;&#x6CD5;&#xFF0C;&#x540C;&#x65F6;
+ * Observable &#x4F1A;&#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x7684; `next(value)` &#x63D0;&#x4F9B;&#x901A;&#x77E5;&#x3002;&#x5B9A;&#x4E49;&#x826F;&#x597D;&#x7684; Observable &#x4F1A;&#x786E;&#x5207;&#x7684;&#x8C03;&#x7528;
+ * &#x89C2;&#x5BDF;&#x8005;&#x7684; `complete()` &#x6216;&#x8005; `error(err)` &#x65B9;&#x6CD5;&#x4E00;&#x6B21;&#xFF0C;&#x4F5C;&#x4E3A;&#x6700;&#x540E;&#x7684;&#x901A;&#x77E5;&#x3002;
  *
  * @interface
  * @name Observer
@@ -227,35 +220,31 @@ export class ObservableDoc {
 export class ObserverDoc {
     constructor() {
         /**
-         * An optional flag to indicate whether this Observer, when used as a
-         * subscriber, has already been unsubscribed from its Observable.
+         * &#x53EF;&#x9009;&#x7684;&#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x8BE5;&#x89C2;&#x5BDF;&#x8005;&#x4F5C;&#x4E3A;&#x8BA2;&#x9605;&#x8005;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5BF9;&#x5B83;&#x89C2;&#x5BDF;&#x7684; Observable &#x53D6;&#x6D88;&#x4E86;&#x8BA2;&#x9605;&#x3002;
          * @type {boolean}
          */
         this.closed = false;
     }
     /**
-     * The callback to receive notifications of type `next` from the Observable,
-     * with a value. The Observable may call this method 0 or more times.
-     * @param {T} value The `next` value.
+     * &#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; `next` &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;Observable &#x4F1A;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;0&#x6B21;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;
+     * @param {T} value  `next` &#x7684;&#x503C;&#x3002;
      * @return {void}
      */
     next(value) {
         return void 0;
     }
     /**
-     * The callback to receive notifications of type `error` from the Observable,
-     * with an attached {@link Error}. Notifies the Observer that the Observable
-     * has experienced an error condition.
-     * @param {any} err The `error` exception.
+     * &#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; `error` &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#xFF0C;&#x5E26;&#x7740; {@link Error} &#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;
+     * Observable &#x53D1;&#x751F;&#x4E86;&#x9519;&#x8BEF;&#x3002;
+     * @param {any} err `error` &#x5F02;&#x5E38;&#x3002;
      * @return {void}
      */
     error(err) {
         return void 0;
     }
     /**
-     * The callback to receive a valueless notification of type `complete` from
-     * the Observable. Notifies the Observer that the Observable has finished
-     * sending push-based notifications.
+     * &#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA;&#x4E8E; Observable &#x7684; `complete` &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;Observable &#x5DF2;&#x7ECF;
+     * &#x5B8C;&#x6210;&#x4E86;&#x53D1;&#x9001;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;
      * @return {void}
      */
     complete() {
@@ -263,60 +252,49 @@ export class ObserverDoc {
     }
 }
 /**
- * `SubscribableOrPromise` interface describes values that behave like either
- * Observables or Promises. Every operator that accepts arguments annotated
- * with this interface, can be also used with parameters that are not necessarily
- * RxJS Observables.
+ * `SubscribableOrPromise` &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x884C;&#x4E3A;&#x50CF; Observables &#x6216;&#x8005; Promises &#x7684;&#x503C;&#x3002;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;
+ * &#x63A5;&#x53D7;&#x88AB;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0D;&#x662F; RxJS Observables &#x7684;&#x53C2;&#x6570;&#x3002;
  *
- * Following types of values might be passed to operators expecting this interface:
+ * &#x4E0B;&#x5217;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x7ED9;&#x671F;&#x671B;&#x6B64;&#x63A5;&#x53E3;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF1A;
  *
  * ## Observable
  *
- * RxJS {@link Observable} instance.
+ * RxJS {@link Observable} &#x5B9E;&#x4F8B;&#x3002;
  *
- * ## Observable-like (Subscribable)
+ * ## &#x7C7B; Observable &#x5BF9;&#x8C61; (Subscribable)
  *
- * This might be any object that has `Symbol.observable` method. This method,
- * when called, should return object with `subscribe` method on it, which should
- * behave the same as RxJS `Observable.subscribe`.
+ * &#x8FD9;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x4F55;&#x62E5;&#x6709; `Symbol.observable` &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5F53;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E94;&#x8BE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5E26;&#x6709;
+ * `subscribe` &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x884C;&#x4E3A;&#x5E94;&#x8BE5;&#x548C; RxJS &#x7684; `Observable.subscribe` &#x4E00;&#x81F4;&#x3002;
  *
- * `Symbol.observable` is part of https://github.com/tc39/proposal-observable proposal.
- * Since currently it is not supported natively, and every symbol is equal only to itself,
- * you should use https://github.com/blesh/symbol-observable polyfill, when implementing
- * custom Observable-likes.
+ * `Symbol.observable` &#x662F; https://github.com/tc39/proposal-observable &#x63D0;&#x6848;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;
+ * &#x5F53;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7C7B; Observable &#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x5728;&#x8FD8;&#x6CA1;&#x6709;&#x88AB;&#x539F;&#x751F;&#x652F;&#x6301;, &#x6BCF;&#x4E2A;&#x7B26;&#x53F7;&#x53EA;&#x548C;&#x81EA;&#x5DF1;&#x76F8;&#x7B49;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; https://github.com/blesh/symbol-observable &#x57AB;&#x7247;&#x3002;
  *
- * **TypeScript Subscribable interface issue**
+ * **TypeScript Subscribable &#x63A5;&#x53E3;&#x95EE;&#x9898;**
  *
- * Although TypeScript interface claims that Subscribable is an object that has `subscribe`
- * method declared directly on it, passing custom objects that have `subscribe`
- * method but not `Symbol.observable` method will fail at runtime. Conversely, passing
- * objects with `Symbol.observable` but without `subscribe` will fail at compile time
- * (if you use TypeScript).
+ * &#x5C3D;&#x7BA1; TypeScript &#x63A5;&#x53E3;&#x58F0;&#x660E;&#xFF0C;&#x53EF;&#x8BA2;&#x9605;&#x5BF9;&#x8C61;&#x662F;&#x4E00;&#x4E2A;&#x58F0;&#x660E;&#x4E86; `subscribe` &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x4F20;&#x9012;&#x5B9A;&#x4E49;&#x4E86; `subscribe` &#x65B9;&#x6CD5;
+ * &#x4F46;&#x662F;&#x6CA1;&#x6709;&#x5B9A;&#x4E49; `Symbol.observable` &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4F1A;&#x5931;&#x8D25;&#x3002;&#x76F8;&#x53CD;&#x5730;&#xFF0C;&#x4F20;&#x9012;&#x5B9A;&#x4E49;&#x4E86; `Symbol.observable` &#x800C;&#x6CA1;&#x6709;
+ * &#x5B9A;&#x4E49; `subscribe` &#x7684;&#x5BF9;&#x8C61;&#x5C06;&#x4F1A;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5931;&#x8D25;&#xFF08;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528; TypeScript&#xFF09;&#x3002;
  *
- * TypeScript has problem supporting interfaces with methods defined as symbol
- * properties. To get around that, you should implement `subscribe` directly on
- * passed object, and make `Symbol.observable` method simply return `this`. That way
- * everything will work as expected, and compiler will not complain. If you really
- * do not want to put `subscribe` directly on your object, you will have to type cast
- * it to `any`, before passing it to an operator.
+ * TypeScript &#x5728;&#x652F;&#x6301;&#x5B9A;&#x4E49;&#x4E86; symbol &#x5C5E;&#x6027;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#x65F6;&#x662F;&#x6709;&#x95EE;&#x9898;&#x7684;&#x3002;&#x4E3A;&#x4E86;&#x7ED5;&#x8FC7;&#x5B83;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x76F4;&#x63A5;&#x5B9E;&#x73B0;
+ * `subscribe` &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F; `Symbol.observable` &#x65B9;&#x6CD5;&#x7B80;&#x5355;&#x5730;&#x8FD4;&#x56DE; `this` &#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x80FD;&#x591F;
+ * &#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4E5F;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#x3002;&#x5982;&#x679C;&#x4F60;&#x771F;&#x7684;&#x4E0D;&#x60F3;&#x6DFB;&#x52A0; `subscribe` &#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x5C06;&#x5176;&#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x4E4B;&#x524D;&#xFF0C;
+ * &#x5C06;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#x4E3A; `any`&#x3002;
  *
- * When this issue is resolved, Subscribable interface will only permit Observable-like
- * objects with `Symbol.observable` defined, no matter if they themselves implement
- * `subscribe` method or not.
+ * &#x5F53;&#x8FD9;&#x4E2A; issue &#x88AB;&#x89E3;&#x51B3;&#x4E86;&#xFF0C;&#x53EF;&#x8BA2;&#x9605;&#x7684;&#x63A5;&#x53E3;&#x4EC5;&#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x4E86; `Symbol.observable` &#x65B9;&#x6CD5;&#x7684;&#x7C7B; Observable
+ * &#x5BF9;&#x8C61;&#xFF0C;&#x65E0;&#x8BBA;&#x8BE5;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5B9E;&#x73B0;&#x4E86; `subscribe` &#x65B9;&#x6CD5;&#x3002;
  *
  * ## ES6 Promise
  *
- * Promise can be interpreted as Observable that emits value and completes
- * when it is resolved or errors when it is rejected.
+ * Promise &#x53EF;&#x4EE5;&#x88AB;&#x8BA4;&#x4E3A;&#x662F; Observable&#xFF0C;&#x5F53; resolved &#x7684;&#x65F6;&#x5019;&#xFF0C;Observable &#x53D1;&#x51FA;&#x503C;&#x5E76;&#x5B8C;&#x6210;&#xFF0C;
+ * &#x5F53; rejected &#x7684;&#x65F6;&#x5019;&#xFF0C;Observable &#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x3002;
  *
- * ## Promise-like (Thenable)
+ * ## &#x7C7B; Promise &#x5BF9;&#x8C61; (&#x53EF;&#x4F7F;&#x7528; then &#x65B9;&#x6CD5;&#x7684;)
  *
- * Promises passed to operators do not have to be native ES6 Promises.
- * They can be implementations from popular Promise libraries, polyfills
- * or even custom ones. They just need to have `then` method that works
- * as the same as ES6 Promise `then`.
+ * &#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x7684; Promises &#x4E0D;&#x9700;&#x8981;&#x662F; ES6 &#x539F;&#x751F;&#x7684; Promises&#x3002;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6D41;&#x884C;&#x5E93;&#x6216;&#x57AB;&#x7247;&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x751A;&#x81F3;&#x81EA;&#x5DF1;&#x6765;&#x5B9E;&#x73B0;&#x3002;
+ * &#x5B83;&#x53EA;&#x9700;&#x8981;&#x62E5;&#x6709; `then` &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x8BE5;&#x65B9;&#x6CD5;&#x548C; ES6 Promise &#x7684; `then` &#x884C;&#x4E3A;
+ * &#x4E00;&#x81F4;&#x3002;
  *
- * @example &lt;caption&gt;Use merge and then map with non-RxJS observable&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7528;&#x975E; RxJS &#x7684; observable &#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x6765;&#x4F7F;&#x7528; merge &#x548C; map &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
  * const nonRxJSObservable = {
  *   subscribe(observer) {
  *     observer.next(1000);
@@ -329,17 +307,17 @@ export class ObserverDoc {
  *
  * Rx.Observable.merge(nonRxJSObservable)
  * .map(value =&gt; &quot;This value is &quot; + value)
- * .subscribe(result =&gt; console.log(result)); // Logs &quot;This value is 1000&quot;
+ * .subscribe(result =&gt; console.log(result)); // &#x8F93;&#x51FA; &quot;This value is 1000&quot;
  *
  *
- * @example &lt;caption&gt;Use combineLatest with ES6 Promise&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7528; ES6 &#x7684; Promise &#x6765;&#x4F7F;&#x7528; combineLatest &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
  * Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))
  * .subscribe(
  *   value =&gt; console.log(value),
  *   err =&gt; {},
  *   () =&gt; console.log(&apos;the end!&apos;)
  * );
- * // Logs
+ * // &#x8F93;&#x51FA;:
  * // [5, 10, 15]
  * // &quot;the end!&quot;
  *
@@ -351,50 +329,40 @@ export class ObserverDoc {
 export class SubscribableOrPromiseDoc {
 }
 /**
- * `ObservableInput` interface describes all values that are either an
- * {@link SubscribableOrPromise} or some kind of collection of values that
- * can be transformed to Observable emitting that values. Every operator that
- * accepts arguments annotated with this interface, can be also used with
- * parameters that are not necessarily RxJS Observables.
+ * `ObservableInput` &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86;&#x6240;&#x6709;&#x503C;&#x662F;&#x4E00;&#x4E2A; {@link SubscribableOrPromise} &#x6216;&#x8005;
+ * &#x6B64;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x80FD;&#x53D1;&#x51FA;&#x503C;&#x7684; Observable &#x3002;
+ * &#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x90FD;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x88AB;&#x8BE5;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x4E00;&#x5B9A;&#x9700;&#x8981;&#x662F; RxJS &#x7684; Observables&#x3002;
  *
- * `ObservableInput` extends {@link SubscribableOrPromise} with following types:
+ * `ObservableInput` &#x7EE7;&#x627F;&#x4E86; {@link SubscribableOrPromise} &#xFF0C;&#x62E5;&#x6709;&#x5982;&#x4E0B;&#x7C7B;&#x578B;:
  *
- * ## Array
+ * ## &#x6570;&#x7EC4;
  *
- * Arrays can be interpreted as observables that emit all values in array one by one,
- * from left to right, and then complete immediately.
+ * &#x6570;&#x7EC4;&#x53EF;&#x4EE5;&#x88AB;&#x7406;&#x89E3;&#x4E3A;&#xFF0C;observables &#x4F1A;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#xFF0C;&#x4E00;&#x4E2A;&#x63A5;&#x4E00;&#x4E2A;&#x5730;&#x53D1;&#x9001;&#x6570;&#x7EC4;&#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x7ACB;&#x5373;&#x5B8C;&#x6210;&#x3002;
  *
- * ## Array-like
+ * ## &#x7C7B;&#x6570;&#x7EC4;
  *
- * Arrays passed to operators do not have to be built-in JavaScript Arrays. They
- * can be also, for example, `arguments` property available inside every function,
- * [DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),
- * or, actually, any object that has `length` property (which is a number)
- * and stores values under non-negative (zero and up) integers.
+ * &#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x6570;&#x7EC4;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x662F; JavaScript &#x5185;&#x7F6E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x5B83;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x662F;&#x5176;&#x4ED6;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x7684; `arguments`
+ * &#x5C5E;&#x6027;&#xFF0C;[DOM NodeList](https://developer.mozilla.org/pl/docs/Web/API/NodeList),&#x6216;&#x8005;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;
+ * &#x62E5;&#x6709; `length` &#x5C5E;&#x6027;&#xFF08;&#x662F;&#x4E2A;&#x6570;&#x5B57;&#xFF09;&#x7684;&#x5BF9;&#x8C61; &#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x4E86;&#x5927;&#x4E8E;0&#x4E2A;&#x6570;&#x3002;
  *
- * ## ES6 Iterable
+ * ## ES6 &#x8FED;&#x4EE3;&#x5668;
  *
- * Operators will accept both built-in and custom ES6 Iterables, by treating them as
- * observables that emit all its values in order of iteration and then complete
- * when iteration ends. Note that contrary to arrays, Iterables do not have to
- * necessarily be finite, so creating Observables that never complete is possible as well.
+ * &#x64CD;&#x4F5C;&#x7B26;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x5185;&#x7F6E;&#x7684;&#x548C;&#x81EA;&#x5B9A;&#x4E49;&#x7684; ES6 &#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x505A; observables &#x901A;&#x8FC7;&#x987A;&#x5E8F;&#x7684;&#x53D1;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;
+ * &#x7136;&#x540E;&#x5F53;&#x8FED;&#x4EE3;&#x5668;&#x5B8C;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x89E6;&#x53D1;&#x5B8C;&#x6210;&#x3002;&#x6CE8;&#x610F;&#x548C;&#x6570;&#x7EC4;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;&#x4E0D;&#x9700;&#x8981;&#x662F;&#x6709;&#x9650;&#x7684;&#xFF0C;&#x5E94;&#x8BE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x5B8C;&#x6210;
+ * &#x7684; Observables &#x4F7F;&#x4E4B;&#x6210;&#x4E3A;&#x53EF;&#x80FD;&#x3002;
  *
- * Note that you can make iterator an instance of Iterable by having it return itself
- * in `Symbol.iterator` method. It means that every operator accepting Iterables accepts,
- * though indirectly, iterators themselves as well. All native ES6 iterators are instances
- * of Iterable by default, so you do not have to implement their `Symbol.iterator` method
- * yourself.
+ * &#x6CE8;&#x610F;&#xFF0C;&#x901A;&#x8FC7;&#x5728; `Symbol.iterator` &#x65B9;&#x6CD5;&#x4E2D;&#x8FD4;&#x56DE;&#x81EA;&#x8EAB;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FED;&#x4EE3;&#x8FED;&#x4EE3;&#x5668;&#x5B9E;&#x4F8B;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x63A5;&#x6536;&#x53EF;&#x8FED;&#x4EE3;&#x5BF9;&#x8C61;&#xFF0C;
+ * &#x4F46;&#x662F;&#x95F4;&#x63A5;&#x7684;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;&#x672C;&#x8EAB;&#x4E5F;&#x53EF;&#x4EE5;&#x3002;&#x6240;&#x6709;&#x539F;&#x751F; ES6 &#x7684;&#x8FED;&#x4EE3;&#x5668;&#x9ED8;&#x8BA4;&#x90FD;&#x662F; Iterable &#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0; `Symbol.iterator` &#x65B9;&#x6CD5;&#x3002;
  *
- * **TypeScript Iterable interface issue**
+ * **TypeScript Iterable &#x63A5;&#x53E3; issue **
  *
- * TypeScript `ObservableInput` interface actually lacks type signature for Iterables,
- * because of issues it caused in some projects (see [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
- * If you want to use Iterable as argument for operator, cast it to `any` first.
- * Remember of course that, because of casting, you have to yourself ensure that passed
- * argument really implements said interface.
+ * TypeScript `ObservableInput` &#x63A5;&#x53E3;&#x5B9E;&#x9645;&#x4E0A;&#x7F3A;&#x4E4F; Iterables &#x7684;&#x7C7B;&#x578B;&#x7B7E;&#x540D;&#xFF0C;
+ * &#x7531;&#x4E8E;&#x4E00;&#x4E9B;&#x9879;&#x76EE;&#x9020;&#x6210;&#x7684; issue (&#x67E5;&#x770B; [this issue](https://github.com/ReactiveX/rxjs/issues/2306)).
+ * &#x5982;&#x679C;&#x4F60;&#x60F3;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x4F20;&#x9012; Iterable, &#x9996;&#x5148;&#x5C06;&#x5B83;&#x8F6C;&#x5316;&#x4E3A; `any`&#x3002;&#x5F53;&#x7136;&#x8981;&#x94ED;&#x8BB0;&#xFF0C;&#x56E0;&#x4E3A;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x786E;&#x4FDD;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;
+ * &#x786E;&#x5B9E;&#x5B9E;&#x73B0;&#x4E86;&#x6B64;&#x63A5;&#x53E3;&#x3002;
  *
  *
- * @example &lt;caption&gt;Use merge with arrays&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7528;&#x6570;&#x7EC4;&#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
  * Rx.Observable.merge([1, 2], [4], [5, 6])
  * .subscribe(
  *   value =&gt; console.log(value),
@@ -402,7 +370,7 @@ export class SubscribableOrPromiseDoc {
  *   () =&gt; console.log(&apos;ta dam!&apos;)
  * );
  *
- * // Logs
+ * // &#x65E5;&#x5FD7;&#xFF1A;
  * // 1
  * // 2
  * // 3
@@ -412,7 +380,7 @@ export class SubscribableOrPromiseDoc {
  * // &quot;ta dam!&quot;
  *
  *
- * @example &lt;caption&gt;Use merge with array-like&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7528;&#x7C7B;&#x6570;&#x7EC4;&#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
  * Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})
  * .subscribe(
  *   value =&gt; console.log(value),
@@ -420,34 +388,34 @@ export class SubscribableOrPromiseDoc {
  *   () =&gt; console.log(&apos;nice, huh?&apos;)
  * );
  *
- * // Logs
+ * // &#x65E5;&#x5FD7;&#xFF1A;
  * // 1
  * // 2
  * // 3
  * // &quot;nice, huh?&quot;
  *
- * @example &lt;caption&gt;Use merge with an Iterable (Map)&lt;/caption&gt;
+ * @example &lt;caption&gt;&#x7528; Iterable (Map) &#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
  * const firstMap = new Map([[1, &apos;a&apos;], [2, &apos;b&apos;]]);
  * const secondMap = new Map([[3, &apos;c&apos;], [4, &apos;d&apos;]]);
  *
  * Rx.Observable.merge(
- *   firstMap,          // pass Iterable
- *   secondMap.values() // pass iterator, which is itself an Iterable
+ *   firstMap,          // &#x4F20;&#x9012; Iterable
+ *   secondMap.values() // &#x4F20;&#x9012; iterator, &#x5B83;&#x672C;&#x8EAB;&#x5C31;&#x662F; Iterable
  * ).subscribe(
  *   value =&gt; console.log(value),
  *   err =&gt; {},
  *   () =&gt; console.log(&apos;yup!&apos;)
  * );
  *
- * // Logs
+ * // &#x65E5;&#x5FD7;&#xFF1A;
  * // [1, &quot;a&quot;]
  * // [2, &quot;b&quot;]
  * // &quot;c&quot;
  * // &quot;d&quot;
  * // &quot;yup!&quot;
  *
- * @example &lt;caption&gt;Use from with generator (returning infinite iterator)&lt;/caption&gt;
- * // infinite stream of incrementing numbers
+ * @example &lt;caption&gt;&#x7528; generator&#xFF08;&#x8FD4;&#x56DE;&#x65E0;&#x9650;&#x7684; iterator&#xFF09;&#x4F7F;&#x7528; from &#x64CD;&#x4F5C;&#x7B26;&lt;/caption&gt;
+ * // &#x65E0;&#x9650;&#x7684;&#x81EA;&#x589E;&#x6570;&#x5217;&#x6D41;
  * const infinite = function* () {
  *   let i = 0;
  *
@@ -457,14 +425,14 @@ export class SubscribableOrPromiseDoc {
  * };
  *
  * Rx.Observable.from(infinite())
- * .take(3) // only take 3, cause this is infinite
+ * .take(3) // &#x56E0;&#x4E3A;&#x662F;&#x65E0;&#x9650;&#x7684;&#xFF0C;&#x4EC5;&#x4EC5;&#x53D6;&#x524D;&#x4E09;&#x4E2A;
  * .subscribe(
  *   value =&gt; console.log(value),
  *   err =&gt; {},
  *   () =&gt; console.log(&apos;ta dam!&apos;)
  * );
  *
- * // Logs
+ * // &#x65E5;&#x5FD7;&#xFF1A;
  * // 0
  * // 1
  * // 2
@@ -478,26 +446,22 @@ export class ObservableInputDoc {
 }
 /**
  *
- * This interface describes what should be returned by function passed to Observable
- * constructor or static {@link create} function. Value of that interface will be used
- * to cancel subscription for given Observable.
+ * &#x8FD9;&#x4E2A;&#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86; Observable &#x6784;&#x9020;&#x51FD;&#x6570;&#x548C;&#x9759;&#x6001;&#x65B9;&#x6CD5; {@link create} &#x63A5;&#x6536;&#x7684;&#x51FD;&#x6570;&#x7684;&#x8FD4;&#x56DE;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3;
+ * &#x7684;&#x503C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x53D6;&#x6D88;&#x5BF9;&#x5F53;&#x524D; Observable &#x7684;&#x8BA2;&#x9605;&#x3002;
  *
- * `TeardownLogic` can be:
+ * `TeardownLogic` &#x53EF;&#x4EE5;&#x662F;:
  *
- * ## Function
+ * ## &#x51FD;&#x6570;
  *
- * Function that takes no parameters. When consumer of created Observable calls `unsubscribe`,
- * that function will be called
+ * &#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x63A5;&#x6536;&#x53C2;&#x6570;&#x3002; &#x5F53;&#x521B;&#x5EFA;&#x7684; Observable &#x7684;&#x6D88;&#x8D39;&#x8005;&#x8C03;&#x7528; `unsubscribe`&#x65F6;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x88AB;&#x8C03;&#x7528;&#x3002;
  *
  * ## AnonymousSubscription
  *
- * `AnonymousSubscription` is simply an object with `unsubscribe` method on it. That method
- * will work the same as function
+ * `AnonymousSubscription` &#x662F;&#x4E00;&#x4E2A;&#x62E5;&#x6709; `unsubscribe` &#x65B9;&#x6CD5;&#x7684;&#x7B80;&#x5355;&#x5BF9;&#x8C61;&#x3002; &#x8BE5;&#x65B9;&#x6CD5;&#x548C;&#x4E0A;&#x9762;&#x51FD;&#x6570;&#x884C;&#x4E3A;&#x4E00;&#x81F4;&#x3002;
  *
  * ## void
  *
- * If created Observable does not have any resources to clean up, function does not have to
- * return anything.
+ * &#x5982;&#x679C;&#x521B;&#x5EFA;&#x7684; Observable &#x4E0D;&#x9700;&#x8981;&#x6E05;&#x7406;&#x4EFB;&#x4F55;&#x8D44;&#x6E90;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x503C;&#x3002;
  *
  * @interface
  * @name TeardownLogic

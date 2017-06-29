@@ -86,12 +86,9 @@
 <div class="content" data-ice="content"><h1 data-ice="title">es6/Notification.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { Observable } from &apos;./Observable&apos;;
 /**
- * Represents a push-based event or value that an {@link Observable} can emit.
- * This class is particularly useful for operators that manage notifications,
- * like {@link materialize}, {@link dematerialize}, {@link observeOn}, and
- * others. Besides wrapping the actual delivered value, it also annotates it
- * with metadata of, for instance, what type of push message it is (`next`,
- * `error`, or `complete`).
+ * &#x4EE3;&#x8868;&#x53EF;&#x4EE5;&#x88AB; {@link Observable} &#x53D1;&#x51FA;&#x7684;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x4E8B;&#x4EF6;&#x6216;&#x8005;&#x503C;&#x3002;&#x5BF9;&#x4E8E;&#x50CF; {@link materialize}&#xFF0C;
+ *  {@link dematerialize}&#xFF0C; {@link observeOn} &#x548C;&#x5176;&#x4ED6;&#x7BA1;&#x7406;&#x901A;&#x77E5;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8BF4;&#xFF0C;Notification &#x7C7B;&#x5C24;&#x5176;&#x9002;&#x7528;&#x3002;
+ * &#x9664;&#x4E86;&#x5305;&#x88C5;&#x771F;&#x6B63;&#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x5B83;&#x8FD8;&#x4F7F;&#x7528;&#x5143;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6CE8;&#x89E3;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x63A8;&#x9001;&#x6D88;&#x606F;&#x7684;&#x7C7B;&#x578B;&#x662F;&#xFF08;`next`&#xFF0C;`error`&#xFF0C; or `complete`&#xFF09;&#x3002;
  *
  * @see {@link materialize}
  * @see {@link dematerialize}
@@ -107,7 +104,7 @@ export class Notification {
         this.hasValue = kind === &apos;N&apos;;
     }
     /**
-     * Delivers to the given `observer` the value wrapped by this Notification.
+     * &#x5C06;&#x7531; Notification &#x5305;&#x88C5;&#x8FC7;&#x7684;&#x503C;&#x4F20;&#x9012;&#x7ED9;&#x7ED9;&#x5B9A;&#x7684; `observer`&#x3002;
      * @param {Observer} observer
      * @return
      */
@@ -122,11 +119,10 @@ export class Notification {
         }
     }
     /**
-     * Given some {@link Observer} callbacks, deliver the value represented by the
-     * current Notification to the correctly corresponding callback.
-     * @param {function(value: T): void} next An Observer `next` callback.
-     * @param {function(err: any): void} [error] An Observer `error` callback.
-     * @param {function(): void} [complete] An Observer `complete` callback.
+     * &#x7ED9;&#x5B9A;&#x4E00;&#x4E9B; {@link Observer} &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C; &#x5C06;&#x5F53;&#x524D; Notification &#x6240;&#x8868;&#x793A;&#x7684;&#x503C;&#x6B63;&#x786E;&#x7684;&#x4F20;&#x9012;&#x7ED9;&#x76F8;&#x5E94;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(value: T): void} next Observer &#x7684; `next` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(err: any): void} [error] Observer &#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(): void} [complete] An Observer &#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
      * @return {any}
      */
     do(next, error, complete) {
@@ -141,12 +137,11 @@ export class Notification {
         }
     }
     /**
-     * Takes an Observer or its individual callback functions, and calls `observe`
-     * or `do` methods accordingly.
-     * @param {Observer|function(value: T): void} nextOrObserver An Observer or
-     * the `next` callback.
-     * @param {function(err: any): void} [error] An Observer `error` callback.
-     * @param {function(): void} [complete] An Observer `complete` callback.
+     * &#x63A5;&#x53D7;&#x4E00;&#x4E2A; Observer &#x6216;&#x8005;&#x5B83;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x76F8;&#x5E94;&#x5730;&#x8C03;&#x7528; `observe` &#x6216;&#x8005; `do` &#x65B9;&#x6CD5;&#x3002;
+     * @param {Observer|function(value: T): void} nextOrObserver  Observer &#x6216;&#x8005;
+     * `next` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(err: any): void} [error] Observer &#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(): void} [complete] Observer &#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
      * @return {any}
      */
     accept(nextOrObserver, error, complete) {
@@ -158,8 +153,7 @@ export class Notification {
         }
     }
     /**
-     * Returns a simple Observable that just delivers the notification represented
-     * by this Notification instance.
+     * &#x8FD4;&#x56DE;&#x7684; Observable &#x53EA;&#x4F20;&#x9012;&#x4EE3;&#x8868;&#x5F53;&#x524D; Notification &#x5B9E;&#x4F8B;&#x7684;&#x901A;&#x77E5;&#x3002;
      * @return {any}
      */
     toObservable() {
@@ -175,11 +169,9 @@ export class Notification {
         throw new Error(&apos;unexpected notification kind value&apos;);
     }
     /**
-     * A shortcut to create a Notification instance of the type `next` from a
-     * given value.
-     * @param {T} value The `next` value.
-     * @return {Notification&lt;T&gt;} The &quot;next&quot; Notification representing the
-     * argument.
+     * &#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; `next` &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;
+     * @param {T} value `next` &#x7684;&#x503C;&#x3002;
+     * @return {Notification&lt;T&gt;} &#x4EE3;&#x8868;&#x4F20;&#x5165;&#x503C;&#x7684;`next`&#x578B;&#x901A;&#x77E5;&#x5B9E;&#x4F8B;&#x3002;
      */
     static createNext(value) {
         if (typeof value !== &apos;undefined&apos;) {
@@ -188,18 +180,16 @@ export class Notification {
         return this.undefinedValueNotification;
     }
     /**
-     * A shortcut to create a Notification instance of the type `error` from a
-     * given error.
-     * @param {any} [err] The `error` error.
-     * @return {Notification&lt;T&gt;} The &quot;error&quot; Notification representing the
-     * argument.
+     * &#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x9519;&#x8BEF;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; `error` &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;
+     * @param {any} [err]  `error` &#x9519;&#x8BEF;&#x3002;
+     * @return {Notification&lt;T&gt;} &#x4EE3;&#x8868;&#x4F20;&#x5165;&#x9519;&#x8BEF;&#x7684;`error`&#x578B;&#x901A;&#x77E5;&#x5B9E;&#x4F8B;&#x3002;
      */
     static createError(err) {
         return new Notification(&apos;E&apos;, undefined, err);
     }
     /**
-     * A shortcut to create a Notification instance of the type `complete`.
-     * @return {Notification&lt;any&gt;} The valueless &quot;complete&quot; Notification.
+     * &#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; `complete` &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;
+     * @return {Notification&lt;any&gt;} &#x6CA1;&#x6709;&#x503C;&#x7684;`complete`&#x578B;&#x7684;&#x901A;&#x77E5;&#x3002;
      */
     static createComplete() {
         return this.completeNotification;

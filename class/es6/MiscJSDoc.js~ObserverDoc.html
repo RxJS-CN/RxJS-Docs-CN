@@ -90,7 +90,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber141">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber134">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,8 +110,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>An interface for a consumer of push-based notifications delivered by an
-<span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>.</p>
+  <div class="description" data-ice="description"><p>&#x6D88;&#x8D39;&#x8005;&#x63A5;&#x53E3;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x63A5;&#x6536;&#x7531; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x63A8;&#x9001;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 <pre><code class="lang-ts"><code class="source-code prettyprint">interface Observer&lt;T&gt; {
   closed?: boolean;
   next: (value: T) =&gt; void;
@@ -119,12 +118,9 @@
   complete: () =&gt; void;
 }</code>
 </code></pre>
-<p>An object conforming to the Observer interface is usually
-given to the <code>observable.subscribe(observer)</code> method, and the Observable will
-call the Observer&apos;s <code>next(value)</code> method to provide notifications. A
-well-behaved Observable will call an Observer&apos;s <code>complete()</code> method exactly
-once or the Observer&apos;s <code>error(err)</code> method exactly once, as the last
-notification delivered.</p>
+<p>&#x7B26;&#x5408;&#x89C2;&#x5BDF;&#x8005;&#x63A5;&#x53E3;&#x89C4;&#x8303;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x901A;&#x5E38;&#x7528;&#x6765;&#x4F20;&#x7ED9; <code>observable.subscribe(observer)</code> &#x65B9;&#x6CD5;&#xFF0C;&#x540C;&#x65F6;
+Observable &#x4F1A;&#x8C03;&#x7528;&#x89C2;&#x5BDF;&#x8005;&#x7684; <code>next(value)</code> &#x63D0;&#x4F9B;&#x901A;&#x77E5;&#x3002;&#x5B9A;&#x4E49;&#x826F;&#x597D;&#x7684; Observable &#x4F1A;&#x786E;&#x5207;&#x7684;&#x8C03;&#x7528;
+&#x89C2;&#x5BDF;&#x8005;&#x7684; <code>complete()</code> &#x6216;&#x8005; <code>error(err)</code> &#x65B9;&#x6CD5;&#x4E00;&#x6B21;&#xFF0C;&#x4F5C;&#x4E3A;&#x6700;&#x540E;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
 
   
@@ -160,8 +156,7 @@ notification delivered.</p>
       <div>
         
         
-        <div data-ice="description"><p>An optional flag to indicate whether this Observer, when used as a
-subscriber, has already been unsubscribed from its Observable.</p>
+        <div data-ice="description"><p>&#x53EF;&#x9009;&#x7684;&#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x8BE5;&#x89C2;&#x5BDF;&#x8005;&#x4F5C;&#x4E3A;&#x8BA2;&#x9605;&#x8005;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5BF9;&#x5B83;&#x89C2;&#x5BDF;&#x7684; Observable &#x53D6;&#x6D88;&#x4E86;&#x8BA2;&#x9605;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -194,8 +189,8 @@ subscriber, has already been unsubscribed from its Observable.</p>
       <div>
         
         
-        <div data-ice="description"><p>The callback to receive a valueless notification of type <code>complete</code> from
-the Observable.</p>
+        <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA;&#x4E8E; Observable &#x7684; <code>complete</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;Observable &#x5DF2;&#x7ECF;
+&#x5B8C;&#x6210;&#x4E86;&#x53D1;&#x9001;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -221,8 +216,8 @@ the Observable.</p>
       <div>
         
         
-        <div data-ice="description"><p>The callback to receive notifications of type <code>error</code> from the Observable,
-with an attached <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span>.</p>
+        <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; <code>error</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#xFF0C;&#x5E26;&#x7740; <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> &#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;
+Observable &#x53D1;&#x751F;&#x4E86;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -248,8 +243,7 @@ with an attached <span><a href="https://developer.mozilla.org/en-US/docs/Web/Jav
       <div>
         
         
-        <div data-ice="description"><p>The callback to receive notifications of type <code>next</code> from the Observable,
-with a value.</p>
+        <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; <code>next</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;Observable &#x4F1A;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;0&#x6B21;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -280,15 +274,14 @@ with a value.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber148">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber140">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>An optional flag to indicate whether this Observer, when used as a
-subscriber, has already been unsubscribed from its Observable.</p>
+  <div data-ice="description"><p>&#x53EF;&#x9009;&#x7684;&#x6807;&#x5FD7;&#x4F4D;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x8BE5;&#x89C2;&#x5BDF;&#x8005;&#x4F5C;&#x4E3A;&#x8BA2;&#x9605;&#x8005;&#x65F6;&#xFF0C;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x5BF9;&#x5B83;&#x89C2;&#x5BDF;&#x7684; Observable &#x53D6;&#x6D88;&#x4E86;&#x8BA2;&#x9605;&#x3002;</p>
 </div>
 
   
@@ -325,16 +318,15 @@ subscriber, has already been unsubscribed from its Observable.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber175">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber164">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The callback to receive a valueless notification of type <code>complete</code> from
-the Observable. Notifies the Observer that the Observable has finished
-sending push-based notifications.</p>
+  <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA;&#x4E8E; Observable &#x7684; <code>complete</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;Observable &#x5DF2;&#x7ECF;
+&#x5B8C;&#x6210;&#x4E86;&#x53D1;&#x9001;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
 
   
@@ -378,16 +370,15 @@ sending push-based notifications.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber166">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber156">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The callback to receive notifications of type <code>error</code> from the Observable,
-with an attached <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span>. Notifies the Observer that the Observable
-has experienced an error condition.</p>
+  <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; <code>error</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#xFF0C;&#x5E26;&#x7740; <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> &#x3002;&#x901A;&#x77E5;&#x89C2;&#x5BDF;&#x8005;&#xFF0C;
+Observable &#x53D1;&#x751F;&#x4E86;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
 
   
@@ -404,7 +395,7 @@ has experienced an error condition.</p>
       <td data-ice="name" data-depth="0">err</td>
       <td data-ice="type"><span>any</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The <code>error</code> exception.</p>
+      <td data-ice="description"><p><code>error</code> &#x5F02;&#x5E38;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -448,15 +439,14 @@ has experienced an error condition.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber156">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/MiscJSDoc.js.html#lineNumber147">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The callback to receive notifications of type <code>next</code> from the Observable,
-with a value. The Observable may call this method 0 or more times.</p>
+  <div data-ice="description"><p>&#x8BE5;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6765;&#x81EA; Observable &#x7684; <code>next</code> &#x7C7B;&#x578B;(&#x9644;&#x5E26;&#x503C;)&#x7684;&#x901A;&#x77E5;&#x3002;Observable &#x4F1A;&#x8C03;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;0&#x6B21;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;</p>
 </div>
 
   
@@ -473,7 +463,7 @@ with a value. The Observable may call this method 0 or more times.</p>
       <td data-ice="name" data-depth="0">value</td>
       <td data-ice="type"><span>T</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The <code>next</code> value.</p>
+      <td data-ice="description"><p><code>next</code> &#x7684;&#x503C;&#x3002;</p>
 </td>
     </tr>
 </tbody>

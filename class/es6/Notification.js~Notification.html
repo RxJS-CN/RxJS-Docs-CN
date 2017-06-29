@@ -84,13 +84,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Notification} from &apos;<span><a href="file/es6/Notification.js.html#lineNumber16">@reactivex/rxjs/es6/Notification.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Notification} from &apos;<span><a href="file/es6/Notification.js.html#lineNumber13">@reactivex/rxjs/es6/Notification.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/Notification.js.html#lineNumber16">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/Notification.js.html#lineNumber13">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,12 +110,9 @@
 
   
   
-  <div class="description" data-ice="description"><p>Represents a push-based event or value that an <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> can emit.
-This class is particularly useful for operators that manage notifications,
-like <span><a href="class/es6/Observable.js~Observable.html#instance-method-materialize">materialize</a></span>, <span><a href="class/es6/Observable.js~Observable.html#instance-method-dematerialize">dematerialize</a></span>, <span><a href="class/es6/Observable.js~Observable.html#instance-method-observeOn">observeOn</a></span>, and
-others. Besides wrapping the actual delivered value, it also annotates it
-with metadata of, for instance, what type of push message it is (<code>next</code>,
-<code>error</code>, or <code>complete</code>).</p>
+  <div class="description" data-ice="description"><p>&#x4EE3;&#x8868;&#x53EF;&#x4EE5;&#x88AB; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x53D1;&#x51FA;&#x7684;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x4E8B;&#x4EF6;&#x6216;&#x8005;&#x503C;&#x3002;&#x5BF9;&#x4E8E;&#x50CF; <span><a href="class/es6/Observable.js~Observable.html#instance-method-materialize">materialize</a></span>&#xFF0C;
+ <span><a href="class/es6/Observable.js~Observable.html#instance-method-dematerialize">dematerialize</a></span>&#xFF0C; <span><a href="class/es6/Observable.js~Observable.html#instance-method-observeOn">observeOn</a></span> &#x548C;&#x5176;&#x4ED6;&#x7BA1;&#x7406;&#x901A;&#x77E5;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8BF4;&#xFF0C;Notification &#x7C7B;&#x5C24;&#x5176;&#x9002;&#x7528;&#x3002;
+&#x9664;&#x4E86;&#x5305;&#x88C5;&#x771F;&#x6B63;&#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x5B83;&#x8FD8;&#x4F7F;&#x7528;&#x5143;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x6CE8;&#x89E3;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x63A8;&#x9001;&#x6D88;&#x606F;&#x7684;&#x7C7B;&#x578B;&#x662F;&#xFF08;<code>next</code>&#xFF0C;<code>error</code>&#xFF0C; or <code>complete</code>&#xFF09;&#x3002;</p>
 </div>
 
   <div data-ice="see"><h4>See:</h4><ul><li><span><span><a href="class/es6/Observable.js~Observable.html#instance-method-materialize">materialize</a></span></span></li>
@@ -157,7 +154,7 @@ with metadata of, for instance, what type of push message it is (<code>next</cod
       <div>
         
         
-        <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>complete</code>.</p>
+        <div data-ice="description"><p>&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>complete</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -183,8 +180,7 @@ with metadata of, for instance, what type of push message it is (<code>next</cod
       <div>
         
         
-        <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>error</code> from a
-given error.</p>
+        <div data-ice="description"><p>&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x9519;&#x8BEF;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>error</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -210,8 +206,7 @@ given error.</p>
       <div>
         
         
-        <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>next</code> from a
-given value.</p>
+        <div data-ice="description"><p>&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>next</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -246,8 +241,7 @@ given value.</p>
       <div>
         
         
-        <div data-ice="description"><p>Takes an Observer or its individual callback functions, and calls <code>observe</code>
-or <code>do</code> methods accordingly.</p>
+        <div data-ice="description"><p>&#x63A5;&#x53D7;&#x4E00;&#x4E2A; Observer &#x6216;&#x8005;&#x5B83;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x76F8;&#x5E94;&#x5730;&#x8C03;&#x7528; <code>observe</code> &#x6216;&#x8005; <code>do</code> &#x65B9;&#x6CD5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -273,8 +267,7 @@ or <code>do</code> methods accordingly.</p>
       <div>
         
         
-        <div data-ice="description"><p>Given some <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callbacks, deliver the value represented by the
-current Notification to the correctly corresponding callback.</p>
+        <div data-ice="description"><p>&#x7ED9;&#x5B9A;&#x4E00;&#x4E9B; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C; &#x5C06;&#x5F53;&#x524D; Notification &#x6240;&#x8868;&#x793A;&#x7684;&#x503C;&#x6B63;&#x786E;&#x7684;&#x4F20;&#x9012;&#x7ED9;&#x76F8;&#x5E94;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -300,7 +293,7 @@ current Notification to the correctly corresponding callback.</p>
       <div>
         
         
-        <div data-ice="description"><p>Delivers to the given <code>observer</code> the value wrapped by this Notification.</p>
+        <div data-ice="description"><p>&#x5C06;&#x7531; Notification &#x5305;&#x88C5;&#x8FC7;&#x7684;&#x503C;&#x4F20;&#x9012;&#x7ED9;&#x7ED9;&#x5B9A;&#x7684; <code>observer</code>&#x3002;</p>
 </div>
       </div>
     </td>
@@ -326,8 +319,7 @@ current Notification to the correctly corresponding callback.</p>
       <div>
         
         
-        <div data-ice="description"><p>Returns a simple Observable that just delivers the notification represented
-by this Notification instance.</p>
+        <div data-ice="description"><p>&#x8FD4;&#x56DE;&#x7684; Observable &#x53EA;&#x4F20;&#x9012;&#x4EE3;&#x8868;&#x5F53;&#x524D; Notification &#x5B9E;&#x4F8B;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -356,14 +348,14 @@ by this Notification instance.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber118">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>complete</code>.</p>
+  <div data-ice="description"><p>&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>complete</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
 
   
@@ -376,7 +368,7 @@ by this Notification instance.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Notification.js~Notification.html">Notification</a></span>&lt;<span>any</span>&gt;</td>
-        <td class="return-desc" data-ice="returnDescription"><p>The valueless &quot;complete&quot; Notification.</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x6CA1;&#x6709;&#x503C;&#x7684;<code>complete</code>&#x578B;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -408,15 +400,14 @@ by this Notification instance.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber111">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber101">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>error</code> from a
-given error.</p>
+  <div data-ice="description"><p>&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x9519;&#x8BEF;&#x5BF9;&#x8C61;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>error</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
 
   
@@ -433,7 +424,7 @@ given error.</p>
       <td data-ice="name" data-depth="0">err</td>
       <td data-ice="type"><span>any</span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>error</code> error.</p>
+      <td data-ice="description"><p><code>error</code> &#x9519;&#x8BEF;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -446,8 +437,7 @@ given error.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Notification.js~Notification.html">Notification</a></span>&lt;<span>T</span>&gt;</td>
-        <td class="return-desc" data-ice="returnDescription"><p>The &quot;error&quot; Notification representing the
-argument.</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x4EE3;&#x8868;&#x4F20;&#x5165;&#x9519;&#x8BEF;&#x7684;<code>error</code>&#x578B;&#x901A;&#x77E5;&#x5B9E;&#x4F8B;&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -479,15 +469,14 @@ argument.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber98">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber90">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>A shortcut to create a Notification instance of the type <code>next</code> from a
-given value.</p>
+  <div data-ice="description"><p>&#x4F7F;&#x7528;&#x7ED9;&#x5B9A;&#x7684;&#x503C;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x4E3A; <code>next</code> &#x7684; Notification &#x5B9E;&#x4F8B;&#x7684;&#x5FEB;&#x6377;&#x65B9;&#x6CD5;&#x3002;</p>
 </div>
 
   
@@ -504,7 +493,7 @@ given value.</p>
       <td data-ice="name" data-depth="0">value</td>
       <td data-ice="type"><span>T</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>The <code>next</code> value.</p>
+      <td data-ice="description"><p><code>next</code> &#x7684;&#x503C;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -517,8 +506,7 @@ given value.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Notification.js~Notification.html">Notification</a></span>&lt;<span>T</span>&gt;</td>
-        <td class="return-desc" data-ice="returnDescription"><p>The &quot;next&quot; Notification representing the
-argument.</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x4EE3;&#x8868;&#x4F20;&#x5165;&#x503C;&#x7684;<code>next</code>&#x578B;&#x901A;&#x77E5;&#x5B9E;&#x4F8B;&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -555,15 +543,14 @@ argument.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber66">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber61">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Takes an Observer or its individual callback functions, and calls <code>observe</code>
-or <code>do</code> methods accordingly.</p>
+  <div data-ice="description"><p>&#x63A5;&#x53D7;&#x4E00;&#x4E2A; Observer &#x6216;&#x8005;&#x5B83;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x76F8;&#x5E94;&#x5730;&#x8C03;&#x7528; <code>observe</code> &#x6216;&#x8005; <code>do</code> &#x65B9;&#x6CD5;&#x3002;</p>
 </div>
 
   
@@ -580,22 +567,22 @@ or <code>do</code> methods accordingly.</p>
       <td data-ice="name" data-depth="0">nextOrObserver</td>
       <td data-ice="type"><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(value: <span>T</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>An Observer or
-the <code>next</code> callback.</p>
+      <td data-ice="description"><p>Observer &#x6216;&#x8005;
+<code>next</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">error</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(err: <span>any</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>An Observer <code>error</code> callback.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>error</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">complete</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>()</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>An Observer <code>complete</code> callback.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -639,15 +626,14 @@ the <code>next</code> callback.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber46">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber42">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Given some <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callbacks, deliver the value represented by the
-current Notification to the correctly corresponding callback.</p>
+  <div data-ice="description"><p>&#x7ED9;&#x5B9A;&#x4E00;&#x4E9B; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C; &#x5C06;&#x5F53;&#x524D; Notification &#x6240;&#x8868;&#x793A;&#x7684;&#x503C;&#x6B63;&#x786E;&#x7684;&#x4F20;&#x9012;&#x7ED9;&#x76F8;&#x5E94;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </div>
 
   
@@ -664,21 +650,21 @@ current Notification to the correctly corresponding callback.</p>
       <td data-ice="name" data-depth="0">next</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(value: <span>T</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>An Observer <code>next</code> callback.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>next</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">error</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(err: <span>any</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>An Observer <code>error</code> callback.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>error</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">complete</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>()</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>An Observer <code>complete</code> callback.</p>
+      <td data-ice="description"><p>An Observer &#x7684; <code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -728,14 +714,14 @@ current Notification to the correctly corresponding callback.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber28">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber25">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Delivers to the given <code>observer</code> the value wrapped by this Notification.</p>
+  <div data-ice="description"><p>&#x5C06;&#x7531; Notification &#x5305;&#x88C5;&#x8FC7;&#x7684;&#x503C;&#x4F20;&#x9012;&#x7ED9;&#x7ED9;&#x5B9A;&#x7684; <code>observer</code>&#x3002;</p>
 </div>
 
   
@@ -795,15 +781,14 @@ current Notification to the correctly corresponding callback.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber79">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Notification.js.html#lineNumber73">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Returns a simple Observable that just delivers the notification represented
-by this Notification instance.</p>
+  <div data-ice="description"><p>&#x8FD4;&#x56DE;&#x7684; Observable &#x53EA;&#x4F20;&#x9012;&#x4EE3;&#x8868;&#x5F53;&#x524D; Notification &#x5B9E;&#x4F8B;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
 
   

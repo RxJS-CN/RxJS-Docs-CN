@@ -89,23 +89,19 @@ import { Subscription } from &apos;./Subscription&apos;;
 import { empty as emptyObserver } from &apos;./Observer&apos;;
 import { rxSubscriber as rxSubscriberSymbol } from &apos;./symbol/rxSubscriber&apos;;
 /**
- * Implements the {@link Observer} interface and extends the
- * {@link Subscription} class. While the {@link Observer} is the public API for
- * consuming the values of an {@link Observable}, all Observers get converted to
- * a Subscriber, in order to provide Subscription-like capabilities such as
- * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
- * implementing operators, but it is rarely used as a public API.
+ * &#x5B9E;&#x73B0; {@link Observer} &#x63A5;&#x53E3;&#x5E76;&#x4E14;&#x7EE7;&#x627F; {@link Subscription} &#x7C7B;&#x3002;
+ * &#x867D;&#x7136; {@link Observer} &#x662F;&#x6D88;&#x8D39; {@link Observable} &#x503C;&#x7684;&#x516C;&#x6709; API, &#x6240;&#x6709; Observers &#x90FD;&#x8F6C;&#x5316;&#x6210;&#x4E86;
+ * Subscriber&#xFF0C;&#x4EE5;&#x4FBF;&#x63D0;&#x4F9B;&#x7C7B;&#x4F3C; Subscription &#x7684;&#x80FD;&#x529B;&#xFF0C;&#x6BD4;&#x5982; `unsubscribe`&#x3002;
+ * Subscriber &#x662F; RxJS &#x7684;&#x5E38;&#x89C1;&#x7C7B;&#x578B;, &#x5E76;&#x4E14;&#x662F;&#x5B9E;&#x73B0;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5173;&#x952E;, &#x4F46;&#x662F;&#x5F88;&#x5C11;&#x4F5C;&#x4E3A;&#x516C;&#x6709; API
+ * &#x4F7F;&#x7528;&#x3002;
  *
  * @class Subscriber&lt;T&gt;
  */
 export class Subscriber extends Subscription {
     /**
-     * @param {Observer|function(value: T): void} [destinationOrNext] A partially
-     * defined Observer or a `next` callback function.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
+     * @param {Observer|function(value: T): void} [destinationOrNext] &#x90E8;&#x5206;&#x5B9A;&#x4E49;&#x7684; Observer &#x6216;&#x8005; `next` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(e: ?any): void} [error] Observer &#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(): void} [complete] Observer &#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
      */
     constructor(destinationOrNext, error, complete) {
         super();
@@ -141,15 +137,11 @@ export class Subscriber extends Subscription {
     }
     [rxSubscriberSymbol]() { return this; }
     /**
-     * A static factory for a Subscriber, given a (potentially partial) definition
-     * of an Observer.
-     * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
-     * @param {function(e: ?any): void} [error] The `error` callback of an
-     * Observer.
-     * @param {function(): void} [complete] The `complete` callback of an
-     * Observer.
-     * @return {Subscriber&lt;T&gt;} A Subscriber wrapping the (partially defined)
-     * Observer represented by the given arguments.
+     * Subscriber &#x7684;&#x9759;&#x6001;&#x5DE5;&#x5382;&#xFF0C;&#x7ED9;&#x5B9A;&#x4E86; Observer &#xFF08;&#x6F5C;&#x5728;&#x7684;&#x90E8;&#x5206;&#xFF09;&#x7684;&#x5B9A;&#x4E49;&#x3002;
+     * @param {function(x: ?T): void} [next] Observer &#x7684; `next` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(e: ?any): void} [error] Observer &#x7684; `error` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @param {function(): void} [complete] Observer &#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;
+     * @return {Subscriber&lt;T&gt;} &#x5305;&#x88C5;&#x4E86;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x7684;&#xFF08;&#x90E8;&#x5206;&#x5B9A;&#x4E49;&#xFF09;Observer &#x7684;  Subscriber&#x3002;
      */
     static create(next, error, complete) {
         const subscriber = new Subscriber(next, error, complete);
@@ -157,9 +149,8 @@ export class Subscriber extends Subscription {
         return subscriber;
     }
     /**
-     * The {@link Observer} callback to receive notifications of type `next` from
-     * the Observable, with a value. The Observable may call this method 0 or more
-     * times.
+     * {@link Observer} &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; next &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709;&#x503C;&#x3002;
+     * Observable &#x53EF;&#x80FD;&#x4F1A;&#x6389;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5; 0 &#x6B21;&#xFF0C;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;
      * @param {T} [value] The `next` value.
      * @return {void}
      */
@@ -169,10 +160,9 @@ export class Subscriber extends Subscription {
         }
     }
     /**
-     * The {@link Observer} callback to receive notifications of type `error` from
-     * the Observable, with an attached {@link Error}. Notifies the Observer that
-     * the Observable has experienced an error condition.
-     * @param {any} [err] The `error` exception.
+     * {@link Observer} &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; error &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709; {@link Error} &#x3002;
+     * &#x901A;&#x77E5; Observer&#xFF0C;Observable &#x53D1;&#x51FA;&#x4E86;&#x9519;&#x8BEF;&#x3002;
+     * @param {any} [err] `error` &#x5F02;&#x5E38;.
      * @return {void}
      */
     error(err) {
@@ -182,9 +172,8 @@ export class Subscriber extends Subscription {
         }
     }
     /**
-     * The {@link Observer} callback to receive a valueless notification of type
-     * `complete` from the Observable. Notifies the Observer that the Observable
-     * has finished sending push-based notifications.
+     * {@link Observer}  &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; `complete` &#x7C7B;&#x578B;&#x901A;&#x77E5;&#x3002;
+     * &#x901A;&#x77E5; Observer&#xFF0C; Observable &#x5B8C;&#x6210;&#x4E86;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;
      * @return {void}
      */
     complete() {

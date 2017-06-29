@@ -90,7 +90,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber391">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber359">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,37 +110,27 @@
 
   
   
-  <div class="description" data-ice="description"><p><code>ObservableInput</code> interface describes all values that are either an
-<span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> or some kind of collection of values that
-can be transformed to Observable emitting that values. Every operator that
-accepts arguments annotated with this interface, can be also used with
-parameters that are not necessarily RxJS Observables.</p>
-<p><code>ObservableInput</code> extends <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> with following types:</p>
-<h2 id="array">Array</h2>
-<p>Arrays can be interpreted as observables that emit all values in array one by one,
-from left to right, and then complete immediately.</p>
-<h2 id="array-like">Array-like</h2>
-<p>Arrays passed to operators do not have to be built-in JavaScript Arrays. They
-can be also, for example, <code>arguments</code> property available inside every function,
-<a href="https://developer.mozilla.org/pl/docs/Web/API/NodeList">DOM NodeList</a>,
-or, actually, any object that has <code>length</code> property (which is a number)
-and stores values under non-negative (zero and up) integers.</p>
-<h2 id="es6-iterable">ES6 Iterable</h2>
-<p>Operators will accept both built-in and custom ES6 Iterables, by treating them as
-observables that emit all its values in order of iteration and then complete
-when iteration ends. Note that contrary to arrays, Iterables do not have to
-necessarily be finite, so creating Observables that never complete is possible as well.</p>
-<p>Note that you can make iterator an instance of Iterable by having it return itself
-in <code>Symbol.iterator</code> method. It means that every operator accepting Iterables accepts,
-though indirectly, iterators themselves as well. All native ES6 iterators are instances
-of Iterable by default, so you do not have to implement their <code>Symbol.iterator</code> method
-yourself.</p>
-<p><strong>TypeScript Iterable interface issue</strong></p>
-<p>TypeScript <code>ObservableInput</code> interface actually lacks type signature for Iterables,
-because of issues it caused in some projects (see <a href="https://github.com/ReactiveX/rxjs/issues/2306">this issue</a>).
-If you want to use Iterable as argument for operator, cast it to <code>any</code> first.
-Remember of course that, because of casting, you have to yourself ensure that passed
-argument really implements said interface.</p>
+  <div class="description" data-ice="description"><p><code>ObservableInput</code> &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x4E86;&#x6240;&#x6709;&#x503C;&#x662F;&#x4E00;&#x4E2A; <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> &#x6216;&#x8005;
+&#x6B64;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x80FD;&#x53D1;&#x51FA;&#x503C;&#x7684; Observable &#x3002;
+&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x90FD;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x88AB;&#x8BE5;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x4E00;&#x5B9A;&#x9700;&#x8981;&#x662F; RxJS &#x7684; Observables&#x3002;</p>
+<p><code>ObservableInput</code> &#x7EE7;&#x627F;&#x4E86; <span><a href="class/es6/MiscJSDoc.js~SubscribableOrPromiseDoc.html">SubscribableOrPromise</a></span> &#xFF0C;&#x62E5;&#x6709;&#x5982;&#x4E0B;&#x7C7B;&#x578B;:</p>
+<h2 id="-">&#x6570;&#x7EC4;</h2>
+<p>&#x6570;&#x7EC4;&#x53EF;&#x4EE5;&#x88AB;&#x7406;&#x89E3;&#x4E3A;&#xFF0C;observables &#x4F1A;&#x4ECE;&#x5DE6;&#x5230;&#x53F3;&#xFF0C;&#x4E00;&#x4E2A;&#x63A5;&#x4E00;&#x4E2A;&#x5730;&#x53D1;&#x9001;&#x6570;&#x7EC4;&#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x7ACB;&#x5373;&#x5B8C;&#x6210;&#x3002;</p>
+<h2 id="-">&#x7C7B;&#x6570;&#x7EC4;</h2>
+<p>&#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x6570;&#x7EC4;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x662F; JavaScript &#x5185;&#x7F6E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x5B83;&#x4EEC;&#x8FD8;&#x53EF;&#x4EE5;&#x662F;&#x5176;&#x4ED6;&#x7684;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x7684; <code>arguments</code>
+&#x5C5E;&#x6027;&#xFF0C;<a href="https://developer.mozilla.org/pl/docs/Web/API/NodeList">DOM NodeList</a>,&#x6216;&#x8005;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;
+&#x62E5;&#x6709; <code>length</code> &#x5C5E;&#x6027;&#xFF08;&#x662F;&#x4E2A;&#x6570;&#x5B57;&#xFF09;&#x7684;&#x5BF9;&#x8C61; &#x5E76;&#x4E14;&#x5B58;&#x50A8;&#x4E86;&#x5927;&#x4E8E;0&#x4E2A;&#x6570;&#x3002;</p>
+<h2 id="es6-">ES6 &#x8FED;&#x4EE3;&#x5668;</h2>
+<p>&#x64CD;&#x4F5C;&#x7B26;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x5185;&#x7F6E;&#x7684;&#x548C;&#x81EA;&#x5B9A;&#x4E49;&#x7684; ES6 &#x8FED;&#x4EE3;&#x5668;&#xFF0C;&#x628A;&#x5B83;&#x4EEC;&#x5F53;&#x505A; observables &#x901A;&#x8FC7;&#x987A;&#x5E8F;&#x7684;&#x53D1;&#x51FA;&#x8FED;&#x4EE3;&#x5668;&#x7684;&#x6240;&#x6709;&#x503C;&#xFF0C;
+&#x7136;&#x540E;&#x5F53;&#x8FED;&#x4EE3;&#x5668;&#x5B8C;&#x6210;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x89E6;&#x53D1;&#x5B8C;&#x6210;&#x3002;&#x6CE8;&#x610F;&#x548C;&#x6570;&#x7EC4;&#x7684;&#x533A;&#x522B;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;&#x4E0D;&#x9700;&#x8981;&#x662F;&#x6709;&#x9650;&#x7684;&#xFF0C;&#x5E94;&#x8BE5;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x5B8C;&#x6210;
+&#x7684; Observables &#x4F7F;&#x4E4B;&#x6210;&#x4E3A;&#x53EF;&#x80FD;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x901A;&#x8FC7;&#x5728; <code>Symbol.iterator</code> &#x65B9;&#x6CD5;&#x4E2D;&#x8FD4;&#x56DE;&#x81EA;&#x8EAB;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x8FED;&#x4EE3;&#x8FED;&#x4EE3;&#x5668;&#x5B9E;&#x4F8B;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;&#x63A5;&#x6536;&#x53EF;&#x8FED;&#x4EE3;&#x5BF9;&#x8C61;&#xFF0C;
+&#x4F46;&#x662F;&#x95F4;&#x63A5;&#x7684;&#xFF0C;&#x8FED;&#x4EE3;&#x5668;&#x672C;&#x8EAB;&#x4E5F;&#x53EF;&#x4EE5;&#x3002;&#x6240;&#x6709;&#x539F;&#x751F; ES6 &#x7684;&#x8FED;&#x4EE3;&#x5668;&#x9ED8;&#x8BA4;&#x90FD;&#x662F; Iterable &#x7684;&#x5B9E;&#x4F8B;&#xFF0C;&#x6240;&#x4EE5;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x5B9E;&#x73B0; <code>Symbol.iterator</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<p><strong>TypeScript Iterable &#x63A5;&#x53E3; issue </strong></p>
+<p>TypeScript <code>ObservableInput</code> &#x63A5;&#x53E3;&#x5B9E;&#x9645;&#x4E0A;&#x7F3A;&#x4E4F; Iterables &#x7684;&#x7C7B;&#x578B;&#x7B7E;&#x540D;&#xFF0C;
+&#x7531;&#x4E8E;&#x4E00;&#x4E9B;&#x9879;&#x76EE;&#x9020;&#x6210;&#x7684; issue (&#x67E5;&#x770B; <a href="https://github.com/ReactiveX/rxjs/issues/2306">this issue</a>).
+&#x5982;&#x679C;&#x4F60;&#x60F3;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x4F20;&#x9012; Iterable, &#x9996;&#x5148;&#x5C06;&#x5B83;&#x8F6C;&#x5316;&#x4E3A; <code>any</code>&#x3002;&#x5F53;&#x7136;&#x8981;&#x94ED;&#x8BB0;&#xFF0C;&#x56E0;&#x4E3A;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x786E;&#x4FDD;&#x4F20;&#x9012;&#x7684;&#x53C2;&#x6570;
+&#x786E;&#x5B9E;&#x5B9E;&#x73B0;&#x4E86;&#x6B64;&#x63A5;&#x53E3;&#x3002;</p>
 </div>
 
   
@@ -149,7 +139,7 @@ argument really implements said interface.</p>
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use merge with arrays</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528;&#x6570;&#x7EC4;&#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">Rx.Observable.merge([1, 2], [4], [5, 6])
 .subscribe(
   value =&gt; console.log(value),
@@ -157,7 +147,7 @@ argument really implements said interface.</p>
   () =&gt; console.log(&apos;ta dam!&apos;)
 );
 
-// Logs
+// &#x65E5;&#x5FD7;&#xFF1A;
 // 1
 // 2
 // 3
@@ -167,7 +157,7 @@ argument really implements said interface.</p>
 // &quot;ta dam!&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use merge with array-like</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528;&#x7C7B;&#x6570;&#x7EC4;&#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">Rx.Observable.merge({0: 1, 1: 2, length: 2}, {0: 3, length: 1})
 .subscribe(
   value =&gt; console.log(value),
@@ -175,27 +165,27 @@ argument really implements said interface.</p>
   () =&gt; console.log(&apos;nice, huh?&apos;)
 );
 
-// Logs
+// &#x65E5;&#x5FD7;&#xFF1A;
 // 1
 // 2
 // 3
 // &quot;nice, huh?&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use merge with an Iterable (Map)</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528; Iterable (Map) &#x4F7F;&#x7528; merge &#x64CD;&#x4F5C;&#x7B26;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const firstMap = new Map([[1, &apos;a&apos;], [2, &apos;b&apos;]]);
 const secondMap = new Map([[3, &apos;c&apos;], [4, &apos;d&apos;]]);
 
 Rx.Observable.merge(
-  firstMap,          // pass Iterable
-  secondMap.values() // pass iterator, which is itself an Iterable
+  firstMap,          // &#x4F20;&#x9012; Iterable
+  secondMap.values() // &#x4F20;&#x9012; iterator, &#x5B83;&#x672C;&#x8EAB;&#x5C31;&#x662F; Iterable
 ).subscribe(
   value =&gt; console.log(value),
   err =&gt; {},
   () =&gt; console.log(&apos;yup!&apos;)
 );
 
-// Logs
+// &#x65E5;&#x5FD7;&#xFF1A;
 // [1, &quot;a&quot;]
 // [2, &quot;b&quot;]
 // &quot;c&quot;
@@ -203,8 +193,8 @@ Rx.Observable.merge(
 // &quot;yup!&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use from with generator (returning infinite iterator)</div>
-      <pre class="prettyprint source-code"><code data-ice="exampleCode">// infinite stream of incrementing numbers
+      <div class="example-caption" data-ice="exampleCaption">&#x7528; generator&#xFF08;&#x8FD4;&#x56DE;&#x65E0;&#x9650;&#x7684; iterator&#xFF09;&#x4F7F;&#x7528; from &#x64CD;&#x4F5C;&#x7B26;</div>
+      <pre class="prettyprint source-code"><code data-ice="exampleCode">// &#x65E0;&#x9650;&#x7684;&#x81EA;&#x589E;&#x6570;&#x5217;&#x6D41;
 const infinite = function* () {
   let i = 0;
 
@@ -214,14 +204,14 @@ const infinite = function* () {
 };
 
 Rx.Observable.from(infinite())
-.take(3) // only take 3, cause this is infinite
+.take(3) // &#x56E0;&#x4E3A;&#x662F;&#x65E0;&#x9650;&#x7684;&#xFF0C;&#x4EC5;&#x4EC5;&#x53D6;&#x524D;&#x4E09;&#x4E2A;
 .subscribe(
   value =&gt; console.log(value),
   err =&gt; {},
   () =&gt; console.log(&apos;ta dam!&apos;)
 );
 
-// Logs
+// &#x65E5;&#x5FD7;&#xFF1A;
 // 0
 // 1
 // 2

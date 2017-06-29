@@ -84,13 +84,13 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Subscriber} from &apos;<span><a href="file/es6/Subscriber.js.html#lineNumber15">@reactivex/rxjs/es6/Subscriber.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {Subscriber} from &apos;<span><a href="file/es6/Subscriber.js.html#lineNumber14">@reactivex/rxjs/es6/Subscriber.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/Subscriber.js.html#lineNumber15">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/Subscriber.js.html#lineNumber14">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,12 +110,11 @@
 
   
   
-  <div class="description" data-ice="description"><p>Implements the <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> interface and extends the
-<span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span> class. While the <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> is the public API for
-consuming the values of an <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span>, all Observers get converted to
-a Subscriber, in order to provide Subscription-like capabilities such as
-<code>unsubscribe</code>. Subscriber is a common type in RxJS, and crucial for
-implementing operators, but it is rarely used as a public API.</p>
+  <div class="description" data-ice="description"><p>&#x5B9E;&#x73B0; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x63A5;&#x53E3;&#x5E76;&#x4E14;&#x7EE7;&#x627F; <span><a href="class/es6/Subscription.js~Subscription.html">Subscription</a></span> &#x7C7B;&#x3002;
+&#x867D;&#x7136; <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x662F;&#x6D88;&#x8D39; <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x503C;&#x7684;&#x516C;&#x6709; API, &#x6240;&#x6709; Observers &#x90FD;&#x8F6C;&#x5316;&#x6210;&#x4E86;
+Subscriber&#xFF0C;&#x4EE5;&#x4FBF;&#x63D0;&#x4F9B;&#x7C7B;&#x4F3C; Subscription &#x7684;&#x80FD;&#x529B;&#xFF0C;&#x6BD4;&#x5982; <code>unsubscribe</code>&#x3002;
+Subscriber &#x662F; RxJS &#x7684;&#x5E38;&#x89C1;&#x7C7B;&#x578B;, &#x5E76;&#x4E14;&#x662F;&#x5B9E;&#x73B0;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5173;&#x952E;, &#x4F46;&#x662F;&#x5F88;&#x5C11;&#x4F5C;&#x4E3A;&#x516C;&#x6709; API
+&#x4F7F;&#x7528;&#x3002;</p>
 </div>
 
   
@@ -155,8 +154,7 @@ implementing operators, but it is rarely used as a public API.</p>
       <div>
         
         
-        <div data-ice="description"><p>A static factory for a Subscriber, given a (potentially partial) definition
-of an Observer.</p>
+        <div data-ice="description"><p>Subscriber &#x7684;&#x9759;&#x6001;&#x5DE5;&#x5382;&#xFF0C;&#x7ED9;&#x5B9A;&#x4E86; Observer &#xFF08;&#x6F5C;&#x5728;&#x7684;&#x90E8;&#x5206;&#xFF09;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -222,8 +220,8 @@ of an Observer.</p>
       <div>
         
         
-        <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive a valueless notification of type
-<code>complete</code> from the Observable.</p>
+        <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span>  &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; <code>complete</code> &#x7C7B;&#x578B;&#x901A;&#x77E5;&#x3002;
+&#x901A;&#x77E5; Observer&#xFF0C; Observable &#x5B8C;&#x6210;&#x4E86;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -249,8 +247,8 @@ of an Observer.</p>
       <div>
         
         
-        <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive notifications of type <code>error</code> from
-the Observable, with an attached <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span>.</p>
+        <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; error &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709; <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> &#x3002;
+&#x901A;&#x77E5; Observer&#xFF0C;Observable &#x53D1;&#x51FA;&#x4E86;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -276,8 +274,8 @@ the Observable, with an attached <span><a href="https://developer.mozilla.org/en
       <div>
         
         
-        <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive notifications of type <code>next</code> from
-the Observable, with a value.</p>
+        <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; next &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709;&#x503C;&#x3002;
+Observable &#x53EF;&#x80FD;&#x4F1A;&#x6389;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5; 0 &#x6B21;&#xFF0C;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -311,7 +309,7 @@ the Observable, with a value.</p>
       <div>
         
         
-        <div data-ice="description"><p>A flag to indicate whether this Subscription has already been unsubscribed.</p>
+        <div data-ice="description"><p>&#x7528;&#x6765;&#x6807;&#x793A;&#x8BE5; Subscription &#x662F;&#x5426;&#x88AB;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x6807;&#x793A;&#x4F4D;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -337,8 +335,7 @@ the Observable, with a value.</p>
       <div>
         
         
-        <div data-ice="description"><p>Adds a tear down to be called during the unsubscribe() of this
-Subscription.</p>
+        <div data-ice="description"><p>&#x6DFB;&#x52A0;&#x4E00;&#x4E2A; tear down &#x5728;&#x8BE5; Subscription &#x7684;  unsubscribe() &#x671F;&#x95F4;&#x8C03;&#x7528;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -364,8 +361,8 @@ Subscription.</p>
       <div>
         
         
-        <div data-ice="description"><p>Removes a Subscription from the internal list of subscriptions that will
-unsubscribe during the unsubscribe process of this Subscription.</p>
+        <div data-ice="description"><p>&#x4ECE; Subscription &#x7684;&#x5185;&#x90E8;&#x5217;&#x8868;&#x4E2D;&#x5220;&#x9664;&#x4E00;&#x4E2A; Subscription&#x3002;&#x5728;&#x8BE5; Subscription &#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;
+&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -391,7 +388,7 @@ unsubscribe during the unsubscribe process of this Subscription.</p>
       <div>
         
         
-        <div data-ice="description"><p>Disposes the resources held by the subscription.</p>
+        <div data-ice="description"><p>&#x6E05;&#x7406; subscription &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x53EF;&#x4EE5;&#x53D6;&#x6D88;&#x6B63;&#x5728;&#x8FDB;&#x884C;&#x7684; Observable &#x6267;&#x884C;&#x6216;&#x53D6;&#x6D88;&#x5728;&#x521B;&#x5EFA; Subscription &#x65F6;&#x542F;&#x52A8;&#x7684;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;&#x7C7B;&#x578B;&#x7684;&#x5DE5;&#x4F5C;&#x3002;</p>
 </div>
       </div>
     </td>
@@ -418,15 +415,14 @@ unsubscribe during the unsubscribe process of this Subscription.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber68">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber60">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>A static factory for a Subscriber, given a (potentially partial) definition
-of an Observer.</p>
+  <div data-ice="description"><p>Subscriber &#x7684;&#x9759;&#x6001;&#x5DE5;&#x5382;&#xFF0C;&#x7ED9;&#x5B9A;&#x4E86; Observer &#xFF08;&#x6F5C;&#x5728;&#x7684;&#x90E8;&#x5206;&#xFF09;&#x7684;&#x5B9A;&#x4E49;&#x3002;</p>
 </div>
 
   
@@ -443,23 +439,21 @@ of an Observer.</p>
       <td data-ice="name" data-depth="0">next</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(x: ?<span>T</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>next</code> callback of an Observer.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>next</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">error</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(e: ?<span>any</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>error</code> callback of an
-Observer.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>error</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">complete</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>()</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>complete</code> callback of an
-Observer.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -472,8 +466,7 @@ Observer.</p>
     <table>
       <tr>
         <td class="return-type" data-ice="returnType"><span><a href="class/es6/Subscriber.js~Subscriber.html">Subscriber</a></span>&lt;<span>T</span>&gt;</td>
-        <td class="return-desc" data-ice="returnDescription"><p>A Subscriber wrapping the (partially defined)
-Observer represented by the given arguments.</p>
+        <td class="return-desc" data-ice="returnDescription"><p>&#x5305;&#x88C5;&#x4E86;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x7684;&#xFF08;&#x90E8;&#x5206;&#x5B9A;&#x4E49;&#xFF09;Observer &#x7684;  Subscriber&#x3002;</p>
 </td>
       </tr>
     </table>
@@ -508,7 +501,7 @@ Observer represented by the given arguments.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber20">source</a></span></span>
     </span>
   </h3>
 
@@ -531,24 +524,21 @@ Observer represented by the given arguments.</p>
       <td data-ice="name" data-depth="0">destinationOrNext</td>
       <td data-ice="type"><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> | <span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(value: <span>T</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>A partially
-defined Observer or a <code>next</code> callback function.</p>
+      <td data-ice="description"><p>&#x90E8;&#x5206;&#x5B9A;&#x4E49;&#x7684; Observer &#x6216;&#x8005; <code>next</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">error</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>(e: ?<span>any</span>)</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>error</code> callback of an
-Observer.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>error</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 <tr data-ice="property" data-depth="0">
       <td data-ice="name" data-depth="0">complete</td>
       <td data-ice="type"><span><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">function</a></span><span>()</span>: <span>void</span></span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>complete</code> callback of an
-Observer.</p>
+      <td data-ice="description"><p>Observer &#x7684; <code>complete</code> &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;</p>
 </td>
     </tr>
 </tbody>
@@ -586,16 +576,15 @@ Observer.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber93">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive a valueless notification of type
-<code>complete</code> from the Observable. Notifies the Observer that the Observable
-has finished sending push-based notifications.</p>
+  <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span>  &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; <code>complete</code> &#x7C7B;&#x578B;&#x901A;&#x77E5;&#x3002;
+&#x901A;&#x77E5; Observer&#xFF0C; Observable &#x5B8C;&#x6210;&#x4E86;&#x57FA;&#x4E8E;&#x63A8;&#x9001;&#x4F53;&#x7CFB;&#x7684;&#x901A;&#x77E5;&#x3002;</p>
 </div>
 
   
@@ -639,16 +628,15 @@ has finished sending push-based notifications.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber82">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive notifications of type <code>error</code> from
-the Observable, with an attached <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span>. Notifies the Observer that
-the Observable has experienced an error condition.</p>
+  <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; error &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709; <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error">Error</a></span> &#x3002;
+&#x901A;&#x77E5; Observer&#xFF0C;Observable &#x53D1;&#x51FA;&#x4E86;&#x9519;&#x8BEF;&#x3002;</p>
 </div>
 
   
@@ -665,7 +653,7 @@ the Observable has experienced an error condition.</p>
       <td data-ice="name" data-depth="0">err</td>
       <td data-ice="type"><span>any</span></td>
       <td data-ice="appendix"><ul><li>optional</li></ul></td>
-      <td data-ice="description"><p>The <code>error</code> exception.</p>
+      <td data-ice="description"><p><code>error</code> &#x5F02;&#x5E38;.</p>
 </td>
     </tr>
 </tbody>
@@ -709,16 +697,15 @@ the Observable has experienced an error condition.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber80">source</a></span></span>
+      <span data-ice="source"><span><a href="file/es6/Subscriber.js.html#lineNumber71">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>The <span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> callback to receive notifications of type <code>next</code> from
-the Observable, with a value. The Observable may call this method 0 or more
-times.</p>
+  <div data-ice="description"><p><span><a href="class/es6/MiscJSDoc.js~ObserverDoc.html">Observer</a></span> &#x7684;&#x56DE;&#x8C03;&#xFF0C;&#x7528;&#x6765;&#x63A5;&#x6536; Observable &#x4E2D;&#x7684; next &#x7C7B;&#x578B;&#x901A;&#x77E5;&#xFF0C;&#x6B64;&#x901A;&#x77E5;&#x5E26;&#x6709;&#x503C;&#x3002;
+Observable &#x53EF;&#x80FD;&#x4F1A;&#x6389;&#x7528;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5; 0 &#x6B21;&#xFF0C;&#x6216;&#x8005;&#x591A;&#x6B21;&#x3002;</p>
 </div>
 
   

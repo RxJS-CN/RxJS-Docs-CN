@@ -88,18 +88,15 @@
 import { toSubscriber } from &apos;./util/toSubscriber&apos;;
 import { observable as Symbol_observable } from &apos;./symbol/observable&apos;;
 /**
- * A representation of any set of values over any amount of time. This the most basic building block
- * of RxJS.
+ * &#x8868;&#x793A;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x5185;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x7EC4;&#x503C;&#x3002; &#x8FD9;&#x662F; RxJS &#x6700;&#x57FA;&#x672C;&#x7684;&#x6784;&#x5EFA;&#x5757;&#x3002;
  *
  * @class Observable&lt;T&gt;
  */
 export class Observable {
     /**
      * @constructor
-     * @param {Function} subscribe the function that is  called when the Observable is
-     * initially subscribed to. This function is given a Subscriber, to which new values
-     * can be `next`ed, or an `error` method can be called to raise an error, or
-     * `complete` can be called to notify of a successful completion.
+     * @param {Function} subscribe &#x5F53; Observable &#x521D;&#x59CB;&#x8BA2;&#x9605;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;. &#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x53D7; Subscriber, &#x8FD9;&#x6837;&#x5C31;&#x53EF;&#x4EE5; `next`
+     * &#x503C;&#xFF0C;&#x6216;&#x8005; `error` &#x65B9;&#x6CD5;&#x4F1A;&#x88AB;&#x8C03;&#x7528;&#x4EE5;&#x5F15;&#x53D1;&#x9519;&#x8BEF;&#xFF0C;&#x6216;&#x8005; `complete` &#x88AB;&#x8C03;&#x7528;&#x4EE5;&#x901A;&#x77E5;&#x6210;&#x529F;&#x7684;&#x5B8C;&#x6210;&#x3002;
      */
     constructor(subscribe) {
         this._isScalar = false;
@@ -108,11 +105,10 @@ export class Observable {
         }
     }
     /**
-     * Creates a new Observable, with this Observable as the source, and the passed
-     * operator defined as the new observable&apos;s operator.
+     * &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684; Observable&#xFF0C;&#x4EE5;&#x5B83;&#x4F5C;&#x4E3A;&#x6E90;&#xFF0C;&#x5E76;&#x4F20;&#x9012;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x5B9A;&#x4E49;&#x4F5C;&#x4E3A;&#x65B0;&#x7684; observable &#x64CD;&#x4F5C;&#x7B26;&#x3002;
      * @method lift
-     * @param {Operator} operator the operator defining the operation to take on the observable
-     * @return {Observable} a new observable with the Operator applied
+     * @param {Operator} operator &#x5B9A;&#x4E49;&#x4E86;&#x5982;&#x4F55;&#x64CD;&#x4F5C; observable &#x7684;&#x64CD;&#x4F5C;&#x7B26;&#x3002;
+     * @return {Observable} &#x5E94;&#x7528;&#x4E86;&#x64CD;&#x4F5C;&#x7B26;&#x7684;&#x65B0; observable&#x3002;
      */
     lift(operator) {
         const observable = new Observable();
@@ -121,46 +117,34 @@ export class Observable {
         return observable;
     }
     /**
-     * Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+     * &#x8C03;&#x7528; Observable &#x7684;&#x6267;&#x884C;&#x5E76;&#x6CE8;&#x518C; Observer &#x7684;&#x5904;&#x7406;&#x5668;&#x4EE5;&#x4FBF;&#x4E8E;&#x53D1;&#x51FA;&#x901A;&#x77E5;&#x3002;
      *
-     * &lt;span class=&quot;informal&quot;&gt;Use it when you have all these Observables, but still nothing is happening.&lt;/span&gt;
+     * &lt;span class=&quot;informal&quot;&gt;&#x5F53;&#x4F60;&#x62E5;&#x6709;&#x8FD9;&#x4E9B; Observables &#x5374;&#x4ECD;&#x7136;&#x4EC0;&#x4E48;&#x4E5F;&#x6CA1;&#x53D1;&#x751F;&#x65F6;&#x4F7F;&#x7528;&#x5B83;&#x3002;&lt;/span&gt;
      *
-     * `subscribe` is not a regular operator, but a method that calls Observables internal `subscribe` function. It
-     * might be for example a function that you passed to a {@link create} static factory, but most of the time it is
-     * a library implementation, which defines what and when will be emitted by an Observable. This means that calling
-     * `subscribe` is actually the moment when Observable starts its work, not when it is created, as it is often
-     * thought.
+     * `subscribe` &#x4E0D;&#x662F;&#x4E00;&#x4E2A;&#x5E38;&#x89C4;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x800C;&#x662F;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x8C03;&#x7528; Observables &#x5185;&#x90E8;&#x7684; subscribe &#x51FD;&#x6570;&#x3002;&#x5B83;&#x4E5F;&#x8BB8;&#x662F;&#x4E00;&#x4E2A;&#x4F60;&#x4F20;&#x9012;&#x7ED9; {@link create}
+     * &#x9759;&#x6001;&#x5DE5;&#x5382;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5E93;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x4E86; Observable &#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53D1;&#x51FA;&#xFF0C;&#x53D1;&#x51FA;&#x4EC0;&#x4E48;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x5B9E;&#x9645;&#x4E0A;&#x662F; Observable &#x5F00;&#x59CB;&#x5DE5;
+     * &#x4F5C;&#x7684;&#x90A3;&#x4E00;&#x523B;&#x624D;&#x8C03;&#x7528; subscribe &#xFF0C; &#x800C;&#x4E0D;&#x662F;&#x50CF;&#x4EBA;&#x4EEC;&#x7ECF;&#x5E38;&#x8BA4;&#x4E3A;&#x7684;&#x90A3;&#x6837;&#xFF0C;&#x5373;&#x521B;&#x5EFA; Observable &#x7684;&#x65F6;&#x5019;&#x3002;
      *
-     * Apart from starting the execution of an Observable, this method allows you to listen for values
-     * that an Observable emits, as well as for when it completes or errors. You can achieve this in two
-     * following ways.
+     * &#x9664;&#x4E86;&#x5F00;&#x59CB; Observable &#x7684;&#x6267;&#x884C;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x5141;&#x8BB8;&#x4F60;&#x76D1;&#x542C; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#xFF0C;&#x4E5F;&#x5305;&#x62EC;&#x5B8C;&#x6210;&#x6216;&#x8005;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#x3002;&#x4F60;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x8FBE;&#x5230;
+     * &#x8FD9;&#x79CD;&#x76EE;&#x7684;&#x3002;
      *
-     * The first way is creating an object that implements {@link Observer} interface. It should have methods
-     * defined by that interface, but note that it should be just a regular JavaScript object, which you can create
-     * yourself in any way you want (ES6 class, classic function constructor, object literal etc.). In particular do
-     * not attempt to use any RxJS implementation details to create Observers - you don&apos;t need them. Remember also
-     * that your object does not have to implement all methods. If you find yourself creating a method that doesn&apos;t
-     * do anything, you can simply omit it. Note however, that if `error` method is not provided, all errors will
-     * be left uncaught.
+     * &#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B9E;&#x73B0;&#x4E86; {@link Observer} &#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5B83;&#x5E94;&#x8BE5;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5B83;&#x4EC5;&#x4EC5;&#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x7684; JavaScript
+     * &#x5BF9;&#x8C61;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7528;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x8981;&#x7684;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;(ES6 class, &#x5E38;&#x89C1;&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;, &#x5BF9;&#x8C61;&#x5B57;&#x9762;&#x91CF;&#x7B49;&#x7B49;)&#x3002; &#x7279;&#x522B;&#x5730;&#xFF0C;&#x4E0D;&#x8981;&#x5C1D;&#x8BD5;&#x4F7F;&#x7528;&#x4EFB;&#x4F55; RxJS &#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x53BB;&#x521B;&#x5EFA;
+     * Observers&#xFF0D;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x8FD9;&#x6837;&#x505A;&#x3002; &#x540C;&#x6837;&#x8981;&#x8BB0;&#x4F4F;&#xFF0C;&#x4F60;&#x7684;&#x5BF9;&#x8C61;&#x4E0D;&#x9700;&#x8981;&#x5B9E;&#x73B0;&#x6240;&#x6709;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x5982;&#x679C;&#x4F60;&#x53D1;&#x73B0;&#x81EA;&#x5DF1;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E0D;&#x505A;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x7B80;&#x5316;&#x5B83;&#x3002;
+     * &#x4E0D;&#x8FC7;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5982;&#x679C; `error` &#x65B9;&#x6CD5;&#x6CA1;&#x7528;&#x88AB;&#x63D0;&#x4F9B;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x9519;&#x8BEF;&#x90FD;&#x4E0D;&#x4F1A;&#x88AB;&#x6355;&#x83B7;&#x3002;
      *
-     * The second way is to give up on Observer object altogether and simply provide callback functions in place of its methods.
-     * This means you can provide three functions as arguments to `subscribe`, where first function is equivalent
-     * of a `next` method, second of an `error` method and third of a `complete` method. Just as in case of Observer,
-     * if you do not need to listen for something, you can omit a function, preferably by passing `undefined` or `null`,
-     * since `subscribe` recognizes these functions by where they were placed in function call. When it comes
-     * to `error` function, just as before, if not provided, errors emitted by an Observable will be thrown.
+     * &#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#x662F;&#x653E;&#x5F03; Observer &#x5BF9;&#x8C61;&#xFF0C;&#x53EA;&#x9700;&#x63D0;&#x4F9B;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x6765;&#x66FF;&#x4EE3;&#x5B83;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x4F60;&#x53EF;&#x4EE5;&#x7ED9; `subscribe` &#x63D0;&#x4F9B;3&#x4E2A;&#x65B9;&#x6CD5;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C; &#x7B2C;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;
+     * &#x7B49;&#x4EF7;&#x4E8E; `next` &#x65B9;&#x6CD5;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x7B49;&#x4EF7;&#x4E8E; `error` &#x65B9;&#x6CD5;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x7B49;&#x4EF7;&#x4E8E; `complete` &#x65B9;&#x6CD5;&#x3002;&#x5C31;&#x5982;&#x540C; Observer &#x4E00;&#x6837;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x9700;&#x8981;&#x76D1;&#x542C;&#x67D0;&#x4E2D;&#x67D0;&#x4E2A;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;
+     * &#x7701;&#x7565;&#x8BE5;&#x51FD;&#x6570;&#xFF0C;&#x901A;&#x8FC7;&#x4F20;&#x9012; `undefined` &#x6216;&#x8005; `null`&#xFF0C;&#x56E0;&#x4E3A; `subscribe` &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x8BC6;&#x522B;&#x4E86;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x3002;&#x63D0;&#x5230; `error` &#x51FD;&#x6570;&#xFF0C;&#x6B63;&#x5982;&#x4E0A;&#x6587;&#x6240;&#x8FF0;&#xFF0C;
+     * &#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#xFF0C;Observable &#x53D1;&#x51FA;&#x7684;&#x9519;&#x8BEF;&#x4F1A;&#x88AB;&#x629B;&#x5F03;&#x3002;
      *
-     * Whatever style of calling `subscribe` you use, in both cases it returns a Subscription object.
-     * This object allows you to call `unsubscribe` on it, which in turn will stop work that an Observable does and will clean
-     * up all resources that an Observable used. Note that cancelling a subscription will not call `complete` callback
-     * provided to `subscribe` function, which is reserved for a regular completion signal that comes from an Observable.
+     * &#x4E0D;&#x7BA1;&#x4F60;&#x4F7F;&#x7528;&#x4E86;&#x54EA;&#x79CD;&#x65B9;&#x5F0F;&#x8C03;&#x7528; `subscribe`&#xFF0C;&#x6240;&#x6709;&#x60C5;&#x51B5;&#x90FD;&#x8FD4;&#x56DE; Subscription &#x5BF9;&#x8C61;&#x3002;&#x8BE5;&#x5BF9;&#x8C61;&#x5141;&#x8BB8;&#x4F60;&#x8C03;&#x7528; `unsubscribe`&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x4F1A;&#x505C;&#x6B62; Observable
+     * &#x7684;&#x5DE5;&#x4F5C;&#x5E76;&#x4E14;&#x6E05;&#x7406; Observable &#x6301;&#x6709;&#x7684;&#x8D44;&#x6E90;&#x3002;&#x6CE8;&#x610F;&#xFF0C;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x4E0D;&#x4F1A;&#x8C03;&#x7528; `subscribe` &#x63D0;&#x4F9B;&#x7684; `complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;`complete` &#x56DE;&#x8C03;&#x51FD;&#x6570;&#x662F;&#x4E3A;&#x6765;&#x81EA; Observable &#x7684;&#x5E38;&#x89C4;&#x5B8C;&#x6210;&#x4FE1;&#x53F7;&#x4FDD;&#x7559;&#x7684;&#x3002;
      *
-     * Remember that callbacks provided to `subscribe` are not guaranteed to be called asynchronously.
-     * It is an Observable itself that decides when these functions will be called. For example {@link of}
-     * by default emits all its values synchronously. Always check documentation for how given Observable
-     * will behave when subscribed and if its default behavior can be modified with a {@link Scheduler}.
+     * &#x8BB0;&#x4F4F;&#xFF0C;&#x63D0;&#x4F9B;&#x7ED9; `subscribe` &#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x65E0;&#x6CD5;&#x4FDD;&#x8BC1;&#x662F;&#x88AB;&#x5F02;&#x6B65;&#x5730;&#x8C03;&#x7528;&#x3002;&#x662F; Observable &#x81EA;&#x8EAB;&#x51B3;&#x5B9A;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x3002;&#x4F8B;&#x5982;&#xFF1A;{@link of}
+     * &#x9ED8;&#x8BA4;&#x540C;&#x6B65;&#x5730;&#x53D1;&#x51FA;&#x6240;&#x6709;&#x7684;&#x503C;&#x3002;&#x7ECF;&#x5E38;&#x67E5;&#x770B;&#x6587;&#x6863;&#x4EE5;&#x786E;&#x8BA4;&#x7ED9;&#x5B9A;&#x7684; Observable &#x88AB;&#x8BA2;&#x9605;&#x65F6;&#x7684;&#x884C;&#x4E3A;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF0C;&#x4EE5;&#x53CA;&#x5B83;&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F7F;&#x7528; {@link Scheduler} &#x8FDB;&#x884C;&#x66F4;&#x6539;&#x3002;
      *
-     * @example &lt;caption&gt;Subscribe with an Observer&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x7528; Observer &#x5BF9;&#x8C61;&#x8BA2;&#x9605;&lt;/caption&gt;
      * const sumObserver = {
      *   sum: 0,
      *   next(value) {
@@ -174,17 +158,17 @@ export class Observable {
      *   }
      * };
      *
-     * Rx.Observable.of(1, 2, 3) // Synchronously emits 1, 2, 3 and then completes.
+     * Rx.Observable.of(1, 2, 3) // &#x540C;&#x6B65;&#x53D1;&#x51FA; 1&#xFF0C; 2&#xFF0C; 3&#xFF0C;&#x7136;&#x540E;&#x5B8C;&#x6210;&#x3002;
      * .subscribe(sumObserver);
      *
-     * // Logs:
+     * // &#x65E5;&#x5FD7;:
      * // &quot;Adding: 1&quot;
      * // &quot;Adding: 2&quot;
      * // &quot;Adding: 3&quot;
      * // &quot;Sum equals: 6&quot;
      *
      *
-     * @example &lt;caption&gt;Subscribe with functions&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x7528;&#x51FD;&#x6570;&#x8BA2;&#x9605;&lt;/caption&gt;
      * let sum = 0;
      *
      * Rx.Observable.of(1, 2, 3)
@@ -199,19 +183,19 @@ export class Observable {
      *   }
      * );
      *
-     * // Logs:
+     * // &#x65E5;&#x5FD7;:
      * // &quot;Adding: 1&quot;
      * // &quot;Adding: 2&quot;
      * // &quot;Adding: 3&quot;
      * // &quot;Sum equals: 6&quot;
      *
      *
-     * @example &lt;caption&gt;Cancel a subscription&lt;/caption&gt;
+     * @example &lt;caption&gt;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&lt;/caption&gt;
      * const subscription = Rx.Observable.interval(1000).subscribe(
      *   num =&gt; console.log(num),
      *   undefined,
-     *   () =&gt; console.log(&apos;completed!&apos;) // Will not be called, even
-     * );                                // when cancelling subscription
+     *   () =&gt; console.log(&apos;completed!&apos;) // &#x5373;&#x4F7F;&#x5F53;&#x53D6;&#x6D88;&#x8BA2;&#x9605;&#x65F6;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x88AB;&#x8C03;&#x7528;
+     * );
      *
      *
      * setTimeout(() =&gt; {
@@ -225,13 +209,11 @@ export class Observable {
      * // &quot;unsubscribed!&quot; after 2,5s
      *
      *
-     * @param {Observer|Function} observerOrNext (optional) Either an observer with methods to be called,
-     *  or the first of three possible handlers, which is the handler for each value emitted from the subscribed
-     *  Observable.
-     * @param {Function} error (optional) A handler for a terminal event resulting from an error. If no error handler is provided,
-     *  the error will be thrown as unhandled.
-     * @param {Function} complete (optional) A handler for a terminal event resulting from successful completion.
-     * @return {ISubscription} a subscription reference to the registered handlers
+     * @param {Observer|Function} observerOrNext [&#x53EF;&#x9009;] &#x6216;&#x8005;&#x662F; observer &#x5BF9;&#x8C61;, &#x6216;&#x8005;&#x662F;1&#x4E2A;&#x5230;3&#x4E2A;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x5904;&#x7406;&#x5DF2;&#x8BA2;&#x9605;&#x7684; Observable
+     * &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;
+     * @param {Function} error [&#x53EF;&#x9009;] &#x7531;&#x9519;&#x8BEF;&#x5BFC;&#x81F4;&#x7684;&#x7EC8;&#x7ED3;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#x5904;&#x7406;&#x5668;&#xFF0C;&#x9519;&#x8BEF;&#x5C06;&#x4E0D;&#x505A;&#x5904;&#x7406;&#x76F4;&#x63A5;&#x629B;&#x5F03;&#x3002;
+     * @param {Function} complete [&#x53EF;&#x9009;] &#x7531;&#x6210;&#x529F;&#x5B8C;&#x6210;&#x5BFC;&#x81F4;&#x7684;&#x7EC8;&#x7ED3;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;
+     * @return {ISubscription} &#x6CE8;&#x518C;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#x7684;&#x8BA2;&#x9605;&#x5F15;&#x7528;&#x3002;
      * @method subscribe
      */
     subscribe(observerOrNext, error, complete) {
@@ -263,10 +245,9 @@ export class Observable {
     }
     /**
      * @method forEach
-     * @param {Function} next a handler for each value emitted by the observable
-     * @param {PromiseConstructor} [PromiseCtor] a constructor function used to instantiate the Promise
-     * @return {Promise} a promise that either resolves on observable completion or
-     *  rejects with the handled error
+     * @param {Function} next  observable &#x53D1;&#x51FA;&#x7684;&#x6BCF;&#x4E2A;&#x503C;&#x7684;&#x5904;&#x7406;&#x5668;&#x3002;
+     * @param {PromiseConstructor} [PromiseCtor] &#x7528;&#x6765;&#x751F;&#x6210; Promise &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;
+     * @return {Promise} &#x4E00;&#x4E2A; observable &#x5B8C;&#x6210;&#x5219; resolves&#xFF0C;&#x9519;&#x8BEF;&#x5219; rejects &#x7684; promise&#x3002;
      */
     forEach(next, PromiseCtor) {
         if (!PromiseCtor) {
@@ -325,12 +306,12 @@ export class Observable {
 // HACK: Since TypeScript inherits static properties too, we have to
 // fight against TypeScript here so Subject can have a different static create signature
 /**
- * Creates a new cold Observable by calling the Observable constructor
+ * &#x901A;&#x8FC7;&#x8C03;&#x7528; Observable &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x51B7; Observable&#x3002;
  * @static true
  * @owner Observable
  * @method create
- * @param {Function} subscribe? the subscriber function to be passed to the Observable constructor
- * @return {Observable} a new cold observable
+ * @param {Function} subscribe? subscriber &#x51FD;&#x6570;&#x4F1A;&#x4F20;&#x9012;&#x7ED9; Observable &#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x3002;
+ * @return {Observable} &#x65B0;&#x7684;&#x51B7; observable
  */
 Observable.create = (subscribe) =&gt; {
     return new Observable(subscribe);

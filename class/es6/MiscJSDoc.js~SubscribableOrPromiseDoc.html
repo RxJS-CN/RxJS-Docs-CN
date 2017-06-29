@@ -90,7 +90,7 @@
   
   
   
-  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber265">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/es6/MiscJSDoc.js.html#lineNumber243">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
@@ -110,44 +110,33 @@
 
   
   
-  <div class="description" data-ice="description"><p><code>SubscribableOrPromise</code> interface describes values that behave like either
-Observables or Promises. Every operator that accepts arguments annotated
-with this interface, can be also used with parameters that are not necessarily
-RxJS Observables.</p>
-<p>Following types of values might be passed to operators expecting this interface:</p>
+  <div class="description" data-ice="description"><p><code>SubscribableOrPromise</code> &#x63A5;&#x53E3;&#x63CF;&#x8FF0;&#x884C;&#x4E3A;&#x50CF; Observables &#x6216;&#x8005; Promises &#x7684;&#x503C;&#x3002;&#x6BCF;&#x4E2A;&#x64CD;&#x4F5C;&#x7B26;
+&#x63A5;&#x53D7;&#x88AB;&#x8FD9;&#x4E2A;&#x63A5;&#x53E3; annotate &#x8FC7;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E0D;&#x662F; RxJS Observables &#x7684;&#x53C2;&#x6570;&#x3002;</p>
+<p>&#x4E0B;&#x5217;&#x7C7B;&#x578B;&#x7684;&#x503C;&#x53EF;&#x4EE5;&#x4F20;&#x9012;&#x7ED9;&#x671F;&#x671B;&#x6B64;&#x63A5;&#x53E3;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF1A;</p>
 <h2 id="observable">Observable</h2>
-<p>RxJS <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> instance.</p>
-<h2 id="observable-like-subscribable-">Observable-like (Subscribable)</h2>
-<p>This might be any object that has <code>Symbol.observable</code> method. This method,
-when called, should return object with <code>subscribe</code> method on it, which should
-behave the same as RxJS <code>Observable.subscribe</code>.</p>
-<p><code>Symbol.observable</code> is part of <a href="https://github.com/tc39/proposal-observable">https://github.com/tc39/proposal-observable</a> proposal.
-Since currently it is not supported natively, and every symbol is equal only to itself,
-you should use <a href="https://github.com/blesh/symbol-observable">https://github.com/blesh/symbol-observable</a> polyfill, when implementing
-custom Observable-likes.</p>
-<p><strong>TypeScript Subscribable interface issue</strong></p>
-<p>Although TypeScript interface claims that Subscribable is an object that has <code>subscribe</code>
-method declared directly on it, passing custom objects that have <code>subscribe</code>
-method but not <code>Symbol.observable</code> method will fail at runtime. Conversely, passing
-objects with <code>Symbol.observable</code> but without <code>subscribe</code> will fail at compile time
-(if you use TypeScript).</p>
-<p>TypeScript has problem supporting interfaces with methods defined as symbol
-properties. To get around that, you should implement <code>subscribe</code> directly on
-passed object, and make <code>Symbol.observable</code> method simply return <code>this</code>. That way
-everything will work as expected, and compiler will not complain. If you really
-do not want to put <code>subscribe</code> directly on your object, you will have to type cast
-it to <code>any</code>, before passing it to an operator.</p>
-<p>When this issue is resolved, Subscribable interface will only permit Observable-like
-objects with <code>Symbol.observable</code> defined, no matter if they themselves implement
-<code>subscribe</code> method or not.</p>
+<p>RxJS <span><a href="class/es6/Observable.js~Observable.html">Observable</a></span> &#x5B9E;&#x4F8B;&#x3002;</p>
+<h2 id="-observable-subscribable-">&#x7C7B; Observable &#x5BF9;&#x8C61; (Subscribable)</h2>
+<p>&#x8FD9;&#x53EF;&#x4EE5;&#x662F;&#x4EFB;&#x4F55;&#x62E5;&#x6709; <code>Symbol.observable</code> &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x5F53;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x88AB;&#x8C03;&#x7528;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E94;&#x8BE5;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x5E26;&#x6709;
+<code>subscribe</code> &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x884C;&#x4E3A;&#x5E94;&#x8BE5;&#x548C; RxJS &#x7684; <code>Observable.subscribe</code> &#x4E00;&#x81F4;&#x3002;</p>
+<p><code>Symbol.observable</code> &#x662F; <a href="https://github.com/tc39/proposal-observable">https://github.com/tc39/proposal-observable</a> &#x63D0;&#x6848;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002;
+&#x5F53;&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x81EA;&#x5B9A;&#x4E49;&#x7684;&#x7C7B; Observable &#x5BF9;&#x8C61;&#xFF0C;&#x56E0;&#x4E3A;&#x73B0;&#x5728;&#x8FD8;&#x6CA1;&#x6709;&#x88AB;&#x539F;&#x751F;&#x652F;&#x6301;, &#x6BCF;&#x4E2A;&#x7B26;&#x53F7;&#x53EA;&#x548C;&#x81EA;&#x5DF1;&#x76F8;&#x7B49;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; <a href="https://github.com/blesh/symbol-observable">https://github.com/blesh/symbol-observable</a> &#x57AB;&#x7247;&#x3002;</p>
+<p><strong>TypeScript Subscribable &#x63A5;&#x53E3;&#x95EE;&#x9898;</strong></p>
+<p>&#x5C3D;&#x7BA1; TypeScript &#x63A5;&#x53E3;&#x58F0;&#x660E;&#xFF0C;&#x53EF;&#x8BA2;&#x9605;&#x5BF9;&#x8C61;&#x662F;&#x4E00;&#x4E2A;&#x58F0;&#x660E;&#x4E86; <code>subscribe</code> &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x4F46;&#x662F;&#x4F20;&#x9012;&#x5B9A;&#x4E49;&#x4E86; <code>subscribe</code> &#x65B9;&#x6CD5;
+&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x5B9A;&#x4E49; <code>Symbol.observable</code> &#x65B9;&#x6CD5;&#x7684;&#x5BF9;&#x8C61;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x4F1A;&#x5931;&#x8D25;&#x3002;&#x76F8;&#x53CD;&#x5730;&#xFF0C;&#x4F20;&#x9012;&#x5B9A;&#x4E49;&#x4E86; <code>Symbol.observable</code> &#x800C;&#x6CA1;&#x6709;
+&#x5B9A;&#x4E49; <code>subscribe</code> &#x7684;&#x5BF9;&#x8C61;&#x5C06;&#x4F1A;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5931;&#x8D25;&#xFF08;&#x5982;&#x679C;&#x4F60;&#x4F7F;&#x7528; TypeScript&#xFF09;&#x3002;</p>
+<p>TypeScript &#x5728;&#x652F;&#x6301;&#x5B9A;&#x4E49;&#x4E86; symbol &#x5C5E;&#x6027;&#x65B9;&#x6CD5;&#x7684;&#x63A5;&#x53E3;&#x65F6;&#x662F;&#x6709;&#x95EE;&#x9898;&#x7684;&#x3002;&#x4E3A;&#x4E86;&#x7ED5;&#x8FC7;&#x5B83;&#xFF0C;&#x4F60;&#x5E94;&#x8BE5;&#x76F4;&#x63A5;&#x5B9E;&#x73B0;
+<code>subscribe</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x4F7F; <code>Symbol.observable</code> &#x65B9;&#x6CD5;&#x7B80;&#x5355;&#x5730;&#x8FD4;&#x56DE; <code>this</code> &#x3002;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x80FD;&#x591F;
+&#x8D77;&#x4F5C;&#x7528;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x4E5F;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#x3002;&#x5982;&#x679C;&#x4F60;&#x771F;&#x7684;&#x4E0D;&#x60F3;&#x6DFB;&#x52A0; <code>subscribe</code> &#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x5C06;&#x5176;&#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x4E4B;&#x524D;&#xFF0C;
+&#x5C06;&#x7C7B;&#x578B;&#x8F6C;&#x5316;&#x4E3A; <code>any</code>&#x3002;</p>
+<p>&#x5F53;&#x8FD9;&#x4E2A; issue &#x88AB;&#x89E3;&#x51B3;&#x4E86;&#xFF0C;&#x53EF;&#x8BA2;&#x9605;&#x7684;&#x63A5;&#x53E3;&#x4EC5;&#x5141;&#x8BB8;&#x5B9A;&#x4E49;&#x4E86; <code>Symbol.observable</code> &#x65B9;&#x6CD5;&#x7684;&#x7C7B; Observable
+&#x5BF9;&#x8C61;&#xFF0C;&#x65E0;&#x8BBA;&#x8BE5;&#x5BF9;&#x8C61;&#x662F;&#x5426;&#x5B9E;&#x73B0;&#x4E86; <code>subscribe</code> &#x65B9;&#x6CD5;&#x3002;</p>
 <h2 id="es6-promise">ES6 Promise</h2>
-<p>Promise can be interpreted as Observable that emits value and completes
-when it is resolved or errors when it is rejected.</p>
-<h2 id="promise-like-thenable-">Promise-like (Thenable)</h2>
-<p>Promises passed to operators do not have to be native ES6 Promises.
-They can be implementations from popular Promise libraries, polyfills
-or even custom ones. They just need to have <code>then</code> method that works
-as the same as ES6 Promise <code>then</code>.</p>
+<p>Promise &#x53EF;&#x4EE5;&#x88AB;&#x8BA4;&#x4E3A;&#x662F; Observable&#xFF0C;&#x5F53; resolved &#x7684;&#x65F6;&#x5019;&#xFF0C;Observable &#x53D1;&#x51FA;&#x503C;&#x5E76;&#x5B8C;&#x6210;&#xFF0C;
+&#x5F53; rejected &#x7684;&#x65F6;&#x5019;&#xFF0C;Observable &#x53D1;&#x51FA;&#x9519;&#x8BEF;&#x3002;</p>
+<h2 id="-promise-then-">&#x7C7B; Promise &#x5BF9;&#x8C61; (&#x53EF;&#x4F7F;&#x7528; then &#x65B9;&#x6CD5;&#x7684;)</h2>
+<p>&#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7B26;&#x7684; Promises &#x4E0D;&#x9700;&#x8981;&#x662F; ES6 &#x539F;&#x751F;&#x7684; Promises&#x3002;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x6D41;&#x884C;&#x5E93;&#x6216;&#x57AB;&#x7247;&#x4E2D;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x751A;&#x81F3;&#x81EA;&#x5DF1;&#x6765;&#x5B9E;&#x73B0;&#x3002;
+&#x5B83;&#x53EA;&#x9700;&#x8981;&#x62E5;&#x6709; <code>then</code> &#x65B9;&#x6CD5;&#xFF0C;&#x5E76;&#x4E14;&#x8BE5;&#x65B9;&#x6CD5;&#x548C; ES6 Promise &#x7684; <code>then</code> &#x884C;&#x4E3A;
+&#x4E00;&#x81F4;&#x3002;</p>
 </div>
 
   
@@ -156,7 +145,7 @@ as the same as ES6 Promise <code>then</code>.</p>
     <h4>Example:</h4>
     
   <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use merge and then map with non-RxJS observable</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528;&#x975E; RxJS &#x7684; observable &#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#x6765;&#x4F7F;&#x7528; merge &#x548C; map &#x64CD;&#x4F5C;&#x7B26;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">const nonRxJSObservable = {
   subscribe(observer) {
     observer.next(1000);
@@ -169,17 +158,17 @@ as the same as ES6 Promise <code>then</code>.</p>
 
 Rx.Observable.merge(nonRxJSObservable)
 .map(value =&gt; &quot;This value is &quot; + value)
-.subscribe(result =&gt; console.log(result)); // Logs &quot;This value is 1000&quot;</code></pre>
+.subscribe(result =&gt; console.log(result)); // &#x8F93;&#x51FA; &quot;This value is 1000&quot;</code></pre>
     </div>
 <div class="example-doc" data-ice="exampleDoc">
-      <div class="example-caption" data-ice="exampleCaption">Use combineLatest with ES6 Promise</div>
+      <div class="example-caption" data-ice="exampleCaption">&#x7528; ES6 &#x7684; Promise &#x6765;&#x4F7F;&#x7528; combineLatest &#x64CD;&#x4F5C;&#x7B26;</div>
       <pre class="prettyprint source-code"><code data-ice="exampleCode">Rx.Observable.combineLatest(Promise.resolve(5), Promise.resolve(10), Promise.resolve(15))
 .subscribe(
   value =&gt; console.log(value),
   err =&gt; {},
   () =&gt; console.log(&apos;the end!&apos;)
 );
-// Logs
+// &#x8F93;&#x51FA;:
 // [5, 10, 15]
 // &quot;the end!&quot;</code></pre>
     </div>
