@@ -5,12 +5,11 @@ import { empty as emptyObserver } from './Observer';
 import { rxSubscriber as rxSubscriberSymbol } from './symbol/rxSubscriber';
 
 /**
- * Implements the {@link Observer} interface and extends the
- * {@link Subscription} class. While the {@link Observer} is the public API for
- * consuming the values of an {@link Observable}, all Observers get converted to
- * a Subscriber, in order to provide Subscription-like capabilities such as
- * `unsubscribe`. Subscriber is a common type in RxJS, and crucial for
- * implementing operators, but it is rarely used as a public API.
+ * 实现 {@link Observer} 接口并且继承 {@link Subscription} 类。
+ * 虽然 {@link Observer} 是消费 {@link Observable} 值的公有 API, 所有 Observers 都转化成了
+ * Subscriber，以便提供类似 Subscription 的能力，比如 `unsubscribe`。
+ * Subscriber 是 RxJS 的常见类型, 并且是实现操作符的关键, 但是很少作为公有 API
+ * 使用。
  *
  * @class Subscriber<T>
  */
@@ -19,15 +18,11 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   [rxSubscriberSymbol]() { return this; }
 
   /**
-   * A static factory for a Subscriber, given a (potentially partial) definition
-   * of an Observer.
-   * @param {function(x: ?T): void} [next] The `next` callback of an Observer.
-   * @param {function(e: ?any): void} [error] The `error` callback of an
-   * Observer.
-   * @param {function(): void} [complete] The `complete` callback of an
-   * Observer.
-   * @return {Subscriber<T>} A Subscriber wrapping the (partially defined)
-   * Observer represented by the given arguments.
+   * Subscriber 的静态工厂，给定了 Observer （潜在的部分）的定义。
+   * @param {function(x: ?T): void} [next] Observer 的 `next` 回调函数。
+   * @param {function(e: ?any): void} [error] Observer 的 `error` 回调函数。
+   * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
+   * @return {Subscriber<T>} 包装了作为参数传入的（部分定义）Observer 的  Subscriber。
    */
   static create<T>(next?: (x?: T) => void,
                    error?: (e?: any) => void,
@@ -45,12 +40,9 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   protected destination: PartialObserver<any>; // this `any` is the escape hatch to erase extra type param (e.g. R)
 
   /**
-   * @param {Observer|function(value: T): void} [destinationOrNext] A partially
-   * defined Observer or a `next` callback function.
-   * @param {function(e: ?any): void} [error] The `error` callback of an
-   * Observer.
-   * @param {function(): void} [complete] The `complete` callback of an
-   * Observer.
+   * @param {Observer|function(value: T): void} [destinationOrNext] 部分定义的 Observer 或者 `next` 回调函数。
+   * @param {function(e: ?any): void} [error] Observer 的 `error` 回调函数。
+   * @param {function(): void} [complete] Observer 的 `complete` 回调函数。
    */
   constructor(destinationOrNext?: PartialObserver<any> | ((value: T) => void),
               error?: (e?: any) => void,
@@ -84,9 +76,8 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer} callback to receive notifications of type `next` from
-   * the Observable, with a value. The Observable may call this method 0 or more
-   * times.
+   * {@link Observer} 的回调，用来接收 Observable 中的 next 类型通知，此通知带有值。
+   * Observable 可能会掉用这个方法 0 次，或者多次。
    * @param {T} [value] The `next` value.
    * @return {void}
    */
@@ -97,10 +88,9 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer} callback to receive notifications of type `error` from
-   * the Observable, with an attached {@link Error}. Notifies the Observer that
-   * the Observable has experienced an error condition.
-   * @param {any} [err] The `error` exception.
+   * {@link Observer} 的回调，用来接收 Observable 中的 error 类型通知，此通知带有 {@link Error} 。
+   * 通知 Observer，Observable 发出了错误。
+   * @param {any} [err] `error` 异常.
    * @return {void}
    */
   error(err?: any): void {
@@ -111,9 +101,8 @@ export class Subscriber<T> extends Subscription implements Observer<T> {
   }
 
   /**
-   * The {@link Observer} callback to receive a valueless notification of type
-   * `complete` from the Observable. Notifies the Observer that the Observable
-   * has finished sending push-based notifications.
+   * {@link Observer}  的回调，用来接收 Observable 中的 `complete` 类型通知。
+   * 通知 Observer， Observable 完成了基于推送体系的通知。
    * @return {void}
    */
   complete(): void {
