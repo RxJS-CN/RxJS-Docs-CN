@@ -1,5 +1,5 @@
 /**
- * 当查询 Observable 或者序列时，没有元素，则抛出该错误。
+ * 当查询 Observable 或者序列没有元素时，则抛出该错误。
  *
  * @see {@link first}
  * @see {@link last}

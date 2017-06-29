@@ -1,5 +1,5 @@
 /**
- * 当 action 由于对象取消订阅导致非法，则抛出该错误。
+ * 当 action 由于对象取消订阅导致非法时，则抛出该错误。
  *
  * @see {@link Subject}
  * @see {@link BehaviorSubject}

@@ -1,6 +1,5 @@
 /**
- * 当在 Observable 的特定下标查询元素时，没有该下标或者位置存在于该序列时，抛出该
- * 错误。
+ * 当查询 Observable 特定索引的元素时，在 Observable 序列中没有此索引或位置的话，则抛出此错误。
  * 
  * @see {@link elementAt}
  * @see {@link take}
