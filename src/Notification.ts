@@ -2,10 +2,9 @@ import { PartialObserver } from './Observer';
 import { Observable } from './Observable';
 
 /**
- * 代表一个可以被 {@link Observable} 发出的基于推送的事件或者值。对于像 {@link materialize}，
- *  {@link dematerialize}， {@link observeOn} 和其他管理通知的操作符来说，这类尤其适用。
- * 除了包装真正发出的值，它还使用，例如，推送的类型（`next`，`error`， or `complete`）等元数据
- * 装饰它。
+ * 代表可以被 {@link Observable} 发出的基于推送体系的事件或者值。对于像 {@link materialize}，
+ *  {@link dematerialize}， {@link observeOn} 和其他管理通知的操作符来说，Notification 类尤其适用。
+ * 除了包装真正发出的值，它还使用元数据进行注解。例如，推送消息的类型是（`next`，`error`， or `complete`）。
  *
  * @see {@link materialize}
  * @see {@link dematerialize}
@@ -21,7 +20,7 @@ export class Notification<T> {
   }
 
   /**
-   * 传递给给定的 `observer` 这个通知包装过的值。
+   * 将由 Notification 包装过的值传递给给定的 `observer`。
    * @param {Observer} observer
    * @return
    */
@@ -37,7 +36,7 @@ export class Notification<T> {
   }
 
   /**
-   * 给定一些 {@link Observer} 回调函数， 将当前通知所表示的值传递给正确的对应回调函数。
+   * 给定一些 {@link Observer} 的回调函数， 将当前 Notification 所表示的值正确的传递给相应的回调函数。
    * @param {function(value: T): void} next Observer 的 `next` 回调函数。
    * @param {function(err: any): void} [error] Observer 的 `error` 回调函数。
    * @param {function(): void} [complete] An Observer 的 `complete` 回调函数。
@@ -56,7 +55,7 @@ export class Notification<T> {
   }
 
   /**
-   * 接受一个 Observer 或者它的回调函数，然后相应的调用 `observe` 或者 `do` 方法。 
+   * 接受一个 Observer 或者它的回调函数，然后相应地调用 `observe` 或者 `do` 方法。 
    * @param {Observer|function(value: T): void} nextOrObserver  Observer 或者
    * `next` 回调函数。
    * @param {function(err: any): void} [error] Observer 的 `error` 回调函数。
@@ -72,7 +71,7 @@ export class Notification<T> {
   }
 
   /**
-   * 返回一个仅仅发出由该通知实例表示的通知的简单 Observable。
+   * 返回的 Observable 只传递代表当前 Notification 实例的通知。
    * @return {any}
    */
   toObservable(): Observable<T> {
@@ -92,7 +91,7 @@ export class Notification<T> {
   private static undefinedValueNotification: Notification<any> = new Notification('N', undefined);
 
   /**
-   * 使用给定的值创建一个`next`型通知实例的快捷方法。
+   * 使用给定的值创建类型为 `next` 的 Notification 实例的快捷方法。
    * @param {T} value `next` 的值。
    * @return {Notification<T>} 代表传入值的`next`型通知实例。
    */
@@ -104,7 +103,7 @@ export class Notification<T> {
   }
 
   /**
-   * 使用给定的错误对象创建一个`error`型通知实例的快捷方法。
+   * 使用给定的错误对象创建类型为 `error` 的 Notification 实例的快捷方法。
    * @param {any} [err]  `error` 错误。
    * @return {Notification<T>} 代表传入错误的`error`型通知实例。
    */
@@ -113,7 +112,7 @@ export class Notification<T> {
   }
 
   /**
-   * 创建一个`complete`型通知实例的快捷方法。
+   * 创建类型为 `complete` 的 Notification 实例的快捷方法。
    * @return {Notification<any>} 没有值的`complete`型的通知。
    */
   static createComplete(): Notification<any> {
