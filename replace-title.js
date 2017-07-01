@@ -3,6 +3,8 @@ var path = require('path');
 var dir = './tmp/docs';
 var titleMap = {'Home': '首页', 'Manual': '手册', 'Reference': '参考', 'Source': '源码', 'Test': '测试', 'Overview': '概览', 'Installation': '安装', 'Tutorial': '教程', 'Usage': '高级', 'Variable': '变量', 'Index': '索引', 'Typedef': '数据类型'};
 var titleSuffix = 'RxJS 中文文档';
+var descriptionMeta = '<meta name="description" content="RxJS 中文文档 - RxJS 5 官方文档中文版，此中文文档与官方文档保持同步更新!RxJS 中文社区致力于为广大国内 RxJS 爱好者提供更好的学习环境，其中包括无语言障碍的中文文档及其他中文学习资料!">';
+var keywordsMeta = '<meta name="keywords" content="RxJS中文文档,RxJS5中文文档,RxJS,RxJS5,RxJS-CN,RxJS中文社区,Observable">';
 
 readDirectory(dir);
 
@@ -47,7 +49,7 @@ function replaceHtmlTitle(file, dir) {
 function replaceTitle(html) {
   return html.replace(/<title data-ice="title">(.*)<\/title>/, function(content, group) {
     var title = getTitle(group);
-    return `<title data-ice="title">${title}</title>`;
+    return `<title data-ice="title">${title}</title>\r\n  ${descriptionMeta}\r\n  ${keywordsMeta}`;
   });
 }
 
