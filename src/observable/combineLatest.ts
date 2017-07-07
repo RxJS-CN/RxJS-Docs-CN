@@ -52,14 +52,14 @@ export function combineLatest<R>(...observables: Array<ObservableInput<any> | ((
  * 去发出值。
  *
  * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回
- * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回
- * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它
+ * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable
+ * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它
  * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会
  * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。
  *
  * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数
  * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接
- * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
+ * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
  * 函数。
  *
  * @example <caption>结合两个 timer Observables</caption>
