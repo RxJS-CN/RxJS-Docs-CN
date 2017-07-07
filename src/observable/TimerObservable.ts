@@ -21,7 +21,7 @@ export class TimerObservable extends Observable<number> {
    *
    * <img src="./img/timer.png" width="100%">
    *
-   * `timer` 返回一个发出有限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
+   * `timer` 返回一个发出无限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
    * 初始延时之后. 初始延时就像是{@link Date}。 默认情况下, 这个操作符使用 async 调度器来提供时间的概念, 
    * 但是你也可以传递任何调度器。 如果时间周期没有被指定, 输出 Observable 只发出0。 否则,会发送一个无限数列。
    *
@@ -36,7 +36,7 @@ export class TimerObservable extends Observable<number> {
    * @see {@link interval}
    * @see {@link delay}
    *
-   * @param {number|Date} initialDelay 在发出第一个值 0 之i前等待的初始延迟时间。
+   * @param {number|Date} initialDelay 在发出第一个值 0 之前等待的初始延迟时间。
    * @param {number} [period] 连续数字发送之间的时间周期。
    * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送, 提供“时间”的概念。
    * @return {Observable} 该 Observable 在初始时延(initialDelay)后发出0，并且在之后的每个时间周期(period)后发出按自增的数字。
