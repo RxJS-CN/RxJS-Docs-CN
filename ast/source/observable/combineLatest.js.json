@@ -385,10 +385,10 @@
         },
         {
           "type": "Block",
-          "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回\n * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
+          "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable\n * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
           "range": [
             250,
-            3492
+            3490
           ],
           "loc": {
             "start": {
@@ -411,8 +411,8 @@
           "type": "Identifier",
           "name": "combineLatest",
           "range": [
-            3509,
-            3522
+            3507,
+            3520
           ],
           "loc": {
             "start": {
@@ -432,8 +432,8 @@
               "type": "Identifier",
               "name": "observables",
               "range": [
-                3526,
-                3537
+                3524,
+                3535
               ],
               "loc": {
                 "start": {
@@ -447,8 +447,8 @@
               }
             },
             "range": [
-              3523,
-              3537
+              3521,
+              3535
             ],
             "loc": {
               "start": {
@@ -474,8 +474,8 @@
                     "type": "Identifier",
                     "name": "project",
                     "range": [
-                      3549,
-                      3556
+                      3547,
+                      3554
                     ],
                     "loc": {
                       "start": {
@@ -493,8 +493,8 @@
                     "value": null,
                     "raw": "null",
                     "range": [
-                      3559,
-                      3563
+                      3557,
+                      3561
                     ],
                     "loc": {
                       "start": {
@@ -508,8 +508,8 @@
                     }
                   },
                   "range": [
-                    3549,
-                    3563
+                    3547,
+                    3561
                   ],
                   "loc": {
                     "start": {
@@ -525,8 +525,8 @@
               ],
               "kind": "let",
               "range": [
-                3545,
-                3564
+                3543,
+                3562
               ],
               "loc": {
                 "start": {
@@ -548,8 +548,8 @@
                     "type": "Identifier",
                     "name": "scheduler",
                     "range": [
-                      3573,
-                      3582
+                      3571,
+                      3580
                     ],
                     "loc": {
                       "start": {
@@ -567,8 +567,8 @@
                     "value": null,
                     "raw": "null",
                     "range": [
-                      3585,
-                      3589
+                      3583,
+                      3587
                     ],
                     "loc": {
                       "start": {
@@ -582,8 +582,8 @@
                     }
                   },
                   "range": [
-                    3573,
-                    3589
+                    3571,
+                    3587
                   ],
                   "loc": {
                     "start": {
@@ -599,8 +599,8 @@
               ],
               "kind": "let",
               "range": [
-                3569,
-                3590
+                3567,
+                3588
               ],
               "loc": {
                 "start": {
@@ -621,8 +621,8 @@
                   "type": "Identifier",
                   "name": "isScheduler",
                   "range": [
-                    3599,
-                    3610
+                    3597,
+                    3608
                   ],
                   "loc": {
                     "start": {
@@ -643,8 +643,8 @@
                       "type": "Identifier",
                       "name": "observables",
                       "range": [
-                        3611,
-                        3622
+                        3609,
+                        3620
                       ],
                       "loc": {
                         "start": {
@@ -667,8 +667,8 @@
                           "type": "Identifier",
                           "name": "observables",
                           "range": [
-                            3623,
-                            3634
+                            3621,
+                            3632
                           ],
                           "loc": {
                             "start": {
@@ -685,8 +685,8 @@
                           "type": "Identifier",
                           "name": "length",
                           "range": [
-                            3635,
-                            3641
+                            3633,
+                            3639
                           ],
                           "loc": {
                             "start": {
@@ -700,8 +700,8 @@
                           }
                         },
                         "range": [
-                          3623,
-                          3641
+                          3621,
+                          3639
                         ],
                         "loc": {
                           "start": {
@@ -719,8 +719,8 @@
                         "value": 1,
                         "raw": "1",
                         "range": [
-                          3644,
-                          3645
+                          3642,
+                          3643
                         ],
                         "loc": {
                           "start": {
@@ -734,8 +734,8 @@
                         }
                       },
                       "range": [
-                        3623,
-                        3645
+                        3621,
+                        3643
                       ],
                       "loc": {
                         "start": {
@@ -749,8 +749,8 @@
                       }
                     },
                     "range": [
-                      3611,
-                      3646
+                      3609,
+                      3644
                     ],
                     "loc": {
                       "start": {
@@ -765,8 +765,8 @@
                   }
                 ],
                 "range": [
-                  3599,
-                  3647
+                  3597,
+                  3645
                 ],
                 "loc": {
                   "start": {
@@ -791,8 +791,8 @@
                         "type": "Identifier",
                         "name": "scheduler",
                         "range": [
-                          3659,
-                          3668
+                          3657,
+                          3666
                         ],
                         "loc": {
                           "start": {
@@ -814,8 +814,8 @@
                             "type": "Identifier",
                             "name": "observables",
                             "range": [
-                              3671,
-                              3682
+                              3669,
+                              3680
                             ],
                             "loc": {
                               "start": {
@@ -832,8 +832,8 @@
                             "type": "Identifier",
                             "name": "pop",
                             "range": [
-                              3683,
-                              3686
+                              3681,
+                              3684
                             ],
                             "loc": {
                               "start": {
@@ -847,8 +847,8 @@
                             }
                           },
                           "range": [
-                            3671,
-                            3686
+                            3669,
+                            3684
                           ],
                           "loc": {
                             "start": {
@@ -863,8 +863,8 @@
                         },
                         "arguments": [],
                         "range": [
-                          3671,
-                          3688
+                          3669,
+                          3686
                         ],
                         "loc": {
                           "start": {
@@ -878,8 +878,8 @@
                         }
                       },
                       "range": [
-                        3659,
-                        3688
+                        3657,
+                        3686
                       ],
                       "loc": {
                         "start": {
@@ -893,8 +893,8 @@
                       }
                     },
                     "range": [
-                      3659,
-                      3689
+                      3657,
+                      3687
                     ],
                     "loc": {
                       "start": {
@@ -909,8 +909,8 @@
                   }
                 ],
                 "range": [
-                  3649,
-                  3695
+                  3647,
+                  3693
                 ],
                 "loc": {
                   "start": {
@@ -925,8 +925,8 @@
               },
               "alternate": null,
               "range": [
-                3595,
-                3695
+                3593,
+                3693
               ],
               "loc": {
                 "start": {
@@ -954,8 +954,8 @@
                       "type": "Identifier",
                       "name": "observables",
                       "range": [
-                        3711,
-                        3722
+                        3709,
+                        3720
                       ],
                       "loc": {
                         "start": {
@@ -978,8 +978,8 @@
                           "type": "Identifier",
                           "name": "observables",
                           "range": [
-                            3723,
-                            3734
+                            3721,
+                            3732
                           ],
                           "loc": {
                             "start": {
@@ -996,8 +996,8 @@
                           "type": "Identifier",
                           "name": "length",
                           "range": [
-                            3735,
-                            3741
+                            3733,
+                            3739
                           ],
                           "loc": {
                             "start": {
@@ -1011,8 +1011,8 @@
                           }
                         },
                         "range": [
-                          3723,
-                          3741
+                          3721,
+                          3739
                         ],
                         "loc": {
                           "start": {
@@ -1030,8 +1030,8 @@
                         "value": 1,
                         "raw": "1",
                         "range": [
-                          3744,
-                          3745
+                          3742,
+                          3743
                         ],
                         "loc": {
                           "start": {
@@ -1045,8 +1045,8 @@
                         }
                       },
                       "range": [
-                        3723,
-                        3745
+                        3721,
+                        3743
                       ],
                       "loc": {
                         "start": {
@@ -1060,8 +1060,8 @@
                       }
                     },
                     "range": [
-                      3711,
-                      3746
+                      3709,
+                      3744
                     ],
                     "loc": {
                       "start": {
@@ -1076,8 +1076,8 @@
                   },
                   "prefix": true,
                   "range": [
-                    3704,
-                    3746
+                    3702,
+                    3744
                   ],
                   "loc": {
                     "start": {
@@ -1095,8 +1095,8 @@
                   "value": "function",
                   "raw": "'function'",
                   "range": [
-                    3751,
-                    3761
+                    3749,
+                    3759
                   ],
                   "loc": {
                     "start": {
@@ -1110,8 +1110,8 @@
                   }
                 },
                 "range": [
-                  3704,
-                  3761
+                  3702,
+                  3759
                 ],
                 "loc": {
                   "start": {
@@ -1136,8 +1136,8 @@
                         "type": "Identifier",
                         "name": "project",
                         "range": [
-                          3773,
-                          3780
+                          3771,
+                          3778
                         ],
                         "loc": {
                           "start": {
@@ -1159,8 +1159,8 @@
                             "type": "Identifier",
                             "name": "observables",
                             "range": [
-                              3783,
-                              3794
+                              3781,
+                              3792
                             ],
                             "loc": {
                               "start": {
@@ -1177,8 +1177,8 @@
                             "type": "Identifier",
                             "name": "pop",
                             "range": [
-                              3795,
-                              3798
+                              3793,
+                              3796
                             ],
                             "loc": {
                               "start": {
@@ -1192,8 +1192,8 @@
                             }
                           },
                           "range": [
-                            3783,
-                            3798
+                            3781,
+                            3796
                           ],
                           "loc": {
                             "start": {
@@ -1208,8 +1208,8 @@
                         },
                         "arguments": [],
                         "range": [
-                          3783,
-                          3800
+                          3781,
+                          3798
                         ],
                         "loc": {
                           "start": {
@@ -1223,8 +1223,8 @@
                         }
                       },
                       "range": [
-                        3773,
-                        3800
+                        3771,
+                        3798
                       ],
                       "loc": {
                         "start": {
@@ -1238,8 +1238,8 @@
                       }
                     },
                     "range": [
-                      3773,
-                      3801
+                      3771,
+                      3799
                     ],
                     "loc": {
                       "start": {
@@ -1254,8 +1254,8 @@
                   }
                 ],
                 "range": [
-                  3763,
-                  3807
+                  3761,
+                  3805
                 ],
                 "loc": {
                   "start": {
@@ -1270,8 +1270,8 @@
               },
               "alternate": null,
               "range": [
-                3700,
-                3807
+                3698,
+                3805
               ],
               "loc": {
                 "start": {
@@ -1288,8 +1288,8 @@
                   "type": "Line",
                   "value": " if the first and only other argument besides the resultSelector is an array",
                   "range": [
-                    3812,
-                    3890
+                    3810,
+                    3888
                   ],
                   "loc": {
                     "start": {
@@ -1306,8 +1306,8 @@
                   "type": "Line",
                   "value": " assume it's been called with `combineLatest([obs1, obs2, obs3], project)`",
                   "range": [
-                    3895,
-                    3971
+                    3893,
+                    3969
                   ],
                   "loc": {
                     "start": {
@@ -1337,8 +1337,8 @@
                       "type": "Identifier",
                       "name": "observables",
                       "range": [
-                        3980,
-                        3991
+                        3978,
+                        3989
                       ],
                       "loc": {
                         "start": {
@@ -1355,8 +1355,8 @@
                       "type": "Identifier",
                       "name": "length",
                       "range": [
-                        3992,
-                        3998
+                        3990,
+                        3996
                       ],
                       "loc": {
                         "start": {
@@ -1370,8 +1370,8 @@
                       }
                     },
                     "range": [
-                      3980,
-                      3998
+                      3978,
+                      3996
                     ],
                     "loc": {
                       "start": {
@@ -1389,8 +1389,8 @@
                     "value": 1,
                     "raw": "1",
                     "range": [
-                      4003,
-                      4004
+                      4001,
+                      4002
                     ],
                     "loc": {
                       "start": {
@@ -1404,8 +1404,8 @@
                     }
                   },
                   "range": [
-                    3980,
-                    4004
+                    3978,
+                    4002
                   ],
                   "loc": {
                     "start": {
@@ -1424,8 +1424,8 @@
                     "type": "Identifier",
                     "name": "isArray",
                     "range": [
-                      4008,
-                      4015
+                      4006,
+                      4013
                     ],
                     "loc": {
                       "start": {
@@ -1446,8 +1446,8 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          4016,
-                          4027
+                          4014,
+                          4025
                         ],
                         "loc": {
                           "start": {
@@ -1465,8 +1465,8 @@
                         "value": 0,
                         "raw": "0",
                         "range": [
-                          4028,
-                          4029
+                          4026,
+                          4027
                         ],
                         "loc": {
                           "start": {
@@ -1480,8 +1480,8 @@
                         }
                       },
                       "range": [
-                        4016,
-                        4030
+                        4014,
+                        4028
                       ],
                       "loc": {
                         "start": {
@@ -1496,8 +1496,8 @@
                     }
                   ],
                   "range": [
-                    4008,
-                    4031
+                    4006,
+                    4029
                   ],
                   "loc": {
                     "start": {
@@ -1511,8 +1511,8 @@
                   }
                 },
                 "range": [
-                  3980,
-                  4031
+                  3978,
+                  4029
                 ],
                 "loc": {
                   "start": {
@@ -1537,8 +1537,8 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          4043,
-                          4054
+                          4041,
+                          4052
                         ],
                         "loc": {
                           "start": {
@@ -1558,8 +1558,8 @@
                           "type": "Identifier",
                           "name": "observables",
                           "range": [
-                            4057,
-                            4068
+                            4055,
+                            4066
                           ],
                           "loc": {
                             "start": {
@@ -1577,8 +1577,8 @@
                           "value": 0,
                           "raw": "0",
                           "range": [
-                            4069,
-                            4070
+                            4067,
+                            4068
                           ],
                           "loc": {
                             "start": {
@@ -1592,8 +1592,8 @@
                           }
                         },
                         "range": [
-                          4057,
-                          4071
+                          4055,
+                          4069
                         ],
                         "loc": {
                           "start": {
@@ -1607,8 +1607,8 @@
                         }
                       },
                       "range": [
-                        4043,
-                        4071
+                        4041,
+                        4069
                       ],
                       "loc": {
                         "start": {
@@ -1622,8 +1622,8 @@
                       }
                     },
                     "range": [
-                      4043,
-                      4072
+                      4041,
+                      4070
                     ],
                     "loc": {
                       "start": {
@@ -1638,8 +1638,8 @@
                   }
                 ],
                 "range": [
-                  4033,
-                  4078
+                  4031,
+                  4076
                 ],
                 "loc": {
                   "start": {
@@ -1654,8 +1654,8 @@
               },
               "alternate": null,
               "range": [
-                3976,
-                4078
+                3974,
+                4076
               ],
               "loc": {
                 "start": {
@@ -1672,8 +1672,8 @@
                   "type": "Line",
                   "value": " if the first and only other argument besides the resultSelector is an array",
                   "range": [
-                    3812,
-                    3890
+                    3810,
+                    3888
                   ],
                   "loc": {
                     "start": {
@@ -1690,8 +1690,8 @@
                   "type": "Line",
                   "value": " assume it's been called with `combineLatest([obs1, obs2, obs3], project)`",
                   "range": [
-                    3895,
-                    3971
+                    3893,
+                    3969
                   ],
                   "loc": {
                     "start": {
@@ -1719,8 +1719,8 @@
                       "type": "Identifier",
                       "name": "ArrayObservable",
                       "range": [
-                        4094,
-                        4109
+                        4092,
+                        4107
                       ],
                       "loc": {
                         "start": {
@@ -1738,8 +1738,8 @@
                         "type": "Identifier",
                         "name": "observables",
                         "range": [
-                          4110,
-                          4121
+                          4108,
+                          4119
                         ],
                         "loc": {
                           "start": {
@@ -1756,8 +1756,8 @@
                         "type": "Identifier",
                         "name": "scheduler",
                         "range": [
-                          4123,
-                          4132
+                          4121,
+                          4130
                         ],
                         "loc": {
                           "start": {
@@ -1772,8 +1772,8 @@
                       }
                     ],
                     "range": [
-                      4090,
-                      4133
+                      4088,
+                      4131
                     ],
                     "loc": {
                       "start": {
@@ -1790,8 +1790,8 @@
                     "type": "Identifier",
                     "name": "lift",
                     "range": [
-                      4134,
-                      4138
+                      4132,
+                      4136
                     ],
                     "loc": {
                       "start": {
@@ -1805,8 +1805,8 @@
                     }
                   },
                   "range": [
-                    4090,
-                    4138
+                    4088,
+                    4136
                   ],
                   "loc": {
                     "start": {
@@ -1826,8 +1826,8 @@
                       "type": "Identifier",
                       "name": "CombineLatestOperator",
                       "range": [
-                        4143,
-                        4164
+                        4141,
+                        4162
                       ],
                       "loc": {
                         "start": {
@@ -1845,8 +1845,8 @@
                         "type": "Identifier",
                         "name": "project",
                         "range": [
-                          4165,
-                          4172
+                          4163,
+                          4170
                         ],
                         "loc": {
                           "start": {
@@ -1861,8 +1861,8 @@
                       }
                     ],
                     "range": [
-                      4139,
-                      4173
+                      4137,
+                      4171
                     ],
                     "loc": {
                       "start": {
@@ -1877,8 +1877,8 @@
                   }
                 ],
                 "range": [
-                  4090,
-                  4174
+                  4088,
+                  4172
                 ],
                 "loc": {
                   "start": {
@@ -1892,8 +1892,8 @@
                 }
               },
               "range": [
-                4083,
-                4175
+                4081,
+                4173
               ],
               "loc": {
                 "start": {
@@ -1908,8 +1908,8 @@
             }
           ],
           "range": [
-            3539,
-            4177
+            3537,
+            4175
           ],
           "loc": {
             "start": {
@@ -1925,8 +1925,8 @@
         "generator": false,
         "expression": false,
         "range": [
-          3500,
-          4177
+          3498,
+          4175
         ],
         "loc": {
           "start": {
@@ -1959,10 +1959,10 @@
           },
           {
             "type": "Block",
-            "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回\n * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
+            "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable\n * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
             "range": [
               250,
-              3492
+              3490
             ],
             "loc": {
               "start": {
@@ -1981,8 +1981,8 @@
             "type": "Line",
             "value": "# sourceMappingURL=combineLatest.js.map",
             "range": [
-              4178,
-              4219
+              4176,
+              4217
             ],
             "loc": {
               "start": {
@@ -2000,8 +2000,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        3493,
-        4177
+        3491,
+        4175
       ],
       "loc": {
         "start": {
@@ -2034,10 +2034,10 @@
         },
         {
           "type": "Block",
-          "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回\n * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
+          "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable\n * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
           "range": [
             250,
-            3492
+            3490
           ],
           "loc": {
             "start": {
@@ -2056,8 +2056,8 @@
           "type": "Line",
           "value": "# sourceMappingURL=combineLatest.js.map",
           "range": [
-            4178,
-            4219
+            4176,
+            4217
           ],
           "loc": {
             "start": {
@@ -2076,7 +2076,7 @@
   "sourceType": "module",
   "range": [
     0,
-    4177
+    4175
   ],
   "loc": {
     "start": {
@@ -2109,10 +2109,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回\n * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
+      "value": "*\n * 组合多个 Observables 来创建一个 Observable ，该 Observable 的值根据每个输入 Observable 的最新值计算得出的。\n *\n * <span class=\"informal\">它将使用所有输入中的最新值计算公式，然后发出该公式的输出。</span>\n *\n * <img src=\"./img/combineLatest.png\" width=\"100%\">\n *\n * `combineLatest` 结合所有输入 Observable 参数的值. 顺序订阅每个 Observable，\n * 每当任一输入 Observable 发出，收集每个输入 Observable 的最新值组成一个数组。所以，当你给操作符\n * 传入 n 个 Observable，返回的 Observable 总是会发出一个长度为 n 的数组，对应输入 Observable\n * 的顺序（第一个 Observable 的值放到数组的第一个）。\n *\n * 静态版本的 `combineLatest` 接受一个 Observables 数组或者每个 Observable 可以直接作为参数。\n * 请注意，如果你事先不知道你将要结合多少个 Observable， 那么 Observables 数组是一个好的选择。\n * 传递空的数组将会导致返回 Observable 立马完成。\n *\n * 为了保证输出数组的长度相同，`combineLatest` 实际上会等待所有的输入 Observable 至少发出一次，\n * 在返回 Observable 发出之前。这意味着如果某个输入 Observable 在其余的输入 Observable 之前发出，它所发出\n * 的值只保留最新的。另一方面，如果某个输入 Observable 没有发出值就完成了，返回 Observable 也不会发\n * 射值并立马完成，因为不可能从已经完成的 Observable 中收集到值。同样的，如果某个输入 Observable\n * 不发出值也不完成，`combineLatest`会永远不发出值也不结束。所以，再次强调下，它会等待所有的流\n * 去发出值。\n *\n * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回\n * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable\n * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它\n * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会\n * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。\n *\n * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数\n * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接\n * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的\n * 函数。\n *\n * @example <caption>结合两个 timer Observables</caption>\n * const firstTimer = Rx.Observable.timer(0, 1000); // 从现在开始，每隔1秒发出0, 1, 2...\n * const secondTimer = Rx.Observable.timer(500, 1000); // 0.5秒后，每隔1秒发出0, 1, 2...\n * const combinedTimers = Rx.Observable.combineLatest(firstTimer, secondTimer);\n * combinedTimers.subscribe(value => console.log(value));\n * // Logs\n * // [0, 0] after 0.5s\n * // [1, 0] after 1s\n * // [1, 1] after 1.5s\n * // [2, 1] after 2s\n *\n *\n * @example <caption>结合 Observables 数组</caption>\n * const observables = [1, 5, 10].map(\n *   n => Rx.Observable.of(n).delay(n * 1000).startWith(0) // 先发出0，然后在 n 秒后发出 n。\n * );\n * const combined = Rx.Observable.combineLatest(observables);\n * combined.subscribe(value => console.log(value));\n * // 日志\n * // [0, 0, 0] 立刻\n * // [1, 0, 0] 1s 后\n * // [1, 5, 0] 5s 后\n * // [1, 5, 10] 10s 后\n *\n *\n * @example <caption>使用 project 函数动态计算体重指数</caption>\n * var weight = Rx.Observable.of(70, 72, 76, 79, 75);\n * var height = Rx.Observable.of(1.76, 1.77, 1.78);\n * var bmi = Rx.Observable.combineLatest(weight, height, (w, h) => w / (h * h));\n * bmi.subscribe(x => console.log('BMI is ' + x));\n *\n * // 控制台输出:\n * // BMI is 24.212293388429753\n * // BMI is 23.93948099205209\n * // BMI is 23.671253629592222\n *\n *\n * @see {@link combineAll}\n * @see {@link merge}\n * @see {@link withLatestFrom}\n *\n * @param {ObservableInput} observable1 用来和其他 Observables 进行结合的输入 Observable 。\n * @param {ObservableInput} observable2 用来和其他 Observables 进行结合的输入 Observable 。\n * 可以有多个输入Observables传入或者第一个参数是Observables数组\n * @param {function} [project] 投射成输出 Observable 上的一个新的值。\n * @param {Scheduler} [scheduler=null] 用来订阅每个输入 Observable 的调度器。\n * @return {Observable} 该 Observable 为每个输入 Observable 的最新值的投射，或者每个输入 Observable 的最新值的数组。\n * @static true\n * @name combineLatest\n * @owner Observable\n ",
       "range": [
         250,
-        3492
+        3490
       ],
       "loc": {
         "start": {
@@ -2129,8 +2129,8 @@
       "type": "Line",
       "value": " if the first and only other argument besides the resultSelector is an array",
       "range": [
-        3812,
-        3890
+        3810,
+        3888
       ],
       "loc": {
         "start": {
@@ -2147,8 +2147,8 @@
       "type": "Line",
       "value": " assume it's been called with `combineLatest([obs1, obs2, obs3], project)`",
       "range": [
-        3895,
-        3971
+        3893,
+        3969
       ],
       "loc": {
         "start": {
@@ -2165,8 +2165,8 @@
       "type": "Line",
       "value": "# sourceMappingURL=combineLatest.js.map",
       "range": [
-        4178,
-        4219
+        4176,
+        4217
       ],
       "loc": {
         "start": {

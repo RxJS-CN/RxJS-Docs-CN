@@ -2092,14 +2092,14 @@ var CombineLatestSubscriber = (function (_super) {
  * 去发出值。
  *
  * 如果给`combineLatest`至少传递一个输入 Observable 并且所有传入的输入 Observable 都发出了值，返回
- * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，`combineLatest`返回
- * Observable 仍然会发出值当其他输入 Observable 也发出值的时候。对于完成的输入 Observable，它
+ * Observable 将会在所有结合流完成后完成。所以即使某些 Observable 完成了，当其他输入 Observable
+ * 发出值的时候，combineLatest返回 Observable 仍然会发出值。对于完成的输入 Observable，它
  * 的值一直是最后发出的值。另一方面，如果任一输入 Observable 发生错误，`combineLatest`也会
  * 立马触发错误状态，所有的其他输入 Observable 都会被解除订阅。
  *
  * `combineLatest`接受一个可选的参数投射函数，它接受返回 Observable 发出的值。投射函数
  * 可以返回任何数据，这些数据代替默认的数组被返回 Observable 发出。需要注意的是，投射函数并不接
- * 受值的数组，还是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
+ * 受值的数组，而是值本身。这意味着默认的投射函数就是一个接受所有参数并把它们放到一个数组里面的
  * 函数。
  *
  * @example <caption>结合两个 timer Observables</caption>
@@ -4774,7 +4774,7 @@ var TimerObservable = (function (_super) {
      *
      * <img src="./img/timer.png" width="100%">
      *
-     * `timer` 返回一个发出有限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
+     * `timer` 返回一个发出无限自增数列的 Observable, 具有一定的时间间隔，这个间隔由你来选择。 第一个发送发生在
      * 初始延时之后. 初始延时就像是{@link Date}。 默认情况下, 这个操作符使用 async 调度器来提供时间的概念,
      * 但是你也可以传递任何调度器。 如果时间周期没有被指定, 输出 Observable 只发出0。 否则,会发送一个无限数列。
      *
@@ -4789,7 +4789,7 @@ var TimerObservable = (function (_super) {
      * @see {@link interval}
      * @see {@link delay}
      *
-     * @param {number|Date} initialDelay 在发出第一个值 0 之i前等待的初始延迟时间。
+     * @param {number|Date} initialDelay 在发出第一个值 0 之前等待的初始延迟时间。
      * @param {number} [period] 连续数字发送之间的时间周期。
      * @param {Scheduler} [scheduler=async] 调度器，用来调度值的发送, 提供“时间”的概念。
      * @return {Observable} 该 Observable 在初始时延(initialDelay)后发出0，并且在之后的每个时间周期(period)后发出按自增的数字。

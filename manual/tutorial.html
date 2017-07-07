@@ -232,7 +232,7 @@ input.take(3)
   .map(event =&gt; event.target.value)
   .subscribe(value =&gt; console.log(value)); // &quot;hel&quot;
 
-// &#x76F4;&#x5230;&#x5176;&#x4ED6; observable &#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#x624D;&#x4F1A;&#x901A;&#x8FC7;&#x4E8B;&#x4EF6;
+// &#x76F4;&#x5230;&#x5176;&#x4ED6; observable &#x89E6;&#x53D1;&#x4E8B;&#x4EF6;&#x624D;&#x505C;&#x6B62;&#x4E8B;&#x4EF6;&#x6D41;
 var stopStream = Rx.Observable.fromEvent(document.querySelector(&apos;button&apos;), &apos;click&apos;);
 input.takeUntil(stopStream)
   .map(event =&gt; event.target.value)

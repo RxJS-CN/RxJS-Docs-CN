@@ -115,14 +115,14 @@ import { CombineLatestOperator } from &apos;../operator/combineLatest&apos;;
  * &#x53BB;&#x53D1;&#x51FA;&#x503C;&#x3002;
  *
  * &#x5982;&#x679C;&#x7ED9;`combineLatest`&#x81F3;&#x5C11;&#x4F20;&#x9012;&#x4E00;&#x4E2A;&#x8F93;&#x5165; Observable &#x5E76;&#x4E14;&#x6240;&#x6709;&#x4F20;&#x5165;&#x7684;&#x8F93;&#x5165; Observable &#x90FD;&#x53D1;&#x51FA;&#x4E86;&#x503C;&#xFF0C;&#x8FD4;&#x56DE;
- * Observable &#x5C06;&#x4F1A;&#x5728;&#x6240;&#x6709;&#x7ED3;&#x5408;&#x6D41;&#x5B8C;&#x6210;&#x540E;&#x5B8C;&#x6210;&#x3002;&#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x67D0;&#x4E9B; Observable &#x5B8C;&#x6210;&#x4E86;&#xFF0C;`combineLatest`&#x8FD4;&#x56DE;
- * Observable &#x4ECD;&#x7136;&#x4F1A;&#x53D1;&#x51FA;&#x503C;&#x5F53;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable &#x4E5F;&#x53D1;&#x51FA;&#x503C;&#x7684;&#x65F6;&#x5019;&#x3002;&#x5BF9;&#x4E8E;&#x5B8C;&#x6210;&#x7684;&#x8F93;&#x5165; Observable&#xFF0C;&#x5B83;
+ * Observable &#x5C06;&#x4F1A;&#x5728;&#x6240;&#x6709;&#x7ED3;&#x5408;&#x6D41;&#x5B8C;&#x6210;&#x540E;&#x5B8C;&#x6210;&#x3002;&#x6240;&#x4EE5;&#x5373;&#x4F7F;&#x67D0;&#x4E9B; Observable &#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x5F53;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable
+ * &#x53D1;&#x51FA;&#x503C;&#x7684;&#x65F6;&#x5019;&#xFF0C;combineLatest&#x8FD4;&#x56DE; Observable &#x4ECD;&#x7136;&#x4F1A;&#x53D1;&#x51FA;&#x503C;&#x3002;&#x5BF9;&#x4E8E;&#x5B8C;&#x6210;&#x7684;&#x8F93;&#x5165; Observable&#xFF0C;&#x5B83;
  * &#x7684;&#x503C;&#x4E00;&#x76F4;&#x662F;&#x6700;&#x540E;&#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#xFF0C;&#x5982;&#x679C;&#x4EFB;&#x4E00;&#x8F93;&#x5165; Observable &#x53D1;&#x751F;&#x9519;&#x8BEF;&#xFF0C;`combineLatest`&#x4E5F;&#x4F1A;
  * &#x7ACB;&#x9A6C;&#x89E6;&#x53D1;&#x9519;&#x8BEF;&#x72B6;&#x6001;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x5176;&#x4ED6;&#x8F93;&#x5165; Observable &#x90FD;&#x4F1A;&#x88AB;&#x89E3;&#x9664;&#x8BA2;&#x9605;&#x3002;
  *
  * `combineLatest`&#x63A5;&#x53D7;&#x4E00;&#x4E2A;&#x53EF;&#x9009;&#x7684;&#x53C2;&#x6570;&#x6295;&#x5C04;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x8FD4;&#x56DE; Observable &#x53D1;&#x51FA;&#x7684;&#x503C;&#x3002;&#x6295;&#x5C04;&#x51FD;&#x6570;
  * &#x53EF;&#x4EE5;&#x8FD4;&#x56DE;&#x4EFB;&#x4F55;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4EE3;&#x66FF;&#x9ED8;&#x8BA4;&#x7684;&#x6570;&#x7EC4;&#x88AB;&#x8FD4;&#x56DE; Observable &#x53D1;&#x51FA;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5E76;&#x4E0D;&#x63A5;
- * &#x53D7;&#x503C;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x8FD8;&#x662F;&#x503C;&#x672C;&#x8EAB;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x9ED8;&#x8BA4;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53D7;&#x6240;&#x6709;&#x53C2;&#x6570;&#x5E76;&#x628A;&#x5B83;&#x4EEC;&#x653E;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x91CC;&#x9762;&#x7684;
+ * &#x53D7;&#x503C;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x800C;&#x662F;&#x503C;&#x672C;&#x8EAB;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x9ED8;&#x8BA4;&#x7684;&#x6295;&#x5C04;&#x51FD;&#x6570;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53D7;&#x6240;&#x6709;&#x53C2;&#x6570;&#x5E76;&#x628A;&#x5B83;&#x4EEC;&#x653E;&#x5230;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x91CC;&#x9762;&#x7684;
  * &#x51FD;&#x6570;&#x3002;
  *
  * @example &lt;caption&gt;&#x7ED3;&#x5408;&#x4E24;&#x4E2A; timer Observables&lt;/caption&gt;
