@@ -79,7 +79,7 @@ input.take(3)
   .map(event => event.target.value)
   .subscribe(value => console.log(value)); // "hel"
 
-// 直到其他 observable 触发事件才会通过事件
+// 直到其他 observable 触发事件才停止事件流
 var stopStream = Rx.Observable.fromEvent(document.querySelector('button'), 'click');
 input.takeUntil(stopStream)
   .map(event => event.target.value)
