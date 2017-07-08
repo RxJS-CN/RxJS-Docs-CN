@@ -9638,17 +9638,17 @@ var IsEmptySubscriber = (function (_super) {
 Observable.prototype.isEmpty = isEmpty;
 
 /**
- * 在由另外一个 Observable 决定的时间段里忽略源数据，然后发出源 Observable 最新发出的值，
+ * 在另一个 Observable 决定的时间段里忽略源数据，然后发出源 Observable 中最新发出的值，
  * 然后重复此过程。
  *
- * <span class="informal">就像是{@link auditTime}, 但是沉默持续时间由第二个 Observable 决定。</span>
+ * <span class="informal">就像是{@link auditTime}, 但是沉默持续时间段由第二个 Observable 决定。</span>
  *
  * <img src="./img/audit.png" width="100%">
  *
- * `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
- * 忽略源值。一旦第一个源值达到，它会被转发到输出 Observable ，然后通过使用源值调用 durationSelector 函数来
- * 启动定时器，这个函数返回 "duration" Observable 。当 duration Observable 发出值或完成时，定时器会被禁用，
- * 并且下一个源值也是重复此过程。
+ * `audit` 和 `throttle` 很像, 但是发出沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部时间器被禁用，
+ * 它就会在输出 Observable 上发出源 Observable 的最新值，并且当时间器启用时忽略源值。初始时，时间器是禁用的。
+ * 只要第一个源值到达，时间器是用源值调用 durationselector 方法启用，返回 "duration" Observable。 当 duration Observable
+ * 发出数据或者完成时，时间器禁用，然后输出 Observable 发出最新的源值，并且不断的重复这个过程。
  *
  * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
@@ -9734,17 +9734,16 @@ var AuditSubscriber = (function (_super) {
 Observable.prototype.audit = audit;
 
 /**
- * 在 duration 毫秒内忽略源值并发出源 Observable 的最新值， 然后重复此过程。
+ * duration 毫秒内忽略源值，然后发出源 Observable 的最新值， 并且重复此过程。
  *
- * <span class="informal">当它看见一个源值，它会在接下来的 duration 毫秒内忽略这个值和接下来的源值，然后发出最新的源值。</span>
+ * <span class="informal">当它看见一个源值，它会在接下来的 duration 毫秒内忽略这个值以及接下来的源值，过后发出最新的源值。</span>
  *
  * <img src="./img/auditTime.png" width="100%">
  *
  *
- *  `auditTime`和`throttleTime`很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部定时间被禁用，它就会在
- * 输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时
- * 忽略源值。只要源 Observable 发出第一值, 时间间隔被启用。度过持续时间后(或者时间单位由内部可选的参数调度器决定),
- * 时间间隔被禁用, 输出 Observable 发出最新的值, 不断的重复这个过程。
+ * `auditTime` 和 `throttleTime` 很像, 但是发送沉默时间窗口的最后一个值, 而不是第一个。只要 audit 的内部时间器被禁用，它就会在
+ * 输出 Observable 上发出源 Observable 的最新值，并且当定时器启用时忽略源值。初始时，时间器是禁用的。只要第一个值到达, 时间器被启用。度过
+ * 持续时间后(或者时间单位由内部可选的参数调度器决定),时间间隔被禁用, 输出 Observable 发出最新的值, 不断的重复这个过程。可选项 IScheduler 用来管理时间器。
  *
  * @example <caption>以每秒最多点击一次的频率发出点击事件</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
