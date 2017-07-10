@@ -14,7 +14,7 @@ export function defaultIfEmpty<T, R>(this: Observable<T>, defaultValue?: R): Obs
  *
  * <img src="./img/defaultIfEmpty.png" width="100%">
  *
- * defaultIfEmpty 发出源 Observable 发出的值或指定的默认值，如果源 Observable 是空的(在完成之前没有发出任何 next 值)。
+ * `defaultIfEmpty` 发出源 Observable 发出的值或指定的默认值，如果源 Observable 是空的(在完成之前没有发出任何 next 值)。
  *
  * @example <caption>如果在5秒内没有点击事件发生,发出"no clicks"</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
