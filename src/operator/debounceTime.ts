@@ -12,13 +12,13 @@ import { async } from '../scheduler/async';
  *
  * <img src="./img/debounceTime.png" width="100%">
  *
- * `debounceTime`延时发送源Observable发送的值,但是会丢弃正在排队的发送如果源Observable
- * 又发出新值。 该操作符会追踪源 Observable 的最新值, 并且发出它当且仅当在`dueTime`时间段内
- * 没有发送行为。 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出Observable
+ * `debounceTime` 延时发送源 Observable 发送的值,但是会丢弃正在排队的发送如果源 Observable
+ * 又发出新值。 该操作符会追踪源 Observable 的最新值, 并且发出它当且仅当在 `dueTime` 时间段内
+ * 没有发送行为。 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出 Observable
  * 中发出。
  *
  * 这是一个控制发送频率的操作符，因为不可能在任何时间窗口的持续时间(dueTime)内发出一个以上的值，同样也是一个延时类操作符，因为输出
- * 并不一定发生在同一时间，正如源Observable上发生的。 可选性的接收一个 {@link IScheduler} 用于管理定时器。
+ * 并不一定发生在同一时间，正如源 Observable 上发生的。 可选性的接收一个 {@link IScheduler} 用于管理定时器。
  *
  * @example <caption>在一顿狂点后只发出最新的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
