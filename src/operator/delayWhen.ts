@@ -16,7 +16,7 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *
  * `delayWhen` 通过由另一个 Observable 决定的时间段来延迟源 Observable 的每个发出值。
  * 当源发出一个数据，`delayDurationSelector`函数将该源值当做参数, 返回一个被称为"duration"的Observable。
- * 当且仅当持续发出或者完成时，源值才会在输出 Observable 上发出。
+ * 当且仅当duration发出或者完成时，源值才会在输出 Observable 上发出。
  *
  * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`, 它是一个Observable。
  * 当`subscriptionDelay`发出第一个值或者完成, 源Observable被订阅并且开始像前一段描
