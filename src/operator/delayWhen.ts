@@ -8,20 +8,20 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 延时源 Observabl e的所有的数据项的发送一个固定的时间段，该时间段由另一个 Observable 的发送决定。
+ * 在给定的时间范围内，延迟源 Observable 所有数据项的发送，该时间段由另一个 Observable 的发送决定。
  *
  * <span class="informal">就像是{@link delay}, 但是延时的时间间隔由第二个Observable决定.</span>
  *
  * <img src="./img/delayWhen.png" width="100%">
  *
  * `delayWhen` 通过由另一个 Observable 决定的时间段来延迟源 Observable 的每个发出值。
- * 当源发出一个数据,`delayDurationSelector`函数将该源值当做参数, 返回一个被称为"持续"Observable。
- * 当且仅当持续发出或者完成时，源值才会在输出 Observable 上发出。
+ * 当源发出一个数据，`delayDurationSelector` 函数将该源值当做参数, 返回一个被称为“持续”的 Observable。
+ * 当且仅当持续的 Observable 发出或完成时，源值才会在输出 Observable 上发出。
  *
- * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`, 它是一个Observable. 
- * 当`subscriptionDelay`发出第一个值或者完成, 源Observable被订阅并且开始像前一段描
- * 述的一样. 如果`subscriptionDelay`没有提供,`delayWhen` 将会订阅源Observable只
- * 要输出Observable被订阅.
+ * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`，它是一个 Observable。
+ * 当 `subscriptionDelay` 发出第一个值或者完成，源 Observable 被订阅并且开始像前一段描
+ * 述的一样。 如果 `subscriptionDelay` 没有提供，`delayWhen` 将会订阅源 Observable 只
+ * 要输出 Observable 被订阅。
  *
  * @example <caption>将每次点击延迟0到5秒的随机时间</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');

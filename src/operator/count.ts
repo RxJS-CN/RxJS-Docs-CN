@@ -22,7 +22,7 @@ import { Subscriber } from '../Subscriber';
  * var result = secondsBeforeClick.count();
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>记录1到7中间有多少个素数</caption>
+ * @example <caption>记录1到7中间有多少个奇数</caption>
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i => i % 2 === 1);
  * result.subscribe(x => console.log(x));
