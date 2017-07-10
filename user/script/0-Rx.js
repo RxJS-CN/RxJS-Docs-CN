@@ -7256,7 +7256,7 @@ Observable.prototype.concatMapTo = concatMapTo;
  * var result = secondsBeforeClick.count();
  * result.subscribe(x => console.log(x));
  *
- * @example <caption>记录1到7中间有多少个素数</caption>
+ * @example <caption>记录1到7中间有多少个奇数</caption>
  * var numbers = Rx.Observable.range(1, 7);
  * var result = numbers.count(i => i % 2 === 1);
  * result.subscribe(x => console.log(x));
@@ -7521,13 +7521,13 @@ Observable.prototype.debounce = debounce;
  *
  * <img src="./img/debounceTime.png" width="100%">
  *
- * `debounceTime`延时发送源Observable发送的值,但是会丢弃正在排队的发送如果源Observable
- * 又发出新值。 该操作符追逐了源Observable中最新的值, 并且发出它当且仅当在`dueTime`时间段内
- * 没有发送行为。 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出Observable
+ * `debounceTime` 延时发送源 Observable 发送的值,但是会丢弃正在排队的发送如果源 Observable
+ * 又发出新值。 该操作符会追踪源 Observable 的最新值, 并且发出它当且仅当在 `dueTime` 时间段内
+ * 没有发送行为。 如果新的值在`dueTime`静默时间段出现, 之前的值会被丢弃并且不会在输出 Observable
  * 中发出。
  *
- * 这是一个控制发送频率的操作符，因为不可能在任何时间窗口的持续时间(dueTime)内发出一个以上的值，同样也是一个延时类操作符因为输出
- * 并不一定发生在同一时间因为是源Observable上发生的。 可选性的接收一个 {@link IScheduler} 用于管理定时器。
+ * 这是一个控制发送频率的操作符，因为不可能在任何时间窗口的持续时间(dueTime)内发出一个以上的值，同样也是一个延时类操作符，因为输出
+ * 并不一定发生在同一时间，正如源 Observable 上发生的。 可选性的接收一个 {@link IScheduler} 用于管理定时器。
  *
  * @example <caption>在一顿狂点后只发出最新的点击</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');
@@ -7631,8 +7631,8 @@ Observable.prototype.debounceTime = debounceTime;
  * @see {@link last}
  *
  * @param {any} [defaultValue=null] 如果源Observable是空的话使用的默认值。
- * @return {Observable} Observable，如果源
- * Observable不发送数据，要么发出特定的`defaultValue`, 要么发出源Observable发出的数据。
+ * @return {Observable} Observable，
+ *  当源 Observable 不发出值时，该 Observable 发出指定的 defaultValue ，否则发出源 Observable 所发出的值。
  * @method defaultIfEmpty
  * @owner Observable
  */
@@ -7796,20 +7796,20 @@ var DelayMessage = (function () {
 Observable.prototype.delay = delay;
 
 /**
- * 延时源 Observabl e的所有的数据项的发送一个固定的时间段，该时间段由另一个 Observable 的发送决定。
+ * 在给定的时间范围内，延迟源 Observable 所有数据项的发送，该时间段由另一个 Observable 的发送决定。
  *
  * <span class="informal">就像是{@link delay}, 但是延时的时间间隔由第二个Observable决定.</span>
  *
  * <img src="./img/delayWhen.png" width="100%">
  *
  * `delayWhen` 通过由另一个 Observable 决定的时间段来延迟源 Observable 的每个发出值。
- * 当源发出一个数据,`delayDurationSelector`函数将该源值当做参数, 返回一个被称为"持续"Observable。
- * 当且仅当持续发出或者完成时，源值才会在输出 Observable 上发出。
+ * 当源发出一个数据，`delayDurationSelector` 函数将该源值当做参数, 返回一个被称为“持续”的 Observable。
+ * 当且仅当持续的 Observable 发出或完成时，源值才会在输出 Observable 上发出。
  *
- * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`, 它是一个Observable.
- * 当`subscriptionDelay`发出第一个值或者完成, 源Observable被订阅并且开始像前一段描
- * 述的一样. 如果`subscriptionDelay`没有提供,`delayWhen` 将会订阅源Observable只
- * 要输出Observable被订阅.
+ * 可选的, `delayWhen` 接受第二个参数, `subscriptionDelay`，它是一个 Observable。
+ * 当 `subscriptionDelay` 发出第一个值或者完成，源 Observable 被订阅并且开始像前一段描
+ * 述的一样。 如果 `subscriptionDelay` 没有提供，`delayWhen` 将会订阅源 Observable 只
+ * 要输出 Observable 被订阅。
  *
  * @example <caption>将每次点击延迟0到5秒的随机时间</caption>
  * var clicks = Rx.Observable.fromEvent(document, 'click');

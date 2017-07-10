@@ -91,20 +91,20 @@ import { Observable } from &apos;../Observable&apos;;
 import { OuterSubscriber } from &apos;../OuterSubscriber&apos;;
 import { subscribeToResult } from &apos;../util/subscribeToResult&apos;;
 /**
- * &#x5EF6;&#x65F6;&#x6E90; Observabl e&#x7684;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x9879;&#x7684;&#x53D1;&#x9001;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6BB5;&#xFF0C;&#x8BE5;&#x65F6;&#x95F4;&#x6BB5;&#x7531;&#x53E6;&#x4E00;&#x4E2A; Observable &#x7684;&#x53D1;&#x9001;&#x51B3;&#x5B9A;&#x3002;
+ * &#x5728;&#x7ED9;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x8303;&#x56F4;&#x5185;&#xFF0C;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x6240;&#x6709;&#x6570;&#x636E;&#x9879;&#x7684;&#x53D1;&#x9001;&#xFF0C;&#x8BE5;&#x65F6;&#x95F4;&#x6BB5;&#x7531;&#x53E6;&#x4E00;&#x4E2A; Observable &#x7684;&#x53D1;&#x9001;&#x51B3;&#x5B9A;&#x3002;
  *
  * &lt;span class=&quot;informal&quot;&gt;&#x5C31;&#x50CF;&#x662F;{@link delay}, &#x4F46;&#x662F;&#x5EF6;&#x65F6;&#x7684;&#x65F6;&#x95F4;&#x95F4;&#x9694;&#x7531;&#x7B2C;&#x4E8C;&#x4E2A;Observable&#x51B3;&#x5B9A;.&lt;/span&gt;
  *
  * &lt;img src=&quot;./img/delayWhen.png&quot; width=&quot;100%&quot;&gt;
  *
  * `delayWhen` &#x901A;&#x8FC7;&#x7531;&#x53E6;&#x4E00;&#x4E2A; Observable &#x51B3;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x6BB5;&#x6765;&#x5EF6;&#x8FDF;&#x6E90; Observable &#x7684;&#x6BCF;&#x4E2A;&#x53D1;&#x51FA;&#x503C;&#x3002;
- * &#x5F53;&#x6E90;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x6570;&#x636E;,`delayDurationSelector`&#x51FD;&#x6570;&#x5C06;&#x8BE5;&#x6E90;&#x503C;&#x5F53;&#x505A;&#x53C2;&#x6570;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x88AB;&#x79F0;&#x4E3A;&quot;&#x6301;&#x7EED;&quot;Observable&#x3002;
- * &#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x6301;&#x7EED;&#x53D1;&#x51FA;&#x6216;&#x8005;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6E90;&#x503C;&#x624D;&#x4F1A;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x3002;
+ * &#x5F53;&#x6E90;&#x53D1;&#x51FA;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#xFF0C;`delayDurationSelector` &#x51FD;&#x6570;&#x5C06;&#x8BE5;&#x6E90;&#x503C;&#x5F53;&#x505A;&#x53C2;&#x6570;, &#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x88AB;&#x79F0;&#x4E3A;&#x201C;&#x6301;&#x7EED;&#x201D;&#x7684; Observable&#x3002;
+ * &#x5F53;&#x4E14;&#x4EC5;&#x5F53;&#x6301;&#x7EED;&#x7684; Observable &#x53D1;&#x51FA;&#x6216;&#x5B8C;&#x6210;&#x65F6;&#xFF0C;&#x6E90;&#x503C;&#x624D;&#x4F1A;&#x5728;&#x8F93;&#x51FA; Observable &#x4E0A;&#x53D1;&#x51FA;&#x3002;
  *
- * &#x53EF;&#x9009;&#x7684;, `delayWhen` &#x63A5;&#x53D7;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;, `subscriptionDelay`, &#x5B83;&#x662F;&#x4E00;&#x4E2A;Observable.
- * &#x5F53;`subscriptionDelay`&#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x8005;&#x5B8C;&#x6210;, &#x6E90;Observable&#x88AB;&#x8BA2;&#x9605;&#x5E76;&#x4E14;&#x5F00;&#x59CB;&#x50CF;&#x524D;&#x4E00;&#x6BB5;&#x63CF;
- * &#x8FF0;&#x7684;&#x4E00;&#x6837;. &#x5982;&#x679C;`subscriptionDelay`&#x6CA1;&#x6709;&#x63D0;&#x4F9B;,`delayWhen` &#x5C06;&#x4F1A;&#x8BA2;&#x9605;&#x6E90;Observable&#x53EA;
- * &#x8981;&#x8F93;&#x51FA;Observable&#x88AB;&#x8BA2;&#x9605;.
+ * &#x53EF;&#x9009;&#x7684;, `delayWhen` &#x63A5;&#x53D7;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;, `subscriptionDelay`&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A; Observable&#x3002;
+ * &#x5F53; `subscriptionDelay` &#x53D1;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x503C;&#x6216;&#x8005;&#x5B8C;&#x6210;&#xFF0C;&#x6E90; Observable &#x88AB;&#x8BA2;&#x9605;&#x5E76;&#x4E14;&#x5F00;&#x59CB;&#x50CF;&#x524D;&#x4E00;&#x6BB5;&#x63CF;
+ * &#x8FF0;&#x7684;&#x4E00;&#x6837;&#x3002; &#x5982;&#x679C; `subscriptionDelay` &#x6CA1;&#x6709;&#x63D0;&#x4F9B;&#xFF0C;`delayWhen` &#x5C06;&#x4F1A;&#x8BA2;&#x9605;&#x6E90; Observable &#x53EA;
+ * &#x8981;&#x8F93;&#x51FA; Observable &#x88AB;&#x8BA2;&#x9605;&#x3002;
  *
  * @example &lt;caption&gt;&#x5C06;&#x6BCF;&#x6B21;&#x70B9;&#x51FB;&#x5EF6;&#x8FDF;0&#x5230;5&#x79D2;&#x7684;&#x968F;&#x673A;&#x65F6;&#x95F4;&lt;/caption&gt;
  * var clicks = Rx.Observable.fromEvent(document, &apos;click&apos;);
