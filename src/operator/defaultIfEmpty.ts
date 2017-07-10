@@ -27,7 +27,7 @@ export function defaultIfEmpty<T, R>(this: Observable<T>, defaultValue?: R): Obs
  *
  * @param {any} [defaultValue=null] 如果源Observable是空的话使用的默认值。
  * @return {Observable} Observable，
- * 要么发出特定的`defaultValue`, 要么发出源Observable发出的数据。
+ * 源 Observable 不发出值则发出特定的`defaultValue`, 不然发出源Observable发出的数据。
  * @method defaultIfEmpty
  * @owner Observable
  */
