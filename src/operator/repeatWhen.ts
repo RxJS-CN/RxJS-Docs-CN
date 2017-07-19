@@ -11,7 +11,7 @@ import { InnerSubscriber } from '../InnerSubscriber';
 import { subscribeToResult } from '../util/subscribeToResult';
 
 /**
- * 返回的 Observalb 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier` 
+ * 返回的 Observalbe 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier`
  * 返回的 Observable 。如果这个 Observale 调用了 `complete` 或 `error`，那么这个方法会在子 subscription 上调用 
  * `complete` 或 `error` 。否则，此方法将重新订阅源 Observable。
  *
