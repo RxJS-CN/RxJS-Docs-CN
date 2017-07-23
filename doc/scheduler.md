@@ -124,4 +124,4 @@ var proxyObserver = {
 
 其他接收调度器作为参数的实例操作符：`cache`、`combineLatest`、`concat`、`expand`、`merge`、`publishReplay`、`startWith`。
 
-注意，`cache` 和 `publishReplay` 都接收调度器是因为它们使用了 ReplaySubject 。ReplaySubjects 的构造函数接收一个可选的调度器作为最后的参数，因为 ReplaySubject 可能会处理时间，这只在调度器的上下文中才有意义。默认情况下，ReplaySubject 使用 `quequ` 调度器来提供时钟。
+注意，`cache` 和 `publishReplay` 都接收调度器是因为它们使用了 ReplaySubject 。ReplaySubjects 的构造函数接收一个可选的调度器作为最后的参数，因为 ReplaySubject 可能会处理时间，这只在调度器的上下文中才有意义。默认情况下，ReplaySubject 使用 `queue` 调度器来提供时钟。
