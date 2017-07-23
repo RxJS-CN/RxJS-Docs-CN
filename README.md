@@ -30,8 +30,8 @@
 
 感谢各位所做出的贡献!!!
 
-| [<img src="https://avatars0.githubusercontent.com/u/2631733?v=3" width="100px;"/><br /><sub>Treri Liu</sub>](http://iSay.me) | [<img src="https://avatars3.githubusercontent.com/u/5787145?v=3" width="100px;"/><br /><sub>lincheng0803</sub>](https://github.com/lincheng0803) | [<img src="https://avatars1.githubusercontent.com/u/12392733?v=3" width="100px;"/><br /><sub>张树源</sub>](https://mrxf.github.io) |
-| :---: | :---: | :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/2631733?v=3" width="100px;"/><br /><sub>Treri Liu</sub>](http://iSay.me) | [<img src="https://avatars3.githubusercontent.com/u/5787145?v=3" width="100px;"/><br /><sub>lincheng0803</sub>](https://github.com/lincheng0803) | [<img src="https://avatars1.githubusercontent.com/u/12392733?v=3" width="100px;"/><br /><sub>张树源</sub>](https://mrxf.github.io) | [<img src="https://avatars1.githubusercontent.com/u/8630596?v=3" width="100px;"/><br /><sub>musicq</sub>](http://musicq.github.io/) |
+| :---: | :---: | :---: | :---: |
 
 ## 其他学习资源
 
