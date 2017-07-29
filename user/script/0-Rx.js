@@ -11008,7 +11008,7 @@ var RepeatSubscriber = (function (_super) {
 Observable.prototype.repeat = repeat;
 
 /**
- * 返回的 Observalb 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier`
+ * 返回的 Observalbe 是源 Observable 的镜像，除了 `complete` 。如果源 Observable 调用了 `complete`，这个方法会发出给 `notifier`
  * 返回的 Observable 。如果这个 Observale 调用了 `complete` 或 `error`，那么这个方法会在子 subscription 上调用
  * `complete` 或 `error` 。否则，此方法将重新订阅源 Observable。
  *
@@ -11701,7 +11701,7 @@ Observable.prototype.shareReplay = shareReplay;
  *
  * <img src="./img/single.png" width="100%">
  *
- * @throws {EmptyError} 如果 Observable 在完成之前发送了 `next` 通知，发送 EmptyError 给观察者的 `error` 回调回调函数。
+ * @throws {EmptyError} 如果 Observable 在发送任何 `next` 通知之前完成的话，则发送 EmptyError 给观察者的 `error` 回调回调函数。
  * @param {Function} predicate - 断言函数，用来评估源 Observable 的数据项。
  * @return {Observable<T>} 该 Observable 发出源 Observable 所发出的值中匹配指定 predicate 函数的单个项。
  .
