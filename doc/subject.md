@@ -113,7 +113,7 @@ multicasted.connect();
 9. 第二个观察者取消了多播 Observable 的订阅
 10. **多播 Observable 的连接已中断(底层进行的操作是取消订阅)**
 
-要实现这点，需要显示地调用 `connect()`，代码如下：
+要实现这点，需要显式地调用 `connect()`，代码如下：
 
 ```js
 var source = Rx.Observable.interval(500);
@@ -146,7 +146,7 @@ setTimeout(() => {
 }, 2000);
 ```
 
-如果不想显示调用 `connect()`，我们可以使用 ConnectableObservable 的 `refCount()` 方法(引用计数)，这个方法返回 Observable，这个 Observable 会追踪有多少个订阅者。当订阅者的数量从`0`变成`1`，它会调用 `connect()` 以开启共享的执行。当订阅者数量从`1`变成`0`时，它会完全取消订阅，停止进一步的执行。
+如果不想显式调用 `connect()`，我们可以使用 ConnectableObservable 的 `refCount()` 方法(引用计数)，这个方法返回 Observable，这个 Observable 会追踪有多少个订阅者。当订阅者的数量从`0`变成`1`，它会调用 `connect()` 以开启共享的执行。当订阅者数量从`1`变成`0`时，它会完全取消订阅，停止进一步的执行。
 
 <span class="informal">`refCount` 的作用是，当有第一个订阅者时，多播 Observable 会自动地启动执行，而当最后一个订阅者离开时，多播 Observable 会自动地停止执行。</span>
 
