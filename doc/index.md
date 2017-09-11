@@ -7,7 +7,7 @@ RxJS 是使用 Observables 的响应式编程的库，它使编写异步或基�
 ### [» 安装](./manual/installation.html)
 *如何通过 npm 或 CDN 安装 RxJS*
 ### [» 学习](./manual/overview.html)
-*阅读学习手册，手册内容包含 Observalbes、Observer、Subject，等等*
+*阅读学习手册，手册内容包含 Observables、Observer、Subject，等等*
 ### [» 完整参考](./identifiers.html)
 *阅读每个操作符的详细文档*
 ### [» 查看示例](./manual/tutorial.html)
