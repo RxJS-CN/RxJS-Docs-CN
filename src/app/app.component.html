@@ -1,0 +1,37 @@
+<md-sidenav-container fullscreen>
+  <md-toolbar color="accent">
+    <button md-button (click)="sidenav.toggle()">
+      <md-icon>
+        menu
+      </md-icon>
+    </button>
+    RxJS Docs
+  </md-toolbar>
+  <md-sidenav #sidenav>
+    <md-toolbar>
+      <span>
+        <button md-button routerLink="/rxjs">
+          Home
+        </button>
+      </span>
+      <md-toolbar-row>
+        <button md-button routerLink="/operators">
+          Operators
+        </button>
+      </md-toolbar-row>
+      <md-toolbar-row>
+        <button md-button routerLink="/companies">
+          Companies
+        </button>
+      </md-toolbar-row>
+      <md-toolbar-row>
+        <button md-button routerLink="/team">
+          Team
+        </button>
+      </md-toolbar-row>
+    </md-toolbar>
+  </md-sidenav>
+  <div class="body-margin">
+    <router-outlet></router-outlet> 
+  </div>
+</md-sidenav-container>
