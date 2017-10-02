@@ -1,16 +1,16 @@
 <md-sidenav-container fullscreen>
-  <md-toolbar color="accent">
-    <button md-button (click)="sidenav.toggle()">
+  <md-toolbar color="accent" class="mat-elevation-z6">
+    <button md-icon-button (click)="sidenav.toggle()">
       <md-icon>
         menu
       </md-icon>
     </button>
-    RxJS Docs
+    <span class="title"> RxJS Docs </span>
   </md-toolbar>
   <md-sidenav #sidenav>
     <md-toolbar>
       <span>
-        <button md-button routerLink="/rxjs">
+        <button md-button routerLink="/">
           Home
         </button>
       </span>
@@ -32,6 +32,6 @@
     </md-toolbar>
   </md-sidenav>
   <div class="body-margin">
-    <router-outlet></router-outlet> 
+    <router-outlet></router-outlet>
   </div>
 </md-sidenav-container>

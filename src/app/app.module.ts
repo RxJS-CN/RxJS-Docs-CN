@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdToolbarModule, MdSidenavModule, MdIconModule, MdButtonModule } from '@angular/material';
-import { routing } from './app.routing';
+import { RouterModule } from '@angular/router';
+
+import { RXJS_DOC_ROUTES } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { OperatorsComponent } from './operators/operators.component';
@@ -21,7 +23,7 @@ import { RxjsComponent } from './rxjs/rxjs.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    routing,
+    RouterModule.forRoot(RXJS_DOC_ROUTES),
     MdToolbarModule,
     MdSidenavModule,
     MdIconModule,
