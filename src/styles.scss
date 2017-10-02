@@ -1,10 +1,46 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import "~@angular/material/theming";
+@include mat-core();
+
+// Define the theme.
+$primary: mat-palette($mat-indigo);
+$accent:  mat-palette($mat-pink);
+$theme: mat-light-theme($primary, $accent);
+@include angular-material-theme($theme);
 
 body {
-  font-family: Roboto;
-  margin: 0px;
- }
+  font-family: Roboto, sans-serif;
+}
 
- .body-margin {
-   margin: 50px;
- }
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.app-fullpage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+md-sidenav-container {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+}
+
+md-sidenav { 
+  width: 200px;
+}
+
+md-sidenav a.active .mat-list-item-content {
+  color: mat-color($accent);
+}
+
+.body-margin {
+  margin: 50px;
+}

@@ -1,37 +1,24 @@
-<md-sidenav-container fullscreen>
+<div class="app-fullpage">
   <md-toolbar color="accent" class="mat-elevation-z6">
     <button md-icon-button (click)="sidenav.toggle()">
-      <md-icon>
-        menu
-      </md-icon>
-    </button>
+    <md-icon>
+      menu
+    </md-icon>
+  </button>
     <span class="title"> RxJS Docs </span>
   </md-toolbar>
-  <md-sidenav #sidenav>
-    <md-toolbar>
-      <span>
-        <button md-button routerLink="/">
-          Home
-        </button>
-      </span>
-      <md-toolbar-row>
-        <button md-button routerLink="/operators">
-          Operators
-        </button>
-      </md-toolbar-row>
-      <md-toolbar-row>
-        <button md-button routerLink="/companies">
-          Companies
-        </button>
-      </md-toolbar-row>
-      <md-toolbar-row>
-        <button md-button routerLink="/team">
-          Team
-        </button>
-      </md-toolbar-row>
-    </md-toolbar>
-  </md-sidenav>
-  <div class="body-margin">
-    <router-outlet></router-outlet>
-  </div>
-</md-sidenav-container>
+  <md-sidenav-container>
+    <md-sidenav #sidenav>
+      <md-nav-list (click)="sidenav.toggle()">
+        <a *ngFor="let menu of menus" md-list-item routerLinkActive="active"
+          [routerLinkActiveOptions]="menu.options"
+          [routerLink]="menu.link">
+         {{menu.title}} 
+        </a>
+      </md-nav-list>
+    </md-sidenav>
+    <div class="body-margin">
+      <router-outlet></router-outlet>
+    </div>
+  </md-sidenav-container>
+</div>
