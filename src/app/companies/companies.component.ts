@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-companies',
+  selector: 'rx-companies',
   templateUrl: './companies.component.html',
-  styleUrls: ['./companies.component.css']
+  styleUrls: ['./companies.component.scss']
 })
 export class CompaniesComponent implements OnInit {
 

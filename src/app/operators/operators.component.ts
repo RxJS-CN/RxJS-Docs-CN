@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-operators',
+  selector: 'rx-operators',
   templateUrl: './operators.component.html',
-  styleUrls: ['./operators.component.css']
+  styleUrls: ['./operators.component.scss']
 })
 export class OperatorsComponent implements OnInit {
 
