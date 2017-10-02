@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'rx-companies',
+  selector: 'app-companies',
   templateUrl: './companies.component.html',
   styleUrls: ['./companies.component.scss']
 })

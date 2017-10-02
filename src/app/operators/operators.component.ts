@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'rx-operators',
+  selector: 'app-operators',
   templateUrl: './operators.component.html',
   styleUrls: ['./operators.component.scss']
 })
