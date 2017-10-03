@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
-class Menu {
+interface Menu {
   title: string;
   link: string;
-  options: { exact: boolean }; 
+  options: { exact: boolean };
 }
 
 @Component({
