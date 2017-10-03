@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ALL_OPERATORS } from '../operator-docs';
 
 @Component({
   selector: 'app-operators',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./operators.component.scss']
 })
 export class OperatorsComponent implements OnInit {
+  public operators = ALL_OPERATORS;
 
   constructor() { }
 

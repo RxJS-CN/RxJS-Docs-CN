@@ -1,3 +1,10 @@
-<p>
-  operators works!
-</p>
+<md-sidenav-container class="operator-container">
+  <md-sidenav mode="side" [opened]="true" class="operator-list-sidenav">
+    <md-list>
+      <md-list-item *ngFor="let operator of operators">
+        {{ operator.name }}
+      </md-list-item>
+    </md-list>
+  </md-sidenav>
+  Operator
+</md-sidenav-container>
