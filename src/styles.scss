@@ -4,6 +4,8 @@
 // Define the theme.
 $primary: mat-palette($mat-indigo);
 $accent:  mat-palette($mat-pink);
+$accent-color: mat-color($accent);
+$primary-color: mat-color($primary);
 $theme: mat-light-theme($primary, $accent);
 @include angular-material-theme($theme);
 

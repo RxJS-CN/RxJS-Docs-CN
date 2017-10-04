@@ -1,3 +1,5 @@
+@import '../../styles';
+
 :host {
   flex: 1 1 auto;
   overflow-y: auto;
@@ -6,4 +8,17 @@
 
 .operator-container {
   width: 100%;
+}
+
+.category-subheader {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white !important;
+  background: $primary-color;
+}
+
+.operator-list {
+  md-list-item:last-child {
+    margin-bottom: 15px;
+  }
 }

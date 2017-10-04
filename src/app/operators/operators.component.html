@@ -1,8 +1,9 @@
 <md-sidenav-container class="operator-container">
   <md-sidenav mode="side" [opened]="true" class="operator-list-sidenav">
-    <md-list>
-      <md-list-item *ngFor="let operator of operators">
-        {{ operator.name }}
+    <md-list *ngFor="let category of categories" class="operator-list">
+      <h3 md-subheader class="category-subheader">{{ category }}</h3>
+      <md-list-item *ngFor="let operator of operators[category]">
+        <h4 md-line>{{ operator.name }}</h4>
       </md-list-item>
     </md-list>
   </md-sidenav>
