@@ -1,4 +1,4 @@
 export const throwOperator = {
-  'name': 'throw',
-  'operatorType': 'creation'
+  "name": "throw",
+  "operatorType": "creation"
 };

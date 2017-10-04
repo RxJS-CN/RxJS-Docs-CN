@@ -1,4 +1,4 @@
 export const windowCount = {
-  'name': 'windowCount',
-  'operatorType': 'transformation'
+  "name": "windowCount",
+  "operatorType": "transformation"
 };

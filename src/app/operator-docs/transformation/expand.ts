@@ -1,4 +1,4 @@
 export const expand = {
-  'name': 'expand',
-  'operatorType': 'transformation'
+  "name": "expand",
+  "operatorType": "transformation"
 };

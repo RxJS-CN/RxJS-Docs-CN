@@ -1,4 +1,4 @@
 export const delayWhen = {
-  'name': 'delayWhen',
-  'operatorType': 'utility'
+  "name": "delayWhen",
+  "operatorType": "utility"
 };

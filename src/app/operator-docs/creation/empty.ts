@@ -1,4 +1,4 @@
 export const empty = {
-  'name': 'empty',
-  'operatorType': 'creation'
+  "name": "empty",
+  "operatorType": "creation"
 };

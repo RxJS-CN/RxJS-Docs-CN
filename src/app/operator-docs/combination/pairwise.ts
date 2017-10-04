@@ -1,4 +1,4 @@
 export const pairwise = {
-  'name': 'pairwise',
-  'operatorType': 'combination'
+  "name": "pairwise",
+  "operatorType": "combination"
 };

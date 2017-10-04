@@ -1,4 +1,4 @@
 export const letOperator = {
-  'name': 'let',
-  'operatorType': 'utility'
+  "name": "let",
+  "operatorType": "utility"
 };

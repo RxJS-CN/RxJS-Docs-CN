@@ -1,4 +1,4 @@
 export const interval = {
-  'name': 'interval',
-  'operatorType': 'creation'
+  "name": "interval",
+  "operatorType": "creation"
 };

@@ -1,4 +1,4 @@
 export const distinctUntilChanged = {
-  'name': 'distinctUntilChanged',
-  'operatorType': 'filtering'
+  "name": "distinctUntilChanged",
+  "operatorType": "filtering"
 };

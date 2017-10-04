@@ -1,4 +1,4 @@
 export const scan = {
-  'name': 'scan',
-  'operatorType': 'transformation'
+  "name": "scan",
+  "operatorType": "transformation"
 };

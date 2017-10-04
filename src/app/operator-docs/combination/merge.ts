@@ -1,4 +1,4 @@
 export const merge = {
-  'name': 'merge',
-  'operatorType': 'combination'
+  "name": "merge",
+  "operatorType": "combination"
 };

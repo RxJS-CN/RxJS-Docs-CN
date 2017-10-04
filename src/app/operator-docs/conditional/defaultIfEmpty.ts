@@ -1,4 +1,4 @@
 export const defaultIfEmpty = {
-  'name': 'defaultIfEmpty',
-  'operatorType': 'conditional'
+  "name": "defaultIfEmpty",
+  "operatorType": "conditional"
 };

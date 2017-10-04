@@ -1,4 +1,4 @@
 export const skip = {
-  'name': 'skip',
-  'operatorType': 'filtering'
+  "name": "skip",
+  "operatorType": "filtering"
 };

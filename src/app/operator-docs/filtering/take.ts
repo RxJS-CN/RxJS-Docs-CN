@@ -1,4 +1,4 @@
 export const take = {
-  'name': 'take',
-  'operatorType': 'filtering'
+  "name": "take",
+  "operatorType": "filtering"
 };

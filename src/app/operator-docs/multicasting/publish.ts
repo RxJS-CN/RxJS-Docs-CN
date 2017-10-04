@@ -1,4 +1,4 @@
 export const publish = {
-  'name': 'publish',
-  'operatorType': 'multicasting'
+  "name": "publish",
+  "operatorType": "multicasting"
 };

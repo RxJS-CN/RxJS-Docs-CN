@@ -1,4 +1,4 @@
 export const every = {
-  'name': 'every',
-  'operatorType': 'conditional'
+  "name": "every",
+  "operatorType": "conditional"
 };

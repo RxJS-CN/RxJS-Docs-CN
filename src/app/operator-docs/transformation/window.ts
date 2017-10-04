@@ -1,4 +1,4 @@
 export const windowOperator = {
-  'name': 'window',
-  'operatorType': 'transformation'
+  "name": "window",
+  "operatorType": "transformation"
 };

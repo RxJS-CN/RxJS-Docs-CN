@@ -1,4 +1,4 @@
 export const ofOperator = {
-  'name': 'of',
-  'operatorType': 'creation'
+  "name": "of",
+  "operatorType": "creation"
 };

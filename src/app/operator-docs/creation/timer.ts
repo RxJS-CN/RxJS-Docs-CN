@@ -1,4 +1,4 @@
 export const timer = {
-  'name': 'timer',
-  'operatorType': 'creation'
+  "name": "timer",
+  "operatorType": "creation"
 };

@@ -1,4 +1,4 @@
 export const startWith = {
-  'name': 'startWith',
-  'operatorType': 'combination'
+  "name": "startWith",
+  "operatorType": "combination"
 };

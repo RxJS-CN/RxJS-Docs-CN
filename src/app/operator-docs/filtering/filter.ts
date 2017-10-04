@@ -1,4 +1,4 @@
 export const filter = {
-  'name': 'filter',
-  'operatorType': 'filtering'
+  "name": "filter",
+  "operatorType": "filtering"
 };

@@ -1,4 +1,4 @@
 export const mergeAll = {
-  'name': 'mergeAll',
-  'operatorType': 'combination'
+  "name": "mergeAll",
+  "operatorType": "combination"
 };

@@ -1,4 +1,4 @@
 export const retryWhen = {
-  'name': 'retryWhen',
-  'operatorType': 'error handling'
+  "name": "retryWhen",
+  "operatorType": "error handling"
 };

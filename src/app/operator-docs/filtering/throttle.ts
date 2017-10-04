@@ -1,4 +1,4 @@
 export const throttle = {
-  'name': 'throttle',
-  'operatorType': 'filtering'
+  "name": "throttle",
+  "operatorType": "filtering"
 };

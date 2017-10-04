@@ -1,4 +1,4 @@
 export const bufferWhen = {
-  'name': 'bufferWhen',
-  'operatorType': 'transformation'
+  "name": "bufferWhen",
+  "operatorType": "transformation"
 };

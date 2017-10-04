@@ -1,4 +1,4 @@
 export const range = {
-  'name': 'range',
-  'operatorType': 'creation'
+  "name": "range",
+  "operatorType": "creation"
 };

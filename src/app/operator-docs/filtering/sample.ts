@@ -1,4 +1,4 @@
 export const sample = {
-  'name': 'sample',
-  'operatorType': 'filtering'
+  "name": "sample",
+  "operatorType": "filtering"
 };

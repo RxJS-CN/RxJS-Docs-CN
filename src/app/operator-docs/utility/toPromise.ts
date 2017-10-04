@@ -1,4 +1,4 @@
 export const toPromise = {
-  'name': 'toPromise',
-  'operatorType': 'utility'
+  "name": "toPromise",
+  "operatorType": "utility"
 };

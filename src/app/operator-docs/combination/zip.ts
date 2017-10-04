@@ -1,4 +1,4 @@
 export const zip = {
-  'name': 'zip',
-  'operatorType': 'combination'
+  "name": "zip",
+  "operatorType": "combination"
 };

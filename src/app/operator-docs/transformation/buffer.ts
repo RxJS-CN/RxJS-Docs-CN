@@ -1,4 +1,4 @@
 export const buffer = {
-  'name': 'buffer',
-  'operatorType': 'transformation'
+  "name": "buffer",
+  "operatorType": "transformation"
 };

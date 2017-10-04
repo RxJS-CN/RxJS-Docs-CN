@@ -1,4 +1,4 @@
 export const ignoreElements = {
-  'name': 'ignoreElements',
-  'operatorType': 'filtering'
+  "name": "ignoreElements",
+  "operatorType": "filtering"
 };

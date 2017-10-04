@@ -1,4 +1,4 @@
 export const mergeMap = {
-  'name': 'mergeMap',
-  'operatorType': 'transformation'
+  "name": "mergeMap",
+  "operatorType": "transformation"
 };

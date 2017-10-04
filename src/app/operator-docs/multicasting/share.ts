@@ -1,4 +1,4 @@
 export const share = {
-  'name': 'share',
-  'operatorType': 'multicasting'
+  "name": "share",
+  "operatorType": "multicasting"
 };

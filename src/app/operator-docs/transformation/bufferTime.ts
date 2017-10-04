@@ -1,4 +1,4 @@
 export const bufferTime = {
-  'name': 'bufferTime',
-  'operatorType': 'transformation'
+  "name": "bufferTime",
+  "operatorType": "transformation"
 };

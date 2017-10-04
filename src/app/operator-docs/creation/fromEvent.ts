@@ -1,4 +1,4 @@
 export const fromEvent = {
-  'name': 'fromEvent',
-  'operatorType': 'creation'
+  "name": "fromEvent",
+  "operatorType": "creation"
 };

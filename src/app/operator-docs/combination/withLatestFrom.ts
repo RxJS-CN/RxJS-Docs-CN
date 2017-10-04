@@ -1,4 +1,4 @@
 export const withLatestFrom = {
-  'name': 'withLatestFrom',
-  'operatorType': 'combination'
+  "name": "withLatestFrom",
+  "operatorType": "combination"
 };

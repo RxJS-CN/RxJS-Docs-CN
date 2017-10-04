@@ -1,4 +1,4 @@
 export const fromPromise = {
-  'name': 'fromPromise',
-  'operatorType': 'creation'
+  "name": "fromPromise",
+  "operatorType": "creation"
 };

@@ -1,4 +1,4 @@
 export const create = {
-  'name': 'create',
-  'operatorType': 'creation'
+  "name": "create",
+  "operatorType": "creation"
 };

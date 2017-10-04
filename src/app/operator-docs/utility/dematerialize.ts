@@ -1,4 +1,4 @@
 export const dematerialize = {
-  'name': 'dematerialize',
-  'operatorType': 'utility'
+  "name": "dematerialize",
+  "operatorType": "utility"
 };

@@ -1,4 +1,4 @@
 export const debounceTime = {
-  'name': 'debounceTime',
-  'operatorType': 'filtering'
+  "name": "debounceTime",
+  "operatorType": "filtering"
 };

@@ -1,4 +1,4 @@
 export const mapTo = {
-  'name': 'mapTo',
-  'operatorType': 'transformation'
+  "name": "mapTo",
+  "operatorType": "transformation"
 };

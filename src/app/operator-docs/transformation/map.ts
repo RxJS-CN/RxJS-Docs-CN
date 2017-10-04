@@ -1,4 +1,4 @@
 export const map = {
-  'name': 'map',
-  'operatorType': 'transformation'
+  "name": "map",
+  "operatorType": "transformation"
 };

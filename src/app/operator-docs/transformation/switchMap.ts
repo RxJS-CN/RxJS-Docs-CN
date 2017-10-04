@@ -1,4 +1,4 @@
 export const switchMap = {
-  'name': 'switchMap',
-  'operatorType': 'transformation'
+  "name": "switchMap",
+  "operatorType": "transformation"
 };

@@ -1,4 +1,4 @@
 export const groupBy = {
-  'name': 'groupBy',
-  'operatorType': 'transformation'
+  "name": "groupBy",
+  "operatorType": "transformation"
 };

@@ -1,4 +1,4 @@
 export const partition = {
-  'name': 'partition',
-  'operatorType': 'transformation'
+  "name": "partition",
+  "operatorType": "transformation"
 };

@@ -1,4 +1,4 @@
 export const last = {
-  'name': 'last',
-  'operatorType': 'filtering'
+  "name": "last",
+  "operatorType": "filtering"
 };

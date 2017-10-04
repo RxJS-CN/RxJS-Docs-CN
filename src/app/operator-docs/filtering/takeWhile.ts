@@ -1,4 +1,4 @@
 export const takeWhile = {
-  'name': 'takeWhile',
-  'operatorType': 'filtering'
+  "name": "takeWhile",
+  "operatorType": "filtering"
 };

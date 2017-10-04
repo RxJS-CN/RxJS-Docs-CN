@@ -1,4 +1,4 @@
 export const concat = {
-  'name': 'concat',
-  'operatorType': 'combination'
+  "name": "concat",
+  "operatorType": "combination"
 };

@@ -1,4 +1,4 @@
 export const forkJoin = {
-  'name': 'forkJoin',
-  'operatorType': 'combination'
+  "name": "forkJoin",
+  "operatorType": "combination"
 };

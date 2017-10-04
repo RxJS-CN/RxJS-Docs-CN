@@ -1,4 +1,4 @@
 export const windowToggle = {
-  'name': 'windowToggle',
-  'operatorType': 'transformation'
+  "name": "windowToggle",
+  "operatorType": "transformation"
 };

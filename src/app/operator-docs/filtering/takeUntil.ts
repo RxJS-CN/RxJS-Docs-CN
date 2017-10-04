@@ -1,4 +1,4 @@
 export const takeUntil = {
-  'name': 'takeUntil',
-  'operatorType': 'filtering'
+  "name": "takeUntil",
+  "operatorType": "filtering"
 };

@@ -1,4 +1,4 @@
 export const pluck = {
-  'name': 'pluck',
-  'operatorType': 'transformation'
+  "name": "pluck",
+  "operatorType": "transformation"
 };

@@ -1,4 +1,4 @@
 export const multicast = {
-  'name': 'multicast',
-  'operatorType': 'multicasting'
+  "name": "multicast",
+  "operatorType": "multicasting"
 };

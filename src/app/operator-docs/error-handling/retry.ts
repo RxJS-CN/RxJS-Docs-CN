@@ -1,4 +1,4 @@
 export const retry = {
-  'name': 'catch',
-  'operatorType': 'error handling'
+  "name": "catch",
+  "operatorType": "error handling"
 };

@@ -1,4 +1,4 @@
 export const windowWhen = {
-  'name': 'windowWhen',
-  'operatorType': 'transformation'
+  "name": "windowWhen",
+  "operatorType": "transformation"
 };

@@ -1,4 +1,4 @@
 export const combineLatest = {
-  'name': 'combineLatest',
-  'operatorType': 'combination'
+  "name": "combineLatest",
+  "operatorType": "combination"
 };

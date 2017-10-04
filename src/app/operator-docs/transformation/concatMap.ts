@@ -1,4 +1,4 @@
 export const concatMap = {
-  'name': 'concatMap',
-  'operatorType': 'transformation'
+  "name": "concatMap",
+  "operatorType": "transformation"
 };

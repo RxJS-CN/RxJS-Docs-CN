@@ -1,4 +1,4 @@
 export const bufferToggle = {
-  'name': 'bufferToggle',
-  'operatorType': 'transformation'
+  "name": "bufferToggle",
+  "operatorType": "transformation"
 };
