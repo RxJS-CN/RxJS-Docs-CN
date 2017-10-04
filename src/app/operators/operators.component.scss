@@ -1,5 +1,7 @@
 @import '../../styles';
 
+$subheader-color: #62757f;
+
 :host {
   flex: 1 1 auto;
   overflow-y: auto;
@@ -14,11 +16,18 @@
   text-transform: uppercase;
   font-weight: bold;
   color: white !important;
-  background: $primary-color;
+  background: $subheader-color;
 }
 
 .operator-list {
-  md-list-item:last-child {
-    margin-bottom: 15px;
+  md-list-item {
+    border-bottom: 1px solid #f3f3f3;
+    &:last-child {
+      border-bottom: none;
+    }
   }
+}
+
+.operator-list-sidenav {
+  width: 300px;
 }
