@@ -13,25 +13,25 @@ interface Menu {
 })
 export class AppComponent {
   menus: Menu[] = [
-    { 
+    {
       title: 'Home',
       link: '/',
       options: { exact: true }
     },
-    { 
+    {
       title: 'Operators',
       link: '/operators',
       options: { exact: false }
     },
-    { 
+    {
       title: 'Companies',
       link: '/companies',
       options: { exact: false }
     },
-    { 
+    {
       title: 'Team',
       link: '/team',
       options: { exact: false }
     }
-  ]
+  ];
 }
