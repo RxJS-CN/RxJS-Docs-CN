@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { OperatorsComponent } from './operators.component';
 import { OperatorComponent } from './operator/operator.component';
+import { OperatorTocComponent } from './operator-toc/operator-toc.component';
 
 const OPERATOR_ROUTES = [
   {
@@ -16,7 +17,8 @@ const OPERATOR_ROUTES = [
 @NgModule({
   declarations: [
     OperatorsComponent,
-    OperatorComponent
+    OperatorComponent,
+    OperatorTocComponent
   ],
   imports: [
     CommonModule,
