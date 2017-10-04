@@ -7,7 +7,7 @@ import { ALL_OPERATORS } from '../operator-docs';
   styleUrls: ['./operators.component.scss']
 })
 export class OperatorsComponent implements OnInit {
-  public operators = ALL_OPERATORS;
+  public operators = ALL_OPERATORS.reduce(;
 
   constructor() { }
 

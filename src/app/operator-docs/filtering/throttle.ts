@@ -1,4 +1,6 @@
-export const throttle = {
+import { OperatorDoc } from '../operator.model';
+
+export const throttle: OperatorDoc = {
   "name": "throttle",
   "operatorType": "filtering"
 };

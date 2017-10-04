@@ -1,3 +1,5 @@
+import { OperatorDoc } from './operator.model';
+
 import { COMBINATION_OPERATORS } from './combination';
 import { CONDITIONAL_OPERATORS } from './conditional';
 import { CREATION_OPERATORS } from './creation';
@@ -7,7 +9,7 @@ import { MULTICASTING_OPERATORS } from './multicasting';
 import { TRANSFORMATION_OPERATORS } from './transformation';
 import { UTILITY_OPERATORS } from './utility';
 
-export const ALL_OPERATORS = [
+export const ALL_OPERATORS: OperatorDoc[] = [
   ...COMBINATION_OPERATORS,
   ...CONDITIONAL_OPERATORS,
   ...CREATION_OPERATORS,
