@@ -18,7 +18,7 @@ $subheader-color: #3f51b5;
 }
 
 .operator-list {
-  md-list-item {
+  a {
     border-bottom: 1px solid #f3f3f3;
     &:last-child {
       border-bottom: none;
