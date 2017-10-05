@@ -3,13 +3,12 @@
     <md-nav-list *ngFor="let category of categories" class="operator-list">
       <h3 md-subheader class="category-subheader">{{ category }}</h3>
       <a md-list-item
-        *ngFor="let operator of operators[category]"
-        [routerLink]="'/operators'">
+        *ngFor="let operator of groupedOperators[category]"
+        [routerLink]="[ '/operators', { name: operator.name } ]">
         {{ operator.name }}
       </a>
     </md-nav-list>
   </md-sidenav>
-  <app-operator>
-    <app-operator-toc></app-operator-toc>
-  </app-operator>
+  <app-operator [operator]="operators[0]"></app-operator>
+  <app-operator-toc></app-operator-toc>
 </md-sidenav-container>

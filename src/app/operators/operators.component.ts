@@ -8,8 +8,9 @@ import { OperatorDoc } from '../operator-docs/operator.model';
   styleUrls: ['./operators.component.scss']
 })
 export class OperatorsComponent implements OnInit {
-  public operators = groupOperatorsByType(ALL_OPERATORS);
-  public categories = Object.keys(this.operators);
+  public operators = ALL_OPERATORS;
+  public groupedOperators = groupOperatorsByType(ALL_OPERATORS);
+  public categories = Object.keys(this.groupedOperators);
 
   constructor() { }
 
