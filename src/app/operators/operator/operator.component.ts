@@ -14,6 +14,10 @@ export class OperatorComponent {
   }
 
   get signature() {
-    return 'Signature';
+    return this.operator.signature;
+  }
+
+  get shortDescription() {
+    return this.operator.shortDescription;
   }
 }
