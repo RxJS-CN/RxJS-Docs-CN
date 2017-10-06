@@ -19,6 +19,6 @@ html, body {
   height: 100%;
 }
 
-md-sidenav a.active .mat-list-item-content {
+mat-sidenav a.active .mat-list-item-content {
   color: mat-color($accent);
 }

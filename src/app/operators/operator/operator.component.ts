@@ -14,7 +14,7 @@ export class OperatorComponent {
   }
 
   get signature() {
-    return this.operator.signature;
+    return this.operator.signature || 'Signature Placeholder';
   }
 
   get shortDescription() {

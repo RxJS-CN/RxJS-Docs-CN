@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MdSidenavModule, MdIconModule,  MdListModule, MdToolbarModule } from '@angular/material';
+import { MatSidenavModule, MatIconModule, MatListModule, MatToolbarModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { OperatorsComponent } from './operators.component';
@@ -25,10 +25,10 @@ const OPERATOR_ROUTES = [
   imports: [
     CommonModule,
     RouterModule.forChild(OPERATOR_ROUTES),
-    MdSidenavModule,
-    MdIconModule,
-    MdListModule,
-    MdToolbarModule
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatToolbarModule
   ]
 })
 export class OperatorsModule { }
