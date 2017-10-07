@@ -10,7 +10,15 @@ describe('AppComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, BrowserAnimationsModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatListModule],
+      imports: [
+        RouterTestingModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatButtonModule,
+        MatListModule
+      ],
       declarations: [AppComponent]
     })
       .compileComponents();
