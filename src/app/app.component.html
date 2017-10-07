@@ -1,6 +1,6 @@
 <div class="app-fullpage">
   <mat-toolbar color="accent" class="mat-elevation-z6">
-    <button md-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="sidenav.toggle()">
     <mat-icon>
       menu
     </mat-icon>
@@ -10,8 +10,14 @@
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-nav-list (click)="sidenav.toggle()">
+<<<<<<< HEAD
         <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="menu.options" [routerLink]="menu.link">
-         {{menu.title}} 
+=======
+        <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active"
+          [routerLinkActiveOptions]="menu.options"
+          [routerLink]="menu.link">
+>>>>>>> dc33074... Update angular material prefix to mat and lock down package versions
+         {{menu.title}}
         </a>
       </mat-nav-list>
     </mat-sidenav>
