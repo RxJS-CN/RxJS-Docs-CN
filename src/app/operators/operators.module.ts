@@ -7,7 +7,8 @@ import { OperatorsComponent } from './operators.component';
 import { OperatorComponent } from './operator/operator.component';
 import { OperatorHeaderComponent } from './operator/operator-header/operator-header.component';
 
-import { OperatorScrollDirective } from './operator-scroll.directive';
+import { OperatorScrollDirective } from './directives/operator-scroll.directive';
+import { HighlightJsDirective } from './directives/highlight-js.directive';
 
 const OPERATOR_ROUTES = [
   {
