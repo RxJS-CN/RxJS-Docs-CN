@@ -10,7 +10,9 @@
   <mat-sidenav-container>
     <mat-sidenav #sidenav>
       <mat-nav-list (click)="sidenav.toggle()">
-        <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="menu.options" [routerLink]="menu.link">
+        <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active"
+          [routerLinkActiveOptions]="menu.options"
+          [routerLink]="menu.link">
          {{menu.title}}
         </a>
       </mat-nav-list>
