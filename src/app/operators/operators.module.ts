@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { OperatorsComponent } from './operators.component';
 import { OperatorComponent } from './operator/operator.component';
 import { OperatorHeaderComponent } from './operator/operator-header/operator-header.component';
-import { OperatorTocComponent } from './operator-toc/operator-toc.component';
+
+import { OperatorScrollDirective } from './operator-scroll.directive';
 
 const OPERATOR_ROUTES = [
   {
@@ -20,7 +21,7 @@ const OPERATOR_ROUTES = [
     OperatorsComponent,
     OperatorComponent,
     OperatorHeaderComponent,
-    OperatorTocComponent
+    OperatorScrollDirective
   ],
   imports: [
     CommonModule,

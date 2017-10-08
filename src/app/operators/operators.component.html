@@ -1,4 +1,7 @@
-<mat-sidenav-container class="operator-container">
+<mat-sidenav-container
+  class="operator-container"
+  appOperatorScroll
+  (activeOperator)="updateUrl($event)">
   <mat-sidenav
     mode="side"
     [opened]="true"
@@ -9,12 +12,15 @@
       <h3 mat-subheader class="category-subheader">{{ category }}</h3>
       <a mat-list-item
         *ngFor="let operator of groupedOperators[category]"
-        [routerLink]="[ '/operators', { name: operator.name } ]">
+        (click)="scrollToOperator(operator.name)"
+        [routerLink]="[ '/operators', { name: operator.name } ]"
+        [class.active-operator]="(activeOperator$ | async) === operator.name">
         {{ operator.name }}
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <!-- just until I get display worked out, focus on one -->
-  <app-operator *ngFor="let operator of operators" [operator]="operator"></app-operator>
-  <app-operator-toc container=".mat-drawer-content"></app-operator-toc>
+  <app-operator
+    *ngFor="let operator of operators"
+    [operator]="operator">
+  </app-operator>
 </mat-sidenav-container>
