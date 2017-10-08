@@ -4,8 +4,8 @@ import { MatSidenavModule, MatIconModule, MatListModule, MatToolbarModule } from
 import { RouterModule } from '@angular/router';
 
 import { OperatorsComponent } from './operators.component';
-import { OperatorComponent } from './operator/operator.component';
-import { OperatorHeaderComponent } from './operator/operator-header/operator-header.component';
+import { OperatorComponent } from './components/operator/operator.component';
+import { OperatorHeaderComponent } from './components/operator-header/operator-header.component';
 
 import { OperatorScrollDirective } from './directives/operator-scroll.directive';
 import { HighlightJsDirective } from './directives/highlight-js.directive';

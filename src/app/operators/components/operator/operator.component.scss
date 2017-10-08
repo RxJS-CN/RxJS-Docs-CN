@@ -1,6 +1,8 @@
 
 .main-operator-container {
-  width: 70%;
   padding: 5px;
   height: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
 }

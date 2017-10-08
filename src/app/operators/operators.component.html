@@ -12,8 +12,7 @@
       <h3 mat-subheader class="category-subheader">{{ category }}</h3>
       <a mat-list-item
         *ngFor="let operator of groupedOperators[category]"
-        (click)="scrollToOperator(operator.name)"
-        [routerLink]="[ '/operators', { name: operator.name } ]"
+        [href]="'/operators#' + operator.name"
         [class.active-operator]="(activeOperator$ | async) === operator.name">
         {{ operator.name }}
       </a>

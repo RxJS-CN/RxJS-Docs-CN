@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OperatorDoc } from '../../operator-docs/operator.model';
+import { OperatorDoc } from '../../../operator-docs/operator.model';
 
 @Component({
   selector: 'app-operator',

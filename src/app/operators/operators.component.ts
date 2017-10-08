@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { ALL_OPERATORS } from '../operator-docs';
 import { OperatorDoc } from '../operator-docs/operator.model';
-import 'rxjs/add/operator/pluck';
 
 @Component({
   selector: 'app-operators',
@@ -22,14 +21,12 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.activeOperator$ = this._activatedRoute
-      .params
-      .pluck('name');
+    this.activeOperator$ = this._activatedRoute.fragment;
   }
 
   ngAfterViewInit() {
     // scroll initial param when applicable
-    const { name } = this._activatedRoute.snapshot.params;
+    const name = this._activatedRoute.snapshot.fragment;
 
     if (name) {
       // wait a tick from scroll to be accurate
@@ -38,7 +35,7 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   }
 
   updateUrl(name: string) {
-    this._router.navigate([ '/operators', { name } ]);
+    this._router.navigate([ '/operators' ], { fragment: name });
   }
 
   scrollToOperator(name: string) {
