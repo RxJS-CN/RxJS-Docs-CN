@@ -1,6 +1,6 @@
 import { OperatorDoc } from '../operator.model';
 
 export const retry: OperatorDoc = {
-  "name": "catch",
-  "operatorType": "error handling"
+  'name': 'catch',
+  'operatorType': 'error handling'
 };

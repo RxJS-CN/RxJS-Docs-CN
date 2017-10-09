@@ -17,6 +17,10 @@ export class OperatorComponent {
     return this.operator.signature || 'Signature Placeholder';
   }
 
+  get marbleUrl() {
+    return this.operator.marbleUrl;
+  }
+
   get shortDescription() {
     return this.operator.shortDescription;
   }

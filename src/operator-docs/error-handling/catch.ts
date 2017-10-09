@@ -1,6 +1,6 @@
 import { OperatorDoc } from '../operator.model';
 
 export const catchOperator: OperatorDoc = {
-  "name": "catch",
-  "operatorType": "error handling"
+  'name': 'catch',
+  'operatorType': 'error handling'
 };

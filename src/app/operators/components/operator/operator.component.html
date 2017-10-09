@@ -6,15 +6,16 @@
 </app-operator-header>
 <section class="main-operator-container mat-typography">
   <h3 class="short-description" [innerHTML]="shortDescription"></h3>
-  <h2> Examples </h2>
+  <img class="marble-diagram mat-elevation-z2" [src]="marbleUrl" *ngIf="marbleUrl"/>
+  <h2 class="examples-header"> Examples </h2>
   <div
     class="code-example"
     *ngFor="let example of examples"
     appHighlightJs>
-    <h3> {{ example.name }} </h3>
-    <pre [innerHTML]="example.code"></pre>
+    <h3 [innerHTML]="example.name"></h3>
+    <pre [innerHTML]="example.code" class="mat-elevation-z2"></pre>
   </div>
-  <h2> Related Operators </h2>
+  <h2 class="related-operators"> Related Operators </h2>
   <ul class="related-list">
     <li *ngFor="let related of relatedOperators">
       <a [href]="'/operators#' + related"> {{ related }} </a>

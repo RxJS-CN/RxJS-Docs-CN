@@ -28,6 +28,7 @@ export interface OperatorDoc {
   readonly name?: string;
   readonly operatorType?: OperatorType;
   readonly signature?: string;
+  readonly marbleUrl?: string;
   readonly shortDescription?: string;
   readonly longDescription?: string;
   readonly examples?: OperatorExample[];

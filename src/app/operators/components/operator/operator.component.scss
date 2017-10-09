@@ -1,6 +1,6 @@
 .main-operator-container {
   padding: 5px;
-  height: 1000px;
+  // height: 1000px;
   display: flex;
   flex-direction: column;
   padding: 0 16px;
@@ -17,6 +17,20 @@
       padding-bottom: 0;
     }
   }
+}
 
+.short-description {
+  margin: 16px 0 32px;
+}
 
+.related-operators {
+  margin-top: 16px;
+}
+
+.examples-header {
+  margin: 32px 0 16px;
+}
+
+.marble-diagram {
+  max-width: 100%;
 }

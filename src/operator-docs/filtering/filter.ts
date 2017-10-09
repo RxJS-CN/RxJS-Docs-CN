@@ -1,6 +1,6 @@
 import { OperatorDoc } from '../operator.model';
 
 export const filter: OperatorDoc = {
-  "name": "filter",
-  "operatorType": "filtering"
+  'name': 'filter',
+  'operatorType': 'filtering'
 };
