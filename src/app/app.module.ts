@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatListModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
-
+import { PreloadAllModules } from '@angular/router';
 import { RXJS_DOC_ROUTES } from './app.routing';
 
 import { AppComponent } from './app.component';
@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(RXJS_DOC_ROUTES),
+    RouterModule.forRoot(RXJS_DOC_ROUTES, { preloadingStrategy: PreloadAllModules }),
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
