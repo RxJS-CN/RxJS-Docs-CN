@@ -19,3 +19,5 @@ export const ALL_OPERATORS: OperatorDoc[] = [
   ...TRANSFORMATION_OPERATORS,
   ...UTILITY_OPERATORS
 ];
+
+export * from './operator.model';

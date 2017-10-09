@@ -1,6 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSidenavModule, MatIconModule, MatListModule, MatToolbarModule } from '@angular/material';
+import {
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule,
+  MatToolbarModule,
+  MatExpansionModule,
+  MatCardModule
+} from '@angular/material';
 import { RouterModule } from '@angular/router';
 
 import { OperatorsComponent } from './operators.component';
@@ -22,7 +29,8 @@ const OPERATOR_ROUTES = [
     OperatorsComponent,
     OperatorComponent,
     OperatorHeaderComponent,
-    OperatorScrollDirective
+    OperatorScrollDirective,
+    HighlightJsDirective
   ],
   imports: [
     CommonModule,
@@ -30,7 +38,8 @@ const OPERATOR_ROUTES = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule
   ]
 })
 export class OperatorsModule { }

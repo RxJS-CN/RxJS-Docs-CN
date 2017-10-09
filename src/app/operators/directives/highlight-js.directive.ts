@@ -14,12 +14,13 @@ export class HighlightJsDirective implements AfterViewChecked {
 
     constructor(
       private elementRef: ElementRef,
-      private zone: NgZone) {}
+      private zone: NgZone
+    ) {}
 
     ngAfterViewChecked() {
         if (!this._done) {
             if (this.elementRef.nativeElement.innerHTML && this.elementRef.nativeElement.querySelector) {
-                const snippets = this.elementRef.nativeElement.querySelectorAll('code');
+                const snippets = this.elementRef.nativeElement.querySelectorAll('pre');
                 this.zone.runOutsideAngular(() => {
                     for (const snippet of snippets) {
                         hljs.highlightBlock(snippet);

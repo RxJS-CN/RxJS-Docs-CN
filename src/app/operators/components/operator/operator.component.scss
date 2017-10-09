@@ -1,8 +1,22 @@
-
 .main-operator-container {
   padding: 5px;
   height: 1000px;
   display: flex;
   flex-direction: column;
   padding: 0 16px;
+}
+
+.related-list {
+  padding: 1px;
+  list-style-type: none;
+  margin-top: 0;
+
+  li {
+    padding-bottom: 5px;
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+
+
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import { ALL_OPERATORS } from '../operator-docs';
-import { OperatorDoc } from '../operator-docs/operator.model';
+import { ALL_OPERATORS } from '../../operator-docs';
+import { OperatorDoc } from '../../operator-docs/operator.model';
 
 @Component({
   selector: 'app-operators',
@@ -13,7 +14,9 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   public operators = ALL_OPERATORS;
   public groupedOperators = groupOperatorsByType(ALL_OPERATORS);
   public categories = Object.keys(this.groupedOperators);
-  public activeOperator$: Observable<string>;
+  public activeOperator: string;
+
+  private _subscription: Subscription;
 
   constructor(
     private _router: Router,
@@ -21,7 +24,11 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   ) { }
 
   ngOnInit() {
-    this.activeOperator$ = this._activatedRoute.fragment;
+    this.activeOperator = this._activatedRoute.snapshot.fragment || this.operators[0].name;
+
+    this._subscription = this._activatedRoute
+      .fragment
+      .subscribe(name => this.scrollToOperator(name));
   }
 
   ngAfterViewInit() {

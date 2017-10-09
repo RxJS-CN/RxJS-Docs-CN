@@ -1,4 +1,4 @@
-import { ALL_OPERATORS } from '../../operator-docs';
+import { ALL_OPERATORS } from '../../../operator-docs';
 import { groupOperatorsByType } from '../operators.component';
 
 describe('Operators', () => {

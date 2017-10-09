@@ -4,8 +4,21 @@
   [id]="operatorName"
   class="operator-header">
 </app-operator-header>
-<div class="main-operator-container">
-  <div class="short-description">
-    {{ shortDescription }}
+<section class="main-operator-container mat-typography">
+  <h3 class="short-description" [innerHTML]="shortDescription"></h3>
+  <h2> Examples </h2>
+  <div
+    class="code-example"
+    *ngFor="let example of examples"
+    appHighlightJs>
+    <h3> {{ example.name }} </h3>
+    <pre [innerHTML]="example.code"></pre>
   </div>
-</div>
+  <h2> Related Operators </h2>
+  <ul class="related-list">
+    <li *ngFor="let related of relatedOperators">
+      <a [href]="'/operators#' + related"> {{ related }} </a>
+    </li>
+  </ul>
+  <h2> Additional References </h2>
+</section>

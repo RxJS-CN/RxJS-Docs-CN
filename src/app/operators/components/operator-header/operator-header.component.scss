@@ -1,3 +1,5 @@
+@import '../../operator-theme';
+
 .operator-name {
   font-size:30px;
 }
@@ -7,6 +9,7 @@
 }
 
 mat-toolbar {
-  background: #62757f !important;
+  background: $operator-active !important;
+  color: rgba(255, 255, 255, 0.87);
   font-weight: normal;
 }

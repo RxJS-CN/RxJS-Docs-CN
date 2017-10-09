@@ -1,7 +1,7 @@
 <mat-sidenav-container
   class="operator-container"
   appOperatorScroll
-  (activeOperator)="updateUrl($event)">
+  (activeOperator)="activeOperator = $event">
   <mat-sidenav
     mode="side"
     [opened]="true"
@@ -13,7 +13,7 @@
       <a mat-list-item
         *ngFor="let operator of groupedOperators[category]"
         [href]="'/operators#' + operator.name"
-        [class.active-operator]="(activeOperator$ | async) === operator.name">
+        [class.active-operator]="activeOperator === operator.name">
         {{ operator.name }}
       </a>
     </mat-nav-list>

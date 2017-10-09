@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { OperatorDoc } from '../../../operator-docs/operator.model';
+import { OperatorDoc } from '../../../../operator-docs/operator.model';
 
 @Component({
   selector: 'app-operator',
@@ -19,5 +19,13 @@ export class OperatorComponent {
 
   get shortDescription() {
     return this.operator.shortDescription;
+  }
+
+  get examples() {
+    return this.operator.examples || [];
+  }
+
+  get relatedOperators() {
+    return this.operator.relatedOperators || [];
   }
 }
