@@ -1,6 +1,7 @@
+@import '../../../../styles/media-helpers';
+
 .main-operator-container {
   padding: 5px;
-  // height: 1000px;
   display: flex;
   flex-direction: column;
   padding: 0 16px;
@@ -31,6 +32,15 @@
   margin: 32px 0 16px;
 }
 
+.marble-wrapper {
+  background-color: white;
+  text-align: center;
+}
+
 .marble-diagram {
-  max-width: 100%;
+  max-width: 640px;
+
+  @media #{$mat-sm-down} {
+    max-width: 100%;
+  }
 }

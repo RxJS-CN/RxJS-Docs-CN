@@ -6,7 +6,9 @@
 </app-operator-header>
 <section class="main-operator-container mat-typography">
   <h3 class="short-description" [innerHTML]="shortDescription"></h3>
-  <img class="marble-diagram mat-elevation-z2" [src]="marbleUrl" *ngIf="marbleUrl"/>
+  <div class="marble-wrapper mat-elevation-z2">
+    <img class="marble-diagram" [src]="marbleUrl" *ngIf="marbleUrl"/>
+  </div>
   <h2 class="examples-header"> Examples </h2>
   <div
     class="code-example"
