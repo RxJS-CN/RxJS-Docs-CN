@@ -22,7 +22,15 @@ export class OperatorComponent {
   }
 
   get shortDescription() {
-    return this.operator.shortDescription;
+    return this.operator.shortDescription && this.operator.shortDescription.description;
+  }
+
+  get longDescription() {
+    return this.operator.longDescription && this.operator.shortDescription.description;
+  }
+
+  get parameters() {
+    return this.operator.parameters || [];
   }
 
   get examples() {
@@ -31,5 +39,13 @@ export class OperatorComponent {
 
   get relatedOperators() {
     return this.operator.relatedOperators || [];
+  }
+
+  get sourceCode() {
+    return `https://github.com/ReactiveX/rxjs/blob/master/src/operators/${this.operatorName}.ts`;
+  }
+
+  get additionalResources() {
+    return this.operator.additionalResources || [];
   }
 }

@@ -7,7 +7,9 @@ import {
   MatToolbarModule,
   MatExpansionModule,
   MatCardModule,
-  MatInputModule
+  MatInputModule,
+  MatMenuModule,
+  MatButtonModule
 } from '@angular/material';
 import { RouterModule } from '@angular/router';
 
@@ -41,7 +43,9 @@ const OPERATOR_ROUTES = [
     MatListModule,
     MatToolbarModule,
     MatCardModule,
-    MatInputModule
+    MatInputModule,
+    MatMenuModule,
+    MatButtonModule
   ]
 })
 export class OperatorsModule { }
