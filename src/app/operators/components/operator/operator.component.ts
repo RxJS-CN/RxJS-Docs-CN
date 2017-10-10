@@ -9,6 +9,8 @@ import { OperatorDoc } from '../../../../operator-docs/operator.model';
 export class OperatorComponent {
   @Input() operator: OperatorDoc;
 
+  private readonly baseSourceUrl = 'https://github.com/ReactiveX/rxjs/blob/master/src/operators/';
+
   get operatorName() {
     return this.operator.name;
   }
@@ -41,8 +43,8 @@ export class OperatorComponent {
     return this.operator.relatedOperators || [];
   }
 
-  get sourceCode() {
-    return `https://github.com/ReactiveX/rxjs/blob/master/src/operators/${this.operatorName}.ts`;
+  get sourceUrl() {
+    return `${this.baseSourceUrl}/${this.operatorName}.ts`;
   }
 
   get additionalResources() {
