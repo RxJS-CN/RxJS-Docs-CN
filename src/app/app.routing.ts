@@ -7,9 +7,9 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { TeamComponent } from './team/team.component';
 
 export const RXJS_DOC_ROUTES: Routes = [
-  { path: '', component: RxjsComponent },
+  { path: '', loadChildren: './rxjs/rxjs.module#RxjsModule' },
   { path: 'operators', loadChildren: './operators/operators.module#OperatorsModule' },
-  { path: 'team', component: TeamComponent },
-  { path: 'companies', component: CompaniesComponent },
+  { path: 'team', loadChildren: './team/team.module#TeamModule' },
+  { path: 'companies', loadChildren: './companies/companies.module#CompaniesModule' },
   { path: '**', redirectTo: '' }
 ];

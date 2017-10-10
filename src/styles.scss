@@ -3,10 +3,9 @@
 @import './styles/code-helpers';
 
 @include mat-core();
-
 // Define the theme.
 $primary: mat-palette($mat-indigo);
-$accent:  mat-palette($mat-pink);
+$accent : mat-palette($mat-pink);
 $theme: mat-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
@@ -16,7 +15,8 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   width: 100%;
   height: 100%;
