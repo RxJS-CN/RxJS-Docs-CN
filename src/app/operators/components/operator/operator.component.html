@@ -6,63 +6,12 @@
 </app-operator-header>
 <section class="main-operator-container mat-typography">
   <h3 class="short-description" [innerHTML]="shortDescription"></h3>
-  <div class="marble-wrapper mat-elevation-z2">
-    <img class="marble-diagram" [src]="marbleUrl" *ngIf="marbleUrl"/>
-  </div>
-  <h2> Parameters </h2>
-  <table class="parameter-table mat-elevation-z2">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Attribute</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let parameter of parameters">
-        <td> {{parameter.name}} </td>
-        <td> {{parameter.type}} </td>
-        <td> {{parameter.attribute}} </td>
-        <td> {{parameter.description}} </td>
-      </tr>
-    </tbody>
-  </table>
-  <h2 class="examples-header"> Examples </h2>
-  <div
-    class="code-example"
-    *ngFor="let example of examples"
-    appHighlightJs>
-    <h3 [innerHTML]="example.name"></h3>
-    <div class="code-block mat-elevation-z2">
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <a
-          mat-menu-item
-          [href]="link.url"
-          target="_blank"
-          *ngFor="let link of example.externalLinks">
-          {{link.platform}}
-        </a>
-      </mat-menu>
-      <pre [innerHTML]="example.code"></pre>
-    </div>
-  </div>
-  <h2 class="related-operators"> Related Operators </h2>
-  <ul class="section-list">
-    <li *ngFor="let related of relatedOperators">
-      <a [href]="'/operators#' + related"> {{ related }} </a>
-    </li>
-  </ul>
-  <h2> Additional Resources </h2>
-  <ul class="section-list">
-    <li>
-      <a [href]="sourceUrl" target="_blank"> Source Code </a>
-    </li>
-    <li *ngFor="let resource of additionalResources">
-      <a [href]="resource.url" target="_blank"> {{ resource.name }} </a>
-    </li>
-  </ul>
+  <app-marble-diagram [url]="marbleUrl"></app-marble-diagram>
+  <app-operator-parameters [operatorParameters]="parameters"></app-operator-parameters>
+  <app-operator-examples [operatorExamples]="examples"></app-operator-examples>
+  <app-related-operators [relatedOperators]="relatedOperators"></app-related-operators>
+  <app-additional-resources
+    [additionalResources]="additionalResources"
+    [sourceUrl]="sourceUrl">
+  </app-additional-resources>
 </section>

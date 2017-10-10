@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
 
 @Component({
   selector: 'app-operator',
   templateUrl: './operator.component.html',
-  styleUrls: ['./operator.component.scss']
+  styleUrls: ['./operator.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OperatorComponent {
   @Input() operator: OperatorDoc;

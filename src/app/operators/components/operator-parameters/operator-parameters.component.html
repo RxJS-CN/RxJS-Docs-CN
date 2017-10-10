@@ -1,0 +1,19 @@
+<h2> Parameters </h2>
+<table class="parameter-table mat-elevation-z2">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let parameter of operatorParameters">
+      <td> {{parameter.name}} </td>
+      <td> {{parameter.type}} </td>
+      <td> {{parameter.attribute}} </td>
+      <td> {{parameter.description}} </td>
+    </tr>
+  </tbody>
+</table>

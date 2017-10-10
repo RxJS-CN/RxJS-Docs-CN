@@ -25,6 +25,19 @@ $link-color: #2196F3;
     }
   }
 
+  .section-list {
+    padding: 1px;
+    list-style-type: none;
+    margin-top: 0;
+
+    li {
+      padding-bottom: 5px;
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+
   a {
     text-decoration: none;
     color: $link-color;

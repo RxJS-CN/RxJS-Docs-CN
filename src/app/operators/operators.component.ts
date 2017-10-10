@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
@@ -8,7 +8,8 @@ import { OperatorDoc } from '../../operator-docs/operator.model';
 @Component({
   selector: 'app-operators',
   templateUrl: './operators.component.html',
-  styleUrls: ['./operators.component.scss']
+  styleUrls: ['./operators.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OperatorsComponent implements OnInit, AfterViewInit {
   public operators = ALL_OPERATORS;
@@ -36,7 +37,7 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
     const name = this._activatedRoute.snapshot.fragment;
 
     if (name) {
-      // wait a tick from scroll to be accurate
+      // wait a tick for scroll to be accurate
       Promise.resolve().then(_ => this.scrollToOperator(name));
     }
   }

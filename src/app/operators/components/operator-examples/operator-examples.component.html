@@ -1,0 +1,22 @@
+<h2 class="examples-header"> Examples </h2>
+<div
+  class="code-example"
+  *ngFor="let example of operatorExamples"
+  appHighlightJs>
+  <h3 [innerHTML]="example.name"></h3>
+  <div class="code-block mat-elevation-z2">
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <a
+        mat-menu-item
+        [href]="link.url"
+        target="_blank"
+        *ngFor="let link of example.externalLinks">
+        {{link.platform}}
+      </a>
+    </mat-menu>
+    <pre [innerHTML]="example.code"></pre>
+  </div>
+</div>
