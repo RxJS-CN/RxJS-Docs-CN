@@ -11,7 +11,7 @@ import {
   MatMenuModule,
   MatButtonModule
 } from '@angular/material';
-import { RouterModule } from '@angular/router';
+import { OperatorsRoutingModule } from './operators.routing';
 
 import { OperatorsComponent } from './operators.component';
 import { OperatorComponent } from './components/operator/operator.component';
@@ -37,7 +37,7 @@ const OPERATOR_ROUTES = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(OPERATOR_ROUTES),
+    OperatorsRoutingModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

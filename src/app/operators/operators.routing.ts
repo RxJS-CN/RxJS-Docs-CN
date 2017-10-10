@@ -7,4 +7,4 @@ const routes: Routes = [
     { path: '', component: OperatorsComponent }
 ];
 
-export const routing: ModuleWithProviders = RouterModule.forChild(routes);
+export const OperatorsRoutingModule: ModuleWithProviders = RouterModule.forChild(routes);
