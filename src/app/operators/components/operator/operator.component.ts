@@ -28,8 +28,8 @@ export class OperatorComponent {
     return this.operator.shortDescription && this.operator.shortDescription.description;
   }
 
-  get longDescription() {
-    return this.operator.longDescription && this.operator.shortDescription.description;
+  get walkthrough() {
+    return this.operator.walkthrough && this.operator.walkthrough.description;
   }
 
   get parameters() {

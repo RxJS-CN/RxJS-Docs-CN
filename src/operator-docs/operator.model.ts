@@ -46,7 +46,7 @@ export interface OperatorDoc {
     description: string;
     extras?: OperatorExtra[]
   };
-  readonly longDescription?: {
+  readonly walkthrough?: {
     description: string;
     extras?: OperatorExtra[]
   };

@@ -21,6 +21,7 @@ import { OperatorExamplesComponent } from './components/operator-examples/operat
 import { RelatedOperatorsComponent } from './components/related-operators/related-operators.component';
 import { AdditionalResourcesComponent } from './components/additional-resources/additional-resources.component';
 import { MarbleDiagramComponent } from './components/marble-diagram/marble-diagram.component';
+import { WalkthroughComponent } from './components/walkthrough/walkthrough.component';
 
 import { OperatorScrollDirective } from './directives/operator-scroll.directive';
 import { HighlightJsDirective } from './directives/highlight-js.directive';
@@ -41,6 +42,7 @@ const OPERATOR_ROUTES = [
     OperatorExamplesComponent,
     RelatedOperatorsComponent,
     AdditionalResourcesComponent,
+    WalkthroughComponent,
     MarbleDiagramComponent,
     OperatorScrollDirective,
     HighlightJsDirective

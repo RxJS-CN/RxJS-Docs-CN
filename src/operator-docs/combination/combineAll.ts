@@ -16,8 +16,31 @@ export const combineAll: OperatorDoc = {
   'shortDescription': {
     'description': 'Flattens an Observable-of-Observables by applying <a href="/operators#combineLatest" class="markdown-code">combineLatest</a> when the Observable-of-Observables completes.'
   },
-  'longDescription': {
-    'description': ''
+  'walkthrough': {
+    'description': `
+      <p>
+        Takes an Observable of Observables, and collects all Observables from it.
+        Once the outer Observable completes, it subscribes to all collected
+        Observables and combines their values using the <a href="/operators#combineLatest" class="markdown-code">combineLatest</a>
+        strategy, such that:
+      </p>
+      <ul>
+        <li>Every time an inner Observable emits, the output Observable emits.</li>
+        <li>When the returned observable emits, it emits all of the latest values by:
+          <ul>
+            <li>
+              If a <span class="markdown-code">project</span> function is provided, it is called with each recent value
+              from each inner Observable in whatever order they arrived, and the result
+              of the <span class="markdown-code">project</span> function is what is emitted by the output Observable.
+            </li>
+            <li>
+              If there is no <span class="markdown-code">project</span> function, an array of all of the most recent
+              values is emitted by the output Observable.
+            </li>
+          </ul>
+        </li>
+      </ul>
+    `
   },
   'examples': [
     {

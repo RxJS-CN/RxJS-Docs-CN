@@ -6,9 +6,10 @@
 </app-operator-header>
 <section class="main-operator-container mat-typography">
   <h3 class="short-description" [innerHTML]="shortDescription"></h3>
-  <app-marble-diagram [url]="marbleUrl"></app-marble-diagram>
+  <app-marble-diagram [url]="marbleUrl" class="margin-bottom-32"></app-marble-diagram>
+  <app-operator-examples [operatorExamples]="examples" class="margin-bottom-16"></app-operator-examples>
   <app-operator-parameters [operatorParameters]="parameters"></app-operator-parameters>
-  <app-operator-examples [operatorExamples]="examples"></app-operator-examples>
+  <app-operator-walkthrough [operatorWalkthrough]="walkthrough" class="margin-bottom-16"></app-operator-walkthrough>
   <app-related-operators [relatedOperators]="relatedOperators"></app-related-operators>
   <app-additional-resources
     [additionalResources]="additionalResources"

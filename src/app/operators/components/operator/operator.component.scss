@@ -1,14 +1,19 @@
-h2 {
-  margin: 16px 0 16px;
-}
-
 .main-operator-container {
   padding: 5px;
   display: flex;
   flex-direction: column;
   padding: 0 16px;
+  margin-bottom: 16px;
 }
 
 .short-description {
   margin: 16px 0 32px;
+}
+
+.margin-bottom-32 {
+  margin-bottom: 32px;
+}
+
+.margin-bottom-16 {
+  margin-bottom: 16px;
 }
