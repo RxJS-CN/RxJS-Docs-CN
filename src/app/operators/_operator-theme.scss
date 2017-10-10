@@ -13,10 +13,10 @@ $link-color: #2196F3;
     a {
       border-bottom: 1px solid $operator-border;
       &.active-operator {
-        background-color: $operator-active-background;
-        color: white;
+        background-color: $operator-border;
+        // color: white;
         &:hover {
-          background-color: $operator-active-background;
+          background-color: $operator-border;
         }
       }
       &:last-child {
