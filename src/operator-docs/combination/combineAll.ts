@@ -14,7 +14,8 @@ export const combineAll: OperatorDoc = {
   ],
   'marbleUrl': 'http://reactivex.io/rxjs/img/combineAll.png',
   'shortDescription': {
-    'description': 'Flattens an Observable-of-Observables by applying <a href="/operators#combineLatest" class="markdown-code">combineLatest</a> when the Observable-of-Observables completes.'
+    'description': 'Flattens an Observable-of-Observables by applying <a href="/operators#combineLatest" class="markdown-code">combineLatest</a> when the Observable-of-Observables completes.',
+    'extras': []
   },
   'walkthrough': {
     'description': `
@@ -55,12 +56,10 @@ export const combineAll: OperatorDoc = {
       `,
       'externalLinks': [
         { 'platform': 'JSBin', 'url': 'test'},
-        { 'platform': 'JSFiddle', 'url': 'test'}
+        { 'platform': 'JSFiddle', 'url': 'https://jsfiddle.net/sba9k56v/'}
       ]
     }
   ],
   'relatedOperators': [ 'combineLatest', 'mergeAll' ],
-  'additionalResources': [
-    { 'description': 'combineAll Tests', 'url': 'http://reactivex.io/rxjs/test-file/spec-js/operators/combineAll-spec.js.html#lineNumber7' }
-  ]
+  'additionalResources': []
 };

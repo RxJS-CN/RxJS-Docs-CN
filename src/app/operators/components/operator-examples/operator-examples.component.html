@@ -16,6 +16,12 @@
         *ngFor="let link of example.externalLinks">
         {{link.platform}}
       </a>
+      <span
+        mat-menu-item
+        ngxClipboard
+        [cbContent]="example.code">
+        Copy To Clipboard
+      </span>
     </mat-menu>
     <pre [innerHTML]="example.code"></pre>
   </div>

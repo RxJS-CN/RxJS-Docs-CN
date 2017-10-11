@@ -11,6 +11,8 @@ import {
   MatMenuModule,
   MatButtonModule
 } from '@angular/material';
+import { ClipboardModule } from 'ngx-clipboard';
+
 import { OperatorsRoutingModule } from './operators.routing';
 
 import { OperatorsComponent } from './operators.component';
@@ -19,6 +21,7 @@ import { OperatorHeaderComponent } from './components/operator-header/operator-h
 import { OperatorParametersComponent } from './components/operator-parameters/operator-parameters.component';
 import { OperatorExamplesComponent } from './components/operator-examples/operator-examples.component';
 import { RelatedOperatorsComponent } from './components/related-operators/related-operators.component';
+import { OperatorExtrasComponent } from './components/operator-extras/operator-extras.component';
 import { AdditionalResourcesComponent } from './components/additional-resources/additional-resources.component';
 import { MarbleDiagramComponent } from './components/marble-diagram/marble-diagram.component';
 import { WalkthroughComponent } from './components/walkthrough/walkthrough.component';
@@ -41,6 +44,7 @@ const OPERATOR_ROUTES = [
     OperatorParametersComponent,
     OperatorExamplesComponent,
     RelatedOperatorsComponent,
+    OperatorExtrasComponent,
     AdditionalResourcesComponent,
     WalkthroughComponent,
     MarbleDiagramComponent,
@@ -50,6 +54,7 @@ const OPERATOR_ROUTES = [
   imports: [
     CommonModule,
     OperatorsRoutingModule,
+    ClipboardModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,

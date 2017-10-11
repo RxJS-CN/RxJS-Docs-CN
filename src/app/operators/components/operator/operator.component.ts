@@ -11,6 +11,7 @@ export class OperatorComponent {
   @Input() operator: OperatorDoc;
 
   private readonly baseSourceUrl = 'https://github.com/ReactiveX/rxjs/blob/master/src/operators/';
+  private readonly baseSpecUrl = 'http://reactivex.io/rxjs/test-file/spec-js/operators';
 
   get operatorName() {
     return this.operator.name;
@@ -26,6 +27,10 @@ export class OperatorComponent {
 
   get shortDescription() {
     return this.operator.shortDescription && this.operator.shortDescription.description;
+  }
+
+  get shortDescriptionExtras() {
+    return this.operator.shortDescription && this.operator.shortDescription.extras;
   }
 
   get walkthrough() {
@@ -46,6 +51,10 @@ export class OperatorComponent {
 
   get sourceUrl() {
     return `${this.baseSourceUrl}/${this.operatorName}.ts`;
+  }
+
+  get specUrl() {
+    return `${this.baseSpecUrl}/${this.operatorName}-spec.js.html`;
   }
 
   get additionalResources() {
