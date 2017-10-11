@@ -1,19 +1,29 @@
 sudo: required
+
 dist: trusty
+
 addons:
   apt:
     sources:
       - google-chrome
     packages:
       - google-chrome-stable
+
 language: node_js
+
 node_js:
- - "7"
+  - "7"
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+
+before_install:
+  - npm install -g npm@5
+
 script:
- - ng lint
- - ng test --single-run
- - ng build -prod
- - ng e2e
+  - if [ -n "DANGER_GITHUB_API_TOKEN" ]; then echo {} > ./.babelrc && npx danger; fi
+  - ng lint
+  - ng test --single-run
+  - ng build -prod
+  - ng e2e
