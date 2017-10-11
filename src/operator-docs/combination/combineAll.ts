@@ -50,12 +50,13 @@ export const combineAll: OperatorDoc = {
         const clicks = Rx.Observable.fromEvent(document, 'click');
         const higherOrder = clicks.map(ev =>
           Rx.Observable.interval(Math.random()*2000).take(3)
-        ).take(2);
+        )
+        .take(2);
         const result = higherOrder.combineAll();
         result.subscribe(x => console.log(x));
       `,
       'externalLinks': [
-        { 'platform': 'JSBin', 'url': 'test'},
+        { 'platform': 'JSBin', 'url': 'jsbin.com'},
         { 'platform': 'JSFiddle', 'url': 'https://jsfiddle.net/sba9k56v/'}
       ]
     }

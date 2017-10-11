@@ -9,4 +9,5 @@ import { OperatorReference } from '../../../../operator-docs';
 export class AdditionalResourcesComponent {
   @Input() additionalResources: OperatorReference[];
   @Input() sourceUrl: string;
+  @Input() specsUrl: string;
 }

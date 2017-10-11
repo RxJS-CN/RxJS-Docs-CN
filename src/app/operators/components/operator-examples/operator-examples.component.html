@@ -14,14 +14,16 @@
         [href]="link.url"
         target="_blank"
         *ngFor="let link of example.externalLinks">
-        {{link.platform}}
+        <mat-icon>open_in_new</mat-icon>
+        <span>{{link.platform}}</span>
       </a>
-      <span
+      <button
         mat-menu-item
         ngxClipboard
         [cbContent]="example.code">
-        Copy To Clipboard
-      </span>
+        <mat-icon>content_copy</mat-icon>
+        <span>Copy To Clipboard</span>
+      </button>
     </mat-menu>
     <pre [innerHTML]="example.code"></pre>
   </div>

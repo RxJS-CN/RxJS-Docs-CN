@@ -53,7 +53,7 @@ export class OperatorComponent {
     return `${this.baseSourceUrl}/${this.operatorName}.ts`;
   }
 
-  get specUrl() {
+  get specsUrl() {
     return `${this.baseSpecUrl}/${this.operatorName}-spec.js.html`;
   }
 
