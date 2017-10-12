@@ -3,28 +3,25 @@
   class="code-example"
   *ngFor="let example of operatorExamples"
   appHighlightJs>
-  <h3 [innerHTML]="example.name"></h3>
   <div class="code-block mat-elevation-z2">
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <a
-        mat-menu-item
-        [href]="link.url"
-        target="_blank"
-        *ngFor="let link of example.externalLinks">
-        <mat-icon>open_in_new</mat-icon>
-        <span>{{link.platform}}</span>
-      </a>
+    <div class="example-header">
+      <div class="header-title" [innerHTML]="example.name"></div>
       <button
-        mat-menu-item
+        mat-icon-button
         ngxClipboard
-        [cbContent]="example.code">
+        [cbContent]="example.code"
+        matTooltip="Copy">
         <mat-icon>content_copy</mat-icon>
-        <span>Copy To Clipboard</span>
       </button>
-    </mat-menu>
+      <a
+        *ngIf="example.externalLink"
+        mat-icon-button
+        [href]="example.externalLink.url"
+        target="_blank"
+        [matTooltip]="example.externalLink.platform">
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+    </div>
     <pre [innerHTML]="example.code"></pre>
   </div>
 </div>

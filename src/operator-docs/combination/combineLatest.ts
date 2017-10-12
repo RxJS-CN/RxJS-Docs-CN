@@ -54,10 +54,7 @@ export const combineLatest: OperatorDoc = {
         */
         bmi.subscribe(x => console.log('BMI is ' + x));
       `,
-      'externalLinks': [
-        { 'platform': 'JSBin', 'url': 'jsbin.com'},
-        { 'platform': 'JSFiddle', 'url': 'https://jsfiddle.net/sba9k56v/'}
-      ]
+      'externalLink': { 'platform': 'JSBin', 'url': 'http://jsbin.com/pivowunedu/1/edit?js,console'}
     }
   ],
   'relatedOperators': [ 'combineAll', 'merge', 'withLatestFrom' ],

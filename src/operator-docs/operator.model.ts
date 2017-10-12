@@ -28,7 +28,7 @@ export interface OperatorParameters {
 export interface OperatorExample {
   name: string;
   code: string;
-  externalLinks: ExternalLink[];
+  externalLink: ExternalLink;
 }
 
 export interface OperatorExtra {

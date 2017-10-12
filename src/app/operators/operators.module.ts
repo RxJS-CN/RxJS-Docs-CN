@@ -9,7 +9,8 @@ import {
   MatCardModule,
   MatInputModule,
   MatMenuModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTooltipModule
 } from '@angular/material';
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -62,7 +63,8 @@ const OPERATOR_ROUTES = [
     MatCardModule,
     MatInputModule,
     MatMenuModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTooltipModule
   ]
 })
 export class OperatorsModule { }

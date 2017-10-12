@@ -6,15 +6,18 @@
   width: 100%;
 
   th {
-    // font-weight: 400;
+    background-color: #fafafa;
     max-width: 100px;
     padding: 12px 18px;
     text-align: left;
+    color: rgba(0, 0, 0, 0.692);
+    font-weight: normal;
   }
 
   td {
     font-weight: 400;
     padding: 8px 16px;
     border: 1px solid rgba(0,0,0,.03);
+    background-color: white;
   }
 }
