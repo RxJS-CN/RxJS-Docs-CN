@@ -30,13 +30,6 @@ import { WalkthroughComponent } from './components/walkthrough/walkthrough.compo
 import { OperatorScrollDirective } from './directives/operator-scroll.directive';
 import { HighlightJsDirective } from './directives/highlight-js.directive';
 
-const OPERATOR_ROUTES = [
-  {
-    path: '',
-    component: OperatorsComponent
-  }
-];
-
 @NgModule({
   declarations: [
     OperatorsComponent,
