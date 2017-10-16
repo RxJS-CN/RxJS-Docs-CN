@@ -30,6 +30,8 @@ import { WalkthroughComponent } from './components/walkthrough/walkthrough.compo
 import { OperatorScrollDirective } from './directives/operator-scroll.directive';
 import { HighlightJsDirective } from './directives/highlight-js.directive';
 
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+
 @NgModule({
   declarations: [
     OperatorsComponent,
@@ -43,7 +45,8 @@ import { HighlightJsDirective } from './directives/highlight-js.directive';
     WalkthroughComponent,
     MarbleDiagramComponent,
     OperatorScrollDirective,
-    HighlightJsDirective
+    HighlightJsDirective,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,

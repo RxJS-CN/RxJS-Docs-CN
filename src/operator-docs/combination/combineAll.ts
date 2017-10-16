@@ -55,7 +55,7 @@ export const combineAll: OperatorDoc = {
         const result = higherOrder.combineAll();
         result.subscribe(x => console.log(x));
       `,
-      'externalLink': { 'platform': 'JSBin', 'url': 'http://jsbin.com/peparawuvo/1/edit?js,console,output'}
+      'externalLink': { 'platform': 'JSBin', 'url': 'http://jsbin.com/peparawuvo/1/embed?js,console,output'}
     }
   ],
   'relatedOperators': [ 'combineLatest', 'mergeAll' ],

@@ -13,15 +13,9 @@
         matTooltip="Copy">
         <mat-icon>content_copy</mat-icon>
       </button>
-      <a
-        *ngIf="example.externalLink"
-        mat-icon-button
-        [href]="example.externalLink.url"
-        target="_blank"
-        [matTooltip]="example.externalLink.platform">
-        <mat-icon>open_in_new</mat-icon>
-      </a>
     </div>
-    <pre [innerHTML]="example.code"></pre>
+    <div class="bin-wrapper">
+      <iframe [src]="example.externalLink.url | safeUrl"></iframe>
+    </div>
   </div>
 </div>
