@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + member.avatar + ')'}" class="header-image">
+    </div>
+    <mat-card-title>{{member.name}}</mat-card-title>
+    <mat-card-subtitle>{{member.role}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{member.bio}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <a *ngIf="!!member.githubUrl" mat-button [href]="member.githubUrl">GITHUB</a>
+    <a *ngIf="!!member.twitterUrl" mat-button [href]="member.twitterUrl">TWITTER</a>
+    <a *ngIf="!!member.linkedin" mat-button [href]="member.linkedin">LINKEDIN</a>
+    <a *ngIf="!!member.email" mat-button [href]="member.email">EMAIL</a>
+  </mat-card-actions>
+</mat-card>
