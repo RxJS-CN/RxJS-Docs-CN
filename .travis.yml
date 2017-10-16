@@ -2,6 +2,10 @@ sudo: required
 
 dist: trusty
 
+deploy:
+  provider: azure_web_apps
+  verbose: true
+
 addons:
   apt:
     sources:
