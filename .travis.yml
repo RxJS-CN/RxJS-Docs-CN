@@ -5,6 +5,7 @@ dist: trusty
 deploy:
   provider: azure_web_apps
   verbose: true
+  skip_cleanup: true
 
 addons:
   apt:
