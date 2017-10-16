@@ -31,7 +31,8 @@ script:
 before_deploy:
   - rm -rf ./dist
   - ng build
-  - rm -rf ./node_modules
+  - yes | rm *.* && rm -rf ./e2e ./node_modules ./src
+  - cp -r ./dist/* ./
 
 deploy:
   provider: azure_web_apps
