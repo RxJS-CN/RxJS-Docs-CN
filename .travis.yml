@@ -2,11 +2,6 @@ sudo: required
 
 dist: trusty
 
-deploy:
-  provider: azure_web_apps
-  verbose: true
-  skip_cleanup: true
-
 addons:
   apt:
     sources:
@@ -32,3 +27,13 @@ script:
   - ng test --single-run
   - ng build -prod
   - ng e2e
+
+before_deploy:
+  - rm -rf ./dist
+  - ng build
+  - rm -rf ./node_modules
+
+deploy:
+  provider: azure_web_apps
+  verbose: true
+  skip_cleanup: true
