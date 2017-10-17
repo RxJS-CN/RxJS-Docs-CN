@@ -25,6 +25,10 @@ export class OperatorComponent {
     return this.operator.marbleUrl;
   }
 
+  get useInteractiveMarbles() {
+    return this.operator.useInteractiveMarbles;
+  }
+
   get shortDescription() {
     return this.operator.shortDescription && this.operator.shortDescription.description;
   }

@@ -4,6 +4,7 @@ export const combineLatest: OperatorDoc = {
   'name': 'combineLatest',
   'operatorType': 'combination',
   'signature': 'public combineLatest(observables: ...Observable, project: function): Observable',
+  "useInteractiveMarbles": true,
   'parameters': [
     {
       'name': 'other',
@@ -22,8 +23,8 @@ export const combineLatest: OperatorDoc = {
   'shortDescription': {
     'description': 'Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.',
     'extras': [
-      { 'type': 'Tip', 'text': 'This operator can be used as either a static or instance method!' },
-      { 'type': 'Tip', 'text': '<a class="markdown-code" href="/operators#combineAll">combineAll</a> can be used to apply <span class="markdown-code">combineLatest</span> to emitted observables when a source completes!' }
+      // { 'type': 'Tip', 'text': 'This operator can be used as either a static or instance method!' },
+      // { 'type': 'Tip', 'text': '<a class="markdown-code" href="/operators#combineAll">combineAll</a> can be used to apply <span class="markdown-code">combineLatest</span> to emitted observables when a source completes!' }
     ]
   },
   'walkthrough': {

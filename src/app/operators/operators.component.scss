@@ -20,3 +20,10 @@ $subheader-color: #333;
 .operator-list-sidenav {
   width: 300px;
 }
+
+.sidenav-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  z-index: 4;
+}

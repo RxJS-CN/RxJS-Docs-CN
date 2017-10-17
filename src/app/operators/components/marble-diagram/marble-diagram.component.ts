@@ -7,5 +7,7 @@ import { OperatorParameters } from '../../../../operator-docs';
   styleUrls: ['./marble-diagram.component.scss']
 })
 export class MarbleDiagramComponent {
+  @Input() operatorName: string;
+  @Input() useInteractiveMarbles: boolean;
   @Input() url: string;
 }

@@ -13,7 +13,9 @@
   </app-operator-extras>
   <app-marble-diagram
     class="margin-bottom-32"
-    [url]="marbleUrl" >
+    [operatorName]="operatorName"
+    [useInteractiveMarbles]="useInteractiveMarbles"
+    [url]="marbleUrl">
   </app-marble-diagram>
   <app-operator-examples
     [operatorExamples]="examples" class="margin-bottom-16">

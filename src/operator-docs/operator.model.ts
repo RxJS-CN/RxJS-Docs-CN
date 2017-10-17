@@ -40,6 +40,7 @@ export interface OperatorDoc {
   readonly name?: string;
   readonly operatorType?: OperatorType;
   readonly signature?: string;
+  readonly useInteractiveMarbles?: boolean;
   readonly marbleUrl?: string;
   readonly parameters?: OperatorParameters[];
   readonly shortDescription?: {

@@ -9,6 +9,21 @@ $link-color: #2196F3;
   $accent: mat-color(map-get($theme, accent));
   $operator-active-background: rgba($operator-active, .7);
 
+  rx-marbles > div {
+    text-align: center;
+    min-width: 840px;
+
+    circle {
+      // temp fix: current broken on marble component
+      filter: none !important;
+    }
+  }
+
+  app-operator a {
+    text-decoration: none;
+    color: $link-color;
+  }
+
   .operator-list {
     a {
       border-bottom: 1px solid $operator-border;
@@ -36,10 +51,5 @@ $link-color: #2196F3;
         padding-bottom: 0;
       }
     }
-  }
-
-  app-operator a {
-    text-decoration: none;
-    color: $link-color;
   }
 }

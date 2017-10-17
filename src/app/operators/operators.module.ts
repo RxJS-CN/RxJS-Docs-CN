@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { LayoutModule } from '@angular/cdk/layout';
 import {
   MatSidenavModule,
   MatIconModule,
@@ -52,6 +53,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     CommonModule,
     OperatorsRoutingModule,
     ClipboardModule,
+    LayoutModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -61,6 +63,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     MatMenuModule,
     MatButtonModule,
     MatTooltipModule
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class OperatorsModule { }
