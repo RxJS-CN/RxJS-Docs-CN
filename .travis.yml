@@ -27,3 +27,14 @@ script:
   - ng test --single-run
   - ng build -prod
   - ng e2e
+
+before_deploy:
+  - rm -rf ./dist
+  - ng build
+  - yes | rm *.* && rm -rf ./e2e ./node_modules ./src
+  - cp -r ./dist/* ./
+
+deploy:
+  provider: azure_web_apps
+  verbose: true
+  skip_cleanup: true
