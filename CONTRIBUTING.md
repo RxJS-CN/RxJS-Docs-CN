@@ -53,7 +53,8 @@ Before you submit your Pull Request (PR) consider the following guidelines:
   is necessary because release notes are automatically generated from these messages.
 
      ```shell
-     git commit -a
+     git add .
+     npm run commit
      ```
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
