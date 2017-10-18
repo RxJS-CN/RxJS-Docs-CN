@@ -9,7 +9,8 @@
     "build-prod": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "commit": "git-cz"
   },
   "private": true,
   "dependencies": {
@@ -41,6 +42,8 @@
     "@types/node": "6.0.60",
     "angular2-template-loader": "0.6.2",
     "codelyzer": "3.1.1",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "danger": "1.2.0",
     "electron": "1.6.11",
     "jasmine-core": "2.6.2",
