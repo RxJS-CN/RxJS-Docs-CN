@@ -66,5 +66,8 @@
     "typescript": "2.3.3",
     "validate-commit-msg": "2.14.0",
     "wallaby-webpack": "*"
+  },
+  "engines": {
+    "npm": ">=2.0.0"
   }
 }
