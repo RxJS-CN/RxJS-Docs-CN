@@ -21,7 +21,17 @@ Contents
 
   <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-  (This document is a work and progress and is subject to change)
+(This document is a work and progress and is subject to change)
+
+## Building/Testing
+
+The build and test structure is fairly primitive at the moment. There are various npm scripts that can be run:
+
+- start: runs the dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- test: runs tests with `jasmine`, must have built prior to running.
+- build: build artifacts will be stored in the `dist/` directory
+- build-prod: builds for production using the `--prod` flag
+- commit: runs git commit wizard for passing rxjs-github-bot message validator
 
 ## Submitting a Pull Request (PR)
 Before you submit your Pull Request (PR) consider the following guidelines:

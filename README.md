@@ -9,14 +9,26 @@ License is the same as the RxJS project: https://github.com/reactivex/rxjs
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contribution Guidelines](CONTRIBUTING.md)
 
-## Development server
+## Important
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+By contributing or commenting on issues in this repository, whether you've read them or not, you're agreeing to the [Contributor Code of Conduct](CODE_OF_CONDUCT.md). Much like traffic laws, ignorance doesn't grant you immunity.
 
-## Build
+## Goals
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+- Serve updated docs for RxJs
+- Serve multiple translations for the docs
+- Provide working examples
 
-## License
+## Contributing
 
+More detailed information can be found in the [Contribution Guidelines](CONTRIBUTING.md)
 
+## Building/Testing
+
+The build and test structure is fairly primitive at the moment. There are various npm scripts that can be run:
+
+- start: runs the dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- test: runs tests with `jasmine`, must have built prior to running.
+- build: build artifacts will be stored in the `dist/` directory
+- build-prod: builds for production using the `--prod` flag
+- commit: runs git commit wizard for passing rxjs-github-bot message validator
