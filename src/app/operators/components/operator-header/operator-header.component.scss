@@ -1,9 +1,5 @@
 @import '../../operator-theme';
 
-:host {
-  position: sticky;
-  top: 0px;
-}
 .operator-name {
   font-size:30px;
 }
@@ -16,9 +12,4 @@ mat-toolbar {
   background: $operator-active !important;
   color: rgba(255, 255, 255, 0.87);
   font-weight: normal;
-}
-
-.operator-header {
-  position: sticky;
-  top: 0px;
 }

@@ -1,14 +1,19 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Inject, InjectionToken, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
-import { ALL_OPERATORS } from '../../operator-docs';
 import { OperatorDoc } from '../../operator-docs/operator.model';
 
 const OPERATOR_MENU_GAP_LARGE = 64;
 const OPERATOR_MENU_GAP_SMALL = 54;
+
+export const OPERATORS_TOKEN = new InjectionToken<string>('operators');
+
+interface OperatorDocMap {
+  [key: string]: OperatorDoc[];
+}
 
 @Component({
   selector: 'app-operators',
@@ -34,19 +39,21 @@ const OPERATOR_MENU_GAP_SMALL = 54;
   ]
 })
 export class OperatorsComponent implements OnInit, AfterViewInit {
-  public operators = ALL_OPERATORS;
-  public groupedOperators = groupOperatorsByType(ALL_OPERATORS);
-  public categories = Object.keys(this.groupedOperators);
+  public groupedOperators: OperatorDocMap;
+  public categories: string[];
 
   private _subscription: Subscription;
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[]
   ) { }
 
   ngOnInit() {
+    this.groupedOperators = groupOperatorsByType(this.operators);
+    this.categories = Object.keys(this.groupedOperators);
     this._subscription = this._activatedRoute
       .fragment
       .subscribe(name => this.scrollToOperator(name));
@@ -92,8 +99,8 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
 
 }
 
-export function groupOperatorsByType(operators: OperatorDoc[]) {
-  return operators.reduce((acc, curr) => {
+export function groupOperatorsByType(operators: OperatorDoc[]): OperatorDocMap {
+  return operators.reduce((acc: OperatorDocMap, curr: OperatorDoc) => {
     if (acc[curr.operatorType]) {
       return { ...acc, [ curr.operatorType ] : [ ...acc[ curr.operatorType ], curr ] };
     }
