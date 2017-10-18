@@ -8,15 +8,6 @@ The home for new work on the new RxJS docs (RxJS v5 and up)
 
 - [Code of Conduct](CODE_OF_CONDUCT.md)
 - [Contribution Guidelines](CONTRIBUTING.md)
-- [Maintainer Guidelines](doc/maintainer-guidelines.md)
-- [Creating Operators](doc/operator-creation.md)
-- [Migrating From RxJS 4 to RxJS 5](MIGRATION.md)
-- [API Documentation (WIP)](http://reactivex.io/rxjs)
-
-
-## Initial setup
-
-Run `yarn install`
 
 ## Development server
 
