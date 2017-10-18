@@ -32,3 +32,11 @@ The build and test structure is fairly primitive at the moment. There are variou
 - build: build artifacts will be stored in the `dist/` directory
 - build-prod: builds for production using the `--prod` flag
 - commit: runs git commit wizard for passing rxjs-github-bot message validator
+
+## Committing
+It is strongly recommended that when creating a commit, you follow this procedure to start the commit wizard. It will aid you on creating valid commit messages.
+
+     ```shell
+     git add .
+     npm run commit
+     ```
