@@ -1,4 +1,4 @@
-# Contributing to RxJS
+# Contributing to RxJS Docs
 
 [Read and abide by the Code of Conduct](CODE_OF_CONDUCT.md)! Even if you don't read it,
 it still applies to you. Ignorance is not an exemption.
