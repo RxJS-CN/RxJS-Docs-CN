@@ -9,12 +9,15 @@ export const combineAll: OperatorDoc = {
       'name': 'project',
       'type': 'function',
       'attribute': 'optional',
-      'description': 'An optional function to map the most recent values from each inner Observable into a new result. Takes each of the most recent values from each collected inner Observable as arguments, in order.'
+      'description': `An optional function to map the most recent values from each inner Observable into a new result.
+      Takes each of the most recent values from each collected inner Observable as arguments, in order.`
     }
   ],
   'marbleUrl': 'http://reactivex.io/rxjs/img/combineAll.png',
   'shortDescription': {
-    'description': 'Flattens an Observable-of-Observables by applying <a href="/operators#combineLatest" class="markdown-code">combineLatest</a> when the Observable-of-Observables completes.',
+    'description': `
+      Flattens an Observable-of-Observables by applying <a href="/operators#combineLatest" class="markdown-code">combineLatest</a>
+      when the Observable-of-Observables completes.`,
     'extras': []
   },
   'walkthrough': {

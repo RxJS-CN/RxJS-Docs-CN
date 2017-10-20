@@ -21,11 +21,11 @@ export const combineLatest: OperatorDoc = {
   ],
   'marbleUrl': 'http://reactivex.io/rxjs/img/combineLatest.png',
   'shortDescription': {
-    'description': 'Combines multiple Observables to create an Observable whose values are calculated from the latest values of each of its input Observables.',
-    'extras': [
-      // { 'type': 'Tip', 'text': 'This operator can be used as either a static or instance method!' },
-      // { 'type': 'Tip', 'text': '<a class="markdown-code" href="/operators#combineAll">combineAll</a> can be used to apply <span class="markdown-code">combineLatest</span> to emitted observables when a source completes!' }
-    ]
+    'description': `
+      Combines multiple Observables to create an Observable whose values
+      are calculated from the latest values of each of its input Observables.
+    `,
+    'extras': []
   },
   'walkthrough': {
     'description': `
