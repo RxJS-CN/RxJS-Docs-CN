@@ -37,5 +37,6 @@
 
  * [RxJS 5 基本原理](https://github.com/RxJS-CN/rxjs5-ultimate-cn)
  * [学习 RxJS 操作符](https://github.com/RxJS-CN/learn-rxjs-operators) (推荐配合[官方文档操作符篇](http://cn.rx.js.org/class/es6/Observable.js~Observable.html)一起学习，示例多且清晰，但文字方面不如官方文档)
+ * [RxJS 优质文章](https://github.com/RxJS-CN/rxjs-articles-translation) (原理剖析干货居多 带你深入理解 RxJS 中的核心概念)
  * [Awesome RxJS](https://github.com/RxJS-CN/awesome-rxjs) (全部是基于 RxJS 5)
  * [redux-observable 中文官方文档](https://redux-observable-cn.js.org/)
