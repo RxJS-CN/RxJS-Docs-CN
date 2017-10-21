@@ -1,0 +1,38 @@
+<app-operator-header
+  [operatorName]="operatorName"
+  [operatorSignature]="signature"
+  [id]="operatorName"
+  class="operator-header">
+</app-operator-header>
+<section class="main-operator-container mat-typography">
+  <h3 class="short-description" [innerHTML]="shortDescription"></h3>
+  <app-operator-extras
+    class="margin-bottom-16"
+    *ngIf="shortDescriptionExtras"
+    [operatorExtras]="shortDescriptionExtras">
+  </app-operator-extras>
+  <app-marble-diagram
+    class="margin-bottom-32"
+    [operatorName]="operatorName"
+    [useInteractiveMarbles]="useInteractiveMarbles"
+    [url]="marbleUrl">
+  </app-marble-diagram>
+  <app-operator-examples
+    [operatorExamples]="examples" class="margin-bottom-16">
+  </app-operator-examples>
+  <app-operator-parameters
+    [operatorParameters]="parameters">
+  </app-operator-parameters>
+  <app-operator-walkthrough
+    class="margin-bottom-16"
+    [operatorWalkthrough]="walkthrough" >
+  </app-operator-walkthrough>
+  <app-related-operators
+    [relatedOperators]="relatedOperators">
+  </app-related-operators>
+  <app-additional-resources
+    [additionalResources]="additionalResources"
+    [sourceUrl]="sourceUrl"
+    [specsUrl]="specsUrl">
+  </app-additional-resources>
+</section>

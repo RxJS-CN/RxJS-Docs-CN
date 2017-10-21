@@ -1,0 +1,42 @@
+.code-block {
+  position: relative;
+
+  pre {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+
+.menu-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.example-options {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.example-header {
+  align-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 8px 6px 8px 18px;
+  color: rgba(0, 0, 0, 0.692);
+  background: #fafafa;
+
+  .header-title {
+    flex: 1 1 auto;
+  }
+}
+
+.bin-wrapper {
+  iframe {
+    border: none;
+    width:100%;
+    height: 350px;
+  }
+}

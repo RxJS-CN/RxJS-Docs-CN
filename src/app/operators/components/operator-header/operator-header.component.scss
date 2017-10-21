@@ -1,0 +1,15 @@
+@import '../../operator-theme';
+
+.operator-name {
+  font-size:30px;
+}
+
+.signature {
+  margin-bottom: 24px;
+}
+
+mat-toolbar {
+  background: $operator-active !important;
+  color: rgba(255, 255, 255, 0.87);
+  font-weight: normal;
+}

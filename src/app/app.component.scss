@@ -2,3 +2,38 @@
   padding: 0 16px;
   font-weight: 600;
 }
+
+.app-fullpage {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    z-index: 10;
+  }
+}
+
+mat-sidenav-container {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+.app-content {
+  min-height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+

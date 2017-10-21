@@ -1,0 +1,9 @@
+<div
+  *ngIf="!useInteractiveMarbles"
+  class="marble-wrapper mat-elevation-z2">
+  <img class="marble-diagram" [src]="url" *ngIf="url"/>
+</div>
+<rx-marbles
+  *ngIf="useInteractiveMarbles"
+  [attr.key]="operatorName">
+</rx-marbles>

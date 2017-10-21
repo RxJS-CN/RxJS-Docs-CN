@@ -1,0 +1,14 @@
+@import '../../../../styles/media-helpers';
+
+.marble-wrapper {
+  background-color: white;
+  text-align: center;
+}
+
+.marble-diagram {
+  max-width: 640px;
+
+  @media #{$mat-sm-down} {
+    max-width: 100%;
+  }
+}

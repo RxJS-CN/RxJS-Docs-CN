@@ -1,0 +1,21 @@
+<h2> Examples </h2>
+<div
+  class="code-example"
+  *ngFor="let example of operatorExamples"
+  appHighlightJs>
+  <div class="code-block mat-elevation-z2">
+    <div class="example-header">
+      <div class="header-title" [innerHTML]="example.name"></div>
+      <button
+        mat-icon-button
+        ngxClipboard
+        [cbContent]="example.code"
+        matTooltip="Copy">
+        <mat-icon>content_copy</mat-icon>
+      </button>
+    </div>
+    <div class="bin-wrapper">
+      <iframe [src]="example.externalLink.url | safeUrl"></iframe>
+    </div>
+  </div>
+</div>
