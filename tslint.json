@@ -136,5 +136,8 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "invoke-injectable": true
-  }
+  },
+  "extends": [
+    "tslint-config-prettier"
+  ]
 }
