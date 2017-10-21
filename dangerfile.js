@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const validateMessage = require('validate-commit-msg');
+const _ = require('lodash');
 
 let errorCount = 0;
 
