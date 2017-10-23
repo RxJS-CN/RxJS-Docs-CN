@@ -24,8 +24,8 @@ before_install:
 script:
   - if [ -n "DANGER_GITHUB_API_TOKEN" ]; then echo {} > ./.babelrc && npx danger; fi
   - ng lint
-  - ng test --single-run
-  - ng build -prod
+  - ng test --single-run --code-coverage
+  - ng build --prod
   - ng e2e
 
 before_deploy:
@@ -38,3 +38,6 @@ deploy:
   provider: azure_web_apps
   verbose: true
   skip_cleanup: true
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
