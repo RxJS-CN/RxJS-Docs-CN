@@ -1,26 +1,8 @@
 <div class="app-fullpage">
   <header>
-    <mat-toolbar color="accent" class="mat-elevation-z6">
-      <button mat-icon-button (click)="sidenav.toggle()" aria-label="menu">
-        <mat-icon>
-          menu
-        </mat-icon>
-      </button>
-      <span class="title"> RxJS Docs </span>
-    </mat-toolbar>
+    <app-toolbar></app-toolbar>
   </header>
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav role="navigation">
-      <mat-nav-list (click)="sidenav.toggle()">
-        <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active"
-          [routerLinkActiveOptions]="menu.options"
-          [routerLink]="menu.link">
-          {{menu.title}}
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-    <main class="app-content">
-      <router-outlet></router-outlet>
-    </main>
-  </mat-sidenav-container>
+  <main class="app-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>

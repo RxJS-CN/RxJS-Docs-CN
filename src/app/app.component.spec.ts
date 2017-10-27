@@ -1,28 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatListModule } from '@angular/material';
-import { AppComponent } from './app.component';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AppComponent } from "./app.component";
+import { ToolbarModule } from "./toolbar/toolbar.module";
 
-describe('AppComponent', () => {
+describe("AppComponent", () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatButtonModule,
-        MatListModule
-      ],
-      declarations: [AppComponent]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, BrowserAnimationsModule, ToolbarModule],
+        declarations: [AppComponent]
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
@@ -30,7 +23,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
