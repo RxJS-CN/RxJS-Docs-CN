@@ -6,6 +6,7 @@ import { RouterModule, PreloadAllModules } from "@angular/router";
 import { AppComponent } from "./app.component";
 import { RXJS_DOC_ROUTES } from "./app.routing";
 import { ToolbarModule } from "./toolbar/toolbar.module";
+import { MatSidenavModule, MatListModule } from "@angular/material";
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,8 @@ import { ToolbarModule } from "./toolbar/toolbar.module";
     BrowserModule,
     BrowserAnimationsModule,
     ToolbarModule,
+    MatListModule,
+    MatSidenavModule,
     RouterModule.forRoot(RXJS_DOC_ROUTES, {
       preloadingStrategy: PreloadAllModules
     })

@@ -1,23 +1,13 @@
 <mat-toolbar color="accent" class="mat-elevation-z6">
-  <button mat-icon-button (click)="sidenav.toggle()" aria-label="menu">
+  <button mat-icon-button (click)="navOpen()" aria-label="menu">
     <mat-icon>
       menu
     </mat-icon>
   </button>
   <span class="title" fxFlex> RxJS Docs </span>
-
   <a aria-label="GitHub Repository" class="mat-button" href="https://github.com/ReactiveX" aria-disabled="false">
     <span class="mat-button-wrapper">
       <img src="../../../assets/img/GitHub-Mark-Light-64px.png"> GitHub
     </span>
   </a>
 </mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
-    <mat-nav-list (click)="sidenav.toggle()">
-      <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="menu.options" [routerLink]="menu.link">
-        {{menu.title}}
-      </a>
-    </mat-nav-list>
-  </mat-sidenav>
-</mat-sidenav-container>

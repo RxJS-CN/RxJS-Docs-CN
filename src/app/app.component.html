@@ -1,8 +1,17 @@
 <div class="app-fullpage">
   <header>
-    <app-toolbar></app-toolbar>
+    <app-toolbar (navToggle)="sidenav.toggle()"></app-toolbar>
   </header>
   <main class="app-content">
-    <router-outlet></router-outlet>
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav role="navigation">
+        <mat-nav-list (click)="sidenav.toggle()">
+          <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="menu.options" [routerLink]="menu.link">
+            {{menu.title}}
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+      <router-outlet></router-outlet>
+    </mat-sidenav-container>
   </main>
 </div>

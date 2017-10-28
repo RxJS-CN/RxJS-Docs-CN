@@ -3,6 +3,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { AppComponent } from "./app.component";
 import { ToolbarModule } from "./toolbar/toolbar.module";
+import { MatSidenavModule } from "@angular/material";
 
 describe("AppComponent", () => {
   let component: AppComponent;
@@ -11,7 +12,12 @@ describe("AppComponent", () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [RouterTestingModule, BrowserAnimationsModule, ToolbarModule],
+        imports: [
+          RouterTestingModule,
+          BrowserAnimationsModule,
+          ToolbarModule,
+          MatSidenavModule
+        ],
         declarations: [AppComponent]
       }).compileComponents();
     })
