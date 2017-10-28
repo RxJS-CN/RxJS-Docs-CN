@@ -3,7 +3,6 @@ import { CommonModule } from "@angular/common";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import {
   MatToolbarModule,
-  MatSidenavModule,
   MatIconModule,
   MatButtonModule,
   MatListModule,
@@ -19,7 +18,6 @@ import {
   imports: [
     CommonModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatIconModule,
     MatButtonModule,
     MatListModule,
@@ -35,7 +33,6 @@ import {
   exports: [
     CommonModule,
     MatToolbarModule,
-    MatSidenavModule,
     MatIconModule,
     MatButtonModule,
     MatListModule,
