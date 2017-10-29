@@ -11,7 +11,7 @@ export const debounceTime: OperatorDoc = {
       type: "number",
       attribute: "mandatory",
       description: `The timeout duration in milliseconds
-      (or the time unit determined internally by the optional scheduler for the window of time required to
+      (or the time unit determined internally by the optional scheduler) for the window of time required to
       wait for emission silence before emitting the most recent source value.`
     },
     {
@@ -25,7 +25,8 @@ export const debounceTime: OperatorDoc = {
   shortDescription: {
     description: `
     Emits a value from the source Observable only after a particular time span has passed without another source emission.
-    It's like <a href="href="/operators#delay">delay</a>, but passes only the most recent value from each burst of emissions.`,
+    It's like <a class="markdown-code" href="href="/operators#delay">delay</a>
+    , but passes only the most recent value from each burst of emissions.`,
     extras: []
   },
   walkthrough: {
