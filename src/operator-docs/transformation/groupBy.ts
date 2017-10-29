@@ -50,6 +50,9 @@ export const groupBy: OperatorDoc = {
     <p>If a GroupedObservable for this key exists, this GroupedObservable emits. Elsewhere, a new
     GroupedObservable for this key is created and emits.</p>
 
+    <p>A GroupedObservable represents values belonging to the same group represented by a common key.
+    The common key is available as the key field of a GroupedObservable instance.</p>
+
     <p>The elements emitted by GroupedObservables are by default the items emitted by the Observable,
     or elements returned by the elementSelector function.
     `
@@ -58,6 +61,10 @@ export const groupBy: OperatorDoc = {
     {
       name: "Group objects by id and return as array",
       code: `
+        interface Obj {
+          id: number;
+          name: string;
+        }
         Rx.Observable.of<Obj>({id: 1, name: 'aze1'},
                               {id: 2, name: 'sf2'},
                               {id: 2, name: 'dg2'},
@@ -85,12 +92,16 @@ export const groupBy: OperatorDoc = {
         `,
       externalLink: {
         platform: "JSBin",
-        url: "http://jsbin.com/buhirolore/1/embed?js,console"
+        url: "http://jsbin.com/linekelumo/1/embed?js,console"
       }
     },
     {
       name: "Pivot data on the id field",
       code: `
+      interface Obj {
+        id: number;
+        name: string;
+      }
       Rx.Observable.of<Obj>({id: 1, name: 'aze1'},
                             {id: 2, name: 'sf2'},
                             {id: 2, name: 'dg2'},
@@ -114,10 +125,10 @@ export const groupBy: OperatorDoc = {
         `,
       externalLink: {
         platform: "JSBin",
-        url: "http://jsbin.com/zibaharuro/embed?js,console"
+        url: "http://jsbin.com/racikizeji/embed?js,console"
       }
     }
   ],
-  relatedOperators: ["combineAll", "merge", "withLatestFrom"],
+  relatedOperators: [],
   additionalResources: []
 };
