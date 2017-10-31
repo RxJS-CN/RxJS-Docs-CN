@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>New Company Form</h2>
+<mat-dialog-content>
+  <form fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="15px" fxLayoutWrap [formGroup]="companyForm" autocomplete="false">
+    <mat-form-field fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="45" fxFlex.lg="23" fxFlex.xl="23">
+      <input matInput placeholder="Name" formControlName="Name">
+    </mat-form-field>
+    <mat-form-field fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="45" fxFlex.lg="23" fxFlex.xl="23">
+      <input matInput placeholder="Location" formControlName="Location">
+    </mat-form-field>
+    <mat-form-field fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="45" fxFlex.lg="23" fxFlex.xl="23">
+      <input matInput type="url" placeholder="Website" formControlName="Website">
+      <mat-hint>http://reactivex.io</mat-hint>
+    </mat-form-field>
+    <input hidden type="file" #tempFile class="button" (change)="detectFiles($event)">
+    <mat-form-field fxFlex.xs="100" fxFlex.sm="100" fxFlex.md="45" fxFlex.lg="23" fxFlex.xl="23">
+      <input matInput placeholder="Logo" (click)="tempFile.click()" [ngModel]="selectedFile" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions fxLayout="row" fxLayoutAlign="end center">
+  <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!companyForm.valid" [mat-dialog-close]="companyForm.value">Submit</button>
+</mat-dialog-actions>
