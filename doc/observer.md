@@ -37,7 +37,7 @@ var observer = {
 observable.subscribe(x => console.log('Observer got a next value: ' + x));
 ```
 
-在 `observable.subscribe` 内部，它回创建一个观察者对象并使用第一个回调函数参数作为 `next` 的处理方法。所有三种类型的回调函数都可以直接作为参数来提供：
+在 `observable.subscribe` 内部，它会创建一个观察者对象并使用第一个回调函数参数作为 `next` 的处理方法。所有三种类型的回调函数都可以直接作为参数来提供：
 
 <!-- skip-example -->
 ```js
