@@ -36,7 +36,7 @@ The build and test structure is fairly primitive at the moment. There are variou
 ## Committing
 It is strongly recommended that when creating a commit, you follow this procedure to start the commit wizard. It will aid you on creating valid commit messages.
 
-     ```shell
-     git add .
-     npm run commit
-     ```
+```shell
+git add .
+npm run commit
+```
