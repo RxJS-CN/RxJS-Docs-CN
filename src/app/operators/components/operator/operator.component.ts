@@ -3,27 +3,27 @@ import {
   Input,
   OnInit,
   ChangeDetectionStrategy
-} from "@angular/core";
-import { OperatorDoc } from "../../../../operator-docs/operator.model";
+} from '@angular/core';
+import { OperatorDoc } from '../../../../operator-docs/operator.model';
 
 @Component({
-  selector: "app-operator",
-  templateUrl: "./operator.component.html",
-  styleUrls: ["./operator.component.scss"],
+  selector: 'app-operator',
+  templateUrl: './operator.component.html',
+  styleUrls: ['./operator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OperatorComponent {
   @Input() operator: OperatorDoc;
 
-  private readonly baseSourceUrl = "https://github.com/ReactiveX/rxjs/blob/master/src/operators/";
-  private readonly baseSpecUrl = "http://reactivex.io/rxjs/test-file/spec-js/operators";
+  private readonly baseSourceUrl = 'https://github.com/ReactiveX/rxjs/blob/master/src/operators/';
+  private readonly baseSpecUrl = 'http://reactivex.io/rxjs/test-file/spec-js/operators';
 
   get operatorName() {
     return this.operator.name;
   }
 
   get signature() {
-    return this.operator.signature || "Signature Placeholder";
+    return this.operator.signature || 'Signature Placeholder';
   }
 
   get marbleUrl() {
