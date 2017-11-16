@@ -4,7 +4,7 @@ export const combineLatest: OperatorDoc = {
   'name': 'combineLatest',
   'operatorType': 'combination',
   'signature': 'public combineLatest(observables: ...Observable, project: function): Observable',
-  "useInteractiveMarbles": true,
+  'useInteractiveMarbles': true,
   'parameters': [
     {
       'name': 'other',

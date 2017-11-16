@@ -21,12 +21,18 @@
     [operatorExamples]="examples" class="margin-bottom-16">
   </app-operator-examples>
   <app-operator-parameters
-    [operatorParameters]="parameters">
+    [operatorParameters]="parameters"
+    *ngIf="parameters?.length">
   </app-operator-parameters>
   <app-operator-walkthrough
     class="margin-bottom-16"
     [operatorWalkthrough]="walkthrough" >
   </app-operator-walkthrough>
+  <app-operator-extras
+    class="margin-bottom-16"
+    *ngIf="walkthroughExtras"
+    [operatorExtras]="walkthroughExtras">
+  </app-operator-extras>
   <app-related-operators
     [relatedOperators]="relatedOperators">
   </app-related-operators>
