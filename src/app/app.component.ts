@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 interface Menu {
   title: string;
@@ -7,30 +7,30 @@ interface Menu {
 }
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
   menus: Menu[] = [
     {
-      title: 'Home',
-      link: '/',
+      title: "Home",
+      link: "/",
       options: { exact: true }
     },
     {
-      title: 'Operators',
-      link: '/operators',
+      title: "Operators",
+      link: "/operators",
       options: { exact: false }
     },
     {
-      title: 'Companies',
-      link: '/companies',
+      title: "Companies",
+      link: "/companies",
       options: { exact: false }
     },
     {
-      title: 'Team',
-      link: '/team',
+      title: "Team",
+      link: "/team",
       options: { exact: false }
     }
   ];
