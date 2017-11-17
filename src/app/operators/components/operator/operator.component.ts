@@ -1,4 +1,9 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
 
 @Component({
@@ -30,15 +35,24 @@ export class OperatorComponent {
   }
 
   get shortDescription() {
-    return this.operator.shortDescription && this.operator.shortDescription.description;
+    return (
+      this.operator.shortDescription &&
+      this.operator.shortDescription.description
+    );
   }
 
   get shortDescriptionExtras() {
-    return this.operator.shortDescription && this.operator.shortDescription.extras;
+    return (
+      this.operator.shortDescription && this.operator.shortDescription.extras
+    );
   }
 
   get walkthrough() {
     return this.operator.walkthrough && this.operator.walkthrough.description;
+  }
+
+  get walkthroughExtras() {
+    return this.operator.walkthrough && this.operator.walkthrough.extras;
   }
 
   get parameters() {
