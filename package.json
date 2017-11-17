@@ -9,7 +9,7 @@
   },
   "lint-staged": {
     "*.@(ts)": [
-      "prettier --parser typescript --write",
+      "prettier --single-quote --parser typescript --write",
       "tslint --fix",
       "git add"
     ]
