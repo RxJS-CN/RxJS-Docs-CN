@@ -2,28 +2,46 @@ import {
   Component,
   Input,
   OnInit,
-  ChangeDetectionStrategy
-} from "@angular/core";
-import { OperatorDoc } from "../../../../operator-docs/operator.model";
+  ChangeDetectionStrategy,
+  Inject,
+  InjectionToken
+} from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { OperatorDoc } from '../../../../operator-docs/operator.model';
+import 'rxjs/add/operator/pluck';
+
+export const OPERATOR_TOKEN = new InjectionToken<string>('operators');
 
 @Component({
-  selector: "app-operator",
-  templateUrl: "./operator.component.html",
-  styleUrls: ["./operator.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'app-operator',
+  templateUrl: './operator.component.html',
+  styleUrls: ['./operator.component.scss']
 })
-export class OperatorComponent {
-  @Input() operator: OperatorDoc;
+export class OperatorComponent implements OnInit {
+  public operator: OperatorDoc;
 
-  private readonly baseSourceUrl = "https://github.com/ReactiveX/rxjs/blob/master/src/operators/";
-  private readonly baseSpecUrl = "http://reactivex.io/rxjs/test-file/spec-js/operators";
+  private readonly baseSourceUrl = 'https://github.com/ReactiveX/rxjs/blob/master/src/operators/';
+  private readonly baseSpecUrl = 'http://reactivex.io/rxjs/test-file/spec-js/operators';
+
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[]
+  ) {}
+
+  ngOnInit() {
+    this._activatedRoute.params.pluck('operator').subscribe((name: string) => {
+      this.operator = this.operators.filter(
+        (operator: OperatorDoc) => operator.name === name
+      )[0];
+    });
+  }
 
   get operatorName() {
     return this.operator.name;
   }
 
   get signature() {
-    return this.operator.signature || "Signature Placeholder";
+    return this.operator.signature || 'Signature Placeholder';
   }
 
   get marbleUrl() {
