@@ -4,8 +4,13 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutModule, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs/Observable';
-import { OperatorsComponent, OPERATORS_TOKEN, groupOperatorsByType } from '../operators.component';
+import {
+  OperatorsComponent,
+  OPERATORS_TOKEN,
+  groupOperatorsByType
+} from '../operators.component';
 import { OperatorDoc } from '../../../operator-docs';
+import { SeoService } from '../../services/seo.service';
 
 const mockActivatedRoute = {
   snapshot: {},
@@ -34,13 +39,14 @@ describe('Operators', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [ RouterTestingModule, LayoutModule ],
-        declarations: [ OperatorsComponent ],
+        imports: [RouterTestingModule, LayoutModule],
+        declarations: [OperatorsComponent],
         providers: [
+          SeoService,
           { provide: OPERATORS_TOKEN, useValue: mockOperators },
           { provide: ActivatedRoute, useValue: mockActivatedRoute }
         ],
-        schemas: [ NO_ERRORS_SCHEMA ]
+        schemas: [NO_ERRORS_SCHEMA]
       });
     });
 
