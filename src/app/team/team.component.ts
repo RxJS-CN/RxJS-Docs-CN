@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeoService } from '../services/seo.service';
 
 @Component({
   selector: 'app-team',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team.component.scss']
 })
 export class TeamComponent implements OnInit {
-
-  constructor() { }
+  constructor(private _seo: SeoService) {}
 
   ngOnInit() {
+    this._seo.setHeaders(['The Team'], this._seo.teamDescription);
   }
-
 }

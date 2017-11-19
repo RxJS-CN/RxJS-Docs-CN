@@ -18,6 +18,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { OperatorDoc } from '../../operator-docs/operator.model';
+import { SeoService } from '../services/seo.service';
 
 const OPERATOR_MENU_GAP_LARGE = 64;
 const OPERATOR_MENU_GAP_SMALL = 54;
@@ -64,7 +65,8 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
     private _breakpointObserver: BreakpointObserver,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[]
+    @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[],
+    private _seo: SeoService
   ) {}
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
     this._subscription = this._activatedRoute.fragment.subscribe(name =>
       this.scrollToOperator(name)
     );
+    this._seo.setHeaders(['Operators'], this._seo.operatorsDescription);
   }
 
   ngAfterViewInit() {

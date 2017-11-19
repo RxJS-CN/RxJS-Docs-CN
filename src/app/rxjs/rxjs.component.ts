@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeoService } from '../services/seo.service';
 
 @Component({
   selector: 'app-rxjs',
@@ -6,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rxjs.component.scss']
 })
 export class RxjsComponent implements OnInit {
-
-  constructor() { }
+  constructor(private _seo: SeoService) {}
 
   ngOnInit() {
+    this._seo.setHeaders([], this._seo.homeDescription);
   }
-
 }
