@@ -7,6 +7,7 @@ import {
   InjectionToken
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { SeoService } from '../../../services/seo.service';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
 import 'rxjs/add/operator/pluck';
 
@@ -26,7 +27,8 @@ export class OperatorComponent implements OnInit {
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[]
+    @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[],
+    private _seo: SeoService
   ) {}
 
   ngOnInit() {
@@ -35,13 +37,13 @@ export class OperatorComponent implements OnInit {
         this.operators.filter(
           (operator: OperatorDoc) => operator.name === name
         )[0] || this.notfound();
+      this._seo.setHeaders(
+        [this.operator.name, this.operator.operatorType],
+        this.operator.shortDescription
+          ? this.operator.shortDescription.description
+          : ''
+      );
     });
-  }
-
-  notfound() {
-    console.log('not found');
-    this._router.navigate(['/operators']);
-    return {};
   }
 
   get operatorName() {
@@ -103,5 +105,10 @@ export class OperatorComponent implements OnInit {
 
   get additionalResources() {
     return this.operator.additionalResources || [];
+  }
+
+  private notfound() {
+    this._router.navigate(['/operators']);
+    return {};
   }
 }
