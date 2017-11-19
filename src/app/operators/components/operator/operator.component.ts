@@ -6,7 +6,7 @@ import {
   Inject,
   InjectionToken
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
 import 'rxjs/add/operator/pluck';
 
@@ -24,16 +24,24 @@ export class OperatorComponent implements OnInit {
   private readonly baseSpecUrl = 'http://reactivex.io/rxjs/test-file/spec-js/operators';
 
   constructor(
+    private _router: Router,
     private _activatedRoute: ActivatedRoute,
     @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[]
   ) {}
 
   ngOnInit() {
     this._activatedRoute.params.pluck('operator').subscribe((name: string) => {
-      this.operator = this.operators.filter(
-        (operator: OperatorDoc) => operator.name === name
-      )[0];
+      this.operator =
+        this.operators.filter(
+          (operator: OperatorDoc) => operator.name === name
+        )[0] || this.notfound();
     });
+  }
+
+  notfound() {
+    console.log('not found');
+    this._router.navigate(['/operators']);
+    return {};
   }
 
   get operatorName() {
