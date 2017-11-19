@@ -1,31 +1,31 @@
-import { OperatorDoc } from "../operator.model";
+import { OperatorDoc } from '../operator.model';
 
 export const debounceTime: OperatorDoc = {
-  name: "debounceTime",
-  operatorType: "filtering",
+  name: 'debounceTime',
+  operatorType: 'filtering',
   signature:
-    "public debounceTime<T>(dueTime: number, scheduler: IScheduler = async): Observable",
+    'public debounceTime<T>(dueTime: number, scheduler: IScheduler = async): Observable',
   parameters: [
     {
-      name: "dueTime",
-      type: "number",
-      attribute: "mandatory",
+      name: 'dueTime',
+      type: 'number',
+      attribute: 'mandatory',
       description: `The timeout duration in milliseconds
       (or the time unit determined internally by the optional scheduler) for the window of time required to
       wait for emission silence before emitting the most recent source value.`
     },
     {
-      name: "scheduler",
-      type: "IScheduler",
-      attribute: "optional",
+      name: 'scheduler',
+      type: 'IScheduler',
+      attribute: 'optional',
       description: `The IScheduler to use for managing the timers that handle the timeout for each value.`
     }
   ],
-  marbleUrl: "http://reactivex.io/rxjs/img/debounceTime.png",
+  marbleUrl: 'http://reactivex.io/rxjs/img/debounceTime.png',
   shortDescription: {
     description: `
     Emits a value from the source Observable only after a particular time span has passed without another source emission.
-    It's like <a class="markdown-code" href="href="/operators#delay">delay</a>
+    It's like <a class="markdown-code" href="/operators/delay">delay</a>
     , but passes only the most recent value from each burst of emissions.`,
     extras: []
   },
@@ -52,7 +52,7 @@ export const debounceTime: OperatorDoc = {
   examples: [
     {
       name:
-        "Emit the most recent value after a burst of value changes over a defined time",
+        'Emit the most recent value after a burst of value changes over a defined time',
       code: `
         const search = document.querySelector('#search');
         const output = document.querySelector('#output');
@@ -64,17 +64,17 @@ export const debounceTime: OperatorDoc = {
           .subscribe((search)=> output.textContent=search);
       `,
       externalLink: {
-        platform: "JSBin",
-        url: "http://jsbin.com/gapobakuwu/edit?js,output"
+        platform: 'JSBin',
+        url: 'http://jsbin.com/gapobakuwu/edit?js,output'
       }
     }
   ],
   relatedOperators: [
-    "auditTime",
-    "debounce",
-    "delay",
-    "sampleTime",
-    "throttleTime"
+    'auditTime',
+    'debounce',
+    'delay',
+    'sampleTime',
+    'throttleTime'
   ],
   additionalResources: []
 };
