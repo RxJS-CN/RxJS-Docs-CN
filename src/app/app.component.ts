@@ -6,7 +6,7 @@ import {
   RouterEvent
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { SeoService } from './services/seo.service';
+import { SeoService, SeoData } from './services/seo.service';
 
 interface Menu {
   title: string;
@@ -61,12 +61,9 @@ export class AppComponent implements OnInit {
           return route;
         }),
         filter(route => route.outlet === 'primary'),
-        mergeMap(route => route.data)
+        mergeMap(route => route.data),
+        filter((data: SeoData) => data.title !== undefined)
       )
-      .subscribe(data => {
-        if (data !== {}) {
-          this._seo.setHeaders(data.title || [], data.description || '');
-        }
-      });
+      .subscribe((data: SeoData) => this._seo.setHeaders(data));
   }
 }
