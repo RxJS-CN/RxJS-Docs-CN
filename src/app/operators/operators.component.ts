@@ -59,8 +59,6 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   public groupedOperators: OperatorDocMap;
   public categories: string[];
 
-  private _subscription: Subscription;
-
   constructor(
     private _breakpointObserver: BreakpointObserver,
     private _router: Router,
@@ -72,9 +70,6 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.groupedOperators = groupOperatorsByType(this.operators);
     this.categories = Object.keys(this.groupedOperators);
-    this._subscription = this._activatedRoute.fragment.subscribe(name =>
-      this.scrollToOperator(name)
-    );
     this._seo.setHeaders(['Operators'], this._seo.operatorsDescription);
   }
 
