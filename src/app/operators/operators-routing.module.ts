@@ -8,6 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: OperatorsComponent,
+    data: { title: ['Operators'], description: 'All the RxJS operators...' },
     children: [{ path: ':operator', component: OperatorComponent }]
   }
 ];

@@ -17,7 +17,6 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { OperatorDoc } from '../../operator-docs/operator.model';
-import { SeoService } from '../services/seo.service';
 
 const OPERATOR_MENU_GAP_LARGE = 64;
 const OPERATOR_MENU_GAP_SMALL = 54;
@@ -60,14 +59,12 @@ export class OperatorsComponent implements OnInit {
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
-    @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[],
-    private _seo: SeoService
+    @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[]
   ) {}
 
   ngOnInit() {
     this.groupedOperators = groupOperatorsByType(this.operators);
     this.categories = Object.keys(this.groupedOperators);
-    this._seo.setHeaders(['Operators'], this._seo.operatorsDescription);
   }
 
   get extraSmallScreen() {

@@ -10,7 +10,6 @@ import {
   groupOperatorsByType
 } from '../operators.component';
 import { OperatorDoc } from '../../../operator-docs';
-import { SeoService } from '../../services/seo.service';
 
 const mockActivatedRoute = {
   snapshot: {},
@@ -42,7 +41,6 @@ describe('Operators', () => {
         imports: [RouterTestingModule, LayoutModule],
         declarations: [OperatorsComponent],
         providers: [
-          SeoService,
           { provide: OPERATORS_TOKEN, useValue: mockOperators },
           { provide: ActivatedRoute, useValue: mockActivatedRoute }
         ],
