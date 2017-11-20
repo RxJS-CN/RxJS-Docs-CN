@@ -3,7 +3,6 @@ import {
   Inject,
   InjectionToken,
   OnInit,
-  AfterViewInit,
   ChangeDetectionStrategy
 } from '@angular/core';
 import {
@@ -55,14 +54,12 @@ interface OperatorDocMap {
     ])
   ]
 })
-export class OperatorsComponent implements OnInit, AfterViewInit {
+export class OperatorsComponent implements OnInit {
   public groupedOperators: OperatorDocMap;
   public categories: string[];
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
-    private _router: Router,
-    private _activatedRoute: ActivatedRoute,
     @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[],
     private _seo: SeoService
   ) {}
@@ -71,24 +68,6 @@ export class OperatorsComponent implements OnInit, AfterViewInit {
     this.groupedOperators = groupOperatorsByType(this.operators);
     this.categories = Object.keys(this.groupedOperators);
     this._seo.setHeaders(['Operators'], this._seo.operatorsDescription);
-  }
-
-  ngAfterViewInit() {
-    // scroll initial param when applicable
-    const name = this._activatedRoute.snapshot.fragment;
-
-    if (name) {
-      // slight delay for scroll to be accurate
-      setTimeout(() => this.scrollToOperator(name), 100);
-    }
-  }
-
-  scrollToOperator(name: string) {
-    const element = document.getElementById(name);
-
-    if (element) {
-      element.scrollIntoView();
-    }
   }
 
   get extraSmallScreen() {

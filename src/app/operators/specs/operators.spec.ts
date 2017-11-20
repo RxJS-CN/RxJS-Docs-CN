@@ -64,13 +64,6 @@ describe('Operators', () => {
       expect(component.groupedOperators['utility'].length).toBe(2);
     });
 
-    it('should scroll to initial operator when fragment exists', () => {
-      spyOn(component, 'scrollToOperator').and.stub();
-      component.ngOnInit();
-
-      expect(component.scrollToOperator).toHaveBeenCalledWith('merge');
-    });
-
     it('should have a sidenav mode of over when on a small screen', () => {
       spyOn(breakpointService, 'isMatched').and.returnValue(true);
 
