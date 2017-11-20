@@ -9,7 +9,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { SeoService } from '../../../services/seo.service';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
-import 'rxjs/add/operator/pluck';
+import { pluck } from 'rxjs/operators';
 
 export const OPERATOR_TOKEN = new InjectionToken<string>('operators');
 
