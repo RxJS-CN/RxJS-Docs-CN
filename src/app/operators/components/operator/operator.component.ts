@@ -32,18 +32,20 @@ export class OperatorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this._activatedRoute.params.pluck('operator').subscribe((name: string) => {
-      this.operator =
-        this.operators.filter(
-          (operator: OperatorDoc) => operator.name === name
-        )[0] || this.notfound();
-      this._seo.setHeaders(
-        [this.operator.name, this.operator.operatorType],
-        this.operator.shortDescription
-          ? this.operator.shortDescription.description
-          : ''
-      );
-    });
+    this._activatedRoute.params
+      .pipe(pluck('operator'))
+      .subscribe((name: string) => {
+        this.operator =
+          this.operators.filter(
+            (operator: OperatorDoc) => operator.name === name
+          )[0] || this.notfound();
+        this._seo.setHeaders(
+          [this.operator.name, this.operator.operatorType],
+          this.operator.shortDescription
+            ? this.operator.shortDescription.description
+            : ''
+        );
+      });
   }
 
   get operatorName() {
