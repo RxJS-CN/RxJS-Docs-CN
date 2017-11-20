@@ -39,12 +39,12 @@ export class OperatorComponent implements OnInit {
           this.operators.filter(
             (operator: OperatorDoc) => operator.name === name
           )[0] || this.notfound();
-        this._seo.setHeaders(
-          [this.operator.name, this.operator.operatorType],
-          this.operator.shortDescription
+        this._seo.setHeaders({
+          title: [this.operator.name, this.operator.operatorType],
+          description: this.operator.shortDescription
             ? this.operator.shortDescription.description
             : ''
-        );
+        });
       });
   }
 
