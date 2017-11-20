@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { ToolbarModule } from './toolbar/toolbar.module';
 import { MatSidenavModule, MatListModule } from '@angular/material';
+import { SeoService } from './services/seo.service';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -19,7 +20,8 @@ describe('AppComponent', () => {
           MatSidenavModule,
           MatListModule
         ],
-        declarations: [AppComponent]
+        declarations: [AppComponent],
+        providers: [SeoService]
       }).compileComponents();
     })
   );
