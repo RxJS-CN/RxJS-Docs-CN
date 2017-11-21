@@ -47,7 +47,7 @@ export const map: OperatorDoc = {
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/geyokey/embed?js,console'
+        url: 'http://jsbin.com/dutered/embed?js,console,output'
       }
     }
   ],
