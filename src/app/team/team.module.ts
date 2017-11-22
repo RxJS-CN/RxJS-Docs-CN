@@ -1,11 +1,11 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { TeamComponent } from "./team.component";
-import { routing } from "./team.routing";
-import { SharedModule } from "../shared.module";
+import { TeamComponent } from './team.component';
+import { TeamRoutingModule } from './team-routing.module';
+import { SharedModule } from '../shared.module';
 
 @NgModule({
-  imports: [routing, SharedModule],
+  imports: [TeamRoutingModule, SharedModule],
   declarations: [TeamComponent]
 })
 export class TeamModule {}
