@@ -20,7 +20,7 @@ export const OPERATOR_TOKEN = new InjectionToken<string>('operators');
 })
 export class OperatorComponent implements OnInit {
   public operator: OperatorDoc;
-  public operatorsMap: { string?: OperatorDoc };
+  public operatorsMap = new Map<string, OperatorDoc>();
 
   private readonly baseSourceUrl = 'https://github.com/ReactiveX/rxjs/blob/master/src/operators/';
   private readonly baseSpecUrl = 'http://reactivex.io/rxjs/test-file/spec-js/operators';
@@ -33,19 +33,14 @@ export class OperatorComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.operatorsMap = this.operators.reduce(
-      (acc: { string?: OperatorDoc }, value: OperatorDoc) => {
-        acc[value.name] = value;
-        return acc;
-      },
-      {}
-    );
-
+    this.operators.forEach((op: OperatorDoc) => {
+      this.operatorsMap.set(op.name, op);
+    });
     this._activatedRoute.params
       .pipe(pluck('operator'))
       .subscribe((name: string) => {
-        if (name in this.operatorsMap) {
-          this.operator = this.operatorsMap[name];
+        if (this.operatorsMap.has(name)) {
+          this.operator = this.operatorsMap.get(name);
         } else {
           this.notfound();
           return;
