@@ -35,7 +35,7 @@ export const doOperator: OperatorDoc = {
   },
   walkthrough: {
     description: `
-      <p><code>do</code> Returns a mirrored Observable of the source Observable,
+      <p>Returns a mirrored Observable of the source Observable,
       but modified so that the provided Observer is called to perform a side effect for every
       value, error, and completion emitted by the source. Any errors that are thrown in
       the aforementioned Observer or handlers are safely sent down the error path
