@@ -55,8 +55,8 @@ import { subscribeToResult } from '../util/subscribeToResult';
  *   );
  *   // 1, 2, 3, error in source. Details: four!
  *
- * @param {function} selector 该函数接受 err 参数，即错误对象，还接受 catch 参数，即源 Observable，
- * 当你想“重试”的时候返回它即可。 任何被`selector`返回的 observable 都会被用来代替源 observable。
+ * @param {function} selector 该函数接受 `err` 参数，即错误对象，还接受 `caught` 参数，即源 Observable，
+ * 当你想“重试”的时候返回它即可。 无论 `selector` 函数返回的 observable 是什么，都会被用来继续执行 observable 链。
  * @return {Observable} 该 Observable 源自源 Observable 或 selector 函数返回的 Observable。
  * @method catch
  * @name catch
