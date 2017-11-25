@@ -19,7 +19,8 @@
     "./doc/scripts/link-hash.js",
     "./doc/scripts/language.js",
     "./doc/scripts/about-link.js",
-    "./doc/scripts/wechat-share.js"
+    "./doc/scripts/wechat-share.js",
+    "./doc/scripts/rxjs-spy.js"
   ],
   "index": "./doc/index.md",
   "plugins": [
