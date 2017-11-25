@@ -98,7 +98,6 @@ npm install @reactivex/rxjs@5.0.0-beta.1
 
 ## CDN
 
-For CDN, you can use [unpkg](https://unpkg.com). Just replace `version` with the current
 对于 CDN，可以使用 [unpkg](https://unpkg.com) 。只需要用当前的版本号来替换下面链接中的 `version`：
 
 对于 RxJS 5.0.0-beta.1 到 beta.11：
