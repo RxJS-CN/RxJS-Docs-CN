@@ -41,6 +41,7 @@ export class OperatorComponent implements OnInit {
       .subscribe((name: string) => {
         if (this.operatorsMap.has(name)) {
           this.operator = this.operatorsMap.get(name);
+          this.scrollToTop();
         } else {
           this.notfound();
           return;
@@ -52,6 +53,14 @@ export class OperatorComponent implements OnInit {
             : ''
         });
       });
+  }
+
+  scrollToTop() {
+    const content = document.querySelector('.mat-drawer-content');
+
+    if (content) {
+      content.scrollTop = 0;
+    }
   }
 
   get operatorName() {
