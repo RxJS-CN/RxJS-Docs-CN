@@ -1,6 +1,6 @@
 <h2 class="related-operators"> Related Operators </h2>
 <ul class="section-list">
   <li *ngFor="let related of relatedOperators">
-    <a [href]="'/operators#' + related"> {{ related }} </a>
+    <a [routerLink]="['/operators', related]"> {{ related }} </a>
   </li>
 </ul>

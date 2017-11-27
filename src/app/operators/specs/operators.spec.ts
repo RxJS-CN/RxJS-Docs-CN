@@ -4,7 +4,11 @@ import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LayoutModule, BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs/Observable';
-import { OperatorsComponent, OPERATORS_TOKEN, groupOperatorsByType } from '../operators.component';
+import {
+  OperatorsComponent,
+  OPERATORS_TOKEN,
+  groupOperatorsByType
+} from '../operators.component';
 import { OperatorDoc } from '../../../operator-docs';
 
 const mockActivatedRoute = {
@@ -34,13 +38,13 @@ describe('Operators', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [ RouterTestingModule, LayoutModule ],
-        declarations: [ OperatorsComponent ],
+        imports: [RouterTestingModule, LayoutModule],
+        declarations: [OperatorsComponent],
         providers: [
           { provide: OPERATORS_TOKEN, useValue: mockOperators },
           { provide: ActivatedRoute, useValue: mockActivatedRoute }
         ],
-        schemas: [ NO_ERRORS_SCHEMA ]
+        schemas: [NO_ERRORS_SCHEMA]
       });
     });
 
@@ -56,13 +60,6 @@ describe('Operators', () => {
 
       expect(component.groupedOperators['transformation'].length).toBe(1);
       expect(component.groupedOperators['utility'].length).toBe(2);
-    });
-
-    it('should scroll to initial operator when fragment exists', () => {
-      spyOn(component, 'scrollToOperator').and.stub();
-      component.ngOnInit();
-
-      expect(component.scrollToOperator).toHaveBeenCalledWith('merge');
     });
 
     it('should have a sidenav mode of over when on a small screen', () => {

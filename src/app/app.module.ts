@@ -1,3 +1,4 @@
+import { SeoService } from './services/seo.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -17,7 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
     MatSidenavModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [SeoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

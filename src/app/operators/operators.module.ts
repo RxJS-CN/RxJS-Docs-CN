@@ -9,7 +9,10 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { ALL_OPERATORS, OperatorDoc } from '../../operator-docs';
 import { OperatorsRoutingModule } from './operators-routing.module';
 import { OperatorsComponent, OPERATORS_TOKEN } from './operators.component';
-import { OperatorComponent } from './components/operator/operator.component';
+import {
+  OperatorComponent,
+  OPERATOR_TOKEN
+} from './components/operator/operator.component';
 import { OperatorHeaderComponent } from './components/operator-header/operator-header.component';
 import { OperatorParametersComponent } from './components/operator-parameters/operator-parameters.component';
 import { OperatorExamplesComponent } from './components/operator-examples/operator-examples.component';
@@ -43,7 +46,10 @@ import { SharedModule } from '../shared.module';
     ClipboardModule,
     LayoutModule
   ],
-  providers: [{ provide: OPERATORS_TOKEN, useValue: ALL_OPERATORS }],
+  providers: [
+    { provide: OPERATORS_TOKEN, useValue: ALL_OPERATORS },
+    { provide: OPERATOR_TOKEN, useValue: ALL_OPERATORS }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class OperatorsModule {}
