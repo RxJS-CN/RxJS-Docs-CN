@@ -59,7 +59,7 @@ export const doOperator: OperatorDoc = {
       code: `
       var clicks = Rx.Observable.fromEvent(document, 'click');
       var positions = clicks
-         .do(ev => console.log(ev))
+         .do(ev => console.log(ev.type))
          .map(ev => ev.clientX);
       positions.subscribe(x => console.log(x));
       `,
