@@ -11,15 +11,13 @@
       <h3 mat-subheader class="category-subheader">{{ category }}</h3>
       <a mat-list-item
         *ngFor="let operator of groupedOperators[category]"
-        [href]="'/operators#' + operator.name">
+        [routerLink]="['/operators', operator.name]"
+        routerLinkActive="active">
         {{ operator.name }}
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <app-operator
-    *ngFor="let operator of operators"
-    [operator]="operator">
-  </app-operator>
+  <router-outlet></router-outlet>
 </mat-sidenav-container>
 <button
   *ngIf="smallScreen"
