@@ -59,13 +59,11 @@ export const distinctUntilChanged: OperatorDoc = {
       code: `
       Rx.Observable.of(1, 1, 2, 2, 2, 1, 1, 2, 3, 3, 4)
        .distinctUntilChanged()
-       // displays
-       // 1, 2, 1, 2, 3, 4
        .subscribe(x => console.log(x));
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/begerivegu/1/embed?js,console'
+        url: 'http://jsbin.com/poxayavuge/embed?js,console'
       }
     },
     {
@@ -78,15 +76,11 @@ export const distinctUntilChanged: OperatorDoc = {
          { age: 6, name: 'Foo'}
         )
         .distinctUntilChanged((p, q) => p.name === q.name)
-         // displays:
-         // { age: 4, name: 'Foo' }
-         // { age: 7, name: 'Bar' }
-         // { age: 5, name: 'Foo' }
         .subscribe(x => console.log(x));
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/fibaxeriku/1/embed?js,console'
+        url: 'http://jsbin.com/duhexuhoxo/embed?js,console'
       }
     }
   ],
