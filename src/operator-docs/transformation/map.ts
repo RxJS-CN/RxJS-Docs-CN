@@ -31,7 +31,13 @@ export const map: OperatorDoc = {
   walkthrough: {
     description: `
       <p>
-        Similar to the well known <span class="markdown-code">Array.prototype.map</span> function,
+        Similar to the well known
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+          target="_blank"
+          class="markdown-code">
+          Array.prototype.map
+        </a> function,
         this operator applies a projection to each value and emits that projection in the output
         Observable.
       </p>
@@ -41,13 +47,13 @@ export const map: OperatorDoc = {
     {
       name: 'Map every click to the clientX position of that click',
       code: `
-        let clicks = Rx.Observable.fromEvent(document, 'click');
-        let positions = clicks.map(ev => ev.clientX);
+        const clicks = Rx.Observable.fromEvent(document, 'click');
+        const positions = clicks.map(ev => ev.clientX);
         positions.subscribe(x => console.log(x));
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/dutered/embed?js,console,output'
+        url: 'http://jsbin.com/detidogile/embed?js,console,output'
       }
     }
   ],

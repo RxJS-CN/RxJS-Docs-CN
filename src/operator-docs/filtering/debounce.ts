@@ -1,16 +1,16 @@
-import { OperatorDoc } from "../operator.model";
+import { OperatorDoc } from '../operator.model';
 
 export const debounce: OperatorDoc = {
-  name: "debounce",
-  operatorType: "filtering",
+  name: 'debounce',
+  operatorType: 'filtering',
   signature:
-    "public debounce(durationSelector: function(value: T): SubscribableOrPromise): Observable",
-  marbleUrl: "http://reactivex.io/rxjs/img/debounce.png",
+    'public debounce(durationSelector: function(value: T): SubscribableOrPromise): Observable',
+  marbleUrl: 'http://reactivex.io/rxjs/img/debounce.png',
   parameters: [
     {
-      name: "durationSelector",
-      type: "function(value: T): SubscribableOrPromise",
-      attribute: "",
+      name: 'durationSelector',
+      type: 'function(value: T): SubscribableOrPromise',
+      attribute: '',
       description: `A function that receives a value from the source Observable
         , for computing the timeout duration for each source value, returned as an Observable or a Promise.`
     }
@@ -20,7 +20,7 @@ export const debounce: OperatorDoc = {
        by another Observable has passed without another source emission.`,
     extras: [
       {
-        type: "Tip",
+        type: 'Tip',
         text: `
         It's like debounceTime, but the time span of emission silence is determined by a second Observable.
         `
@@ -47,18 +47,18 @@ export const debounce: OperatorDoc = {
   },
   examples: [
     {
-      name: "Emit the most recent click after a burst of clicks",
+      name: 'Emit the most recent click after a burst of clicks',
       code: `
-        var clicks = Rx.Observable.fromEvent(document, 'click');
-        var result = clicks.debounce(() => Rx.Observable.interval(1000));
+        const clicks = Rx.Observable.fromEvent(document, 'click');
+        const result = clicks.debounce(() => Rx.Observable.interval(1000));
         result.subscribe(x => console.log(x));
       `,
       externalLink: {
-        platform: "JSBin",
-        url: "http://jsbin.com/renayeqatu/1/edit?js,console,output"
+        platform: 'JSBin',
+        url: 'http://jsbin.com/zuyafikiqa/embed?js,console,output'
       }
     }
   ],
-  relatedOperators: ["debounceTime", "audit", "delayWhen", "throttle"],
+  relatedOperators: ['debounceTime', 'audit', 'delayWhen', 'throttle'],
   additionalResources: []
 };
