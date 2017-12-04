@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ToolbarComponent } from './toolbar.component';
-import { SharedModule } from '../shared.module';
+import { MaterialModule } from '../../../material/material.module';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
@@ -12,7 +12,7 @@ describe('ToolbarComponent', () => {
   beforeEach(
     async(() => {
       TestBed.configureTestingModule({
-        imports: [SharedModule, BrowserAnimationsModule, RouterTestingModule],
+        imports: [MaterialModule, BrowserAnimationsModule, RouterTestingModule],
         declarations: [ToolbarComponent]
       }).compileComponents();
     })
