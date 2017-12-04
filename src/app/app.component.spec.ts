@@ -15,7 +15,7 @@ describe('AppComponent', () => {
         imports: [
           RouterTestingModule,
           BrowserAnimationsModule,
-          CoreModule,
+          CoreModule.forRoot(),
           MatSidenavModule,
           MatListModule
         ],
