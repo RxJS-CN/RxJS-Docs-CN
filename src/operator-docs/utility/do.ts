@@ -46,10 +46,10 @@ export const doOperator: OperatorDoc = {
       or performing other side effects.
       </p>
       <p>
-      Note: this is different to a <code>subscribe</code> on the Observable. If the Observable
-      returned by <code>do</code> is not subscribed, the side effects specified by the
-      Observer will never happen. <code>do</code> therefore simply spies on existing
-      execution, it does not trigger an execution to happen like <code>subscribe</code> does.</p>
+      Note: this is different to a <span class="markdown-code">subscribe</span> on the Observable. If the Observable
+      returned by <span class="markdown-code">do</span> is not subscribed, the side effects specified by the
+      Observer will never happen. <span class="markdown-code">do</span> therefore simply spies on existing
+      execution, it does not trigger an execution to happen like <span class="markdown-code">subscribe</span> does.</p>
     `
   },
   examples: [
@@ -57,15 +57,15 @@ export const doOperator: OperatorDoc = {
       name:
         'Map every click to the clientX position of that click, while also logging the click event',
       code: `
-      var clicks = Rx.Observable.fromEvent(document, 'click');
-      var positions = clicks
+      const clicks = Rx.Observable.fromEvent(document, 'click');
+      const positions = clicks
          .do(ev => console.log(ev.type))
          .map(ev => ev.clientX);
       positions.subscribe(x => console.log(x));
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/mikiqub/edit?js,console,output'
+        url: 'http://jsbin.com/pijosapixu/embed?js,console,output'
       }
     }
   ],
