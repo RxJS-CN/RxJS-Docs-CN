@@ -7,9 +7,11 @@ import {
   InjectionToken
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatSnackBar } from '@angular/material';
+import { pluck } from 'rxjs/operators';
+import { CopierService } from '../../../core/services/copier.service';
 import { SeoService } from '../../../core/services/seo.service';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
-import { pluck } from 'rxjs/operators';
 
 export const OPERATOR_TOKEN = new InjectionToken<string>('operators');
 
@@ -28,8 +30,10 @@ export class OperatorComponent implements OnInit {
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[],
-    private _seo: SeoService
+    private _seo: SeoService,
+    private _copierService: CopierService,
+    private _snackBar: MatSnackBar,
+    @Inject(OPERATOR_TOKEN) public operators: OperatorDoc[]
   ) {}
 
   ngOnInit() {
@@ -61,6 +65,15 @@ export class OperatorComponent implements OnInit {
     if (content) {
       content.scrollTop = 0;
     }
+  }
+
+  copyToClipboard(code: string) {
+    this._copierService.copyText(code);
+    this._snackBar.open(
+      'The example has been copied to your clipboard!',
+      null,
+      { duration: 3000 }
+    );
   }
 
   get operatorName() {
