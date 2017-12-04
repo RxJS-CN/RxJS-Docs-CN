@@ -6,7 +6,7 @@ import {
   RouterEvent
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import { SeoService, SeoData } from './services/seo.service';
+import { SeoService, SeoData } from './core/services/seo.service';
 
 interface Menu {
   title: string;

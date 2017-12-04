@@ -1,24 +1,25 @@
-import { SeoService } from './services/seo.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatSidenavModule, MatListModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { CoreModule } from '../app/core/core.module';
+import { MaterialModule } from './material/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { ToolbarModule } from './toolbar/toolbar.module';
-import { MatSidenavModule, MatListModule } from '@angular/material';
-import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToolbarModule,
-    MatListModule,
-    MatSidenavModule,
-    AppRoutingModule
+    FlexLayoutModule,
+    MaterialModule,
+    AppRoutingModule,
+    CoreModule.forRoot()
   ],
-  providers: [SeoService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
