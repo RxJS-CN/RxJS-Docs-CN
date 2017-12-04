@@ -7,7 +7,7 @@ import {
   InjectionToken
 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SeoService } from '../../../services/seo.service';
+import { SeoService } from '../../../core/services/seo.service';
 import { OperatorDoc } from '../../../../operator-docs/operator.model';
 import { pluck } from 'rxjs/operators';
 

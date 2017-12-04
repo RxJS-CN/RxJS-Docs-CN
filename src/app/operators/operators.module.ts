@@ -3,6 +3,7 @@ import {
   InjectionToken,
   CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
 import { ClipboardModule } from 'ngx-clipboard';
 
@@ -23,7 +24,7 @@ import { MarbleDiagramComponent } from './components/marble-diagram/marble-diagr
 import { WalkthroughComponent } from './components/walkthrough/walkthrough.component';
 import { HighlightJsDirective } from './directives/highlight-js.directive';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { SharedModule } from '../shared.module';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SharedModule } from '../shared.module';
     SafeUrlPipe
   ],
   imports: [
-    SharedModule,
+    CommonModule,
+    MaterialModule,
     OperatorsRoutingModule,
     ClipboardModule,
     LayoutModule
