@@ -33,7 +33,7 @@ export const combineLatest: OperatorDoc = {
         type: 'Tip',
         text: `
           Note: combineLatest will only start to emit when all sources have emitted at least once. By adding a default
-           start value to the sources with <a href="/operators#startWith">.startWith</a>, it will activate right away.
+           start value to the sources with <a href="#/operators/startWith" class="markdown-code">startWith</a>, it will activate right away.
          `
       }
     ]
