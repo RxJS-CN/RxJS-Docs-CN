@@ -3,8 +3,8 @@ import {
   InjectionToken,
   CUSTOM_ELEMENTS_SCHEMA
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { LayoutModule } from '@angular/cdk/layout';
-import { ClipboardModule } from 'ngx-clipboard';
 
 import { ALL_OPERATORS, OperatorDoc } from '../../operator-docs';
 import { OperatorsRoutingModule } from './operators-routing.module';
@@ -23,7 +23,7 @@ import { MarbleDiagramComponent } from './components/marble-diagram/marble-diagr
 import { WalkthroughComponent } from './components/walkthrough/walkthrough.component';
 import { HighlightJsDirective } from './directives/highlight-js.directive';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
-import { SharedModule } from '../shared.module';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -40,12 +40,7 @@ import { SharedModule } from '../shared.module';
     HighlightJsDirective,
     SafeUrlPipe
   ],
-  imports: [
-    SharedModule,
-    OperatorsRoutingModule,
-    ClipboardModule,
-    LayoutModule
-  ],
+  imports: [CommonModule, MaterialModule, OperatorsRoutingModule, LayoutModule],
   providers: [
     { provide: OPERATORS_TOKEN, useValue: ALL_OPERATORS },
     { provide: OPERATOR_TOKEN, useValue: ALL_OPERATORS }

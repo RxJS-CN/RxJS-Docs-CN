@@ -1,32 +1,32 @@
-import { OperatorDoc } from "../operator.model";
+import { OperatorDoc } from '../operator.model';
 
 export const merge: OperatorDoc = {
-  name: "merge",
-  operatorType: "combination",
+  name: 'merge',
+  operatorType: 'combination',
   signature:
-    "public merge(other: ObservableInput, concurrent: number, scheduler: Scheduler): Observable",
+    'public merge(other: ObservableInput, concurrent: number, scheduler: Scheduler): Observable',
   parameters: [
     {
-      name: "other",
-      type: "ObservableInput",
-      attribute: "",
+      name: 'other',
+      type: 'ObservableInput',
+      attribute: '',
       description: `An input Observable to merge with the source Observable. More than one input
        Observables may be given as argument.`
     },
     {
-      name: "concurrent",
-      type: "number",
-      attribute: "optional, default: Number.POSITIVE_INFINITY",
+      name: 'concurrent',
+      type: 'number',
+      attribute: 'optional, default: Number.POSITIVE_INFINITY',
       description: `Maximum number of input Observables being subscribed to concurrently.`
     },
     {
-      name: "scheduler",
-      type: "Scheduler",
-      attribute: "optional, default: null",
+      name: 'scheduler',
+      type: 'Scheduler',
+      attribute: 'optional, default: null',
       description: `The IScheduler to use for managing concurrency of input Observables.`
     }
   ],
-  marbleUrl: "http://reactivex.io/rxjs/img/merge.png",
+  marbleUrl: 'http://reactivex.io/rxjs/img/merge.png',
   shortDescription: {
     description: `Creates an output Observable which concurrently emits all values
       from every given input Observable. <span class="informal">Flattens multiple Observables
@@ -34,7 +34,7 @@ export const merge: OperatorDoc = {
   },
   walkthrough: {
     description: `
-      <p><code>Merge</code> subscribes to each given input Observable (either the source or an
+      <p><span class="markdown-code">Merge</span> subscribes to each given input Observable (either the source or an
       Observable given as argument), and simply forwards (without doing any
       transformation) all the values from all the input Observables to the output
       Observable. The output Observable only completes once all input Observables
@@ -44,7 +44,7 @@ export const merge: OperatorDoc = {
   },
   examples: [
     {
-      name: "Merge together two Observables: 1s interval and clicks",
+      name: 'Merge together two Observables: 1s interval and clicks',
       code: `
         const clicks = Rx.Observable.fromEvent(document, 'click');
         const timer = Rx.Observable.interval(1000);
@@ -52,12 +52,12 @@ export const merge: OperatorDoc = {
         clicksOrTimer.subscribe(x => console.log(x));
       `,
       externalLink: {
-        platform: "JSBin",
-        url: "http://jsbin.com/wihafapiva/1/edit?js,output"
+        platform: 'JSBin',
+        url: 'http://jsbin.com/wihafapiva/1/embed?js,output'
       }
     },
     {
-      name: "Merge together 3 Observables, but only 2 run concurrently",
+      name: 'Merge together 3 Observables, but only 2 run concurrently',
       code: `
         const timer1 = Rx.Observable.interval(1000).take(10);
         const timer2 = Rx.Observable.interval(2000).take(6);
@@ -67,10 +67,10 @@ export const merge: OperatorDoc = {
         merged.subscribe(x => console.log(x));
       `,
       externalLink: {
-        platform: "JSBin",
-        url: "http://jsbin.com/midosuqaga/1/edit?js,output"
+        platform: 'JSBin',
+        url: 'http://jsbin.com/midosuqaga/1/embed?js,output'
       }
     }
   ],
-  relatedOperators: ["mergeAll", "mergeMap", "mergeMapTo", "mergeScan"]
+  relatedOperators: ['mergeAll', 'mergeMap', 'mergeMapTo', 'mergeScan']
 };
