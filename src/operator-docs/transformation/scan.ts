@@ -18,6 +18,7 @@ export const scan: OperatorDoc = {
       description: 'The initial accumulation value.'
     }
   ],
+  useInteractiveMarbles: true,
   marbleUrl: 'http://reactivex.io/rxjs/img/scan.png',
   shortDescription: {
     description: `
@@ -31,7 +32,8 @@ export const scan: OperatorDoc = {
           <p>
               Combines together all values emitted on the source, using an accumulator
               function that knows how to join a new source value into the accumulation from
-              the past. Is similar to <span class="markdown-code">reduce</span>, but emits the intermediate accumulations.
+              the past. Is similar to <a href="/operators/reduce" class="markdown-code">reduce</a>, but emits the
+              intermediate accumulations.
           </p>
           <p>
               Returns an Observable that applies a specified <span class="markdown-code">accumulator</span> function to each
