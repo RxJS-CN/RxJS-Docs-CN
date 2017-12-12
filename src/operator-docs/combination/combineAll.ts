@@ -16,7 +16,7 @@ export const combineAll: OperatorDoc = {
   marbleUrl: 'http://reactivex.io/rxjs/img/combineAll.png',
   shortDescription: {
     description: `
-      Flattens an Observable-of-Observables by applying <a href="/operators/combineLatest" class="markdown-code">combineLatest</a>
+      Flattens an Observable-of-Observables by applying <a href="/#/operators/combineLatest" class="markdown-code">combineLatest</a>
       when the Observable-of-Observables completes.`,
     extras: []
   },
@@ -25,7 +25,7 @@ export const combineAll: OperatorDoc = {
       <p>
         Takes an Observable of Observables, and collects all Observables from it.
         Once the outer Observable completes, it subscribes to all collected
-        Observables and combines their values using the <a href="/operators/combineLatest" class="markdown-code">combineLatest</a>
+        Observables and combines their values using the <a href="/#/operators/combineLatest" class="markdown-code">combineLatest</a>
         strategy, such that:
       </p>
       <ul>

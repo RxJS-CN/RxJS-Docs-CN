@@ -3,7 +3,7 @@ import { OperatorDoc } from '../operator.model';
 export const empty: OperatorDoc = {
   name: 'empty',
   operatorType: 'creation',
-  signature: 'public empty<T>(scheduler?: IScheduler): Observable<T>',
+  signature: 'public empty(scheduler?: IScheduler): Observable',
   parameters: [
     {
       name: 'scheduler',
@@ -34,7 +34,7 @@ export const empty: OperatorDoc = {
              });`,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/hojacunecu/1/edit?js,console,output'
+        url: 'http://jsbin.com/hojacunecu/1/embed?js,console,output'
       }
     },
     {
@@ -46,7 +46,7 @@ export const empty: OperatorDoc = {
              });`,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/tubonoradi/1/edit?js,console,output'
+        url: 'http://jsbin.com/tubonoradi/1/embed?js,console,output'
       }
     },
     {
@@ -62,7 +62,7 @@ export const empty: OperatorDoc = {
              });`,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/qazabojiri/edit?js,console,output'
+        url: 'http://jsbin.com/qazabojiri/embed?js,console,output'
       }
     }
   ],

@@ -1,9 +1,9 @@
-<div
-  *ngIf="!useInteractiveMarbles"
-  class="marble-wrapper mat-elevation-z2">
-  <img class="marble-diagram" [src]="url" *ngIf="url" alt="Diagram of how combineAll works"/>
+<div class="marble-wrapper mat-elevation-z2">
+  <img class="marble-diagram"
+       [src]="url"
+       *ngIf="url"
+       alt="Diagram of how combineAll works" />
 </div>
-<rx-marbles
-  *ngIf="useInteractiveMarbles"
-  [attr.key]="operatorName">
-</rx-marbles>
+<!-- <rx-marbles *ngIf="useInteractiveMarbles"
+            [attr.key]="operatorName">
+</rx-marbles> -->
