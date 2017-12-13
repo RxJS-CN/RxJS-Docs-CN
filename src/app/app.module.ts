@@ -1,27 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatListModule } from '@angular/material';
-import { RouterModule, PreloadAllModules } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatSidenavModule, MatListModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { CoreModule } from '../app/core/core.module';
+import { MaterialModule } from './material/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { RXJS_DOC_ROUTES } from './app.routing';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(RXJS_DOC_ROUTES, { preloadingStrategy: PreloadAllModules }),
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatButtonModule,
-    MatListModule
+    FlexLayoutModule,
+    MaterialModule,
+    AppRoutingModule,
+    CoreModule.forRoot()
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

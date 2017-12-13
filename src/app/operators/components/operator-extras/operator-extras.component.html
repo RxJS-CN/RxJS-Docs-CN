@@ -1,0 +1,12 @@
+<div
+  class="extra-tip"
+  *ngFor="let tip of tips">
+  <mat-icon class="tip-info">info</mat-icon>
+  <h3 [innerHTML]="tip.text"></h3>
+</div>
+<div
+  class="extra-tip"
+  *ngFor="let warning of warnings">
+  <mat-icon class="tip-warning">warning</mat-icon>
+  <h3 [innerHTML]="warning.text"></h3>
+</div>

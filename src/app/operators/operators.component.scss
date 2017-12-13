@@ -1,0 +1,29 @@
+$subheader-color: #333;
+
+:host {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  display: flex;
+}
+
+.operator-container {
+  width: 100%;
+}
+
+.category-subheader {
+  text-transform: uppercase;
+  font-weight: 600;
+  color: white !important;
+  background: $subheader-color;
+}
+
+.operator-list-sidenav {
+  width: 300px;
+}
+
+.sidenav-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 10px;
+  z-index: 4;
+}

@@ -8,7 +8,7 @@ import {
   MatIconRegistry
 } from '@angular/material';
 
-import { routing } from './team.routing';
+import { TeamRoutingModule } from './team-routing.module';
 import { TeamComponent } from './team.component';
 import { TeamService } from './team.service';
 import { MemberComponent } from './member.component';
@@ -16,7 +16,7 @@ import { SocialSharingComponent } from './social-sharing/social-sharing.componen
 
 @NgModule({
   imports: [
-    routing,
+    TeamRoutingModule,
     CommonModule,
     MatCardModule,
     MatButtonModule,

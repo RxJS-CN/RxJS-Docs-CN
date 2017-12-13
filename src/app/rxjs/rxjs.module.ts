@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { RxjsComponent } from './rxjs.component';
-import { routing } from './rxjs.routing';
+import { RxjsRoutingModule } from './rxjs-routing.module';
 
 @NgModule({
-    imports: [routing],
-    declarations: [RxjsComponent]
+  imports: [RxjsRoutingModule],
+  declarations: [RxjsComponent]
 })
-export class RxjsModule { }
+export class RxjsModule {}

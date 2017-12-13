@@ -1,0 +1,55 @@
+@import '~@angular/material/theming';
+
+$operator-border: #f3f3f3;
+$operator-active: #62757f;
+$link-color: #2196F3;
+
+@mixin operator-theme($theme) {
+  $primary: mat-color(map-get($theme, primary));
+  $accent: mat-color(map-get($theme, accent));
+  $operator-active-background: rgba($operator-active, .7);
+
+  rx-marbles > div {
+    text-align: center;
+    min-width: 840px;
+
+    circle {
+      // temp fix: current broken on marble component
+      filter: none !important;
+    }
+  }
+
+  app-operator a {
+    text-decoration: none;
+    color: $link-color;
+  }
+
+  .operator-list {
+    a {
+      border-bottom: 1px solid $operator-border;
+      &.active-operator {
+        background-color: $operator-border;
+        // color: white;
+        &:hover {
+          background-color: $operator-border;
+        }
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .section-list {
+    padding: 1px;
+    list-style-type: none;
+    margin-top: 0;
+
+    li {
+      padding-bottom: 5px;
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

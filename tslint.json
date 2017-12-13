@@ -81,7 +81,7 @@
     ],
     "prefer-const": true,
     "quotemark": [
-      true,
+      false,
       "single"
     ],
     "radix": true,
@@ -136,5 +136,8 @@
     "component-class-suffix": true,
     "directive-class-suffix": true,
     "invoke-injectable": true
-  }
+  },
+  "extends": [
+    "tslint-config-prettier"
+  ]
 }

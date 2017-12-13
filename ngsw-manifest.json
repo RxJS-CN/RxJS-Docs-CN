@@ -2,9 +2,14 @@
   "external": {
     "urls": [
       {"url": "https://fonts.googleapis.com/icon?family=Material+Icons"},
-      {"url": "https://fonts.googleapis.com/css?family=Roboto"},
+      {"url": "https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700"},
       {"url": "https://ajax.googleapis.com/ajax/libs/hammerjs/2.0.8/hammer.min.js"},
-      {"url": "https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.5/web-animations.min.js"}
+      {"url": "https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.5/web-animations.min.js"},
+      {"url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/monokai_sublime.min.css"},
+      {"url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js"},
+      {"url": "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/languages/typescript.min.js"},
+      {"url": "http://reactivex.io/rxjs/img/combineAll.png"},
+      {"url": "http://reactivex.io/rxjs/img/combineLatest.png"}
     ]
   }
 }

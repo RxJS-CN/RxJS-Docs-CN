@@ -1,28 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatSidenavModule, MatIconModule, MatButtonModule, MatListModule } from '@angular/material';
 import { AppComponent } from './app.component';
+import { MatSidenavModule, MatListModule } from '@angular/material';
+import { CoreModule } from './core/core.module';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatIconModule,
-        MatButtonModule,
-        MatListModule
-      ],
-      declarations: [AppComponent]
+  beforeEach(
+    async(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          RouterTestingModule,
+          BrowserAnimationsModule,
+          CoreModule.forRoot(),
+          MatSidenavModule,
+          MatListModule
+        ],
+        declarations: [AppComponent]
+      }).compileComponents();
     })
-      .compileComponents();
-  }));
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);

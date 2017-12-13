@@ -1,0 +1,12 @@
+<h2> Additional Resources </h2>
+<ul class="section-list">
+  <li>
+    <a [href]="sourceUrl" target="_blank"> Source Code </a>
+  </li>
+  <li>
+    <a [href]="specsUrl" target="_blank"> Specs </a>
+  </li>
+  <li *ngFor="let resource of additionalResources">
+    <a [href]="resource.url" target="_blank"> {{ resource.description }} </a>
+  </li>
+</ul>

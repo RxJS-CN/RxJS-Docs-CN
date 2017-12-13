@@ -11,38 +11,100 @@ export class TeamService {
       coreTeam: [{
         'name': 'Fredrik Lundin',
         'role': 'Developer',
-        'githubUrl': 'https://github.com/fredrik-lundin',
-        'avatar': 'https://github.com/fredrik-lundin.png',
-        'twitterUrl': 'https://twitter.com/kirderflundin',
-        'linkedinUrl': 'https://www.linkedin.com/in/lundin-fredrik',
-        'email': 'mailto:flu.lund@gmail.com',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
         'bio':
-          'Fredrik is a fullstack developer, during most of his daily work in the ' +
-          '.Net space. He is born and raised in Stockholm, Sweden'
-      },
-      {
-        'name': 'Jonas Lundin',
-        'role': 'Bajskorv',
-        'githubUrl': 'https://github.com/fredrik-lundin',
-        'avatar':
-          // tslint:disable-next-line:max-line-length
-          'https://scontent.fSbma1-1.fna.fbcdn.net/v/t1.0-9/292966_10150978152096377_323051395_n.jpg?oh=830fed266e24bb5d4fccf082747d28fe&oe=5A6DA83C',
-        'twitterUrl': 'https://twitter.com/kirderflundin',
-        'linkedinUrl': 'https://www.linkedin.com/in/lundin-fredrik',
-        'email': 'mailto:flu.lund@gmail.com',
-        'bio': 'Gillar bajs etc etc etc '
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }],
       learningTeam: [{
         'name': 'Fredrik Lundin',
         'role': 'Developer',
-        'githubUrl': 'https://github.com/fredrik-lundin',
-        'avatar': 'https://github.com/fredrik-lundin.png',
-        'twitterUrl': 'https://twitter.com/kirderflundin',
-        'linkedinUrl': 'https://www.linkedin.com/in/lundin-fredrik',
-        'email': 'mailto:flu.lund@gmail.com',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
         'bio':
-          'Fredrik is a fullstack developer, during most of his daily work in the ' +
-          '.Net space. He is born and raised in Stockholm, Sweden'
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
+      }, {
+        'name': 'Fredrik Lundin',
+        'role': 'Developer',
+        'githubUrl': 'https://github.com/benlesh',
+        'avatar': 'https://github.com/benlesh.png',
+        'twitterUrl': 'https://twitter.com/BenLesh',
+        'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
+        'email': 'mailto:mail@mail.com',
+        'bio':
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
+          'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
+          'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }]
     }]);
   }
