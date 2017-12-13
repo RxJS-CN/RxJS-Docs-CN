@@ -9,7 +9,7 @@ export interface IMember {
   githubUrl: string;
   avatar: string;
   twitterUrl: string;
-  linkedin: string;
+  linkedinUrl: string;
   email: string;
   bio: string;
 }
