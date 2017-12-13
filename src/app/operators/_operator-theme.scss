@@ -2,12 +2,12 @@
 
 $operator-border: #f3f3f3;
 $operator-active: #62757f;
-$link-color: #2196F3;
+$link-color: #2196f3;
 
 @mixin operator-theme($theme) {
   $primary: mat-color(map-get($theme, primary));
   $accent: mat-color(map-get($theme, accent));
-  $operator-active-background: rgba($operator-active, .7);
+  $operator-active-background: rgba($operator-active, 0.7);
 
   rx-marbles > div {
     text-align: center;
@@ -22,6 +22,10 @@ $link-color: #2196F3;
   app-operator a {
     text-decoration: none;
     color: $link-color;
+  }
+
+  app-operator a:hover {
+    text-decoration: underline;
   }
 
   .operator-list {
