@@ -9,7 +9,7 @@ export class TeamService {
   getTeam(): Observable<ITeam> {
     return Observable.from([{
       coreTeam: [{
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -20,7 +20,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -31,7 +31,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -42,7 +42,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -54,7 +54,7 @@ export class TeamService {
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }],
       learningTeam: [{
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -65,7 +65,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -76,7 +76,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
@@ -87,7 +87,7 @@ export class TeamService {
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
           'Mauris purus dui, dignissim nec sodales ut, feugiat et purus.'
       }, {
-        'name': 'Fredrik Lundin',
+        'name': 'Ben Lesh',
         'role': 'Developer',
         'githubUrl': 'https://github.com/benlesh',
         'avatar': 'https://github.com/benlesh.png',
