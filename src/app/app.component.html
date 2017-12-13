@@ -6,12 +6,10 @@
     <mat-sidenav #sidenav role="navigation">
       <mat-nav-list (click)="sidenav.toggle()">
         <a *ngFor="let menu of menus" mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="menu.options" [routerLink]="menu.link">
-            {{menu.title}}
-          </a>
+          {{menu.title}}
+        </a>
       </mat-nav-list>
     </mat-sidenav>
-    <main class="body-margin">
-      <router-outlet></router-outlet>
-    </main>
+    <router-outlet></router-outlet>
   </mat-sidenav-container>
 </div>
