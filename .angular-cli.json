@@ -21,8 +21,7 @@
       "prefix": "app",
       "serviceWorker": true,
       "styles": [
-        "styles.scss",
-        "../node_modules/font-awesome/scss/font-awesome.scss"
+        "styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
