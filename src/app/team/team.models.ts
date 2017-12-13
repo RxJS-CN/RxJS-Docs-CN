@@ -10,6 +10,5 @@ export interface IMember {
   avatar: string;
   twitterUrl: string;
   linkedinUrl: string;
-  email: string;
   bio: string;
 }

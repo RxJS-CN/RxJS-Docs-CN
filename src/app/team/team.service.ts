@@ -15,7 +15,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -27,7 +26,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -39,7 +37,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -51,7 +48,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -64,7 +60,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -76,7 +71,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -88,7 +82,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
@@ -100,7 +93,6 @@ export class TeamService {
         'avatar': 'https://github.com/benlesh.png',
         'twitterUrl': 'https://twitter.com/BenLesh',
         'linkedinUrl': 'https://www.linkedin.com/in/blesh/',
-        'email': 'mailto:mail@mail.com',
         'bio':
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ' +
           'Sed est odio, sodales et tellus a, semper pellentesque elit. ' +
