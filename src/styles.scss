@@ -1,11 +1,11 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 @import './app/operators/operator-theme';
 @import './styles/code-helpers';
 
 @include mat-core();
 // Define the theme.
 $primary: mat-palette($mat-indigo);
-$accent : mat-palette($mat-pink);
+$accent: mat-palette($mat-pink, 600);
 $theme: mat-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
