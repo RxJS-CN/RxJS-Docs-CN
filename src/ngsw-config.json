@@ -1,0 +1,43 @@
+{
+  "index": "/index.html",
+  "appData": {
+    "name": "RxJS Docs",
+    "description": "RxJS Docs"
+  },
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "resources": {
+        "files": ["/favicon.ico", "/index.html"],
+        "versionedFiles": ["/*.bundle.css", "/*.bundle.js", "/*.chunk.js"]
+      }
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "resources": {
+        "files": ["/assets/**"]
+      }
+    },
+    {
+      "name": "fonts",
+      "resources": {
+        "urls": ["https://fonts.googleapis.com/**"]
+      }
+    },
+    {
+      "name": "misc",
+      "resources": {
+        "urls": [
+          "https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.2.5/web-animations.min.js",
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/styles/monokai_sublime.min.css",
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/highlight.min.js",
+          "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.5.0/languages/typescript.min.js",
+          "http://reactivex.io/rxjs/img/**"
+        ]
+      }
+    }
+  ]
+}
