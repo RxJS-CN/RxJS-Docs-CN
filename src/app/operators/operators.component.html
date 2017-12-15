@@ -1,31 +1,29 @@
-<mat-sidenav-container
-  class="operator-container">
-  <mat-sidenav
-    [mode]="sidenavMode"
-    [opened]="!smallScreen"
-    [fixedTopGap]="operatorMenuGap"
-    [fixedInViewport]="true"
-    class="operator-list-sidenav"
-    #operatorSidenav>
-    <mat-nav-list *ngFor="let category of categories" class="operator-list">
-      <h3 mat-subheader class="category-subheader">{{ category }}</h3>
+<mat-sidenav-container class="operator-container">
+  <mat-sidenav [mode]="sidenavMode"
+               [opened]="!smallScreen"
+               [fixedTopGap]="operatorMenuGap"
+               [fixedInViewport]="true"
+               class="operator-list-sidenav"
+               #operatorSidenav>
+    <mat-nav-list *ngFor="let category of categories"
+                  class="operator-list">
+      <h3 mat-subheader
+          class="category-subheader">{{ category }}</h3>
       <a mat-list-item
-        *ngFor="let operator of groupedOperators[category]"
-        [routerLink]="['/operators', operator.name]"
-        routerLinkActive="active">
+         *ngFor="let operator of groupedOperators[category]"
+         [routerLink]="['/operators', operator.name]"
+         routerLinkActive="active">
         {{ operator.name }}
       </a>
     </mat-nav-list>
   </mat-sidenav>
   <router-outlet></router-outlet>
 </mat-sidenav-container>
-<button
-  *ngIf="smallScreen"
-  mat-mini-fab
-  color="primary"
-  class="sidenav-toggle"
-  [@growInOut]="'in'"
-  (click)="operatorSidenav.toggle()">
+<button *ngIf="smallScreen"
+        mat-mini-fab
+        color="primary"
+        class="sidenav-toggle"
+        [@growInOut]="'in'"
+        (click)="operatorSidenav.toggle()">
   <mat-icon>view_list</mat-icon>
 </button>
-
