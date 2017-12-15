@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
 import { SeoService, SeoData } from './core/services/seo.service';
+import { OperatorMenuService } from './core/services/operator-menu.service';
 
 interface Menu {
   title: string;
@@ -46,7 +47,8 @@ export class AppComponent implements OnInit {
   constructor(
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _seo: SeoService
+    private _seo: SeoService,
+    private _operatorMenuService: OperatorMenuService
   ) {}
 
   ngOnInit() {
@@ -65,5 +67,12 @@ export class AppComponent implements OnInit {
         filter((data: SeoData) => data.title !== undefined)
       )
       .subscribe((data: SeoData) => this._seo.setHeaders(data));
+  }
+
+  shouldOpenChildMenu(title: string) {
+    // for accessibility we need to ensure child menu is open when clicked
+    if (title === 'Operators') {
+      this._operatorMenuService.openOperatorMenu();
+    }
   }
 }
