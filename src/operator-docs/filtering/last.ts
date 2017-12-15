@@ -39,7 +39,7 @@ export const last: OperatorDoc = {
       `,
       externalLink: {
         platform: 'JSBin',
-        url: 'http://jsbin.com/reqacoselu/edit?html,js,console'
+        url: 'http://jsbin.com/reqacoselu/embed?html,js,console'
       }
     }
   ],
