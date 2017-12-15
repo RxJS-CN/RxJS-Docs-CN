@@ -1,8 +1,7 @@
 @import '~@angular/material/theming';
-$fa-font-path: "~font-awesome/fonts";
-@import "~font-awesome/scss/font-awesome";
 @import './app/operators/operator-theme';
 @import './styles/code-helpers';
+@import './styles/fonts';
 
 @include mat-core();
 // Define the theme.

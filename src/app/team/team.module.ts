@@ -5,7 +5,6 @@ import {
   MatCardModule,
   MatButtonModule,
   MatIconModule,
-  MatIconRegistry
 } from '@angular/material';
 
 import { TeamRoutingModule } from './team-routing.module';
@@ -22,11 +21,7 @@ import { SocialSharingComponent } from './social-sharing/social-sharing.componen
     MatButtonModule,
     MatIconModule
   ],
-  providers: [TeamService, MatIconRegistry],
+  providers: [TeamService],
   declarations: [TeamComponent, MemberComponent, SocialSharingComponent]
 })
-export class TeamModule {
-  constructor(private matIconRegistry: MatIconRegistry) {
-    matIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-  }
- }
+export class TeamModule {}
