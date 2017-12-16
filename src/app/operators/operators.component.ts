@@ -3,7 +3,10 @@ import {
   Inject,
   InjectionToken,
   OnInit,
-  ChangeDetectionStrategy
+  OnDestroy,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ViewChild
 } from '@angular/core';
 import {
   trigger,
@@ -14,9 +17,13 @@ import {
 } from '@angular/animations';
 import { Router, ActivatedRoute } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material';
 import { Subscription } from 'rxjs/Subscription';
+import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
+import { filter, takeUntil } from 'rxjs/operators';
 import { OperatorDoc } from '../../operator-docs/operator.model';
+import { OperatorMenuService } from '../core/services/operator-menu.service';
 
 const OPERATOR_MENU_GAP_LARGE = 64;
 const OPERATOR_MENU_GAP_SMALL = 54;
@@ -53,18 +60,28 @@ interface OperatorDocMap {
     ])
   ]
 })
-export class OperatorsComponent implements OnInit {
+export class OperatorsComponent implements OnInit, AfterContentInit, OnDestroy {
+  @ViewChild(MatSidenav) _sidenav: MatSidenav;
   public groupedOperators: OperatorDocMap;
   public categories: string[];
+  private _onDestroy = new Subject();
 
   constructor(
     private _breakpointObserver: BreakpointObserver,
+    private _operatorMenuService: OperatorMenuService,
     @Inject(OPERATORS_TOKEN) public operators: OperatorDoc[]
   ) {}
 
   ngOnInit() {
     this.groupedOperators = groupOperatorsByType(this.operators);
     this.categories = Object.keys(this.groupedOperators);
+  }
+
+  ngAfterContentInit() {
+    this._operatorMenuService
+      .menuStatus()
+      .pipe(filter(s => !!s), takeUntil(this._onDestroy))
+      .subscribe(_ => this._sidenav.open());
   }
 
   get extraSmallScreen() {
@@ -83,6 +100,10 @@ export class OperatorsComponent implements OnInit {
 
   get sidenavMode() {
     return this.smallScreen ? 'over' : 'side';
+  }
+
+  ngOnDestroy() {
+    this._onDestroy.next();
   }
 }
 

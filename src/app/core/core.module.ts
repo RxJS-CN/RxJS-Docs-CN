@@ -5,6 +5,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { CopierService } from './services/copier.service';
 import { SeoService } from './services/seo.service';
+import { OperatorMenuService } from './services/operator-menu.service';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { MaterialModule } from '../material/material.module';
 
@@ -17,7 +18,7 @@ export class CoreModule {
   static forRoot() {
     return {
       ngModule: CoreModule,
-      providers: [CopierService, SeoService]
+      providers: [CopierService, SeoService, OperatorMenuService]
     };
   }
 }
