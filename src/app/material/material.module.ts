@@ -5,16 +5,15 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatButtonModule,
-  MatDialogModule,
   MatListModule,
   MatSidenavModule,
   MatExpansionModule,
   MatCardModule,
   MatInputModule,
   MatMenuModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatSnackBarModule
 } from '@angular/material';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [],
@@ -22,7 +21,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule,
     MatListModule,
     MatSidenavModule,
     MatExpansionModule,
@@ -31,14 +29,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatMenuModule,
     MatTooltipModule,
     FlexLayoutModule,
-    ReactiveFormsModule,
-    FormsModule
+    MatSnackBarModule
   ],
   exports: [
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatDialogModule,
     MatListModule,
     MatSidenavModule,
     MatExpansionModule,
@@ -47,8 +43,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatMenuModule,
     MatTooltipModule,
     FlexLayoutModule,
-    ReactiveFormsModule,
-    FormsModule
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}

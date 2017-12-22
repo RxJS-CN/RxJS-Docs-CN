@@ -1,21 +1,12 @@
-import { Injectable } from "@angular/core";
-import { AngularFireDatabase, AngularFireList } from "angularfire2/database";
-import * as firebase from "firebase";
-import { Observable } from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { COMPANIES_LIST } from './companies-list';
+import { Company } from './companies.model';
 
 @Injectable()
 export class CompanyService {
-  constructor(private db: AngularFireDatabase) {}
-  basePath = "uploads";
-  uploadsRef: AngularFireList<any>;
-  uploads: Observable<any[]>;
-  // Executes the file uploading to firebase https://firebase.google.com/docs/storage/web/upload-files
-
-  pushUpload(upload: any) {
-    const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef
-      .child(`${this.basePath}/${upload.name}`)
-      .put(upload);
-    return uploadTask;
+  getCompanies(): Observable<Company[]> {
+    return of(COMPANIES_LIST);
   }
 }
