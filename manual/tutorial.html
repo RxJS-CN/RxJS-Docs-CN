@@ -256,11 +256,11 @@ input.pluck(&apos;target&apos;, &apos;value&apos;).pairwise()
   .subscribe(value =&gt; console.log(value)); // [&quot;h&quot;, &quot;e&quot;]
 
 // &#x53EA;&#x4F1A;&#x901A;&#x8FC7;&#x552F;&#x4E00;&#x7684;&#x503C;
-input.pluck(&apos;target&apos;, &apos;value&apos;).distinct()
+input.pluck(&apos;data&apos;).distinct()
   .subscribe(value =&gt; console.log(value)); // &quot;helo wrd&quot;
 
 // &#x4E0D;&#x4F1A;&#x4F20;&#x9012;&#x91CD;&#x590D;&#x7684;&#x503C;
-input.pluck(&apos;target&apos;, &apos;value&apos;).distinctUntilChanged()
+input.pluck(&apos;data&apos;).distinctUntilChanged()
   .subscribe(value =&gt; console.log(value)); // &quot;helo world&quot;</code>
 </code></pre>
 <h1 id="-">&#x521B;&#x5EFA;&#x5E94;&#x7528;</h1>
