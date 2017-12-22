@@ -105,10 +105,10 @@ input.pluck('target', 'value').pairwise()
   .subscribe(value => console.log(value)); // ["h", "e"]
 
 // 只会通过唯一的值
-input.pluck('target', 'value').distinct()
+input.pluck('data').distinct()
   .subscribe(value => console.log(value)); // "helo wrd"
 
 // 不会传递重复的值
-input.pluck('target', 'value').distinctUntilChanged()
+input.pluck('data').distinctUntilChanged()
   .subscribe(value => console.log(value)); // "helo world"
 ```
