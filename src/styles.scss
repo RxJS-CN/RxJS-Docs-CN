@@ -1,6 +1,7 @@
 @import '~@angular/material/theming';
 @import './app/operators/operator-theme';
 @import './styles/code-helpers';
+@import './styles/icons';
 
 @include mat-core();
 // Define the theme.
