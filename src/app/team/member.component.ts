@@ -7,6 +7,6 @@ import { IMember } from './team.models';
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss']
 })
-export class MemberComponent{
+export class MemberComponent {
   @Input() member: IMember;
 }
