@@ -10,7 +10,9 @@ export const pluck: OperatorDoc = {
       name: 'properties',
       type: '...string',
       attribute: '',
-      description: `The nested properties to 'pluck' from each source value (an object).`
+      description: `
+        The nested properties to 'pluck' from each source value (an object).
+      `
     }
   ],
   shortDescription: {
@@ -20,8 +22,8 @@ export const pluck: OperatorDoc = {
       {
         type: 'Tip',
         text: `
-          Like <a href="#/operators/map" class="markdown-code">map</a>, but meant only for picking
-          one of the nested properties of every emitted object.
+          Like <a href="#/operators/map" class="markdown-code">map</a>, but meant
+          only for picking one of the nested properties of every emitted object.
         `
       }
     ]
@@ -29,9 +31,10 @@ export const pluck: OperatorDoc = {
   walkthrough: {
     description: `
       <p>
-        Given a list of strings describing a path to an object property, retrieves the value of a specified
-        nested property from all values in the source Observable. If a property can't be resolved, it will
-        return <span class="markdown-code">undefined</span> for that value.
+        Given a list of strings describing a path to an object property, retrieves
+        the value of a specified nested property from all values in the source Observable.
+        If a property can't be resolved, it will return <span class="markdown-code">undefined</span>
+        for that value.
       </p>
     `
   },
