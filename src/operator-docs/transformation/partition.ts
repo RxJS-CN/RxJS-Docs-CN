@@ -4,7 +4,7 @@ export const partition: OperatorDoc = {
   name: 'partition',
   operatorType: 'transformation',
   signature:
-    'public partition(predicate: function(value: T, index: number): boolean, thisArg: any): [Observable<T>, Observable<T>',
+    'public partition(predicate: function(value: T, index: number): boolean, thisArg: any): [Observable<T>, Observable<T>]',
   marbleUrl: 'http://reactivex.io/rxjs/img/partition.png',
   parameters: [
     {
