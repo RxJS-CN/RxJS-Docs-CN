@@ -1,0 +1,27 @@
+.example-header-image {
+  background-image: url('../../assets/img/Rx_Logo-96-96.png');
+  background-size: cover;
+}
+
+.companies-container {
+  margin: 0 15px;
+}
+
+.website-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+mat-card {
+  margin-top: 15px;
+}
+
+mat-card-avatar {
+  margin-right: 10px;
+}
+
+.company-logo{
+  height: 40px;
+  width: 40px;
+}
