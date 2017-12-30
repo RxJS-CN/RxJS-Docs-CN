@@ -2,7 +2,7 @@
 
 $operator-border: #f3f3f3;
 $operator-active: #62757f;
-$link-color: #2196f3;
+$link-color: #0a6fc2;
 
 @mixin operator-theme($theme) {
   $primary: mat-color(map-get($theme, primary));

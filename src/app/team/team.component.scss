@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+h2 {
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+section.wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+div.team-section {
+  box-shadow: -1px 3px 5px 0px #d6d6d6;
+  margin-bottom: 3px;
+}
