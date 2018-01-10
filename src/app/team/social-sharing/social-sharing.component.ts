@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 export class SocialSharingComponent {
   @Input() githubUrl: string;
   @Input() twitterUrl: string;
-  @Input() linkedinUrl: string;
+  @Input() webpageUrl: string;
 }
