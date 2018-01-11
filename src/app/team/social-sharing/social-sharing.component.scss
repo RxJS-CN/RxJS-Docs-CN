@@ -1,6 +1,14 @@
 @import "../../../styles/colors";
 
-a.mat-button {
+.app-social-sharing {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.app-social-sharing a {
   font-size: 25px;
 }
 
@@ -13,6 +21,6 @@ a.mat-button {
 
 }
 
-.icon-linkedin {
-  color: $icon-color-linkedin;
+.icon-link {
+  color: $icon-color-link;
 }

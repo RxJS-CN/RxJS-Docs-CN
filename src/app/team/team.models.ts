@@ -9,6 +9,5 @@ export interface IMember {
   githubUrl: string;
   avatar: string;
   twitterUrl: string;
-  linkedinUrl: string;
-  bio: string;
+  webpageUrl: string;
 }

@@ -27,8 +27,7 @@ describe('MemberComponent', () => {
       githubUrl: '',
       avatar: '',
       twitterUrl: '',
-      linkedinUrl: '',
-      bio: ''
+      webpageUrl: ''
     };
     fixture.detectChanges();
   });

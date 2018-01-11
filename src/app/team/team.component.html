@@ -1,4 +1,4 @@
-<div style="background-color: white;" class="team-section">
+<div class="team-section">
     <h2>Core team</h2>
     <section class="wrapper">
       <app-member *ngFor="let member of (team$ | async).coreTeam" [member]="member">
@@ -6,7 +6,7 @@
     </section>
 </div>
 
-<div style="background-color: #efefef" class="team-section">
+<div class="team-section">
     <h2>Learning team</h2>
     <section class="wrapper">
       <app-member *ngFor="let member of (team$ | async).learningTeam" [member]="member">
