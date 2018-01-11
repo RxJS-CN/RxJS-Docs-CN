@@ -6,16 +6,13 @@
       <mat-card-subtitle>{{member.role}}</mat-card-subtitle>
     </mat-card-title-group>
   </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{member.bio}}
-    </p>
-  </mat-card-content>
   <mat-card-actions>
     <app-social-sharing
       [githubUrl]="member.githubUrl"
       [twitterUrl]="member.twitterUrl"
-      [linkedinUrl]="member.linkedinUrl">
+      [webpageUrl]="member.webpageUrl"
+      class="app-social-sharing"
+      >
     </app-social-sharing>
   </mat-card-actions>
 </mat-card>
