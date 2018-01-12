@@ -4,9 +4,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatToolbarModule,
   MatIconModule,
+  MatButtonModule,
   MatListModule,
   MatSidenavModule,
-  MatButtonModule,
   MatExpansionModule,
   MatCardModule,
   MatInputModule,
@@ -20,27 +20,29 @@ import {
   imports: [
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     MatListModule,
     MatSidenavModule,
-    MatButtonModule,
     MatExpansionModule,
     MatCardModule,
     MatInputModule,
     MatMenuModule,
     MatTooltipModule,
+    FlexLayoutModule,
     MatSnackBarModule
   ],
   exports: [
     MatToolbarModule,
     MatIconModule,
+    MatButtonModule,
     MatListModule,
     MatSidenavModule,
-    MatButtonModule,
     MatExpansionModule,
     MatCardModule,
     MatInputModule,
     MatMenuModule,
     MatTooltipModule,
+    FlexLayoutModule,
     MatSnackBarModule
   ]
 })

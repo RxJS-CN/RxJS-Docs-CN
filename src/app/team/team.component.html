@@ -1,3 +1,15 @@
-<p>
-  team works!
-</p>
+<div class="team-section">
+    <h2>Core team</h2>
+    <section class="wrapper">
+      <app-member *ngFor="let member of (team$ | async).coreTeam" [member]="member">
+      </app-member>
+    </section>
+</div>
+
+<div class="team-section">
+    <h2>Learning team</h2>
+    <section class="wrapper">
+      <app-member *ngFor="let member of (team$ | async).learningTeam" [member]="member">
+      </app-member>
+    </section>
+</div>
