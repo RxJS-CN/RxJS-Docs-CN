@@ -46,6 +46,7 @@
       "./doc/external-references.md"
     ],
     "usage": [
+      "./doc/pipeable-operators.md",
       "./doc/writing-marble-tests.md",
       "./doc/operator-creation.md"
     ]
