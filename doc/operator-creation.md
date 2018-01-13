@@ -20,6 +20,7 @@
 <!-- share-code-between-examples -->
 ### 示例
 
+<!-- skip-example -->
 ```js
 function mySimpleOperator(someCallback) {
    // 我们可以在这写 `var self = this;` 以保存 `this` ，但看下一条注释
@@ -52,12 +53,14 @@ function mySimpleOperator(someCallback) {
 
 1) 使用 ES7 函数绑定操作符 (`::`)，在像 [BabelJS](http://babeljs.io) 这样的编译器中是可用的：
 
+<!-- skip-example -->
 ```js
 someObservable::mySimpleOperator(x => x + '!');
 ```
 
 2) 创建你自己的 Observable 子类并重载 `lift` 方法将其返回：
 
+<!-- skip-example -->
 ```js
 class MyObservable extends Observable {
   lift(operator) {
@@ -79,6 +82,7 @@ MyObservable.prototype.mySimpleOperator = mySimpleOperator;
 
 3) 直接在 `Observable.prototype` 上打补丁：
 
+<!-- skip-example -->
 ```js
 Observable.prototype.mySimpleOperator = mySimpleOperator;
 
@@ -87,7 +91,50 @@ Observable.prototype.mySimpleOperator = mySimpleOperator;
 someObservable.mySimpleOperator(x => x + '!');
 ```
 
+### 作为纯函数的操作符
+
+如果你不想在 Observable 原型上打补丁的话，还可以编写纯函数作为操作符，此函数接收输入 Observable 作为参数来替代对 `this` 关键字的依赖。
+
+示例实现:
+
+<!-- skip-example -->
+```js
+function mySimpleOperator(someCallback) {
+  // 注意这里返回的是函数
+  return function mySimpleOperatorImplementation(source) {
+    return Observable.create(subscriber => {
+      var subscription = source.subscribe(value => {
+        try {
+          subscriber.next(someCallback(value));
+        } catch(err) {
+          subscriber.error(err);
+        }
+      },
+      err => subscriber.error(err),
+      () => subscriber.complete());
+
+      return subscription;
+   });
+  }
+}
+```
+
+现在可以使用 Observable 上的 `pipe()` 方法:
+
+<!-- skip-example -->
+```js
+const obs = someObservable.pipe(mySimpleOperator(x => x + '!'));
+```
+
+## 将操作符作为独立的库发布
+
+我们强烈推荐你将使用了 `let` 的纯函数的自定义操作符作为独立的 npm 包。RxJS 核心已经超过100个操作符，我们不应该再增加额外的操作符了，除非它们是绝对必要的，并且提供了现有操作符无法提供的功能。
+
+将其作为一个独立的库发布将保证你的操作符能够立即为社区所用，并且这是对 RxJS 社区生态的一种促进与发展，而不是让 RxJS 库变得愈发笨重。但是，在某些情况下，新操作符还是应该添加到核心库中。
+
 ## <a id="advanced"></a>创建加入到此库中的操作符
+
+**在提议将操作符加入 RxJS 库之前，请先将其作为独立的库进行发布。** 参见上一节。
 
 __要创建加入到此库中的操作符，最好是基于现有的成果来工作__。像 `filter` 这样的操作符会是不错的开始。没有人会期望你在读完本章后会立即成为一个专家级的操作符贡献者。
 
@@ -105,8 +152,7 @@ __要创建加入到此库中的操作符，最好是基于现有的成果来工
    - 重要的是要注意，在任何 `Subscriber` 服务上设置的 `destination` 观察者不仅仅是传递的事件的目的地，如果 `destination` 
      是 `Subscriber` 的话，它也用于设置共享底层的 `Subscription` ，其实际上也是 `Subscriber`，并且是链中的第一个 `Subscriber` 。
    - `Subscribers` 都有 `add` 和 `remove` 方法，用来添加和移除共享底层的 subscription 的内部 subscriptions 。
-   - 当你订阅 Observable 时，传递的函数或观察者用于创建链的最终 `destination` `Subscriber` 。它是 `Subscriber` ，实际上也是操作符链
-     的共享 `Subscriptoin` 。
+   - 当你订阅 Observable 时，传递的函数或观察者用于创建链的最终 `destination` `Subscriber` 。它是 `Subscriber` ，实际上也是操作符链的共享 `Subscription` 。
 
 ### 为操作符提交 PR
 
