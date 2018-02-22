@@ -2,13 +2,13 @@
 
 **什么是 Subject？** - RxJS Subject 是一种特殊类型的 Observable，它允许将值多播给多个观察者，所以 Subject 是多播的，而普通的 Observables 是单播的(每个已订阅的观察者都拥有 Observable 的独立执行)。
 
-<span class="informal">Subject 像是 Observalbe，但是可以多播给多个观察者。Subject 还像是 EventEmitters，维护着多个监听器的注册表。</span>
+<span class="informal">Subject 像是 Observable，但是可以多播给多个观察者。Subject 还像是 EventEmitters，维护着多个监听器的注册表。</span>
 
 **每个 Subject 都是 Observable 。** - 对于 Subject，你可以提供一个观察者并使用 `subscribe` 方法，就可以开始正常接收值。从观察者的角度而言，它无法判断 Observable 执行是来自普通的 Observable 还是 Subject 。
 
 在 Subject 的内部，`subscribe` 不会调用发送值的新执行。它只是将给定的观察者注册到观察者列表中，类似于其他库或语言中的 `addListener` 的工作方式。
 
-**每个 Subject 都是观察者。** - Subject 是一个有如下方法的对象： `next(v)`、`error(e)` 和 `complete()` 。要给 Subjetc 提供新值，只要调用 `next(theValue)`，它会将值多播给已注册监听该 Subject 的观察者们。
+**每个 Subject 都是观察者。** - Subject 是一个有如下方法的对象： `next(v)`、`error(e)` 和 `complete()` 。要给 Subject 提供新值，只要调用 `next(theValue)`，它会将值多播给已注册监听该 Subject 的观察者们。
 
 在下面的示例中，我们为 Subject 添加了两个观察者，然后给 Subject 提供一些值：
 
