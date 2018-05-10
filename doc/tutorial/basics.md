@@ -102,7 +102,7 @@ input.pluck('target', 'value')
 
 // 传递之前的两个值
 input.pluck('target', 'value').pairwise()
-  .subscribe(value => console.log(value)); // ["h", "e"]
+  .subscribe(value => console.log(value)); // ["h", "he"]
 
 // 只会通过唯一的值
 input.pluck('data').distinct()
