@@ -263,7 +263,7 @@ input.pluck(&apos;target&apos;, &apos;value&apos;)
 
 // &#x4F20;&#x9012;&#x4E4B;&#x524D;&#x7684;&#x4E24;&#x4E2A;&#x503C;
 input.pluck(&apos;target&apos;, &apos;value&apos;).pairwise()
-  .subscribe(value =&gt; console.log(value)); // [&quot;h&quot;, &quot;e&quot;]
+  .subscribe(value =&gt; console.log(value)); // [&quot;h&quot;, &quot;he&quot;]
 
 // &#x53EA;&#x4F1A;&#x901A;&#x8FC7;&#x552F;&#x4E00;&#x7684;&#x503C;
 input.pluck(&apos;data&apos;).distinct()
