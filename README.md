@@ -32,6 +32,7 @@
 
 | [<img src="https://avatars0.githubusercontent.com/u/2631733?v=3" width="100px;"/><br /><sub>Treri Liu</sub>](http://iSay.me) | [<img src="https://avatars3.githubusercontent.com/u/5787145?v=3" width="100px;"/><br /><sub>lincheng0803</sub>](https://github.com/lincheng0803) | [<img src="https://avatars1.githubusercontent.com/u/12392733?v=3" width="100px;"/><br /><sub>张树源</sub>](https://mrxf.github.io) | [<img src="https://avatars1.githubusercontent.com/u/8630596?v=3" width="100px;"/><br /><sub>musicq</sub>](http://musicq.github.io/) | [<img src="https://avatars0.githubusercontent.com/u/12066055?v=4" width="100px;"/><br /><sub>Gu Kunfeng</sub>](https://github.com/keifergu) | [<img src="https://avatars3.githubusercontent.com/u/13745971?v=4" width="100px;"/><br /><sub>Vincent</sub>](https://github.com/Zaynex) | [<img src="https://avatars1.githubusercontent.com/u/21173134?v=4" width="100px;"/><br /><sub>pumpkin</sub>](https://github.com/pumpkindev) |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| [<img src="https://avatars0.githubusercontent.com/u/13310861?v=4" width="100px;"/><br /><sub>Rex Rao</sub>](https://github.com/sohobloo) |
 
 ## 其他学习资源
 
