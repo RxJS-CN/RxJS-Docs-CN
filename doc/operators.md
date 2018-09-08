@@ -67,7 +67,7 @@ observable.subscribe(x => console.log(x));
 
 **什么是静态操作符？** - 除了实例操作符，还有静态操作符，它们是直接附加到 Observable 类上的。静态操作符在内部不使用 `this` 关键字，而是完全依赖于它的参数。
 
-<span class="informal">静态操作符是附加到 Observalbe 类上的纯函数，通常用来从头开始创建 Observalbe 。</span>
+<span class="informal">静态操作符是附加到 Observable 类上的纯函数，通常用来从头开始创建 Observable 。</span>
 
 最常用的静态操作符类型是所谓的**创建操作符**。它们只接收非 Observable 参数，比如数字，然后**创建**一个新的 Observable ，而不是将一个输入 Observable 转换为输出 Observable 。
 
