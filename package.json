@@ -160,7 +160,7 @@
     "doctoc": "^1.0.0",
     "escape-string-regexp": "^1.0.5 ",
     "esdoc": "^0.4.7",
-    "eslint": "^3.8.0",
+    "eslint": "^6.6.0",
     "fs-extra": "^2.1.2",
     "get-folder-size": "^1.0.0",
     "glob": "^7.0.3",
